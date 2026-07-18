@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>HEIC to JPG / PNG Guide - WeConvertFiles</title>
+  <meta name="description" content="Convert Apple HEIC photos to JPEG or PNG offline and securely in your web browser." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+  <script src="../layout.js" defer></script>
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png?v=3" />
+  <link rel="apple-touch-icon" href="/assets/favicon.png?v=3" />
+</head>
+<body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
+  <main class="mx-auto max-w-4xl px-4 py-10">
+    <div class="flex items-center justify-between mb-8">
+      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        Back to Home
+      </a>
+      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
+    </div>
+
+    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+      <div class="flex items-center gap-3">
+        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">HEIC to JPG / PNG</h1>
+        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
+      </div>
+      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">HEIC to JPG / PNG converts Apple HEIC photos to standard JPG or PNG images. Using the heic2any rendering package in parallel web worker buffers, the converter decodes the HEIF container and prints standard graphic pixels to a downloadable canvas format, making iPhone photos instantly compatible with Windows systems.</p>
+      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/heic-to-jpg">
+        Open HEIC Converter
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+    </section>
+
+    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
+    <section class="grid gap-4 md:grid-cols-3">
+      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
+        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload HEIC Files</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select one or more Apple HEIC photos in the upload zone above.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
+        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose Format</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose JPEG (.jpg) or PNG (.png) format and adjust output quality preferences.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
+        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Batch Convert</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert. Individual conversions download directly, or multiple conversions compile inside a ZIP package.</p>
+      </div>
+    </section>
+
+    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
+    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+      <div>
+        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I convert multiple HEIC files?</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, you can upload multiple HEIC images. If multiple files are converted, they are compressed and downloaded as a ZIP folder.</p>
+      </div>
+      <hr class="border-slate-100 dark:border-slate-700/60" />
+      <div>
+        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are my photos uploaded to any servers?</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. All image conversions happen locally in your web browser tab without any remote network uploads, keeping your photos secure.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  
+  <title>About Us — WeConvertFiles</title>
+  <meta name="description" content="Learn about WeConvertFiles's mission to provide 100% free, secure, and client-side browser-based document utilities." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://weconvertfiles.com/about.html" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+  <script src="layout.js" defer></script>
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png?v=3" />
+  <link rel="apple-touch-icon" href="/assets/favicon.png?v=3" />
+</head>
+<body class="bg-[#f8fafd] dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 transition-colors duration-200 min-h-screen">
+  <main class="mx-auto max-w-3xl px-4 py-10">
+    <a class="inline-flex items-center gap-2 text-sm font-semibold text-[#1967d2] dark:text-blue-400 hover:underline" href="index.html">
+      <span>&larr;</span> Back to WeConvertFiles
+    </a>
+    <article class="mt-6 rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+      <h1 class="text-3xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-4xl">About WeConvertFiles</h1>
+      
+      <p class="mt-5 leading-7 text-slate-600 dark:text-slate-400">
+        WeConvertFiles was founded with a single core mission: to make daily document processing fast, free, and <span class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">100%</span> secure. Unlike traditional online tools that require you to upload your sensitive PDFs, private invoices, and private spreadsheets to remote servers, WeConvertFiles processes your files directly on your local device.
+      </p>
+
+      <h2 class="mt-8 text-xl font-semibold text-slate-900 dark:text-slate-100">Local Client-Side Processing</h2>
+      <p class="mt-3 leading-7 text-slate-600 dark:text-slate-400">
+        By utilizing state-of-the-art WebAssembly compiles and modern Client-Side JavaScript libraries (such as <code>pdf-lib.js</code>, <code>pdf.js</code>, <code>jsPDF</code>, and <code>SheetJS</code>), all file manipulation happens in-memory inside your browser tab. When you select, sign, or scale files, the logic runs entirely on your device. Your data never leaves your computer, laptop, or mobile screen.
+      </p>
+
+      <h2 class="mt-8 text-xl font-semibold text-slate-900 dark:text-slate-100">Our Monetization Model</h2>
+      <p class="mt-3 leading-7 text-slate-600 dark:text-slate-400">
+        To keep this service <span class="bg-yellow-100 dark:bg-yellow-900/30 px-1.5 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">100%</span> free for students, freelancers, and businesses without asking for subscriptions, user accounts, or credit card inputs, we rely on digital advertising revenue. Ads allow us to cover our domain registrations, server hosting fees, and ongoing maintenance. If you find our tools useful, please consider whitelisting us on your AdBlocker extension so we can keep building free services.
+      </p>
+
+      <h2 class="mt-8 text-xl font-semibold text-slate-900 dark:text-slate-100">Core Features Available</h2>
+      <ul class="mt-3 space-y-2.5 leading-7 text-slate-600 dark:text-slate-400 list-disc list-inside">
+        <li><strong>PDF Operations</strong>: Merge documents, split pages, extract ranges, rotate angles, and stamp watermarks.</li>
+        <li><strong>Lightweight Approvals</strong>: Signature tools allowing you to draw or type signatures locally.</li>
+        <li><strong>High Resolution Image Scaling</strong>: Local Lanczos-3, Bilinear, and Nearest-Neighbor interpolation algorithms.</li>
+        <li><strong>Data Conversion</strong>: Convert CSV tables directly into clean JSON arrays or Excel documents.</li>
+      </ul>
+
+      <h2 class="mt-8 text-xl font-semibold text-slate-900 dark:text-slate-100">Who We Are</h2>
+      <p class="mt-3 leading-7 text-slate-600 dark:text-slate-400">
+        WeConvertFiles is proudly developed and maintained by <a href="https://www.techknogeeks.com" target="_blank" class="font-bold text-[#1967d2] dark:text-blue-400 hover:underline">TechKnoGeeks</a>. We focus on building modern, high-performance web applications that respect user privacy. For questions, suggestions, or business inquiries, feel free to contact us.
+      </p>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,47 @@
+# WeConvertFiles Netlify Redirects
+# Map clean guide paths to their HTML files
+/guides/bulk-resize    /guides/bulk-resize.html    200
+/guides/color-palette    /guides/color-palette.html    200
+/guides/compress-pdf    /guides/compress-pdf.html    200
+/guides/csv-convert    /guides/csv-convert.html    200
+/guides/decrypt-pdf    /guides/decrypt-pdf.html    200
+/guides/diff-checker    /guides/diff-checker.html    200
+/guides/encrypt-pdf    /guides/encrypt-pdf.html    200
+/guides/exif-utility    /guides/exif-utility.html    200
+/guides/extract-pages    /guides/extract-pages.html    200
+/guides/hash-generator    /guides/hash-generator.html    200
+/guides/heic-to-jpg    /guides/heic-to-jpg.html    200
+/guides/image-scaler    /guides/image-scaler.html    200
+/guides/images-to-pdf    /guides/images-to-pdf.html    200
+/guides/jpg-to-pdf    /guides/jpg-to-pdf.html    200
+/guides/json-convert    /guides/json-convert.html    200
+/guides/json-formatter    /guides/json-formatter.html    200
+/guides/markdown-preview    /guides/markdown-preview.html    200
+/guides/merge-pdf    /guides/merge-pdf.html    200
+/guides/office-pdf    /guides/office-pdf.html    200
+/guides/organize-pdf    /guides/organize-pdf.html    200
+/guides/page-numbers    /guides/page-numbers.html    200
+/guides/pdf-to-images    /guides/pdf-to-images.html    200
+/guides/pdf-to-jpg    /guides/pdf-to-jpg.html    200
+/guides/png-to-pdf    /guides/png-to-pdf.html    200
+/guides/qr-generator    /guides/qr-generator.html    200
+/guides/remove-pages    /guides/remove-pages.html    200
+/guides/rotate-pdf    /guides/rotate-pdf.html    200
+/guides/sign-pdf    /guides/sign-pdf.html    200
+/guides/split-pdf    /guides/split-pdf.html    200
+/guides/url-base64    /guides/url-base64.html    200
+/guides/watermark-pdf    /guides/watermark-pdf.html    200
+/guides/webp-convert    /guides/webp-convert.html    200
+/guides/word-counter    /guides/word-counter.html    200
+
+# Catch-all rule for SPA routing
+/guides/pdf-to-word    /guides/pdf-to-word.html    200
+/guides/image-cropper    /guides/image-cropper.html    200
+/guides/favicon-generator    /guides/favicon-generator.html    200
+/guides/excel-to-csv    /guides/excel-to-csv.html    200
+/guides/regex-tester    /guides/regex-tester.html    200
+/guides/uuid-generator    /guides/uuid-generator.html    200
+/guides/unix-converter    /guides/unix-converter.html    200
+/guides/jwt-decoder    /guides/jwt-decoder.html    200
+
+/*    /index.html    200

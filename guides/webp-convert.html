@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  
+  <title>Image to WebP Converter Guide - WeConvertFiles</title>
+  <meta name="description" content="Convert JPEG, PNG, or WebP images to high-compression WebP format locally in your browser." />
+  <meta name="robots" content="index, follow" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    };
+  </script>
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+  <script src="../layout.js" defer></script>
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png?v=3" />
+  <link rel="apple-touch-icon" href="/assets/favicon.png?v=3" />
+</head>
+<body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
+  <main class="mx-auto max-w-4xl px-4 py-10">
+    <div class="flex items-center justify-between mb-8">
+      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
+        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back to Home
+      </a>
+      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
+    </div>
+
+    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+      <div class="flex items-center gap-3">
+        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Convert Image to WebP</h1>
+        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
+          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
+        </span>
+      </div>
+      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Image to WebP Converter allows you to convert JPEG and PNG files to modern high-efficiency WebP image files in real-time. The tool loads files into HTML5 Canvas templates and exports them as compressed blobs via native Canvas rendering algorithms. WebP provides superior lossless and lossy compression compared to legacy formats, reducing image sizes by up to 35% while preserving visual clarity. Because all processes run client-side inside your browser memory, your original graphics remain completely private. This tool is ideal for web developers, content creators, and editors optimizing assets for page load speeds.</p>
+      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/webp-convert">
+        Open Image to WebP
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </a>
+    </section>
+
+    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
+    <section class="grid gap-4 md:grid-cols-3">
+      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
+        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload Images</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose PNG, JPG, or WebP images from your local drive or drag them into the conversion zone.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
+        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose Quality</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Adjust the conversion quality slider or toggle Lossless compression to match your file requirements.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
+        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Convert & Save</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert to execute. Single files download directly; multiple files compile into a clean ZIP folder.</p>
+      </div>
+    </section>
+
+    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
+    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+      <div>
+        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Why should I convert images to WebP?</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">WebP is a highly optimized next-generation graphic format. It supports both lossy compression and lossless alpha transparency, producing significantly smaller file sizes than JPG or PNG, which boosts website load speeds and SEO rankings.</p>
+      </div>
+      <hr class="border-slate-100 dark:border-slate-700/60" />
+      <div>
+        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What is the difference between lossy and lossless modes?</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Lossless compression preserves every pixel exactly, making it perfect for graphics, logos, and screenshots. Lossy mode discards tiny amounts of visual data to achieve extreme file size reductions, which is ideal for photographic images.</p>
+      </div>
+      <hr class="border-slate-100 dark:border-slate-700/60" />
+      <div>
+        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are my original pictures uploaded to a backend server?</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. The entire conversion process occurs within your browser session using native HTML5 API loops. Your images never leave your computer, ensuring complete confidentiality.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
