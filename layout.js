@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Define tools dataset for search and mobile menu drawer
   const tools = [
-      { id: 'pdf-to-word', title: 'PDF to Word / TXT', kicker: 'PDF Tools', badge: 'Text Layer', iconBg: 'bg-indigo-100', iconColor: 'text-indigo-600' },
-      { id: 'office-pdf', title: 'Word / Excel to PDF', kicker: 'Office Tools', badge: '100% Local', iconBg: 'bg-indigo-100', iconColor: 'text-indigo-700' },
-      { id: 'merge-pdf', title: 'Merge PDF', kicker: 'Organize PDF', badge: 'Multiple PDFs', iconBg: 'bg-red-100', iconColor: 'text-red-600' },
-      { id: 'images-pdf', title: 'Images to PDF', kicker: 'Convert PDF', badge: 'Convert JPG/PNG', iconBg: 'bg-pink-100', iconColor: 'text-pink-700' },
-      { id: 'compress-pdf', title: 'Compress PDF', kicker: 'Optimize PDF', badge: 'File shrink', iconBg: 'bg-blue-100', iconColor: 'text-blue-700' },
-      { id: 'heic-to-jpg', title: 'HEIC to JPG / PNG', kicker: 'Image Tools', badge: 'Apple HEIC', iconBg: 'bg-violet-100', iconColor: 'text-violet-700' },
+      { id: 'pdf-to-word', title: 'PDF to Word / TXT', kicker: 'PDF Tools', badge: 'Text Layer', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
+      { id: 'office-pdf', title: 'Word / Excel to PDF', kicker: 'Office Tools', badge: '100% Local', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' },
+      { id: 'merge-pdf', title: 'Merge PDF', kicker: 'Organize PDF', badge: 'Multiple PDFs', iconBg: 'bg-rose-100', iconColor: 'text-rose-600' },
+      { id: 'images-pdf', title: 'Images to PDF', kicker: 'Convert PDF', badge: 'Convert JPG/PNG', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
+      { id: 'compress-pdf', title: 'Compress PDF', kicker: 'Optimize PDF', badge: 'File shrink', iconBg: 'bg-amber-100', iconColor: 'text-amber-600' },
+      { id: 'heic-to-jpg', title: 'HEIC to JPG / PNG', kicker: 'Image Tools', badge: 'Apple HEIC', iconBg: 'bg-teal-100', iconColor: 'text-teal-600' },
       { id: 'split-pdf', title: 'Split PDF', kicker: 'Organize PDF', badge: 'ZIP output', iconBg: 'bg-orange-100', iconColor: 'text-orange-600' },
       { id: 'pdf-images', title: 'PDF to PNG', kicker: 'Convert PDF', badge: 'Extract images', iconBg: 'bg-rose-100', iconColor: 'text-rose-700' },
       { id: 'pdf-jpg', title: 'PDF to JPG', kicker: 'Convert PDF', badge: 'Extract JPGs', iconBg: 'bg-red-100', iconColor: 'text-red-700' },
