@@ -2330,16 +2330,16 @@
               </select>
             </div>
             <div id="jsonGridWrapper" class="grid gap-4 md:grid-cols-2 transition-all duration-300">
-              <div>
+              <div id="jsonInputCol">
                 <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Raw JSON Input</label>
                 <textarea id="jsonFormatterInput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition" placeholder="Paste your raw JSON text here..."></textarea>
               </div>
-              <div>
+              <div id="jsonOutputCol">
                 <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Formatted Output</label>
                 <textarea id="jsonFormatterOutput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none readonly" readonly placeholder="Formatted output will appear here..."></textarea>
               </div>
             </div>
-            <div class="mt-4 flex flex-wrap gap-2.5">
+            <div id="jsonButtonsRow" class="mt-4 flex flex-wrap gap-2.5">
               <button id="jsonValidateBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-950/60 transition border border-blue-200/50 dark:border-blue-900/50">Validate JSON</button>
               <button id="jsonFormatBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Format / Beautify</button>
               <button id="jsonMinifyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Minify JSON</button>
@@ -2667,12 +2667,12 @@
 
         const expandLayout = () => {
           const wrapper = document.getElementById('jsonGridWrapper');
-          if (wrapper) {
+          const buttonsRow = document.getElementById('jsonButtonsRow');
+          const outputCol = document.getElementById('jsonOutputCol');
+          if (wrapper && buttonsRow && outputCol) {
             wrapper.classList.remove('md:grid-cols-2');
             wrapper.classList.add('grid-cols-1');
-          }
-          if (input) {
-            input.style.minHeight = '650px';
+            wrapper.insertBefore(buttonsRow, outputCol);
           }
           if (output) {
             output.style.minHeight = '650px';
@@ -2681,13 +2681,11 @@
 
         const resetLayout = () => {
           const wrapper = document.getElementById('jsonGridWrapper');
-          if (wrapper) {
+          const buttonsRow = document.getElementById('jsonButtonsRow');
+          if (wrapper && buttonsRow) {
+            wrapper.parentNode.insertBefore(buttonsRow, wrapper.nextSibling);
             wrapper.classList.remove('grid-cols-1');
             wrapper.classList.add('md:grid-cols-2');
-          }
-          if (input) {
-            input.style.minHeight = '';
-            input.style.height = '';
           }
           if (output) {
             output.style.minHeight = '';
