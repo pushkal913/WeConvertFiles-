@@ -35,22 +35,25 @@
       }
     }
   </script>
+  <script>
+    // The server rewrites known tool URLs to this document. Mark direct tool
+    // visits before the body is parsed so the dashboard cannot flash first.
+    (() => {
+      const path = window.location.pathname.replace(/^\/|\/$/g, '');
+      const isToolRoute = (path && path !== 'index.html') || window.location.hash.length > 1;
+      document.documentElement.dataset.initialView = isToolRoute ? 'tool' : 'dashboard';
+    })();
+  </script>
+  <style>
+    html[data-initial-view="tool"] #dashboardView {
+      display: none !important;
+    }
+
+    html[data-initial-view="tool"] #workspaceView {
+      display: block !important;
+    }
+  </style>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pdf-lib-with-encrypt@1.2.1/dist/pdf-lib.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -911,10 +914,167 @@
   </div>
 
   <script>
-    const { jsPDF } = window.jspdf || {};
-    const { PDFDocument, StandardFonts, rgb, degrees } = window.PDFLib || {};
-    if (window.pdfjsLib) {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+    let jsPDF;
+    let PDFDocument;
+    let StandardFonts;
+    let rgb;
+    let degrees;
+
+    const converterLibraries = Object.freeze({
+      jspdf: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+        ready: () => Boolean(window.jspdf && window.jspdf.jsPDF)
+      },
+      pdfjs: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js',
+        ready: () => Boolean(window.pdfjsLib)
+      },
+      pdflib: {
+        src: 'https://cdn.jsdelivr.net/npm/pdf-lib-with-encrypt@1.2.1/dist/pdf-lib.min.js',
+        ready: () => Boolean(window.PDFLib)
+      },
+      papa: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js',
+        ready: () => Boolean(window.Papa)
+      },
+      xlsx: {
+        src: 'https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js',
+        ready: () => Boolean(window.XLSX)
+      },
+      jszip: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+        ready: () => Boolean(window.JSZip)
+      },
+      mammoth: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js',
+        ready: () => Boolean(window.mammoth)
+      },
+      html2pdf: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js',
+        ready: () => Boolean(window.html2pdf)
+      },
+      cryptojs: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js',
+        ready: () => Boolean(window.CryptoJS)
+      },
+      qrious: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js',
+        ready: () => Boolean(window.QRious)
+      },
+      exif: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js',
+        ready: () => Boolean(window.EXIF)
+      },
+      heic2any: {
+        src: 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js',
+        ready: () => Boolean(window.heic2any)
+      },
+      marked: {
+        src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
+        ready: () => Boolean(window.marked)
+      },
+      diff: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js',
+        ready: () => Boolean(window.diff_match_patch)
+      }
+    });
+
+    const toolLibraryDependencies = Object.freeze({
+      'pdf-to-word': ['pdfjs'],
+      'office-pdf': ['html2pdf', 'mammoth', 'xlsx'],
+      'merge-pdf': ['pdflib'],
+      'images-pdf': ['jspdf'],
+      'compress-pdf': ['pdfjs', 'jspdf'],
+      'heic-to-jpg': ['heic2any', 'jszip'],
+      'split-pdf': ['pdflib', 'jszip'],
+      'pdf-images': ['pdfjs', 'jszip'],
+      'pdf-jpg': ['pdfjs', 'jszip'],
+      'qr-generator': ['qrious'],
+      'sign-pdf': ['pdflib'],
+      'extract-pages': ['pdflib'],
+      'remove-pages': ['pdfjs', 'pdflib'],
+      'bulk-resize': ['jszip'],
+      'excel-to-csv': ['xlsx'],
+      'webp-convert': ['jszip'],
+      'organize-pdf': ['pdfjs', 'pdflib'],
+      'watermark-pdf': ['pdflib'],
+      'page-numbers': ['pdflib'],
+      'rotate-pdf': ['pdfjs', 'pdflib'],
+      'encrypt-pdf': ['pdflib'],
+      'json-convert': ['xlsx'],
+      'csv-convert': ['papa', 'xlsx'],
+      'favicon-generator': ['jszip'],
+      'diff-checker': ['diff'],
+      'markdown-preview': ['marked'],
+      'hash-generator': ['cryptojs'],
+      'exif-utility': ['exif'],
+      'decrypt-pdf': ['pdflib', 'pdfjs', 'jspdf']
+    });
+
+    const interactiveLibraryTools = new Set([
+      'qr-generator',
+      'hash-generator',
+      'markdown-preview',
+      'diff-checker'
+    ]);
+
+    const libraryLoadPromises = new Map();
+
+    function syncConverterLibraryGlobals() {
+      jsPDF = window.jspdf && window.jspdf.jsPDF;
+      PDFDocument = window.PDFLib && window.PDFLib.PDFDocument;
+      StandardFonts = window.PDFLib && window.PDFLib.StandardFonts;
+      rgb = window.PDFLib && window.PDFLib.rgb;
+      degrees = window.PDFLib && window.PDFLib.degrees;
+
+      if (window.pdfjsLib) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+          'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+      }
+    }
+
+    function loadConverterLibrary(name) {
+      const library = converterLibraries[name];
+      if (!library) {
+        return Promise.reject(new Error(`Unknown converter library: ${name}`));
+      }
+      if (library.ready()) {
+        syncConverterLibraryGlobals();
+        return Promise.resolve();
+      }
+      if (libraryLoadPromises.has(name)) {
+        return libraryLoadPromises.get(name);
+      }
+
+      const promise = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = library.src;
+        script.async = true;
+        script.dataset.converterLibrary = name;
+        script.onload = () => {
+          if (!library.ready()) {
+            libraryLoadPromises.delete(name);
+            reject(new Error(`The ${name} conversion library did not initialize.`));
+            return;
+          }
+          syncConverterLibraryGlobals();
+          resolve();
+        };
+        script.onerror = () => {
+          libraryLoadPromises.delete(name);
+          reject(new Error(`Unable to load the ${name} conversion library. Check your connection and try again.`));
+        };
+        document.head.appendChild(script);
+      });
+
+      libraryLoadPromises.set(name, promise);
+      return promise;
+    }
+
+    async function ensureToolLibraries(toolId) {
+      const dependencies = toolLibraryDependencies[toolId] || [];
+      await Promise.all(dependencies.map(loadConverterLibrary));
+      syncConverterLibraryGlobals();
     }
 
     const toolContentDetails = {
@@ -1790,12 +1950,15 @@
       }).join('');
     }
 
-    function openTool(toolId) {
+    async function openTool(toolId) {
       const tool = tools.find(item => item.id === toolId);
       if (!tool) return;
       state.currentTool = tool;
       state.files = [];
       state.dragIndex = null;
+      document.documentElement.dataset.initialView = 'tool';
+      dashboardView.classList.add('hidden');
+      workspaceView.classList.remove('hidden');
 
       // Hide or show file upload zone based on whether tool is interactive plain-text counter/previewer/diff utility
       const isInteractiveOnly = ['word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator'].includes(toolId);
@@ -1985,6 +2148,17 @@
       fileInput.accept = tool.accept;
       fileInput.multiple = tool.multiple;
       csvOptions.classList.toggle('hidden', tool.id !== 'csv-convert');
+
+      if (interactiveLibraryTools.has(tool.id)) {
+        setStatus('Loading the tool engine...');
+        try {
+          await ensureToolLibraries(tool.id);
+        } catch (error) {
+          setStatus(error.message || 'Unable to load the tool engine. Please refresh and try again.', 'error');
+          return;
+        }
+      }
+
       renderToolOptions(tool.id);
       if (tool.id === 'sign-pdf') {
         initSignaturePad();
@@ -1992,8 +2166,6 @@
       if (tool.id === 'image-scaler') {
         initImageScalerOptions();
       }
-      dashboardView.classList.add('hidden');
-      workspaceView.classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'instant' });
       updateFileList();
       setStatus('');
@@ -3567,7 +3739,7 @@
       });
     }
 
-    function handleRoute() {
+    async function handleRoute() {
       // Backward compatibility fallback for hash links
       if (window.location.hash) {
         const hashId = window.location.hash.replace('#', '');
@@ -3578,8 +3750,8 @@
 
       const path = window.location.pathname.replace(/^\/|\/$/g, '');
       if (tools.some(tool => tool.id === path)) {
-        openTool(path);
         updateSeoMetadata(path);
+        await openTool(path);
       } else if (path === '' || path === 'index.html') {
         showDashboard();
         updateSeoMetadata(null);
@@ -3590,6 +3762,7 @@
     }
 
     function showDashboard() {
+      document.documentElement.dataset.initialView = 'dashboard';
       workspaceView.classList.add('hidden');
       dashboardView.classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -3661,6 +3834,18 @@
       }
       state.files = state.currentTool.multiple ? [...state.files, ...validFiles] : validFiles.slice(0, 1);
       setStatus('');
+
+      const dependencies = toolLibraryDependencies[state.currentTool.id] || [];
+      if (dependencies.length) {
+        setStatus('Loading the secure conversion engine...');
+        try {
+          await ensureToolLibraries(state.currentTool.id);
+          setStatus('');
+        } catch (error) {
+          setStatus(error.message || 'Unable to load the conversion engine. Please try again.', 'error');
+          return;
+        }
+      }
 
       if (state.currentTool.id === 'json-convert' && validFiles.length) {
         const reader = new FileReader();
@@ -5309,6 +5494,7 @@
       setStatus('Starting conversion...');
 
       try {
+        await ensureToolLibraries(state.currentTool.id);
         if (state.currentTool.id === 'heic-to-jpg') await heicToJpgPng();
         if (state.currentTool.id === 'exif-utility') await removeExif();
         if (state.currentTool.id === 'merge-pdf') await mergePdfs();
