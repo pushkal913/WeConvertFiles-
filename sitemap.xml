@@ -5,6 +5,23 @@
     <loc>https://weconvertfiles.com/</loc>
   </url>
 
+  <!-- Static Conversion Landing Pages -->
+  <url>
+    <loc>https://weconvertfiles.com/convert/jpg-to-pdf</loc>
+  </url>
+  <url>
+    <loc>https://weconvertfiles.com/convert/png-to-pdf</loc>
+  </url>
+  <url>
+    <loc>https://weconvertfiles.com/convert/heic-to-jpg</loc>
+  </url>
+  <url>
+    <loc>https://weconvertfiles.com/convert/word-to-pdf</loc>
+  </url>
+  <url>
+    <loc>https://weconvertfiles.com/convert/pdf-to-jpg</loc>
+  </url>
+
   <!-- Interactive Client-side Tools -->
   <url>
     <loc>https://weconvertfiles.com/bulk-resize</loc>
