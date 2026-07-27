@@ -534,7 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm space-y-2 max-w-xl">
             <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">Our Mission & Support</h4>
             <p class="text-xs leading-5.5 text-slate-600 dark:text-slate-400">
-              WeConvertFiles is proudly built by <a href="https://www.techknogeeks.com" target="_blank" class="font-bold text-[#1a73e8] hover:underline">TechKnoGeeks</a> to provide <span class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">100%</span> free, private, and secure browser-based document tools. To keep our servers running and keep these premium features free for everyone without a subscription, we rely on advertising revenue. Thank you for supporting us by allowing ads on our platform!
+              WeConvertFiles is proudly built by <a href="https://www.techknogeeks.com" target="_blank" class="font-bold text-[#1a73e8] hover:underline">TechKnoGeeks</a> to provide <span class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">100%</span> free, private, and secure browser-based document tools. Clearly labelled advertising helps fund hosting, maintenance, and continued development without requiring a subscription.
             </p>
           </div>
         </div>

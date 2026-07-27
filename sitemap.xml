@@ -34,7 +34,7 @@
     <loc>https://weconvertfiles.com/image-scaler</loc>
   </url>
   <url>
-    <loc>https://weconvertfiles.com/images-to-pdf</loc>
+    <loc>https://weconvertfiles.com/images-pdf</loc>
   </url>
   <url>
     <loc>https://weconvertfiles.com/json-convert</loc>
@@ -55,10 +55,10 @@
     <loc>https://weconvertfiles.com/page-numbers</loc>
   </url>
   <url>
-    <loc>https://weconvertfiles.com/pdf-to-images</loc>
+    <loc>https://weconvertfiles.com/pdf-images</loc>
   </url>
   <url>
-    <loc>https://weconvertfiles.com/pdf-to-jpg</loc>
+    <loc>https://weconvertfiles.com/pdf-jpg</loc>
   </url>
   <url>
     <loc>https://weconvertfiles.com/remove-pages</loc>
@@ -83,12 +83,6 @@
   </url>
   <url>
     <loc>https://weconvertfiles.com/url-base64</loc>
-  </url>
-  <url>
-    <loc>https://weconvertfiles.com/jpg-to-pdf</loc>
-  </url>
-  <url>
-    <loc>https://weconvertfiles.com/png-to-pdf</loc>
   </url>
   <!-- Phase 2 Tools -->
   <url>
