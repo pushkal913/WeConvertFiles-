@@ -39,6 +39,7 @@ if (generator.includes('cdn.tailwindcss.com') || generator.includes('tailwind.co
 }
 
 const css = await readFile(path.join(rootDir, 'assets', 'styles.css'), 'utf8');
+const homepage = await readFile(path.join(rootDir, 'index.html'), 'utf8');
 const requiredSelectors = [
   'md\\:grid-cols-2',
   'dark\\:bg-\\[\\#0b0f19\\]',
@@ -52,6 +53,21 @@ for (const selector of requiredSelectors) {
   if (!css.includes(selector)) failures.push(`Compiled CSS is missing ${selector}`);
 }
 
+const cardBorderColors = [...homepage.matchAll(/iconColor:\s*'text-([^']+)'/g)]
+  .map(match => match[1])
+  .filter((color, index, colors) => colors.indexOf(color) === index);
+
+for (const color of cardBorderColors) {
+  const cardSelectors = [
+    `border-${color}\\\/40`,
+    `dark\\:border-${color}\\\/45`,
+    `hover\\:border-${color}\\\/90`
+  ];
+  for (const selector of cardSelectors) {
+    if (!css.includes(selector)) failures.push(`Compiled CSS is missing dynamic card selector ${selector}`);
+  }
+}
+
 if (failures.length) {
   console.error(`Static CSS validation failed:\n- ${failures.join('\n- ')}`);
   process.exit(1);
@@ -61,3 +77,4 @@ console.log('Static CSS validation passed.');
 console.log(`- ${pageFiles.length} styled HTML pages use /assets/styles.css`);
 console.log('- no page or generator uses the Tailwind browser runtime');
 console.log(`- compiled CSS contains ${requiredSelectors.length} critical responsive and dynamic selectors`);
+console.log(`- compiled CSS contains dynamic border states for ${cardBorderColors.length} tool-card colors`);
