@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = path.join(rootDir, 'convert');
-const siteUrl = 'https://weconvertfiles.com';
+const siteUrl = 'https://www.weconvertfiles.com';
 const socialImage = `${siteUrl}/assets/logo.png`;
 
 const pages = [
