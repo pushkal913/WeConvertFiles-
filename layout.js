@@ -446,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <svg class="block dark:hidden h-[22px] w-[22px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
             <svg class="hidden dark:block h-[22px] w-[22px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
           </button>
-          <a class="group inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-[#1967d2] transition-colors whitespace-nowrap dark:text-slate-100 dark:hover:text-[#1967d2]" href="/about.html">
+          <a class="group inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-[#1967d2] transition-colors whitespace-nowrap dark:text-slate-100 dark:hover:text-[#1967d2]" href="/about">
             <svg class="h-[25px] w-[25px] text-blue-500 transition-colors group-hover:text-[#1967d2]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             About
           </a>
@@ -486,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="border-t border-slate-100 dark:border-slate-700/60 pt-4 mt-auto">
           
-          <a class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 font-semibold" href="/about.html">About WeConvertFiles</a>
+          <a class="flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 font-semibold" href="/about">About WeConvertFiles</a>
         </div>
       </div>
     </div>
@@ -525,16 +525,16 @@ document.addEventListener('DOMContentLoaded', () => {
               WeConvertFiles processes supported files directly in your web browser. All operations are completed locally via Client-Side Web Assembly and JavaScript to ensure your data remains <span class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">100%</span> secure and private.
             </p>
             <div class="flex flex-wrap gap-4 text-xs font-bold text-slate-600 dark:text-slate-300 pt-2">
-              <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/about.html">About Us</a>
-              <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/contact.html">Contact Us</a>
-              <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/privacy.html">Privacy Policy</a>
-              <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/terms.html">Terms of Service</a>
+              <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/about">About Us</a>
+              <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/contact">Contact Us</a>
+              <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/privacy">Privacy Policy</a>
+              <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/terms">Terms of Service</a>
             </div>
           </div>
           <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm space-y-2 max-w-xl">
             <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">Our Mission & Support</h4>
             <p class="text-xs leading-5.5 text-slate-600 dark:text-slate-400">
-              WeConvertFiles is proudly built by <a href="https://www.techknogeeks.com" target="_blank" class="font-bold text-[#1a73e8] hover:underline">TechKnoGeeks</a> to provide <span class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">100%</span> free, private, and secure browser-based document tools. To keep our servers running and keep these premium features free for everyone without a subscription, we rely on advertising revenue. Thank you for supporting us by allowing ads on our platform!
+              WeConvertFiles is proudly built by <a href="https://www.techknogeeks.com" target="_blank" class="font-bold text-[#1a73e8] hover:underline">TechKnoGeeks</a> to provide <span class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">100%</span> free, private, and secure browser-based document tools. Clearly labelled advertising helps fund hosting, maintenance, and continued development without requiring a subscription.
             </p>
           </div>
         </div>
