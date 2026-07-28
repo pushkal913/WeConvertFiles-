@@ -788,6 +788,53 @@
                 <p id="statusText" class="min-h-6 text-sm text-slate-600 dark:text-slate-400"></p>
               </div>
 
+              <!-- Progress Animation Bar -->
+              <div id="conversionProgressContainer" class="mt-4 hidden space-y-2">
+                <div class="flex items-center justify-between text-xs font-semibold text-slate-600 dark:text-slate-400">
+                  <span id="progressLabelText">Processing file...</span>
+                  <span id="progressPercentText">0%</span>
+                </div>
+                <div class="h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                  <div id="progressBarFill" class="h-full w-0 rounded-full bg-[#1a73e8] transition-all duration-200"></div>
+                </div>
+              </div>
+
+              <!-- 2-Step Result Screen (AdSense Compliant) -->
+              <div id="conversionResultPanel" class="mt-6 hidden rounded-2xl border border-emerald-200/80 dark:border-emerald-900/50 bg-emerald-50/40 dark:bg-emerald-950/20 p-5 sm:p-6 transition-all duration-300">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <div class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400">
+                      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <h4 class="text-base font-bold text-slate-900 dark:text-slate-100">Conversion Complete!</h4>
+                      <p id="resultFileInfo" class="text-xs text-slate-600 dark:text-slate-400 truncate"></p>
+                    </div>
+                  </div>
+                  <button id="downloadResultBtn" type="button" class="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 text-white px-6 py-3 text-sm font-bold shadow-material transition shrink-0">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Download File
+                  </button>
+                </div>
+
+                <!-- Labeled Ad Slot (Policy compliant, clearly separated from download button) -->
+                <div class="mt-5 border-t border-emerald-200/60 dark:border-emerald-900/40 pt-4">
+                  <div class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-center mb-1.5">Advertisement</div>
+                  <div class="rounded-xl border border-dashed border-slate-300 dark:border-slate-700/60 bg-slate-100/70 dark:bg-slate-900/40 p-4 text-center text-xs font-medium text-slate-400 dark:text-slate-500">
+                    Reserved Ad Space
+                  </div>
+                </div>
+
+                <!-- Next Actions & Discovery -->
+                <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-emerald-200/60 dark:border-emerald-900/40 pt-4">
+                  <button id="convertAnotherBtn" type="button" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-[#1a73e8] dark:hover:text-blue-400 transition">
+                    <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    Convert Another File
+                  </button>
+                  <div id="relatedToolsContainer" class="flex flex-wrap items-center gap-1.5 text-xs"></div>
+                </div>
+              </div>
+
               <div class="mt-5 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-100/70 dark:bg-slate-800/30 p-6 text-center text-sm font-medium text-slate-500 dark:text-slate-400">
                 Advertisement Space
               </div>
@@ -5099,7 +5146,8 @@
         jsPDF: { unit: 'pt', format: 'letter', orientation: 'portrait' }
       };
       
-      await html2pdf().set(opt).from(printContainer).save();
+      const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
+      downloadBlob(pdfBlob, opt.filename);
       setStatus('Office document converted successfully.', 'success');
     }
 
@@ -5253,7 +5301,61 @@
       }
     }
 
+    let progressTimer = null;
+
+    function startProgressAnimation() {
+      const container = document.getElementById('conversionProgressContainer');
+      const bar = document.getElementById('progressBarFill');
+      const percent = document.getElementById('progressPercentText');
+      const label = document.getElementById('progressLabelText');
+      if (!container || !bar || !percent) return;
+
+      container.classList.remove('hidden');
+      bar.style.width = '0%';
+      percent.textContent = '0%';
+      if (label) label.textContent = 'Processing file...';
+
+      let current = 0;
+      clearInterval(progressTimer);
+      progressTimer = setInterval(() => {
+        if (current < 90) {
+          current += Math.floor(Math.random() * 8) + 4;
+          if (current > 90) current = 90;
+          bar.style.width = current + '%';
+          percent.textContent = current + '%';
+        }
+      }, 150);
+    }
+
+    function completeProgressAnimation(callback) {
+      const container = document.getElementById('conversionProgressContainer');
+      const bar = document.getElementById('progressBarFill');
+      const percent = document.getElementById('progressPercentText');
+      const label = document.getElementById('progressLabelText');
+      
+      clearInterval(progressTimer);
+      if (bar && percent) {
+        bar.style.width = '100%';
+        percent.textContent = '100%';
+        if (label) label.textContent = 'Finalizing...';
+      }
+
+      setTimeout(() => {
+        if (container) container.classList.add('hidden');
+        if (callback) callback();
+      }, 350);
+    }
+
     function downloadBlob(blob, fileName) {
+      state.pendingResult = { blob, fileName };
+      completeProgressAnimation(() => {
+        showResultPanel(blob, fileName);
+      });
+    }
+
+    function executeActualDownload() {
+      if (!state.pendingResult) return;
+      const { blob, fileName } = state.pendingResult;
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -5262,10 +5364,53 @@
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
+      showNotification('Download started!');
+    }
+
+    function showResultPanel(blob, fileName) {
+      const panel = document.getElementById('conversionResultPanel');
+      const info = document.getElementById('resultFileInfo');
+      if (panel && info) {
+        info.textContent = `${fileName} (${formatBytes(blob.size)})`;
+        panel.classList.remove('hidden');
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      renderRelatedTools();
+    }
+
+    function renderRelatedTools() {
+      const container = document.getElementById('relatedToolsContainer');
+      if (!container || !state.currentTool) return;
+      
+      const currentKicker = state.currentTool.kicker;
+      const related = tools.filter(t => t.id !== state.currentTool.id && t.kicker === currentKicker).slice(0, 3);
+      
+      if (!related.length) {
+        container.innerHTML = '';
+        return;
+      }
+
+      container.innerHTML = `<span class="text-slate-400 dark:text-slate-500 font-medium mr-1">Related:</span>` + related.map(t => `
+        <button onclick="window.location.hash='#${t.id}'" type="button" class="inline-flex items-center gap-1 rounded-full bg-slate-200/70 dark:bg-slate-800 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-[#e8f0fe] hover:text-[#1967d2] dark:hover:bg-[#1a73e8]/20 dark:hover:text-blue-300 transition">
+          ${t.title}
+        </button>
+      `).join('');
+    }
+
+    function resetWorkspaceForNewFile() {
+      state.files = [];
+      state.pendingResult = null;
+      document.getElementById('fileInput').value = '';
+      document.getElementById('conversionResultPanel')?.classList.add('hidden');
+      document.getElementById('conversionProgressContainer')?.classList.add('hidden');
+      updateFileList();
+      setStatus('');
     }
 
     async function handleConvert() {
       if (!state.currentTool || !state.files.length) return;
+      document.getElementById('conversionResultPanel')?.classList.add('hidden');
+      startProgressAnimation();
       setBusy(true);
       setStatus('Starting conversion...');
 
@@ -5601,6 +5746,8 @@
     });
 
     convertButton.addEventListener('click', handleConvert);
+    document.getElementById('downloadResultBtn')?.addEventListener('click', executeActualDownload);
+    document.getElementById('convertAnotherBtn')?.addEventListener('click', resetWorkspaceForNewFile);
 
   // Reset language to default English
   localStorage.removeItem('lang');
