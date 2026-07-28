@@ -34,8 +34,8 @@ module.exports = {
     './scripts/*.mjs'
   ],
   safelist: cardBorderColors.flatMap(color => [
-    `border-${color}/40`,
-    `dark:border-${color}/45`,
+    `border-${color}/[0.48]`,
+    `dark:border-${color}/[0.54]`,
     `hover:border-${color}/90`
   ]),
   theme: {

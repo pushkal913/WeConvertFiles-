@@ -59,13 +59,22 @@ const cardBorderColors = [...homepage.matchAll(/iconColor:\s*'text-([^']+)'/g)]
 
 for (const color of cardBorderColors) {
   const cardSelectors = [
-    `border-${color}\\\/40`,
-    `dark\\:border-${color}\\\/45`,
+    `border-${color}\\\/\\[0\\.48\\]`,
+    `dark\\:border-${color}\\\/\\[0\\.54\\]`,
     `hover\\:border-${color}\\\/90`
   ];
   for (const selector of cardSelectors) {
     if (!css.includes(selector)) failures.push(`Compiled CSS is missing dynamic card selector ${selector}`);
   }
+}
+
+const requiredGlowValues = [
+  'rgba(var(--glow-rgb),0.096)',
+  'rgba(var(--glow-rgb),0.30)'
+];
+for (const glowValue of requiredGlowValues) {
+  if (!homepage.includes(glowValue)) failures.push(`Homepage is missing tool-card glow value ${glowValue}`);
+  if (!css.includes(glowValue)) failures.push(`Compiled CSS is missing tool-card glow value ${glowValue}`);
 }
 
 if (failures.length) {
@@ -78,3 +87,4 @@ console.log(`- ${pageFiles.length} styled HTML pages use /assets/styles.css`);
 console.log('- no page or generator uses the Tailwind browser runtime');
 console.log(`- compiled CSS contains ${requiredSelectors.length} critical responsive and dynamic selectors`);
 console.log(`- compiled CSS contains dynamic border states for ${cardBorderColors.length} tool-card colors`);
+console.log('- tool-card border and glow intensity is increased by 20% in light and dark modes');
