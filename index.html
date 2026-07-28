@@ -1989,7 +1989,14 @@
       if (!tool) return;
       state.currentTool = tool;
       state.files = [];
+      state.pendingResult = null;
       state.dragIndex = null;
+      const fileInputEl = document.getElementById('fileInput');
+      if (fileInputEl) fileInputEl.value = '';
+      document.getElementById('conversionResultPanel')?.classList.add('hidden');
+      document.getElementById('conversionProgressContainer')?.classList.add('hidden');
+      updateFileList();
+      setStatus('');
       document.documentElement.dataset.initialView = 'tool';
       dashboardView.classList.add('hidden');
       workspaceView.classList.remove('hidden');
@@ -3796,6 +3803,12 @@
     }
 
     function showDashboard() {
+      state.files = [];
+      state.pendingResult = null;
+      const fileInputEl = document.getElementById('fileInput');
+      if (fileInputEl) fileInputEl.value = '';
+      document.getElementById('conversionResultPanel')?.classList.add('hidden');
+      document.getElementById('conversionProgressContainer')?.classList.add('hidden');
       document.documentElement.dataset.initialView = 'dashboard';
       workspaceView.classList.add('hidden');
       dashboardView.classList.remove('hidden');
