@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const siteUrl = 'https://weconvertfiles.com';
+const siteUrl = 'https://www.weconvertfiles.com';
 const pages = [
   ['jpg-to-pdf', '/images-pdf'],
   ['png-to-pdf', '/images-pdf'],
