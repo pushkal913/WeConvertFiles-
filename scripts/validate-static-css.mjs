@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const stylesheetUrl = '/assets/styles.css?v=20260728-1';
 const pageDirectories = [
   rootDir,
   path.join(rootDir, 'convert'),
@@ -20,10 +21,10 @@ for (const directory of pageDirectories) {
 const failures = [];
 for (const file of pageFiles) {
   const html = await readFile(file, 'utf8');
-  const stylesheetCount = html.split('/assets/styles.css').length - 1;
+  const stylesheetCount = html.split(stylesheetUrl).length - 1;
 
   if (stylesheetCount !== 1) {
-    failures.push(`${path.relative(rootDir, file)} has ${stylesheetCount} static stylesheet references`);
+    failures.push(`${path.relative(rootDir, file)} has ${stylesheetCount} versioned stylesheet references`);
   }
   if (html.includes('cdn.tailwindcss.com') || html.includes('tailwind.config')) {
     failures.push(`${path.relative(rootDir, file)} still includes the Tailwind browser runtime`);
@@ -31,8 +32,8 @@ for (const file of pageFiles) {
 }
 
 const generator = await readFile(path.join(rootDir, 'scripts', 'generate-conversion-pages.mjs'), 'utf8');
-if (!generator.includes('/assets/styles.css')) {
-  failures.push('The conversion-page generator does not include the static stylesheet');
+if (!generator.includes(stylesheetUrl)) {
+  failures.push('The conversion-page generator does not include the versioned static stylesheet');
 }
 if (generator.includes('cdn.tailwindcss.com') || generator.includes('tailwind.config')) {
   failures.push('The conversion-page generator still includes the Tailwind browser runtime');
@@ -83,7 +84,7 @@ if (failures.length) {
 }
 
 console.log('Static CSS validation passed.');
-console.log(`- ${pageFiles.length} styled HTML pages use /assets/styles.css`);
+console.log(`- ${pageFiles.length} styled HTML pages use ${stylesheetUrl}`);
 console.log('- no page or generator uses the Tailwind browser runtime');
 console.log(`- compiled CSS contains ${requiredSelectors.length} critical responsive and dynamic selectors`);
 console.log(`- compiled CSS contains dynamic border states for ${cardBorderColors.length} tool-card colors`);
