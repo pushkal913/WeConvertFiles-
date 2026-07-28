@@ -284,9 +284,8 @@ const renderPage = (page) => {
   <script type="application/ld+json">
 ${jsonLd(page)}
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/styles.css?v=20260728-1" />
   <script>
-    tailwind.config = { darkMode: 'class' };
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     }

@@ -18,9 +18,8 @@
   <meta name="twitter:title" content="Markdown Live Preview Guide - WeConvertFiles" />
   <meta name="twitter:description" content="Type Markdown text and view real-time rendered HTML preview side-by-side offline." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/logo.png" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/styles.css?v=20260728-1" />
   <script>
-    tailwind.config = { darkMode: 'class' };
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     } else {
