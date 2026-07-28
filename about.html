@@ -18,11 +18,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="About Us — WeConvertFiles" />
   <meta name="twitter:description" content="Learn about WeConvertFiles's mission to provide 100% free, secure, and client-side browser-based document utilities." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/logo.png" />  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/logo.png" />  <link rel="stylesheet" href="/assets/styles.css" />
   <script>
-    tailwind.config = {
-      darkMode: 'class'
-    }
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     } else {

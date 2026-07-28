@@ -18,9 +18,8 @@
   <meta name="twitter:title" content="PDF to Word / TXT Guide - WeConvertFiles" />
   <meta name="twitter:description" content="Extract raw text layers from PDF documents offline and securely in your web browser." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/logo.png" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/styles.css" />
   <script>
-    tailwind.config = { darkMode: 'class' };
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     } else {

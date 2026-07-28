@@ -18,9 +18,8 @@
   <meta name="twitter:title" content="Word & Character Counter Guide - WeConvertFiles" />
   <meta name="twitter:description" content="Count words, characters, sentences, and paragraphs in real-time locally in your browser." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/logo.png" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/styles.css" />
   <script>
-    tailwind.config = { darkMode: 'class' };
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     } else {
