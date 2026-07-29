@@ -5418,16 +5418,13 @@
       
       const arrayBuffer = await file.arrayBuffer();
       const printContainer = document.createElement('div');
-      printContainer.id = 'officePrintContainer';
       printContainer.className = 'p-8 bg-white text-black font-sans leading-relaxed prose';
-      printContainer.style.position = 'fixed';
+      printContainer.style.position = 'absolute';
+      printContainer.style.left = '-9999px';
       printContainer.style.top = '0';
-      printContainer.style.left = '0';
-      printContainer.style.width = '100vw';
-      printContainer.style.height = '100vh';
-      printContainer.style.overflow = 'auto';
       printContainer.style.background = '#ffffff';
-      printContainer.style.zIndex = '99999';
+      printContainer.style.zIndex = '-9999';
+      printContainer.style.width = (extension === 'xlsx' || extension === 'xls') ? '1000px' : '750px';
       
       const pageBreakStyle = document.createElement('style');
       pageBreakStyle.textContent = `
@@ -5439,7 +5436,7 @@
           width: 100% !important;
           border-collapse: collapse !important;
           table-layout: auto !important;
-          font-size: 11px !important;
+          font-size: 10px !important;
           word-break: break-word !important;
           margin-top: 12px !important;
           margin-bottom: 20px !important;
@@ -5459,13 +5456,11 @@
       document.body.appendChild(printContainer);
       
       try {
-        let contentDiv = document.createElement('div');
         if (extension === 'docx' || extension === 'doc') {
           if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
           setStatus('Parsing DOCX to HTML structure...');
           const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-          contentDiv.style.maxWidth = '800px';
-          contentDiv.style.margin = '0 auto';
+          const contentDiv = document.createElement('div');
           contentDiv.innerHTML = result.value || '<h3>Empty Document</h3>';
           printContainer.appendChild(contentDiv);
         } else if (extension === 'xlsx' || extension === 'xls') {
@@ -5474,10 +5469,9 @@
           const sheetName = workbook.SheetNames[0];
           const sheet = workbook.Sheets[sheetName];
           const htmlTable = XLSX.utils.sheet_to_html(sheet);
-          contentDiv.style.maxWidth = '1100px';
-          contentDiv.style.margin = '0 auto';
+          const contentDiv = document.createElement('div');
           contentDiv.innerHTML = `
-            <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 12px;">Sheet: ${sheetName}</h2>
+            <h2 style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">Sheet: ${sheetName}</h2>
             <div>
               ${htmlTable}
             </div>
@@ -5488,7 +5482,7 @@
         }
         
         setStatus('Generating PDF layout snapshot...');
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => setTimeout(resolve, 250));
         
         const isLandscape = extension === 'xlsx' || extension === 'xls';
         const opt = {
@@ -5500,7 +5494,7 @@
           pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
         };
         
-        const pdfBlob = await html2pdf().set(opt).from(contentDiv).output('blob');
+        const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
         downloadBlob(pdfBlob, opt.filename);
         setStatus('Office document converted successfully.', 'success');
       } finally {
