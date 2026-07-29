@@ -5415,39 +5415,41 @@
       if (!window.html2pdf) throw new Error('html2pdf script not loaded.');
       const file = state.files[0];
       const extension = file.name.split('.').pop().toLowerCase();
+      const isExcel = extension === 'xlsx' || extension === 'xls';
       
       const arrayBuffer = await file.arrayBuffer();
       const printContainer = document.createElement('div');
       printContainer.id = 'officePrintContainer';
-      printContainer.className = 'p-8 bg-white text-black font-sans leading-relaxed prose';
       printContainer.style.position = 'fixed';
       printContainer.style.top = '0';
       printContainer.style.left = '0';
-      printContainer.style.width = '100vw';
-      printContainer.style.height = '100vh';
-      printContainer.style.overflow = 'auto';
+      printContainer.style.zIndex = '-1';
       printContainer.style.background = '#ffffff';
-      printContainer.style.zIndex = '99999';
+      printContainer.style.color = '#000000';
+      printContainer.style.padding = '32px';
+      printContainer.style.boxSizing = 'border-box';
+      printContainer.style.fontFamily = 'system-ui, -apple-system, sans-serif';
+      printContainer.style.width = isExcel ? '1100px' : '800px';
       
       const pageBreakStyle = document.createElement('style');
       pageBreakStyle.textContent = `
-        p, tr, th, td, h1, h2, h3, h4, h5, h6, li, blockquote, .prose > * {
+        p, tr, th, td, h1, h2, h3, h4, h5, h6, li, blockquote {
           page-break-inside: avoid !important;
           break-inside: avoid !important;
         }
         table {
-          width: 100% !important;
           border-collapse: collapse !important;
-          table-layout: auto !important;
-          font-size: 11px !important;
-          word-break: break-word !important;
-          margin-top: 12px !important;
+          margin-top: 14px !important;
           margin-bottom: 20px !important;
+          font-size: 11px !important;
+          width: auto !important;
+          max-width: none !important;
         }
         th, td {
           border: 1px solid #cbd5e1 !important;
-          padding: 6px 10px !important;
+          padding: 6px 12px !important;
           text-align: left !important;
+          white-space: nowrap !important;
         }
         th {
           background-color: #f1f5f9 !important;
@@ -5455,48 +5457,52 @@
         }
       `;
       printContainer.appendChild(pageBreakStyle);
-
       document.body.appendChild(printContainer);
       
       try {
-        let contentDiv = document.createElement('div');
+        const contentDiv = document.createElement('div');
         if (extension === 'docx' || extension === 'doc') {
           if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
           setStatus('Parsing DOCX to HTML structure...');
           const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-          contentDiv.style.maxWidth = '800px';
+          contentDiv.style.maxWidth = '750px';
           contentDiv.style.margin = '0 auto';
+          contentDiv.className = 'prose';
           contentDiv.innerHTML = result.value || '<h3>Empty Document</h3>';
-          printContainer.appendChild(contentDiv);
-        } else if (extension === 'xlsx' || extension === 'xls') {
+        } else if (isExcel) {
           setStatus('Parsing XLSX sheet rows...');
           const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
           const sheetName = workbook.SheetNames[0];
           const sheet = workbook.Sheets[sheetName];
           const htmlTable = XLSX.utils.sheet_to_html(sheet);
-          contentDiv.style.maxWidth = '1100px';
-          contentDiv.style.margin = '0 auto';
           contentDiv.innerHTML = `
-            <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 12px;">Sheet: ${sheetName}</h2>
-            <div>
+            <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 12px; color: #0f172a;">Sheet: ${sheetName}</h2>
+            <div style="overflow: visible;">
               ${htmlTable}
             </div>
           `;
-          printContainer.appendChild(contentDiv);
         } else {
           throw new Error('Unsupported format. Only Word (.docx) and Excel (.xlsx) documents are supported.');
         }
+
+        printContainer.appendChild(contentDiv);
+
+        if (isExcel) {
+          const tableElem = contentDiv.querySelector('table');
+          if (tableElem && tableElem.offsetWidth > 1000) {
+            printContainer.style.width = (tableElem.offsetWidth + 80) + 'px';
+          }
+        }
         
         setStatus('Generating PDF layout snapshot...');
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => setTimeout(resolve, 350));
         
-        const isLandscape = extension === 'xlsx' || extension === 'xls';
         const opt = {
           margin: [25, 25, 25, 25],
           filename: file.name.substring(0, file.name.lastIndexOf('.')) + '.pdf',
           image: { type: 'jpeg', quality: 0.98 },
           html2canvas: { scale: 2, useCORS: true, letterRendering: true, logging: false },
-          jsPDF: { unit: 'pt', format: 'a4', orientation: isLandscape ? 'landscape' : 'portrait' },
+          jsPDF: { unit: 'pt', format: 'a4', orientation: isExcel ? 'landscape' : 'portrait' },
           pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
         };
         
