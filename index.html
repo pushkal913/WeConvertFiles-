@@ -3922,9 +3922,18 @@
         return incoming.filter(file => /\.heic$/i.test(file.name));
       }
 
-      // Group 3: Office Files (.docx, .xlsx)
+      // Group 3: Office Files (.docx, .xlsx, .doc, .xls)
       if (toolId === 'office-pdf') {
-        return incoming.filter(file => /\.(docx|xlsx)$/i.test(file.name));
+        return incoming.filter(file => 
+          /\.(docx|xlsx|doc|xls)$/i.test(file.name) ||
+          (file.type && (
+            file.type.includes('word') ||
+            file.type.includes('excel') ||
+            file.type.includes('spreadsheet') ||
+            file.type.includes('officedocument') ||
+            file.type.includes('msword')
+          ))
+        );
       }
 
       // Group 4: CSV Files
@@ -5410,7 +5419,12 @@
       const arrayBuffer = await file.arrayBuffer();
       const printContainer = document.createElement('div');
       printContainer.className = 'p-8 bg-white text-black font-sans leading-relaxed prose';
-      printContainer.style.width = extension === 'xlsx' ? '1000px' : '750px';
+      printContainer.style.position = 'absolute';
+      printContainer.style.left = '-9999px';
+      printContainer.style.top = '0';
+      printContainer.style.background = '#ffffff';
+      printContainer.style.zIndex = '-9999';
+      printContainer.style.width = (extension === 'xlsx' || extension === 'xls') ? '1000px' : '750px';
       
       const pageBreakStyle = document.createElement('style');
       pageBreakStyle.textContent = `
@@ -5424,53 +5438,70 @@
           table-layout: auto !important;
           font-size: 10px !important;
           word-break: break-word !important;
+          margin-top: 12px !important;
+          margin-bottom: 20px !important;
         }
         th, td {
           border: 1px solid #cbd5e1 !important;
-          padding: 5px 8px !important;
+          padding: 6px 10px !important;
           text-align: left !important;
         }
         th {
           background-color: #f1f5f9 !important;
+          font-weight: bold !important;
         }
       `;
       printContainer.appendChild(pageBreakStyle);
+
+      document.body.appendChild(printContainer);
       
-      if (extension === 'docx') {
-        if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
-        setStatus('Parsing DOCX to HTML structure...');
-        const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-        printContainer.innerHTML += result.value || '<h3>Empty Document</h3>';
-      } else if (extension === 'xlsx') {
-        setStatus('Parsing XLSX sheet rows...');
-        const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
-        const sheetName = workbook.SheetNames[0];
-        const sheet = workbook.Sheets[sheetName];
-        const htmlTable = XLSX.utils.sheet_to_html(sheet);
-        printContainer.innerHTML += `
-          <h2>Sheet: ${sheetName}</h2>
-          <div style="margin-top: 15px;">
-            ${htmlTable}
-          </div>
-        `;
-      } else {
-        throw new Error('Unsupported format. Only DOCX and XLSX extensions are supported.');
+      try {
+        if (extension === 'docx' || extension === 'doc') {
+          if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
+          setStatus('Parsing DOCX to HTML structure...');
+          const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+          const contentDiv = document.createElement('div');
+          contentDiv.innerHTML = result.value || '<h3>Empty Document</h3>';
+          printContainer.appendChild(contentDiv);
+        } else if (extension === 'xlsx' || extension === 'xls') {
+          setStatus('Parsing XLSX sheet rows...');
+          const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
+          const sheetName = workbook.SheetNames[0];
+          const sheet = workbook.Sheets[sheetName];
+          const htmlTable = XLSX.utils.sheet_to_html(sheet);
+          const contentDiv = document.createElement('div');
+          contentDiv.innerHTML = `
+            <h2 style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">Sheet: ${sheetName}</h2>
+            <div>
+              ${htmlTable}
+            </div>
+          `;
+          printContainer.appendChild(contentDiv);
+        } else {
+          throw new Error('Unsupported format. Only Word (.docx) and Excel (.xlsx) documents are supported.');
+        }
+        
+        setStatus('Generating PDF layout snapshot...');
+        await new Promise(resolve => setTimeout(resolve, 250));
+        
+        const isLandscape = extension === 'xlsx' || extension === 'xls';
+        const opt = {
+          margin: [25, 25, 25, 25],
+          filename: file.name.substring(0, file.name.lastIndexOf('.')) + '.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, letterRendering: true, logging: false },
+          jsPDF: { unit: 'pt', format: 'a4', orientation: isLandscape ? 'landscape' : 'portrait' },
+          pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+        
+        const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
+        downloadBlob(pdfBlob, opt.filename);
+        setStatus('Office document converted successfully.', 'success');
+      } finally {
+        if (document.body.contains(printContainer)) {
+          document.body.removeChild(printContainer);
+        }
       }
-      
-      setStatus('Generating PDF layout snapshot...');
-      
-      const opt = {
-        margin: [30, 30, 30, 30],
-        filename: file.name.substring(0, file.name.lastIndexOf('.')) + '.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-        jsPDF: { unit: 'pt', format: 'a4', orientation: extension === 'xlsx' ? 'landscape' : 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-      };
-      
-      const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
-      downloadBlob(pdfBlob, opt.filename);
-      setStatus('Office document converted successfully.', 'success');
     }
 
     async function convertPdfToWord() {
