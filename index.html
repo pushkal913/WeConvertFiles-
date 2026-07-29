@@ -1426,7 +1426,7 @@
         iconColor: 'text-emerald-600',
         description: 'Convert Word (.docx) or Excel (.xlsx) documents to PDF using client-side rendering.',
         hint: 'Upload a DOCX or XLSX file. Note: complex styling may vary.',
-        accept: '.docx,.xlsx',
+        accept: '.docx,.xlsx,.doc,.xls,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.ms-excel',
         multiple: false,
         notes: ['Word parsed with mammoth.js.', 'Excel parsed with SheetJS.', 'DOM elements compiled to PDF via html2pdf.']
       },
@@ -3922,9 +3922,18 @@
         return incoming.filter(file => /\.heic$/i.test(file.name));
       }
 
-      // Group 3: Office Files (.docx, .xlsx)
+      // Group 3: Office Files (.docx, .xlsx, .doc, .xls)
       if (toolId === 'office-pdf') {
-        return incoming.filter(file => /\.(docx|xlsx)$/i.test(file.name));
+        return incoming.filter(file => 
+          /\.(docx|xlsx|doc|xls)$/i.test(file.name) ||
+          (file.type && (
+            file.type.includes('word') ||
+            file.type.includes('excel') ||
+            file.type.includes('spreadsheet') ||
+            file.type.includes('officedocument') ||
+            file.type.includes('msword')
+          ))
+        );
       }
 
       // Group 4: CSV Files
@@ -5406,15 +5415,16 @@
       if (!window.html2pdf) throw new Error('html2pdf script not loaded.');
       const file = state.files[0];
       const extension = file.name.split('.').pop().toLowerCase();
+      const isExcel = extension === 'xlsx' || extension === 'xls';
       
       const arrayBuffer = await file.arrayBuffer();
       const printContainer = document.createElement('div');
       printContainer.className = 'p-8 bg-white text-black font-sans leading-relaxed prose';
-      printContainer.style.width = extension === 'xlsx' ? '1000px' : '750px';
+      printContainer.style.width = isExcel ? '1000px' : '750px';
       
       const pageBreakStyle = document.createElement('style');
       pageBreakStyle.textContent = `
-        p, tr, th, td, h1, h2, h3, h4, h5, h6, li, blockquote, .prose > * {
+        p, tr, th, td, h1, h2, h3, h4, h5, h6, li, blockquote, table, img, div, .prose > * {
           page-break-inside: avoid !important;
           break-inside: avoid !important;
         }
@@ -5422,49 +5432,53 @@
           width: 100% !important;
           border-collapse: collapse !important;
           table-layout: auto !important;
-          font-size: 10px !important;
-          word-break: break-word !important;
+          font-size: 11px !important;
+          margin-top: 14px !important;
+          margin-bottom: 20px !important;
         }
         th, td {
           border: 1px solid #cbd5e1 !important;
-          padding: 5px 8px !important;
+          padding: 6px 10px !important;
           text-align: left !important;
         }
         th {
           background-color: #f1f5f9 !important;
+          font-weight: bold !important;
         }
       `;
       printContainer.appendChild(pageBreakStyle);
       
-      if (extension === 'docx') {
+      const contentDiv = document.createElement('div');
+      if (extension === 'docx' || extension === 'doc') {
         if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
         setStatus('Parsing DOCX to HTML structure...');
         const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-        printContainer.innerHTML += result.value || '<h3>Empty Document</h3>';
-      } else if (extension === 'xlsx') {
+        contentDiv.innerHTML = result.value || '<h3>Empty Document</h3>';
+      } else if (isExcel) {
         setStatus('Parsing XLSX sheet rows...');
         const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
         const htmlTable = XLSX.utils.sheet_to_html(sheet);
-        printContainer.innerHTML += `
-          <h2>Sheet: ${sheetName}</h2>
+        contentDiv.innerHTML = `
+          <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 12px; color: #0f172a;">Sheet: ${sheetName}</h2>
           <div style="margin-top: 15px;">
             ${htmlTable}
           </div>
         `;
       } else {
-        throw new Error('Unsupported format. Only DOCX and XLSX extensions are supported.');
+        throw new Error('Unsupported format. Only Word (.docx) and Excel (.xlsx) documents are supported.');
       }
+      printContainer.appendChild(contentDiv);
       
       setStatus('Generating PDF layout snapshot...');
       
       const opt = {
-        margin: [30, 30, 30, 30],
+        margin: [25, 25, 25, 25],
         filename: file.name.substring(0, file.name.lastIndexOf('.')) + '.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-        jsPDF: { unit: 'pt', format: 'a4', orientation: extension === 'xlsx' ? 'landscape' : 'portrait' },
+        jsPDF: { unit: 'pt', format: 'a4', orientation: isExcel ? 'landscape' : 'portrait' },
         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
       };
       
