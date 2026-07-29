@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@600&family=Dancing+Script:wght@600&family=Great+Vibes&family=Kalam:wght@600&family=Marck+Script&family=Pacifico&family=Parisienne&family=Sacramento&family=Satisfy&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@600&family=Dancing+Script:wght@600&family=Great+Vibes&family=Kalam:wght@600&family=Marck+Script&family=Pacifico&family=Parisienne&family=Sacramento&family=Satisfy&display=swap');
+  </style>
   <title>WeConvertFiles - Free PDF and Image Converter</title>
   <meta name="description" content="Free PDF, image, Office, and developer tools with 100% private, browser-based conversion — files are never uploaded to servers." />
   <meta name="robots" content="index, follow" />
@@ -2384,11 +2388,31 @@
             </div>
           </div>
           
-          <div class="mt-4 pt-2 border-t border-slate-100 dark:border-slate-800">
-            <label class="${labelClass}">Page Number</label>
-            <input id="signaturePage" class="${inputClass} mt-1" type="number" min="1" value="1" />
-            <p class="${helpClass} mt-1.5">Adds a visible signature near the lower-right of the selected PDF page.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 grid gap-4 sm:grid-cols-3">
+            <div>
+              <label class="${labelClass}">Page Number</label>
+              <input id="signaturePage" class="${inputClass} mt-1" type="number" min="1" value="1" />
+            </div>
+            <div>
+              <label class="${labelClass}">Position</label>
+              <select id="signaturePosition" class="${inputClass} mt-1">
+                <option value="lower-right" selected>Bottom Right</option>
+                <option value="lower-left">Bottom Left</option>
+                <option value="lower-center">Bottom Center</option>
+                <option value="upper-right">Top Right</option>
+                <option value="upper-left">Top Left</option>
+              </select>
+            </div>
+            <div>
+              <label class="${labelClass}">Size</label>
+              <select id="signatureSize" class="${inputClass} mt-1">
+                <option value="medium" selected>Medium (Default)</option>
+                <option value="small">Small</option>
+                <option value="large">Large</option>
+              </select>
+            </div>
           </div>
+          <p class="${helpClass} mt-2">Custom signature placement and scale on your chosen PDF page.</p>
         `,
         'image-scaler': `
           <div class="grid gap-4 sm:grid-cols-2">
@@ -3680,16 +3704,16 @@
       const typeCont = document.getElementById('typeSignContainer');
 
       const signatureFonts = [
-        { id: 'dancing', name: 'Classic Cursive', family: "'Dancing Script', cursive" },
-        { id: 'greatvibes', name: 'Formal Calligraphy', family: "'Great Vibes', cursive" },
-        { id: 'pacifico', name: 'Modern Brush', family: "'Pacifico', cursive" },
-        { id: 'caveat', name: 'Natural Handwriting', family: "'Caveat', cursive" },
-        { id: 'sacramento', name: 'Flowing Script', family: "'Sacramento', cursive" },
-        { id: 'alexbrush', name: 'Refined Brush', family: "'Alex Brush', cursive" },
-        { id: 'satisfy', name: 'Smooth Pen', family: "'Satisfy', cursive" },
-        { id: 'marck', name: 'Classic Ink', family: "'Marck Script', cursive" },
-        { id: 'kalam', name: 'Felt-Tip Signature', family: "'Kalam', cursive" },
-        { id: 'parisienne', name: 'Chic Script', family: "'Parisienne', cursive" }
+        { id: 'dancing', name: 'Classic Cursive', fontName: 'Dancing Script', family: 'Dancing Script, cursive' },
+        { id: 'greatvibes', name: 'Formal Calligraphy', fontName: 'Great Vibes', family: 'Great Vibes, cursive' },
+        { id: 'pacifico', name: 'Modern Brush', fontName: 'Pacifico', family: 'Pacifico, cursive' },
+        { id: 'caveat', name: 'Natural Handwriting', fontName: 'Caveat', family: 'Caveat, cursive' },
+        { id: 'sacramento', name: 'Flowing Script', fontName: 'Sacramento', family: 'Sacramento, cursive' },
+        { id: 'alexbrush', name: 'Refined Brush', fontName: 'Alex Brush', family: 'Alex Brush, cursive' },
+        { id: 'satisfy', name: 'Smooth Pen', fontName: 'Satisfy', family: 'Satisfy, cursive' },
+        { id: 'marck', name: 'Classic Ink', fontName: 'Marck Script', family: 'Marck Script, cursive' },
+        { id: 'kalam', name: 'Felt-Tip Signature', fontName: 'Kalam', family: 'Kalam, cursive' },
+        { id: 'parisienne', name: 'Chic Script', fontName: 'Parisienne', family: 'Parisienne, cursive' }
       ];
 
       const signatureColors = [
@@ -3716,6 +3740,7 @@
           const previewElem = document.getElementById(`fontPreview_${font.id}`);
           if (previewElem) {
             previewElem.textContent = textVal;
+            previewElem.style.fontFamily = font.family;
             previewElem.style.color = state.signatureColor;
           }
         });
@@ -4870,19 +4895,33 @@
         const bytes = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
         
         const embeddedImage = await pdfDoc.embedPng(bytes);
-        const sigWidth = 150;
-        const sigHeight = 48; // maintains canvas width/height aspect ratio
+        const position = document.getElementById('signaturePosition')?.value || 'lower-right';
+        const sizeOption = document.getElementById('signatureSize')?.value || 'medium';
+
+        let sigWidth = 150;
+        let sigHeight = 48;
+        if (sizeOption === 'small') { sigWidth = 110; sigHeight = 35; }
+        if (sizeOption === 'large') { sigWidth = 200; sigHeight = 64; }
+
+        const pageHeight = page.getHeight();
+        let posX = Math.max(36, width - sigWidth - 36);
+        let posY = 50;
+
+        if (position === 'lower-left') posX = 36;
+        if (position === 'lower-center') posX = Math.max(36, (width - sigWidth) / 2);
+        if (position === 'upper-right') { posX = Math.max(36, width - sigWidth - 36); posY = Math.max(36, pageHeight - sigHeight - 45); }
+        if (position === 'upper-left') { posX = 36; posY = Math.max(36, pageHeight - sigHeight - 45); }
         
         page.drawImage(embeddedImage, {
-          x: Math.max(36, width - sigWidth - 36),
-          y: 50,
+          x: posX,
+          y: posY,
           width: sigWidth,
           height: sigHeight
         });
         
         page.drawLine({
-          start: { x: Math.max(36, width - sigWidth - 40), y: 46 },
-          end: { x: width - 36, y: 46 },
+          start: { x: Math.max(20, posX - 5), y: posY - 4 },
+          end: { x: Math.min(width - 20, posX + sigWidth + 5), y: posY - 4 },
           thickness: 1,
           color: rgb(0.16, 0.1, 0.42)
         });
@@ -4890,15 +4929,23 @@
         const signatureText = document.getElementById('signatureText')?.value?.trim();
         if (!signatureText) throw new Error('Please enter signature text.');
         
-        if (document.fonts) await document.fonts.ready;
+        const fontFamily = state.signatureFontFamily || "Dancing Script, cursive";
+        const fontName = fontFamily.split(',')[0].replace(/['"]/g, '').trim();
+        const inkColor = state.signatureColor || '#0f172a';
+
+        if (document.fonts) {
+          try {
+            await document.fonts.load(`64px "${fontName}"`);
+            await document.fonts.ready;
+          } catch (e) {
+            console.warn('Signature font load notice:', e);
+          }
+        }
         
         const typeCanvas = document.createElement('canvas');
-        typeCanvas.width = 800;
-        typeCanvas.height = 200;
+        typeCanvas.width = 900;
+        typeCanvas.height = 220;
         const typeCtx = typeCanvas.getContext('2d');
-        
-        const fontFamily = state.signatureFontFamily || "'Dancing Script', cursive";
-        const inkColor = state.signatureColor || '#0f172a';
         
         typeCtx.clearRect(0, 0, typeCanvas.width, typeCanvas.height);
         typeCtx.font = `600 64px ${fontFamily}`;
@@ -4906,13 +4953,13 @@
         typeCtx.textBaseline = 'middle';
         
         const textWidth = typeCtx.measureText(signatureText).width;
-        typeCtx.fillText(signatureText, 30, 90);
+        typeCtx.fillText(signatureText, 30, 95);
         
         typeCtx.strokeStyle = inkColor;
         typeCtx.lineWidth = 3;
         typeCtx.beginPath();
-        typeCtx.moveTo(25, 140);
-        typeCtx.lineTo(Math.max(200, textWidth + 35), 140);
+        typeCtx.moveTo(25, 145);
+        typeCtx.lineTo(Math.max(220, textWidth + 35), 145);
         typeCtx.stroke();
         
         const dataUrl = typeCanvas.toDataURL('image/png');
@@ -4920,12 +4967,27 @@
         const bytes = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
         
         const embeddedImage = await pdfDoc.embedPng(bytes);
-        const sigWidth = Math.min(220, Math.max(160, textWidth * 0.35));
-        const sigHeight = (sigWidth / 4);
         
+        const position = document.getElementById('signaturePosition')?.value || 'lower-right';
+        const sizeOption = document.getElementById('signatureSize')?.value || 'medium';
+
+        let sigWidth = 190;
+        let sigHeight = 48;
+        if (sizeOption === 'small') { sigWidth = 140; sigHeight = 35; }
+        if (sizeOption === 'large') { sigWidth = 250; sigHeight = 62; }
+
+        const pageHeight = page.getHeight();
+        let posX = Math.max(36, width - sigWidth - 36);
+        let posY = 45;
+
+        if (position === 'lower-left') posX = 36;
+        if (position === 'lower-center') posX = Math.max(36, (width - sigWidth) / 2);
+        if (position === 'upper-right') { posX = Math.max(36, width - sigWidth - 36); posY = Math.max(36, pageHeight - sigHeight - 45); }
+        if (position === 'upper-left') { posX = 36; posY = Math.max(36, pageHeight - sigHeight - 45); }
+
         page.drawImage(embeddedImage, {
-          x: Math.max(36, width - sigWidth - 36),
-          y: 45,
+          x: posX,
+          y: posY,
           width: sigWidth,
           height: sigHeight
         });
