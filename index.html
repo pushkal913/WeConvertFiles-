@@ -2349,29 +2349,46 @@
           </label>
         `,
         'sign-pdf': `
-          <div id="signatureMethodTabs" class="flex gap-2 mb-3">
-            <button id="tabDrawSign" type="button" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border border-blue-200 dark:border-blue-800 transition">Draw Signature</button>
-            <button id="tabTypeSign" type="button" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Type Signature</button>
+          <div id="signatureMethodTabs" class="flex gap-2 mb-4">
+            <button id="tabDrawSign" type="button" class="px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border border-blue-200 dark:border-blue-800 transition">Draw Signature</button>
+            <button id="tabTypeSign" type="button" class="px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Type Signature</button>
           </div>
           
           <div id="drawSignContainer">
             <label class="${labelClass}">Draw your signature below:</label>
-            <div class="relative mt-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-inner">
-              <canvas id="signatureCanvas" class="w-full h-32 cursor-crosshair touch-none" width="1200" height="384"></canvas>
-              <button id="clearSignatureCanvas" type="button" class="absolute right-2 bottom-2 px-2 py-1 text-[10px] font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-md border border-slate-300 dark:border-slate-600 transition">Clear</button>
+            <div class="relative mt-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-inner">
+              <canvas id="signatureCanvas" class="w-full h-36 cursor-crosshair touch-none" width="1200" height="384"></canvas>
+              <button id="clearSignatureCanvas" type="button" class="absolute right-2.5 bottom-2.5 px-2.5 py-1 text-[11px] font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-lg border border-slate-300 dark:border-slate-600 transition">Clear</button>
             </div>
           </div>
           
-          <div id="typeSignContainer" class="hidden">
-            <label class="${labelClass}">Signature text</label>
-            <input id="signatureText" class="${inputClass}" placeholder="Your name" />
+          <div id="typeSignContainer" class="hidden space-y-4">
+            <div>
+              <label class="${labelClass}">Full Name / Signature Text</label>
+              <input id="signatureText" class="${inputClass} mt-1.5" placeholder="e.g. John Doe" value="John Doe" />
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="${labelClass}">Choose Signature Font (10 Styles)</label>
+                <span class="text-[11px] text-slate-500 font-medium">Scroll for more</span>
+              </div>
+              <div id="signatureStyleGrid" class="grid gap-2 sm:grid-cols-2 max-h-56 overflow-y-auto p-2 border border-slate-200 dark:border-slate-700/60 rounded-2xl bg-slate-50/50 dark:bg-slate-900/40">
+              </div>
+            </div>
+
+            <div>
+              <label class="${labelClass}">Signature Ink Color</label>
+              <div id="signatureColorSwatches" class="mt-2 flex items-center gap-3">
+              </div>
+            </div>
           </div>
           
-          <div class="mt-4">
-            <label class="${labelClass}">Page number</label>
-            <input id="signaturePage" class="${inputClass}" type="number" min="1" value="1" />
+          <div class="mt-4 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <label class="${labelClass}">Page Number</label>
+            <input id="signaturePage" class="${inputClass} mt-1" type="number" min="1" value="1" />
+            <p class="${helpClass} mt-1.5">Adds a visible signature near the lower-right of the selected PDF page.</p>
           </div>
-          <p class="${helpClass} mt-2">This adds a visible signature near the lower-right of the selected page.</p>
         `,
         'image-scaler': `
           <div class="grid gap-4 sm:grid-cols-2">
@@ -3662,8 +3679,88 @@
       const drawCont = document.getElementById('drawSignContainer');
       const typeCont = document.getElementById('typeSignContainer');
 
+      const signatureFonts = [
+        { id: 'dancing', name: 'Classic Cursive', family: "'Dancing Script', cursive" },
+        { id: 'greatvibes', name: 'Formal Calligraphy', family: "'Great Vibes', cursive" },
+        { id: 'pacifico', name: 'Modern Brush', family: "'Pacifico', cursive" },
+        { id: 'caveat', name: 'Natural Handwriting', family: "'Caveat', cursive" },
+        { id: 'sacramento', name: 'Flowing Script', family: "'Sacramento', cursive" },
+        { id: 'alexbrush', name: 'Refined Brush', family: "'Alex Brush', cursive" },
+        { id: 'satisfy', name: 'Smooth Pen', family: "'Satisfy', cursive" },
+        { id: 'marck', name: 'Classic Ink', family: "'Marck Script', cursive" },
+        { id: 'kalam', name: 'Felt-Tip Signature', family: "'Kalam', cursive" },
+        { id: 'parisienne', name: 'Chic Script', family: "'Parisienne', cursive" }
+      ];
+
+      const signatureColors = [
+        { id: 'black', label: 'Dark Black', hex: '#0f172a' },
+        { id: 'navy', label: 'Classic Blue', hex: '#1e3a8a' },
+        { id: 'royal', label: 'Royal Blue', hex: '#1a73e8' },
+        { id: 'red', label: 'Red Ink', hex: '#dc2626' },
+        { id: 'green', label: 'Green Ink', hex: '#059669' }
+      ];
+
       state.signatureMethod = 'draw';
       state.isCanvasEmpty = true;
+      state.signatureFontFamily = signatureFonts[0].family;
+      state.signatureColor = signatureColors[0].hex;
+
+      const styleGrid = document.getElementById('signatureStyleGrid');
+      const colorContainer = document.getElementById('signatureColorSwatches');
+      const signTextInput = document.getElementById('signatureText');
+
+      function updateFontCardPreviews() {
+        if (!styleGrid) return;
+        const textVal = signTextInput?.value?.trim() || 'John Doe';
+        signatureFonts.forEach(font => {
+          const previewElem = document.getElementById(`fontPreview_${font.id}`);
+          if (previewElem) {
+            previewElem.textContent = textVal;
+            previewElem.style.color = state.signatureColor;
+          }
+        });
+      }
+
+      if (styleGrid) {
+        styleGrid.innerHTML = signatureFonts.map((font, idx) => `
+          <button id="fontCard_${font.id}" type="button" data-family="${font.family}" class="font-card-btn text-left p-3 rounded-xl border transition flex flex-col justify-between h-20 ${idx === 0 ? 'border-[#1a73e8] bg-[#f5f9ff] dark:bg-[#1a73e8]/10 ring-2 ring-[#1a73e8]/30' : 'border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600'}">
+            <span class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">${font.name}</span>
+            <span id="fontPreview_${font.id}" class="text-xl font-medium truncate mt-1" style="font-family: ${font.family}; color: ${state.signatureColor};">John Doe</span>
+          </button>
+        `).join('');
+
+        styleGrid.querySelectorAll('.font-card-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            styleGrid.querySelectorAll('.font-card-btn').forEach(b => {
+              b.className = 'font-card-btn text-left p-3 rounded-xl border transition flex flex-col justify-between h-20 border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600';
+            });
+            btn.className = 'font-card-btn text-left p-3 rounded-xl border transition flex flex-col justify-between h-20 border-[#1a73e8] bg-[#f5f9ff] dark:bg-[#1a73e8]/10 ring-2 ring-[#1a73e8]/30';
+            state.signatureFontFamily = btn.dataset.family;
+          });
+        });
+      }
+
+      if (colorContainer) {
+        colorContainer.innerHTML = signatureColors.map((color, idx) => `
+          <button id="colorSwatch_${color.id}" type="button" data-hex="${color.hex}" title="${color.label}" class="color-swatch-btn w-7 h-7 rounded-full transition flex items-center justify-center ${idx === 0 ? 'ring-2 ring-offset-2 ring-[#1a73e8]' : 'hover:scale-105'}" style="background-color: ${color.hex};">
+          </button>
+        `).join('');
+
+        colorContainer.querySelectorAll('.color-swatch-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            colorContainer.querySelectorAll('.color-swatch-btn').forEach(b => {
+              b.className = 'color-swatch-btn w-7 h-7 rounded-full transition flex items-center justify-center hover:scale-105';
+            });
+            btn.className = 'color-swatch-btn w-7 h-7 rounded-full transition flex items-center justify-center ring-2 ring-offset-2 ring-[#1a73e8]';
+            state.signatureColor = btn.dataset.hex;
+            updateFontCardPreviews();
+          });
+        });
+      }
+
+      if (signTextInput) {
+        signTextInput.addEventListener('input', updateFontCardPreviews);
+      }
 
       tabDraw.addEventListener('click', () => {
         state.signatureMethod = 'draw';
@@ -3683,6 +3780,7 @@
         tabDraw.classList.add('bg-slate-100', 'text-slate-700', 'border-slate-200', 'dark:bg-slate-800', 'dark:text-slate-300', 'dark:border-slate-700');
         typeCont.classList.remove('hidden');
         drawCont.classList.add('hidden');
+        updateFontCardPreviews();
       });
 
       ctx.strokeStyle = '#000000';
@@ -4789,22 +4887,47 @@
           color: rgb(0.16, 0.1, 0.42)
         });
       } else {
-        const signature = document.getElementById('signatureText')?.value?.trim();
-        if (!signature) throw new Error('Enter signature text.');
-        const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-        const label = `Signed: ${signature}`;
-        page.drawText(label, {
-          x: Math.max(36, width - 230),
-          y: 64,
-          size: 16,
-          font,
-          color: rgb(0.16, 0.1, 0.42)
-        });
-        page.drawLine({
-          start: { x: Math.max(36, width - 235), y: 58 },
-          end: { x: width - 36, y: 58 },
-          thickness: 1,
-          color: rgb(0.16, 0.1, 0.42)
+        const signatureText = document.getElementById('signatureText')?.value?.trim();
+        if (!signatureText) throw new Error('Please enter signature text.');
+        
+        if (document.fonts) await document.fonts.ready;
+        
+        const typeCanvas = document.createElement('canvas');
+        typeCanvas.width = 800;
+        typeCanvas.height = 200;
+        const typeCtx = typeCanvas.getContext('2d');
+        
+        const fontFamily = state.signatureFontFamily || "'Dancing Script', cursive";
+        const inkColor = state.signatureColor || '#0f172a';
+        
+        typeCtx.clearRect(0, 0, typeCanvas.width, typeCanvas.height);
+        typeCtx.font = `600 64px ${fontFamily}`;
+        typeCtx.fillStyle = inkColor;
+        typeCtx.textBaseline = 'middle';
+        
+        const textWidth = typeCtx.measureText(signatureText).width;
+        typeCtx.fillText(signatureText, 30, 90);
+        
+        typeCtx.strokeStyle = inkColor;
+        typeCtx.lineWidth = 3;
+        typeCtx.beginPath();
+        typeCtx.moveTo(25, 140);
+        typeCtx.lineTo(Math.max(200, textWidth + 35), 140);
+        typeCtx.stroke();
+        
+        const dataUrl = typeCanvas.toDataURL('image/png');
+        const base64Data = dataUrl.split(',')[1];
+        const bytes = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
+        
+        const embeddedImage = await pdfDoc.embedPng(bytes);
+        const sigWidth = Math.min(220, Math.max(160, textWidth * 0.35));
+        const sigHeight = (sigWidth / 4);
+        
+        page.drawImage(embeddedImage, {
+          x: Math.max(36, width - sigWidth - 36),
+          y: 45,
+          width: sigWidth,
+          height: sigHeight
         });
       }
 
