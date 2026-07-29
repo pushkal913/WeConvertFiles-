@@ -4407,7 +4407,8 @@
       }
 
       setStatus('Saving PDF document...');
-      doc.save('images.pdf');
+      const pdfBlob = doc.output('blob');
+      downloadBlob(pdfBlob, 'images.pdf');
     }
 
     async function convertPdfToImagesZip(format = 'png') {
@@ -4907,7 +4908,8 @@
       }
       
       setStatus('Saving unlocked PDF...');
-      doc.save('unlocked.pdf');
+      const pdfBlob = doc.output('blob');
+      downloadBlob(pdfBlob, 'unlocked.pdf');
     }
 
     async function compressPdf() {
@@ -4951,7 +4953,8 @@
       }
       
       setStatus('Saving compressed PDF...');
-      doc.save('compressed.pdf');
+      const pdfBlob = doc.output('blob');
+      downloadBlob(pdfBlob, 'compressed.pdf');
     }
 
     async function scaleImage() {
@@ -5407,28 +5410,49 @@
       const arrayBuffer = await file.arrayBuffer();
       const printContainer = document.createElement('div');
       printContainer.className = 'p-8 bg-white text-black font-sans leading-relaxed prose';
-      printContainer.style.width = '700px';
+      printContainer.style.width = extension === 'xlsx' ? '1000px' : '750px';
+      
+      const pageBreakStyle = document.createElement('style');
+      pageBreakStyle.textContent = `
+        p, tr, th, td, h1, h2, h3, h4, h5, h6, li, blockquote, .prose > * {
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+        }
+        table {
+          width: 100% !important;
+          border-collapse: collapse !important;
+          table-layout: auto !important;
+          font-size: 10px !important;
+          word-break: break-word !important;
+        }
+        th, td {
+          border: 1px solid #cbd5e1 !important;
+          padding: 5px 8px !important;
+          text-align: left !important;
+        }
+        th {
+          background-color: #f1f5f9 !important;
+        }
+      `;
+      printContainer.appendChild(pageBreakStyle);
       
       if (extension === 'docx') {
         if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
         setStatus('Parsing DOCX to HTML structure...');
         const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-        printContainer.innerHTML = result.value || '<h3>Empty Document</h3>';
+        printContainer.innerHTML += result.value || '<h3>Empty Document</h3>';
       } else if (extension === 'xlsx') {
         setStatus('Parsing XLSX sheet rows...');
         const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
         const htmlTable = XLSX.utils.sheet_to_html(sheet);
-        printContainer.innerHTML = `
+        printContainer.innerHTML += `
           <h2>Sheet: ${sheetName}</h2>
-          <div style="overflow-x: auto; margin-top: 15px;">
+          <div style="margin-top: 15px;">
             ${htmlTable}
           </div>
         `;
-        const style = document.createElement('style');
-        style.textContent = 'table { border-collapse: collapse; width: 100%; margin-bottom: 20px; } th, td { border: 1px solid #ccc; padding: 6px; text-align: left; font-size: 11px; } th { background-color: #f2f2f2; }';
-        printContainer.appendChild(style);
       } else {
         throw new Error('Unsupported format. Only DOCX and XLSX extensions are supported.');
       }
@@ -5436,11 +5460,12 @@
       setStatus('Generating PDF layout snapshot...');
       
       const opt = {
-        margin: 40,
+        margin: [30, 30, 30, 30],
         filename: file.name.substring(0, file.name.lastIndexOf('.')) + '.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'pt', format: 'letter', orientation: 'portrait' }
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'pt', format: 'a4', orientation: extension === 'xlsx' ? 'landscape' : 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
       };
       
       const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
@@ -5706,6 +5731,32 @@
 
     async function handleConvert() {
       if (!state.currentTool || !state.files.length) return;
+
+      if (state.currentTool.id === 'remove-pages') {
+        const pagesVal = document.getElementById('pageRangeInput')?.value?.trim();
+        if (!pagesVal) {
+          setStatus('Please enter the page numbers to remove (e.g. 1, 3-5).', 'error');
+          document.getElementById('pageRangeInput')?.focus();
+          return;
+        }
+      }
+      if (state.currentTool.id === 'extract-pages') {
+        const pagesVal = document.getElementById('pageRangeInput')?.value?.trim();
+        if (!pagesVal) {
+          setStatus('Please enter the page numbers to extract (e.g. 1, 3-5).', 'error');
+          document.getElementById('pageRangeInput')?.focus();
+          return;
+        }
+      }
+      if (state.currentTool.id === 'organize-pdf') {
+        const pagesVal = document.getElementById('pageRangeInput')?.value?.trim();
+        if (!pagesVal) {
+          setStatus('Please enter the new page order (e.g. 3,1,2,4).', 'error');
+          document.getElementById('pageRangeInput')?.focus();
+          return;
+        }
+      }
+
       document.getElementById('conversionResultPanel')?.classList.add('hidden');
       startProgressAnimation();
       setBusy(true);
