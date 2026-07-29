@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const stylesheetUrl = '/assets/styles.css?v=20260729-2';
+const stylesheetUrl = '/assets/styles.css?v=20260729-3';
 const pageDirectories = [
   rootDir,
   path.join(rootDir, 'convert'),
