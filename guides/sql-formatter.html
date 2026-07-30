@@ -4,48 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>SQL Formatter Guide - WeConvertFiles</title>
-  <meta name="description" content="Format standard SQL, MySQL, PostgreSQL, and SQL Server queries beautifully without executing them." />
+  <title>SQL Formatter & Beautifier Guide - WeConvertFiles</title>
+  <meta name="description" content="Format and beautify SQL queries locally in your browser supporting MySQL, PostgreSQL, and SQL Server dialects." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/sql-formatter.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="SQL Formatter Guide - WeConvertFiles" />
-  <meta property="og:description" content="Format standard SQL, MySQL, PostgreSQL, and SQL Server queries beautifully without executing them." />
+  <meta property="og:title" content="SQL Formatter & Beautifier Guide - WeConvertFiles" />
+  <meta property="og:description" content="Format and beautify SQL queries locally in your browser supporting MySQL, PostgreSQL, and SQL Server dialects." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/sql-formatter.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="SQL Formatter Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Format standard SQL, MySQL, PostgreSQL, and SQL Server queries beautifully without executing them." />
+  <meta name="twitter:title" content="SQL Formatter & Beautifier Guide - WeConvertFiles" />
+  <meta name="twitter:description" content="Format and beautify SQL queries locally in your browser supporting MySQL, PostgreSQL, and SQL Server dialects." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/logo.png" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Are my SQL queries executed or uploaded?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. The SQL Formatter only beautifies the syntax and runs locally in your browser. It does not execute the queries and your code is never uploaded."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Which SQL dialects are supported?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We support Standard SQL, MySQL, PostgreSQL, and SQL Server formatting."
-            }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -55,7 +27,6 @@
     }
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=3" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=3" />
@@ -72,10 +43,10 @@
 
     <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
       <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">SQL Formatter</h1>
+        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">SQL Formatter & Beautifier</h1>
         <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
       </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">The SQL Formatter beautifies your raw, minified, or disorganized database queries so they are easy to read and debug. You can toggle between Standard SQL, MySQL, PostgreSQL, and SQL Server, and select preferred keyword casing. Your queries are never executed and never uploaded to any remote server.</p>
+      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Format and beautify SQL queries locally in your browser supporting MySQL, PostgreSQL, and SQL Server dialects. The entire processing executes locally in sandboxed javascript memory, protecting user data from external storage leaks.</p>
       <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/sql-formatter">
         Open SQL Formatter
         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -86,31 +57,26 @@
     <section class="grid gap-4 md:grid-cols-3">
       <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
         <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Input Query</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Paste your raw or minified SQL statements into the editor.</p>
+        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Input SQL</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Paste your unformatted, minified, or raw SQL queries into the input box.</p>
       </div>
       <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
         <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select Dialect</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Pick the SQL dialect and your preferred casing for keywords (UPPERCASE or lowercase).</p>
+        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select Options</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose your preferred SQL dialect (Standard, MySQL, PostgreSQL, T-SQL) and keyword casing (Upper/Lower).</p>
       </div>
       <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
         <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Format & Copy</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click format to apply indentation and line breaks, then copy the result to your clipboard.</p>
+        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Format & Export</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click "Format SQL" to beautify the code instantly. Copy or download the clean SQL query.</p>
       </div>
     </section>
 
     <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
     <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
       <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are my SQL queries executed or uploaded?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. The SQL Formatter only beautifies the syntax and runs locally in your browser. It does not execute the queries and your code is never uploaded.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Which SQL dialects are supported?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">We support Standard SQL, MySQL, PostgreSQL, and SQL Server formatting.</p>
+        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does this execute my SQL queries?</h3>
+        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No, this tool ONLY formats the text. It never executes your SQL queries, and the formatting process runs entirely locally on your device for absolute safety and speed.</p>
       </div>
     </section>
   </main>
