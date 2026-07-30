@@ -40,7 +40,7 @@ for (const file of files) {
 
 const sitemap = await readFile(path.join(rootDir, 'sitemap.xml'), 'utf8');
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-check(sitemapUrls.length === 90, `expected 90 sitemap URLs, found ${sitemapUrls.length}`);
+check(sitemapUrls.length === 96, `expected 96 sitemap URLs, found ${sitemapUrls.length}`);
 check(sitemapUrls.length === new Set(sitemapUrls).size, 'sitemap contains duplicate URLs');
 
 for (const url of sitemapUrls) {
