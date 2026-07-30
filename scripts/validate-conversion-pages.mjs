@@ -97,7 +97,7 @@ for (const toolPath of new Set(pages.map(([, pathName]) => pathName))) {
 const sitemap = await readFile(path.join(rootDir, 'sitemap.xml'), 'utf8');
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 check(sitemapUrls.length === new Set(sitemapUrls).size, 'sitemap contains duplicate URLs');
-check(sitemapUrls.length === 96, `expected 96 sitemap URLs, found ${sitemapUrls.length}`);
+check(sitemapUrls.length === 102, `expected 102 sitemap URLs, found ${sitemapUrls.length}`);
 for (const [slug] of pages) {
   check(sitemapUrls.includes(`${siteUrl}/convert/${slug}`), `${slug}: missing from sitemap`);
 }

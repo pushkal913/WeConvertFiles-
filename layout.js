@@ -52,7 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
       { id: 'decrypt-pdf', title: 'Unlock PDF', kicker: 'Security PDF', badge: 'Remove pass', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-700' },
       { id: 'image-to-base64', title: 'Image to Base64', kicker: 'Image Tools', badge: 'Base64 Output', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
       { id: 'base64-to-image', title: 'Base64 to Image', kicker: 'Image Tools', badge: 'Base64 Decode', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
-      { id: 'svg-to-image', title: 'SVG to PNG / JPG', kicker: 'Image Tools', badge: 'Vector Export', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' }
+      { id: 'svg-to-image', title: 'SVG to PNG / JPG', kicker: 'Image Tools', badge: 'Vector Export', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' },
+      { id: 'json-yaml', title: 'JSON ↔ YAML Converter', kicker: 'Document Tools', badge: 'Bidirectional', iconBg: 'bg-indigo-100', iconColor: 'text-indigo-600' },
+      { id: 'sql-formatter', title: 'SQL Formatter & Beautifier', kicker: 'Developer Tools', badge: 'Multi-Dialect', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-600' },
+      { id: 'code-minifier', title: 'Code Minifier & Beautifier', kicker: 'Developer Tools', badge: 'HTML / CSS / JS', iconBg: 'bg-violet-100', iconColor: 'text-violet-600' }
     ];
 
   // Inject Header (Sitewide, full-width alignment matching main index layout)
