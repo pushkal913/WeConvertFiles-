@@ -2994,20 +2994,18 @@
         `,
         'base64-to-image': `
           <div>
-            <div class="flex flex-wrap items-end justify-between gap-4 mb-4">
-              <div class="flex-1 min-w-[220px]">
-                <label class="${labelClass}">Format Selection</label>
-                <select id="b64ImgFormatSelect" class="${inputClass}">
+            <div class="mb-4">
+              <label class="${labelClass}">Format Selection</label>
+              <div class="mt-2 flex flex-wrap items-center gap-3">
+                <select id="b64ImgFormatSelect" class="flex-1 min-w-[220px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-semibold text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition h-[38px]">
                   <option value="auto" selected>Auto-Detect Format (Header/Signature)</option>
                   <option value="image/png">PNG Image (.png)</option>
                   <option value="image/jpeg">JPEG Image (.jpg)</option>
                   <option value="image/webp">WebP Image (.webp)</option>
                   <option value="image/gif">GIF Image (.gif)</option>
                 </select>
-              </div>
-              <div class="flex items-center gap-2">
-                <button id="b64ImgDecodeBtn" type="button" class="px-5 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-sm h-[38px]">Decode Base64</button>
-                <button id="b64ImgClearBtn" type="button" class="px-4 py-2 text-xs font-semibold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition h-[38px]">Clear</button>
+                <button id="b64ImgDecodeBtn" type="button" class="px-5 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-sm h-[38px] flex items-center justify-center">Decode Base64</button>
+                <button id="b64ImgClearBtn" type="button" class="px-4 py-2 text-xs font-semibold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition h-[38px] flex items-center justify-center">Clear</button>
               </div>
             </div>
 
