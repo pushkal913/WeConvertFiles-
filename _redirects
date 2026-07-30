@@ -18,8 +18,10 @@
 /guides/image-scaler    /guides/image-scaler.html    301
 /guides/images-to-pdf    /guides/images-to-pdf.html    301
 /guides/jpg-to-pdf    /guides/jpg-to-pdf.html    301
+/guides/code-minifier    /guides/code-minifier.html    301
 /guides/json-convert    /guides/json-convert.html    301
 /guides/json-formatter    /guides/json-formatter.html    301
+/guides/json-yaml    /guides/json-yaml.html    301
 /guides/jwt-decoder    /guides/jwt-decoder.html    301
 /guides/markdown-preview    /guides/markdown-preview.html    301
 /guides/merge-pdf    /guides/merge-pdf.html    301
@@ -36,6 +38,7 @@
 /guides/rotate-pdf    /guides/rotate-pdf.html    301
 /guides/sign-pdf    /guides/sign-pdf.html    301
 /guides/split-pdf    /guides/split-pdf.html    301
+/guides/sql-formatter    /guides/sql-formatter.html    301
 /guides/unix-converter    /guides/unix-converter.html    301
 /guides/url-base64    /guides/url-base64.html    301
 /guides/uuid-generator    /guides/uuid-generator.html    301
@@ -108,6 +111,9 @@
 /image-to-base64    /index.html    200
 /base64-to-image    /index.html    200
 /svg-to-image    /index.html    200
+/json-yaml    /index.html    200
+/sql-formatter    /index.html    200
+/code-minifier    /index.html    200
 
 # Unknown URLs return a real 404 instead of a homepage soft 404.
 /*    /404.html    404
