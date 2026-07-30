@@ -4176,24 +4176,28 @@
           img.src = dataUri;
         };
 
+        if (inputText) {
+          inputText.addEventListener('input', () => {
+            updateFileList();
+            runDecode();
+          });
+        }
+
         if (state.files && state.files[0]) {
           const reader = new FileReader();
           reader.onload = (e) => {
             inputText.value = e.target.result;
+            updateFileList();
             runDecode();
           };
           reader.readAsText(state.files[0]);
         }
 
-        if (decodeBtn) decodeBtn.addEventListener('click', runDecode);
+        if (decodeBtn) decodeBtn.addEventListener('click', handleConvert);
         if (formatSelect) formatSelect.addEventListener('change', () => { if (inputText.value.trim()) runDecode(); });
 
         if (downloadBtn) {
-          downloadBtn.addEventListener('click', () => {
-            if (currentDecodedBlob) {
-              downloadBlob(currentDecodedBlob, `decoded-image.${currentExt}`);
-            }
-          });
+          downloadBtn.addEventListener('click', handleConvert);
         }
 
         if (clearBtn) {
@@ -4331,52 +4335,15 @@
           });
         }
 
-        if (textInput) textInput.addEventListener('input', renderSvgPreview);
+        if (textInput) {
+          textInput.addEventListener('input', () => {
+            updateFileList();
+            renderSvgPreview();
+          });
+        }
 
         if (convertBtn) {
-          convertBtn.addEventListener('click', () => {
-            if (!originalSvgText) return;
-
-            const targetW = parseInt(widthInput.value, 10) || naturalWidth;
-            const targetH = parseInt(heightInput.value, 10) || naturalHeight;
-            const mime = formatSelect.value;
-            const isJpg = mime === 'image/jpeg';
-            const quality = isJpg ? (parseInt(qualitySlider.value, 10) / 100) : 1.0;
-
-            let bgColor = 'transparent';
-            if (bgSelect.value === 'custom') {
-              bgColor = customColorInput.value;
-            } else if (bgSelect.value !== 'transparent') {
-              bgColor = bgSelect.value;
-            } else if (isJpg) {
-              bgColor = '#ffffff';
-            }
-
-            const canvas = document.createElement('canvas');
-            canvas.width = targetW;
-            canvas.height = targetH;
-            const ctx = canvas.getContext('2d');
-
-            if (bgColor && bgColor !== 'transparent') {
-              ctx.fillStyle = bgColor;
-              ctx.fillRect(0, 0, targetW, targetH);
-            }
-
-            const blob = new Blob([originalSvgText], { type: 'image/svg+xml;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const img = new Image();
-            img.onload = () => {
-              ctx.drawImage(img, 0, 0, targetW, targetH);
-              URL.revokeObjectURL(url);
-
-              canvas.toBlob((exportBlob) => {
-                const ext = isJpg ? 'jpg' : 'png';
-                const baseName = (state.files[0]?.name || 'vector').replace(/\.[^/.]+$/, '');
-                downloadBlob(exportBlob, `${baseName}.${ext}`);
-              }, mime, quality);
-            };
-            img.src = url;
-          });
+          convertBtn.addEventListener('click', handleConvert);
         }
 
         updateControlsVisibility();
@@ -5052,11 +5019,11 @@
 
     function updateFileList(pdf = null) {
       let hasContent = state.files.length > 0;
-      if (state.currentTool && state.currentTool.id === 'json-convert') {
-        const jsonArea = document.getElementById('jsonPasteArea');
-        if (jsonArea && jsonArea.value.trim().length > 0) {
-          hasContent = true;
-        }
+      if (state.currentTool) {
+        if (state.currentTool.id === 'json-convert' && document.getElementById('jsonPasteArea')?.value?.trim().length > 0) hasContent = true;
+        if (state.currentTool.id === 'base64-to-image' && document.getElementById('b64ImgInputText')?.value?.trim().length > 0) hasContent = true;
+        if (state.currentTool.id === 'svg-to-image' && document.getElementById('svgImgTextInput')?.value?.trim().length > 0) hasContent = true;
+        if (state.currentTool.id === 'image-to-base64' && state.files.length > 0) hasContent = true;
       }
       clearButton.classList.toggle('hidden', !hasContent);
       convertButton.disabled = !hasContent;
@@ -5133,11 +5100,11 @@
 
     function setBusy(isBusy, label = 'Convert') {
       let hasContent = state.files.length > 0;
-      if (state.currentTool && state.currentTool.id === 'json-convert') {
-        const jsonArea = document.getElementById('jsonPasteArea');
-        if (jsonArea && jsonArea.value.trim().length > 0) {
-          hasContent = true;
-        }
+      if (state.currentTool) {
+        if (state.currentTool.id === 'json-convert' && document.getElementById('jsonPasteArea')?.value?.trim().length > 0) hasContent = true;
+        if (state.currentTool.id === 'base64-to-image' && document.getElementById('b64ImgInputText')?.value?.trim().length > 0) hasContent = true;
+        if (state.currentTool.id === 'svg-to-image' && document.getElementById('svgImgTextInput')?.value?.trim().length > 0) hasContent = true;
+        if (state.currentTool.id === 'image-to-base64' && state.files.length > 0) hasContent = true;
       }
       convertButton.disabled = isBusy || !hasContent;
       convertButton.innerHTML = isBusy
@@ -6619,8 +6586,162 @@
       setStatus('');
     }
 
+    async function handleImageToBase64Convert() {
+      if (!state.files.length) throw new Error('Please select an image file first.');
+      setStatus('Encoding image file to Base64...');
+      const file = state.files[0];
+      const dataUri = await readAsDataUrl(file);
+      const baseName = file.name.replace(/\.[^/.]+$/, '');
+      const blob = new Blob([dataUri], { type: 'text/plain;charset=utf-8' });
+      downloadBlob(blob, `${baseName}-base64.txt`);
+    }
+
+    async function handleBase64ToImageConvert() {
+      let raw = document.getElementById('b64ImgInputText')?.value?.trim() || '';
+      if (!raw && state.files.length > 0) {
+        setStatus('Reading uploaded file containing Base64 data...');
+        raw = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = e => resolve(e.target.result);
+          reader.onerror = reject;
+          reader.readAsText(state.files[0]);
+        });
+      }
+      if (!raw) throw new Error('Please enter a Base64 string or upload a file containing Base64 data.');
+
+      setStatus('Decoding Base64 data...');
+      let mime = 'image/png';
+      let ext = 'png';
+      let dataUri = '';
+
+      const uriMatch = raw.match(/^data:(image\/[a-zA-Z0-9\+\-\.]+);base64,(.+)$/s);
+      if (uriMatch) {
+        mime = uriMatch[1];
+        const rawB64 = uriMatch[2].replace(/\s/g, '');
+        dataUri = `data:${mime};base64,${rawB64}`;
+      } else {
+        const cleanB64 = raw.replace(/^data:image\/[a-zA-Z0-9\+\-\.]+;base64,/, '').replace(/\s/g, '');
+        const selectedFormat = document.getElementById('b64ImgFormatSelect')?.value || 'auto';
+        if (selectedFormat !== 'auto') {
+          mime = selectedFormat;
+        } else {
+          if (cleanB64.startsWith('/9j/')) mime = 'image/jpeg';
+          else if (cleanB64.startsWith('iVBORw0KGgo')) mime = 'image/png';
+          else if (cleanB64.startsWith('UklGR')) mime = 'image/webp';
+          else if (cleanB64.startsWith('R0lGOD')) mime = 'image/gif';
+          else mime = 'image/png';
+        }
+        dataUri = `data:${mime};base64,${cleanB64}`;
+      }
+
+      if (mime === 'image/jpeg') ext = 'jpg';
+      else if (mime === 'image/webp') ext = 'webp';
+      else if (mime === 'image/gif') ext = 'gif';
+      else ext = 'png';
+
+      const byteString = atob(dataUri.split(',')[1]);
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([ab], { type: mime });
+      downloadBlob(blob, `decoded-image.${ext}`);
+    }
+
+    async function handleSvgToImageConvert() {
+      let svgXml = document.getElementById('svgImgTextInput')?.value?.trim() || '';
+      if (!svgXml && state.files.length > 0) {
+        setStatus('Reading uploaded SVG vector file...');
+        svgXml = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = e => resolve(e.target.result);
+          reader.onerror = reject;
+          reader.readAsText(state.files[0]);
+        });
+      }
+      if (!svgXml) throw new Error('Please upload an SVG file or paste raw SVG XML code.');
+
+      setStatus('Sanitizing vector XML...');
+      let sanitized = svgXml;
+      try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(svgXml, 'image/svg+xml');
+        doc.querySelectorAll('script').forEach(s => s.remove());
+        doc.querySelectorAll('*').forEach(el => {
+          for (let i = el.attributes.length - 1; i >= 0; i--) {
+            const attr = el.attributes[i];
+            if (/^on/i.test(attr.name)) el.removeAttribute(attr.name);
+          }
+        });
+        sanitized = new XMLSerializer().serializeToString(doc);
+      } catch (e) {
+        sanitized = svgXml;
+      }
+
+      const mime = document.getElementById('svgImgFormatSelect')?.value || 'image/png';
+      const isJpg = mime === 'image/jpeg';
+      const bgSelect = document.getElementById('svgImgBgSelect')?.value || 'transparent';
+      const customColorInput = document.getElementById('svgImgCustomColorInput');
+      const qualitySlider = document.getElementById('svgImgQualitySlider');
+      const quality = isJpg ? (parseInt(qualitySlider?.value || '90', 10) / 100) : 1.0;
+
+      let bgColor = 'transparent';
+      if (bgSelect === 'custom') {
+        bgColor = customColorInput?.value || '#1a73e8';
+      } else if (bgSelect !== 'transparent') {
+        bgColor = bgSelect;
+      } else if (isJpg) {
+        bgColor = '#ffffff';
+      }
+
+      setStatus('Rendering SVG to canvas...');
+      const svgBlob = new Blob([sanitized], { type: 'image/svg+xml;charset=utf-8' });
+      const svgUrl = URL.createObjectURL(svgBlob);
+
+      const img = new Image();
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = () => reject(new Error('Failed to render SVG image. Make sure the SVG XML code is valid.'));
+        img.src = svgUrl;
+      });
+
+      const naturalW = img.naturalWidth || 800;
+      const naturalH = img.naturalHeight || 600;
+      const targetW = parseInt(document.getElementById('svgImgWidthInput')?.value, 10) || naturalW;
+      const targetH = parseInt(document.getElementById('svgImgHeightInput')?.value, 10) || naturalH;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = targetW;
+      canvas.height = targetH;
+      const ctx = canvas.getContext('2d');
+
+      if (bgColor && bgColor !== 'transparent') {
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, targetW, targetH);
+      }
+
+      ctx.drawImage(img, 0, 0, targetW, targetH);
+      URL.revokeObjectURL(svgUrl);
+
+      const exportBlob = await new Promise((resolve, reject) => {
+        canvas.toBlob(blob => {
+          if (blob) resolve(blob);
+          else reject(new Error('Failed to generate image from SVG canvas.'));
+        }, mime, quality);
+      });
+
+      const ext = isJpg ? 'jpg' : 'png';
+      const baseName = (state.files[0]?.name || 'vector').replace(/\.[^/.]+$/, '');
+      downloadBlob(exportBlob, `${baseName}.${ext}`);
+    }
+
     async function handleConvert() {
-      if (!state.currentTool || !state.files.length) return;
+      if (!state.currentTool) return;
+      if (!state.files.length) {
+        if (state.currentTool.id === 'base64-to-image' && !document.getElementById('b64ImgInputText')?.value?.trim()) return;
+        if (state.currentTool.id === 'svg-to-image' && !document.getElementById('svgImgTextInput')?.value?.trim()) return;
+      }
 
       if (state.currentTool.id === 'remove-pages') {
         const pagesVal = document.getElementById('pageRangeInput')?.value?.trim();
@@ -6682,6 +6803,9 @@
         if (state.currentTool.id === 'image-cropper') await cropImageAction();
         if (state.currentTool.id === 'favicon-generator') await generateFaviconPackageAction();
         if (state.currentTool.id === 'excel-to-csv') await convertExcel();
+        if (state.currentTool.id === 'image-to-base64') await handleImageToBase64Convert();
+        if (state.currentTool.id === 'base64-to-image') await handleBase64ToImageConvert();
+        if (state.currentTool.id === 'svg-to-image') await handleSvgToImageConvert();
 
         setStatus('Done. Your download should begin automatically.', 'success');
       } catch (error) {
