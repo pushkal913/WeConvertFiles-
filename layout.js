@@ -49,7 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
       { id: 'hash-generator', title: 'Hash Generator', kicker: 'Developer Tools', badge: 'Cryptographic', iconBg: 'bg-rose-100', iconColor: 'text-rose-700' },
       { id: 'exif-utility', title: 'EXIF Viewer / Remover', kicker: 'Image Tools', badge: 'Privacy Tool', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-700' },
       { id: 'unix-converter', title: 'Unix Time Converter', kicker: 'Developer Tools', badge: 'Epoch Converter', iconBg: 'bg-rose-100', iconColor: 'text-rose-600' },
-      { id: 'decrypt-pdf', title: 'Unlock PDF', kicker: 'Security PDF', badge: 'Remove pass', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-700' }
+      { id: 'decrypt-pdf', title: 'Unlock PDF', kicker: 'Security PDF', badge: 'Remove pass', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-700' },
+      { id: 'image-to-base64', title: 'Image to Base64', kicker: 'Image Tools', badge: 'Base64 Output', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
+      { id: 'base64-to-image', title: 'Base64 to Image', kicker: 'Image Tools', badge: 'Base64 Decode', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
+      { id: 'svg-to-image', title: 'SVG to PNG / JPG', kicker: 'Image Tools', badge: 'Vector Export', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' }
     ];
 
   // Inject Header (Sitewide, full-width alignment matching main index layout)

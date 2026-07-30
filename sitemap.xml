@@ -142,6 +142,15 @@
   <url>
     <loc>https://www.weconvertfiles.com/jwt-decoder</loc>
   </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/image-to-base64</loc>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/base64-to-image</loc>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/svg-to-image</loc>
+  </url>
 
   <!-- Programmatic SEO Guide Pages -->
   <url>
@@ -268,6 +277,15 @@
   </url>
   <url>
     <loc>https://www.weconvertfiles.com/guides/jwt-decoder.html</loc>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/guides/image-to-base64.html</loc>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/guides/base64-to-image.html</loc>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/guides/svg-to-image.html</loc>
   </url>
 
   <!-- Information Pages -->
