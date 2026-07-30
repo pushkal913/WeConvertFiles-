@@ -357,7 +357,7 @@
                 Word / Excel to PDF
               </a>
               <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/json-yaml">
-                <svg class="h-4 w-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
                 </svg>
                 JSON ↔ YAML
@@ -449,7 +449,7 @@
                 Hash Generator
               </a>
               <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/sql-formatter">
-                <svg class="h-4 w-4 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg class="h-4 w-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
                 </svg>
                 SQL Formatter
@@ -460,8 +460,6 @@
                 </svg>
                 Code Minifier / Beautifier
               </a>
-            </div>
-          </div>
             </div>
           </div>
         </nav>
@@ -1511,29 +1509,32 @@
           { q: 'How does the converter handle SVG security and scripts?', a: 'Before rendering on canvas, the converter parses the SVG XML and strips all script tags, inline event handlers (onload, onclick), and external network subresources to prevent security vulnerabilities.' },
           { q: 'Can I convert transparent SVGs to PNG or JPG?', a: 'Yes! When converting to PNG, transparency is fully preserved. When converting to JPG, you can choose a custom solid background color (such as white or black).' }
         ]
-      },
+      }
       'json-yaml': {
-        howItWorks: 'JSON ↔ YAML Converter enables bidirectional transformation between JSON structures and YAML documents directly in your browser. Powered by js-yaml (v4.1.0), it parses incoming text, validates syntax accuracy, highlights structural errors with precise line numbers, and exports formatted results. No data is sent to external servers, protecting configurations and sensitive credentials.',
+        howItWorks: 'JSON ↔ YAML Converter parses your JSON or YAML input entirely in-browser using the js-yaml library. It validates syntax, converts between formats bidirectionally, and lets you choose your preferred indentation. No data is ever sent to a server.',
         faqs: [
-          { q: 'How does JSON to YAML conversion handle data types?', a: 'All JSON data types (objects, arrays, strings, numbers, booleans, and null values) map cleanly to native YAML syntax constructs.' },
-          { q: 'What happens if my YAML input contains syntax errors?', a: 'The safe js-yaml parser catches syntax issues and displays descriptive error messages, specifying exact line numbers to help you fix formatting errors quickly.' },
-          { q: 'Is my data secure when converting JSON or YAML online?', a: 'Yes. All parsing and formatting occur 100% locally in your web browser tab without transmitting your text or configuration files over the network.' }
+          { q: 'Is my data safe?', a: 'Absolutely. All conversion happens locally in your browser. Nothing is uploaded.' },
+          { q: 'Which YAML spec is supported?', a: 'The converter uses js-yaml v4.1.0, supporting YAML 1.2 (JSON-compatible schema).' },
+          { q: 'Can I convert YAML back to JSON?', a: 'Yes! Use the Direction dropdown to switch between JSON → YAML and YAML → JSON.' },
+          { q: 'What indentation options are available?', a: 'You can choose between 2-space and 4-space indentation for the output.' }
         ]
       },
       'sql-formatter': {
-        howItWorks: 'SQL Formatter cleans, indents, and standardizes raw SQL queries to improve code readability and maintainability. Powered by sql-formatter (v15.4.8), it supports Standard SQL, MySQL, PostgreSQL, and T-SQL (SQL Server) dialects. You can customize keyword casing (UPPERCASE, lowercase, preserve) and indentation. It operates strictly as a text layout engine and never executes database queries.',
+        howItWorks: 'SQL Formatter uses the sql-formatter library to parse and reformat your SQL queries entirely in your browser. It supports multiple SQL dialects, keyword casing options, and indentation controls. Queries are never executed or sent to any server.',
         faqs: [
-          { q: 'Does SQL Formatter execute my SQL queries?', a: 'No, never. The tool is purely a client-side text formatter. It processes string tokens inside browser memory and never connects to any database server.' },
-          { q: 'Which SQL dialects are supported?', a: 'We support Standard SQL, MySQL, PostgreSQL, and SQL Server (T-SQL) with dialect-specific keyword and quote handling.' },
-          { q: 'Are my database queries private?', a: 'Yes. All SQL formatting is performed locally inside your browser sandbox. Your queries, schema details, and code never leave your device.' }
+          { q: 'Does this execute my SQL queries?', a: 'No. SQL Formatter only formats the text of your query. It never runs or sends queries anywhere.' },
+          { q: 'Which SQL dialects are supported?', a: 'Standard SQL, MySQL, PostgreSQL, and SQL Server (T-SQL) are supported.' },
+          { q: 'Can I control keyword casing?', a: 'Yes. Choose between UPPERCASE, lowercase, or Preserve original casing for SQL keywords.' },
+          { q: 'Is my SQL data private?', a: 'Completely. Everything runs locally in your browser with zero server interaction.' }
         ]
       },
       'code-minifier': {
-        howItWorks: 'Code Minifier & Beautifier shrinks or formats HTML, CSS, and JavaScript files without executing input. Minification strips unnecessary whitespace, comments, and unneeded characters using Terser (v5.31.1) for JS and regex engines for HTML/CSS. Beautification formats code structures using js-beautify (v1.15.1). Real-time statistics show exact byte sizes and percentage savings.',
+        howItWorks: 'Code Minifier & Beautifier processes HTML, CSS, and JavaScript code entirely in your browser. For JavaScript minification it uses Terser, and for beautification it uses js-beautify. It shows input/output byte sizes and calculates savings percentage. No code is ever executed or uploaded.',
         faqs: [
-          { q: 'Does minification change how my JavaScript code executes?', a: 'No. Terser safely compresses syntax trees and removes dead code/comments while strictly preserving script semantics and variable scopes.' },
-          { q: 'Can I beautify already minified HTML, CSS, or JS code?', a: 'Yes! Select Beautify mode to expand minified code blocks with proper line breaks, tab/space indentations, and clean formatting.' },
-          { q: 'Is code processing completely client-side?', a: 'Yes. All parsing, minification, and beautification run inside your browser using version-pinned, lazy-loaded JavaScript libraries without server processing.' }
+          { q: 'Does this execute my code?', a: 'No. Your code is only parsed and reformatted — never executed. It runs 100% client-side.' },
+          { q: 'Which languages are supported?', a: 'HTML, CSS, and JavaScript are supported for both minification and beautification.' },
+          { q: 'How is the savings percentage calculated?', a: 'It compares the byte size of your input to the byte size of the output and computes the percentage reduction.' },
+          { q: 'Is my code private?', a: 'Yes. All processing happens locally in your browser. Nothing is sent to any server.' }
         ]
       }
     };
@@ -2115,6 +2116,7 @@
       },
       {
         id: 'decrypt-pdf',
+        title: 'Unlock PDF',
         kicker: 'PDF Security',
         badge: 'Remove Password',
         icon: 'U',
@@ -2138,35 +2140,35 @@
         hint: 'Paste JSON or YAML data or select a local file.',
         accept: '.json,.yaml,.yml,text/plain',
         multiple: false,
-        notes: ['Bidirectional JSON ↔ YAML parsing.', 'Real-time syntax validation with line errors.', 'Copy output or download files.']
+        notes: ['Bidirectional conversion.', 'Validates syntax on both sides.', 'Configurable indentation.']
       },
       {
         id: 'sql-formatter',
-        title: 'SQL Formatter & Beautifier',
+        title: 'SQL Formatter',
         kicker: 'Developer Tools',
-        badge: 'Multi-Dialect',
+        badge: 'Format Only',
         icon: 'S',
-        iconBg: 'bg-cyan-100',
-        iconColor: 'text-cyan-600',
-        description: 'Format, align, and clean up SQL queries for MySQL, PostgreSQL, SQL Server, and Standard SQL.',
-        hint: 'Paste your raw SQL query into the input box.',
+        iconBg: 'bg-amber-100',
+        iconColor: 'text-amber-600',
+        description: 'Format and beautify SQL queries with dialect-aware keyword casing, indentation, and syntax validation.',
+        hint: 'Paste your SQL query.',
         accept: '.sql,text/plain',
         multiple: false,
-        notes: ['Supports Standard SQL, MySQL, PostgreSQL, T-SQL.', 'Keyword casing (UPPERCASE/lowercase) & indentation.', 'Queries are formatted only—never executed.']
+        notes: ['Supports Standard SQL, MySQL, PostgreSQL & T-SQL.', 'Never executes queries.', 'Configurable keyword casing.']
       },
       {
         id: 'code-minifier',
         title: 'Code Minifier & Beautifier',
         kicker: 'Developer Tools',
-        badge: 'HTML / CSS / JS',
+        badge: 'Minify / Beautify',
         icon: 'C',
         iconBg: 'bg-violet-100',
         iconColor: 'text-violet-600',
-        description: 'Minify or format HTML, CSS, and JavaScript source code instantly with byte savings analytics.',
-        hint: 'Paste HTML, CSS, or JavaScript code into the editor.',
+        description: 'Minify or beautify HTML, CSS, and JavaScript code with real-time size analytics.',
+        hint: 'Paste your code.',
         accept: '.js,.css,.html,text/plain',
         multiple: false,
-        notes: ['Supports JavaScript, HTML, and CSS.', 'Minify or Beautify modes with real-time byte analytics.', 'Safe local browser processing—code is never executed.']
+        notes: ['HTML, CSS & JavaScript modes.', 'Shows bytes saved percentage.', 'Safe — never executes code.']
       }
     ];
 
@@ -2231,155 +2233,14 @@
         'excel-to-csv': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M9 9h6M9 13h6M9 17h6"/></svg>`,
         'regex-tester': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>`,
         'uuid-generator': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M9 12h6M12 9v6"/></svg>`,
-        'unix-converter': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" opacity=".35"/><path d="M12 6v6l4 2"/></svg>`,
-        'jwt-decoder': `
-          <div>
-            <label class="${labelClass}">Paste JWT Token</label>
-            <textarea id="jwtInputToken" rows="3" class="${inputClass} font-mono text-xs mt-2" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ..."></textarea>
-
-            <div class="grid gap-4 md:grid-cols-2 mt-5">
-              <div>
-                <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Header (JSON)</span>
-                <pre id="jwtOutputHeader" class="w-full h-[180px] overflow-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200"></pre>
-              </div>
-              <div>
-                <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Payload (JSON)</span>
-                <pre id="jwtOutputPayload" class="w-full h-[180px] overflow-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200"></pre>
-              </div>
-            </div>
-            <div id="jwtInfoBox" class="mt-3 p-3 rounded-xl text-xs font-bold hidden"></div>
-          </div>
-        `,
-'json-yaml': `
-          <div>
-            <div class="grid gap-4 md:grid-cols-2 mb-4">
-              <div>
-                <label class="${labelClass}">Direction</label>
-                <select id="jsonYamlDirection" class="${inputClass}">
-                  <option value="json2yaml" selected>JSON → YAML</option>
-                  <option value="yaml2json">YAML → JSON</option>
-                </select>
-              </div>
-              <div>
-                <label class="${labelClass}">Indentation</label>
-                <select id="jsonYamlIndent" class="${inputClass}">
-                  <option value="2" selected>2 Spaces</option>
-                  <option value="4">4 Spaces</option>
-                </select>
-              </div>
-            </div>
-            <div id="jsonYamlGridWrapper" class="grid gap-4 md:grid-cols-2 transition-all duration-300">
-              <div id="jsonYamlInputCol">
-                <label id="jsonYamlInputLabel" class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">JSON Input</label>
-                <textarea id="jsonYamlInput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition" placeholder="Paste your input here..."></textarea>
-              </div>
-              <div id="jsonYamlOutputCol">
-                <label id="jsonYamlOutputLabel" class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">YAML Output</label>
-                <textarea id="jsonYamlOutput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none readonly" readonly placeholder="Output will appear here..."></textarea>
-              </div>
-            </div>
-            <div id="jsonYamlButtonsRow" class="mt-4 flex flex-wrap gap-2.5">
-              <button id="jsonYamlConvertBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Convert</button>
-              <button id="jsonYamlCopyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy</button>
-              <button id="jsonYamlDownloadBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Download</button>
-              <button id="jsonYamlClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition ml-auto">Clear</button>
-            </div>
-            <div id="jsonYamlInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold"></div>
-          </div>
-        `,
-        'sql-formatter': `
-          <div>
-            <div class="grid gap-4 sm:grid-cols-3 mb-4">
-              <div>
-                <label class="${labelClass}">SQL Dialect</label>
-                <select id="sqlDialectSelect" class="${inputClass}">
-                  <option value="sql" selected>Standard SQL</option>
-                  <option value="mysql">MySQL</option>
-                  <option value="postgresql">PostgreSQL</option>
-                  <option value="tsql">SQL Server (T-SQL)</option>
-                </select>
-              </div>
-              <div>
-                <label class="${labelClass}">Keyword Casing</label>
-                <select id="sqlCasingSelect" class="${inputClass}">
-                  <option value="upper" selected>UPPERCASE</option>
-                  <option value="lower">lowercase</option>
-                  <option value="preserve">Preserve</option>
-                </select>
-              </div>
-              <div>
-                <label class="${labelClass}">Indentation</label>
-                <select id="sqlIndentSelect" class="${inputClass}">
-                  <option value="2" selected>2 Spaces</option>
-                  <option value="4">4 Spaces</option>
-                  <option value="tab">Tab</option>
-                </select>
-              </div>
-            </div>
-            <div id="sqlGridWrapper" class="grid gap-4 md:grid-cols-2 transition-all duration-300">
-              <div id="sqlInputCol">
-                <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Raw SQL Query</label>
-                <textarea id="sqlInput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition" placeholder="SELECT * FROM users WHERE status = 'active' ORDER BY created_at DESC;"></textarea>
-              </div>
-              <div id="sqlOutputCol">
-                <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Formatted SQL Output</label>
-                <textarea id="sqlOutput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none readonly" readonly placeholder="Formatted SQL will appear here..."></textarea>
-              </div>
-            </div>
-            <div id="sqlButtonsRow" class="mt-4 flex flex-wrap gap-2.5">
-              <button id="sqlFormatBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Format SQL</button>
-              <button id="sqlCopyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy</button>
-              <button id="sqlDownloadBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Download .sql</button>
-              <button id="sqlClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition ml-auto">Clear</button>
-            </div>
-            <div id="sqlInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold"></div>
-          </div>
-        `,
-        'code-minifier': `
-          <div>
-            <div class="grid gap-4 sm:grid-cols-2 mb-4">
-              <div>
-                <label class="${labelClass}">Language Mode</label>
-                <select id="codeLanguageSelect" class="${inputClass}">
-                  <option value="js" selected>JavaScript (.js)</option>
-                  <option value="css">CSS (.css)</option>
-                  <option value="html">HTML (.html)</option>
-                </select>
-              </div>
-              <div>
-                <label class="${labelClass}">Operation</label>
-                <select id="codeOperationSelect" class="${inputClass}">
-                  <option value="minify" selected>Minify Code</option>
-                  <option value="beautify">Beautify / Format Code</option>
-                </select>
-              </div>
-            </div>
-            <div id="codeGridWrapper" class="grid gap-4 md:grid-cols-2 transition-all duration-300">
-              <div id="codeInputCol">
-                <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Source Code Input</label>
-                <textarea id="codeInput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition" placeholder="Paste HTML, CSS, or JS code here..."></textarea>
-              </div>
-              <div id="codeOutputCol">
-                <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Processed Output</label>
-                <textarea id="codeOutput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none readonly" readonly placeholder="Output code will appear here..."></textarea>
-              </div>
-            </div>
-            <div id="codeButtonsRow" class="mt-4 flex flex-wrap gap-2.5">
-              <button id="codeRunBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Process Code</button>
-              <button id="codeCopyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy</button>
-              <button id="codeDownloadBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Download File</button>
-              <button id="codeClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition ml-auto">Clear</button>
-            </div>
-            <div id="codeStatsBox" class="hidden mt-3 p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold flex flex-wrap items-center justify-between gap-2"></div>
-            <div id="codeInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold"></div>
-          </div>
-        `,<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M9 12h6M9 8h6M9 16h6"/></svg>`,
-        'image-to-base64': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg>`,
-        'base64-to-image': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>`,
-        'svg-to-image': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" opacity=".35"/><polyline points="14 3 14 9 20 9"/><path d="M10 13l2 2 4-4"/></svg>`,
         'json-yaml': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" opacity=".35"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>`,
         'sql-formatter': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" opacity=".35"/><path d="M12 3v18"/></svg>`,
-        'code-minifier': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>`
+        'code-minifier': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>`,
+        'unix-converter': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" opacity=".35"/><path d="M12 6v6l4 2"/></svg>`,
+        'jwt-decoder': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M9 12h6M9 8h6M9 16h6"/></svg>`,
+        'image-to-base64': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg>`,
+        'base64-to-image': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>`,
+        'svg-to-image': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" opacity=".35"/><polyline points="14 3 14 9 20 9"/><path d="M10 13l2 2 4-4"/></svg>`
       };
 
       return icons[tool.id] || `<svg class="${iconClass}" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="7" y="5" width="18" height="22" rx="3" fill="currentColor" opacity=".3"/></svg>`;
@@ -3546,6 +3407,130 @@
             <div id="jwtInfoBox" class="mt-3 p-3 rounded-xl text-xs font-bold hidden"></div>
           </div>
         `
+        'json-yaml': `
+          <div>
+            <div class="grid gap-4 md:grid-cols-2 mb-4">
+              <div>
+                <label class="${labelClass}">Direction</label>
+                <select id="jsonYamlDirection" class="${inputClass}">
+                  <option value="json2yaml" selected>JSON → YAML</option>
+                  <option value="yaml2json">YAML → JSON</option>
+                </select>
+              </div>
+              <div>
+                <label class="${labelClass}">Indentation</label>
+                <select id="jsonYamlIndent" class="${inputClass}">
+                  <option value="2" selected>2 Spaces</option>
+                  <option value="4">4 Spaces</option>
+                </select>
+              </div>
+            </div>
+            <div id="jsonYamlGridWrapper" class="grid gap-4 md:grid-cols-2 transition-all duration-300">
+              <div id="jsonYamlInputCol">
+                <label id="jsonYamlInputLabel" class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">JSON Input</label>
+                <textarea id="jsonYamlInput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition" placeholder="Paste your input here..."></textarea>
+              </div>
+              <div id="jsonYamlOutputCol">
+                <label id="jsonYamlOutputLabel" class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">YAML Output</label>
+                <textarea id="jsonYamlOutput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none readonly" readonly placeholder="Output will appear here..."></textarea>
+              </div>
+            </div>
+            <div id="jsonYamlButtonsRow" class="mt-4 flex flex-wrap gap-2.5">
+              <button id="jsonYamlConvertBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Convert</button>
+              <button id="jsonYamlCopyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy</button>
+              <button id="jsonYamlDownloadBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Download</button>
+              <button id="jsonYamlClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition ml-auto">Clear</button>
+            </div>
+            <div id="jsonYamlInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold"></div>
+          </div>
+        `,
+        'sql-formatter': `
+          <div>
+            <div class="grid gap-4 sm:grid-cols-3 mb-4">
+              <div>
+                <label class="${labelClass}">SQL Dialect</label>
+                <select id="sqlDialectSelect" class="${inputClass}">
+                  <option value="sql" selected>Standard SQL</option>
+                  <option value="mysql">MySQL</option>
+                  <option value="postgresql">PostgreSQL</option>
+                  <option value="tsql">SQL Server (T-SQL)</option>
+                </select>
+              </div>
+              <div>
+                <label class="${labelClass}">Keyword Casing</label>
+                <select id="sqlCasingSelect" class="${inputClass}">
+                  <option value="upper" selected>UPPERCASE</option>
+                  <option value="lower">lowercase</option>
+                  <option value="preserve">Preserve</option>
+                </select>
+              </div>
+              <div>
+                <label class="${labelClass}">Indentation</label>
+                <select id="sqlIndentSelect" class="${inputClass}">
+                  <option value="2" selected>2 Spaces</option>
+                  <option value="4">4 Spaces</option>
+                  <option value="tab">Tab</option>
+                </select>
+              </div>
+            </div>
+            <div id="sqlGridWrapper" class="grid gap-4 md:grid-cols-2 transition-all duration-300">
+              <div id="sqlInputCol">
+                <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Raw SQL Query</label>
+                <textarea id="sqlInput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition" placeholder="SELECT * FROM users WHERE status = &apos;active&apos; ORDER BY created_at DESC;"></textarea>
+              </div>
+              <div id="sqlOutputCol">
+                <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Formatted SQL Output</label>
+                <textarea id="sqlOutput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none readonly" readonly placeholder="Formatted SQL will appear here..."></textarea>
+              </div>
+            </div>
+            <div id="sqlButtonsRow" class="mt-4 flex flex-wrap gap-2.5">
+              <button id="sqlFormatBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Format SQL</button>
+              <button id="sqlCopyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy</button>
+              <button id="sqlDownloadBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Download .sql</button>
+              <button id="sqlClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition ml-auto">Clear</button>
+            </div>
+            <div id="sqlInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold"></div>
+          </div>
+        `,
+        'code-minifier': `
+          <div>
+            <div class="grid gap-4 sm:grid-cols-2 mb-4">
+              <div>
+                <label class="${labelClass}">Language Mode</label>
+                <select id="codeLanguageSelect" class="${inputClass}">
+                  <option value="js" selected>JavaScript (.js)</option>
+                  <option value="css">CSS (.css)</option>
+                  <option value="html">HTML (.html)</option>
+                </select>
+              </div>
+              <div>
+                <label class="${labelClass}">Operation</label>
+                <select id="codeOperationSelect" class="${inputClass}">
+                  <option value="minify" selected>Minify Code</option>
+                  <option value="beautify">Beautify / Format Code</option>
+                </select>
+              </div>
+            </div>
+            <div id="codeGridWrapper" class="grid gap-4 md:grid-cols-2 transition-all duration-300">
+              <div id="codeInputCol">
+                <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Source Code Input</label>
+                <textarea id="codeInput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition" placeholder="Paste HTML, CSS, or JS code here..."></textarea>
+              </div>
+              <div id="codeOutputCol">
+                <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Processed Output</label>
+                <textarea id="codeOutput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none readonly" readonly placeholder="Output code will appear here..."></textarea>
+              </div>
+            </div>
+            <div id="codeButtonsRow" class="mt-4 flex flex-wrap gap-2.5">
+              <button id="codeRunBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Process Code</button>
+              <button id="codeCopyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy</button>
+              <button id="codeDownloadBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Download File</button>
+              <button id="codeClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition ml-auto">Clear</button>
+            </div>
+            <div id="codeStatsBox" class="hidden mt-3 p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold flex flex-wrap items-center justify-between gap-2"></div>
+            <div id="codeInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold"></div>
+          </div>
+        `
       };
 
       toolOptions.innerHTML = panels[toolId] || '';
@@ -4615,7 +4600,6 @@
       }
     }
 
-
       if (toolId === 'json-yaml') {
         const input = document.getElementById('jsonYamlInput');
         const output = document.getElementById('jsonYamlOutput');
@@ -4630,50 +4614,50 @@
         const outputLabel = document.getElementById('jsonYamlOutputLabel');
 
         const updateLabels = () => {
-          const isJsonToYaml = directionSelect.value === 'json2yaml';
-          inputLabel.textContent = isJsonToYaml ? 'JSON Input' : 'YAML Input';
-          outputLabel.textContent = isJsonToYaml ? 'YAML Output' : 'JSON Output';
-          input.placeholder = isJsonToYaml ? 'Paste JSON here (e.g. {"name": "ConvertDesk"})...' : 'Paste YAML here (e.g. name: ConvertDesk)...';
+          const isJson2Yaml = directionSelect.value === 'json2yaml';
+          inputLabel.textContent = isJson2Yaml ? 'JSON Input' : 'YAML Input';
+          outputLabel.textContent = isJson2Yaml ? 'YAML Output' : 'JSON Output';
+          input.placeholder = isJson2Yaml ? 'Paste JSON here...' : 'Paste YAML here...';
         };
 
-        const processConversion = () => {
+        directionSelect.addEventListener('change', updateLabels);
+
+        const processConvert = () => {
           const raw = input.value.trim();
           if (!raw) {
             output.value = '';
             info.className = 'hidden';
             return;
           }
-          if (typeof jsyaml === 'undefined') {
+
+          const indent = parseInt(indentSelect.value, 10);
+
+          if (!window.jsyaml) {
             info.className = 'mt-3 p-3 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/40 text-amber-800 dark:text-amber-300 text-xs font-bold';
-            info.textContent = 'YAML parser is initializing, please wait...';
+            info.textContent = 'YAML library loading...';
             return;
           }
+
           try {
-            const isJsonToYaml = directionSelect.value === 'json2yaml';
-            const indent = parseInt(indentSelect.value, 10) || 2;
-            if (isJsonToYaml) {
+            if (directionSelect.value === 'json2yaml') {
               const parsed = JSON.parse(raw);
-              output.value = jsyaml.dump(parsed, { indent });
+              output.value = jsyaml.dump(parsed, { indent, lineWidth: -1 });
             } else {
               const parsed = jsyaml.load(raw);
               output.value = JSON.stringify(parsed, null, indent);
             }
             info.className = 'mt-3 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/50 dark:border-emerald-900/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold';
-            info.textContent = 'Valid syntax! Converted successfully.';
+            info.textContent = 'Converted successfully!';
           } catch (err) {
             output.value = '';
             info.className = 'mt-3 p-3 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200/50 dark:border-red-900/40 text-red-800 dark:text-red-300 text-xs font-bold';
-            info.textContent = `Conversion Error: ${err.message}`;
+            info.textContent = `Syntax Error: ${err.message}`;
           }
         };
 
-        directionSelect.addEventListener('change', () => {
-          updateLabels();
-          processConversion();
-        });
-        indentSelect.addEventListener('change', processConversion);
-        input.addEventListener('input', processConversion);
-        convertBtn.addEventListener('click', processConversion);
+        indentSelect.addEventListener('change', processConvert);
+        input.addEventListener('input', processConvert);
+        convertBtn.addEventListener('click', processConvert);
 
         copyBtn.addEventListener('click', () => {
           if (output.value) {
@@ -4719,7 +4703,8 @@
             info.className = 'hidden';
             return;
           }
-          if (typeof sqlFormatter === 'undefined') {
+
+          if (!window.sqlFormatter) {
             info.className = 'mt-3 p-3 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/40 text-amber-800 dark:text-amber-300 text-xs font-bold';
             info.textContent = 'SQL Formatter engine loading...';
             return;
