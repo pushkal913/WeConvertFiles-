@@ -1119,6 +1119,30 @@
       diff: {
         src: 'https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js',
         ready: () => Boolean(window.diff_match_patch)
+      },
+      jsyaml: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js',
+        ready: () => Boolean(window.jsyaml)
+      },
+      sqlformatter: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/sql-formatter/15.3.2/sql-formatter.min.js',
+        ready: () => Boolean(window.sqlFormatter)
+      },
+      terser: {
+        src: 'https://cdn.jsdelivr.net/npm/terser/dist/bundle.min.js',
+        ready: () => Boolean(window.Terser)
+      },
+      jsbeautify: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.1/beautifier.min.js',
+        ready: () => Boolean(window.html_beautify)
+      },
+      jsbeautifyCss: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.1/beautify-css.min.js',
+        ready: () => Boolean(window.css_beautify)
+      },
+      jsbeautifyHtml: {
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.1/beautify-html.min.js',
+        ready: () => Boolean(window.html_beautify)
       }
     });
 
@@ -1151,14 +1175,20 @@
       'markdown-preview': ['marked'],
       'hash-generator': ['cryptojs'],
       'exif-utility': ['exif'],
-      'decrypt-pdf': ['pdflib', 'pdfjs', 'jspdf']
+      'decrypt-pdf': ['pdflib', 'pdfjs', 'jspdf'],
+      'json-yaml': ['jsyaml'],
+      'sql-formatter': ['sqlformatter'],
+      'code-minifier': ['terser', 'jsbeautify', 'jsbeautifyCss', 'jsbeautifyHtml']
     });
 
     const interactiveLibraryTools = new Set([
       'qr-generator',
       'hash-generator',
       'markdown-preview',
-      'diff-checker'
+      'diff-checker',
+      'json-yaml',
+      'sql-formatter',
+      'code-minifier'
     ]);
 
     const libraryLoadPromises = new Map();
@@ -2095,6 +2125,80 @@
         'color-palette': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19C5.34442 19.4858 5.41324 20.2526 5.0934 20.817C4.66774 21.5682 4.81181 22 5.5 22H12Z" opacity=".35"/><circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"/><circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="16.5" cy="9.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="14.5" r="1.5" fill="currentColor"/></svg>`,
         'json-convert': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h4v16h-4M8 20H4V4h4" opacity=".35"/><path d="M12 8v8M9 11l3-3 3 3"/></svg>`,
         'word-counter': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" opacity=".35"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>`,
+
+        'json-yaml': `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-[400px]">
+            <div class="flex flex-col h-full bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700/60 rounded-xl overflow-hidden shadow-sm">
+              <div class="flex items-center justify-between px-4 py-2 border-b border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-800">
+                <span class="text-xs font-bold text-slate-500 uppercase">Input</span>
+                <button type="button" id="jySwapBtn" class="p-1 rounded bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 transition" aria-label="Swap directions" title="Swap Input/Output"><svg class="w-4 h-4 text-slate-600 dark:text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M16 3l4 4-4 4M16 17H4M8 21l-4-4 4-4"/></svg></button>
+              </div>
+              <textarea id="jyInput" class="flex-grow w-full p-4 bg-transparent outline-none resize-none text-sm text-slate-800 dark:text-slate-200 font-mono" placeholder="Paste JSON or YAML here..." spellcheck="false"></textarea>
+            </div>
+            <div class="flex flex-col h-full bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700/60 rounded-xl overflow-hidden shadow-sm">
+              <div class="flex items-center justify-between px-4 py-2 border-b border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-800">
+                <span class="text-xs font-bold text-slate-500 uppercase">Output</span>
+                <div class="flex gap-2">
+                  <button type="button" id="jyCopyBtn" class="px-2 py-1 text-xs font-bold bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition">Copy</button>
+                  <button type="button" id="jyDownloadBtn" class="px-2 py-1 text-xs font-bold bg-teal-50 text-teal-600 rounded hover:bg-teal-100 transition">Download</button>
+                  <button type="button" id="jyClearBtn" class="px-2 py-1 text-xs font-bold bg-rose-50 text-rose-600 rounded hover:bg-rose-100 transition">Clear</button>
+                </div>
+              </div>
+              <textarea id="jyOutput" class="flex-grow w-full p-4 bg-transparent outline-none resize-none text-sm text-slate-800 dark:text-slate-200 font-mono" readonly placeholder="Output will appear here..."></textarea>
+            </div>
+          </div>
+          <div id="jyError" class="mt-4 p-3 bg-rose-50 dark:bg-rose-950/30 text-rose-600 border border-rose-200 dark:border-rose-900/50 rounded-lg text-sm hidden font-mono"></div>
+        `,
+        'sql-formatter': `
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-wrap gap-3">
+              <select id="sqlDialect" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 outline-none">
+                <option value="sql">Standard SQL</option>
+                <option value="mysql">MySQL</option>
+                <option value="postgresql">PostgreSQL</option>
+                <option value="tsql">SQL Server</option>
+              </select>
+              <select id="sqlCasing" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 outline-none">
+                <option value="upper">UPPERCASE</option>
+                <option value="lower">lowercase</option>
+              </select>
+              <button type="button" id="sqlFormatBtn" class="px-4 py-2 bg-[#1a73e8] text-white rounded-lg text-sm font-bold shadow hover:bg-[#1967d2] transition">Format SQL</button>
+              <button type="button" id="sqlCopyBtn" class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg text-sm font-bold hover:bg-blue-100 transition">Copy</button>
+              <button type="button" id="sqlDownloadBtn" class="px-4 py-2 bg-teal-50 text-teal-600 rounded-lg text-sm font-bold hover:bg-teal-100 transition">Download</button>
+              <button type="button" id="sqlClearBtn" class="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold hover:bg-slate-200 transition">Clear</button>
+            </div>
+            <div class="grid grid-cols-1 gap-4 h-[400px]">
+              <textarea id="sqlInput" class="w-full h-full p-4 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700/60 rounded-xl outline-none resize-none text-sm text-slate-800 dark:text-slate-200 font-mono shadow-sm" placeholder="Paste unformatted SQL here..." spellcheck="false"></textarea>
+            </div>
+            <div id="sqlError" class="p-3 bg-rose-50 dark:bg-rose-950/30 text-rose-600 border border-rose-200 dark:border-rose-900/50 rounded-lg text-sm hidden font-mono"></div>
+          </div>
+        `,
+        'code-minifier': `
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-wrap items-center gap-3">
+              <select id="cmLang" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 outline-none">
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="js">JavaScript</option>
+              </select>
+              <button type="button" id="cmMinifyBtn" class="px-4 py-2 bg-[#1a73e8] text-white rounded-lg text-sm font-bold shadow hover:bg-[#1967d2] transition">Minify</button>
+              <button type="button" id="cmBeautifyBtn" class="px-4 py-2 bg-emerald-500 text-white rounded-lg text-sm font-bold shadow hover:bg-emerald-600 transition">Beautify</button>
+              <button type="button" id="cmCopyBtn" class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg text-sm font-bold hover:bg-blue-100 transition">Copy</button>
+              <button type="button" id="cmDownloadBtn" class="px-4 py-2 bg-teal-50 text-teal-600 rounded-lg text-sm font-bold hover:bg-teal-100 transition">Download</button>
+              <button type="button" id="cmClearBtn" class="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold hover:bg-slate-200 transition">Clear</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-[400px]">
+              <textarea id="cmInput" class="w-full h-full p-4 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700/60 rounded-xl outline-none resize-none text-sm text-slate-800 dark:text-slate-200 font-mono shadow-sm" placeholder="Paste HTML, CSS, or JS code here..." spellcheck="false"></textarea>
+              <textarea id="cmOutput" class="w-full h-full p-4 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700/60 rounded-xl outline-none resize-none text-sm text-slate-800 dark:text-slate-200 font-mono shadow-sm" readonly placeholder="Output will appear here..."></textarea>
+            </div>
+            <div id="cmStats" class="flex gap-4 text-xs font-semibold text-slate-500 dark:text-slate-400 mt-2">
+              <span>Input: <span id="cmInSize">0 B</span></span>
+              <span>Output: <span id="cmOutSize">0 B</span></span>
+              <span>Saved: <span id="cmSaved" class="text-emerald-600 dark:text-emerald-400">0%</span></span>
+            </div>
+            <div id="cmError" class="p-3 bg-rose-50 dark:bg-rose-950/30 text-rose-600 border border-rose-200 dark:border-rose-900/50 rounded-lg text-sm hidden font-mono mt-2"></div>
+          </div>
+        `,
         'diff-checker': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 9h4M15 15h4" stroke-width="2.5"/><rect x="2" y="3" width="20" height="18" rx="2" opacity=".35"/></svg>`,
         'markdown-preview': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" opacity=".35"/><path d="M7 15V9l3.5 4L14 9v6M18 9v4M16.5 10.5L18 12l1.5-1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
         'url-base64': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" opacity=".35"/></svg>`,
@@ -2111,6 +2215,9 @@
         'regex-tester': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>`,
         'uuid-generator': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M9 12h6M12 9v6"/></svg>`,
         'unix-converter': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" opacity=".35"/><path d="M12 6v6l4 2"/></svg>`,
+        'json-yaml': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16" opacity="0.4"/><path d="M4 14l4-4 4 4"/></svg>`,
+        'sql-formatter': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" opacity="0.4"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+        'code-minifier': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6" opacity="0.4"/><path d="M12 2v20"/></svg>`,
         'jwt-decoder': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M9 12h6M9 8h6M9 16h6"/></svg>`,
         'image-to-base64': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg>`,
         'base64-to-image': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>`,
@@ -2154,14 +2261,14 @@
         title: 'Data & Document Conversion',
         rgb: '99, 102, 241',
         icon: '<path d="M4 5h16v14H4z"/><path d="M4 10h16M10 5v14"/>',
-        tools: ['excel-to-csv', 'json-convert', 'csv-convert']
+        tools: ['excel-to-csv', 'json-convert', 'csv-convert', 'json-yaml']
       },
       {
         id: 'developer-tools',
         title: 'Text & Developer Utilities',
         rgb: '139, 92, 246',
         icon: '<path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/>',
-        tools: ['qr-generator', 'word-counter', 'json-formatter', 'diff-checker', 'url-base64', 'markdown-preview', 'regex-tester', 'jwt-decoder', 'uuid-generator', 'hash-generator', 'unix-converter']
+        tools: ['qr-generator', 'word-counter', 'json-formatter', 'diff-checker', 'url-base64', 'markdown-preview', 'regex-tester', 'jwt-decoder', 'uuid-generator', 'hash-generator', 'unix-converter', 'sql-formatter', 'code-minifier']
       }
     ];
 
@@ -2243,7 +2350,7 @@
       workspaceView.classList.remove('hidden');
 
       // Hide file controls for tools that work entirely with pasted or generated text.
-      const isInteractiveOnly = ['word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'regex-tester', 'jwt-decoder'].includes(toolId);
+      const isInteractiveOnly = ['word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'regex-tester', 'jwt-decoder', 'json-yaml', 'sql-formatter', 'code-minifier'].includes(toolId);
       document.getElementById('dropZone').classList.toggle('hidden', isInteractiveOnly);
       document.getElementById('selectedFilesContainer').classList.toggle('hidden', isInteractiveOnly);
       document.getElementById('convertActionRow').classList.toggle('hidden', isInteractiveOnly);
@@ -2251,7 +2358,7 @@
       // Hide convertButton for color palette tool as picking is fully interactive
       const convertButton = document.getElementById('convertButton');
       if (convertButton) {
-        convertButton.classList.toggle('hidden', ['color-palette', 'json-formatter', 'qr-generator', 'hash-generator', 'image-to-base64', 'base64-to-image', 'svg-to-image'].includes(toolId));
+        convertButton.classList.toggle('hidden', ['color-palette', 'json-formatter', 'qr-generator', 'hash-generator', 'image-to-base64', 'base64-to-image', 'svg-to-image', 'json-yaml', 'sql-formatter', 'code-minifier'].includes(toolId));
       }
 
       document.getElementById('workspaceKicker').textContent = tool.kicker;
@@ -2750,6 +2857,80 @@
               </div>
             </div>
             <p class="${helpClass} mt-2">Stats are computed live with local javascript. Perfect for bloggers, authors, and student reports.</p>
+          </div>
+        `,
+
+        'json-yaml': `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-[400px]">
+            <div class="flex flex-col h-full bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700/60 rounded-xl overflow-hidden shadow-sm">
+              <div class="flex items-center justify-between px-4 py-2 border-b border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-800">
+                <span class="text-xs font-bold text-slate-500 uppercase">Input</span>
+                <button type="button" id="jySwapBtn" class="p-1 rounded bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 transition" aria-label="Swap directions" title="Swap Input/Output"><svg class="w-4 h-4 text-slate-600 dark:text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M16 3l4 4-4 4M16 17H4M8 21l-4-4 4-4"/></svg></button>
+              </div>
+              <textarea id="jyInput" class="flex-grow w-full p-4 bg-transparent outline-none resize-none text-sm text-slate-800 dark:text-slate-200 font-mono" placeholder="Paste JSON or YAML here..." spellcheck="false"></textarea>
+            </div>
+            <div class="flex flex-col h-full bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700/60 rounded-xl overflow-hidden shadow-sm">
+              <div class="flex items-center justify-between px-4 py-2 border-b border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-800">
+                <span class="text-xs font-bold text-slate-500 uppercase">Output</span>
+                <div class="flex gap-2">
+                  <button type="button" id="jyCopyBtn" class="px-2 py-1 text-xs font-bold bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition">Copy</button>
+                  <button type="button" id="jyDownloadBtn" class="px-2 py-1 text-xs font-bold bg-teal-50 text-teal-600 rounded hover:bg-teal-100 transition">Download</button>
+                  <button type="button" id="jyClearBtn" class="px-2 py-1 text-xs font-bold bg-rose-50 text-rose-600 rounded hover:bg-rose-100 transition">Clear</button>
+                </div>
+              </div>
+              <textarea id="jyOutput" class="flex-grow w-full p-4 bg-transparent outline-none resize-none text-sm text-slate-800 dark:text-slate-200 font-mono" readonly placeholder="Output will appear here..."></textarea>
+            </div>
+          </div>
+          <div id="jyError" class="mt-4 p-3 bg-rose-50 dark:bg-rose-950/30 text-rose-600 border border-rose-200 dark:border-rose-900/50 rounded-lg text-sm hidden font-mono"></div>
+        `,
+        'sql-formatter': `
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-wrap gap-3">
+              <select id="sqlDialect" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 outline-none">
+                <option value="sql">Standard SQL</option>
+                <option value="mysql">MySQL</option>
+                <option value="postgresql">PostgreSQL</option>
+                <option value="tsql">SQL Server</option>
+              </select>
+              <select id="sqlCasing" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 outline-none">
+                <option value="upper">UPPERCASE</option>
+                <option value="lower">lowercase</option>
+              </select>
+              <button type="button" id="sqlFormatBtn" class="px-4 py-2 bg-[#1a73e8] text-white rounded-lg text-sm font-bold shadow hover:bg-[#1967d2] transition">Format SQL</button>
+              <button type="button" id="sqlCopyBtn" class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg text-sm font-bold hover:bg-blue-100 transition">Copy</button>
+              <button type="button" id="sqlDownloadBtn" class="px-4 py-2 bg-teal-50 text-teal-600 rounded-lg text-sm font-bold hover:bg-teal-100 transition">Download</button>
+              <button type="button" id="sqlClearBtn" class="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold hover:bg-slate-200 transition">Clear</button>
+            </div>
+            <div class="grid grid-cols-1 gap-4 h-[400px]">
+              <textarea id="sqlInput" class="w-full h-full p-4 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700/60 rounded-xl outline-none resize-none text-sm text-slate-800 dark:text-slate-200 font-mono shadow-sm" placeholder="Paste unformatted SQL here..." spellcheck="false"></textarea>
+            </div>
+            <div id="sqlError" class="p-3 bg-rose-50 dark:bg-rose-950/30 text-rose-600 border border-rose-200 dark:border-rose-900/50 rounded-lg text-sm hidden font-mono"></div>
+          </div>
+        `,
+        'code-minifier': `
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-wrap items-center gap-3">
+              <select id="cmLang" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 outline-none">
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="js">JavaScript</option>
+              </select>
+              <button type="button" id="cmMinifyBtn" class="px-4 py-2 bg-[#1a73e8] text-white rounded-lg text-sm font-bold shadow hover:bg-[#1967d2] transition">Minify</button>
+              <button type="button" id="cmBeautifyBtn" class="px-4 py-2 bg-emerald-500 text-white rounded-lg text-sm font-bold shadow hover:bg-emerald-600 transition">Beautify</button>
+              <button type="button" id="cmCopyBtn" class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg text-sm font-bold hover:bg-blue-100 transition">Copy</button>
+              <button type="button" id="cmDownloadBtn" class="px-4 py-2 bg-teal-50 text-teal-600 rounded-lg text-sm font-bold hover:bg-teal-100 transition">Download</button>
+              <button type="button" id="cmClearBtn" class="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold hover:bg-slate-200 transition">Clear</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-[400px]">
+              <textarea id="cmInput" class="w-full h-full p-4 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700/60 rounded-xl outline-none resize-none text-sm text-slate-800 dark:text-slate-200 font-mono shadow-sm" placeholder="Paste HTML, CSS, or JS code here..." spellcheck="false"></textarea>
+              <textarea id="cmOutput" class="w-full h-full p-4 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700/60 rounded-xl outline-none resize-none text-sm text-slate-800 dark:text-slate-200 font-mono shadow-sm" readonly placeholder="Output will appear here..."></textarea>
+            </div>
+            <div id="cmStats" class="flex gap-4 text-xs font-semibold text-slate-500 dark:text-slate-400 mt-2">
+              <span>Input: <span id="cmInSize">0 B</span></span>
+              <span>Output: <span id="cmOutSize">0 B</span></span>
+              <span>Saved: <span id="cmSaved" class="text-emerald-600 dark:text-emerald-400">0%</span></span>
+            </div>
+            <div id="cmError" class="p-3 bg-rose-50 dark:bg-rose-950/30 text-rose-600 border border-rose-200 dark:border-rose-900/50 rounded-lg text-sm hidden font-mono mt-2"></div>
           </div>
         `,
         'diff-checker': `
@@ -3474,6 +3655,269 @@
           updateStats();
         }
       }
+
+      if (toolId === 'json-yaml') {
+        const input = document.getElementById('jyInput');
+        const output = document.getElementById('jyOutput');
+        const errorDiv = document.getElementById('jyError');
+        const swapBtn = document.getElementById('jySwapBtn');
+        const copyBtn = document.getElementById('jyCopyBtn');
+        const clearBtn = document.getElementById('jyClearBtn');
+        const downloadBtn = document.getElementById('jyDownloadBtn');
+        let currentMode = 'json2yaml';
+
+        const updateConversion = () => {
+          const val = input.value.trim();
+          errorDiv.classList.add('hidden');
+          if (!val) { output.value = ''; return; }
+          try {
+            if (currentMode === 'json2yaml') {
+              const obj = JSON.parse(val);
+              output.value = window.jsyaml.dump(obj, { indent: 2 });
+            } else {
+              const obj = window.jsyaml.load(val);
+              output.value = JSON.stringify(obj, null, 2);
+            }
+          } catch (err) {
+            errorDiv.textContent = err.message;
+            errorDiv.classList.remove('hidden');
+            output.value = '';
+          }
+        };
+
+        swapBtn.addEventListener('click', () => {
+          currentMode = currentMode === 'json2yaml' ? 'yaml2json' : 'json2yaml';
+          input.placeholder = currentMode === 'json2yaml' ? 'Paste JSON here...' : 'Paste YAML here...';
+          const temp = input.value;
+          input.value = output.value;
+          output.value = temp;
+          updateConversion();
+        });
+
+        input.addEventListener('input', updateConversion);
+
+        copyBtn.addEventListener('click', async () => {
+          if (!output.value) return;
+          try {
+            await navigator.clipboard.writeText(output.value);
+            const origText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => copyBtn.textContent = origText, 2000);
+          } catch (e) {
+            alert('Failed to copy to clipboard.');
+          }
+        });
+
+        if (downloadBtn) {
+          downloadBtn.addEventListener('click', () => {
+            if (!output.value) return;
+            const ext = currentMode === 'json2yaml' ? 'yaml' : 'json';
+            const blob = new Blob([output.value], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `converted.${ext}`;
+            a.click();
+            URL.revokeObjectURL(url);
+          });
+        }
+
+        clearBtn.addEventListener('click', () => {
+          input.value = '';
+          output.value = '';
+          errorDiv.classList.add('hidden');
+        });
+      }
+
+      if (toolId === 'sql-formatter') {
+        const input = document.getElementById('sqlInput');
+        const output = document.getElementById('sqlOutput');
+        const errorDiv = document.getElementById('sqlError');
+        const formatBtn = document.getElementById('sqlFormatBtn');
+        const copyBtn = document.getElementById('sqlCopyBtn');
+        const clearBtn = document.getElementById('sqlClearBtn');
+        const downloadBtn = document.getElementById('sqlDownloadBtn');
+        const dialectSelect = document.getElementById('sqlDialect');
+        const casingSelect = document.getElementById('sqlCasing');
+
+        const formatSQL = () => {
+          const val = input.value.trim();
+          errorDiv.classList.add('hidden');
+          if (!val) { output.value = ''; return; }
+          try {
+            const dialect = dialectSelect.value;
+            const keywordCase = casingSelect.value;
+            output.value = window.sqlFormatter.format(val, {
+              language: dialect,
+              keywordCase: keywordCase,
+              indentStyle: 'standard'
+            });
+          } catch (err) {
+            errorDiv.textContent = err.message;
+            errorDiv.classList.remove('hidden');
+            output.value = '';
+          }
+        };
+
+        formatBtn.addEventListener('click', formatSQL);
+
+        copyBtn.addEventListener('click', async () => {
+          if (!output.value) return;
+          try {
+            await navigator.clipboard.writeText(output.value);
+            const origText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => copyBtn.textContent = origText, 2000);
+          } catch (e) {
+            alert('Failed to copy to clipboard.');
+          }
+        });
+
+        if (downloadBtn) {
+          downloadBtn.addEventListener('click', () => {
+            if (!output.value) return;
+            const blob = new Blob([output.value], { type: 'application/sql' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `query.sql`;
+            a.click();
+            URL.revokeObjectURL(url);
+          });
+        }
+
+        clearBtn.addEventListener('click', () => {
+          input.value = '';
+          output.value = '';
+          errorDiv.classList.add('hidden');
+        });
+      }
+
+      if (toolId === 'code-minifier') {
+        const input = document.getElementById('cmInput');
+        const output = document.getElementById('cmOutput');
+        const errorDiv = document.getElementById('cmError');
+        const minifyBtn = document.getElementById('cmMinifyBtn');
+        const beautifyBtn = document.getElementById('cmBeautifyBtn');
+        const copyBtn = document.getElementById('cmCopyBtn');
+        const clearBtn = document.getElementById('cmClearBtn');
+        const downloadBtn = document.getElementById('cmDownloadBtn');
+        const langSelect = document.getElementById('cmLang');
+        const inSizeEl = document.getElementById('cmInSize');
+        const outSizeEl = document.getElementById('cmOutSize');
+        const savedEl = document.getElementById('cmSaved');
+
+        const formatBytes = (bytes) => {
+          if (bytes === 0) return '0 B';
+          const k = 1024;
+          const sizes = ['B', 'KB', 'MB', 'GB'];
+          const i = Math.floor(Math.log(bytes) / Math.log(k));
+          return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        };
+
+        const updateStats = (inStr, outStr) => {
+          const inBytes = new Blob([inStr]).size;
+          const outBytes = new Blob([outStr]).size;
+          inSizeEl.textContent = formatBytes(inBytes);
+          outSizeEl.textContent = formatBytes(outBytes);
+          if (inBytes > 0 && inBytes > outBytes) {
+            const saved = ((inBytes - outBytes) / inBytes * 100).toFixed(1);
+            savedEl.textContent = saved + '%';
+            savedEl.className = 'text-emerald-600 dark:text-emerald-400';
+          } else {
+            savedEl.textContent = '0%';
+            savedEl.className = 'text-slate-500';
+          }
+        };
+
+        input.addEventListener('input', () => {
+          const val = input.value;
+          const inBytes = new Blob([val]).size;
+          inSizeEl.textContent = formatBytes(inBytes);
+        });
+
+        minifyBtn.addEventListener('click', async () => {
+          const val = input.value.trim();
+          errorDiv.classList.add('hidden');
+          if (!val) { output.value = ''; return; }
+          const lang = langSelect.value;
+          try {
+            let res = val;
+            if (lang === 'js') {
+              const result = await window.Terser.minify(val);
+              if (result.error) throw result.error;
+              res = result.code;
+            } else if (lang === 'css') {
+              // Basic CSS minifier using regex if no library available
+              res = val.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/ {/g, '{').replace(/} /g, '}').replace(/ ;/g, ';').replace(/; }/g, '}');
+            } else if (lang === 'html') {
+              // Basic HTML minifier using regex if no library available
+              res = val.replace(/<!--[\s\S]*?-->/g, '').replace(/>\s+</g, '><').trim();
+            }
+            output.value = res;
+            updateStats(val, res);
+          } catch (err) {
+            errorDiv.textContent = err.message || 'Error minifying code';
+            errorDiv.classList.remove('hidden');
+          }
+        });
+
+        beautifyBtn.addEventListener('click', () => {
+          const val = input.value.trim();
+          errorDiv.classList.add('hidden');
+          if (!val) { output.value = ''; return; }
+          const lang = langSelect.value;
+          try {
+            let res = val;
+            if (lang === 'js') {
+              res = window.html_beautify(val, { indent_size: 2, space_in_empty_paren: true });
+            } else if (lang === 'css') {
+              res = window.css_beautify(val, { indent_size: 2 });
+            } else if (lang === 'html') {
+              res = window.html_beautify(val, { indent_size: 2 });
+            }
+            output.value = res;
+            updateStats(val, res);
+          } catch (err) {
+            errorDiv.textContent = err.message || 'Error beautifying code';
+            errorDiv.classList.remove('hidden');
+          }
+        });
+
+        copyBtn.addEventListener('click', async () => {
+          if (!output.value) return;
+          try {
+            await navigator.clipboard.writeText(output.value);
+            const origText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => copyBtn.textContent = origText, 2000);
+          } catch (e) {
+            alert('Failed to copy to clipboard.');
+          }
+        });
+
+        if (downloadBtn) {
+          downloadBtn.addEventListener('click', () => {
+            if (!output.value) return;
+            const ext = langSelect.value;
+            const blob = new Blob([output.value], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `code.${ext}`;
+            a.click();
+            URL.revokeObjectURL(url);
+          });
+        }
+
+        clearBtn.addEventListener('click', () => {
+          input.value = '';
+          output.value = '';
+          errorDiv.classList.add('hidden');
+          updateStats('', '');
+        });
+      }
+
       if (toolId === 'markdown-preview') {
         const input = document.getElementById('markdownInputArea');
         const preview = document.getElementById('markdownPreviewArea');

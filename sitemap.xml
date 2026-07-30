@@ -301,4 +301,35 @@
   <url>
     <loc>https://www.weconvertfiles.com/terms</loc>
   </url>
+
+  <url>
+    <loc>https://www.weconvertfiles.com/json-yaml</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/sql-formatter</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/code-minifier</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/guides/json-yaml.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/guides/sql-formatter.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/guides/code-minifier.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
