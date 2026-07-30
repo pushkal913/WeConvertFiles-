@@ -45,6 +45,9 @@
 /guides/image-to-base64    /guides/image-to-base64.html    301
 /guides/base64-to-image    /guides/base64-to-image.html    301
 /guides/svg-to-image    /guides/svg-to-image.html    301
+/guides/json-yaml    /guides/json-yaml.html    301
+/guides/sql-formatter    /guides/sql-formatter.html    301
+/guides/code-minifier    /guides/code-minifier.html    301
 
 # Preserve older descriptive tool aliases.
 /images-to-pdf    /images-pdf    301
@@ -108,6 +111,9 @@
 /image-to-base64    /index.html    200
 /base64-to-image    /index.html    200
 /svg-to-image    /index.html    200
+/json-yaml    /index.html    200
+/sql-formatter    /index.html    200
+/code-minifier    /index.html    200
 
 # Unknown URLs return a real 404 instead of a homepage soft 404.
 /*    /404.html    404
