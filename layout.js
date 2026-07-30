@@ -52,10 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { id: 'decrypt-pdf', title: 'Unlock PDF', kicker: 'Security PDF', badge: 'Remove pass', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-700' },
       { id: 'image-to-base64', title: 'Image to Base64', kicker: 'Image Tools', badge: 'Base64 Output', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
       { id: 'base64-to-image', title: 'Base64 to Image', kicker: 'Image Tools', badge: 'Base64 Decode', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
-      { id: 'svg-to-image', title: 'SVG to PNG / JPG', kicker: 'Image Tools', badge: 'Vector Export', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' },
-      { id: 'json-yaml', title: 'JSON ↔ YAML Converter', kicker: 'Data Conversion', badge: 'Two-way', iconBg: 'bg-indigo-100', iconColor: 'text-indigo-700' },
-      { id: 'sql-formatter', title: 'SQL Formatter', kicker: 'Developer Tools', badge: 'Format Only', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-700' },
-      { id: 'code-minifier', title: 'Code Minifier & Beautifier', kicker: 'Developer Tools', badge: 'HTML / CSS / JS', iconBg: 'bg-rose-100', iconColor: 'text-rose-700' }
+      { id: 'svg-to-image', title: 'SVG to PNG / JPG', kicker: 'Image Tools', badge: 'Vector Export', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' }
     ];
 
   // Inject Header (Sitewide, full-width alignment matching main index layout)
@@ -334,13 +331,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </svg>
                 Word / Excel to PDF
               </a>
-              <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/json-yaml">
-                <svg class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2" opacity=".35"/>
-                  <path d="M9 8h6M9 12h6M9 16h3"/>
-                </svg>
-                JSON ↔ YAML Converter
-              </a>
             </div>
           </div>
 
@@ -426,18 +416,6 @@ document.addEventListener('DOMContentLoaded', () => {
                   <path d="M12 22a7 7 0 0 0 5-12.02V8a5 5 0 0 0-10 0v1.98A7 7 0 0 0 12 22z" opacity=".35"/><path d="M12 13v4" /><circle cx="12" cy="12" r="1" />
                 </svg>
                 Hash Generator
-              </a>
-              <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/sql-formatter">
-                <svg class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <ellipse cx="12" cy="5" rx="8" ry="3" opacity=".35"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>
-                </svg>
-                SQL Formatter
-              </a>
-              <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/code-minifier">
-                <svg class="h-4 w-4 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path d="M10 20l-4-4 4-4M14 8l4 4-4 4" opacity=".35"/><path d="M8 8h8M8 12h8M8 16h5"/>
-                </svg>
-                Code Minifier & Beautifier
               </a>
             </div>
           </div>
@@ -599,8 +577,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const categories = [
     { name: 'IMAGE TOOLS', ids: ['image-cropper', 'favicon-generator', 'image-scaler', 'pdf-images', 'pdf-jpg', 'images-pdf', 'webp-convert', 'bulk-resize', 'color-palette', 'exif-utility', 'heic-to-jpg'] },
     { name: 'PDF TOOLS', ids: ['pdf-to-word', 'merge-pdf', 'split-pdf', 'extract-pages', 'organize-pdf', 'rotate-pdf', 'remove-pages', 'decrypt-pdf', 'encrypt-pdf', 'compress-pdf', 'watermark-pdf', 'page-numbers', 'sign-pdf'] },
-    { name: 'CONVERT & OFFICE', ids: ['excel-to-csv', 'csv-convert', 'json-convert', 'office-pdf', 'json-yaml'] },
-    { name: 'TEXT & DEVELOPERS', ids: ['regex-tester', 'uuid-generator', 'unix-converter', 'jwt-decoder', 'word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'sql-formatter', 'code-minifier'] }
+    { name: 'CONVERT & OFFICE', ids: ['excel-to-csv', 'csv-convert', 'json-convert', 'office-pdf'] },
+    { name: 'TEXT & DEVELOPERS', ids: ['regex-tester', 'uuid-generator', 'unix-converter', 'jwt-decoder', 'word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator'] }
   ];
 
   function renderMobileMenu() {

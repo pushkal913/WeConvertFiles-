@@ -151,15 +151,6 @@
   <url>
     <loc>https://www.weconvertfiles.com/svg-to-image</loc>
   </url>
-  <url>
-    <loc>https://www.weconvertfiles.com/json-yaml</loc>
-  </url>
-  <url>
-    <loc>https://www.weconvertfiles.com/sql-formatter</loc>
-  </url>
-  <url>
-    <loc>https://www.weconvertfiles.com/code-minifier</loc>
-  </url>
 
   <!-- Programmatic SEO Guide Pages -->
   <url>
@@ -295,15 +286,6 @@
   </url>
   <url>
     <loc>https://www.weconvertfiles.com/guides/svg-to-image.html</loc>
-  </url>
-  <url>
-    <loc>https://www.weconvertfiles.com/guides/json-yaml.html</loc>
-  </url>
-  <url>
-    <loc>https://www.weconvertfiles.com/guides/sql-formatter.html</loc>
-  </url>
-  <url>
-    <loc>https://www.weconvertfiles.com/guides/code-minifier.html</loc>
   </url>
 
   <!-- Information Pages -->
