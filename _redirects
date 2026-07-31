@@ -28,6 +28,8 @@
 /guides/office-pdf    /guides/office-pdf.html    301
 /guides/organize-pdf    /guides/organize-pdf.html    301
 /guides/page-numbers    /guides/page-numbers.html    301
+/guides/password-generator    /guides/password-generator.html    301
+/guides/case-converter    /guides/case-converter.html    301
 /guides/pdf-to-images    /guides/pdf-to-images.html    301
 /guides/pdf-to-jpg    /guides/pdf-to-jpg.html    301
 /guides/pdf-to-word    /guides/pdf-to-word.html    301
@@ -114,6 +116,8 @@
 /json-yaml    /index.html    200
 /sql-formatter    /index.html    200
 /code-minifier    /index.html    200
+/password-generator    /index.html    200
+/case-converter    /index.html    200
 
 # Unknown URLs return a real 404 instead of a homepage soft 404.
 /*    /404.html    404

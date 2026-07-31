@@ -461,6 +461,18 @@
                 </svg>
                 Code Minifier & Beautifier
               </a>
+              <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/password-generator">
+                <svg class="h-4 w-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" opacity=".35"/><path d="M7 11V7a5 5 0 0 1 10 0v4" /><circle cx="12" cy="16" r="1.5" />
+                </svg>
+                Password & Secret Generator
+              </a>
+              <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/case-converter">
+                <svg class="h-4 w-4 text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path d="M4 17V7l3.5 6L11 7v10" /><path d="M14 17h6M17 8v9M14 11l3-3 3 3" opacity=".7" />
+                </svg>
+                Case Converter
+              </a>
             </div>
           </div>
         </nav>
@@ -1480,6 +1492,22 @@
           { q: 'What do the size statistics mean?', a: 'After processing, the tool shows the input size and output size in bytes, plus the percentage change, so you can see exactly how much smaller (or more readable) your code became.' }
         ]
       },
+      'password-generator': {
+        howItWorks: 'Password & Secret Generator creates passwords, hex tokens, and Base64URL tokens using the Web Crypto API\'s crypto.getRandomValues(), which draws from your operating system\'s cryptographically secure random number source. Math.random() is never used anywhere in this tool. Character selection uses rejection sampling to avoid modulo bias, so every allowed character is equally likely. An entropy estimate updates live as you adjust length, character sets, or token size, and generated secrets are never saved, logged, or transmitted anywhere.',
+        faqs: [
+          { q: 'Is Math.random() ever used to generate my passwords?', a: 'No. Every character and byte is generated using crypto.getRandomValues(), the Web Crypto API\'s cryptographically secure random number generator. Math.random() is not suitable for secrets and is never used here.' },
+          { q: 'Are my generated passwords saved or sent anywhere?', a: 'No. Generation happens entirely in your browser\'s memory. Nothing is written to storage, logged to a server, or transmitted over the network.' },
+          { q: 'What is the difference between a password, hex token, and Base64URL token?', a: 'A password is a human-typeable string built from the character sets you choose. A hex token encodes random bytes as hexadecimal (0-9, a-f), and a Base64URL token encodes random bytes using the URL-safe Base64 alphabet — both are common formats for API keys and session secrets.' }
+        ]
+      },
+      'case-converter': {
+        howItWorks: 'Case Converter rewrites text into UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, or CONSTANT_CASE entirely inside your browser. It splits each line into words using boundary detection for spaces, hyphens, underscores, and camelCase transitions, then rebuilds the text in your chosen style while preserving line breaks. Live word and character counts update as you type, and the whole conversion runs locally with nothing uploaded.',
+        faqs: [
+          { q: 'Does this tool support multiline text?', a: 'Yes. Line breaks are preserved, and each line is converted independently, so pasting multiple lines, lists, or paragraphs works as expected.' },
+          { q: 'How are word and character counts calculated?', a: 'Word count splits on whitespace and counts non-empty segments. Character count is the full length of the text, including spaces and punctuation.' },
+          { q: 'Can I download the converted text?', a: 'Yes. After converting, use the Download button to save the output as a .txt file, or use Copy Output to copy it to your clipboard.' }
+        ]
+      },
       'qr-generator': {
         howItWorks: 'QR Code Generator creates visual two-dimensional QR Code matrix grids from URL links, phone numbers, contact info, or plaintext parameters. Utilizing modern Canvas API drawing filters, the engine paints the black/white alignment squares based on inputs and correction options locally, allowing you to download high-resolution PNG image files without API rate limits.',
         faqs: [
@@ -2161,6 +2189,34 @@
         accept: 'text/plain',
         multiple: false,
         notes: ['Minify or beautify HTML, CSS, or JavaScript.', 'Shows input size, output size, and percent saved.', 'Code is only parsed and formatted, never executed.']
+      },
+      {
+        id: 'password-generator',
+        title: 'Password & Secret Generator',
+        kicker: 'Developer Tools',
+        badge: 'Crypto Secure',
+        icon: 'P',
+        iconBg: 'bg-orange-100',
+        iconColor: 'text-orange-600',
+        description: 'Generate strong passwords, hex tokens, and Base64URL tokens using your browser\'s secure random generator.',
+        hint: 'Choose a mode and options, then generate secrets below.',
+        accept: 'text/plain',
+        multiple: false,
+        notes: ['Uses crypto.getRandomValues(), never Math.random().', 'Generate passwords, hex tokens, or Base64URL tokens.', 'Nothing is ever saved, logged, or transmitted.']
+      },
+      {
+        id: 'case-converter',
+        title: 'Case Converter',
+        kicker: 'Developer Tools',
+        badge: 'Text Case',
+        icon: 'C',
+        iconBg: 'bg-lime-100',
+        iconColor: 'text-lime-700',
+        description: 'Convert text between UPPERCASE, camelCase, snake_case, and more, with word and character counts.',
+        hint: 'Paste your text inside the workspace below.',
+        accept: 'text/plain',
+        multiple: false,
+        notes: ['Supports 9 case styles including camelCase and snake_case.', 'Shows live word and character counts.', 'Handles multiline text.']
       }
     ];
 
@@ -2232,7 +2288,9 @@
         'svg-to-image': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" opacity=".35"/><polyline points="14 3 14 9 20 9"/><path d="M10 13l2 2 4-4"/></svg>`,
         'json-yaml': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="M8 8v3.5L6 14l2 2.5V20M16 8v3.5l2 2.5-2 2.5V20" /></svg>`,
         'sql-formatter': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3" opacity=".35"/><path d="M4 6v12c0 1.66 3.58 3 8 3s8-1.34 8-3V6" /><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" /></svg>`,
-        'code-minifier': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="m9 9-3 3 3 3m6-6 3 3-3 3" /></svg>`
+        'code-minifier': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" opacity=".35"/><path d="m9 9-3 3 3 3m6-6 3 3-3 3" /></svg>`,
+        'password-generator': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" opacity=".35"/><path d="M7 11V7a5 5 0 0 1 10 0v4" /><circle cx="12" cy="16" r="1.5" /></svg>`,
+        'case-converter': `<svg class="${iconClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17V7l3.5 6L11 7v10" /><path d="M14 17h6M17 8v9M14 11l3-3 3 3" opacity=".7" /></svg>`
       };
 
       return icons[tool.id] || `<svg class="${iconClass}" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="7" y="5" width="18" height="22" rx="3" fill="currentColor" opacity=".3"/></svg>`;
@@ -2279,7 +2337,7 @@
         title: 'Text & Developer Utilities',
         rgb: '139, 92, 246',
         icon: '<path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/>',
-        tools: ['qr-generator', 'word-counter', 'json-formatter', 'diff-checker', 'url-base64', 'markdown-preview', 'regex-tester', 'jwt-decoder', 'uuid-generator', 'hash-generator', 'unix-converter', 'sql-formatter', 'code-minifier']
+        tools: ['qr-generator', 'word-counter', 'json-formatter', 'diff-checker', 'url-base64', 'markdown-preview', 'regex-tester', 'jwt-decoder', 'uuid-generator', 'hash-generator', 'unix-converter', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter']
       }
     ];
 
@@ -2361,7 +2419,7 @@
       workspaceView.classList.remove('hidden');
 
       // Hide file controls for tools that work entirely with pasted or generated text.
-      const isInteractiveOnly = ['word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'regex-tester', 'jwt-decoder', 'json-yaml', 'sql-formatter', 'code-minifier'].includes(toolId);
+      const isInteractiveOnly = ['word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'regex-tester', 'jwt-decoder', 'json-yaml', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter'].includes(toolId);
       document.getElementById('dropZone').classList.toggle('hidden', isInteractiveOnly);
       document.getElementById('selectedFilesContainer').classList.toggle('hidden', isInteractiveOnly);
       document.getElementById('convertActionRow').classList.toggle('hidden', isInteractiveOnly);
@@ -2369,7 +2427,7 @@
       // Hide convertButton for color palette tool as picking is fully interactive
       const convertButton = document.getElementById('convertButton');
       if (convertButton) {
-        convertButton.classList.toggle('hidden', ['color-palette', 'json-formatter', 'qr-generator', 'hash-generator', 'image-to-base64', 'base64-to-image', 'svg-to-image', 'json-yaml', 'sql-formatter', 'code-minifier'].includes(toolId));
+        convertButton.classList.toggle('hidden', ['color-palette', 'json-formatter', 'qr-generator', 'hash-generator', 'image-to-base64', 'base64-to-image', 'svg-to-image', 'json-yaml', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter'].includes(toolId));
       }
 
       document.getElementById('workspaceKicker').textContent = tool.kicker;
@@ -3106,6 +3164,104 @@
               </div>
             </div>
             <div id="cmInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold whitespace-pre-wrap"></div>
+          </div>
+        `,
+        'password-generator': `
+          <div>
+            <div class="mb-4 inline-flex flex-wrap rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/40 p-1">
+              <button id="pgModePassword" type="button" class="px-3.5 py-1.5 text-xs font-bold rounded-lg transition">Password</button>
+              <button id="pgModeHex" type="button" class="px-3.5 py-1.5 text-xs font-bold rounded-lg transition">Hex Token</button>
+              <button id="pgModeBase64" type="button" class="px-3.5 py-1.5 text-xs font-bold rounded-lg transition">Base64URL Token</button>
+            </div>
+
+            <div class="grid gap-4 sm:grid-cols-2 mb-4">
+              <div id="pgLengthWrapper">
+                <div class="flex items-center justify-between">
+                  <label class="${labelClass}">Length: <span id="pgLengthValue">16</span> characters</label>
+                </div>
+                <input id="pgLengthRange" type="range" min="4" max="128" value="16" class="mt-2.5 w-full accent-[#1a73e8]" />
+              </div>
+              <div id="pgTokenBytesWrapper" class="hidden">
+                <label class="${labelClass}">Token Length</label>
+                <select id="pgTokenBytesSelect" class="${inputClass}">
+                  <option value="16">16 bytes (128-bit)</option>
+                  <option value="24">24 bytes (192-bit)</option>
+                  <option value="32" selected>32 bytes (256-bit)</option>
+                  <option value="48">48 bytes (384-bit)</option>
+                  <option value="64">64 bytes (512-bit)</option>
+                </select>
+              </div>
+              <div>
+                <label class="${labelClass}">Number of Results</label>
+                <select id="pgCountSelect" class="${inputClass}">
+                  <option value="1" selected>1</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="pgCharsetOptions" class="grid gap-2.5 sm:grid-cols-2 mb-4">
+              <label class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300"><input type="checkbox" id="pgUpper" checked class="rounded accent-[#1a73e8]" /> Uppercase (A-Z)</label>
+              <label class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300"><input type="checkbox" id="pgLower" checked class="rounded accent-[#1a73e8]" /> Lowercase (a-z)</label>
+              <label class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300"><input type="checkbox" id="pgNumbers" checked class="rounded accent-[#1a73e8]" /> Numbers (0-9)</label>
+              <label class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300"><input type="checkbox" id="pgSymbols" class="rounded accent-[#1a73e8]" /> Symbols (!@#$...)</label>
+              <label class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 sm:col-span-2"><input type="checkbox" id="pgExcludeAmbiguous" class="rounded accent-[#1a73e8]" /> Exclude ambiguous characters (I, l, 1, O, 0)</label>
+            </div>
+
+            <div class="mb-4 p-3 rounded-xl border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/40 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Estimated Entropy</span>
+              <span id="pgEntropyValue" class="text-sm font-bold text-slate-800 dark:text-slate-200">&mdash;</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2.5 mb-4">
+              <button id="pgGenerateBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Generate</button>
+              <button id="pgRegenerateBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Regenerate</button>
+              <button id="pgCopyAllBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy All</button>
+              <button id="pgClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition ml-auto">Clear</button>
+            </div>
+
+            <div id="pgResultsList" class="space-y-2"></div>
+            <div id="pgInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold whitespace-pre-wrap"></div>
+            <p class="mt-3 text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">Generated with your browser's cryptographically secure random number generator (crypto.getRandomValues). Nothing is ever saved, logged, or transmitted.</p>
+          </div>
+        `,
+        'case-converter': `
+          <div>
+            <div class="grid gap-4 md:grid-cols-2 mb-4">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Input Text</label>
+                  <span id="ccInputStats" class="text-[10px] font-semibold text-slate-500 dark:text-slate-400">0 words · 0 characters</span>
+                </div>
+                <textarea id="ccInput" rows="11" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition" placeholder="Type or paste text here..."></textarea>
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Output Text</label>
+                  <span id="ccOutputStats" class="text-[10px] font-semibold text-slate-500 dark:text-slate-400">0 words · 0 characters</span>
+                </div>
+                <textarea id="ccOutput" rows="11" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none readonly" readonly placeholder="Converted text will appear here..."></textarea>
+              </div>
+            </div>
+            <label class="${labelClass} block mb-2">Choose a Case Style</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
+              <button data-case="upper" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">UPPERCASE</button>
+              <button data-case="lower" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">lowercase</button>
+              <button data-case="title" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Title Case</button>
+              <button data-case="sentence" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Sentence case</button>
+              <button data-case="camel" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">camelCase</button>
+              <button data-case="pascal" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">PascalCase</button>
+              <button data-case="snake" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">snake_case</button>
+              <button data-case="kebab" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">kebab-case</button>
+              <button data-case="constant" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">CONSTANT_CASE</button>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+              <button id="ccCopyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy Output</button>
+              <button id="ccDownloadBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Download .txt</button>
+              <button id="ccClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition ml-auto">Clear</button>
+            </div>
           </div>
         `,
         'qr-generator': `
@@ -3947,6 +4103,294 @@
         });
 
         setMode('minify');
+      }
+      if (toolId === 'password-generator') {
+        const modePasswordBtn = document.getElementById('pgModePassword');
+        const modeHexBtn = document.getElementById('pgModeHex');
+        const modeBase64Btn = document.getElementById('pgModeBase64');
+        const lengthWrapper = document.getElementById('pgLengthWrapper');
+        const lengthRange = document.getElementById('pgLengthRange');
+        const lengthValue = document.getElementById('pgLengthValue');
+        const tokenBytesWrapper = document.getElementById('pgTokenBytesWrapper');
+        const tokenBytesSelect = document.getElementById('pgTokenBytesSelect');
+        const countSelect = document.getElementById('pgCountSelect');
+        const charsetOptions = document.getElementById('pgCharsetOptions');
+        const upperCheck = document.getElementById('pgUpper');
+        const lowerCheck = document.getElementById('pgLower');
+        const numbersCheck = document.getElementById('pgNumbers');
+        const symbolsCheck = document.getElementById('pgSymbols');
+        const excludeAmbiguousCheck = document.getElementById('pgExcludeAmbiguous');
+        const entropyValue = document.getElementById('pgEntropyValue');
+        const generateBtn = document.getElementById('pgGenerateBtn');
+        const regenerateBtn = document.getElementById('pgRegenerateBtn');
+        const copyAllBtn = document.getElementById('pgCopyAllBtn');
+        const clearBtn = document.getElementById('pgClearBtn');
+        const resultsList = document.getElementById('pgResultsList');
+        const info = document.getElementById('pgInfoBox');
+
+        const AMBIGUOUS_CHARS = 'Il1O0';
+        const UPPER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const LOWER_CHARS = 'abcdefghijklmnopqrstuvwxyz';
+        const NUMBER_CHARS = '0123456789';
+        const SYMBOL_CHARS = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+        const toggleBaseClass = 'px-3.5 py-1.5 text-xs font-bold rounded-lg transition';
+        const toggleActiveClass = 'bg-blue-600 text-white shadow';
+        const toggleInactiveClass = 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800';
+
+        let mode = 'password';
+        let lastResults = [];
+
+        const escapeAttr = (value) => value
+          .replace(/&/g, '&amp;')
+          .replace(/"/g, '&quot;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+
+        const setMode = (m) => {
+          mode = m;
+          modePasswordBtn.className = `${toggleBaseClass} ${mode === 'password' ? toggleActiveClass : toggleInactiveClass}`;
+          modeHexBtn.className = `${toggleBaseClass} ${mode === 'hex' ? toggleActiveClass : toggleInactiveClass}`;
+          modeBase64Btn.className = `${toggleBaseClass} ${mode === 'base64' ? toggleActiveClass : toggleInactiveClass}`;
+          const isPassword = mode === 'password';
+          lengthWrapper.classList.toggle('hidden', !isPassword);
+          charsetOptions.classList.toggle('hidden', !isPassword);
+          tokenBytesWrapper.classList.toggle('hidden', isPassword);
+          updateEntropy();
+        };
+
+        const secureRandomInt = (maxExclusive) => {
+          if (maxExclusive <= 0) return 0;
+          const array = new Uint32Array(1);
+          const limit = Math.floor(0xFFFFFFFF / maxExclusive) * maxExclusive;
+          let x;
+          do {
+            crypto.getRandomValues(array);
+            x = array[0];
+          } while (x >= limit);
+          return x % maxExclusive;
+        };
+
+        const buildCharset = () => {
+          let charset = '';
+          if (upperCheck.checked) charset += UPPER_CHARS;
+          if (lowerCheck.checked) charset += LOWER_CHARS;
+          if (numbersCheck.checked) charset += NUMBER_CHARS;
+          if (symbolsCheck.checked) charset += SYMBOL_CHARS;
+          if (excludeAmbiguousCheck.checked) {
+            charset = charset.split('').filter((ch) => !AMBIGUOUS_CHARS.includes(ch)).join('');
+          }
+          return charset;
+        };
+
+        const generatePassword = (length, charset) => {
+          let out = '';
+          for (let i = 0; i < length; i++) {
+            out += charset[secureRandomInt(charset.length)];
+          }
+          return out;
+        };
+
+        const generateRandomBytes = (count) => {
+          const bytes = new Uint8Array(count);
+          crypto.getRandomValues(bytes);
+          return bytes;
+        };
+
+        const bytesToHex = (bytes) => Array.from(bytes).map((b) => b.toString(16).padStart(2, '0')).join('');
+
+        const bytesToBase64Url = (bytes) => {
+          let binary = '';
+          bytes.forEach((b) => { binary += String.fromCharCode(b); });
+          return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        };
+
+        const updateEntropy = () => {
+          let bits = 0;
+          if (mode === 'password') {
+            const charset = buildCharset();
+            const length = parseInt(lengthRange.value, 10) || 0;
+            bits = charset.length > 0 ? length * Math.log2(charset.length) : 0;
+          } else {
+            const tokenBytes = parseInt(tokenBytesSelect.value, 10) || 0;
+            bits = tokenBytes * 8;
+          }
+          entropyValue.textContent = `${Math.round(bits)} bits`;
+        };
+
+        const showError = (message) => {
+          info.className = 'mt-3 p-3 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200/50 dark:border-red-900/40 text-red-800 dark:text-red-300 text-xs font-bold whitespace-pre-wrap';
+          info.textContent = message;
+        };
+        const clearInfo = () => { info.className = 'hidden'; };
+
+        const renderResults = (values) => {
+          resultsList.innerHTML = values.map((value, index) => `
+            <div class="flex items-center gap-2">
+              <input readonly data-index="${index}" class="pg-result-input flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none" value="${escapeAttr(value)}" />
+              <button type="button" data-index="${index}" class="pg-copy-btn shrink-0 px-3 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy</button>
+            </div>
+          `).join('');
+
+          resultsList.querySelectorAll('.pg-copy-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              navigator.clipboard.writeText(values[Number(btn.dataset.index)]);
+              showNotification('Copied!');
+            });
+          });
+        };
+
+        const runGenerate = () => {
+          const count = parseInt(countSelect.value, 10) || 1;
+          const results = [];
+
+          if (mode === 'password') {
+            const charset = buildCharset();
+            if (!charset) {
+              showError('Select at least one character type (uppercase, lowercase, numbers, or symbols).');
+              resultsList.innerHTML = '';
+              return;
+            }
+            const length = parseInt(lengthRange.value, 10) || 16;
+            for (let i = 0; i < count; i++) {
+              results.push(generatePassword(length, charset));
+            }
+          } else {
+            const tokenBytes = parseInt(tokenBytesSelect.value, 10) || 32;
+            for (let i = 0; i < count; i++) {
+              const bytes = generateRandomBytes(tokenBytes);
+              results.push(mode === 'hex' ? bytesToHex(bytes) : bytesToBase64Url(bytes));
+            }
+          }
+
+          lastResults = results;
+          renderResults(results);
+          clearInfo();
+          updateEntropy();
+        };
+
+        if (modePasswordBtn) modePasswordBtn.addEventListener('click', () => setMode('password'));
+        if (modeHexBtn) modeHexBtn.addEventListener('click', () => setMode('hex'));
+        if (modeBase64Btn) modeBase64Btn.addEventListener('click', () => setMode('base64'));
+
+        if (lengthRange) lengthRange.addEventListener('input', () => {
+          lengthValue.textContent = lengthRange.value;
+          updateEntropy();
+        });
+        [tokenBytesSelect, upperCheck, lowerCheck, numbersCheck, symbolsCheck, excludeAmbiguousCheck].forEach((el) => {
+          if (el) el.addEventListener('change', updateEntropy);
+        });
+
+        if (generateBtn) generateBtn.addEventListener('click', runGenerate);
+        if (regenerateBtn) regenerateBtn.addEventListener('click', runGenerate);
+        if (clearBtn) clearBtn.addEventListener('click', () => {
+          lastResults = [];
+          resultsList.innerHTML = '';
+          clearInfo();
+        });
+        if (copyAllBtn) copyAllBtn.addEventListener('click', () => {
+          if (lastResults.length) {
+            navigator.clipboard.writeText(lastResults.join('\n'));
+            showNotification('Copied all results!');
+          }
+        });
+
+        setMode('password');
+      }
+      if (toolId === 'case-converter') {
+        const input = document.getElementById('ccInput');
+        const output = document.getElementById('ccOutput');
+        const inputStats = document.getElementById('ccInputStats');
+        const outputStats = document.getElementById('ccOutputStats');
+        const copyBtn = document.getElementById('ccCopyBtn');
+        const downloadBtn = document.getElementById('ccDownloadBtn');
+        const clearBtn = document.getElementById('ccClearBtn');
+        const caseButtons = document.querySelectorAll('.cc-case-btn');
+
+        const activeBtnClass = 'cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-blue-600 text-white border border-blue-600 shadow-md transition';
+        const inactiveBtnClass = 'cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition';
+
+        const countStats = (text) => {
+          const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+          const characters = text.length;
+          return `${words} word${words === 1 ? '' : 's'} · ${characters} character${characters === 1 ? '' : 's'}`;
+        };
+
+        const updateInputStats = () => { inputStats.textContent = countStats(input.value); };
+        const updateOutputStats = () => { outputStats.textContent = countStats(output.value); };
+
+        const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+
+        const splitWords = (str) => str
+          .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+          .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+          .replace(/[_-]+/g, ' ')
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+
+        const convertLine = (line, m) => {
+          const words = splitWords(line);
+          if (!words.length) return '';
+          if (m === 'camel') return words.map((w, i) => (i === 0 ? w.toLowerCase() : capitalize(w))).join('');
+          if (m === 'pascal') return words.map(capitalize).join('');
+          if (m === 'snake') return words.map((w) => w.toLowerCase()).join('_');
+          if (m === 'kebab') return words.map((w) => w.toLowerCase()).join('-');
+          if (m === 'constant') return words.map((w) => w.toUpperCase()).join('_');
+          return line;
+        };
+
+        const convertText = (text, m) => {
+          if (m === 'upper') return text.toUpperCase();
+          if (m === 'lower') return text.toLowerCase();
+          if (m === 'title') return text.replace(/\S+/g, (word) => capitalize(word));
+          if (m === 'sentence') {
+            return text.toLowerCase().replace(/(^\s*[a-z]|[.!?]\s+[a-z]|\n\s*[a-z])/g, (match) => match.toUpperCase());
+          }
+          if (['camel', 'pascal', 'snake', 'kebab', 'constant'].includes(m)) {
+            return text.split('\n').map((line) => convertLine(line, m)).join('\n');
+          }
+          return text;
+        };
+
+        caseButtons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const caseMode = btn.dataset.case;
+            output.value = convertText(input.value, caseMode);
+            updateOutputStats();
+            caseButtons.forEach((b) => { b.className = (b === btn) ? activeBtnClass : inactiveBtnClass; });
+          });
+        });
+
+        if (input) input.addEventListener('input', updateInputStats);
+        if (copyBtn) copyBtn.addEventListener('click', () => {
+          if (output.value) {
+            navigator.clipboard.writeText(output.value);
+            showNotification('Copied output!');
+          }
+        });
+        if (downloadBtn) downloadBtn.addEventListener('click', () => {
+          if (!output.value) return;
+          const blob = new Blob([output.value], { type: 'text/plain;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'converted-text.txt';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+        if (clearBtn) clearBtn.addEventListener('click', () => {
+          input.value = '';
+          output.value = '';
+          updateInputStats();
+          updateOutputStats();
+          caseButtons.forEach((b) => { b.className = inactiveBtnClass; });
+        });
+
+        updateInputStats();
+        updateOutputStats();
       }
       if (toolId === 'qr-generator') {
         const textInput = document.getElementById('qrTextInput');
@@ -5171,7 +5615,9 @@
           'url-base64': 'encode and decode URL and Base64 streams',
           'json-yaml': 'convert data between JSON and YAML formats',
           'sql-formatter': 'format and beautify SQL queries for multiple dialects',
-          'code-minifier': 'minify or beautify HTML, CSS, and JavaScript code'
+          'code-minifier': 'minify or beautify HTML, CSS, and JavaScript code',
+          'password-generator': 'generate strong passwords, hex tokens, and Base64URL tokens',
+          'case-converter': 'convert text between UPPERCASE, camelCase, snake_case, and more'
         };
         const seoAction = actionMap[tool.id] || tool.description.toLowerCase().replace(/\.$/, '');
         title = `${tool.title} Online - 100% Private & Free | WeConvertFiles`;
@@ -7448,7 +7894,7 @@
         },
         {
           name: 'TEXT & DEVELOPERS',
-          ids: ['regex-tester', 'uuid-generator', 'unix-converter', 'jwt-decoder', 'word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'sql-formatter', 'code-minifier']
+          ids: ['regex-tester', 'uuid-generator', 'unix-converter', 'jwt-decoder', 'word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter']
         }
       ];
 

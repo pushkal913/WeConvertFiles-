@@ -55,7 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
       { id: 'svg-to-image', title: 'SVG to PNG / JPG', kicker: 'Image Tools', badge: 'Vector Export', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' },
       { id: 'json-yaml', title: 'JSON to YAML Converter', kicker: 'Developer Tools', badge: 'JSON ⇄ YAML', iconBg: 'bg-indigo-100', iconColor: 'text-indigo-700' },
       { id: 'sql-formatter', title: 'SQL Formatter', kicker: 'Developer Tools', badge: 'Format Only', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-700' },
-      { id: 'code-minifier', title: 'Code Minifier & Beautifier', kicker: 'Developer Tools', badge: 'HTML / CSS / JS', iconBg: 'bg-purple-100', iconColor: 'text-purple-700' }
+      { id: 'code-minifier', title: 'Code Minifier & Beautifier', kicker: 'Developer Tools', badge: 'HTML / CSS / JS', iconBg: 'bg-purple-100', iconColor: 'text-purple-700' },
+      { id: 'password-generator', title: 'Password & Secret Generator', kicker: 'Developer Tools', badge: 'Crypto Secure', iconBg: 'bg-orange-100', iconColor: 'text-orange-600' },
+      { id: 'case-converter', title: 'Case Converter', kicker: 'Developer Tools', badge: 'Text Case', iconBg: 'bg-lime-100', iconColor: 'text-lime-700' }
     ];
 
   // Inject Header (Sitewide, full-width alignment matching main index layout)
@@ -439,10 +441,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 </svg>
                 Code Minifier & Beautifier
               </a>
+              <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/password-generator">
+                <svg class="h-4 w-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" opacity=".35"/><path d="M7 11V7a5 5 0 0 1 10 0v4" /><circle cx="12" cy="16" r="1.5" />
+                </svg>
+                Password & Secret Generator
+              </a>
+              <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/case-converter">
+                <svg class="h-4 w-4 text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path d="M4 17V7l3.5 6L11 7v10" /><path d="M14 17h6M17 8v9M14 11l3-3 3 3" opacity=".7" />
+                </svg>
+                Case Converter
+              </a>
             </div>
           </div>
-          
-          
+
+
         </nav>
         
         <!-- Desktop Utilities -->
@@ -600,7 +614,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'IMAGE TOOLS', ids: ['image-cropper', 'favicon-generator', 'image-scaler', 'pdf-images', 'pdf-jpg', 'images-pdf', 'webp-convert', 'bulk-resize', 'color-palette', 'exif-utility', 'heic-to-jpg'] },
     { name: 'PDF TOOLS', ids: ['pdf-to-word', 'merge-pdf', 'split-pdf', 'extract-pages', 'organize-pdf', 'rotate-pdf', 'remove-pages', 'decrypt-pdf', 'encrypt-pdf', 'compress-pdf', 'watermark-pdf', 'page-numbers', 'sign-pdf'] },
     { name: 'CONVERT & OFFICE', ids: ['excel-to-csv', 'csv-convert', 'json-convert', 'office-pdf', 'json-yaml'] },
-    { name: 'TEXT & DEVELOPERS', ids: ['regex-tester', 'uuid-generator', 'unix-converter', 'jwt-decoder', 'word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'sql-formatter', 'code-minifier'] }
+    { name: 'TEXT & DEVELOPERS', ids: ['regex-tester', 'uuid-generator', 'unix-converter', 'jwt-decoder', 'word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter'] }
   ];
 
   function renderMobileMenu() {
