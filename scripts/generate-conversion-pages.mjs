@@ -5,7 +5,7 @@ import path from 'node:path';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = path.join(rootDir, 'convert');
 const siteUrl = 'https://www.weconvertfiles.com';
-const socialImage = `${siteUrl}/assets/logo.png`;
+const socialImage = `${siteUrl}/assets/og-image.png`;
 
 const pages = [
   {
@@ -291,9 +291,9 @@ ${jsonLd(page)}
     }
   </script>
   <script src="../layout.js" defer></script>
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3" />
-  <link rel="icon" type="image/png" href="/assets/favicon.png?v=3" />
-  <link rel="apple-touch-icon" href="/assets/favicon.png?v=3" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=4" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png?v=4" />
+  <link rel="apple-touch-icon" href="/assets/favicon.png?v=4" />
 </head>
 <body class="bg-[#f8fafd] text-slate-900 antialiased transition-colors duration-200 dark:bg-[#0b0f19] dark:text-slate-100">
   <main class="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6">
