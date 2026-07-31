@@ -160,6 +160,12 @@
   <url>
     <loc>https://www.weconvertfiles.com/code-minifier</loc>
   </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/password-generator</loc>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/case-converter</loc>
+  </url>
 
   <!-- Programmatic SEO Guide Pages -->
   <url>
@@ -305,6 +311,13 @@
   </url>
   <url>
     <loc>https://www.weconvertfiles.com/guides/code-minifier.html</loc>
+  </url>
+  <!-- Phase 5 Guides -->
+  <url>
+    <loc>https://www.weconvertfiles.com/guides/password-generator.html</loc>
+  </url>
+  <url>
+    <loc>https://www.weconvertfiles.com/guides/case-converter.html</loc>
   </url>
 
   <!-- Information Pages -->
