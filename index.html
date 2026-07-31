@@ -4179,24 +4179,36 @@
           return x % maxExclusive;
         };
 
-        const buildCharset = () => {
-          let charset = '';
-          if (upperCheck.checked) charset += UPPER_CHARS;
-          if (lowerCheck.checked) charset += LOWER_CHARS;
-          if (numbersCheck.checked) charset += NUMBER_CHARS;
-          if (symbolsCheck.checked) charset += SYMBOL_CHARS;
-          if (excludeAmbiguousCheck.checked) {
-            charset = charset.split('').filter((ch) => !AMBIGUOUS_CHARS.includes(ch)).join('');
-          }
-          return charset;
+        const buildCharsetGroups = () => {
+          const groups = [];
+          if (upperCheck.checked) groups.push(UPPER_CHARS);
+          if (lowerCheck.checked) groups.push(LOWER_CHARS);
+          if (numbersCheck.checked) groups.push(NUMBER_CHARS);
+          if (symbolsCheck.checked) groups.push(SYMBOL_CHARS);
+          if (!excludeAmbiguousCheck.checked) return groups;
+          return groups
+            .map((group) => group.split('').filter((ch) => !AMBIGUOUS_CHARS.includes(ch)).join(''))
+            .filter((group) => group.length > 0);
         };
 
-        const generatePassword = (length, charset) => {
-          let out = '';
-          for (let i = 0; i < length; i++) {
-            out += charset[secureRandomInt(charset.length)];
+        const buildCharset = () => buildCharsetGroups().join('');
+
+        const generatePassword = (length, groups) => {
+          const fullCharset = groups.join('');
+          const chars = [];
+          // Guarantee at least one character from each selected class.
+          groups.forEach((group) => {
+            if (chars.length < length) chars.push(group[secureRandomInt(group.length)]);
+          });
+          while (chars.length < length) {
+            chars.push(fullCharset[secureRandomInt(fullCharset.length)]);
           }
-          return out;
+          // Fisher-Yates shuffle using the same CSPRNG so guaranteed characters aren't predictably placed.
+          for (let i = chars.length - 1; i > 0; i--) {
+            const j = secureRandomInt(i + 1);
+            [chars[i], chars[j]] = [chars[j], chars[i]];
+          }
+          return chars.join('');
         };
 
         const generateRandomBytes = (count) => {
@@ -4253,15 +4265,15 @@
           const results = [];
 
           if (mode === 'password') {
-            const charset = buildCharset();
-            if (!charset) {
+            const groups = buildCharsetGroups();
+            if (!groups.length) {
               showError('Select at least one character type (uppercase, lowercase, numbers, or symbols).');
               resultsList.innerHTML = '';
               return;
             }
             const length = parseInt(lengthRange.value, 10) || 16;
             for (let i = 0; i < count; i++) {
-              results.push(generatePassword(length, charset));
+              results.push(generatePassword(length, groups));
             }
           } else {
             const tokenBytes = parseInt(tokenBytesSelect.value, 10) || 32;
@@ -4361,16 +4373,24 @@
           return text;
         };
 
+        let activeCase = null;
+
         caseButtons.forEach((btn) => {
           btn.addEventListener('click', () => {
-            const caseMode = btn.dataset.case;
-            output.value = convertText(input.value, caseMode);
+            activeCase = btn.dataset.case;
+            output.value = convertText(input.value, activeCase);
             updateOutputStats();
             caseButtons.forEach((b) => { b.className = (b === btn) ? activeBtnClass : inactiveBtnClass; });
           });
         });
 
-        if (input) input.addEventListener('input', updateInputStats);
+        if (input) input.addEventListener('input', () => {
+          updateInputStats();
+          if (activeCase) {
+            output.value = convertText(input.value, activeCase);
+            updateOutputStats();
+          }
+        });
         if (copyBtn) copyBtn.addEventListener('click', () => {
           if (output.value) {
             navigator.clipboard.writeText(output.value);
@@ -4392,6 +4412,7 @@
         if (clearBtn) clearBtn.addEventListener('click', () => {
           input.value = '';
           output.value = '';
+          activeCase = null;
           updateInputStats();
           updateOutputStats();
           caseButtons.forEach((b) => { b.className = inactiveBtnClass; });
