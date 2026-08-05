@@ -65,13 +65,14 @@ for (const page of informationPages) {
 }
 
 const indexHtml = await readFile(path.join(rootDir, 'index.html'), 'utf8');
+const appSource = await readFile(path.join(rootDir, 'app.js'), 'utf8');
 check(
   indexHtml.includes(`<link rel="canonical" href="${siteUrl}/"`),
   'index.html: homepage canonical is not the www URL',
 );
 check(
-  indexHtml.includes(`canonicalUrl = \`${siteUrl}/\${tool.id}\``),
-  'index.html: dynamic tool canonical does not use the www URL',
+  appSource.includes(`canonicalUrl = \`${siteUrl}/\${tool.id}\``),
+  'app.js: dynamic tool canonical does not use the www URL',
 );
 
 const robots = await readFile(path.join(rootDir, 'robots.txt'), 'utf8');

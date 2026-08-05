@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "build:css": "tailwindcss -c tailwind.config.js -i ./assets/tailwind.css -o ./assets/styles.css --minify",
-    "validate": "node scripts/validate-conversion-pages.mjs && node scripts/validate-canonical-urls.mjs && node scripts/validate-static-css.mjs"
+    "generate:tools": "node scripts/generate-tool-pages.mjs",
+    "validate": "node scripts/validate-tool-pages.mjs && node scripts/validate-conversion-pages.mjs && node scripts/validate-canonical-urls.mjs && node scripts/validate-static-css.mjs"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"

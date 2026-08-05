@@ -561,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </span>
             </div>
             <p class="max-w-xl text-xs leading-6 text-slate-600 dark:text-slate-400">
-              WeConvertFiles processes supported files directly in your web browser. All operations are completed locally via Client-Side Web Assembly and JavaScript to ensure your data remains <span class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">100%</span> secure and private.
+              WeConvertFiles processes supported files directly in your web browser using client-side WebAssembly and JavaScript. File contents are not sent to WeConvertFiles for conversion.
             </p>
             <div class="flex flex-wrap gap-4 text-xs font-bold text-slate-600 dark:text-slate-300 pt-2">
               <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/about">About Us</a>
@@ -573,7 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm space-y-2 max-w-xl">
             <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">Our Mission & Support</h4>
             <p class="text-xs leading-5.5 text-slate-600 dark:text-slate-400">
-              WeConvertFiles is proudly built by <a href="https://www.techknogeeks.com" target="_blank" class="font-bold text-[#1a73e8] hover:underline">TechKnoGeeks</a> to provide <span class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">100%</span> free, private, and secure browser-based document tools. Clearly labelled advertising helps fund hosting, maintenance, and continued development without requiring a subscription.
+              WeConvertFiles is proudly built by <a href="https://www.techknogeeks.com" target="_blank" rel="noopener" class="font-bold text-[#1a73e8] hover:underline">TechKnoGeeks</a> to provide free, privacy-focused browser-based document tools. Clearly labelled advertising helps fund hosting, maintenance, and continued development without requiring a subscription.
             </p>
           </div>
         </div>

@@ -7,7 +7,8 @@ const stylesheetUrl = '/assets/styles.css?v=20260729-4';
 const pageDirectories = [
   rootDir,
   path.join(rootDir, 'convert'),
-  path.join(rootDir, 'guides')
+  path.join(rootDir, 'guides'),
+  path.join(rootDir, 'tool-pages')
 ];
 const pageFiles = [];
 
@@ -39,8 +40,14 @@ if (generator.includes('cdn.tailwindcss.com') || generator.includes('tailwind.co
   failures.push('The conversion-page generator still includes the Tailwind browser runtime');
 }
 
+const toolGenerator = await readFile(path.join(rootDir, 'scripts', 'generate-tool-pages.mjs'), 'utf8');
+if (!toolGenerator.includes("const shell = await readFile(path.join(rootDir, 'index.html'), 'utf8')")) {
+  failures.push('The tool-page generator does not use the shared styled HTML shell');
+}
+
 const css = await readFile(path.join(rootDir, 'assets', 'styles.css'), 'utf8');
 const homepage = await readFile(path.join(rootDir, 'index.html'), 'utf8');
+const appSource = await readFile(path.join(rootDir, 'app.js'), 'utf8');
 const requiredSelectors = [
   'md\\:grid-cols-2',
   'dark\\:bg-\\[\\#0b0f19\\]',
@@ -54,7 +61,7 @@ for (const selector of requiredSelectors) {
   if (!css.includes(selector)) failures.push(`Compiled CSS is missing ${selector}`);
 }
 
-const cardBorderColors = [...homepage.matchAll(/iconColor:\s*'text-([^']+)'/g)]
+const cardBorderColors = [...appSource.matchAll(/iconColor:\s*'text-([^']+)'/g)]
   .map(match => match[1])
   .filter((color, index, colors) => colors.indexOf(color) === index);
 
@@ -74,7 +81,7 @@ const requiredGlowValues = [
   'rgba(var(--glow-rgb),0.30)'
 ];
 for (const glowValue of requiredGlowValues) {
-  if (!homepage.includes(glowValue)) failures.push(`Homepage is missing tool-card glow value ${glowValue}`);
+  if (!appSource.includes(glowValue)) failures.push(`Application script is missing tool-card glow value ${glowValue}`);
   if (!css.includes(glowValue)) failures.push(`Compiled CSS is missing tool-card glow value ${glowValue}`);
 }
 

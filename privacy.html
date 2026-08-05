@@ -40,7 +40,7 @@
     </a>
     <article class="mt-6 rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
       <h1 class="text-3xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-4xl">Privacy Policy</h1>
-      <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Last updated: July 7, 2026</p>
+      <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Last updated: August 5, 2026</p>
       
       <p class="mt-5 leading-7 text-slate-600 dark:text-slate-400">
         At WeConvertFiles, user privacy is our highest priority. This Privacy Policy details how we handle files, cookies, and ads when you access our tools.
@@ -48,15 +48,18 @@
 
       <h2 class="mt-8 text-xl font-semibold text-slate-900 dark:text-slate-100">1. Document and File Privacy</h2>
       <p class="mt-3 leading-7 text-slate-600 dark:text-slate-400">
-        The core feature set of WeConvertFiles operates fully client-side. When you load files into tools (such as <em>Merge PDF</em>, <em>Unlock PDF</em>, or <em>Scale Image</em>), the processing is completed locally inside your web browser using HTML5 features, JavaScript libraries, and WebAssembly. Your files are <strong>never uploaded to our servers</strong>.
+        The current WeConvertFiles toolset processes supported files locally inside your web browser using HTML5 features, JavaScript libraries, and WebAssembly. When you select a file in tools such as <em>Merge PDF</em>, <em>Unlock PDF</em>, or <em>Scale Image</em>, its contents remain on your device and are <strong>not uploaded to WeConvertFiles for conversion</strong>.
       </p>
       <p class="mt-2 leading-7 text-slate-600 dark:text-slate-400">
-        For cloud-based conversions like <em>PDF to Word or Excel</em> (which require server processing), files are transferred securely over HTTPS to conversion nodes and are automatically, permanently deleted from those systems immediately after conversion. We do not store or inspect your content.
+        Some conversion libraries are downloaded from third-party content delivery networks when a tool needs them. Those libraries run in your browser. Our implementation does not send the contents of the selected file to those library providers for conversion.
       </p>
 
       <h2 class="mt-8 text-xl font-semibold text-slate-900 dark:text-slate-100">2. Cookies and Data Analytics</h2>
       <p class="mt-3 leading-7 text-slate-600 dark:text-slate-400">
-        To provide a reliable experience, we use basic browser LocalStorage to save interface preferences (such as dark mode selections). We do not collect personally identifiable information (PII). We may use privacy-compliant web analytics tools to monitor general site traffic patterns and aggregate browser data.
+        We use browser LocalStorage to save interface preferences such as dark mode. With your consent, we also use <strong>Zoho PageSense</strong> to understand how the platform is used. PageSense may record information such as page visits, clicks, scrolling, referral information, browser or device details, and the conversion events described on the site. PageSense uses cookies to recognize sessions and returning visitors. Our PageSense integration does not receive the contents of files selected for conversion.
+      </p>
+      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">
+        The cookie notice allows you to accept or decline PageSense tracking. If you decline, PageSense analytics should not be collected for that browser session. We do not require an account, name, email address, or payment information to use the conversion tools.
       </p>
 
       <h2 class="mt-8 text-xl font-semibold text-slate-900 dark:text-slate-100">3. Google AdSense & Third-Party Advertising</h2>

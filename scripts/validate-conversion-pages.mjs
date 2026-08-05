@@ -91,7 +91,8 @@ for (const [slug] of pages) {
 check(redirects.trimEnd().endsWith('/*    /404.html    404'), '404 catch-all must be the final redirect');
 
 for (const toolPath of new Set(pages.map(([, pathName]) => pathName))) {
-  check(redirects.includes(`${toolPath}    /index.html    200`), `existing tool route changed or missing: ${toolPath}`);
+  const toolId = toolPath.slice(1);
+  check(redirects.includes(`${toolPath}    /tool-pages/${toolId}.html    200`), `generated tool route changed or missing: ${toolPath}`);
 }
 
 const sitemap = await readFile(path.join(rootDir, 'sitemap.xml'), 'utf8');
@@ -118,4 +119,4 @@ console.log(`- ${pages.length} unique static pages`);
 console.log('- valid FAQ, breadcrumb, and application JSON-LD');
 console.log('- clean canonical routes and converter links');
 console.log(`- ${sitemapUrls.length} unique sitemap URLs`);
-console.log('- existing converter route mappings preserved');
+console.log('- conversion landing pages link to generated tool routes');
