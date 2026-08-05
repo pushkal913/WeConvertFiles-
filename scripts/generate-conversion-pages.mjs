@@ -265,6 +265,7 @@ const renderPage = (page) => {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
+  <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${escapeHtml(page.title)}</title>

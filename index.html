@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WeConvertFiles - Free PDF, Image, Office & Developer Tools</title>
@@ -2225,6 +2226,11 @@
         notes: ['Supports 9 case styles including camelCase and snake_case.', 'Shows live word and character counts.', 'Handles multiline text.']
       }
     ];
+
+    function trackPageSenseEvent(eventName) {
+      window.pagesense = window.pagesense || [];
+      window.pagesense.push(['trackEvent', eventName]);
+    }
 
     const state = {
       currentTool: null,
@@ -5927,6 +5933,8 @@
       } else {
         updateFileList();
       }
+
+      trackPageSenseEvent('file_upload_completed');
     }
 
     async function initVisualPages() {
@@ -7839,6 +7847,7 @@
         }
       }
 
+      trackPageSenseEvent('conversion_started');
       document.getElementById('conversionResultPanel')?.classList.add('hidden');
       startProgressAnimation();
       setBusy(true);
@@ -7878,6 +7887,7 @@
         if (state.currentTool.id === 'base64-to-image') await handleBase64ToImageConvert();
         if (state.currentTool.id === 'svg-to-image') await handleSvgToImageConvert();
 
+        trackPageSenseEvent('conversion_completed');
         setStatus('Done. Your download should begin automatically.', 'success');
       } catch (error) {
         setStatus(error.message || 'Conversion failed. Please try another file.', 'error');
@@ -8180,6 +8190,11 @@
     });
 
     convertButton.addEventListener('click', handleConvert);
+    document.addEventListener('click', (event) => {
+      if (!event.isTrusted || !(event.target instanceof Element)) return;
+      const downloadControl = event.target.closest('[id*="download" i], [data-pagesense-download]');
+      if (downloadControl) trackPageSenseEvent('download_clicked');
+    }, true);
     document.getElementById('downloadResultBtn')?.addEventListener('click', executeActualDownload);
     document.getElementById('convertAnotherBtn')?.addEventListener('click', resetWorkspaceForNewFile);
 
