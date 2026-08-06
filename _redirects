@@ -17,7 +17,8 @@
 /guides/image-cropper    /guides/image-cropper.html    301
 /guides/image-scaler    /guides/image-scaler.html    301
 /guides/images-to-pdf    /guides/images-to-pdf.html    301
-/guides/jpg-to-pdf    /guides/jpg-to-pdf.html    301
+/guides/jpg-to-pdf    /convert/jpg-to-pdf    301
+/guides/jpg-to-pdf.html    /convert/jpg-to-pdf    301
 /guides/code-minifier    /guides/code-minifier.html    301
 /guides/json-convert    /guides/json-convert.html    301
 /guides/json-formatter    /guides/json-formatter.html    301
@@ -33,7 +34,8 @@
 /guides/pdf-to-images    /guides/pdf-to-images.html    301
 /guides/pdf-to-jpg    /guides/pdf-to-jpg.html    301
 /guides/pdf-to-word    /guides/pdf-to-word.html    301
-/guides/png-to-pdf    /guides/png-to-pdf.html    301
+/guides/png-to-pdf    /convert/png-to-pdf    301
+/guides/png-to-pdf.html    /convert/png-to-pdf    301
 /guides/qr-generator    /guides/qr-generator.html    301
 /guides/regex-tester    /guides/regex-tester.html    301
 /guides/remove-pages    /guides/remove-pages.html    301
