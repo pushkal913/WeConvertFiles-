@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>How to Convert SVG to PNG or JPG Online | Guide</title>
-  <meta name="description" content="Learn how to render and export SVG vector graphics to high-resolution PNG or JPG images 100% locally with custom dimensions and background colors." />
+  <title>SVG to PNG Converter: Set Size and Background</title>
+  <meta name="description" content="Convert SVG to PNG or JPG in your browser. Set pixel dimensions, preserve or replace transparency, choose a background, and understand raster limits." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/svg-to-image.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="How to Convert SVG to PNG or JPG Online | Guide" />
-  <meta property="og:description" content="Learn how to render and export SVG vector graphics to high-resolution PNG or JPG images 100% locally with custom dimensions and background colors." />
+  <meta property="og:title" content="SVG to PNG Converter: Set Size and Background" />
+  <meta property="og:description" content="Choose dimensions, transparency, background, and output format while learning exactly how browser SVG rasterization works." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/svg-to-image.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="How to Convert SVG to PNG or JPG Online | Guide" />
-  <meta name="twitter:description" content="Learn how to render and export SVG vector graphics to high-resolution PNG or JPG images 100% locally with custom dimensions and background colors." />
+  <meta name="twitter:title" content="SVG to PNG Converter: Set Size and Background" />
+  <meta name="twitter:description" content="Choose dimensions, transparency, background, and output format while learning exactly how browser SVG rasterization works." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -28,31 +27,49 @@
     }
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "How does the converter handle SVG security and scripts?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Before rendering on canvas, the converter parses the SVG XML and strips all script tags, inline event handlers (onload, onclick), and external network subresources to prevent security vulnerabilities."
-        }
+        "@type": "Article",
+        "headline": "SVG to PNG Converter: Choosing Dimensions, Background and Format",
+        "description": "A practical guide to rasterizing SVG artwork as PNG or JPG with browser-based size, background, transparency, and quality controls.",
+        "mainEntityOfPage": "https://www.weconvertfiles.com/guides/svg-to-image.html",
+        "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" }
       },
       {
-        "@type": "Question",
-        "name": "Can I convert transparent SVGs to PNG or JPG?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes! When converting to PNG, transparency is fully preserved. When converting to JPG, you can choose a custom solid background color (such as white or black)."
-        }
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Which format is better for an SVG logo, PNG or JPG?",
+            "acceptedAnswer": { "@type": "Answer", "text": "PNG is usually better for logos because it preserves transparency and sharp edges without JPG compression artifacts. JPG can be useful when a solid background and smaller photographic-style output are more important." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can JPG preserve an SVG's transparent background?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. JPG has no transparency channel. The converter uses a solid background; if transparent is selected for JPG, the output receives a white background." }
+          },
+          {
+            "@type": "Question",
+            "name": "What does locking the aspect ratio do?",
+            "acceptedAnswer": { "@type": "Answer", "text": "It keeps width and height in the source image's proportions. Changing one dimension updates the other, which prevents accidental stretching or squashing." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool completely sanitize untrusted SVG files?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. It removes script elements and inline attributes beginning with on, such as onclick. It is not a comprehensive SVG sanitizer and does not claim to remove external resource references." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can a converted PNG be changed back into the original SVG?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Rasterization discards the original paths and shape instructions. Tracing software can approximate vectors from pixels, but it cannot reconstruct the exact source SVG." }
+          }
+        ]
       }
     ]
   }
@@ -68,49 +85,114 @@
       <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
     </div>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">How to Convert SVG to PNG or JPG Online</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">SVG to PNG / JPG converts Scalable Vector Graphics (SVG) into raster image files (PNG or JPEG) directly in your browser. Vector graphics maintain crisp quality at any resolution, but raster formats are required for social media, print, and legacy applications. Using HTML5 Canvas rendering and XML sanitization, this tool lets you set custom width/height dimensions, preserve transparency or choose solid background colors, and export high-resolution images offline.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/svg-to-image">
-        Open SVG to PNG / JPG Converter
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3">
+          <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">SVG to PNG Converter: Choosing Dimensions, Background and Format</h1>
+          <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Browser-Based</span>
+        </div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">An SVG to PNG converter redraws vector artwork at a pixel size you choose and saves it as PNG or JPG. Upload an SVG or paste its XML, then set width, height, background, aspect ratio, and JPG quality. PNG can retain transparency; JPG always uses a solid background. The downloaded image is a fixed pixel grid, so it no longer has the SVG's unlimited scaling.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/svg-to-image">Open SVG to PNG or JPG<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload or Paste SVG</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Upload an SVG file or paste raw SVG XML code directly into the workspace editor.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Customize Dimensions</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select PNG or JPG format, adjust pixel dimensions with aspect ratio lock, and pick a background color.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Sanitized Export</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The browser sanitizes XML elements, paints vector paths onto canvas, and downloads the high-res image.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When an SVG needs to become a raster image</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+          <li><strong class="text-slate-900 dark:text-slate-200">Platform compatibility:</strong> create a PNG logo for a service that does not accept SVG uploads.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Exact pixel requirements:</strong> export an icon at dimensions such as 512 × 512 or 180 × 180 pixels.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Documents and presentations:</strong> use a predictable PNG in software or file formats with inconsistent SVG support.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Email and sharing:</strong> provide an image that opens in common viewers and clients without vector-editing software.</li>
+        </ul>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How does the converter handle SVG security and scripts?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Before rendering on canvas, the converter parses the SVG XML and strips all script tags, inline event handlers (onload, onclick), and external network subresources to prevent security vulnerabilities.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I convert transparent SVGs to PNG or JPG?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes! When converting to PNG, transparency is fully preserved. When converting to JPG, you can choose a custom solid background color (such as white or black).</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Input, output, and available controls</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+          <h3 class="font-bold text-slate-900 dark:text-slate-200">Input and output</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Upload one <code>.svg</code> file or paste complete SVG XML. Download PNG or JPG using the uploaded file's base name, or <code>vector.png</code>/<code>vector.jpg</code> for pasted markup.</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+          <h3 class="font-bold text-slate-900 dark:text-slate-200">Rendering controls</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Width and height from 1 to 10,000 pixels, aspect-ratio lock, transparent/white/black/custom background, and JPG quality from 10% to 100% with 90% as the default.</p>
+        </div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to convert SVG to PNG or JPG</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Add and preview</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Upload the SVG or paste its complete XML. Check that the preview shows the expected artwork before export.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose dimensions</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Set the required pixel width and height. Keep the aspect-ratio lock enabled unless intentional distortion is required.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Set format and export</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Select PNG or JPG, choose the background, adjust JPG quality when applicable, then convert and download.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How browser SVG rasterization works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>An SVG is XML containing instructions for shapes, paths, fills, and text. A PNG or JPG is a fixed grid of colored pixels. Turning the instructions into that grid is called <strong class="text-slate-900 dark:text-slate-200">rasterization</strong>.</p>
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1. Parse:</strong> <code>DOMParser</code> converts the SVG XML into a document the browser can inspect.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2. Remove limited executable markup:</strong> the code removes <code>script</code> elements and attributes beginning with <code>on</code>, such as <code>onclick</code> and <code>onload</code>.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3. Serialize:</strong> <code>XMLSerializer</code> turns the modified document back into text, which becomes an SVG <code>Blob</code> and temporary object URL.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4. Render:</strong> an <code>Image</code> loads the object URL and is drawn onto an HTML canvas at the requested width and height.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5. Encode:</strong> <code>canvas.toBlob()</code> generates PNG or JPEG bytes. The selected quality value is applied to JPEG output.</li>
+        </ol>
+        <p>No external conversion library is required. File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What the SVG cleanup does—and does not do</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300 space-y-3">
+        <p>The tool removes <code>script</code> elements and inline event-handler attributes before preview and conversion. This reduces obvious executable content, but it is <strong>not comprehensive SVG sanitization</strong>.</p>
+        <p>The implementation does not claim to remove external image, font, stylesheet, or other resource references. Do not rely on this conversion step as the only protection when accepting untrusted SVG uploads in a security-sensitive application. Use a dedicated, maintained sanitizer with a policy appropriate to your system.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">PNG or JPG: choosing the right result</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Choose PNG</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Best for logos, icons, diagrams, text, sharp edges, and transparent backgrounds. PNG stores those edges without JPEG compression artifacts.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Choose JPG</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Useful when the artwork behaves more like a photograph and must have a solid background. If transparent is selected, the converter uses white because JPG cannot store transparency.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations and when to use another workflow</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+          <li><strong class="text-slate-900 dark:text-slate-200">Fixed resolution:</strong> enlarging the exported raster later cannot restore the original vector sharpness.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Fonts:</strong> text can render differently when the SVG references a font unavailable to the browser. Converting text to paths before export avoids substitution.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">External references:</strong> remotely referenced images, fonts, or styles may fail to load or render differently.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Advanced features:</strong> filters, masks, clipping, and browser-dependent effects may differ from professional vector software.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Static output:</strong> animation and interactive behavior are not carried into a PNG or JPG.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Memory:</strong> very large canvas dimensions can slow or exhaust a low-memory device. Reduce the dimensions if conversion fails.</li>
+        </ul>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> This tool uses native browser functions rather than an external conversion library.</p>
+        <p>Other tools may download JavaScript libraries from third-party CDNs when required. Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the SVG file or pasted markup.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The preview is blank or conversion reports invalid SVG</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Confirm that pasted content contains one complete, valid <code>&lt;svg&gt;...&lt;/svg&gt;</code> document rather than a fragment, code fence, or explanatory text. Check the root element's dimensions or <code>viewBox</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Text appears in the wrong font</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The SVG references a font the browser cannot use. Embed an appropriate web font where permitted or convert text to vector paths in the source design application.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The downloaded image looks blurry</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Export again at the largest pixel size where the image will appear. Avoid enlarging the PNG or JPG after rasterization.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Some artwork is missing</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The file may reference an unavailable external resource or use an SVG feature rendered differently by the browser. Compare it with the SVG opened directly in the same browser.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The background is white instead of transparent</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">JPG cannot store transparency. Choose PNG and transparent background for an alpha channel.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which format is better for a logo?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">PNG is normally the better choice because it preserves transparent backgrounds, flat colors, and sharp edges. JPG introduces compression artifacts around lines and lettering and always uses a solid background.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I convert the PNG back to the original SVG?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Rasterization discards paths, shapes, and other vector instructions. Automatic tracing can approximate them from pixels, but it cannot reconstruct the exact source file.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What does the aspect-ratio lock do?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It keeps width and height in the source artwork's proportions. Changing one dimension updates the other. Disabling it allows independent values and can visibly stretch or squash the image.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does maximum JPG quality make JPG equal to PNG?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. A higher setting reduces JPEG compression artifacts but does not add transparency or make JPEG lossless. PNG remains more suitable for sharp-edged artwork when file size is acceptable.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What happens to SVG animation?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">PNG and JPG are static output formats. They do not preserve SVG animation or interactive event behavior; the raster download contains a still image.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-to-base64"><h3 class="font-bold text-[#1a73e8]">Image to Base64</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Turn the exported PNG or JPG into raw Base64 and a complete Data URI.</p></a>
+        <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/base64-to-image"><h3 class="font-bold text-[#1a73e8]">Base64 to Image</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Decode PNG, JPEG, WebP, or GIF data when an image arrives as Base64 text.</p></a>
+      </section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Rasterize your SVG at the right size</h2><p class="mt-3 text-sm leading-6 text-white">Set the dimensions and background your destination needs, preview the artwork, and export PNG or JPG.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/svg-to-image">Use SVG to PNG or JPG</a></section>
+    </article>
   </main>
 </body>
 </html>

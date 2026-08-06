@@ -4,99 +4,136 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Compress PDF Guide - Free Browser Tool</title>
-  <meta name="description" content="Reduce PDF file size by compressing images." />
+  <title>Compress PDF Online: The Quality Trade-Off</title>
+  <meta name="description" content="Compress PDF pages by rasterizing them at a chosen quality. Understand the loss of selectable text, links, forms, vectors, accessibility, and page geometry." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/compress-pdf.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Compress PDF Guide - Free Browser Tool" />
-  <meta property="og:description" content="Reduce PDF file size by compressing images." />
+  <meta property="og:title" content="Compress PDF Online: The Quality Trade-Off" />
+  <meta property="og:description" content="Learn exactly how full-page JPEG rasterization affects file size, text, links, forms, vectors, accessibility, and source page shape." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/compress-pdf.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Compress PDF Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Reduce PDF file size by compressing images." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="Compress PDF Online: The Quality Trade-Off" />
+  <meta name="twitter:description" content="Learn exactly how full-page JPEG rasterization affects file size, text, links, forms, vectors, accessibility, and source page shape." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "Compress PDF Online: What Rasterizing Every Page Really Costs", "description": "A practical guide to the benefits and permanent losses created by full-page PDF rasterization.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/compress-pdf.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which PDF compression level should I choose first?", "acceptedAnswer": { "@type": "Answer", "text": "Medium is a reasonable starting point. Compare the output size and inspect the smallest text. Choose low compression for more detail or high compression when a smaller visual copy matters more." } },
+          { "@type": "Question", "name": "Why does low compression create a larger file?", "acceptedAnswer": { "@type": "Answer", "text": "Low describes how little compression is applied. It uses render scale 1.8 and JPEG quality 0.9, preserving more detail and generally producing a larger result than the high setting." } },
+          { "@type": "Question", "name": "Can I recover searchable text after compression?", "acceptedAnswer": { "@type": "Answer", "text": "Not from this output's original text layer, because every page becomes a JPEG image. OCR can attempt to recognize the pixels later, but that is not the same as preserving the original characters." } },
+          { "@type": "Question", "name": "Does this PDF compressor preserve forms and links?", "acceptedAnswer": { "@type": "Answer", "text": "No. The output pages contain flattened JPEG imagery. Interactive form controls and live hyperlinks are not recreated in the new PDF." } },
+          { "@type": "Question", "name": "Will compressing always make a PDF smaller?", "acceptedAnswer": { "@type": "Answer", "text": "No. An already efficient text-based PDF can become larger after every page is replaced by JPEG image data. Compare the files before using the result." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Compress PDF Online: What Rasterizing Every Page Really Costs</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Full-Page Rasterization</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">This tool attempts to reduce PDF size by rendering every page as a JPEG and building <code>compressed.pdf</code> from those images. Its three levels control render scale and JPEG quality. It works best for scanned and photo-heavy documents. The trade-off is permanent: selectable text, live links, forms, vector sharpness, and accessibility structure are not preserved. Output pages are also rebuilt as A4 portrait, and a smaller file is not guaranteed.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/compress-pdf">Open Compress PDF<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Compress PDF</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Compress PDF reduces the size of your documents by optimizing embedded image layouts. It uses pdf.js to render page templates onto canvases at specific scale factors, then recompiles them into JPEG format at chosen quality values, saving storage.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/compress-pdf">
-        Open Compress PDF
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When this compression method fits</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Good candidates</h3><ul class="mt-2 space-y-2 text-sm leading-6 text-slate-600 dark:text-slate-400"><li>Scanned PDFs that are already page images.</li><li>Photo-based files created from phone pictures.</li><li>Visual portfolios intended only for on-screen viewing.</li><li>Read-only reference copies when the original is stored safely.</li></ul></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Poor candidates</h3><ul class="mt-2 space-y-2 text-sm leading-6 text-slate-600 dark:text-slate-400"><li>Legal, archival, or accessibility-critical documents.</li><li>Fillable forms or documents with important links.</li><li>Text PDFs that are already small and efficient.</li><li>Technical drawings or files intended for high-quality printing.</li></ul></div>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose the PDF file you wish to compress to reduce its storage size.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose Quality</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select your preferred compression balance: Low (max compression), Medium (balanced), or High (best resolution).</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Compress & Save</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Compress PDF to downscale and re-encode images in-memory and download the file.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Input, output, and the three levels</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Input:</strong> one readable PDF. <strong class="text-slate-900 dark:text-slate-200">Output:</strong> <code>compressed.pdf</code> with one A4 portrait output page for every source page.</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Level</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Render scale</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">JPEG quality</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Trade-off</th></tr></thead><tbody><tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Low compression</td><td class="py-3 pr-4">1.8</td><td class="py-3 pr-4">0.9</td><td class="py-3">Most detail; generally largest</td></tr><tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Medium</td><td class="py-3 pr-4">1.5</td><td class="py-3 pr-4">0.8</td><td class="py-3">Middle setting</td></tr><tr><td class="py-3 pr-4">High compression</td><td class="py-3 pr-4">1.0</td><td class="py-3 pr-4">0.6</td><td class="py-3">Least detail; intended smallest</td></tr></tbody></table></div>
+        <p><strong class="text-slate-900 dark:text-slate-200">“Low compression” means less compression, not a smaller output.</strong> It renders more pixels and uses higher JPEG quality. High compression removes more image detail.</p>
+      </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Keep the original PDF.</strong> This workflow discards document structure and cannot be reversed. An already efficient source may also produce a larger output.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does text remain readable?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. Text vector elements are preserved, meaning outlines remain sharp while images are compressed.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How much space will I save?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">PDFs containing high-resolution images typically see a file size reduction of 50% to 80%.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is it secure to compress confidential files?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. All compression operations run locally inside your browser on-device, keeping files safe.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to compress and check the result</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Protect the source</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Keep an unchanged original. Upload a copy and start with medium compression.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Render every page</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Allow time for PDF.js to draw and JPEG-encode every source page.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Compare carefully</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Check file size, smallest text, landscape pages, links, forms, and print quality before using the result.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How full-page rasterization works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1. Load:</strong> PDF.js 3.4.120 reads the selected PDF from browser memory.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2. Render:</strong> each page is drawn to an HTML canvas using scale 1.8, 1.5, or 1.0.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3. Encode:</strong> <code>canvas.toDataURL('image/jpeg', quality)</code> converts the entire canvas to JPEG at quality 0.9, 0.8, or 0.6.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4. Rebuild:</strong> jsPDF 2.5.1 creates A4 portrait pages and stretches each JPEG to the full page width and height.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5. Download:</strong> the new Blob is saved as <code>compressed.pdf</code>.</li>
+        </ol>
+        <p>This is not selective image optimization. The tool does not leave text and vectors untouched while downsampling only embedded photographs; it flattens the complete page.</p>
+        <p>File contents are processed in browser memory and are not sent to WeConvertFiles for conversion. PDF.js and jsPDF are downloaded from third-party CDNs when required.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What is permanently lost or changed</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Text and accessibility</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Selectable/searchable characters, document tags, reading order, alternative text, and other accessibility structure are not recreated. Assistive technology receives page images rather than structured content.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Links and forms</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A hyperlink becomes visible pixels rather than a live target. Fillable fields, checkboxes, signatures, and other interactive controls are not rebuilt.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Vectors and annotations</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Vector diagrams become pixels. Annotations may be flattened into the rendering when visible or omitted; they no longer retain normal interactive behavior.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Page geometry</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Every output page is A4 portrait and the source rendering is stretched to fill it. Letter, landscape, square, A3, and mixed-size pages can change proportions.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations and better alternatives</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">No target size:</strong> choose only among three presets; there is no exact MB target or direct quality slider.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No smaller-file guarantee:</strong> image pages can outweigh efficient text and vector instructions.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No selective optimization:</strong> use a dedicated optimizer when text, links, forms, and tags must survive.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No password entry:</strong> encrypted PDFs requiring a password cannot be processed through this compression interface.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Browser load:</strong> long and graphics-heavy PDFs use substantial memory. Split, process smaller parts, and merge only if the structural trade-off is acceptable.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Source-first alternative:</strong> re-export from the original application with lower image resolution whenever possible.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> PDF.js and jsPDF are downloaded from third-party CDNs when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the selected PDF contents.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The result is larger than the original</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The source was probably already efficient. Keep it and use a selective optimizer or re-export from the source application instead.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Small text is difficult to read</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Return to the original and choose low compression, which uses a higher render scale and JPEG quality.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Search, links, or forms stopped working</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">That is a consequence of full-page rasterization. Use the original or another compression method that preserves document structure.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Pages changed shape</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The implementation places every source rendering onto A4 portrait without preserving its original page dimensions.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A long conversion stalls</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Every page is rendered and encoded in browser memory. Close heavy tabs or work with smaller document sections.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which level should I try first?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Medium is a useful starting point. Inspect the smallest text and compare file sizes, then use low for more detail or high for a more aggressive visual copy.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why does low compression produce a larger file?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It applies less compression: render scale 1.8 and JPEG quality 0.9. Higher detail requires more image data.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I recover the original text afterward?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. OCR could recognize some pixels later, but it would create an approximation rather than restore the source PDF's original character data and structure.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the number of pages change?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The loop creates one output page for every source page. Page content and dimensions change, but the page count remains the same.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is this the same as PDF optimization?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Selective optimizers can downsample images and remove unused objects while retaining text and other structures. This implementation rasterizes the complete page.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/merge-pdf"><h3 class="font-bold text-[#1a73e8]">Merge PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Rejoin smaller sections after processing them separately.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/split-pdf"><h3 class="font-bold text-[#1a73e8]">Split PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Create one-page PDFs when a long source strains browser memory.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/images-pdf"><h3 class="font-bold text-[#1a73e8]">Images to PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Build the image-based documents this raster method handles most naturally.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Create a smaller visual copy</h2><p class="mt-3 text-sm leading-6 text-white">Keep your original, choose a level, and verify size, readability, and page shape before using the result.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/compress-pdf">Use Compress PDF</a></section>
+    </article>
   </main>
 </body>
 </html>

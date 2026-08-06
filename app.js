@@ -193,27 +193,28 @@ async function ensureToolLibraries(toolId) {
 
 const toolContentDetails = {
   'merge-pdf': {
-    howItWorks: 'Merge PDF combines multiple PDF documents into a single, unified file. The tool runs entirely in your browser using modern Client-Side JavaScript (pdf-lib.js). When you select your files, the engine reads their binary streams, compiles the page trees, and appends them sequentially. The process is instantaneous and offline. This is perfect for compiling receipts, reports, or homework assignments without risking your privacy.',
+    howItWorks: 'Merge PDF combines multiple PDF documents into a single file in your chosen order. A browser-compatible pdf-lib build reads each source in browser memory, copies all of its page objects, and appends those pages to a new PDF. The operation does not rasterize pages or apply compression. The required library is downloaded from a third-party CDN when needed, while source document contents are not sent to WeConvertFiles for conversion.',
     faqs: [
-      { q: 'Is there a limit on the number of PDFs I can merge?', a: 'No, WeConvertFiles does not impose any file count or upload limit caps. You can select and combine as many PDF documents as you need in a single action, as long as your web browser tab has sufficient system memory to hold and write the binary streams.' },
+      { q: 'Is there a limit on the number of PDFs I can merge?', a: 'The implementation does not set a specific file-count maximum. Available browser memory is the practical constraint, especially when combining many large or image-heavy PDFs.' },
       { q: 'Are my merged files uploaded to a server?', a: 'No. File merging is completed locally inside your web browser, and document contents are not sent to WeConvertFiles for processing.' },
-      { q: 'Can I reorder pages before merging?', a: 'Yes, you can rearrange the uploaded documents in any layout before compiling. The interface features a flexible file listing queue where you can drag and drop list items to position pages in the exact sequence you want.' },
-      { q: 'Does this tool preserve the quality of my original PDFs?', a: 'Yes. The merging algorithm copies the page objects directly from the source streams without modifying vector paths, text fields, fonts, or high-definition images, keeping the final output identical in visual fidelity.' }
+      { q: 'Can I control the document order before merging?', a: 'Yes. Drag the uploaded file rows into the required sequence. The tool copies every page from each PDF in that visible file-list order.' },
+      { q: 'Does this tool preserve the visible quality of PDF pages?', a: 'Pages are copied as PDF objects rather than re-rendered through canvas, so merging does not intentionally recompress their visible text, vector artwork, or images. Document-level features such as forms, bookmarks, signatures, or links should still be checked.' }
     ]
   },
   'split-pdf': {
-    howItWorks: 'Split PDF separates a single multi-page PDF document into individual single-page PDF files or extracts specific ranges into a ZIP folder. It executes locally in your browser using JavaScript and pdf-lib. The binary structure of each page is isolated, packed into a new PDF header, and zipped using JSZip client-side, giving you a lightning-fast download.',
+    howItWorks: 'Split PDF copies every page of one source PDF into its own single-page document with pdf-lib, names the results page-1.pdf, page-2.pdf, and so on, and packages them in split-pages.zip with JSZip. It does not offer page ranges or multi-page groups. Page objects are copied rather than rasterized, although document-level features may not transfer to the new files.',
     faqs: [
-      { q: 'Can I split a PDF into custom page ranges?', a: 'Yes. You can choose to split every page individually or extract specific page groupings. The tool parses the document map and splits the nodes according to your input rules.' },
-      { q: 'Is there a file size limit for splitting PDFs?', a: 'Since processing happens locally on your device, it depends on your system memory. Standard files up to 100MB process in seconds, while larger files might require a brief processing time.' },
-      { q: 'Are my documents safe when using this tool?', a: 'Yes. All extraction operations occur strictly in your local browser sandbox. Your files are never uploaded, shared, or scanned on any server.' }
+      { q: 'Can I split a PDF into custom page ranges?', a: 'No. This tool creates one PDF for every source page. Use Extract Pages when you need selected page numbers or ranges in one output document.' },
+      { q: 'Does splitting reduce page quality?', a: 'Pages are copied as PDF objects instead of being rendered to canvas, so the process does not intentionally reduce image resolution or flatten text and vector artwork. Document-level features should still be checked.' },
+      { q: 'Is there a file size or page limit?', a: 'The implementation sets no specific maximum and makes no 100 MB speed promise. Available browser memory is the practical constraint because it holds the source, generated page files, and ZIP.' },
+      { q: 'How are my documents handled?', a: 'PDF contents are processed in browser memory and are not sent to WeConvertFiles for conversion. Consented site-usage analytics may operate separately without receiving the document contents.' }
     ]
   },
   'office-pdf': {
-    howItWorks: 'Word/Excel to PDF Workaround delivers document conversion directly in the web browser. True PDF conversion requires server-side rendering, but this client-side parser uses mammoth.js to compile Word (.docx) files into HTML structures, and SheetJS to render Excel (.xlsx) spreadsheets as interactive HTML tables. The resulting layout is loaded into an invisible sandbox, and html2pdf.js compiles the DOM nodes into a PDF file. Users should note that complex formatting may vary from the original MS Office files.',
+    howItWorks: 'Word/Excel to PDF converts supported Office content into a browser-rendered PDF. Mammoth.js turns Word (.docx) structures into HTML, SheetJS renders the first worksheet of an Excel (.xlsx) workbook as an HTML table, and html2pdf.js captures that layout through canvas before assembling A4 PDF pages. This is not Microsoft Office rendering, so complex formatting, fonts, page breaks, charts, and shapes may vary.',
     faqs: [
       { q: 'How does client-side Word-to-PDF work?', a: 'It parses Docx XML elements into HTML elements via mammoth.js, inserts them into an invisible browser page, and generates a PDF snapshot using html2pdf.js.' },
-      { q: 'Can I convert spreadsheet sheets from Excel (.xlsx)?', a: 'Yes, the Excel parser reads worksheet grids, formats them into a clean HTML table, and exports the table sheet into PDF format.' },
+      { q: 'Can I convert spreadsheet sheets from Excel (.xlsx)?', a: 'The Excel parser reads only the workbook\'s first worksheet, formats it as an HTML table, and exports that rendered table to A4 landscape PDF pages.' },
       { q: 'Why does my converted PDF look different from MS Office?', a: 'Since conversion runs client-side without Microsoft Office engines, complex styles like custom charts, smart shapes, and nested tables are rendered as basic HTML elements, which might cause formatting differences.' }
     ]
   },
@@ -235,11 +236,11 @@ const toolContentDetails = {
     ]
   },
   'images-pdf': {
-    howItWorks: 'Images to PDF compiles PNG, JPG, or WebP images into a single clean PDF document. It runs locally using pdf-lib. The engine scales each image to fit standard page dimensions, adds a new page, and compiles them in sequence. This is perfect for archiving photos, documents, or screenshots.',
+    howItWorks: 'Images to PDF combines PNG and JPEG/JPG files into one A4 portrait PDF using jsPDF. It reads each image in browser memory, scales it proportionally to fit inside a 36-point margin, centers it, and places one image on each page in the visible file-list order. Small images may be enlarged, and text inside images remains image content because no OCR is performed.',
     faqs: [
-      { q: 'What image formats are supported?', a: 'We support PNG, JPEG/JPG, and WebP image formats. You can mix and match different formats in your file upload queue.' },
-      { q: 'Can I reorder my images before saving?', a: 'Yes, you can drag and drop thumbnails in the visual editor to rearrange them before generating the PDF. This ensures the output pages match your desired sequence.' },
-      { q: 'Are my images secure?', a: 'Yes, all processing occurs on your local device. Your images are never uploaded to any server, keeping your personal photos private.' }
+      { q: 'What image formats are supported?', a: 'The tool accepts PNG and JPEG/JPG files. Convert WebP, HEIC, or other formats to PNG or JPEG before adding them.' },
+      { q: 'Can I reorder my images before saving?', a: 'Yes. Drag the selected file rows into the required order before conversion. The first row becomes page one, the second becomes page two, and so on.' },
+      { q: 'How are my images handled?', a: 'Image contents are processed in browser memory and are not sent to WeConvertFiles for conversion. If you consent to analytics cookies, separate usage events may be collected without containing your image files.' }
     ]
   },
   'pdf-images': {
@@ -283,11 +284,11 @@ const toolContentDetails = {
     ]
   },
   'compress-pdf': {
-    howItWorks: 'Compress PDF reduces the size of your documents by optimizing embedded image layouts. It uses pdf.js to render page templates onto canvases at specific scale factors, then recompiles them into JPEG format at chosen quality values, saving storage.',
+    howItWorks: 'Compress PDF uses PDF.js to render every page to an HTML canvas, encodes the complete page as JPEG, and places that JPEG on a new A4 portrait page with jsPDF. Low, medium, and high compression use scale and JPEG-quality pairs of 1.8/0.9, 1.5/0.8, and 1.0/0.6. This rasterizes text, links, forms, and vectors, and a smaller result is not guaranteed.',
     faqs: [
-      { q: 'What are the quality levels?', a: 'Low quality yields maximum compression; High quality preserves image resolutions; Medium offers the best balance for general document use.' },
-      { q: 'Does text remain readable?', a: 'Yes. Text vector elements are preserved, meaning outlines remain sharp while images are compressed, keeping documents legible.' },
-      { q: 'How much space will I save?', a: 'PDFs containing high-resolution images typically see a file size reduction of 50% to 80%, depending on the density of graphics.' }
+      { q: 'What are the compression levels?', a: 'Low compression uses the highest render scale and JPEG quality, medium uses balanced settings, and high compression uses the lowest scale and JPEG quality. Higher compression can make small text and graphics less clear.' },
+      { q: 'Does text remain searchable or selectable?', a: 'No. Each complete page becomes a JPEG image, so selectable text, live links, form fields, vectors, and accessibility structure are not preserved in the output.' },
+      { q: 'How much space will I save?', a: 'The result depends on the source PDF. Image-heavy files may become smaller, while text-heavy or already optimized PDFs may shrink very little or even become larger. Compare the downloaded file before replacing the original.' }
     ]
   },
   'image-scaler': {
@@ -440,30 +441,32 @@ const toolContentDetails = {
     ]
   },
   'heic-to-jpg': {
-    howItWorks: 'HEIC to JPG / PNG converts Apple HEIC photos to standard JPG or PNG images. Using the heic2any rendering package in parallel web worker buffers, the converter decodes the HEIF container and prints standard graphic pixels to a downloadable canvas format, making iPhone photos instantly compatible with Windows systems.',
+    howItWorks: 'HEIC to JPG / PNG passes each selected .heic file to heic2any 0.0.4 in sequence and requests JPEG or PNG output. JPEG quality can be set from 10 to 100, with 90 as the default. One result downloads directly; multiple results are packaged as converted-images.zip with JSZip. Metadata and HEIC-specific features are not guaranteed to survive.',
     faqs: [
-      { q: 'Can I convert multiple HEIC files?', a: 'Yes, you can upload multiple HEIC images. If multiple files are converted, they are compressed and downloaded as a ZIP folder.' },
-      { q: 'Are my photos uploaded to any servers?', a: 'No. All image conversions happen locally in your web browser tab without any remote network uploads, keeping your photos secure.' }
+      { q: 'Can I convert multiple HEIC files?', a: 'Yes. The files are converted one after another. One output downloads directly, while two or more outputs are packaged in converted-images.zip.' },
+      { q: 'Can I convert .heif files?', a: 'No. The current file filter accepts names ending in .heic. Renaming another format does not convert its underlying data.' },
+      { q: 'Does conversion preserve metadata or Live Photo motion?', a: 'Do not rely on it to preserve metadata, auxiliary images, depth data, editing information, or Live Photo motion. Keep the original HEIC and any paired video.' },
+      { q: 'How are my photos handled?', a: 'Photo contents are processed in browser memory and are not sent to WeConvertFiles for conversion. Consented site-usage analytics may operate separately without receiving the photo contents.' }
     ]
   },
   'image-to-base64': {
     howItWorks: 'Image to Base64 encodes PNG, JPG, WebP, and GIF images into ASCII Base64 text strings and HTML Data URIs. Web developers use Base64 strings to embed images directly into HTML, CSS stylesheets, or JSON API payloads without making extra HTTP requests. Using the native HTML5 FileReader API, encoding is computed locally in your browser, and image contents are not sent to WeConvertFiles for processing.',
     faqs: [
       { q: 'What is the difference between raw Base64 and a Data URI?', a: 'Raw Base64 contains only the encoded binary character string, whereas a Data URI includes the MIME type header prefix (e.g. data:image/png;base64,...), allowing web browsers and CSS files to render the image directly inline.' },
-      { q: 'Are my images uploaded to a server when converting to Base64?', a: 'No. The entire Image to Base64 conversion runs locally inside your browser using the HTML5 FileReader API. Your images never leave your device.' }
+      { q: 'Are my images uploaded for Base64 conversion?', a: 'File contents are processed in browser memory with the HTML5 FileReader API and are not sent to WeConvertFiles for conversion. Consented site-usage analytics may operate separately without receiving the selected image contents.' }
     ]
   },
   'base64-to-image': {
     howItWorks: 'Base64 to Image decodes raw Base64 strings or formatted Data URIs into downloadable PNG, JPG, WebP, and GIF image files. Developers often need to inspect base64 encoded image strings from database fields, API responses, or CSS assets. This tool parses the encoded data in local browser memory, renders a visual preview, and exports the decoded file with its matching extension without transmitting data to external servers.',
     faqs: [
       { q: 'How does the Base64 to Image decoder auto-detect the image format?', a: 'The decoder inspects the Data URI header prefix or raw Base64 magic byte signatures to identify whether the encoded stream represents a PNG, JPEG, WebP, or GIF graphic format.' },
-      { q: 'Is it safe to paste confidential Base64 image payloads into this tool?', a: 'Yes. Decoding executes entirely in your browser sandbox without sending string data over the network or rendering arbitrary HTML elements, guaranteeing complete security.' }
+      { q: 'How is pasted Base64 image data handled?', a: 'Decoding runs in browser memory with native JavaScript APIs, and the string is not sent to WeConvertFiles for conversion. Consented site-usage analytics may operate separately without receiving the pasted Base64 contents.' }
     ]
   },
   'svg-to-image': {
-    howItWorks: 'SVG to PNG / JPG converts Scalable Vector Graphics (SVG) into raster image files (PNG or JPEG) directly in your browser. Vector graphics maintain crisp quality at any resolution, but raster formats are required for social media, print, and legacy applications. Using HTML5 Canvas rendering and XML sanitization, this tool lets you set custom width/height dimensions, preserve transparency or choose solid background colors, and export high-resolution images offline.',
+    howItWorks: 'SVG to PNG / JPG converts Scalable Vector Graphics (SVG) into raster image files (PNG or JPEG) directly in your browser. Vector graphics maintain crisp quality at any resolution, but raster formats are required for social media, print, and legacy applications. Using HTML5 Canvas rendering and limited XML cleanup, this tool lets you set custom width/height dimensions, preserve transparency or choose solid background colors, and export a fixed-size raster image in the browser.',
     faqs: [
-      { q: 'How does the converter handle SVG security and scripts?', a: 'Before rendering on canvas, the converter parses the SVG XML and strips all script tags, inline event handlers (onload, onclick), and external network subresources to prevent security vulnerabilities.' },
+      { q: 'How does the converter handle SVG scripts?', a: 'Before rendering on canvas, the converter parses the SVG XML and removes script elements and inline event-handler attributes such as onload and onclick. This is limited cleanup, not comprehensive SVG sanitization, and it does not claim to remove external resource references.' },
       { q: 'Can I convert transparent SVGs to PNG or JPG?', a: 'Yes! When converting to PNG, transparency is fully preserved. When converting to JPG, you can choose a custom solid background color (such as white or black).' }
     ]
   }
@@ -496,7 +499,7 @@ const tools = [
     hint: 'Paste a Base64 string or upload a TXT file containing Base64 data.',
     accept: '.txt,text/plain',
     multiple: false,
-    notes: ['Auto-detects format extension.', 'Safe preview with 0 HTML injection.', 'Download decoded image.']
+    notes: ['Auto-detects format extension.', 'Previews image data without injecting HTML.', 'Download decoded image.']
   },
   {
     id: 'svg-to-image',
@@ -510,7 +513,7 @@ const tools = [
     hint: 'Upload an SVG file or paste raw SVG XML code below.',
     accept: '.svg,image/svg+xml',
     multiple: false,
-    notes: ['Sanitizes SVG scripts & external URLs.', 'Custom dimensions & background color.', 'Lossless PNG or quality JPG.']
+    notes: ['Removes scripts & inline event handlers.', 'Custom dimensions & background color.', 'Lossless PNG or quality JPG.']
   },
   {
     id: 'pdf-to-word',
@@ -530,7 +533,7 @@ const tools = [
     id: 'office-pdf',
     title: 'Word / Excel to PDF',
     kicker: 'Office Tools',
-    badge: '100% Local',
+    badge: 'Browser Rendered',
     icon: 'O',
     iconBg: 'bg-emerald-100',
     iconColor: 'text-emerald-600',
@@ -566,7 +569,7 @@ const tools = [
     hint: 'PNG or JPG files. Drag selected items to reorder.',
     accept: 'image/png,image/jpeg',
     multiple: true,
-    notes: ['Supports multiple images.', 'Drag the preview rows to change page order.', 'PDF pages are sized to fit each image neatly.']
+    notes: ['Supports multiple PNG and JPEG images.', 'Drag the preview rows to change page order.', 'Images are centered on fixed A4 portrait pages.']
   },
   {
     id: 'compress-pdf',
@@ -576,11 +579,11 @@ const tools = [
     icon: 'C',
     iconBg: 'bg-amber-100',
     iconColor: 'text-amber-600',
-    description: 'Reduce the file size of your PDF document.',
+    description: 'Create a rasterized PDF copy using selectable JPEG quality levels.',
     hint: 'Upload one PDF file and select the compression level.',
     accept: 'application/pdf',
     multiple: false,
-    notes: ['Compresses locally in your browser.', 'Optimizes and downscales embedded images.', 'Best for image-heavy documents.']
+    notes: ['Processes file contents in browser memory.', 'Rasterizes complete pages as JPEG.', 'A smaller result is not guaranteed.']
   },
   {
     id: 'heic-to-jpg',
@@ -590,11 +593,11 @@ const tools = [
     icon: 'H',
     iconBg: 'bg-teal-100',
     iconColor: 'text-teal-600',
-    description: 'Convert Apple HEIC photos to standard JPEG or PNG images completely offline.',
+    description: 'Convert Apple HEIC photos to standard JPEG or PNG images in browser memory.',
     hint: 'Upload one or more HEIC files to begin batch conversion.',
     accept: '.heic',
     multiple: true,
-    notes: ['Apple HEIC to JPG/PNG.', 'Batch convert multiple files.', 'Downloads standard image formats.']
+    notes: ['Accepts files ending in .heic.', 'Batch conversion runs sequentially.', 'One file downloads directly; batches use ZIP.']
   },
   {
     id: 'split-pdf',
@@ -1355,7 +1358,7 @@ async function openTool(toolId) {
     'split-pdf': [
       'Split every single page of your PDF file into individual documents in one click.',
       'Output files are packaged into a tidy ZIP folder for clean downloads.',
-      'Completed locally inside your web browser for total privacy.'
+      'File contents stay in browser memory and are not sent for conversion.'
     ],
     'office-pdf': [
       'Convert MS Word (.docx) or Excel (.xlsx) files directly into clean PDF layouts.',
@@ -1393,7 +1396,7 @@ async function openTool(toolId) {
       'Images are embedded locally directly into the PDF layout for privacy.'
     ],
     'images-pdf': [
-      'Compile PNG, JPEG, or WebP images into a single professional PDF document.',
+      'Compile PNG or JPEG images into a single A4 portrait PDF document.',
       'Perfect for digitizing receipts, ID cards, screenshots, or physical records.',
       'Drag and drop rows to reorder images before generating the document.'
     ],
@@ -1709,9 +1712,9 @@ function renderToolOptions(toolId) {
       <select id="compressLevelSelect" class="${inputClass}">
         <option value="low">Low (High quality, minimal compression)</option>
         <option value="medium" selected>Medium (Balanced)</option>
-        <option value="high">High (Maximum compression, downscales images)</option>
+        <option value="high">High (Lower render scale and JPEG quality)</option>
       </select>
-      <p class="${helpClass}">Images will be optimized to reduce document file size.</p>
+      <p class="${helpClass}">Each complete page is rasterized as JPEG. Selectable text, links, forms, vectors, and original page geometry are not preserved.</p>
     `,
 
     'webp-convert': `
@@ -2276,7 +2279,7 @@ function renderToolOptions(toolId) {
             </div>
           </div>
         </div>
-        <p class="${helpClass} mt-2">HEIC photos will be processed entirely client-side using heic2any.</p>
+        <p class="${helpClass} mt-2">Photo contents are processed in browser memory with heic2any. Keep the original when metadata or HEIC-specific features matter.</p>
       </div>
     `,
     'image-to-base64': `
@@ -4638,6 +4641,10 @@ function validateFiles(fileListObject) {
   }
 
   // Group 2: Image Tools
+  if (toolId === 'images-pdf') {
+    return incoming.filter(file => ['image/png', 'image/jpeg', 'image/jpg'].includes(file.type) || /\.(png|jpe?g)$/i.test(file.name));
+  }
+
   const imageTools = [
     'images-pdf', 'image-scaler', 'webp-convert', 'bulk-resize', 'color-palette', 'exif-utility'
   ];
