@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>How to Convert Base64 String to Image Online | Guide</title>
-  <meta name="description" content="Learn how to decode Base64 strings and Data URIs into downloadable PNG, JPG, WebP, and GIF images 100% locally with zero server uploads." />
+  <title>Base64 to Image Converter: Decode and Save Files</title>
+  <meta name="description" content="Learn how to decode raw Base64 or a Data URI, preview image dimensions, identify PNG, JPG, WebP, or GIF data, and save the correct file." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/base64-to-image.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="How to Convert Base64 String to Image Online | Guide" />
-  <meta property="og:description" content="Learn how to decode Base64 strings and Data URIs into downloadable PNG, JPG, WebP, and GIF images 100% locally with zero server uploads." />
+  <meta property="og:title" content="Base64 to Image Converter: Decode and Save Files" />
+  <meta property="og:description" content="Decode Base64 image data, understand format detection, avoid mislabeled files, and troubleshoot invalid strings." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/base64-to-image.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="How to Convert Base64 String to Image Online | Guide" />
-  <meta name="twitter:description" content="Learn how to decode Base64 strings and Data URIs into downloadable PNG, JPG, WebP, and GIF images 100% locally with zero server uploads." />
+  <meta name="twitter:title" content="Base64 to Image Converter: Decode and Save Files" />
+  <meta name="twitter:description" content="Decode Base64 image data, understand format detection, avoid mislabeled files, and troubleshoot invalid strings." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -28,31 +27,49 @@
     }
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "How does the Base64 to Image decoder auto-detect the image format?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The decoder inspects the Data URI header prefix or raw Base64 magic byte signatures to identify whether the encoded stream represents a PNG, JPEG, WebP, or GIF graphic format."
-        }
+        "@type": "Article",
+        "headline": "Base64 to Image Converter: Decode a String and Check the Result",
+        "description": "A practical guide to decoding raw Base64 and image Data URIs into correctly identified image files.",
+        "mainEntityOfPage": "https://www.weconvertfiles.com/guides/base64-to-image.html",
+        "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" }
       },
       {
-        "@type": "Question",
-        "name": "Is it safe to paste confidential Base64 image payloads into this tool?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Decoding executes entirely in your browser sandbox without sending string data over the network or rendering arbitrary HTML elements, guaranteeing complete security."
-        }
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I need to remove the Data URI prefix?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. The tool accepts a complete image Data URI or a raw Base64 string. For a complete Data URI, it uses the declared image MIME type and decodes the characters after the comma." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Base64 decoding change image quality?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Decoding reconstructs the bytes represented by the string and does not resize, recompress, or redraw the image." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can this tool decode a Base64 PDF or ZIP?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. This workflow is designed to preview and save PNG, JPEG, WebP, or GIF image data. Base64 representing another file type will not produce a valid image preview." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does selecting a different format convert the image?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. For raw Base64, manual format selection supplies the MIME type and download extension but does not re-encode the underlying bytes into another image format." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Base64 safer than an image file?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Base64 is reversible encoding rather than encryption. Anyone who can access the complete string can decode the underlying image." }
+          }
+        ]
       }
     ]
   }
@@ -68,49 +85,140 @@
       <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
     </div>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">How to Convert Base64 String to Image Online</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Base64 to Image decodes raw Base64 strings or formatted Data URIs into downloadable PNG, JPG, WebP, and GIF image files. Developers often need to inspect base64 encoded image strings from database fields, API responses, or CSS assets. This tool parses the encoded data in local browser memory, renders a visual preview, and exports the decoded file with its matching extension without transmitting data to external servers.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/base64-to-image">
-        Open Base64 to Image Converter
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3">
+          <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Base64 to Image Converter: Decode a String and Check the Result</h1>
+          <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Browser-Based</span>
+        </div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">A Base64 to image converter reconstructs an image from encoded text. Paste raw Base64, paste a complete <code>data:image/...;base64,...</code> Data URI, or select a TXT file containing the value. The tool recognizes common PNG, JPEG, WebP, and GIF signatures, shows a preview and pixel dimensions, and downloads the decoded bytes. It cannot repair missing characters or turn non-image data into a picture.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/base64-to-image">
+          Open Base64 to Image Converter
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Paste Base64 Code</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Paste your raw Base64 string or full Data URI (data:image/png;base64,...) into the input box.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Format Detection</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The tool identifies whether the encoded stream represents a PNG, JPG, WebP, or GIF image.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Preview & Download</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">View the visual image preview and click Download to save the decoded graphic to your computer.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When decoding Base64 image data helps</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+          <li><strong class="text-slate-900 dark:text-slate-200">Inspect an API response:</strong> confirm that an encoded image field contains the expected asset rather than a thumbnail or placeholder.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Recover an embedded asset:</strong> save an image that currently exists only as an HTML or CSS Data URI.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Debug an upload pipeline:</strong> check that encoding elsewhere produced a complete, valid picture before sending the value onward.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Inspect a text export:</strong> load Base64 stored in a TXT file and verify the visual result and dimensions.</li>
+        </ul>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How does the Base64 to Image decoder auto-detect the image format?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The decoder inspects the Data URI header prefix or raw Base64 magic byte signatures to identify whether the encoded stream represents a PNG, JPEG, WebP, or GIF graphic format.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is it safe to paste confidential Base64 image payloads into this tool?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. Decoding executes entirely in your browser sandbox without sending string data over the network or rendering arbitrary HTML elements, guaranteeing complete security.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Accepted input and generated output</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+          <h3 class="font-bold text-slate-900 dark:text-slate-200">Input</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Raw Base64, a complete image Data URI, or a TXT file containing one of those values. Whitespace is removed before decoding, but surrounding JSON, quotation marks, labels, and code fences must not be included.</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+          <h3 class="font-bold text-slate-900 dark:text-slate-200">Output</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A preview with pixel dimensions and a download named <code>decoded-image.png</code>, <code>.jpg</code>, <code>.webp</code>, or <code>.gif</code>, according to the detected or declared format.</p>
+        </div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to decode Base64 to an image</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
+          <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Add the string</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Paste raw Base64 or a complete Data URI, or upload a TXT file that contains the encoded image value.</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
+          <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Check the preview</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Confirm that the expected picture appears and that its dimensions match the full-size image rather than a smaller derivative.</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
+          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
+          <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Download the bytes</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Keep auto-detection unless you know the raw data's true format. Download the result and open it once to verify the file.</p>
+        </div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the browser decodes the string</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The tool first removes whitespace from the encoded portion. For raw Base64, it checks the opening characters for a familiar image signature. For a complete Data URI, it reads the MIME type declared before the comma.</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Image format</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Common Base64 opening</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">JPEG</td><td class="py-3"><code>/9j/</code></td></tr>
+              <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">PNG</td><td class="py-3"><code>iVBORw0KGgo</code></td></tr>
+              <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">WebP</td><td class="py-3"><code>UklGR</code></td></tr>
+              <tr><td class="py-3 pr-4">GIF</td><td class="py-3"><code>R0lGOD</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The browser's native <code>atob()</code> function converts the text representation back into byte values. JavaScript places those bytes into an <code>ArrayBuffer</code> through a <code>Uint8Array</code>, then wraps the result in a <code>Blob</code>. An <code>Image</code> element verifies and previews the data before it is offered as a download. No external conversion library is required for this process.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Decoding is not format conversion</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300 space-y-3">
+        <p><strong>Decoding restores the encoded bytes.</strong> It does not read the pixels and re-encode them into another image format. If a JPEG was encoded, decoding returns JPEG bytes with the same dimensions and existing compression.</p>
+        <p>For raw Base64, the manual format selection supplies a MIME type and file extension when automatic signature detection cannot identify the data. Selecting PNG for JPEG bytes does not create a real PNG; it labels those bytes as PNG. Some applications detect the mismatch and refuse to open the file.</p>
+        <p>A complete Data URI already declares its MIME type, so the tool uses that declaration. If the declaration is wrong, correct the prefix at the source or decode using clean raw Base64 and the format that matches the underlying image.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Practical examples</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Inspecting an API field</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Copy only the string value, without the JSON property name, quotation marks, or trailing comma. The preview quickly reveals whether the API returned the correct image and size.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Saving a CSS Data URI</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Paste the value beginning with <code>data:image/</code>. The tool reads its declared format, previews it, and lets you save the embedded image separately.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Checking an unknown raw string</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">An opening such as <code>/9j/</code> points to JPEG, while <code>iVBORw0KGgo</code> points to PNG. The preview and dimensions provide a second check.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Handling a long value</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Place only the Base64 or Data URI in a TXT file and select it in the tool. This avoids accidentally copying only part of a very long terminal or editor line.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations and when this is the wrong tool</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+          <li><strong class="text-slate-900 dark:text-slate-200">No repair:</strong> missing or changed characters can make the image invalid, and the decoder cannot recreate absent data.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Image data only:</strong> a valid Base64 PDF, ZIP, or text document will not become a valid image preview.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">No editing:</strong> decoding does not resize, optimize, crop, or change image quality.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Standard alphabet expected:</strong> URL-safe Base64 using <code>-</code> and <code>_</code> may need to be normalized before decoding.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Memory use:</strong> very large strings and their decoded bytes can make a browser tab slow on a low-memory device.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">No secrecy:</strong> Base64 is reversible and offers no encryption, access control, or integrity protection.</li>
+        </ul>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm text-sm leading-6 text-slate-600 dark:text-slate-400 space-y-3">
+        <p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> Base64 decoding uses built-in browser functions and does not require an external conversion library.</p>
+        <p>Other tools on the site may download JavaScript libraries from third-party CDNs when needed. Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. The PageSense integration is not given the Base64 strings or selected TXT-file contents.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The tool reports invalid image data</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Copy the complete value again. Remove quotation marks, a JSON property name, commas, code fences, or explanatory text. Normal spaces and line breaks inside the encoded portion are removed automatically.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The detected format looks wrong</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Compare the opening characters with the signature table. For raw Base64, choose the known format manually only when the data genuinely uses that format.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The downloaded file will not open</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The declared or manually selected format may not match the bytes. Return to auto-detection or correct an inaccurate Data URI MIME type.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The image is incomplete or corrupted</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The string was probably truncated by a terminal, database column, message, or text box. Obtain the complete value from its original source.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A TXT file does not decode</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The file should contain the raw Base64 or Data URI, not a whole JSON document or source-code assignment. Extract only the encoded value.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Do I need to remove the Data URI prefix?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Paste the complete value. The tool separates the encoded portion internally and uses the image MIME type declared in the prefix.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What do the reported dimensions mean?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">They are the decoded image's natural pixel width and height. They help confirm whether you received the full-size asset, a thumbnail, or an unexpected placeholder.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I decode a Base64 PDF or ZIP here?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. This workflow expects image bytes that can be previewed as PNG, JPEG, WebP, or GIF. Base64 can represent many file types, but valid Base64 is not automatically valid image data.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does decoding change image quality?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Decoding reconstructs the bytes represented by the string. It does not resize or recompress the image, although any compression applied before encoding remains part of the file.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is receiving Base64 safer than receiving a file?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Anyone who can access the complete string can reverse the encoding. Handle a Base64 image with the same care as the original file, especially when it contains confidential information.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-to-base64"><h3 class="font-bold text-[#1a73e8]">Image to Base64</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Encode a supported image into raw Base64 and a complete Data URI.</p></a>
+        <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/svg-to-image"><h3 class="font-bold text-[#1a73e8]">SVG to PNG or JPG</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Perform a real vector-to-raster conversion when decoding alone is not the required operation.</p></a>
+      </section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8">
+        <h2 class="text-2xl font-bold">Inspect your Base64 image</h2>
+        <p class="mt-3 text-sm leading-6 text-white">Paste the string, verify the preview and pixel dimensions, then download the bytes with the matching image format.</p>
+        <a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/base64-to-image">Use Base64 to Image</a>
+      </section>
+    </article>
   </main>
 </body>
 </html>

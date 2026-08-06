@@ -4,93 +4,146 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>How Browser-Based Word and Excel to PDF Works | Guide</title>
-  <meta name="description" content="Learn how DOCX and XLSX files are rendered as PDFs in a browser, including supported formats and layout limitations." />
+  <title>Word to PDF Converter: Browser-Rendered Output</title>
+  <meta name="description" content="Learn how browser-based Word and Excel to PDF conversion renders DOCX and XLSX files, why layouts shift, and why only the first worksheet is included." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/office-pdf.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="How Browser-Based Word and Excel to PDF Works | Guide" />
-  <meta property="og:description" content="Learn how DOCX and XLSX files are rendered as PDFs in a browser, including supported formats and layout limitations." />
+  <meta property="og:title" content="Word to PDF Converter: Browser-Rendered Output" />
+  <meta property="og:description" content="Understand DOCX and XLSX parsing, A4 output, first-sheet limits, canvas rendering, and differences from Microsoft Office export." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/office-pdf.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="How Browser-Based Word and Excel to PDF Works | Guide" />
-  <meta name="twitter:description" content="Learn how DOCX and XLSX files are rendered as PDFs in a browser, including supported formats and layout limitations." />
+  <meta name="twitter:title" content="Word to PDF Converter: Browser-Rendered Output" />
+  <meta name="twitter:description" content="Understand DOCX and XLSX parsing, A4 output, first-sheet limits, canvas rendering, and differences from Microsoft Office export." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Word to PDF Converter: How Browser Rendering Changes the Result",
+        "description": "A practical guide to converting DOCX and XLSX files into browser-rendered PDF while understanding layout and worksheet limitations.",
+        "mainEntityOfPage": "https://www.weconvertfiles.com/guides/office-pdf.html",
+        "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Will the PDF look identical to the Word document?", "acceptedAnswer": { "@type": "Answer", "text": "Not necessarily. DOCX is converted to HTML and rendered by the browser rather than Microsoft Word, so fonts, spacing, page breaks, headers, shapes, and complex tables may change." } },
+          { "@type": "Question", "name": "How many Excel worksheets are included?", "acceptedAnswer": { "@type": "Answer", "text": "Only the first worksheet in the workbook is converted. Move the required sheet into first position or save each sheet in a separate workbook before converting." } },
+          { "@type": "Question", "name": "Can I choose a different PDF page size?", "acceptedAnswer": { "@type": "Answer", "text": "No. The implementation generates A4 portrait pages for Word documents and A4 landscape pages for spreadsheets." } },
+          { "@type": "Question", "name": "Is text in the generated PDF selectable?", "acceptedAnswer": { "@type": "Answer", "text": "The HTML is captured through canvas and added to the PDF as rendered image content, so it should not be relied on as selectable, searchable, or accessibility-structured text." } },
+          { "@type": "Question", "name": "Does the converter recalculate Excel formulas?", "acceptedAnswer": { "@type": "Answer", "text": "No. SheetJS reads values stored in the workbook; the workflow does not run Microsoft Excel's calculation engine. Recalculate and save the workbook before conversion when current formula results matter." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
     <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
+      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a>
       <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
     </div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Word to PDF Converter: How Browser Rendering Changes the Result</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Browser-Rendered</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">This Word to PDF converter reads a DOCX document or an XLSX workbook, turns its content into HTML, and renders that HTML into a PDF. Word files use A4 portrait; spreadsheets use A4 landscape. It is convenient for simple documents, but it is not Microsoft Office's native export engine. Complex layouts can change, Excel conversion includes only the first worksheet, and the canvas-based PDF should not be treated as selectable text.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/office-pdf">Open Word / Excel to PDF<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">How Browser-Based Word and Excel to PDF Works</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Word/Excel to PDF Workaround delivers document conversion directly in the web browser. True PDF conversion requires server-side rendering, but this client-side parser uses mammoth.js to compile Word (.docx) files into HTML structures, and SheetJS to render Excel (.xlsx) spreadsheets as interactive HTML tables. The resulting layout is loaded into an invisible sandbox, and html2pdf.js compiles the DOM nodes into a PDF file. Users should note that complex formatting may vary from the original MS Office files.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/office-pdf">
-        Open Word/Excel to PDF
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When browser-rendered Office conversion makes sense</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Simple documents:</strong> convert an agenda, checklist, letter, or basic report without opening Office.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Read-only snapshots:</strong> share a straightforward worksheet as a fixed view rather than an editable workbook.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Limited devices:</strong> create a PDF on a Chromebook or computer without Word or Excel installed.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Internal circulation:</strong> prepare a quick reference copy where pixel-perfect brand layout is not required.</li>
+      </ul><p class="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-400">For contracts, professional print files, accessibility-critical documents, or highly designed proposals, export from the application that created the document.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload DOCX or XLSX</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Drag your Word doc (.docx) or Excel sheet (.xlsx) file into the upload zone workspace.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Client-Side Parse</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Mammoth.js or SheetJS will compile document streams into HTML DOM structures locally.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Render snapshot</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Html2pdf.js prints the compiled HTML container layout and downloads your new PDF.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Supported files and generated PDF</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Reliable input paths</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">DOCX for Word and XLSX for Excel. The picker may recognize older DOC and XLS files, but legacy Word DOC is not reliably parsed by the DOCX-focused Mammoth workflow. Save legacy files in a modern format first.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Output settings</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A PDF named after the source file, using A4 portrait for Word or A4 landscape for Excel. Margins are 25 points. Only the first Excel worksheet is included.</p></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Check the first worksheet before converting.</strong> SheetJS explicitly selects <code>workbook.SheetNames[0]</code>. Later tabs are not added to the PDF and no warning lists the omitted sheets.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How does client-side Word-to-PDF work?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">It parses Docx XML elements into HTML elements via mammoth.js, inserts them into an invisible browser page, and generates a PDF snapshot using html2pdf.js.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I convert spreadsheet sheets from Excel (.xlsx)?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, the Excel parser reads worksheet grids, formats them into a clean HTML table, and exports the table sheet into PDF format.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Why does my converted PDF look different from MS Office?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Since conversion runs client-side without Microsoft Office engines, complex styles like custom charts, smart shapes, and nested tables are rendered as basic HTML elements, which might cause formatting differences.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to convert Word or Excel to PDF</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Prepare the source</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Save as DOCX or XLSX. Recalculate formulas and move the required worksheet into first position.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Render the document</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Select one file and start conversion. Large documents and tables require more browser memory and time.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Inspect before sharing</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Open the PDF and verify every page break, table edge, font, image, heading, and spreadsheet value.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What happens under the hood</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Three versioned browser libraries handle different stages and are downloaded from third-party CDNs when the tool needs them.</p>
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1. DOCX parsing:</strong> Mammoth.js 1.6.0 converts DOCX structures into HTML. It emphasizes semantic content rather than exact Word-page appearance.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2. Spreadsheet parsing:</strong> SheetJS 0.20.3 reads the workbook, chooses its first sheet, and creates an HTML table.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3. Browser layout:</strong> the implementation places that HTML in a temporary 750-pixel Word container or 1,000-pixel Excel container and applies page-break and table styles.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4. Canvas capture:</strong> html2pdf.js 0.10.1 uses html2canvas at scale 2 and JPEG quality 0.98, then assembles A4 pages through jsPDF.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5. Download:</strong> the generated Blob is saved with the source base name and a <code>.pdf</code> extension.</li>
+        </ol>
+        <p>File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why it can differ from Microsoft Office</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Fonts and page flow</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Unavailable fonts are substituted. Different character widths change line wrapping and page breaks. Word-specific headers, footers, and fixed page positioning may not map to HTML.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Shapes and complex tables</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Layered shapes, text boxes, SmartArt, charts, nested tables, merged cells, and exact widths can be omitted, simplified, or repositioned.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Excel behavior</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The browser reads stored cell values but does not run Excel's calculation engine. Print areas, frozen panes, conditional formatting, charts, and hidden-sheet behavior are not reproduced as Office would.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Text becomes rendered page imagery</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The canvas-capture path produces visual page content rather than structured document text. Do not rely on the result for search, copy-and-paste, tagging, or accessibility.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations and when to export from Office</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">First sheet only:</strong> later Excel worksheets are omitted.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Fixed paper setup:</strong> A4 portrait for Word and A4 landscape for Excel; there is no Letter-size or orientation control.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No fidelity guarantee:</strong> do not use it for contractual layout, brand-critical presentation, professional printing, or exact pagination.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No searchable text guarantee:</strong> canvas-rendered pages do not preserve semantic text structure.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No workbook recalculation:</strong> save current formula results before conversion.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Memory limits:</strong> long documents and very large tables can slow or exhaust the browser.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> Mammoth.js, SheetJS, and html2pdf.js are downloaded from third-party CDNs when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the selected document or workbook contents.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Excel tabs are missing</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Only the first worksheet is rendered. Move the required tab first or save individual sheets as separate workbooks and convert them separately.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Fonts or page breaks changed</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The browser substituted a font or recalculated the HTML flow. Use Word's own export when exact typography and pagination matter.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Spreadsheet columns are cut off</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The table exceeds A4 landscape width. Narrow or hide columns in the workbook, save it, and convert again.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Formula values look outdated</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Open the workbook in spreadsheet software, recalculate it, and save the updated values before converting.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A legacy file will not convert</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Rename is not conversion. Open a DOC or older workbook in compatible software and save it as DOCX or XLSX first.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will the result look identical to Word?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not necessarily. Mammoth produces HTML and the browser lays it out under different rules. Review typography, page breaks, tables, shapes, headers, and images before sharing.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I choose Letter size or orientation?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Current output is fixed to A4 portrait for Word and A4 landscape for Excel. Use Office export when another paper size or orientation is required.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why is only one Excel sheet included?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The implementation selects the first sheet by name and converts only that table. Convert separate workbooks and then use Merge PDF if several sheets must become one file.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I search or select the PDF text?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Do not rely on it. The HTML is captured to canvas and inserted as rendered page imagery, so the result is not suitable when searchable or accessibility-structured text is required.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can several documents be converted together?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">This tool accepts one Office file at a time. Convert files separately, verify each result, and combine the finished PDFs with Merge PDF.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/merge-pdf"><h3 class="font-bold text-[#1a73e8]">Merge PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Combine separately converted documents or worksheets in a chosen order.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/pdf-to-word"><h3 class="font-bold text-[#1a73e8]">PDF to Word / TXT</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Extract an existing PDF text layer into a plain UTF-8 TXT file.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/images-pdf"><h3 class="font-bold text-[#1a73e8]">Images to PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Create a PDF from ordered PNG or JPEG images instead of an Office file.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Create a browser-rendered PDF</h2><p class="mt-3 text-sm leading-6 text-white">Convert one DOCX or XLSX, then inspect every page before relying on the result.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/office-pdf">Use Word / Excel to PDF</a></section>
+    </article>
   </main>
 </body>
 </html>

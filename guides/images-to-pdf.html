@@ -4,99 +4,138 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Images to PDF Guide - Free Browser Tool</title>
-  <meta name="description" content="Combine PNG, JPG, or WebP images into a single PDF." />
+  <title>Images to PDF Converter: Set the Page Order</title>
+  <meta name="description" content="Place PNG and JPG images on ordered A4 PDF pages. Learn how proportional scaling, centering, fixed margins, image quality, and searchable text work." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/images-to-pdf.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Images to PDF Guide - Free Browser Tool" />
-  <meta property="og:description" content="Combine PNG, JPG, or WebP images into a single PDF." />
+  <meta property="og:title" content="Images to PDF Converter: Set the Page Order" />
+  <meta property="og:description" content="Combine PNG and JPEG files into images.pdf with one proportionally fitted image on each A4 portrait page." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/images-to-pdf.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Images to PDF Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Combine PNG, JPG, or WebP images into a single PDF." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="Images to PDF Converter: Set the Page Order" />
+  <meta name="twitter:description" content="Combine PNG and JPEG files into images.pdf with one proportionally fitted image on each A4 portrait page." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "Images to PDF Converter: Turning a Folder of Photos Into One Document", "description": "A practical guide to arranging PNG and JPEG images on separate A4 portrait PDF pages.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/images-to-pdf.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can I put two images on one PDF page?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current layout creates one A4 portrait page for every source image. Combine images in an editor before conversion if several must appear on one page." } },
+          { "@type": "Question", "name": "Will text in photographed documents be searchable?", "acceptedAnswer": { "@type": "Answer", "text": "No. The PDF contains image content, not recognized characters. Making photographed text searchable requires OCR, which this tool does not perform." } },
+          { "@type": "Question", "name": "How is the image order decided?", "acceptedAnswer": { "@type": "Answer", "text": "The visible file-list order becomes the PDF page order. Drag image rows into the required sequence before converting; the merge process does not sort them by filename." } },
+          { "@type": "Question", "name": "Does the converter preserve original image dimensions?", "acceptedAnswer": { "@type": "Answer", "text": "No. Each image is scaled proportionally to fill as much of the available A4 page area as possible inside a 36-point margin, which can enlarge small images." } },
+          { "@type": "Question", "name": "Can I add HEIC or WebP images?", "acceptedAnswer": { "@type": "Answer", "text": "No. This tool accepts PNG and JPEG/JPG. Convert HEIC, WebP, or other formats to a supported format before creating the PDF." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Images to PDF Converter: Turning Photos Into One Document</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">PNG and JPG</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">This images to PDF converter takes PNG and JPEG/JPG files, places one image on each A4 portrait page in the order you set, and downloads <code>images.pdf</code>. Every picture is scaled proportionally to fit inside a 36-point margin and centered on its page. Small images may be enlarged and lose visible sharpness. Text inside photographs remains image content because the tool does not perform OCR.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/images-pdf">Open Images to PDF<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Images to PDF</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Images to PDF compiles PNG, JPG, or WebP images into a single clean PDF document. It runs locally using pdf-lib. The engine scales each image to fit standard page dimensions, adds a new page, and compiles them in sequence. This is perfect for archiving photos, documents, or screenshots.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/images-pdf">
-        Open Images to PDF
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When one PDF is easier than many images</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Expense claims:</strong> place photographed receipts in date order inside one attachment.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Coursework:</strong> turn ordered photographs of handwritten pages into one submission.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Supporting documents:</strong> combine separately photographed or scanned records in a requested sequence.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Inspection evidence:</strong> preserve a simple chronological photo record in a single file.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Reference collections:</strong> share product images or visual examples without sending many separate attachments.</li>
+      </ul></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Add Images</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select one or more PNG, JPG, JPEG, or WebP files from your device.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Reorder Grid</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Drag and drop preview cards to rearrange the sequence of pages as you like.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Generate PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert to compile images in sequence, download, and save the PDF.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Supported files and fixed page layout</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Input and order</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Multiple PNG and JPEG/JPG files. Drag the visible file rows into position. WebP, HEIC, SVG, TIFF, and other formats are not supported here.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">PDF output</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">One <code>images.pdf</code> with A4 portrait pages, one image per page, a 36-point margin on every edge, proportional fitting, and centered placement.</p></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>The displayed list order becomes the page order.</strong> The conversion loop reads <code>state.files</code> from first to last. Drag rows into the required sequence before starting.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What image formats are supported?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">WeConvertFiles supports PNG, JPEG/JPG, and WebP formats. You can mix and match files in the same queue.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does this tool compress my images?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. The images are embedded in their original resolution, ensuring the output PDF preserves maximum graphic detail.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is there a limit on image count?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">There is no hard limit, though large batches of high-resolution images may consume more browser memory.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to turn images into a PDF</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Prepare the images</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Use PNG or JPEG files. Correct cropping and orientation in an image editor before adding them.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Arrange the pages</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Add the files, drag rows into order, and check that every expected image is listed once.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Convert and inspect</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Create <code>images.pdf</code>, then check order, orientation, white space, and sharpness on every page.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How jsPDF builds each page</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The implementation uses <strong class="text-slate-900 dark:text-slate-200">jsPDF 2.5.1</strong>, loaded from a third-party CDN when required. It creates an A4 portrait document measured in typographic points.</p>
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1. Read:</strong> each file becomes a Data URL in browser memory and loads into an <code>Image</code> element.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2. Measure:</strong> 36 points are removed from every edge to calculate the available width and height.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3. Scale:</strong> one ratio is calculated from the page area and source dimensions, preserving the aspect ratio while maximizing the image inside the margins.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4. Center:</strong> remaining horizontal or vertical space is split equally around the image.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5. Add:</strong> PNG data is added as PNG and JPEG data as JPEG, with one new page for every subsequent image.</li>
+        </ol>
+        <p>File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Resolution, scaling, and white space</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Large images are fitted down</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">High-resolution phone photos usually contain enough detail to remain clear when scaled to the printable A4 area.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Small images are enlarged</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The scaling formula has no “do not enlarge” limit. A small screenshot or logo can become soft or blocky because scaling cannot create missing detail.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Aspect ratio is preserved</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The same scale factor is applied to width and height, so images are not intentionally stretched or squashed.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Different shapes leave white space</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A wide landscape photo fills the width and leaves space above and below. That is expected on a fixed portrait page.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations and when to use another workflow</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">No OCR:</strong> photographed words remain pixels and are not selectable, searchable, or accessible text.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Fixed layout:</strong> A4 portrait, 36-point margins, and one image per page cannot be changed.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No editing:</strong> there are no controls for rotation, cropping, captions, color correction, or multiple-image layouts.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No quality control:</strong> the tool offers no target file size or image-compression setting.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Limited formats:</strong> only PNG and JPEG/JPG are accepted.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Memory:</strong> many high-resolution images can slow or exhaust a low-memory browser. Convert smaller batches and merge the results if necessary.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> jsPDF is downloaded from a third-party CDN when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the selected image contents.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Pages are in the wrong order</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Drag the file rows into the correct sequence and convert again. The visible list determines the result.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">An image needs rotation or cropping</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">This tool has no such controls. Correct and save the image in a photo editor before building the PDF.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A page looks blurry</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The source was likely small and was enlarged. Replace it with a higher-resolution image.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">There is considerable white space</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The source shape differs from A4 portrait. Proportional fitting leaves unused space rather than distorting the picture.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A file is rejected</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Confirm its real format is PNG or JPEG. Renaming a HEIC, WebP, or another format does not convert its data.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can two images share one page?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Every source image receives one A4 page. Create a collage in an image editor first if several pictures must appear together.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will photographed text become searchable?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. OCR is required to recognize photographed characters. This tool packages the pixels without creating a PDF text layer.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does conversion reduce image quality?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Large images are scaled down to fit. Small images are enlarged and can appear less sharp because no process can recover detail missing from the source.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I add a cover page or page numbers?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not here. Create a cover separately and merge it with the result. Page numbering is a separate PDF-editing operation.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What about iPhone HEIC photos?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert HEIC files to JPG or PNG first, check the converted pictures, and then add those supported files to this tool.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/merge-pdf"><h3 class="font-bold text-[#1a73e8]">Merge PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Attach the image-based PDF to another document or join smaller batches.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/compress-pdf"><h3 class="font-bold text-[#1a73e8]">Compress PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Reduce a photo-heavy PDF while accepting raster quality trade-offs.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/split-pdf"><h3 class="font-bold text-[#1a73e8]">Split PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Create a separate one-page PDF from every page in the result.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Build an ordered PDF from your images</h2><p class="mt-3 text-sm leading-6 text-white">Arrange supported files, create the document, and inspect every page before sharing it.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/images-pdf">Use Images to PDF</a></section>
+    </article>
   </main>
 </body>
 </html>

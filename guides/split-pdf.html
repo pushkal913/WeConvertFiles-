@@ -4,99 +4,126 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Split PDF Guide - Free Browser Tool</title>
-  <meta name="description" content="Separate pages of a PDF document into individual files." />
+  <title>Split PDF Into Separate Pages: One File Each</title>
+  <meta name="description" content="Split every PDF page into a separate numbered file and download them in a ZIP. Learn what page copying preserves and when Extract Pages is better." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/split-pdf.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Split PDF Guide - Free Browser Tool" />
-  <meta property="og:description" content="Separate pages of a PDF document into individual files." />
+  <meta property="og:title" content="Split PDF Into Separate Pages: One File Each" />
+  <meta property="og:description" content="Turn every source page into page-1.pdf, page-2.pdf, and more inside split-pages.zip." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/split-pdf.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Split PDF Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Separate pages of a PDF document into individual files." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="Split PDF Into Separate Pages: One File Each" />
+  <meta name="twitter:description" content="Turn every source page into page-1.pdf, page-2.pdf, and more inside split-pages.zip." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "Split PDF Into Separate Pages: Every Page Gets Its Own File", "description": "A practical guide to copying every PDF page into a numbered single-page document and ZIP archive.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/split-pdf.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can I split only a selected page range?", "acceptedAnswer": { "@type": "Answer", "text": "No. Split PDF processes every page and creates one PDF per page. Use Extract Pages when you need selected pages in one output document." } },
+          { "@type": "Question", "name": "Does splitting reduce page quality?", "acceptedAnswer": { "@type": "Answer", "text": "Pages are copied as PDF objects rather than rasterized, so the tool does not intentionally lower image resolution or convert vectors and text into page images." } },
+          { "@type": "Question", "name": "What files does Split PDF create?", "acceptedAnswer": { "@type": "Answer", "text": "It creates page-1.pdf, page-2.pdf, and so on, then packages every numbered file inside split-pages.zip. Even a one-page source produces a ZIP." } },
+          { "@type": "Question", "name": "Will forms and document navigation survive splitting?", "acceptedAnswer": { "@type": "Answer", "text": "Do not assume so. Each page is copied into a new document, while bookmarks, outlines, attachments, metadata, scripts, and some interactive form relationships can depend on document-level structures." } },
+          { "@type": "Question", "name": "Are PDF contents uploaded for splitting?", "acceptedAnswer": { "@type": "Answer", "text": "Document contents are processed in browser memory and are not sent to WeConvertFiles for conversion. The required pdf-lib and JSZip libraries are downloaded from third-party CDNs." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Split PDF Into Separate Pages: Every Page Gets Its Own File</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">ZIP Output</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Split PDF takes one source document and creates a separate single-page PDF for every page: <code>page-1.pdf</code>, <code>page-2.pdf</code>, and so on. All results are packaged in <code>split-pages.zip</code>. The workflow is intentionally all-or-nothing; it has no page-range input. Pages are copied as PDF objects instead of being rendered as images.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/split-pdf">Open Split PDF<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Split PDF</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Split PDF separates a single multi-page PDF document into individual single-page PDF files or extracts specific ranges into a ZIP folder. It executes locally in your browser using JavaScript and pdf-lib. The binary structure of each page is isolated, packed into a new PDF header, and zipped client-side.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/split-pdf">
-        Open Split PDF
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When one file per page is useful</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><li><strong class="text-slate-900 dark:text-slate-200">Separate certificates or statements:</strong> turn a combined batch into files that can be renamed and distributed individually.</li><li><strong class="text-slate-900 dark:text-slate-200">File invoices separately:</strong> place each one-page invoice in the correct account or record.</li><li><strong class="text-slate-900 dark:text-slate-200">Upload individual pages:</strong> meet systems that request one supporting page per file.</li><li><strong class="text-slate-900 dark:text-slate-200">Rebuild a document:</strong> split every page, keep the files you need, and merge them in the required order.</li><li><strong class="text-slate-900 dark:text-slate-200">Distribute worksheets:</strong> send one page without sharing the complete pack.</li></ul></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select the multi-page PDF document you wish to split or extract pages from.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose Option</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select whether you want to split all pages or extract specific page groupings/ranges.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Download ZIP</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Split PDF to process your pages locally in memory. They will download bundled in a ZIP.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Splitting is different from extracting</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Split every page</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">This tool always creates one file for each page. A 200-page source creates 200 single-page PDFs inside one ZIP. There is no range, grouping, or exclusion control.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Extract selected pages</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Use <a class="font-semibold text-[#1a73e8]" href="/extract-pages">Extract Pages</a> when you know exactly which pages you want. It accepts page numbers and ranges and returns one PDF containing those selections.</p></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Keep the source PDF.</strong> Splitting creates new documents. Visible page content is copied, but document-level features may not transfer cleanly to isolated one-page files.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I split a PDF into custom page ranges?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. You can choose to split every page individually or extract specific page groupings like page 1 to 5.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is there a file size limit for splitting PDFs?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Since processing happens locally, it depends on your device memory. Files up to 100MB process in seconds.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are my documents safe when using this tool?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. All extraction operations occur strictly in your local browser sandbox. Your files are never uploaded.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to split a PDF into separate pages</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Check the source</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Open the PDF in a viewer, confirm its page count, and keep an untouched copy.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Split every page</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Add one PDF and start. The converter copies pages in their source order and builds the ZIP.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Extract and verify</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Open <code>split-pages.zip</code>, compare page numbers and content, then rename files meaningfully.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How each page is copied</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <ol class="space-y-3"><li><strong class="text-slate-900 dark:text-slate-200">1. Parse:</strong> the browser-compatible pdf-lib-with-encrypt 1.2.1 build reads the source from an ArrayBuffer.</li><li><strong class="text-slate-900 dark:text-slate-200">2. Create:</strong> the loop makes a new empty <code>PDFDocument</code> for each source page.</li><li><strong class="text-slate-900 dark:text-slate-200">3. Copy:</strong> <code>copyPages()</code> copies that page into the new document, which is saved as <code>page-N.pdf</code>.</li><li><strong class="text-slate-900 dark:text-slate-200">4. Package:</strong> JSZip 3.10.1 stores all numbered PDFs and creates <code>split-pages.zip</code>.</li></ol>
+        <p>This is object-level copying, not canvas rendering. Selectable text usually remains text, vector artwork remains vector artwork, and embedded images are not intentionally recompressed. The tool does not perform OCR, compression, rotation, or content editing.</p>
+        <p>File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What may change in separate documents</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Document navigation</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Bookmarks, outlines, page labels, named destinations, and links to other pages can depend on the original document and may be absent or no longer useful.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Forms and scripts</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Interactive fields, calculations, JavaScript, signatures, and document-level relationships should be tested. Use the original for workflows that rely on them.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Metadata and attachments</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The new one-page documents do not automatically reproduce every original document property, attachment, or package-level feature.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">File size</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">There is no compression. The combined size of all generated files can exceed the source because each output has its own PDF structure and may repeat shared resources.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations and practical constraints</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">No selected range:</strong> every page is split. Use Extract Pages for a subset.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Exactly one page per result:</strong> the interface cannot create two-page invoices or five-page chunks.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Generic names:</strong> filenames reflect source order rather than page content. Rename sensitive or distributed files carefully.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Printed numbers can differ:</strong> <code>page-5.pdf</code> means the fifth page object, even if the printed footer says page 1 after a cover and contents section.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Encryption and damage:</strong> protected, malformed, or unusually constructed PDFs may fail or produce incomplete features. Confirm results in a PDF viewer.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Memory is the practical limit:</strong> the code has no page-count or 100 MB promise. The source, generated PDFs, and ZIP consume browser memory.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">PDF contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> pdf-lib and JSZip are downloaded from third-party CDNs when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the contents of the selected PDF.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">I wanted only several pages</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Use Extract Pages and enter the required numbers or ranges. Split PDF intentionally produces every page.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The ZIP will not open</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Download it again in case the transfer was interrupted. Then extract it through the operating system's file manager rather than a PDF viewer.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Filenames do not match printed page numbers</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Numbering follows source order. Covers, introductions, and custom printed labels can make the visible page number different.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A form, bookmark, or link stopped working</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">That feature may depend on structures outside the copied page. Keep and use the source document when interactivity matters.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A long split stalls</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Every one-page document and the final ZIP are built in memory. Close other tabs or process a shorter source document.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does splitting lower visual quality?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The pages are copied rather than rasterized, so the tool does not intentionally reduce image resolution or turn text and vectors into page-sized pictures.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will the files remain searchable?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Usually, if the source stored real text. A scanned page remains an image because splitting does not perform OCR.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I create multi-page groups?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not directly. Split first and merge the required page files, or use Extract Pages for a known group.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What happens with a one-page PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The loop creates <code>page-1.pdf</code> and packages it in <code>split-pages.zip</code>. Splitting provides little benefit in that case.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I undo a split?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The original is not modified. Keep it, or merge the numbered files in order if you need a reconstructed copy.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/extract-pages"><h3 class="font-bold text-[#1a73e8]">Extract Pages</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Copy selected pages and ranges into one new PDF.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/merge-pdf"><h3 class="font-bold text-[#1a73e8]">Merge PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Rejoin chosen single-page files in your preferred order.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/compress-pdf"><h3 class="font-bold text-[#1a73e8]">Compress PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Create a rasterized visual copy when reducing size matters more than structure.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Give every page its own file</h2><p class="mt-3 text-sm leading-6 text-white">Split the complete document, extract the ZIP, and verify each numbered page before renaming or distributing it.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/split-pdf">Split a PDF</a></section>
+    </article>
   </main>
 </body>
 </html>
