@@ -4593,7 +4593,12 @@ async function handleRoute() {
     }
   }
 
-  const path = document.documentElement.dataset.toolId || window.location.pathname.replace(/^\/|\/$/g, '');
+  // Derive the active tool from the live route (window.location.pathname is always
+  // current, including after pushState/popstate), not the page's static build-time
+  // data-tool-id attribute. That attribute never changes after pushState navigation,
+  // which previously kept single-tool pages stuck on whichever tool they were
+  // generated for, even once the URL and DOM had "moved on" via pushState.
+  const path = window.location.pathname.replace(/^\/|\/$/g, '');
   if (tools.some(tool => tool.id === path)) {
     updateSeoMetadata(path);
     await openTool(path);
@@ -6893,7 +6898,12 @@ document.addEventListener('click', event => {
     handleRoute();
   }
 
-  const toolButton = event.target.closest('[data-tool-id]');
+  // Scoped to <button> so this only matches real dashboard tool-card buttons.
+  // A plain `[data-tool-id]` selector also matches <html>, which carries a
+  // static, build-time data-tool-id on every generated tool page -- letting
+  // closest() bubble all the way up and spuriously re-navigate to that page's
+  // own original tool on unrelated clicks (e.g. Back to Dashboard, the logo).
+  const toolButton = event.target.closest('button[data-tool-id]');
   if (toolButton) {
     const toolId = toolButton.dataset.toolId;
     history.pushState(null, '', `/${toolId}`);
