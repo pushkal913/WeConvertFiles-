@@ -4,96 +4,153 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Excel to CSV / JSON Guide - WeConvertFiles</title>
-  <meta name="description" content="Convert Microsoft Excel spreadsheet sheets into clean CSV tables or JSON lists offline." />
+  <title>Excel to CSV or JSON: Export the First Sheet</title>
+  <meta name="description" content="Turn the first worksheet of an XLS or XLSX file into a CSV file or a JSON array of row arrays. Only that first sheet is exported, and styling is dropped." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/excel-to-csv.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Excel to CSV / JSON Guide - WeConvertFiles" />
-  <meta property="og:description" content="Convert Microsoft Excel spreadsheet sheets into clean CSV tables or JSON lists offline." />
+  <meta property="og:title" content="Excel to CSV or JSON: Export the First Sheet" />
+  <meta property="og:description" content="How SheetJS exports the workbook's first worksheet as CSV or a JSON array of arrays, and the data types to check afterward." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/excel-to-csv.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Excel to CSV / JSON Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Convert Microsoft Excel spreadsheet sheets into clean CSV tables or JSON lists offline." />
+  <meta name="twitter:title" content="Excel to CSV or JSON: Export the First Sheet" />
+  <meta name="twitter:description" content="How SheetJS exports the workbook's first worksheet as CSV or a JSON array of arrays, and the data types to check afterward." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "Excel to CSV or JSON: Export the First Sheet", "description": "How the tool exports a workbook's first worksheet as CSV or a JSON array of row arrays with SheetJS, and which data types to verify.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/excel-to-csv.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can I choose which worksheet to export?", "acceptedAnswer": { "@type": "Answer", "text": "No. The first worksheet in the workbook is always used, regardless of which sheet was active when the file was saved. Reordering the tabs in Excel so your data sits first is the only way to change what gets exported." } },
+          { "@type": "Question", "name": "Why is the JSON not keyed by my column headers?", "acceptedAnswer": { "@type": "Answer", "text": "The export produces plain nested arrays, with the header row appearing as the first array. Turning that into keyed objects is straightforward in code, but it is a step you write yourself rather than something the tool performs." } },
+          { "@type": "Question", "name": "Does the tool calculate my formulas?", "acceptedAnswer": { "@type": "Answer", "text": "No. It reads the values stored in the file. A browser tool is not a spreadsheet calculation engine, so anything depending on recalculation should be sorted out in Excel before you export." } },
+          { "@type": "Question", "name": "Does .xls work as well as .xlsx?", "acceptedAnswer": { "@type": "Answer", "text": "Both are accepted. The .xls format is the older binary one and .xlsx the modern one; the library reads either, and the export is the same in both cases." } },
+          { "@type": "Question", "name": "Is my original workbook modified?", "acceptedAnswer": { "@type": "Answer", "text": "No. The file is read and a new export is produced. Nothing is written back to your spreadsheet." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Excel to CSV or JSON: Export the First Sheet</h1><span class="rounded-full bg-green-50 dark:bg-green-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-green-700 dark:text-green-400 border border-green-200/50 dark:border-green-900/50">First Worksheet Only</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Spreadsheets carry far more than data: column widths, cell colours, charts, validation rules, macros. When you need to move the values into a database, a script, or another system, most of that is in the way. This tool reads a workbook and exports the values from one worksheet as CSV (a plain text table) or JSON (structured data for code). The most important thing to know first: <strong class="text-slate-900 dark:text-slate-200">only the first worksheet is exported</strong> — not the sheet you had open when you saved, but the first one in the workbook's own order.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/excel-to-csv">Open Excel to CSV / JSON<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Excel to CSV / JSON</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">XLSX / XLS</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Excel to CSV / JSON converts MS Excel worksheets (.xlsx, .xls) into clean CSV data sheets or JSON array nodes. The client-side parser uses SheetJS to decode binary spreadsheets, extract cell matrices, and format tabular rows offline.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/excel-to-csv">
-        Open Excel Converter
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When this tool is useful</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Importing a list into another system:</strong> CRMs, e-commerce platforms, and mailing tools almost universally accept CSV and rarely accept XLSX directly.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Feeding data into a script:</strong> a Python or JavaScript program is far simpler to write against CSV or JSON than a spreadsheet format.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Loading rows into a database:</strong> bulk import tools expect delimited text.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Passing data to someone with no Excel:</strong> CSV opens in any text editor, on any system, without licensed software.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Building a small data file for a web page:</strong> JSON is what browser code expects, and a short lookup table is quicker to export than to hand-type.</li>
+      </ul></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload Spreadsheet</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select your Excel document (.xlsx or .xls file) from your storage.</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select Format</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose between CSV (Comma-separated columns) or JSON (Nested array structure) options.</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Export Data</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert. The sheet cells are parsed locally and downloaded as a formatted file.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the export works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The tool uses <strong class="text-slate-900 dark:text-slate-200">SheetJS</strong>, a JavaScript library that reads spreadsheet formats in the browser. Your workbook is parsed, and the tool takes the <strong class="text-slate-900 dark:text-slate-200">first worksheet</strong> — always the first, with no selector and no detection of which sheet was active when you last saved — and reads its cell values. For CSV, those values are written as lines of text with commas between cells. For JSON, they are assembled into nested arrays and formatted with two-space indentation.</p>
+        <p>What gets read are <strong class="text-slate-900 dark:text-slate-200">values</strong>, not the machinery that produced them. If a cell contains a formula, what comes out is the result stored in the file. This tool does not recalculate anything; it is not a spreadsheet engine. A workbook saved with stale results will export those stale results.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      
-      
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I convert multi-sheet Excel files?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">By default, the tool converts the first sheet of the uploaded workbook. You can export it as a clean CSV table or a structured JSON array.</p>
-      </div>
-      
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are Excel formulas preserved?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The parser reads the computed static values of cells rather than dynamic cell equations, ensuring output CSV/JSON has correct content.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What the JSON actually looks like</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>JSON output is an <strong class="text-slate-900 dark:text-slate-200">array of row arrays</strong>, worth seeing rather than describing. A small sheet with a header row <code>Region, Units, Opened</code> and two data rows exports as:</p>
+        <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/50 p-4"><pre class="text-xs leading-5 text-slate-700 dark:text-slate-300"><code>[
+  [
+    "Region",
+    "Units",
+    "Opened"
+  ],
+  [
+    "North",
+    120,
+    "2026-01-14"
+  ],
+  [
+    "South",
+    95,
+    "2026-01-15"
+  ]
+]</code></pre></div>
+        <p>Note what this is <strong class="text-slate-900 dark:text-slate-200">not</strong>: it is not an array of objects keyed by your header row. There are no <code>{"Region": "North"}</code> structures. The header row is simply the first array in the list. Numeric cells come through as JSON numbers (unquoted, like <code>120</code>), while text stays quoted. If your code expects keyed objects, take the first array as your keys and map the rest against it, a few lines you write yourself.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Step by step</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Put your data first</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Check which sheet sits first in the workbook. If the data you want is elsewhere, drag its tab to the front and save.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Pick a format</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Select one <code>.xls</code> or <code>.xlsx</code> file and choose CSV (the default) or JSON before converting.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Check the awkward columns</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Open the file and inspect dates, reference numbers with leading zeros, long numeric IDs, and anything containing commas.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">CSV or JSON: which to pick</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Choose CSV when</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The data is going into another application that imports tables: a CRM, a mailing platform, an accounting package, a database import wizard, or another spreadsheet. CSV is the universal exchange format for tabular data, readable by effectively everything. Its filename follows your source, so <code>sales-q1.xlsx</code> becomes <code>sales-q1.csv</code>.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Choose JSON when</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The data is going into code. Web applications, APIs, and scripts consume JSON natively, without parsing delimiters or worrying about quoting rules. The nested-array structure maps directly to a two-dimensional list in most languages. A rough guide: if a human opens the file in a spreadsheet program, use CSV; if a program reads it, use JSON.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Data types to check after conversion</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Dates</strong> may export in a different form than Excel displayed, since display formatting and stored value are separate things.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Leading zeros</strong> on reference codes and postcodes can be lost if the cell held the value as a number.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Long numeric IDs</strong> may have been stored in a form that loses precision.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Values containing commas</strong> need correct quoting in CSV to survive import, so check that any free-text column came through intact.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Important limitations</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Only the first worksheet is exported:</strong> no sheet selector, no multi-sheet export, no batch processing of several workbooks.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">This exports values, not a workbook:</strong> charts, images, pivot tables, macros, conditional formatting, validation rules, comments, merged cells, and styling are all outside what CSV or JSON can carry.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Formulas are not preserved as formulas:</strong> you get whatever result was stored when the file was saved.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">CSV has no formatting layer:</strong> no colours, no column widths, no multiple sheets. That is the format doing its job, not a fault.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Encrypted or damaged workbooks may fail:</strong> the library needs to read the file.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> The SheetJS library is downloaded from a third-party CDN when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the selected workbook contents.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The wrong data came out</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The workbook's first sheet was not the one you wanted. Reorder the tabs in Excel so your data sits first, save, and convert again.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Dates look wrong or appear as numbers</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Spreadsheets store dates as numbers and apply a display format on top. The export takes the stored value, so convert the column to text in a copy of your workbook before exporting if the exact displayed form matters.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Leading zeros have disappeared</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The cell contained a number, and numbers have no leading zeros. Format the column as text in your workbook before exporting.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A formula result looks out of date</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The export reads what the file stored. Open the workbook, let it recalculate, save, and convert again.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A text column split across several CSV columns</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The values contain commas and were not quoted as your importing application expects. Check the raw file in a text editor to see how the values were written.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I choose which worksheet to export?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The first worksheet in the workbook is always used, regardless of which sheet was active when the file was saved. Reordering the tabs in Excel so your data sits first is the only way to change what gets exported.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why is the JSON not keyed by my column headers?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The export produces plain nested arrays, with the header row appearing as the first array. Turning that into keyed objects is straightforward in code, but it is a step you write yourself rather than something the tool performs.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool calculate my formulas?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It reads the values stored in the file. A browser tool is not a spreadsheet calculation engine, so anything depending on recalculation should be sorted out in Excel before you export.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will my column widths and cell colours survive?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No, and they could not. CSV and JSON are data formats with no concept of presentation. If you need the workbook's appearance preserved, converting it to PDF keeps the layout as a fixed document.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does .xls work as well as .xlsx?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Both are accepted. The .xls format is the older binary one and .xlsx the modern one; the library reads either, and the export is the same in both cases.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is my original workbook modified?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The file is read and a new export is produced. Nothing is written back to your spreadsheet.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-2"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/office-pdf"><h3 class="font-bold text-[#1a73e8]">Word or Excel to PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">When you need the sheet's appearance preserved for reading rather than its values extracted for processing.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/pdf-to-word"><h3 class="font-bold text-[#1a73e8]">PDF to Word / TXT</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">When the data you need is trapped in a PDF rather than a workbook, this pulls out the text it contains.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Get portable data out of a workbook</h2><p class="mt-3 text-sm leading-6 text-white">Put your data on the first sheet, choose CSV or JSON, and download a clean file named after your workbook, with the original left untouched.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/excel-to-csv">Use Excel to CSV / JSON</a></section>
+    </article>
   </main>
 </body>
 </html>

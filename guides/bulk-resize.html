@@ -4,93 +4,145 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Bulk Image Resizer Guide - WeConvertFiles</title>
-  <meta name="description" content="Resize multiple images in bulk by percentage or dimensions locally and download as a ZIP file." />
+  <title>Resize Many Images at Once in Your Browser</title>
+  <meta name="description" content="Resize a batch of JPG, PNG and WebP images by percentage, width or height. Formats and filenames are kept, and everything arrives in a single ZIP." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/bulk-resize.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Bulk Image Resizer Guide - WeConvertFiles" />
-  <meta property="og:description" content="Resize multiple images in bulk by percentage or dimensions locally and download as a ZIP file." />
+  <meta property="og:title" content="Resize Many Images at Once in Your Browser" />
+  <meta property="og:description" content="How batch resizing re-encodes each image on a canvas, the three sizing modes, and why a 100% pass is still a re-encode." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/bulk-resize.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Bulk Image Resizer Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Resize multiple images in bulk by percentage or dimensions locally and download as a ZIP file." />
+  <meta name="twitter:title" content="Resize Many Images at Once in Your Browser" />
+  <meta name="twitter:description" content="How batch resizing re-encodes each image on a canvas, the three sizing modes, and why a 100% pass is still a re-encode." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "Resize Many Images at Once in Your Browser", "description": "How browser-based batch resizing re-encodes images on a canvas, the three sizing modes and the aspect-ratio lock, and why a 100% pass still re-encodes.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/bulk-resize.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does resizing crop anything off my photos?", "acceptedAnswer": { "@type": "Answer", "text": "No. The entire image is preserved, the same scene and framing, with fewer or more pixels. Cropping is a separate operation that discards part of the picture." } },
+          { "@type": "Question", "name": "Can I convert formats at the same time, say PNG to JPG?", "acceptedAnswer": { "@type": "Answer", "text": "No. Each image comes back in the format it went in as. Format conversion is a different job and would need a different tool." } },
+          { "@type": "Question", "name": "Why is the quality fixed at 0.85 for JPEG and WebP?", "acceptedAnswer": { "@type": "Answer", "text": "There is no exposed setting for it. 0.85 is a high value that keeps images looking clean while reducing file size, and it applies to every JPEG and WebP in the batch. PNG is lossless and is not affected by that value in the same way." } },
+          { "@type": "Question", "name": "What happens if I resize an image larger than its original size?", "acceptedAnswer": { "@type": "Answer", "text": "The pixels are interpolated, so the browser invents intermediate values. The file gets bigger without gaining real detail and edges look softer. The 200% ceiling permits it, but starting from a larger original is always better." } },
+          { "@type": "Question", "name": "Can I apply different sizes to different images in one run?", "acceptedAnswer": { "@type": "Answer", "text": "No. One setting applies to the entire batch. Group images that need the same treatment and run each group separately." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Resize Many Images at Once in Your Browser</h1><span class="rounded-full bg-orange-50 dark:bg-orange-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-orange-700 dark:text-orange-400 border border-orange-200/50 dark:border-orange-900/50">One Rule, Whole Batch</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Modern cameras and phones produce images far larger than most uses require, and resizing forty of them one at a time is an afternoon you will not get back. This tool applies the same resizing rule to a whole set of JPG, PNG, and WebP images at once. Scale everything by a percentage, or set a target width or height; the results arrive as <code>resized_images.zip</code>, keeping their original filenames and formats. Worth being clear about upfront: this resizes, it does not crop. Every image still shows exactly what it showed before, just at different pixel dimensions.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/bulk-resize">Open Bulk Image Resizer<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Bulk Image Resizer</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Bulk Image Resizer allows you to batch scale, crop, and resize multiple graphic files (PNG, JPG, WebP) simultaneously without uploading them. The client-side processor loads the selected file list, reads their pixel layouts onto canvas grids, and scales their coordinates. Users can select percentage scales, target pixel widths, or target heights while preserving original aspect ratios. Once resizing is complete, the tool leverages JSZip to compress all output image files into a single, clean ZIP package. This offline processing is fast, resource-efficient, and secure.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/bulk-resize">
-        Open Bulk Image Resizer
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When a batch resize helps</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Preparing photos for a web gallery:</strong> full-resolution originals slow pages badly; a consistent width across a set makes a gallery load and lay out predictably.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Getting a batch under an email limit:</strong> twenty photos at phone resolution will not attach; the same twenty at half scale usually will.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Producing catalogue thumbnails:</strong> a uniform width across product images keeps a grid tidy.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Sending photos to family:</strong> nobody needs forty-megapixel originals to look at pictures on a phone.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Standardising screenshots:</strong> a set captured on different displays at different resolutions can be brought to one common width.</li>
+      </ul></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload Multiple Images</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select any number of JPEG, PNG, or WebP files to resize simultaneously.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Define Output Dimensions</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose resizing by scale percentage, width, or height, and check the aspect ratio lock if desired.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Generate ZIP</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert. The browser scales all files in memory, compiles them, and triggers a clean ZIP download.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Decode, redraw, re-encode</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The tool uses the browser's own image and canvas capabilities rather than an external image-processing library. Each image is decoded, drawn onto a canvas at the new dimensions your settings produce, and encoded back into a file. Images are processed sequentially, one after another, which keeps memory use manageable on a long list. JSZip then packages the results into a single archive.</p>
+        <p>Three details follow from that re-encoding step:</p>
+        <ul class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">JPEG and WebP are encoded at quality 0.85.</strong> That is a high setting, but it means these formats are re-compressed rather than simply copied. PNG, being lossless, is not affected by that quality value in the same way.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">A 100% resize is still a re-encode.</strong> Leaving the percentage at its default does not hand back your original files untouched; the images pass through the same decode-and-encode cycle, so results are not guaranteed to be byte-identical to what you put in.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Re-encoding may drop metadata.</strong> EXIF such as capture date, camera settings, and GPS coordinates is often not carried into a canvas-produced file. Keep your originals if that data matters.</li>
+        </ul>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How do I resize a batch of images at once?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Upload multiple JPEG/PNG/WebP files into our workspace dropzone, select your target dimensions (or percentage scale), choose whether to maintain aspect ratios, and click convert to download them all compiled in a ZIP archive.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What formats does the bulk resizer support?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">It supports standard web formats including JPEG, PNG, and WebP, outputting them in high quality.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is there a limit to the number of images I can batch process?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">There is no hardcoded cap, but processing speed depends on your local hardware resources. We recommend batches of up to 50 images for optimal performance.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">The three modes</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Percentage scale</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Multiplies both dimensions by your figure, between 10% and 200% (default 100). Proportions are always preserved. A 4000&times;3000 photo at 50% becomes 2000&times;1500. Best when images have varying sizes and you want them all reduced by the same factor.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Target width</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Sets a fixed pixel width. With the aspect lock on, height is calculated proportionally so each image keeps its shape. With the lock off, height stays as it was, which stretches the picture. The mode for a gallery where every image must share a width.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Target height</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The same in the other axis. With the lock on, width is calculated proportionally; with it off, the original width stays while the height changes. The mode for a fixed-height banner or row.</p></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Values above 100%, or target dimensions larger than the source, enlarge images.</strong> Enlarging cannot add detail that was never captured, so upscaled results look softer. The 10&ndash;200% range allows it, but it is rarely a good idea. The aspect-ratio lock is on by default; it governs the width and height modes, and in percentage mode proportions are preserved regardless.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Step by step</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select the images</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Add several JPG, PNG, or WebP files at once. Check that no two share a filename, which can conflict inside the archive.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose a mode and value</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Percentage (10&ndash;200), target width, or target height in pixels. Leave the aspect-ratio lock on unless you specifically want to distort the images.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Run and download</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Images are handled one after another, so a long list takes proportionally longer. Download <code>resized_images.zip</code> and check a couple of results.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What the archive keeps</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Filenames are preserved.</strong> <code>beach-sunset.jpg</code> goes in and comes out as <code>beach-sunset.jpg</code>, which matters when your images are already referenced by name somewhere.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Formats are preserved.</strong> A JPG stays a JPG, a PNG stays a PNG, a WebP stays a WebP. This is not a format converter, so mixing formats in one batch is fine and each file comes back as what it was. Dimensions follow your chosen mode, applied identically to every image, with no per-image settings.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Choosing a mode for the job</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Web gallery or grid:</strong> target width with the lock on. Consistent width makes a layout behave; varying heights is normal and usually fine.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Reducing everything for email or storage:</strong> percentage scale. It handles a mixed set sensibly without you knowing any individual image's dimensions.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Fixed-height banner or row:</strong> target height with the lock on.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Exactly one size in both dimensions:</strong> no single setting achieves that without distortion, because sources have different proportions. Crop each to a common ratio first with <a class="font-semibold text-[#1a73e8]" href="/image-cropper">Crop Image</a>, then resize the batch.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations worth knowing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">This is not cropping:</strong> framing and composition are untouched. To change what an image shows, use the Crop Image tool.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Unlocking the aspect ratio distorts images:</strong> faces stretch and circles become ovals. The option exists for the occasional case where it is wanted; most of the time, leave it on.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No quality slider and no target file size:</strong> JPEG and WebP use a fixed quality of 0.85, and dimensions are the only lever you have.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No per-image control, cropping, watermarking, rotation, or format conversion:</strong> one setting applies to the whole batch.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Duplicate filenames can conflict:</strong> two files with the same name, a common result of selecting from multiple folders, may collide inside the archive. Rename before you start.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Animated WebP is not something to rely on:</strong> canvas processing typically works from a single frame, so test before assuming an animated file survives intact.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Memory is the practical ceiling:</strong> there is no coded limit, but every file is decoded and the archive assembled in the browser, so very large batches may be slow or fail on a modest device. Splitting into groups is reliable. HEIC is not accepted; convert Apple photos first with the <a class="font-semibold text-[#1a73e8]" href="/heic-to-jpg">HEIC to JPG or PNG tool</a>.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> Resizing uses the browser's built-in canvas, and JSZip is downloaded from a third-party CDN when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the selected images.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Some images look stretched</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The aspect-ratio lock was disabled. Re-run the batch from your originals with it enabled.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A file is missing from the archive</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Check for duplicate filenames in your selection; two identically named files may conflict inside the ZIP. Rename and run again.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The resized images look soft</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Either they were enlarged beyond their original dimensions, or reduced very heavily. Neither is recoverable; work from higher-resolution sources where possible.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The photos lost their dates and locations</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Re-encoding through a canvas generally does not carry EXIF data across. Your originals still have it.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">I set 100% and the files still changed size</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Every image passes through decode and re-encode regardless of the percentage, and JPEG and WebP are re-compressed at quality 0.85. A 100% pass is not a copy operation.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does resizing crop anything off my photos?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The entire image is preserved, the same scene and framing, with fewer or more pixels. Cropping is a separate operation that discards part of the picture.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I convert formats at the same time, say PNG to JPG?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Each image comes back in the format it went in as. Format conversion is a different job and would need a different tool.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why is the quality fixed at 0.85 for JPEG and WebP?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">There is no exposed setting for it. 0.85 is a high value that keeps images looking clean while reducing file size, and it applies to every JPEG and WebP in the batch. PNG is lossless and is not affected by that value in the same way.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What happens if I resize an image larger than its original size?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The pixels are interpolated, so the browser invents intermediate values. The file gets bigger without gaining real detail and edges look softer. The 200% ceiling permits it, but starting from a larger original is always better.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">How many images can I process at once?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No limit is coded in, so the honest answer is as many as your device's memory allows. Batches of a few dozen are more dependable than several hundred, particularly with high-resolution photos.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I apply different sizes to different images in one run?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. One setting applies to the entire batch. Group images that need the same treatment and run each group separately.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-cropper"><h3 class="font-bold text-[#1a73e8]">Crop Image</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Change what an image shows before resizing the set, useful when you need a common shape as well as a common size.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/heic-to-jpg"><h3 class="font-bold text-[#1a73e8]">HEIC to JPG or PNG</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert Apple photos into a format this tool accepts.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/images-pdf"><h3 class="font-bold text-[#1a73e8]">Images to PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Assemble your resized images into a single document for sending or printing.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Shrink a whole folder of images in one pass</h2><p class="mt-3 text-sm leading-6 text-white">Add your JPG, PNG, and WebP files, pick a mode, and download <code>resized_images.zip</code> with every filename and format preserved.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/bulk-resize">Use Bulk Image Resizer</a></section>
+    </article>
   </main>
 </body>
 </html>

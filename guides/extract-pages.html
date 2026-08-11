@@ -4,99 +4,136 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Extract Pages Guide - Free Browser Tool</title>
-  <meta name="description" content="Extract specific pages or ranges from a PDF document." />
+  <title>Extract Selected Pages Into a New PDF File</title>
+  <meta name="description" content="Enter page numbers like 1,3-5 to build a new PDF from just those pages. Your chosen order is kept, duplicates are dropped, and the source document is left unchanged." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/extract-pages.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Extract Pages Guide - Free Browser Tool" />
-  <meta property="og:description" content="Extract specific pages or ranges from a PDF document." />
+  <meta property="og:title" content="Extract Selected Pages Into a New PDF File" />
+  <meta property="og:description" content="How to build a new PDF from chosen pages with pdf-lib, the exact selection syntax, and why extracting differs from splitting." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/extract-pages.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Extract Pages Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Extract specific pages or ranges from a PDF document." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="Extract Selected Pages Into a New PDF File" />
+  <meta name="twitter:description" content="How to build a new PDF from chosen pages with pdf-lib, the exact selection syntax, and why extracting differs from splitting." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "Extract Selected Pages Into a New PDF File", "description": "How to build a new PDF from chosen pages with pdf-lib page copying, the exact selection rules, and how extracting differs from splitting.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/extract-pages.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How do I extract pages in reverse order?", "acceptedAnswer": { "@type": "Answer", "text": "List them individually in the order you want, such as 8,7,6,5. Descending ranges like 8-5 are rejected, but nothing stops you typing the numbers out in descending sequence." } },
+          { "@type": "Question", "name": "Does extracting reduce quality?", "acceptedAnswer": { "@type": "Answer", "text": "No. Pages are copied as PDF pages rather than redrawn, so text stays as text and images keep their original data. The extracted pages are visually identical to the originals." } },
+          { "@type": "Question", "name": "Can I pull pages from two different PDFs into one file?", "acceptedAnswer": { "@type": "Answer", "text": "Not in a single step. Extract from each document separately, then combine the two results with Merge PDF." } },
+          { "@type": "Question", "name": "Will the new PDF renumber its pages?", "acceptedAnswer": { "@type": "Answer", "text": "The document's internal page order restarts at 1, but any page numbers printed on the pages themselves are part of the page artwork and stay as they were. An extracted page 12 still shows 12 printed on it." } },
+          { "@type": "Question", "name": "Is my original file changed at all?", "acceptedAnswer": { "@type": "Answer", "text": "No. The source PDF on your device is read but never written to. A mistaken selection costs nothing more than repeating the operation." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Extract Selected Pages Into a New PDF File</h1><span class="rounded-full bg-amber-50 dark:bg-amber-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-amber-700 dark:text-amber-400 border border-amber-200/50 dark:border-amber-900/50">Select &amp; Reorder</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">A sixty-page report contains the four pages someone actually asked for. Sending the whole thing is lazy; printing and rescanning is worse. Type the page numbers you want, something like <code>1,3-5</code>, and this tool builds a new document from just those, saved as <code>extracted-pages.pdf</code>. A detail people miss and then find genuinely useful: the output follows the order you type, so extraction and reordering happen in the same step.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/extract-pages">Open Extract Pages<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Extract Pages</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Extract Pages allows you to isolate and save only the pages you need from a larger PDF. By typing page numbers or ranges, the local parser builds a new page catalog, copies the page object references in-memory, and compiles them into a new document instantly.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/extract-pages">
-        Open Extract Pages
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When this is the right tool</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Sending one section of a long report:</strong> a finance team needs pages 12 to 18, not the full document and not a note telling them where to look.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Isolating a form from a pack:</strong> an application bundle contains one page that needs completing, signing, and returning.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Building a sample:</strong> a few representative pages of a proposal or portfolio, shared with someone who does not need the whole thing.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Beating a size-limited upload:</strong> a portal that rejects large attachments will often accept the handful of pages that matter.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Reordering while you extract:</strong> putting a summary page ahead of the detail it refers to, in one operation.</li>
+      </ul></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Upload the PDF document from which you wish to extract pages.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Enter Page Ranges</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Type your target page numbers or sequences, for example: 1, 3-5, 8.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Extract File</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Extract Pages to create a new PDF consisting only of your selected pages.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How pages are copied, not redrawn</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The tool uses <strong class="text-slate-900 dark:text-slate-200">pdf-lib</strong>, a JavaScript library that reads and writes PDF files in the browser. Your document is parsed, a new empty document is created, and for each page number you entered, in the order you entered it, the matching page is copied from the source into the new file. The new document is then written out for download.</p>
+        <p>The key word is <strong class="text-slate-900 dark:text-slate-200">copied</strong>. Pages are transferred as PDF pages, not redrawn as images, so selectable text stays selectable, vector diagrams stay sharp, and image quality is unchanged. Nothing about the visible content of a page is altered by extracting it, and no compression is applied. Before any copying happens, your input is validated, with page numbering starting at 1 — the first page of the document is page 1, not page 0.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I extract non-consecutive pages?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, you can enter any sequence separated by commas, such as 1, 4, 7, 9.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does this change my original PDF file?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. The extraction runs in memory and creates a new copy, leaving your source file completely untouched.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is there a limit to how many pages I can extract?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No, you can extract any number of pages as long as they exist in the source document.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">The page selection rules</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-emerald-200/60 dark:border-emerald-900/40 bg-emerald-50/40 dark:bg-emerald-950/20 p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Accepted</h3><ul class="mt-2 space-y-2 text-sm leading-6 text-slate-600 dark:text-slate-400"><li>Single pages separated by commas: <code>2,7,9</code></li><li>Ranges written low to high: <code>4-11</code></li><li>A mixture of both: <code>1,3-5,20</code></li><li>Spaces around commas are tolerated: <code>1, 3-5</code></li></ul></div>
+        <div class="rounded-2xl border border-rose-200/60 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-950/20 p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Rejected</h3><ul class="mt-2 space-y-2 text-sm leading-6 text-slate-600 dark:text-slate-400"><li>Blank input; you must specify something.</li><li>Descending ranges: <code>9-4</code> is invalid.</li><li>Non-integer values; decimals and text.</li><li>Out-of-range numbers, such as page 40 of a 30-page file.</li></ul></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Order:</strong> the sequence you type is the sequence you get. <code>10,2,6</code> produces a three-page document in exactly that order.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Duplicates:</strong> if you enter the same page twice, the repeat is dropped. <code>3,1,3</code> gives pages 3 and 1 — the first occurrence sets the position, and the second mention of page 3 is ignored. A page cannot appear twice in the output.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Reverse order:</strong> descending ranges are rejected, but listing numbers individually works: <code>9,8,7,6,5,4</code>.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Step by step</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Count actual positions</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Identify pages by their position in the file, counting from the first page. Printed numbers often begin after a cover and contents section.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Enter the selection</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Commas separate numbers, a hyphen makes a range: <code>1,3-5</code> gives pages 1, 3, 4, and 5. Type them in the sequence you want them.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Generate and check</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Download <code>extracted-pages.pdf</code> and open it to confirm the pages are the ones you meant, in the order you meant.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Extracting versus splitting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>WeConvertFiles has two tools that sound similar and suit opposite situations.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Extract Pages</strong>, this tool, is selective. You name the pages you want and receive one new PDF containing them, in your chosen order. Use it when you know which pages you need and want them together.</p>
+        <p><a class="font-semibold text-[#1a73e8]" href="/split-pdf">Split PDF</a> is exhaustive. It produces a separate one-page file for every page in the document, delivered as a ZIP archive, with no selection. Use it when a document is really a stack of individual items, such as batched certificates or combined invoices, that each need to exist as their own file.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">A quick way to decide:</strong> if you would end up deleting most of the files that Split produces, you wanted Extract.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations worth knowing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Text is not extracted:</strong> this produces a PDF, not editable text. For wording, the <a class="font-semibold text-[#1a73e8]" href="/pdf-to-word">PDF to Word / TXT tool</a> extracts text from PDFs that contain it.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Whole pages only:</strong> you get complete pages with their surrounding text and layout, not the individual images inside them.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Document-level features may not transfer:</strong> bookmarks, outlines, attachments, metadata, form fields, and cross-page links live at document level and may not survive into the new file. Check any document where those matter.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Selection only:</strong> pages cannot be rotated, cropped, or altered here, only chosen.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">One source at a time:</strong> one PDF in, one PDF out. To combine pages from two documents, extract from each and join the results with <a class="font-semibold text-[#1a73e8]" href="/merge-pdf">Merge PDF</a>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Unreadable files fail:</strong> encrypted, restricted, or damaged PDFs may not open, and long documents hold both the source and the new file in browser memory.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> pdf-lib is downloaded from a third-party CDN when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the selected PDF contents.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The wrong pages came out</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Almost always printed page numbers versus actual positions in the file. A page labelled "1" is often the fifth page of the document. Count from the beginning of the file.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">My input was rejected</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Check for a descending range like <code>12-8</code>, a decimal, a page number beyond the end of the document, or an empty field. Ranges must run low to high.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A page I listed twice only appears once</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Duplicates are removed by design; the output cannot contain the same page twice. To repeat a page, extract it separately and merge the results.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Links inside the extracted PDF no longer work</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Cross-page links point to pages that may not exist in the new document, and document-level structures do not always transfer. Keep the original for anything link-dependent.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The PDF will not load</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It may be password-protected, use unsupported encryption, or be damaged. Confirm it opens normally in a PDF viewer, and remove any password first.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">How do I extract pages in reverse order?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">List them individually in the order you want, such as <code>8,7,6,5</code>. Descending ranges like <code>8-5</code> are rejected, but nothing stops you typing the numbers out in descending sequence.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does extracting reduce quality?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Pages are copied as PDF pages rather than redrawn, so text stays as text and images keep their original data. The extracted pages are visually identical to the originals.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I pull pages from two different PDFs into one file?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not in a single step. Extract from each document separately, then combine the two results using Merge PDF.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will the new PDF renumber its pages?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The document's internal page order restarts at 1, but any page numbers printed on the pages themselves are part of the page artwork and stay as they were. An extracted page 12 still shows "12" printed on it.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What if I want every page except a few?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Listing dozens of numbers to exclude three is tedious. The <a class="font-semibold text-[#1a73e8]" href="/remove-pages">Remove Pages tool</a> is designed for exactly that: you name what goes, and everything else stays.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I extract a single page?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Enter just that number, and the result is a one-page PDF named <code>extracted-pages.pdf</code>.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/remove-pages"><h3 class="font-bold text-[#1a73e8]">Remove Pages</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The inverse approach, better when you want to keep most of a document and drop a few pages.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/split-pdf"><h3 class="font-bold text-[#1a73e8]">Split PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Produce one file per page when a document is a stack of separate items rather than one you want to sample from.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/merge-pdf"><h3 class="font-bold text-[#1a73e8]">Merge PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Combine extracted sets from different source documents into a single file.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Pull out exactly the pages you need</h2><p class="mt-3 text-sm leading-6 text-white">Type a selection like <code>1,3-5</code>, keep your chosen order, and download <code>extracted-pages.pdf</code> with the source document left untouched.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/extract-pages">Use Extract Pages</a></section>
+    </article>
   </main>
 </body>
 </html>

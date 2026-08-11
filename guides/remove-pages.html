@@ -4,99 +4,148 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Remove Pages Guide - Free Browser Tool</title>
-  <meta name="description" content="Delete unwanted pages from PDF files." />
+  <title>Remove Unwanted Pages From a PDF Document</title>
+  <meta name="description" content="List the pages you want gone, check them against the numbered previews, and download a PDF containing everything else. Numbering mistakes are the main risk." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/remove-pages.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Remove Pages Guide - Free Browser Tool" />
-  <meta property="og:description" content="Delete unwanted pages from PDF files." />
+  <meta property="og:title" content="Remove Unwanted Pages From a PDF Document" />
+  <meta property="og:description" content="How the tool previews pages with PDF.js and rebuilds the reduced file with pdf-lib, plus why page numbering causes most mistakes." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/remove-pages.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Remove Pages Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Delete unwanted pages from PDF files." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="Remove Unwanted Pages From a PDF Document" />
+  <meta name="twitter:description" content="How the tool previews pages with PDF.js and rebuilds the reduced file with pdf-lib, plus why page numbering causes most mistakes." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "Remove Unwanted Pages From a PDF Document", "description": "How to build a reduced PDF that excludes chosen pages, why file position beats printed numbering, and how removing differs from extracting.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/remove-pages.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does removing pages change the quality of the ones that remain?", "acceptedAnswer": { "@type": "Answer", "text": "No. Retained pages are copied as PDF pages, not re-rendered as images, so they are not deliberately rasterised or recompressed. They look exactly as they did in the source." } },
+          { "@type": "Question", "name": "Can I remove all the blank pages automatically?", "acceptedAnswer": { "@type": "Answer", "text": "There is no automatic blank-page detection. You identify them from the numbered previews and list their numbers. For an alternating scan, the blanks usually fall on a predictable pattern, which makes the list quick to build." } },
+          { "@type": "Question", "name": "Will the remaining pages be renumbered?", "acceptedAnswer": { "@type": "Answer", "text": "Their positions in the file shift, so the second page of the new document is whatever followed the removed first page. Numbers printed on the pages themselves are artwork and stay as they were, which can leave visible gaps in the printed sequence." } },
+          { "@type": "Question", "name": "Why can I not remove every page?", "acceptedAnswer": { "@type": "Answer", "text": "A PDF with no pages serves no purpose, so a selection covering the whole document is rejected. If you want rid of the whole document, delete the file instead." } },
+          { "@type": "Question", "name": "Is the original file altered on my device?", "acceptedAnswer": { "@type": "Answer", "text": "No. It is read but never written to, so your source document is safe regardless of what the output looks like." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Remove Unwanted Pages From a PDF Document</h1><span class="rounded-full bg-rose-50 dark:bg-rose-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-rose-700 dark:text-rose-400 border border-rose-200/50 dark:border-rose-900/50">Keep the Rest</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Some documents arrive with clutter attached: a blank sheet the scanner produced, a fax cover page, an internal notes section that should not go to a client. The document is otherwise fine and just needs a few pages gone. This tool takes one PDF and a list of the pages to exclude, and produces <code>removed-pages.pdf</code> containing everything else. Numbered page previews help you confirm you are pointing at the right sheets. The single biggest risk here is not technical: it is numbering.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/remove-pages">Open Remove Pages<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Remove Pages</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Remove Pages allows you to delete unwanted slides or pages from a PDF. By entering page indexes to remove, the local parser builds a new page array, skipping the matching page elements, and outputs a cleaned document instantly.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/remove-pages">
-        Open Remove Pages
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common cleanups</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Clearing blank pages from a scan:</strong> duplex scanning a stack of single-sided sheets produces an empty page between every real one.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Stripping an internal section:</strong> a proposal with pricing notes or reviewer comments that should not leave the building.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Removing a cover or fax sheet:</strong> documents from an agency often carry a routing page nobody needs to keep.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Cleaning up after a merge:</strong> a combined file that ended up with a duplicated page or an accidental extra document at the end.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Cutting an outdated appendix:</strong> a superseded schedule or price list sitting at the back of an otherwise current document.</li>
+      </ul></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose the PDF document that contains pages you want to delete.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Enter Page Indexes</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Specify page numbers or ranges to remove (e.g. 2, 4-6) in the input block.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Remove & Save</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Remove Pages to strip the selected slides in-memory and download the file.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Two libraries, two jobs</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">PDF.js renders the previews.</strong> It draws each page as a numbered thumbnail so you can look at what you are about to remove. Those previews exist purely for checking your selection; they are not what gets written into your new file.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">pdf-lib builds the result.</strong> It parses your document, creates a new empty PDF, and copies across every page you did not list for removal. Those pages are copied as PDF pages rather than redrawn, so they are not intentionally rasterised or recompressed: selectable text stays selectable and vector artwork stays sharp.</p>
+        <p>In other words, you look at pictures of pages, but the file you download is built from the pages themselves. Selection is made by typing the page numbers to remove into the "Pages to remove" field; the numbered thumbnails are your reference for getting those numbers right.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I remove ranges and individual pages at the same time?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, you can input a combination of ranges and page numbers, such as 1, 3, 5-7.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is it possible to recover deleted pages?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No, once the cleaned file is compiled, those pages are gone. Make sure to keep a backup of the original.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are my files safe during removal?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. The document is parsed and cleaned in browser memory, meaning no server receives your data.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why page numbering causes most of the trouble</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A PDF has two sets of page numbers, and they usually disagree.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">File position</strong> is what this tool uses: the first page in the document is page 1, the next is page 2, and so on, regardless of what appears on them.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">The printed number</strong> is part of the page artwork. Reports typically begin numbering after a cover, a contents page, and perhaps a summary, so the page showing "1" might be the fourth page of the file. Enter numbers from the printed sequence and you will remove pages three or four positions away from the ones you meant. The numbered previews are the reliable reference: count the pages you can see, from the start.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">The selection rules</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-emerald-200/60 dark:border-emerald-900/40 bg-emerald-50/40 dark:bg-emerald-950/20 p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Accepted</h3><ul class="mt-2 space-y-2 text-sm leading-6 text-slate-600 dark:text-slate-400"><li>Comma-separated numbers: <code>3,8,11</code></li><li>Ascending ranges, inclusive at both ends: <code>7-9</code> removes 7, 8, and 9</li><li>A combination: <code>1,5-8,12</code></li></ul></div>
+        <div class="rounded-2xl border border-rose-200/60 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-950/20 p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Rejected</h3><ul class="mt-2 space-y-2 text-sm leading-6 text-slate-600 dark:text-slate-400"><li>Blank input.</li><li>Descending ranges such as <code>9-4</code>.</li><li>Non-integer values.</li><li>Numbers beyond the end of the document.</li></ul></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Duplicates are ignored.</strong> Listing the same page twice has the same effect as listing it once, since a page can only be removed once.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">You cannot remove every page.</strong> A selection covering the whole document is rejected, because an empty PDF is not a useful outcome and the tool will not produce one.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Step by step</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Read the previews</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Look through the numbered thumbnails and note the position of each page you want gone, counting from the first page of the file.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Enter the numbers</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Type them into "Pages to remove", separated by commas. Ranges use a hyphen and run low to high: <code>2,7-9,14</code> removes 2, 7, 8, 9, and 14.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Generate and confirm</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Download <code>removed-pages.pdf</code>, open it, and check that what disappeared is what you intended and nothing else went with it.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What the output looks like</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>You receive one file named <code>removed-pages.pdf</code>, containing all the pages you did not list, in their original relative order. Nothing is reordered. The retained pages are copied rather than re-rendered, so they look exactly as they did and there is no deliberate quality change.</p>
+        <p>No compression is applied, which means the result is not dramatically smaller unless the pages you removed were the heavy ones. Your source PDF is untouched, so if the result is not what you wanted, start again from the original.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Removing pages or extracting them?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>These are mirror-image operations, and choosing correctly saves a lot of typing.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Remove Pages</strong>, this tool, keeps everything except what you name. Use it when the majority of the document is staying: dropping four pages from a sixty-page report means typing four numbers.</p>
+        <p><a class="font-semibold text-[#1a73e8]" href="/extract-pages">Extract Pages</a> keeps only what you name and builds a new document from those pages in the order you typed. Use it when the majority is going. The test is simply which list is shorter, with one functional difference: Extract Pages lets you set the output order, while removal preserves the original sequence of whatever remains.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations worth knowing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Document-level features may not transfer:</strong> bookmarks, outlines, attachments, metadata, form fields, and cross-page links live at document level and may not survive into the new file. Inspect the output if your document depends on any of those.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Selection only:</strong> pages cannot be reordered, rotated, cropped, or altered here, only kept or dropped.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No content removal within a page:</strong> sensitive text in the middle of a page cannot be taken out by removing pages; the whole sheet goes or stays.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">One document at a time:</strong> there is no batch processing across several files.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Unreadable files fail:</strong> encrypted, restricted, or damaged PDFs may not open, since the libraries need to read the file to preview and copy from it.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Long documents are demanding:</strong> rendering a thumbnail for every page and building the new document both happen in the browser, so a very long file may be slow or may fail on a modest device.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> PDF.js and pdf-lib are downloaded from third-party CDNs when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the selected PDF contents.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The wrong pages were removed</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Printed page numbers were almost certainly used instead of file positions. Go back to the original, count from the previews, and try again.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">My selection was rejected</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Look for a descending range, a decimal, a number larger than the page count, or an empty field. Also check you have not accidentally listed every page.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A page I wanted gone is still there</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Either it was outside your listed range, or a range boundary was off by one. Ranges are inclusive at both ends: <code>7-9</code> removes 7, 8, and 9.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The new file is barely smaller</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Nothing is compressed. Removing light text pages from a scan-heavy document changes very little. If size is the goal, the <a class="font-semibold text-[#1a73e8]" href="/compress-pdf">Compress PDF tool</a> addresses that directly, with its quality trade-off.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Previews take a long time to appear</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Every page has to be rendered to show a thumbnail. On a long document this is heavy work; give it time, or close other tabs.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does removing pages change the quality of the ones that remain?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Retained pages are copied as PDF pages, not re-rendered as images, so they are not deliberately rasterised or recompressed. They look exactly as they did in the source.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I remove all the blank pages automatically?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">There is no automatic blank-page detection. You identify them from the numbered previews and list their numbers. For an alternating scan, the blanks usually fall on a predictable pattern, which makes the list quick to build.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will the remaining pages be renumbered?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Their positions in the file shift, so the second page of the new document is whatever followed the removed first page. Numbers printed on the pages themselves are artwork and stay as they were, which can leave visible gaps in the printed sequence.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I get the removed pages back as a separate file?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not from this tool, which only produces the reduced document. If you want the excluded pages kept separately, run Extract Pages on the original with the same list of numbers before removing them.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why can I not remove every page?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A PDF with no pages serves no purpose, so a selection covering the whole document is rejected. If you want rid of the whole document, delete the file instead.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is the original file altered on my device?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It is read but never written to, so your source document is safe regardless of what the output looks like.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/extract-pages"><h3 class="font-bold text-[#1a73e8]">Extract Pages</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The opposite selection, better when you are keeping only a few pages rather than dropping a few.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/split-pdf"><h3 class="font-bold text-[#1a73e8]">Split PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Produce one file per page when a document is really a stack of separate items.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/merge-pdf"><h3 class="font-bold text-[#1a73e8]">Merge PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Rebuild a document after cleaning up its parts, or join a trimmed file to another one.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Drop the pages you do not want</h2><p class="mt-3 text-sm leading-6 text-white">Check the numbered previews, list the pages to remove, and download <code>removed-pages.pdf</code> with everything else intact and your original untouched.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/remove-pages">Use Remove Pages</a></section>
+    </article>
   </main>
 </body>
 </html>

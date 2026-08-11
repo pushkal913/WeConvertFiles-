@@ -88,6 +88,11 @@ const converterLibraries = Object.freeze({
   jsbeautifyhtml: {
     src: 'https://cdn.jsdelivr.net/npm/js-beautify@2.0.3/js/lib/beautify-html.js',
     ready: () => Boolean(window.html_beautify)
+  },
+  cropper: {
+    src: 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js',
+    css: 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css',
+    ready: () => Boolean(window.Cropper)
   }
 });
 
@@ -106,6 +111,7 @@ const toolLibraryDependencies = Object.freeze({
   'qr-generator': ['qrious'],
   'sign-pdf': ['pdflib'],
   'extract-pages': ['pdflib'],
+  'image-cropper': ['cropper'],
   'remove-pages': ['pdfjs', 'pdflib'],
   'bulk-resize': ['jszip'],
   'excel-to-csv': ['xlsx'],
@@ -158,6 +164,14 @@ function loadConverterLibrary(name) {
   }
   if (libraryLoadPromises.has(name)) {
     return libraryLoadPromises.get(name);
+  }
+
+  if (library.css && !document.querySelector(`link[data-converter-library-css="${name}"]`)) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = library.css;
+    link.dataset.converterLibraryCss = name;
+    document.head.appendChild(link);
   }
 
   const promise = new Promise((resolve, reject) => {
@@ -228,11 +242,11 @@ const toolContentDetails = {
     ]
   },
   'sign-pdf': {
-    howItWorks: 'Sign PDF allows you to place custom drawn or typed signatures onto your PDF documents. Using the drawing pad tab, you can draw your signature using touch gesture/mouse controls on a high-density (3x resolution) canvas. It gets compiled into a transparent PNG byte stream and embedded directly into the PDF page using vector placement.',
+    howItWorks: 'Sign PDF places a visible drawn or typed signature onto one page of your PDF using pdf-lib, then outputs signed.pdf. A drawn signature is captured as a transparent PNG; a typed one is rendered in one of ten styles and a chosen ink colour onto a canvas. Either way the mark is embedded as an image at a chosen position and size. This adds a visible electronic mark, not a certificate-based digital signature: it does not verify identity, attach a certificate, or make later edits detectable.',
     faqs: [
-      { q: 'Can I choose which page to sign?', a: 'Yes, you can specify the target page number where you want the signature to appear. The tool will draw the signature block precisely on that page.' },
-      { q: 'What is the difference between drawing and typing?', a: 'Drawing captures your actual hand-drawn signature using your mouse or touchscreen, while typing renders your name as high-quality bold text with script styling.' },
-      { q: 'Are my signatures stored on a server?', a: 'No, all signature images are processed and embedded locally in the browser. They are never saved or sent to any server, preventing identity theft.' }
+      { q: 'Can I choose which page to sign?', a: 'Yes. Enter a whole page number within the document, counting from the first page of the file. The signature is added to that single page, and the other pages are copied unchanged, so their text stays selectable.' },
+      { q: 'What is the difference between drawing and typing?', a: 'Drawing captures your hand-drawn mark and varies slightly each time. Typing renders your name in one of ten styles and an ink colour you pick, so it is neater and reproducible. Both are placed with a line beneath the mark.' },
+      { q: 'Is this a legally binding digital signature?', a: 'This tool adds a visible signature mark, not a certificate-based digital signature, and does not verify identity or make tampering detectable. Whether a visible mark is sufficient depends on the document and the rules that apply to you, so confirm with the requesting party.' }
     ]
   },
   'images-pdf': {
@@ -244,19 +258,19 @@ const toolContentDetails = {
     ]
   },
   'pdf-images': {
-    howItWorks: 'PDF to PNG extracts each page of your PDF and renders it as a high-quality PNG image. The tool runs locally utilizing pdf.js to render page vector nodes onto HTML5 canvases, then exports them as PNG files and packages them into a ZIP archive for immediate download.',
+    howItWorks: 'PDF to PNG renders each page of your PDF as a complete image using PDF.js. Every page is drawn onto an in-browser canvas at render scale 2 and encoded as a lossless PNG, then the pages are packaged with JSZip into pdf-pages-png.zip. This renders whole pages rather than extracting the individual images embedded inside the document.',
     faqs: [
-      { q: 'Can I extract images from scanned PDFs?', a: 'Yes. Since pages are rendered as image layers, every page is extracted as a high-quality graphic, maintaining the original scanning resolution.' },
-      { q: 'Is there a limit on file size?', a: 'Larger PDFs might take slightly longer depending on your device\'s processing power, but standard files process in seconds and bundle cleanly.' },
-      { q: 'Are my documents safe?', a: 'Yes, the rendering and zipping process is executed entirely locally inside your browser. No files leave your device.' }
+      { q: 'Does this extract the images embedded in a PDF?', a: 'No. It renders each complete page. A photo on the page arrives inside the page image, together with any surrounding text and margins, rather than as a separate file at its original resolution.' },
+      { q: 'Is there a limit on file size?', a: 'No fixed limit is set, but every page is rendered and held in browser memory before zipping, so very long or graphics-heavy PDFs can be slow or may fail on a device with limited memory.' },
+      { q: 'How are my documents handled?', a: 'File contents are processed in browser memory and are not sent to WeConvertFiles for conversion. PDF.js and JSZip load from third-party CDNs when needed, so the tool is not described as fully offline.' }
     ]
   },
   'pdf-jpg': {
-    howItWorks: 'PDF to JPG renders pages of your PDF document as JPEG images. Ideal for online submissions and sharing, it uses pdf.js to draw the page elements on a canvas and saves them as JPEGs with optimized compression, bundled inside a ZIP file.',
+    howItWorks: 'PDF to JPG renders each page of your PDF as a JPEG image using PDF.js. Every page is drawn onto an in-browser canvas at render scale 2 and encoded as a JPEG at quality 0.92, then packaged with JSZip into pdf-pages-jpg.zip. It suits photographic and scanned pages; text-heavy pages show JPEG artefacts around sharp edges.',
     faqs: [
-      { q: 'Why use JPEG instead of PNG?', a: 'JPEG images are compressed and have significantly smaller file sizes, making them perfect for email and web sharing where bandwidth is limited.' },
-      { q: 'Can I select a custom image quality?', a: 'The tool uses an optimized high-quality JPEG compression level (90%) for the best balance of size and clarity, ensuring text remains readable.' },
-      { q: 'Is it completely private?', a: 'Yes, all operations run inside your browser on your device, keeping your files secure from third-party servers.' }
+      { q: 'Why use JPG instead of PNG?', a: 'JPEG discards some detail to produce smaller files, which suits photographic or scanned pages for sharing. For small text, tables, and diagrams, the lossless PDF to PNG tool keeps edges cleaner.' },
+      { q: 'Can I select a custom image quality?', a: 'No. The quality is fixed at 0.92, a high setting chosen to keep pages readable. To reduce size further, compress the resulting JPGs with a separate image tool.' },
+      { q: 'How are my documents handled?', a: 'File contents are processed in browser memory and are not sent to WeConvertFiles for conversion. PDF.js and JSZip load from third-party CDNs when needed, so the tool is not described as fully offline.' }
     ]
   },
   'csv-convert': {
@@ -309,11 +323,11 @@ const toolContentDetails = {
     ]
   },
   'bulk-resize': {
-    howItWorks: 'Bulk Image Resizer allows you to batch scale, crop, and resize multiple graphic files (PNG, JPG, WebP) simultaneously without uploading them. The client-side processor loads the selected file list, reads their pixel layouts onto canvas grids, and scales their coordinates. Users can select percentage scales, target pixel widths, or target heights while preserving original aspect ratios. Once resizing is complete, the tool leverages JSZip to compress all output image files into a single, clean ZIP package. This offline processing is fast, resource-efficient, and secure.',
+    howItWorks: 'Bulk Image Resizer applies one resizing rule to a batch of PNG, JPG, and WebP images. Each image is decoded and drawn onto a canvas at the new dimensions, one after another, then re-encoded, and JSZip packages the results into resized_images.zip. You can scale by percentage (10 to 200, default 100) or set a target width or height, with an aspect-ratio lock that is on by default. This resizes rather than crops, and it is not a format converter: filenames and formats are kept. JPEG and WebP are re-encoded at quality 0.85, so a 100% pass is still a re-encode rather than a copy.',
     faqs: [
-      { q: 'How do I resize a batch of images at once?', a: 'Upload multiple JPEG/PNG/WebP files into our workspace dropzone, select your target dimensions (or percentage scale), choose whether to maintain aspect ratios, and click convert to download them all compiled in a ZIP archive.' },
-      { q: 'What formats does the bulk resizer support?', a: 'It supports standard web formats including JPEG, PNG, and WebP, outputting them in high quality.' },
-      { q: 'Is there a limit to the number of images I can batch process?', a: 'There is no hardcoded cap, but processing speed depends on your local hardware resources. We recommend resizes of up to 50 images per batch for optimal performance.' }
+      { q: 'How do I resize a batch of images at once?', a: 'Select multiple JPG, PNG, or WebP files, choose a mode (percentage scale, target width, or target height), set your value, and run the batch. Images are processed one after another and downloaded together in resized_images.zip.' },
+      { q: 'Does it crop or convert formats?', a: 'No. It resizes only, keeping the whole scene, and each file comes back in the format it went in as. A JPG stays a JPG, a PNG stays a PNG, and a WebP stays a WebP.' },
+      { q: 'Is there a limit to the number of images I can batch process?', a: 'No fixed cap is set. Every image is decoded and the ZIP is built in browser memory, so available memory is the practical limit. Splitting very large, high-resolution batches into smaller groups is more dependable.' }
     ]
   },
   'color-palette': {
@@ -333,11 +347,11 @@ const toolContentDetails = {
     ]
   },
   'word-counter': {
-    howItWorks: 'Word & Character Counter is a lightweight, responsive text editor that analyzes copy metrics in real-time. As you paste or type characters into the workspace, the native JavaScript engine performs regex counting queries to identify word borders, alphanumeric characters, whitespace gaps, sentence endpoints, and paragraph breaks. It dynamically computes these values and estimates reading times based on average reading speeds. Since text analysis runs locally in your device\'s memory, this utility is completely safe for confidential business proposals, academic articles, and draft blogs.',
+    howItWorks: 'Word & Character Counter reports four figures as you type or paste, using plain JavaScript in your browser with no counting library. Characters is the text length in UTF-16 code units, so spaces count and some emoji add more than one. Words are found by trimming and splitting on runs of whitespace, so punctuation stays attached and a hyphenated term like state-of-the-art counts as one word. Paragraphs are the blocks separated by line breaks. Reading time is the word count divided by 200, rounded up. It does not count sentences, and it does not check grammar or spelling.',
     faqs: [
-      { q: 'How is reading time calculated?', a: 'Reading time is estimated using the standard average reading speed of 200 words per minute (WPM), providing a helpful duration indicator for articles and newsletters.' },
-      { q: 'Does this counter work on mobile devices?', a: 'Yes, the tool is fully responsive and recalculates character, word, and paragraph metrics instantly on phone, tablet, and desktop viewports.' },
-      { q: 'Is my text data stored or monitored?', a: 'No. The text counter operates entirely client-side without any server storage, API tracking, or data monitoring, securing your writing completely.' }
+      { q: 'How is reading time calculated?', a: 'Word count divided by 200, rounded up to the next whole minute. It is a rough planning figure based on a common average reading speed, not a measurement of your particular audience.' },
+      { q: 'Does it count sentences?', a: 'No. It reports words, characters, paragraphs, and a reading-time estimate. Sentence detection is not offered, because abbreviations, decimals, and quotations make simple rules unreliable.' },
+      { q: 'Is my text uploaded anywhere?', a: 'The counting runs in your browser and the text is not sent to WeConvertFiles. Consented Zoho PageSense analytics may record page usage such as visits and clicks, but not the text you enter.' }
     ]
   },
   'diff-checker': {
@@ -420,10 +434,10 @@ const toolContentDetails = {
     ]
   },
   'qr-generator': {
-    howItWorks: 'QR Code Generator creates visual two-dimensional QR Code matrix grids from URL links, phone numbers, contact info, or plaintext parameters. Utilizing modern Canvas API drawing filters, the engine paints the black/white alignment squares based on inputs and correction options locally, allowing you to download high-resolution PNG image files without API rate limits.',
+    howItWorks: 'QR Code Generator turns the text or URL you type into a static QR code using the QRious library, drawn on a canvas in your browser as you type. The code uses error correction level H, the highest level, and you choose a pixel size of 150, 200, 250, or 300 before downloading a PNG named qrcode.png. Whatever you enter is encoded literally, so include the full https:// for a link; there are no dedicated forms for phone or Wi-Fi payloads.',
     faqs: [
-      { q: 'Is there a limit to the amount of text in QR Codes?', a: 'Yes, standard QR code specifications allow up to 4296 alphanumeric characters, but we recommend keeping links short for optimal scanner readability.' },
-      { q: 'Do the generated QR codes expire?', a: 'No. They contain static raw text or direct URL paths, so they will function permanently as long as the destination URL remains active.' }
+      { q: 'Is there a limit to the amount of text in QR Codes?', a: 'No fixed limit is set here, but practicality bites first: the more you encode, the denser the pattern and the harder it is to scan at these sizes. Keep links short, and prefer a larger size for print.' },
+      { q: 'Do the generated QR codes expire?', a: 'The image never expires and always decodes to the same text, because the code is static with no redirect to repoint. Whether the destination it points to still works is a separate matter you control.' }
     ]
   },
   'hash-generator': {
@@ -747,11 +761,11 @@ const tools = [
     icon: 'N',
     iconBg: 'bg-lime-100',
     iconColor: 'text-lime-700',
-    description: 'Live-updates word, character, sentence, and paragraph counts for your text.',
+    description: 'Live-updates word, character, and paragraph counts plus a reading-time estimate.',
     hint: 'Paste or type your text to count characters (or upload text files).',
     accept: 'text/plain',
     multiple: false,
-    notes: ['Real-time live counting.', 'Supports sentence and paragraph analysis.', 'Fully client-side, zero data sent.']
+    notes: ['Real-time live counting.', 'Words, characters, paragraphs, and reading time.', 'Runs in your browser; text is not uploaded.']
   },
   {
     id: 'image-scaler',
@@ -2418,7 +2432,7 @@ function renderToolOptions(toolId) {
             <option value="json">JSON Array (.json)</option>
           </select>
         </div>
-        <p class="${helpClass}">Select your Excel file (.xlsx or .xls) in the upload zone above to convert its active sheet.</p>
+        <p class="${helpClass}">Select your Excel file (.xlsx or .xls) in the upload zone above. Only the first worksheet in the workbook is exported.</p>
       </div>
     `,
     'image-cropper': `
@@ -4756,12 +4770,18 @@ async function addFiles(fileListObject) {
   }
   if (state.currentTool.id === 'image-cropper' && validFiles.length) {
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       const preview = document.getElementById('cropImagePreview');
       const container = document.getElementById('cropPreviewContainer');
       if (preview && container) {
         preview.src = e.target.result;
         container.classList.remove('hidden');
+        try {
+          await loadConverterLibrary('cropper');
+        } catch (err) {
+          setStatus('Unable to load the crop tool. Check your connection and try again.', 'error');
+          return;
+        }
         if (state.cropper) state.cropper.destroy();
         state.cropper = new Cropper(preview, {
           aspectRatio: NaN,
@@ -6322,7 +6342,8 @@ async function cropImageAction() {
   const dataUrl = canvas.toDataURL('image/png');
   const res = await fetch(dataUrl);
   const blob = await res.blob();
-  downloadBlob(blob, 'cropped-' + state.files[0].name);
+  const baseName = (state.files[0].name || 'image').replace(/\.[^./\\]+$/, '');
+  downloadBlob(blob, `cropped-${baseName}.png`);
 }
 
 async function generateFaviconPackageAction() {
