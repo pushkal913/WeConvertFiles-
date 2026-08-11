@@ -4,96 +4,135 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Crop Image Guide - WeConvertFiles</title>
-  <meta name="description" content="Crop and trim image coordinates interactively with aspect ratio controls in your browser." />
+  <title>Crop an Image Online Without Editing Software</title>
+  <meta name="description" content="Crop a JPG, PNG or WebP image in your browser with free or fixed ratios. The result is exported as a PNG and your original file is left untouched." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/image-cropper.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Crop Image Guide - WeConvertFiles" />
-  <meta property="og:description" content="Crop and trim image coordinates interactively with aspect ratio controls in your browser." />
+  <meta property="og:title" content="Crop an Image Online Without Editing Software" />
+  <meta property="og:description" content="How browser cropping keeps the pixels you select, why the output is PNG, and how cropping differs from resizing and compressing." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/image-cropper.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Crop Image Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Crop and trim image coordinates interactively with aspect ratio controls in your browser." />
+  <meta name="twitter:title" content="Crop an Image Online Without Editing Software" />
+  <meta name="twitter:description" content="How browser cropping keeps the pixels you select, why the output is PNG, and how cropping differs from resizing and compressing." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "Crop an Image Online Without Editing Software", "description": "How browser-based cropping keeps the selected pixels exactly, why output is PNG, and how cropping differs from resizing and compressing.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/image-cropper.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does cropping reduce the quality of the part I keep?", "acceptedAnswer": { "@type": "Answer", "text": "The pixels within your selection are copied as they were, so the retained area is not degraded. What changes is the total amount of image you have: a heavy crop leaves fewer pixels, which shows if you then display the result large." } },
+          { "@type": "Question", "name": "Why is the download a PNG when I uploaded a JPG?", "acceptedAnswer": { "@type": "Answer", "text": "The crop is drawn onto a canvas and encoded as PNG, and the file is named with a .png extension. PNG keeps the retained pixels exact, at the cost of a larger file for photographic content. If you need a JPG, convert the result afterward." } },
+          { "@type": "Question", "name": "Can I undo a crop?", "acceptedAnswer": { "@type": "Answer", "text": "Not within the tool, but your original file is untouched on your device, so you can simply start again from it. Nothing is overwritten." } },
+          { "@type": "Question", "name": "Can I crop a batch of photos to the same shape?", "acceptedAnswer": { "@type": "Answer", "text": "No. This handles one image at a time, and each crop is positioned by hand. Consistent framing across many images is a job for desktop editing software with batch actions." } },
+          { "@type": "Question", "name": "Can I use this to hide sensitive information in a photo?", "acceptedAnswer": { "@type": "Answer", "text": "Only if it sits near an edge. Cropping cannot remove something from the middle of a frame without taking the surrounding area with it, and it is not a redaction feature." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Crop an Image Online Without Editing Software</h1><span class="rounded-full bg-cyan-50 dark:bg-cyan-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-cyan-700 dark:text-cyan-400 border border-cyan-200/50 dark:border-cyan-900/50">PNG Output</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Most cropping is about removal: a distracting doorway at the edge of a photo, empty desk beneath a product, the browser chrome around a screenshot. Select the rectangle you want to keep from one image and download just that area. Free-form selection is available, along with fixed ratios for square, widescreen, and standard photo shapes. Two things to know upfront: cropping discards the outer pixels permanently, and the result is encoded as a PNG named <code>cropped-&lt;name&gt;.png</code> regardless of the format you started with.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/image-cropper">Open Crop Image<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Crop Image</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Aspect Crop</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Crop Image allows you to trim off unwanted visual borders and adjust image shapes interactively. Powered by Cropper.js, it loads PNG/JPG images locally, allows free or constrained aspect-ratio dragging, and renders pixel output via HTML5 Canvas.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/image-cropper">
-        Open Image Cropper
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What cropping is good for</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Squaring a photo for an avatar:</strong> many platforms crop for you, usually badly. Choosing the square yourself puts your face where you want it.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Cleaning up a screenshot:</strong> removing the taskbar, browser tabs, or a stray notification before pasting into documentation or a message.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Reframing a product shot:</strong> tightening in so the item fills the frame rather than sitting small in the middle of a table.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Cutting a banner from a taller photo:</strong> a 16:9 selection from a portrait image gives you a header graphic without stretching anything.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Removing an edge detail:</strong> a visible address or a face at the border, provided it sits near the edge, is simplest to be rid of by cropping.</li>
+      </ul></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload Image</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Upload a JPG, PNG, or WebP graphic file to initiate the editor.</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Adjust Handles</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Drag the visual crop boundary box, or select a preset ratio like Square (1:1), 16:9, or 4:3.</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Crop & Download</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert to output the cropped canvas region and download it as a PNG file.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the crop is produced</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The image you choose is read directly by the browser and shown with a selection rectangle you can move and resize. Nothing is altered while you adjust the selection; you are only choosing coordinates. When you confirm, the browser copies your selected region onto a canvas sized to match the area you kept, and encodes that canvas as a PNG for download.</p>
+        <p>Two consequences follow from that final step, and both surprise people:</p>
+        <ul class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">The output is PNG.</strong> PNG is lossless, storing every kept pixel exactly. A crop taken from a photographic JPG can therefore be larger in file size than the original despite showing less of the picture, because JPG's lossy compression is far more economical with photographs.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">Metadata is normally removed.</strong> Re-encoding through a canvas produces a fresh file, so capture date, camera settings, and GPS coordinates the source carried are not typically carried across. For sharing this is often an advantage; if that data matters, keep the original.</li>
+        </ul>
+        <p>Your source file is never modified. Cropping produces a new file and leaves the original exactly as it was on your device.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      
-      
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What aspect ratios can I crop to?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">We support standard presets like Square (1:1), Widescreen (16:9), Photo (4:3), and fully customizable Free Aspect cropping.</p>
-      </div>
-      
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is the cropped image quality compressed?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No, cropping extracts the exact visual coordinates from the canvas layer and saves them lossless, preserving image resolution.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Step by step</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select and choose a ratio</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Load one JPG, PNG, or WebP. Free lets you drag any rectangle; 1:1 gives a square, 16:9 widescreen, 4:3 standard photo proportions.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Frame the selection</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Drag and resize the box over what you want to keep. Check the edges carefully; clipping the top of a head or the edge of an object is where mistakes happen.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Crop and download</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Confirm the crop, then open the downloaded <code>cropped-&lt;name&gt;.png</code> to check the framing before using it anywhere.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Cropping does not enlarge anything</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The output contains only the region you selected, at pixel dimensions matching that selection. So a tight crop from a large photo produces a much smaller image in both dimensions and detail. This is worth dwelling on: if you select a small area, the result has correspondingly few pixels, and stretching it to fill a large space afterward will look soft. The more you crop, the less resolution you have left to work with. Because your original stays untouched, a crop that goes wrong costs nothing but the time to redo it.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Cropping, resizing, and compressing are three different jobs</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Cropping</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Changes what the picture shows. You keep a region and discard the rest; composition changes, and the pixels you keep are unaltered.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Resizing</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Changes how many pixels the picture has while keeping the whole scene. For a batch of files, the <a class="font-semibold text-[#1a73e8]" href="/bulk-resize">Bulk Image Resizer</a> handles this.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Compressing</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Reduces file size by storing the same picture less precisely. Framing and dimensions stay; fine detail is traded away.</p></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm text-sm leading-6 text-slate-600 dark:text-slate-400"><p>A common real need is a combination: crop for composition first, then resize the result to the dimensions a platform requires. Doing it the other way around wastes resolution.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations worth knowing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">No rotation or straightening:</strong> a photo taken at a slight angle cannot be levelled here. Cropping only removes outer areas.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No exact dimension entry:</strong> you cannot type "800 by 600". Selection is by dragging, with fixed ratios constraining shape rather than size.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No format or quality control:</strong> output is PNG, with no JPG or WebP option and no quality setting.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Metadata is normally lost:</strong> re-encoding drops the information the source file carried.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">One image at a time:</strong> there is no batch cropping. Several images means repeating the process.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Accepted formats are JPG, PNG, and WebP:</strong> HEIC photos from Apple devices need converting first, and cropping only excludes content sitting at the edge.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> The cropping library and its stylesheet are downloaded from a third-party CDN when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the selected image.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">My cropped file is bigger than the original</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Expected when the source was a JPG. Output is PNG, which stores photographic content far less economically than JPG, and that can outweigh the reduction in area.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The image looks soft when I enlarge it</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Cropping reduced the pixel count. A small selection from a photo does not contain enough detail to fill a large space. Start from a higher-resolution original if you have one.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">I cannot get the exact size a website asks for</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">There is no numeric dimension entry. Choose the closest ratio, crop for composition, then resize the result to the required dimensions with a resizing tool.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">My HEIC photo will not load</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Only JPG, PNG, and WebP are accepted. Convert it first with the <a class="font-semibold text-[#1a73e8]" href="/heic-to-jpg">HEIC to JPG or PNG tool</a>, then crop.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The selection will not take the shape I want</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A fixed ratio is active. Switch to Free to drag any rectangle.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does cropping reduce the quality of the part I keep?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The pixels within your selection are copied as they were, so the retained area is not degraded. What changes is the total amount of image you have: a heavy crop leaves fewer pixels, which shows if you then display the result large.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why is the download a PNG when I uploaded a JPG?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The crop is drawn onto a canvas and encoded as PNG, and the file is named with a <code>.png</code> extension. PNG keeps the retained pixels exact, at the cost of a larger file for photographic content. If you need a JPG, convert the result afterward.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I undo a crop?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not within the tool, but your original file is untouched on your device, so you can simply start again from it. Nothing is overwritten.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I crop a batch of photos to the same shape?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. This handles one image at a time, and each crop is positioned by hand. Consistent framing across many images is a job for desktop editing software with batch actions.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will a 1:1 crop work as a profile picture everywhere?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A square is the shape most platforms expect, but many display it inside a circle. Leave a little breathing room around the subject so nothing important sits where the corners get masked.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I use this to hide sensitive information in a photo?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Only if it sits near an edge. Cropping cannot remove something from the middle of a frame without taking the surrounding area with it, and it is not a redaction feature.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/bulk-resize"><h3 class="font-bold text-[#1a73e8]">Bulk Image Resizer</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Change dimensions after cropping, or resize a set of images without altering their framing.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/heic-to-jpg"><h3 class="font-bold text-[#1a73e8]">HEIC to JPG or PNG</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert Apple photos into a format this tool accepts.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-to-base64"><h3 class="font-bold text-[#1a73e8]">Image to Base64</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Encode a cropped image as a string for use in HTML, CSS, or an API request.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Keep exactly the part of the picture that matters</h2><p class="mt-3 text-sm leading-6 text-white">Load an image, drag the selection to frame what you want, and download a clean <code>cropped-&lt;name&gt;.png</code> with your original left untouched.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/image-cropper">Use Crop Image</a></section>
+    </article>
   </main>
 </body>
 </html>

@@ -4,99 +4,134 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>How to Turn PDF Pages into JPG Images | Guide</title>
-  <meta name="description" content="Learn how browser-based PDF rendering creates one JPG per page, packages the images, and protects file privacy." />
+  <title>PDF to JPG: Page Images Built for Sharing</title>
+  <meta name="description" content="Render each PDF page at scale 2 and encode it as a JPG at quality 0.92, delivered in one ZIP. Best for photographic or scanned pages where a smaller file helps." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/pdf-to-jpg.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="How to Turn PDF Pages into JPG Images | Guide" />
-  <meta property="og:description" content="Learn how browser-based PDF rendering creates one JPG per page, packages the images, and protects file privacy." />
+  <meta property="og:title" content="PDF to JPG: Page Images Built for Sharing" />
+  <meta property="og:description" content="How JPEG page rendering at quality 0.92 behaves, where its artefacts appear, and when it beats PNG for moving pages around." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/pdf-to-jpg.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="How to Turn PDF Pages into JPG Images | Guide" />
-  <meta name="twitter:description" content="Learn how browser-based PDF rendering creates one JPG per page, packages the images, and protects file privacy." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="PDF to JPG: Page Images Built for Sharing" />
+  <meta name="twitter:description" content="How JPEG page rendering at quality 0.92 behaves, where its artefacts appear, and when it beats PNG for moving pages around." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "PDF to JPG: Page Images Built for Sharing", "description": "How JPEG page rendering at quality 0.92 behaves, where it loses detail, and when it is the right choice over PNG.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/pdf-to-jpg.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can I change the JPEG quality setting?", "acceptedAnswer": { "@type": "Answer", "text": "No. The quality is fixed at 0.92, a high value chosen to keep pages readable. If the resulting files are larger than you need, compress the images afterward with a separate image tool." } },
+          { "@type": "Question", "name": "Are these JPG images good enough to print?", "acceptedAnswer": { "@type": "Answer", "text": "For casual printing of a scanned or photographic page, usually yes. For anything where print quality matters, inspect a page at full size first, because rendering at scale 2 sets a firm upper limit on available detail." } },
+          { "@type": "Question", "name": "Why do my scanned pages look better than my text pages?", "acceptedAnswer": { "@type": "Answer", "text": "JPEG was designed for photographic content, where gradual tonal changes hide the discarded detail. Scanned photographs suit it, while crisp black text on white reveals compression artefacts more readily." } },
+          { "@type": "Question", "name": "Does the tool rotate pages that were saved sideways?", "acceptedAnswer": { "@type": "Answer", "text": "Pages are drawn as the document defines them. A page stored in landscape produces a landscape image, and no additional rotation is applied afterward." } },
+          { "@type": "Question", "name": "Can I convert several PDFs in one pass?", "acceptedAnswer": { "@type": "Answer", "text": "The tool accepts one PDF at a time. For multiple documents, convert them one after another, or combine them first with Merge PDF and render the single result." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">PDF to JPG: Page Images Built for Sharing</h1><span class="rounded-full bg-fuchsia-50 dark:bg-fuchsia-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-fuchsia-700 dark:text-fuchsia-400 border border-fuchsia-200/50 dark:border-fuchsia-900/50">Lossy at Quality 0.92</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">JPG is the format that travels everywhere: chat apps compress it happily, upload forms accept it without complaint, and every device can open it. When a page of a PDF needs to move that easily, this tool draws each page at render scale 2, encodes it as a JPEG at quality 0.92, and delivers the set as <code>pdf-pages-jpg.zip</code>. The question worth settling first is whether JPG genuinely suits your pages, because it is a lossy format and small text is exactly where its weaknesses show.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/pdf-jpg">Open PDF to JPG<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">How to Turn PDF Pages into JPG Images</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">PDF to JPG renders pages of your PDF document as JPEG images. Ideal for online submissions and sharing, it uses pdf.js to draw the page elements on a canvas and saves them as JPEGs with optimized compression, bundled inside a ZIP file.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/pdf-jpg">
-        Open PDF to JPG
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Where JPG output earns its place</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Sending a scanned page through a messaging app:</strong> chat clients preview JPG inline, while a PDF becomes an attachment recipients often skip.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Posting to a forum or community upload field:</strong> many platforms accept images only, and JPG is the format they expect.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Sharing a photo-led brochure or catalogue:</strong> pages built around photography compress well and lose little a viewer would notice.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Producing a quick visual reference:</strong> a JPG of the first page works as a preview in a listing or an internal index.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Moving pages over a slow or metered connection:</strong> where every megabyte counts, lossy compression is a fair trade.</li>
+      </ul></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose the PDF file you wish to convert to JPG format.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Compress Layout</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The tool draws pages onto local canvases, generating compressed JPEG output streams.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Save ZIP Archive</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert to bundle all JPG pages into a single ZIP file and download it.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">The render-and-encode pipeline</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1. Open:</strong> PDF.js 3.4.120 reads the selected PDF from browser memory.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2. Draw:</strong> each page is painted onto an in-memory canvas at <code>scale: 2</code>, twice its default render size.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3. Compress:</strong> <code>canvas.toDataURL('image/jpeg', 0.92)</code> encodes the canvas, discarding the image detail the eye is least likely to miss.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4. Collect:</strong> JSZip gathers the finished JPGs so a long document does not become a queue of separate downloads.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5. Report:</strong> the status line counts pages as they render, then shows a zipping percentage while the archive is built.</li>
+        </ol>
+        <p>At 0.92 the loss is subtle on most content, but it is still loss: the discarded detail cannot be recovered from the resulting file. Re-rendering from the original PDF is the only way back to full detail.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What is the difference between PNG and JPG output?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">JPG images use lossy compression, which yields much smaller file sizes than PNGs, making them ideal for emails.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are my document images stored anywhere?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. The conversion runs strictly in-memory. The files are immediately garbage collected after download.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does it support password-protected PDFs?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. You must unlock password-protected files using our Unlock PDF tool before converting them.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Fixed behaviour and the output archive</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Input:</strong> one PDF. <strong class="text-slate-900 dark:text-slate-200">Output:</strong> <code>pdf-pages-jpg.zip</code> holding <code>page-1.jpg</code>, <code>page-2.jpg</code>, and so on in document order. Every page is converted; there is no way to select a subset, and none of quality, scale, or coverage can be changed.</p>
+        <p>Because JPEG has no transparency channel, any transparent area of a page is flattened as it is drawn rather than carried through. Do not assume the archive will be smaller than the PDF, either: a compact text-only document stores letters as drawing instructions, which is far more efficient than storing a picture of those letters, so rendering it at scale 2 can produce a larger archive than the source. Where JPG genuinely wins is on photographic and scanned content, which is what the format was built for.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Where the artefacts appear</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">High-contrast edges</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Black text on white, table rules, and technical line work are where JPEG shows faint haloing and speckling. At quality 0.92 this stays mild, but on dense small type it becomes visible.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Smooth photographic areas</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Gradients and photographs hide the discarded detail well, which is precisely why the format suits scanned and image-led pages. The same compression that troubles text is nearly invisible here.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">JPG or PNG: reading the page first</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The honest answer depends entirely on what the pages contain. Choose JPG when pages are photographic or scanned, when the images are for viewing and sharing rather than close inspection, when they must move through platforms that expect JPG, or when file size is a real constraint.</p>
+        <p>Choose <a class="font-semibold text-[#1a73e8]" href="/guides/pdf-to-images.html">PDF to PNG</a> when pages contain small text, screenshots, tables, or diagrams, when someone will zoom in to read detail, or when you want a faithful record with no compression artefacts.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">A quick rule of thumb:</strong> if a page would look at home in a photo album, reach for JPG; if it belongs in a technical manual, reach for PNG.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations worth knowing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Compression is permanent:</strong> detail dropped during encoding is gone from the JPG for good.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Nothing is adjustable:</strong> quality is fixed at 0.92, scale at 2, and coverage at every page.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Pages become pictures:</strong> selectable text, links, form fields, vector artwork, and accessibility structure are all lost in rendering.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No transparency:</strong> transparent regions of a source page are flattened during drawing.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Embedded assets are not recovered:</strong> this is full-page rendering, so a photograph placed in the PDF returns as part of the page image, not as its own file.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Memory is the practical ceiling:</strong> drawing, encoding, and archiving a long document all happen in the browser, so a very large file may be slow or fail on a modest device.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> PDF.js and JSZip are downloaded from third-party CDNs when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the selected PDF contents.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Text has a faint fuzz or halo around it</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Those are JPEG artefacts around high-contrast edges. Quality is not adjustable here, so switch to the PNG tool for text-heavy pages.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The archive is bigger than the source PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Common with text-only documents, which store text far more efficiently as instructions than as page pictures. It is a sign image conversion may be the wrong approach for that file.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A page has a solid background where I expected transparency</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">JPEG cannot store transparency, so it is flattened during drawing. Use PNG output when transparent regions must be preserved.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Colours look slightly different from the PDF viewer</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Rendering and JPEG encoding can shift colour subtly, particularly in saturated areas. For colour-critical work, check a page against the original.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Conversion never finishes on a long document</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Every page is drawn and encoded in sequence. Shorten the document first, or convert on a device with more available memory.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I change the JPEG quality setting?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The quality is fixed at 0.92, a high value chosen to keep pages readable. If the resulting files are larger than you need, compress the images afterward with a separate image tool.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Are these JPG images good enough to print?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">For casual printing of a scanned or photographic page, usually yes. For anything where print quality matters, inspect a page at full size first, because rendering at scale 2 sets a firm upper limit on available detail.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why do my scanned pages look better than my text pages?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">JPEG was designed for photographic content, where gradual tonal changes hide the discarded detail. Scanned photographs suit it, while crisp black text on white reveals compression artefacts more readily.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool rotate pages that were saved sideways?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Pages are drawn as the document defines them. A page stored in landscape produces a landscape image, and no additional rotation is applied afterward.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I convert several PDFs in one pass?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The tool accepts one PDF at a time. For multiple documents, convert them one after another, or combine them first with Merge PDF and render the single result.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/pdf-images"><h3 class="font-bold text-[#1a73e8]">PDF to PNG</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Lossless page images, the better choice for small text, screenshots, and diagrams.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/merge-pdf"><h3 class="font-bold text-[#1a73e8]">Merge PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Combine several documents into one before converting, since this tool takes a single PDF.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/compress-pdf"><h3 class="font-bold text-[#1a73e8]">Compress PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">If the goal is a smaller PDF rather than image files, this keeps the document as a PDF.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Get shareable page images in one download</h2><p class="mt-3 text-sm leading-6 text-white">Pick one PDF, let every page encode at quality 0.92, and check the busiest page in the archive before sending the images anywhere.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/pdf-jpg">Use PDF to JPG</a></section>
+    </article>
   </main>
 </body>
 </html>

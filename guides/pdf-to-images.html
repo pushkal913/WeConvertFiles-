@@ -4,99 +4,133 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>PDF to PNG Guide - Free Browser Tool</title>
-  <meta name="description" content="Extract PDF pages as high-quality PNG images." />
+  <title>PDF to PNG: Render Every Page as a Lossless Image</title>
+  <meta name="description" content="Render each PDF page at scale 2 and download every page as a lossless PNG inside one ZIP. Suited to text, tables, diagrams, and screenshots." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/pdf-to-images.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="PDF to PNG Guide - Free Browser Tool" />
-  <meta property="og:description" content="Extract PDF pages as high-quality PNG images." />
+  <meta property="og:title" content="PDF to PNG: Render Every Page as a Lossless Image" />
+  <meta property="og:description" content="Understand what full-page PNG rendering produces, why it is not image extraction, and when PNG beats JPG for document pages." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/pdf-to-images.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="PDF to PNG Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Extract PDF pages as high-quality PNG images." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="PDF to PNG: Render Every Page as a Lossless Image" />
+  <meta name="twitter:description" content="Understand what full-page PNG rendering produces, why it is not image extraction, and when PNG beats JPG for document pages." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "PDF to PNG: Render Every Page as a Lossless Image", "description": "How full-page PNG rendering works, why it differs from extracting embedded images, and when PNG suits document pages better than JPG.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/pdf-to-images.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can I pull out the photographs that were placed inside a PDF?", "acceptedAnswer": { "@type": "Answer", "text": "No. This tool draws each complete page and saves that drawing. A photograph on the page arrives inside the page image at the rendered scale, together with any surrounding text and margins, rather than as a separate file at its original resolution." } },
+          { "@type": "Question", "name": "Why do I receive a ZIP file for a single-page PDF?", "acceptedAnswer": { "@type": "Answer", "text": "The download path is the same regardless of page count. A one-page document still arrives as pdf-pages-png.zip containing page-1.png. Extract it as you would any archive." } },
+          { "@type": "Question", "name": "Will text inside the PNG images stay searchable?", "acceptedAnswer": { "@type": "Answer", "text": "No. Rendering converts characters into pixels, so nothing in the images can be searched, selected, or copied. Keep the original PDF whenever the wording needs to remain findable." } },
+          { "@type": "Question", "name": "What happens to a document that mixes portrait and landscape pages?", "acceptedAnswer": { "@type": "Answer", "text": "Each page is measured and drawn at its own size multiplied by the render scale, so the archive can contain images with different pixel dimensions. No page is rotated or resized to match the others." } },
+          { "@type": "Question", "name": "Can I convert only the pages I actually need?", "acceptedAnswer": { "@type": "Answer", "text": "Not in this tool, because every page of the selected PDF is processed. Build a shorter PDF first with Extract Pages, then render that file." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">PDF to PNG: Render Every Page as a Lossless Image</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Lossless Page Images</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Sometimes a PDF is simply the wrong container. You need page four as a picture you can drop into a slide, attach to a ticket, or place in a wiki, and a PDF viewer will not hand you that. This tool draws every page of your document at render scale 2 and saves each one as a PNG, then packages the whole set into <code>pdf-pages-png.zip</code>. One point matters before you start: it photographs pages. It does not reach inside the file and pull out the logos or photographs embedded in it.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/pdf-images">Open PDF to PNG<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">PDF to PNG</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">PDF to PNG extracts each page of your PDF and renders it as a high-quality PNG image. The tool runs locally utilizing pdf.js to render page vector nodes onto HTML5 canvases, then exports them as PNG files and packages them into a ZIP archive for immediate download.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/pdf-images">
-        Open PDF to PNG
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Page rendering is not image extraction</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">What you receive</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A picture of each complete page, exactly as a reader would see it: body text, headings, tables, diagrams, margins, headers and footers, all flattened into one image per page.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">What you do not receive</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The individual assets a designer placed in the document. If a page holds one chart and two paragraphs, the output is a single image containing all three, not a separate chart file at its own resolution.</p></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Scan resolution is not reproduced.</strong> For a scanned document, pages are drawn at render scale 2 rather than at whatever resolution the scanner originally captured. The result may carry more or less detail than the source imagery, so compare a page before relying on the output.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Upload the PDF document you want to extract page images from.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Render Pages</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The browser parser loops through the pages and renders vector elements onto HTML5 canvases.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Download ZIP</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The rendered canvases are converted to PNG, zipped client-side, and downloaded instantly.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Fixed behaviour: input, output, and settings</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Input:</strong> one readable PDF. <strong class="text-slate-900 dark:text-slate-200">Output:</strong> <code>pdf-pages-png.zip</code> containing <code>page-1.png</code>, <code>page-2.png</code>, and so on in document order.</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Setting</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Value</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Adjustable?</th></tr></thead><tbody><tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Render scale</td><td class="py-3 pr-4">2</td><td class="py-3">No</td></tr><tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Image format</td><td class="py-3 pr-4">PNG, lossless</td><td class="py-3">No</td></tr><tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Page coverage</td><td class="py-3 pr-4">Every page</td><td class="py-3">No</td></tr><tr><td class="py-3 pr-4">Files per run</td><td class="py-3 pr-4">One PDF</td><td class="py-3">No</td></tr></tbody></table></div>
+        <p>Image dimensions come from each page's own size multiplied by the render scale, so a portrait page yields a tall image and a landscape page a wide one. A ZIP is produced even when the document has a single page.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Why use PNG format?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">PNG offers lossless image compression, which preserves clear text borders and graphic layouts perfectly.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is the rendering done client-side?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. The rendering is processed in your browser sandbox using pdf.js, keeping documents secure.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How fast is the conversion?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Standard PDFs convert in seconds. Large documents with hundreds of pages may take slightly longer.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the rendering pipeline runs</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1. Read:</strong> PDF.js 3.4.120 opens the selected file from browser memory.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2. Measure:</strong> <code>page.getViewport({ scale: 2 })</code> sizes each page at twice its default render size, which is why small type and thin rules stay legible.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3. Draw:</strong> the page is painted onto a canvas created in memory rather than shown on screen.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4. Encode:</strong> <code>canvas.toDataURL('image/png')</code> stores every drawn pixel exactly, with nothing discarded to save space.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5. Package:</strong> JSZip collects the images so you receive one archive instead of a queue of separate downloads.</li>
+        </ol>
+        <p>Progress is reported as the run proceeds: the status line counts <em>Rendering page 3 of 40</em> during drawing, then switches to a zipping percentage while the archive is assembled.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Match the format to what is on the page</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Stay with PNG when</h3><ul class="mt-2 space-y-2 text-sm leading-6 text-slate-600 dark:text-slate-400"><li>Pages carry small text, tables, or dense figures.</li><li>Screenshots, line art, or diagrams need clean edges.</li><li>Someone will zoom in to read fine detail.</li><li>You want a faithful visual record with no compression artefacts.</li></ul></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Switch to JPG when</h3><ul class="mt-2 space-y-2 text-sm leading-6 text-slate-600 dark:text-slate-400"><li>Pages are photographic, scanned, or image-led.</li><li>The images travel through chat apps or upload forms.</li><li>File size matters more than absolute edge precision.</li><li>Use <a class="font-semibold text-[#1a73e8]" href="/guides/pdf-to-jpg.html">PDF to JPG</a> for that route.</li></ul></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm text-sm leading-6 text-slate-600 dark:text-slate-400"><p>Unsure? Run the same document through both tools and compare a page of small type side by side. The difference is usually obvious at a glance, and it costs one extra minute.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What rendering removes</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Text and structure</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Selectable characters, tags, and reading order do not survive. Assistive technology receives a picture, so keep the source PDF for anything that must remain accessible or searchable.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Interactivity and vectors</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Hyperlinks become coloured pixels, form fields stop accepting input, and vector artwork is fixed at the rendered pixel grid rather than scaling cleanly.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations worth knowing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">No page selection:</strong> the whole document is processed, so narrow the file first when you want a subset.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No resolution choice:</strong> render scale is fixed, which sets a firm ceiling on available detail.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No smaller-archive guarantee:</strong> lossless storage of detailed pages can easily exceed the size of the source PDF.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">One document per run:</strong> the tool takes a single PDF rather than a batch.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Memory is the real ceiling:</strong> every page is drawn, encoded, and held before zipping, so very long or graphics-heavy files can be slow or may fail on a modest device.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Unreadable files stop the run:</strong> a password-protected, unusually encrypted, or damaged PDF cannot be opened, and the status line reports the error.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">File contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</strong> PDF.js and JSZip are downloaded from third-party CDNs when needed, so the workflow is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the selected PDF contents.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The ZIP is much larger than the PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Expected in many cases. Storing detailed pages losslessly at double scale produces substantial files. Try JPG output when size is the binding constraint.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Text looks soft once I zoom in</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Images are fixed at the render scale. Zooming past it enlarges pixels rather than revealing new detail, and there is no higher-resolution option here.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">I wanted one page and received the whole document</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Every page is converted. Either keep the image you need from the archive, or build a shorter source PDF first with <a class="font-semibold text-[#1a73e8]" href="/extract-pages">Extract Pages</a>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A long document stalls partway through</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Rendering is memory-hungry. Close other tabs and retry, or split the file into shorter sections before converting.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The PDF will not open at all</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The renderer needs to read the document. Confirm it opens normally in a PDF viewer and is not password-protected or corrupted.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I pull out the photographs that were placed inside a PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. This tool draws each complete page and saves that drawing. A photograph on the page arrives inside the page image at the rendered scale, together with any surrounding text and margins, rather than as a separate file at its original resolution.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why do I receive a ZIP file for a single-page PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The download path is the same regardless of page count. A one-page document still arrives as <code>pdf-pages-png.zip</code> containing <code>page-1.png</code>. Extract it as you would any archive.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will text inside the PNG images stay searchable?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Rendering converts characters into pixels, so nothing in the images can be searched, selected, or copied. Keep the original PDF whenever the wording needs to remain findable.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What happens to a document that mixes portrait and landscape pages?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Each page is measured and drawn at its own size multiplied by the render scale, so the archive can contain images with different pixel dimensions. No page is rotated or resized to match the others.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I convert only the pages I actually need?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not in this tool, because every page of the selected PDF is processed. Build a shorter PDF first with Extract Pages, then render that file.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/pdf-jpg"><h3 class="font-bold text-[#1a73e8]">PDF to JPG</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The lossy alternative, worth choosing when pages are photographic and smaller files matter.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/extract-pages"><h3 class="font-bold text-[#1a73e8]">Extract Pages</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Build a shorter PDF first so you only render the pages you actually want.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/images-pdf"><h3 class="font-bold text-[#1a73e8]">Images to PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The reverse journey, assembling image files back into a single document.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Turn pages into images you can place anywhere</h2><p class="mt-3 text-sm leading-6 text-white">Select one PDF, let every page render at scale 2, and check a page of small type in the archive before you send the images on.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/pdf-images">Use PDF to PNG</a></section>
+    </article>
   </main>
 </body>
 </html>

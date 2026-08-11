@@ -4,88 +4,129 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>QR Code Generator Guide - WeConvertFiles</title>
-  <meta name="description" content="Generate custom QR codes offline in your web browser securely and instantly." />
+  <title>QR Code Generator: Create a Static QR PNG</title>
+  <meta name="description" content="Generate a static QR code from text or a URL at error correction level H, pick a pixel size from 150 to 300, and download a PNG. No tracking or redirect." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/qr-generator.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="QR Code Generator Guide - WeConvertFiles" />
-  <meta property="og:description" content="Generate custom QR codes offline in your web browser securely and instantly." />
+  <meta property="og:title" content="QR Code Generator: Create a Static QR PNG" />
+  <meta property="og:description" content="How a static QR PNG is built in the browser, why the pattern density depends on your text, and how to make a code that scans." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/qr-generator.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="QR Code Generator Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Generate custom QR codes offline in your web browser securely and instantly." />
+  <meta name="twitter:title" content="QR Code Generator: Create a Static QR PNG" />
+  <meta name="twitter:description" content="How a static QR PNG is built in the browser, why the pattern density depends on your text, and how to make a code that scans." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
   </script>
   <script src="../layout.js" defer></script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "QR Code Generator: Create a Static QR PNG", "description": "How a static QR code PNG is built in the browser, why text length drives pattern density, and how to produce a code that scans reliably.", "mainEntityOfPage": "https://www.weconvertfiles.com/guides/qr-generator.html", "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" } },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can I change where the code points after printing it?", "acceptedAnswer": { "@type": "Answer", "text": "Not with a static code. The destination is written into the image itself. If you expect it to change, encode a URL you control, such as a page on your own site, and change what that page redirects to." } },
+          { "@type": "Question", "name": "Why does a short link produce a simpler-looking code?", "acceptedAnswer": { "@type": "Answer", "text": "The pattern grows with the amount of data encoded. Less text needs fewer modules, so each square is larger relative to the whole image, which is exactly what makes a code easier for a camera to read." } },
+          { "@type": "Question", "name": "What does the high error-correction level do for me?", "acceptedAnswer": { "@type": "Answer", "text": "This tool uses level H, the highest of the four QR levels. It lets a code still decode when part of it is damaged, dirty, or partly obscured, which suits stickers and handled print. The cost is a denser pattern for the same text." } },
+          { "@type": "Question", "name": "Can I put my logo in the middle of the code?", "acceptedAnswer": { "@type": "Answer", "text": "Not through this tool. There is no overlay feature. Adding one afterward in an image editor is possible but must be tested carefully, since covering part of the pattern relies on the error correction absorbing the loss." } },
+          { "@type": "Question", "name": "Can I encode a phone number or Wi-Fi details?", "acceptedAnswer": { "@type": "Answer", "text": "Only by typing the correctly formatted text yourself, because there are no dedicated forms for those types. Whatever you enter is encoded literally, so the syntax must be exactly right for a scanner to act on it." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">QR Code Generator: Create a Static QR PNG</h1><span class="rounded-full bg-indigo-50 dark:bg-indigo-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-indigo-700 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-900/50">Static &amp; Untracked</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">A QR code is a picture of some text. Whatever you type is written into the pattern of black and white squares, and a phone camera reads it back out. Type a URL or any other text, choose a size, and download a PNG, generated in your browser as you type so the preview keeps pace with your edits. The key point to settle before printing: the code is <strong class="text-slate-900 dark:text-slate-200">static</strong>. Your text is baked into the image permanently, with no intermediate link to track or edit later.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/qr-generator">Open QR Code Generator<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">QR Code Generator</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">QR Code Generator creates visual two-dimensional QR Code matrix grids from URL links, phone numbers, contact info, or plaintext parameters. Utilizing modern Canvas API drawing filters, the engine paints the black/white alignment squares based on inputs and correction options locally, allowing you to download high-resolution PNG image files without API rate limits.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/qr-generator">
-        Open QR Generator
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Good uses for a permanent code</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">A poster or flyer for a fixed campaign:</strong> a code linking to an event listing, a menu, or a registration form, printed once for a set purpose.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">A label on physical equipment:</strong> a sticker on a machine or meter that opens its documentation or a maintenance log.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">A closing slide in a talk:</strong> give an audience a way to reach your material without typing a long address from the back of the room.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Packaging or a business card:</strong> something printed in quantity, where a fixed destination is an advantage rather than a limitation.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Plain text rather than a link:</strong> a serial number, reference code, or short instruction someone needs to capture accurately.</li>
+      </ul></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Input Text or URL</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Type or paste the URL, link, or custom text parameter inside the generator field.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Instant Paint</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select your preferred output dimensions. The client-side engine renders the QR code instantly.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Download Image</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Download to save the generated QR code directly to your local file system as a PNG.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the code is built</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>No file is involved. The tool takes the text you type and passes it to <strong class="text-slate-900 dark:text-slate-200">QRious</strong>, a JavaScript library that draws QR codes onto a canvas in the browser. Every keystroke and every size change triggers a fresh drawing, which is why the preview updates instantly.</p>
+        <p>The code uses <strong class="text-slate-900 dark:text-slate-200">error correction level H</strong>, the highest of the four levels in the QR standard. Error correction adds redundant data so a code still reads when part of it is obscured, scratched, or poorly printed. Level H builds in the most redundancy, which helps with real-world wear, and the trade is density: the same text at level H produces a busier pattern than it would at a lower level.</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Setting</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Value</th></tr></thead><tbody><tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Available sizes</td><td class="py-3 pr-4">150, 200, 250, 300 px (200 default)</td></tr><tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Error correction</td><td class="py-3 pr-4">Level H (highest)</td></tr><tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Output</td><td class="py-3 pr-4">PNG named <code>qrcode.png</code></td></tr><tr><td class="py-3 pr-4">Colours, logo, format</td><td class="py-3 pr-4">Fixed; not configurable</td></tr></tbody></table></div>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is there a limit to the amount of text in QR Codes?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, standard QR code specifications allow up to 4296 alphanumeric characters, but we recommend keeping links short for optimal scanner readability.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Do the generated QR codes expire?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. They contain static raw text or direct URL paths, so they will function permanently as long as the destination URL remains active.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Step by step</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Enter the text</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Type or paste your content. For a web address, include the full <code>https://</code> so scanners treat it as a link rather than plain text.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Pick a size</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Choose one of the four pixel sizes. If the preview looks very dense, your text is long; larger is safer for print.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Download and test</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Save <code>qrcode.png</code>, then scan it with at least two phones. If it will print, test a printed proof rather than the screen.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why the pattern density depends on your text</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Every download is a single PNG named <code>qrcode.png</code> at the pixel size you selected, so rename files as you go if you produce several in one session. The density of the pattern is set by how much text you encoded: a short link produces large, forgiving squares, while a long URL carrying tracking parameters produces a much finer grid where each module is smaller and harder for a camera to resolve, especially at 150 pixels or on a small printed label.</p>
+        <p>Nothing about the image is configurable beyond size. Colours are fixed, there is no logo overlay, no margin control, no SVG or other format option, and no way to choose a different error-correction level.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What a static code will not do</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">No redirect or repointing</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">There is no intermediate link you can edit later. If the destination changes, you must generate and redistribute a new code. The image itself never expires, but the page it points to might.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">No analytics or shortening</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Nothing counts scans or records location, because that only exists when a code routes through a tracking service. Long addresses are encoded in full rather than shortened, which is what makes the pattern dense.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Making a code that actually scans</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Keep the payload short:</strong> shorter text means larger modules, and larger modules scan more easily. A clean URL beats one carrying a long string of parameters.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Pick the largest size for print:</strong> the 300-pixel option gives more pixels to place into a layout. Enlarging a 150-pixel PNG in a design app produces soft, blocky edges.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Leave a clear margin:</strong> QR codes need a quiet zone around them. Add space in your layout and avoid crowding the code with text or graphics.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Keep contrast strong:</strong> place the code on a plain light background. Printing over a photo or coloured panel is a common cause of failed scans.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Test on real devices:</strong> camera apps differ, and so do older phones, which may be exactly what your audience uses.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">The text you enter is not sent to WeConvertFiles to produce the code;</strong> generation happens in your browser. The QRious library is downloaded from a third-party CDN when needed, so the tool is not described as fully offline.</p><p>Zoho PageSense may collect consented site-usage data such as visits, clicks, scrolling, referrer, device information, and conversion events. PageSense is not given the text you encode.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Phones will not read the printed code</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Usually size or contrast. Print it larger, keep a clear margin, and check that the printing is sharp rather than smudged or lightly inked.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The pattern is extremely dense</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Your text is long. Shorten the URL before generating, or use a larger size so each module occupies more pixels.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Scanning opens a search result instead of my page</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The text was not recognised as a URL. Include the full address with the <code>https://</code> prefix.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The image looks blurry in my design software</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A PNG is a fixed grid of pixels and cannot be enlarged without softening. Generate at 300 pixels and place it at or below that size.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">I cannot tell several downloads apart</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Every file is named <code>qrcode.png</code>. Rename each one right after downloading, and note which text produced which file.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I change where the code points after printing it?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not with a static code. The destination is written into the image itself. If you expect it to change, encode a URL you control, such as a page on your own site, and change what that page redirects to.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why does a short link produce a simpler-looking code?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The pattern grows with the amount of data encoded. Less text needs fewer modules, so each square is larger relative to the whole image, which is exactly what makes a code easier for a camera to read.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What does the high error-correction level do for me?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">This tool uses level H, the highest of the four QR levels. It lets a code still decode when part of it is damaged, dirty, or partly obscured, which suits stickers and handled print. The cost is a denser pattern for the same text.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I put my logo in the middle of the code?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not through this tool. There is no overlay feature. Adding one afterward in an image editor is possible but must be tested carefully, since covering part of the pattern relies on the error correction absorbing the loss.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the code work without an internet connection?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Scanning the code and reading its text does not need a connection. Opening a website the code points to does.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I encode a phone number or Wi-Fi details?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Only by typing the correctly formatted text yourself, because there are no dedicated forms for those types. Whatever you enter is encoded literally, so the syntax must be exactly right for a scanner to act on it.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-to-base64"><h3 class="font-bold text-[#1a73e8]">Image to Base64</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Turn <code>qrcode.png</code> into a string you can embed directly in an HTML email or web page.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/images-pdf"><h3 class="font-bold text-[#1a73e8]">Images to PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Place several generated codes into one document for printing as labels or handouts.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/bulk-resize"><h3 class="font-bold text-[#1a73e8]">Bulk Image Resizer</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Scale a set of downloaded codes to a consistent size for a layout, then re-test scanning.</p></a></section>
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Generate a code that points exactly where you type</h2><p class="mt-3 text-sm leading-6 text-white">Enter your text, choose a size, download <code>qrcode.png</code>, and scan a printed proof before you commit it to a run.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/qr-generator">Use QR Code Generator</a></section>
+    </article>
   </main>
 </body>
 </html>
