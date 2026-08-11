@@ -715,15 +715,15 @@ const tools = [
     id: 'remove-pages',
     title: 'Remove Pages',
     kicker: 'Organize PDF',
-    badge: 'Page ranges',
+    badge: 'Visual editor',
     icon: 'X',
     iconBg: 'bg-rose-100',
     iconColor: 'text-rose-600',
     description: 'Delete selected pages from a PDF and download the cleaned file.',
-    hint: 'Upload one PDF and enter pages to remove, such as 2,4-6.',
+    hint: 'Upload one PDF, then click the trash icon on the pages to remove.',
     accept: 'application/pdf',
     multiple: false,
-    notes: ['Supports single pages and ranges.', 'Keeps all pages not listed.', 'Best for quick cleanup tasks.']
+    notes: ['Remove pages by clicking them in the visual editor.', 'Keeps every page you do not delete.', 'Drag to reorder or rotate while you are there.']
   },
   {
     id: 'bulk-resize',
@@ -1563,11 +1563,6 @@ function renderToolOptions(toolId) {
   const labelClass = 'text-sm font-semibold text-slate-800 dark:text-slate-200';
   const helpClass = 'mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400';
   const panels = {
-    'remove-pages': `
-      <label class="${labelClass}" for="pageRangeInput">Pages to remove</label>
-      <input id="pageRangeInput" class="${inputClass}" placeholder="Example: 2,4-6" />
-      <p class="${helpClass}">Use commas and ranges. Page numbers start at 1.</p>
-    `,
     'extract-pages': `
       <label class="${labelClass}" for="pageRangeInput">Pages to extract</label>
       <input id="pageRangeInput" class="${inputClass}" placeholder="Example: 1,3-5" />
@@ -6725,14 +6720,6 @@ async function handleConvert() {
     if (state.currentTool.id === 'svg-to-image' && !document.getElementById('svgImgTextInput')?.value?.trim()) return;
   }
 
-  if (state.currentTool.id === 'remove-pages') {
-    const pagesVal = document.getElementById('pageRangeInput')?.value?.trim();
-    if (!pagesVal) {
-      setStatus('Please enter the page numbers to remove (e.g. 1, 3-5).', 'error');
-      document.getElementById('pageRangeInput')?.focus();
-      return;
-    }
-  }
   if (state.currentTool.id === 'extract-pages') {
     const pagesVal = document.getElementById('pageRangeInput')?.value?.trim();
     if (!pagesVal) {
@@ -6762,7 +6749,7 @@ async function handleConvert() {
     if (state.currentTool.id === 'exif-utility') await removeExif();
     if (state.currentTool.id === 'merge-pdf') await mergePdfs();
     if (state.currentTool.id === 'split-pdf') await splitPdf();
-    if (state.currentTool.id === 'remove-pages') await copySelectedPages('remove');
+    if (state.currentTool.id === 'remove-pages') await processVisualPdfEdit();
     if (state.currentTool.id === 'extract-pages') await copySelectedPages('extract');
     if (state.currentTool.id === 'organize-pdf') await copySelectedPages('organize');
     if (state.currentTool.id === 'rotate-pdf') await rotatePdf();
