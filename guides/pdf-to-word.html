@@ -4,19 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Extract Text From PDF to an Editable TXT File</title>
-  <meta name="description" content="Extract text from PDF pages into a UTF-8 TXT file in your browser. Learn what is preserved, why layout is lost, and when scanned PDFs need OCR software." />
+  <title>PDF to Word (.DOCX) or Plain Text (.TXT) in Your Browser</title>
+  <meta name="description" content="Convert a PDF's text layer into an editable Word (.docx) document or a UTF-8 TXT file in your browser. Learn what is reconstructed, what layout is not, and why scanned PDFs need OCR." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/pdf-to-word.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Extract Text From PDF to an Editable TXT File" />
-  <meta property="og:description" content="Understand PDF text layers, TXT output, page separators, reading-order limits, and why scanned pages require OCR." />
+  <meta property="og:title" content="PDF to Word (.DOCX) or Plain Text (.TXT) in Your Browser" />
+  <meta property="og:description" content="Understand PDF text layers, DOCX and TXT output, paragraph reconstruction, layout limits, and why scanned pages require OCR." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/pdf-to-word.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Extract Text From PDF to an Editable TXT File" />
-  <meta name="twitter:description" content="Understand PDF text layers, TXT output, page separators, reading-order limits, and why scanned pages require OCR." />
+  <meta name="twitter:title" content="PDF to Word (.DOCX) or Plain Text (.TXT) in Your Browser" />
+  <meta name="twitter:description" content="Understand PDF text layers, DOCX and TXT output, paragraph reconstruction, layout limits, and why scanned pages require OCR." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -36,8 +36,8 @@
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Extract Text From PDF: What You Get, and What You Do Not",
-        "description": "A practical guide to extracting selectable PDF text as UTF-8 TXT while understanding formatting, reading-order, and OCR limitations.",
+        "headline": "PDF to Word or Plain Text: What You Get, and What You Do Not",
+        "description": "A practical guide to converting a selectable PDF text layer into an editable Word (.docx) document or UTF-8 TXT file, and understanding the formatting, reading-order, and OCR limits of each.",
         "mainEntityOfPage": "https://www.weconvertfiles.com/guides/pdf-to-word.html",
         "publisher": { "@type": "Organization", "name": "WeConvertFiles", "url": "https://www.weconvertfiles.com" }
       },
@@ -46,8 +46,8 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Why is the output TXT when the tool name mentions Word?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The current tool extracts existing text rather than rebuilding the PDF as a formatted document. It downloads UTF-8 plain text, which can be opened in Word and saved as DOCX after manual formatting." }
+            "name": "Can I export a Word (.docx) file, or only plain text?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Both. An Output Format selector lets you choose an editable Word (.docx) document, which rebuilds lines and paragraphs from the PDF text layer, or a plain UTF-8 TXT file. DOCX is the default." }
           },
           {
             "@type": "Question",
@@ -57,7 +57,7 @@
           {
             "@type": "Question",
             "name": "Does PDF text extraction preserve tables and columns?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. Text items are joined with spaces into plain text. Table cells lose their row and column structure, and multi-column documents may produce an unexpected reading order." }
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Both outputs reconstruct running lines and paragraphs, not tables. Table cells lose their row and column structure, and multi-column documents may produce an unexpected reading order." }
           },
           {
             "@type": "Question",
@@ -67,7 +67,7 @@
           {
             "@type": "Question",
             "name": "Does extracting PDF text change the original file?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. The original PDF is read in browser memory. The tool creates a separate TXT download and does not overwrite or alter the source file." }
+            "acceptedAnswer": { "@type": "Answer", "text": "No. The original PDF is read in browser memory. The tool creates a separate download and does not overwrite or alter the source file." }
           }
         ]
       }
@@ -88,10 +88,10 @@
     <article>
       <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
         <div class="flex flex-wrap items-center gap-3">
-          <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Extract Text From PDF: What You Get, and What You Do Not</h1>
-          <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">TXT Output</span>
+          <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">PDF to Word or Plain Text: What You Get, and What You Do Not</h1>
+          <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">DOCX or TXT</span>
         </div>
-        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">This tool extracts the text already stored inside a PDF, page by page, and downloads it as a UTF-8 TXT file. It is useful for quoting, searching, translating, or rewriting selectable text. Despite the tool name mentioning Word, it does not create a Microsoft Word DOCX file. It also does not perform OCR, so scanned or image-only pages produce little or no useful text.</p>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">This tool reads the text already stored inside a PDF, page by page, groups it back into lines and paragraphs, and lets you download the result as an editable Microsoft Word (.docx) document or a plain UTF-8 TXT file — you choose the format. It is useful for quoting, searching, translating, or reworking selectable text. It does not perform OCR, so scanned or image-only pages produce little or no useful text.</p>
         <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/pdf-to-word">Open PDF to Word / TXT<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
       </section>
 
@@ -108,18 +108,18 @@
 
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What the tool produces</h2>
       <section class="grid gap-4 md:grid-cols-2">
-        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Input and download</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Upload one PDF. The result is named <code>original-name-extracted.txt</code> and encoded as UTF-8 for broad language and symbol support.</p></div>
-        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Page separation</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Each page begins with a marker such as <code>--- Page 1 ---</code>. Text items from that page follow as a space-separated sequence.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Input and download</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Upload one PDF and pick an output format. The result is saved as <code>original-name.docx</code> or <code>original-name.txt</code>, encoded as UTF-8 for broad language and symbol support.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Lines and pages</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Text fragments are grouped into visual lines and paragraphs. DOCX starts each PDF page on a new Word page; TXT places a <code>--- Page 1 ---</code> marker before each page.</p></div>
       </section>
       <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300">
-        <p><strong>The result is plain text, not DOCX.</strong> It does not contain page layout, fonts, styling, images, table cells, columns, or document structure. You can open the TXT file in Word or another word processor and format it manually.</p>
+        <p><strong>DOCX rebuilds text, not full design.</strong> The Word output preserves reading lines and paragraph breaks, but it does not recreate page layout, fonts, styling, images, table cells, or columns. Choose TXT when you only need the raw wording.</p>
       </section>
 
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to extract text from a PDF</h2>
       <section class="grid gap-4 md:grid-cols-3">
         <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Check the PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Open it in a viewer and try to select a sentence. Word-by-word selection usually indicates a usable text layer.</p></div>
         <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Extract every page</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Select the PDF and start conversion. The browser reads each page's stored text in order.</p></div>
-        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Review the TXT</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Download and inspect the result, especially tables, columns, page headers, and unusual character spacing.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span><h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Review the output</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Download and inspect the DOCX or TXT result, especially tables, columns, page headers, and unusual character spacing.</p></div>
       </section>
 
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How PDF.js extracts the text layer</h2>
@@ -129,8 +129,8 @@
           <li><strong class="text-slate-900 dark:text-slate-200">1. Read:</strong> the selected PDF becomes an <code>ArrayBuffer</code> in browser memory.</li>
           <li><strong class="text-slate-900 dark:text-slate-200">2. Parse:</strong> PDF.js loads the document and visits pages from first to last.</li>
           <li><strong class="text-slate-900 dark:text-slate-200">3. Retrieve:</strong> <code>getTextContent()</code> returns the text items stored on each page.</li>
-          <li><strong class="text-slate-900 dark:text-slate-200">4. Assemble:</strong> the implementation joins each item's <code>str</code> value with a space and adds an exact <code>--- Page N ---</code> marker before every page.</li>
-          <li><strong class="text-slate-900 dark:text-slate-200">5. Save:</strong> the complete result becomes a UTF-8 text Blob and downloads as a separate TXT file.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4. Assemble:</strong> the implementation sorts each item by position, groups items into lines, and groups lines into paragraphs using the vertical gaps between them.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5. Save:</strong> for DOCX the paragraphs are written with the docx library and downloaded as a Word file; for TXT they become a UTF-8 Blob with a <code>--- Page N ---</code> marker before each page.</li>
         </ol>
         <p>A PDF normally stores instructions for placing text fragments at coordinates rather than the paragraphs and semantic structure used by a word processor. That is why the words may be available even when their visual relationships are lost.</p>
       </section>
@@ -139,7 +139,7 @@
       <section class="grid gap-4 md:grid-cols-3">
         <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Text extraction</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Retrieves characters already stored in the PDF. This is what the current tool does.</p></div>
         <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">OCR</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Recognizes letters inside a scanned page image. This tool does not perform OCR.</p></div>
-        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">PDF to DOCX</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Attempts to rebuild editable layout, styling, tables, and images. This tool does not create DOCX.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Full PDF to DOCX</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Commercial converters attempt to rebuild layout, styling, tables, and images. This tool's DOCX keeps text lines and paragraphs, not that full design.</p></div>
       </section>
 
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What to expect from different PDFs</h2>
@@ -171,8 +171,8 @@
 
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
       <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The TXT file is empty or nearly empty</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The PDF probably contains page images without an OCR text layer. Try selecting a sentence in a PDF viewer; if characters cannot be selected, use OCR software.</p></div>
-        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Words are spaced or ordered strangely</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">PDF.js returns positioned text fragments, and the implementation joins them with spaces. The file's internal order may not match its visual paragraphs or columns.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The output is empty or nearly empty</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The PDF probably contains page images without an OCR text layer. Try selecting a sentence in a PDF viewer; if characters cannot be selected, use OCR software before converting.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Words are spaced or ordered strangely</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">PDF.js returns positioned text fragments that are regrouped into lines by position. In multi-column pages or documents with unusual internal ordering, the reconstructed reading order may still not match the visual layout.</p></div>
         <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Accented or non-Latin characters look wrong</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Open the download in an editor configured for UTF-8. If characters remain incorrect, the PDF may use unusual font encoding or mappings.</p></div>
         <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A long document takes substantial time</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Every page is parsed sequentially. Close other memory-heavy tabs, or create a smaller PDF containing only the pages you need before extraction.</p></div>
         <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The PDF cannot be loaded</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The file may be damaged, encrypted, or unsupported by the loaded PDF.js version. Confirm that it opens normally in another PDF viewer.</p></div>
@@ -180,11 +180,11 @@
 
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
       <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why is the output TXT when the tool mentions Word?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The current implementation extracts stored text instead of reconstructing a formatted document. Open the TXT file in Word if desired, apply your own formatting, and then save it as DOCX.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Should I choose DOCX or TXT?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Choose DOCX for an editable Word document that keeps reconstructed lines and paragraphs, ready to edit or format further. Choose TXT when you only need the raw wording for search, translation, or another text workflow. Use the Output Format selector on the tool.</p></div>
         <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will the text match the page exactly?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The characters come from the PDF's text layer, but spacing and order may differ. Columns, tables, positioned fragments, headers, and footers require careful review.</p></div>
         <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I extract only selected pages?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not directly in this workflow. First create a smaller PDF with the required pages, then run text extraction on that document.</p></div>
         <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it support languages other than English?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The output is UTF-8 and can store many writing systems. Results still depend on how the source PDF encoded its characters, and complex or right-to-left text should be reviewed.</p></div>
-        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can the output preserve tables?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. TXT has no rows or cells, and this implementation joins retrieved items with spaces. Use a dedicated table-extraction workflow when spreadsheet structure matters.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can the output preserve tables?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Neither DOCX nor TXT rebuilds table rows and cells; cell values become part of the running text. Use a dedicated table-extraction workflow when spreadsheet structure matters.</p></div>
       </section>
 
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
@@ -194,7 +194,7 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/compress-pdf"><h3 class="font-bold text-[#1a73e8]">Compress PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Reduce an image-heavy PDF for sharing when extracting its wording is not the goal.</p></a>
       </section>
 
-      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Extract the text layer from your PDF</h2><p class="mt-3 text-sm leading-6 text-white">If the document contains selectable text, download its wording as a page-separated UTF-8 TXT file.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/pdf-to-word">Use PDF to Word / TXT</a></section>
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Convert your PDF text layer</h2><p class="mt-3 text-sm leading-6 text-white">If the document contains selectable text, download it as an editable Word (.docx) document or a UTF-8 TXT file.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/pdf-to-word">Use PDF to Word / TXT</a></section>
     </article>
   </main>
 </body>

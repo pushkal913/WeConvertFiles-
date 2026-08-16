@@ -107,7 +107,7 @@ const converterLibraries = Object.freeze({
 const toolLibraryDependencies = Object.freeze({
   'json-yaml': ['jsyaml'],
   'sql-formatter': ['sqlformatter'],
-  'pdf-to-word': ['pdfjs', 'docx'],
+  'pdf-to-word': ['pdfjs'],
   'office-pdf': ['html2pdf', 'mammoth', 'xlsx'],
   'merge-pdf': ['pdflib'],
   'images-pdf': ['jspdf'],
@@ -230,6 +230,14 @@ const toolContentDetails = {
       { q: 'Does splitting reduce page quality?', a: 'Pages are copied as PDF objects instead of being rendered to canvas, so the process does not intentionally reduce image resolution or flatten text and vector artwork. Document-level features should still be checked.' },
       { q: 'Is there a file size or page limit?', a: 'The implementation sets no specific maximum and makes no 100 MB speed promise. Available browser memory is the practical constraint because it holds the source, generated page files, and ZIP.' },
       { q: 'How are my documents handled?', a: 'PDF contents are processed in browser memory and are not sent to WeConvertFiles for conversion. Consented site-usage analytics may operate separately without receiving the document contents.' }
+    ]
+  },
+  'pdf-to-word': {
+    howItWorks: 'PDF to Word / TXT reads a PDF\'s existing text layer with PDF.js, groups the positioned text fragments back into visual lines and paragraphs, and lets you download the result in the format you pick. Choose DOCX to build an editable Microsoft Word document (lines and paragraphs preserved, one Word page per PDF page) using the docx library, or choose TXT to save the reconstructed text as a UTF-8 file with a marker before each page. Everything runs in your browser; the tool does not perform OCR, so scanned image-only pages produce little or no text.',
+    faqs: [
+      { q: 'Do I get a real Word (.docx) file or plain text?', a: 'Both are available — pick from the Output Format selector. DOCX produces an editable Word document with reconstructed lines and paragraphs; TXT produces a plain UTF-8 text file. The default is DOCX.' },
+      { q: 'Does the Word output keep the original layout and tables?', a: 'It rebuilds reading lines and paragraph breaks, not full page design. Fonts, colours, images, and table cell/column structure are not recreated, because a PDF stores positioned fragments rather than semantic document structure.' },
+      { q: 'Can it convert a scanned PDF?', a: 'Only if the scan already carries a selectable text layer. The tool does not run OCR, so image-only pages return little or no text. Run the file through OCR software first if it is a pure scan.' }
     ]
   },
   'office-pdf': {
@@ -539,17 +547,17 @@ const tools = [
   },
   {
     id: 'pdf-to-word',
-    title: 'PDF to Word (.DOCX)',
+    title: 'PDF to Word / TXT',
     kicker: 'PDF Tools',
-    badge: 'Editable DOCX',
+    badge: 'DOCX or TXT',
     icon: 'W',
     iconBg: 'bg-blue-100',
     iconColor: 'text-blue-600',
-    description: 'Rebuild a PDF text layer into an editable Word (.docx) document with lines and paragraphs preserved.',
+    description: 'Turn a PDF text layer into an editable Word (.docx) document or a plain-text (.txt) file — you choose the output format.',
     hint: 'Upload one PDF file with a selectable text layer.',
     accept: 'application/pdf',
     multiple: false,
-    notes: ['Extracts characters client-side.', 'Downloads output as a .txt file.', 'Does not perform OCR on images.']
+    notes: ['Reconstructs lines and paragraphs client-side.', 'Choose a Word (.docx) or plain-text (.txt) download.', 'Does not perform OCR on images.']
   },
   {
     id: 'office-pdf',
@@ -2423,7 +2431,14 @@ function renderToolOptions(toolId) {
     `,
     'pdf-to-word': `
       <div>
-        <p class="${helpClass}">Your PDF document text layer will be reconstructed client-side into an editable Word (.docx) file. No server processing involved.</p>
+        <div class="mb-4">
+          <label class="${labelClass}">Output Format</label>
+          <select id="pdfWordFormatSelect" class="${inputClass}">
+            <option value="docx" selected>Word Document (.docx)</option>
+            <option value="txt">Plain Text (.txt)</option>
+          </select>
+        </div>
+        <p class="${helpClass}">Your PDF text layer is reconstructed client-side into the selected format. DOCX rebuilds lines and paragraphs as an editable Word file; TXT extracts the raw text with a page marker before each page. No server processing involved.</p>
       </div>
     `,
     'excel-to-csv': `
@@ -6255,56 +6270,74 @@ async function convertOfficeToPdf() {
   if (!window.html2pdf) throw new Error('html2pdf script not loaded.');
   if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
 
-  const printContainer = document.createElement('div');
-  printContainer.className = 'p-8 bg-white text-black font-sans leading-relaxed prose';
-  printContainer.style.width = '750px';
+  const CONTAINER_ID = 'wcfOfficePdfSource';
+  const CONTENT_WIDTH = 750;
 
+  const printContainer = document.createElement('div');
+  printContainer.id = CONTAINER_ID;
+  printContainer.className = 'font-sans leading-relaxed';
+  // Attach off-screen at the page origin so html2canvas captures from the
+  // container's own top (a detached element mis-measures its offset) and so
+  // width:100% tables resolve against a real 750px box.
+  printContainer.style.cssText = 'position:fixed;top:0;left:0;z-index:-9999;width:' + CONTENT_WIDTH + 'px;padding:32px;background:#ffffff;color:#000000;';
+
+  // Print styles live in <head>, scoped to the container. They must NOT sit
+  // inside the captured element: html2canvas lays a <style> tag's CSS text out
+  // as a block, which is what pushed a tall blank band above the content.
   const pageBreakStyle = document.createElement('style');
+  pageBreakStyle.dataset.wcfOfficePdf = 'true';
   pageBreakStyle.textContent = `
-    p, tr, th, td, h1, h2, h3, h4, h5, h6, li, blockquote, table, img, div, .prose > * {
+    #${CONTAINER_ID} > *:first-child, #${CONTAINER_ID} > div > *:first-child { margin-top: 0 !important; }
+    #${CONTAINER_ID} p, #${CONTAINER_ID} tr, #${CONTAINER_ID} th, #${CONTAINER_ID} td,
+    #${CONTAINER_ID} h1, #${CONTAINER_ID} h2, #${CONTAINER_ID} h3, #${CONTAINER_ID} h4,
+    #${CONTAINER_ID} h5, #${CONTAINER_ID} h6, #${CONTAINER_ID} li, #${CONTAINER_ID} blockquote,
+    #${CONTAINER_ID} img {
       page-break-inside: avoid !important;
       break-inside: avoid !important;
     }
-    table {
+    #${CONTAINER_ID} table {
       width: 100% !important;
       border-collapse: collapse !important;
       table-layout: auto !important;
       font-size: 11px !important;
-      margin-top: 14px !important;
-      margin-bottom: 20px !important;
+      margin: 14px 0 20px !important;
     }
-    th, td {
+    #${CONTAINER_ID} th, #${CONTAINER_ID} td {
       border: 1px solid #cbd5e1 !important;
       padding: 6px 10px !important;
       text-align: left !important;
+      vertical-align: top !important;
     }
-    th {
-      background-color: #f1f5f9 !important;
-      font-weight: bold !important;
-    }
+    #${CONTAINER_ID} th { background-color: #f1f5f9 !important; font-weight: bold !important; }
   `;
-  printContainer.appendChild(pageBreakStyle);
+  document.head.appendChild(pageBreakStyle);
 
-  const contentDiv = document.createElement('div');
   setStatus('Parsing DOCX to HTML structure...');
   const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-  contentDiv.innerHTML = result.value || '<h3>Empty Document</h3>';
+  const contentDiv = document.createElement('div');
+  contentDiv.innerHTML = (result.value || '').trim() || '<h3>Empty Document</h3>';
   printContainer.appendChild(contentDiv);
+  document.body.appendChild(printContainer);
 
   setStatus('Generating PDF layout snapshot...');
 
   const opt = {
-    margin: [25, 25, 25, 25],
+    margin: [24, 24, 24, 24],
     filename: file.name.substring(0, file.name.lastIndexOf('.')) + '.pdf',
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+    html2canvas: { scale: 2, useCORS: true, letterRendering: true, backgroundColor: '#ffffff', scrollX: 0, scrollY: 0, windowWidth: CONTENT_WIDTH },
     jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    pagebreak: { mode: ['css', 'legacy'] }
   };
 
-  const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
-  downloadBlob(pdfBlob, opt.filename);
-  setStatus('Office document converted successfully.', 'success');
+  try {
+    const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
+    downloadBlob(pdfBlob, opt.filename);
+    setStatus('Office document converted successfully.', 'success');
+  } finally {
+    if (printContainer.parentNode) printContainer.parentNode.removeChild(printContainer);
+    if (pageBreakStyle.parentNode) pageBreakStyle.parentNode.removeChild(pageBreakStyle);
+  }
 }
 
 async function convertExcelToPdf(file, arrayBuffer) {
@@ -6362,15 +6395,17 @@ async function convertExcelToPdf(file, arrayBuffer) {
 
 async function convertPdfToWord() {
   if (!window.pdfjsLib) throw new Error('pdf.js did not load.');
-  if (!window.docx || !window.docx.Packer) throw new Error('docx library did not load.');
-  const { Document, Packer, Paragraph, TextRun } = window.docx;
+  const formatSelect = document.getElementById('pdfWordFormatSelect');
+  const format = formatSelect && formatSelect.value === 'txt' ? 'txt' : 'docx';
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
   setStatus('Reading PDF document structure...');
   const buffer = await state.files[0].arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
 
-  const children = [];
+  // Reconstruct each page into paragraphs (arrays of line strings) once, then
+  // render to the chosen output format below.
+  const pages = [];
   let foundText = false;
 
   for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
@@ -6408,24 +6443,13 @@ async function convertPdfToWord() {
     const pageLines = lines.filter(line => line.text);
     if (pageLines.length) foundText = true;
 
-    // Start pages after the first on a fresh page in the Word document.
-    if (pageNumber > 1 && pageLines.length) {
-      children.push(new Paragraph({ pageBreakBefore: true }));
-    }
-
     // Group consecutive lines into paragraphs, breaking on larger vertical gaps.
+    const paragraphs = [];
     let paragraph = [];
     const flushParagraph = () => {
-      if (!paragraph.length) return;
-      const runs = [];
-      paragraph.forEach((text, index) => {
-        if (index > 0) runs.push(new TextRun({ text, break: 1 }));
-        else runs.push(new TextRun(text));
-      });
-      children.push(new Paragraph({ children: runs, spacing: { after: 160 } }));
+      if (paragraph.length) paragraphs.push(paragraph);
       paragraph = [];
     };
-
     for (let i = 0; i < pageLines.length; i += 1) {
       paragraph.push(pageLines[i].text);
       const current = pageLines[i];
@@ -6437,16 +6461,51 @@ async function convertPdfToWord() {
       }
     }
     flushParagraph();
+    pages.push(paragraphs);
   }
 
   if (!foundText) {
     throw new Error('No selectable text layer was found. This PDF looks like a scanned image, which this tool cannot convert to editable text.');
   }
 
+  const baseName = state.files[0].name.replace(/\.pdf$/i, '');
+  const multiPage = pdf.numPages > 1;
+
+  if (format === 'txt') {
+    setStatus('Building text file...');
+    const parts = [];
+    pages.forEach((paragraphs, index) => {
+      if (multiPage) parts.push(`--- Page ${index + 1} ---`);
+      paragraphs.forEach(par => parts.push(par.join('\n')));
+    });
+    const blob = new Blob([parts.join('\n\n')], { type: 'text/plain;charset=utf-8' });
+    downloadBlob(blob, `${baseName}.txt`);
+    setStatus('PDF text extracted to a .txt file.', 'success');
+    return;
+  }
+
+  await loadConverterLibrary('docx');
+  if (!window.docx || !window.docx.Packer) throw new Error('docx library did not load.');
+  const { Document, Packer, Paragraph, TextRun } = window.docx;
+
   setStatus('Building Word document...');
+  const children = [];
+  pages.forEach((paragraphs, index) => {
+    // Start pages after the first on a fresh page in the Word document.
+    if (index > 0 && paragraphs.length) children.push(new Paragraph({ pageBreakBefore: true }));
+    paragraphs.forEach(par => {
+      const runs = [];
+      par.forEach((line, lineIndex) => {
+        if (lineIndex > 0) runs.push(new TextRun({ text: line, break: 1 }));
+        else runs.push(new TextRun(line));
+      });
+      children.push(new Paragraph({ children: runs, spacing: { after: 160 } }));
+    });
+  });
+
   const doc = new Document({ sections: [{ children }] });
   const blob = await Packer.toBlob(doc);
-  downloadBlob(blob, `${state.files[0].name.replace(/\.pdf$/i, '')}.docx`);
+  downloadBlob(blob, `${baseName}.docx`);
   setStatus('PDF converted to an editable Word document.', 'success');
 }
 
