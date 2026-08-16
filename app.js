@@ -6312,7 +6312,7 @@ async function convertOfficeToPdf() {
     margin: [25, 25, 25, 25],
     filename: file.name.substring(0, file.name.lastIndexOf('.')) + '.pdf',
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+    html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0 },
     jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' },
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
   };
