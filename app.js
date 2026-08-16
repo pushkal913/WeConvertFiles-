@@ -6270,40 +6270,52 @@ async function convertOfficeToPdf() {
   if (!window.html2pdf) throw new Error('html2pdf script not loaded.');
   if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
 
+  const CONTAINER_ID = 'wcfOfficePdfSource';
   const printContainer = document.createElement('div');
+  printContainer.id = CONTAINER_ID;
   printContainer.className = 'p-8 bg-white text-black font-sans leading-relaxed prose';
   printContainer.style.width = '750px';
 
+  // Print styles live in <head>, scoped to the container by id, and are removed
+  // afterward. A <style> tag kept INSIDE the captured element can make the
+  // screenshot engine reserve a blank band the height of its CSS text at the
+  // top of the page — the gap we were chasing. The element itself stays in
+  // normal flow (no fixed/absolute positioning) so html2pdf measures its real
+  // height and never produces a blank page.
   const pageBreakStyle = document.createElement('style');
+  pageBreakStyle.dataset.wcfOfficePdf = 'true';
   pageBreakStyle.textContent = `
-    p, tr, th, td, h1, h2, h3, h4, h5, h6, li, blockquote, table, img, div, .prose > * {
+    #${CONTAINER_ID} > div > *:first-child { margin-top: 0 !important; }
+    #${CONTAINER_ID} p, #${CONTAINER_ID} tr, #${CONTAINER_ID} th, #${CONTAINER_ID} td,
+    #${CONTAINER_ID} h1, #${CONTAINER_ID} h2, #${CONTAINER_ID} h3, #${CONTAINER_ID} h4,
+    #${CONTAINER_ID} h5, #${CONTAINER_ID} h6, #${CONTAINER_ID} li, #${CONTAINER_ID} blockquote,
+    #${CONTAINER_ID} table, #${CONTAINER_ID} img {
       page-break-inside: avoid !important;
       break-inside: avoid !important;
     }
-    table {
+    #${CONTAINER_ID} table {
       width: 100% !important;
       border-collapse: collapse !important;
       table-layout: auto !important;
       font-size: 11px !important;
-      margin-top: 14px !important;
-      margin-bottom: 20px !important;
+      margin: 14px 0 20px !important;
     }
-    th, td {
+    #${CONTAINER_ID} th, #${CONTAINER_ID} td {
       border: 1px solid #cbd5e1 !important;
       padding: 6px 10px !important;
       text-align: left !important;
+      vertical-align: top !important;
     }
-    th {
-      background-color: #f1f5f9 !important;
-      font-weight: bold !important;
-    }
+    #${CONTAINER_ID} th { background-color: #f1f5f9 !important; font-weight: bold !important; }
   `;
-  printContainer.appendChild(pageBreakStyle);
+  document.head.appendChild(pageBreakStyle);
 
-  const contentDiv = document.createElement('div');
   setStatus('Parsing DOCX to HTML structure...');
   const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-  contentDiv.innerHTML = result.value || '<h3>Empty Document</h3>';
+  // Drop leading empty paragraphs so the document doesn't open with blank space.
+  const cleanHtml = (result.value || '').replace(/^(?:\s*<p>(?:\s|&nbsp;|<br\s*\/?>)*<\/p>)+/i, '').trim();
+  const contentDiv = document.createElement('div');
+  contentDiv.innerHTML = cleanHtml || '<h3>Empty Document</h3>';
   printContainer.appendChild(contentDiv);
 
   setStatus('Generating PDF layout snapshot...');
@@ -6317,9 +6329,13 @@ async function convertOfficeToPdf() {
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
   };
 
-  const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
-  downloadBlob(pdfBlob, opt.filename);
-  setStatus('Office document converted successfully.', 'success');
+  try {
+    const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
+    downloadBlob(pdfBlob, opt.filename);
+    setStatus('Office document converted successfully.', 'success');
+  } finally {
+    if (pageBreakStyle.parentNode) pageBreakStyle.parentNode.removeChild(pageBreakStyle);
+  }
 }
 
 async function convertExcelToPdf(file, arrayBuffer) {
