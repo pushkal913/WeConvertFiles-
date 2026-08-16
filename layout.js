@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Define tools dataset for search and mobile menu drawer
   const tools = [
-      { id: 'pdf-to-word', title: 'PDF to Word / TXT', kicker: 'PDF Tools', badge: 'Text Layer', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
+      { id: 'pdf-to-word', title: 'PDF to Word / TXT', kicker: 'PDF Tools', badge: 'DOCX or TXT', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
       { id: 'office-pdf', title: 'Word / Excel to PDF', kicker: 'Office Tools', badge: '100% Local', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' },
       { id: 'merge-pdf', title: 'Merge PDF', kicker: 'Organize PDF', badge: 'Multiple PDFs', iconBg: 'bg-rose-100', iconColor: 'text-rose-600' },
       { id: 'images-pdf', title: 'Images to PDF', kicker: 'Convert PDF', badge: 'Convert JPG/PNG', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
