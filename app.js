@@ -6270,74 +6270,56 @@ async function convertOfficeToPdf() {
   if (!window.html2pdf) throw new Error('html2pdf script not loaded.');
   if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
 
-  const CONTAINER_ID = 'wcfOfficePdfSource';
-  const CONTENT_WIDTH = 750;
-
   const printContainer = document.createElement('div');
-  printContainer.id = CONTAINER_ID;
-  printContainer.className = 'font-sans leading-relaxed';
-  // Attach off-screen at the page origin so html2canvas captures from the
-  // container's own top (a detached element mis-measures its offset) and so
-  // width:100% tables resolve against a real 750px box.
-  printContainer.style.cssText = 'position:fixed;top:0;left:0;z-index:-9999;width:' + CONTENT_WIDTH + 'px;padding:32px;background:#ffffff;color:#000000;';
+  printContainer.className = 'p-8 bg-white text-black font-sans leading-relaxed prose';
+  printContainer.style.width = '750px';
 
-  // Print styles live in <head>, scoped to the container. They must NOT sit
-  // inside the captured element: html2canvas lays a <style> tag's CSS text out
-  // as a block, which is what pushed a tall blank band above the content.
   const pageBreakStyle = document.createElement('style');
-  pageBreakStyle.dataset.wcfOfficePdf = 'true';
   pageBreakStyle.textContent = `
-    #${CONTAINER_ID} > *:first-child, #${CONTAINER_ID} > div > *:first-child { margin-top: 0 !important; }
-    #${CONTAINER_ID} p, #${CONTAINER_ID} tr, #${CONTAINER_ID} th, #${CONTAINER_ID} td,
-    #${CONTAINER_ID} h1, #${CONTAINER_ID} h2, #${CONTAINER_ID} h3, #${CONTAINER_ID} h4,
-    #${CONTAINER_ID} h5, #${CONTAINER_ID} h6, #${CONTAINER_ID} li, #${CONTAINER_ID} blockquote,
-    #${CONTAINER_ID} img {
+    p, tr, th, td, h1, h2, h3, h4, h5, h6, li, blockquote, table, img, div, .prose > * {
       page-break-inside: avoid !important;
       break-inside: avoid !important;
     }
-    #${CONTAINER_ID} table {
+    table {
       width: 100% !important;
       border-collapse: collapse !important;
       table-layout: auto !important;
       font-size: 11px !important;
-      margin: 14px 0 20px !important;
+      margin-top: 14px !important;
+      margin-bottom: 20px !important;
     }
-    #${CONTAINER_ID} th, #${CONTAINER_ID} td {
+    th, td {
       border: 1px solid #cbd5e1 !important;
       padding: 6px 10px !important;
       text-align: left !important;
-      vertical-align: top !important;
     }
-    #${CONTAINER_ID} th { background-color: #f1f5f9 !important; font-weight: bold !important; }
+    th {
+      background-color: #f1f5f9 !important;
+      font-weight: bold !important;
+    }
   `;
-  document.head.appendChild(pageBreakStyle);
+  printContainer.appendChild(pageBreakStyle);
 
+  const contentDiv = document.createElement('div');
   setStatus('Parsing DOCX to HTML structure...');
   const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-  const contentDiv = document.createElement('div');
-  contentDiv.innerHTML = (result.value || '').trim() || '<h3>Empty Document</h3>';
+  contentDiv.innerHTML = result.value || '<h3>Empty Document</h3>';
   printContainer.appendChild(contentDiv);
-  document.body.appendChild(printContainer);
 
   setStatus('Generating PDF layout snapshot...');
 
   const opt = {
-    margin: [24, 24, 24, 24],
+    margin: [25, 25, 25, 25],
     filename: file.name.substring(0, file.name.lastIndexOf('.')) + '.pdf',
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, letterRendering: true, backgroundColor: '#ffffff', scrollX: 0, scrollY: 0, windowWidth: CONTENT_WIDTH },
+    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
     jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['css', 'legacy'] }
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
   };
 
-  try {
-    const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
-    downloadBlob(pdfBlob, opt.filename);
-    setStatus('Office document converted successfully.', 'success');
-  } finally {
-    if (printContainer.parentNode) printContainer.parentNode.removeChild(printContainer);
-    if (pageBreakStyle.parentNode) pageBreakStyle.parentNode.removeChild(pageBreakStyle);
-  }
+  const pdfBlob = await html2pdf().set(opt).from(printContainer).output('blob');
+  downloadBlob(pdfBlob, opt.filename);
+  setStatus('Office document converted successfully.', 'success');
 }
 
 async function convertExcelToPdf(file, arrayBuffer) {
