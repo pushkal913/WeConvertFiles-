@@ -37,6 +37,14 @@ const converterLibraries = Object.freeze({
     src: 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js',
     ready: () => Boolean(window.html2pdf)
   },
+  docx: {
+    src: 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js',
+    ready: () => Boolean(window.docx && window.docx.Packer)
+  },
+  jspdfautotable: {
+    src: 'https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js',
+    ready: () => Boolean(window.jspdf && window.jspdf.jsPDF && window.jspdf.jsPDF.API && typeof window.jspdf.jsPDF.API.autoTable === 'function')
+  },
   cryptojs: {
     src: 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js',
     ready: () => Boolean(window.CryptoJS)
@@ -99,7 +107,7 @@ const converterLibraries = Object.freeze({
 const toolLibraryDependencies = Object.freeze({
   'json-yaml': ['jsyaml'],
   'sql-formatter': ['sqlformatter'],
-  'pdf-to-word': ['pdfjs'],
+  'pdf-to-word': ['pdfjs', 'docx'],
   'office-pdf': ['html2pdf', 'mammoth', 'xlsx'],
   'merge-pdf': ['pdflib'],
   'images-pdf': ['jspdf'],
@@ -225,10 +233,10 @@ const toolContentDetails = {
     ]
   },
   'office-pdf': {
-    howItWorks: 'Word/Excel to PDF converts supported Office content into a browser-rendered PDF. Mammoth.js turns Word (.docx) structures into HTML, SheetJS renders the first worksheet of an Excel (.xlsx) workbook as an HTML table, and html2pdf.js captures that layout through canvas before assembling A4 PDF pages. This is not Microsoft Office rendering, so complex formatting, fonts, page breaks, charts, and shapes may vary.',
+    howItWorks: 'Word/Excel to PDF converts supported Office content into a browser-generated PDF. Mammoth.js turns Word (.docx) structures into HTML that html2pdf.js captures through canvas, while Excel (.xlsx) workbooks are read by SheetJS and drawn as native, selectable vector tables with jsPDF AutoTable — one landscape page section per worksheet. This is not Microsoft Office rendering, so complex formatting, fonts, page breaks, charts, and shapes may vary.',
     faqs: [
       { q: 'How does client-side Word-to-PDF work?', a: 'It parses Docx XML elements into HTML elements via mammoth.js, inserts them into an invisible browser page, and generates a PDF snapshot using html2pdf.js.' },
-      { q: 'Can I convert spreadsheet sheets from Excel (.xlsx)?', a: 'The Excel parser reads only the workbook\'s first worksheet, formats it as an HTML table, and exports that rendered table to A4 landscape PDF pages.' },
+      { q: 'Can I convert spreadsheet sheets from Excel (.xlsx)?', a: 'Yes. Every worksheet in the workbook is read with SheetJS and rendered by jsPDF AutoTable as a native PDF table with selectable text, so the output stays crisp and searchable rather than being a flattened image.' },
       { q: 'Why does my converted PDF look different from MS Office?', a: 'Since conversion runs client-side without Microsoft Office engines, complex styles like custom charts, smart shapes, and nested tables are rendered as basic HTML elements, which might cause formatting differences.' }
     ]
   },
@@ -531,13 +539,13 @@ const tools = [
   },
   {
     id: 'pdf-to-word',
-    title: 'PDF to Word / TXT',
+    title: 'PDF to Word (.DOCX)',
     kicker: 'PDF Tools',
-    badge: 'Text Layer',
+    badge: 'Editable DOCX',
     icon: 'W',
     iconBg: 'bg-blue-100',
     iconColor: 'text-blue-600',
-    description: 'Extract raw text layers from PDF files into a clean editable TXT document.',
+    description: 'Rebuild a PDF text layer into an editable Word (.docx) document with lines and paragraphs preserved.',
     hint: 'Upload one PDF file with a selectable text layer.',
     accept: 'application/pdf',
     multiple: false,
@@ -2415,7 +2423,7 @@ function renderToolOptions(toolId) {
     `,
     'pdf-to-word': `
       <div>
-        <p class="${helpClass}">Your PDF document text layer will be extracted client-side into a plain text file. No server processing involved.</p>
+        <p class="${helpClass}">Your PDF document text layer will be reconstructed client-side into an editable Word (.docx) file. No server processing involved.</p>
       </div>
     `,
     'excel-to-csv': `
@@ -6231,15 +6239,25 @@ async function convertJsonToSpreadsheet() {
 
 async function convertOfficeToPdf() {
   if (!state.files.length) throw new Error('Please select a Word (.docx) or Excel (.xlsx) file.');
-  if (!window.html2pdf) throw new Error('html2pdf script not loaded.');
   const file = state.files[0];
   const extension = file.name.split('.').pop().toLowerCase();
-  const isExcel = extension === 'xlsx' || extension === 'xls';
-
   const arrayBuffer = await file.arrayBuffer();
+
+  // Spreadsheets render as native vector PDF tables (selectable, crisp) via jsPDF + AutoTable.
+  if (extension === 'xlsx' || extension === 'xls') {
+    await convertExcelToPdf(file, arrayBuffer);
+    return;
+  }
+
+  if (extension !== 'docx' && extension !== 'doc') {
+    throw new Error('Unsupported format. Only Word (.docx) and Excel (.xlsx) documents are supported.');
+  }
+  if (!window.html2pdf) throw new Error('html2pdf script not loaded.');
+  if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
+
   const printContainer = document.createElement('div');
   printContainer.className = 'p-8 bg-white text-black font-sans leading-relaxed prose';
-  printContainer.style.width = isExcel ? '1000px' : '750px';
+  printContainer.style.width = '750px';
 
   const pageBreakStyle = document.createElement('style');
   pageBreakStyle.textContent = `
@@ -6268,26 +6286,9 @@ async function convertOfficeToPdf() {
   printContainer.appendChild(pageBreakStyle);
 
   const contentDiv = document.createElement('div');
-  if (extension === 'docx' || extension === 'doc') {
-    if (!window.mammoth) throw new Error('mammoth.js script not loaded.');
-    setStatus('Parsing DOCX to HTML structure...');
-    const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-    contentDiv.innerHTML = result.value || '<h3>Empty Document</h3>';
-  } else if (isExcel) {
-    setStatus('Parsing XLSX sheet rows...');
-    const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
-    const htmlTable = XLSX.utils.sheet_to_html(sheet);
-    contentDiv.innerHTML = `
-      <h2 style="font-size: 18px; font-weight: bold; margin-bottom: 12px; color: #0f172a;">Sheet: ${sheetName}</h2>
-      <div style="margin-top: 15px;">
-        ${htmlTable}
-      </div>
-    `;
-  } else {
-    throw new Error('Unsupported format. Only Word (.docx) and Excel (.xlsx) documents are supported.');
-  }
+  setStatus('Parsing DOCX to HTML structure...');
+  const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+  contentDiv.innerHTML = result.value || '<h3>Empty Document</h3>';
   printContainer.appendChild(contentDiv);
 
   setStatus('Generating PDF layout snapshot...');
@@ -6297,7 +6298,7 @@ async function convertOfficeToPdf() {
     filename: file.name.substring(0, file.name.lastIndexOf('.')) + '.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-    jsPDF: { unit: 'pt', format: 'a4', orientation: isExcel ? 'landscape' : 'portrait' },
+    jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' },
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
   };
 
@@ -6306,26 +6307,147 @@ async function convertOfficeToPdf() {
   setStatus('Office document converted successfully.', 'success');
 }
 
+async function convertExcelToPdf(file, arrayBuffer) {
+  if (!window.XLSX) throw new Error('SheetJS library did not load.');
+  // jsPDF must be present before AutoTable loads, because the plugin attaches to it at load time.
+  setStatus('Preparing PDF engine...');
+  await loadConverterLibrary('jspdf');
+  await loadConverterLibrary('jspdfautotable');
+  const JsPdf = window.jspdf && window.jspdf.jsPDF;
+  if (!JsPdf) throw new Error('jsPDF library did not load.');
+
+  setStatus('Reading spreadsheet data...');
+  const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
+  const doc = new JsPdf({ orientation: 'landscape', unit: 'pt', format: 'a4' });
+  const marginX = 32;
+  let renderedSheet = false;
+
+  workbook.SheetNames.forEach(sheetName => {
+    const sheet = workbook.Sheets[sheetName];
+    const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false, defval: '' });
+    if (!rows.length) return;
+
+    // Normalise ragged rows so every row has the same column count.
+    const columnCount = rows.reduce((max, row) => Math.max(max, row.length), 0);
+    const normalised = rows.map(row => {
+      const cells = row.map(cell => (cell == null ? '' : String(cell)));
+      while (cells.length < columnCount) cells.push('');
+      return cells;
+    });
+
+    if (renderedSheet) doc.addPage();
+    renderedSheet = true;
+
+    doc.setFontSize(13);
+    doc.text(sheetName, marginX, 40);
+
+    doc.autoTable({
+      head: [normalised[0]],
+      body: normalised.slice(1),
+      startY: 54,
+      margin: { left: marginX, right: marginX },
+      styles: { fontSize: 9, cellPadding: 4, overflow: 'linebreak' },
+      headStyles: { fillColor: [241, 245, 249], textColor: [15, 23, 42], fontStyle: 'bold' },
+      theme: 'grid'
+    });
+  });
+
+  if (!renderedSheet) throw new Error('The workbook has no data to convert.');
+
+  setStatus('Generating PDF...');
+  const pdfBlob = doc.output('blob');
+  downloadBlob(pdfBlob, file.name.substring(0, file.name.lastIndexOf('.')) + '.pdf');
+  setStatus('Spreadsheet converted to PDF successfully.', 'success');
+}
+
 async function convertPdfToWord() {
   if (!window.pdfjsLib) throw new Error('pdf.js did not load.');
+  if (!window.docx || !window.docx.Packer) throw new Error('docx library did not load.');
+  const { Document, Packer, Paragraph, TextRun } = window.docx;
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
   setStatus('Reading PDF document structure...');
   const buffer = await state.files[0].arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
-  let fullText = '';
+
+  const children = [];
+  let foundText = false;
 
   for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
-    setStatus(`Extracting text layer from page ${pageNumber} of ${pdf.numPages}...`);
+    setStatus(`Reconstructing text from page ${pageNumber} of ${pdf.numPages}...`);
     const page = await pdf.getPage(pageNumber);
     const textContent = await page.getTextContent();
-    const pageText = textContent.items.map(item => item.str).join(' ');
-    fullText += `--- Page ${pageNumber} ---\n\n${pageText}\n\n`;
+
+    // Collect positioned text fragments (x, y baseline, glyph height).
+    const fragments = textContent.items
+      .filter(item => item.str && item.str.trim())
+      .map(item => ({
+        x: item.transform[4],
+        y: item.transform[5],
+        h: item.height || Math.abs(item.transform[3]) || 10,
+        str: item.str
+      }));
+
+    // Group fragments into visual lines: top-to-bottom, then left-to-right.
+    fragments.sort((a, b) => (b.y - a.y) || (a.x - b.x));
+    const lines = [];
+    fragments.forEach(frag => {
+      const last = lines[lines.length - 1];
+      if (last && Math.abs(last.y - frag.y) <= Math.max(2, frag.h * 0.5)) {
+        last.items.push(frag);
+        last.h = Math.max(last.h, frag.h);
+      } else {
+        lines.push({ y: frag.y, h: frag.h, items: [frag] });
+      }
+    });
+    lines.forEach(line => {
+      line.items.sort((a, b) => a.x - b.x);
+      line.text = line.items.map(i => i.str).join(' ').replace(/\s{2,}/g, ' ').trim();
+    });
+
+    const pageLines = lines.filter(line => line.text);
+    if (pageLines.length) foundText = true;
+
+    // Start pages after the first on a fresh page in the Word document.
+    if (pageNumber > 1 && pageLines.length) {
+      children.push(new Paragraph({ pageBreakBefore: true }));
+    }
+
+    // Group consecutive lines into paragraphs, breaking on larger vertical gaps.
+    let paragraph = [];
+    const flushParagraph = () => {
+      if (!paragraph.length) return;
+      const runs = [];
+      paragraph.forEach((text, index) => {
+        if (index > 0) runs.push(new TextRun({ text, break: 1 }));
+        else runs.push(new TextRun(text));
+      });
+      children.push(new Paragraph({ children: runs, spacing: { after: 160 } }));
+      paragraph = [];
+    };
+
+    for (let i = 0; i < pageLines.length; i += 1) {
+      paragraph.push(pageLines[i].text);
+      const current = pageLines[i];
+      const next = pageLines[i + 1];
+      if (next) {
+        const gap = current.y - next.y;
+        const lineHeight = Math.max(current.h, next.h);
+        if (gap > lineHeight * 1.6) flushParagraph();
+      }
+    }
+    flushParagraph();
   }
 
-  setStatus('Downloading extracted text...');
-  const blob = new Blob([fullText], { type: 'text/plain;charset=utf-8' });
-  downloadBlob(blob, `${state.files[0].name.replace(/\.pdf$/i, '')}-extracted.txt`);
+  if (!foundText) {
+    throw new Error('No selectable text layer was found. This PDF looks like a scanned image, which this tool cannot convert to editable text.');
+  }
+
+  setStatus('Building Word document...');
+  const doc = new Document({ sections: [{ children }] });
+  const blob = await Packer.toBlob(doc);
+  downloadBlob(blob, `${state.files[0].name.replace(/\.pdf$/i, '')}.docx`);
+  setStatus('PDF converted to an editable Word document.', 'success');
 }
 
 async function cropImageAction() {

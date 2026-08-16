@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Define tools dataset for search and mobile menu drawer
   const tools = [
-      { id: 'pdf-to-word', title: 'PDF to Word / TXT', kicker: 'PDF Tools', badge: 'Text Layer', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
+      { id: 'pdf-to-word', title: 'PDF to Word (.DOCX)', kicker: 'PDF Tools', badge: 'Editable DOCX', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
       { id: 'office-pdf', title: 'Word / Excel to PDF', kicker: 'Office Tools', badge: '100% Local', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' },
       { id: 'merge-pdf', title: 'Merge PDF', kicker: 'Organize PDF', badge: 'Multiple PDFs', iconBg: 'bg-rose-100', iconColor: 'text-rose-600' },
       { id: 'images-pdf', title: 'Images to PDF', kicker: 'Convert PDF', badge: 'Convert JPG/PNG', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <svg class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                PDF to Word / TXT
+                PDF to Word (.DOCX)
               </a>
               <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/merge-pdf">
                 <svg class="h-4 w-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
