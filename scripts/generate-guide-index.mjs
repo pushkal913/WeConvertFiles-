@@ -35,7 +35,7 @@ const renderGroups = (innerGridClass, openFirst) => categories.map((category, in
   }).join('\n');
   const openAttr = openFirst && index === 0 ? ' open' : '';
 
-  return `                <details${openAttr} data-cat="${index % 6}" class="wcf-acc group border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/60 rounded-2xl overflow-hidden">
+  return `                <details${openAttr} style="--c:rgb(${category.rgb})" class="wcf-acc group border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/60 rounded-2xl overflow-hidden">
                   <summary class="flex items-center justify-between p-4 cursor-pointer select-none font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors list-none [&::-webkit-details-marker]:hidden">
                     <span class="flex items-center gap-2">
                       <span class="wcf-badge grid h-6 min-w-6 place-items-center rounded-full bg-blue-100 px-1.5 text-xs font-bold text-blue-700 dark:bg-blue-950/60 dark:text-blue-300">${category.toolIds.length}</span>

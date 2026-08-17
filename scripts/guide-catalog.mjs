@@ -20,11 +20,12 @@ export function parseToolCatalogue(appSource) {
 
   const categoriesStart = appSource.indexOf('const toolCategories = [');
   const categoriesBlock = requiredBlock(appSource.slice(categoriesStart), 'const toolCategories = [', '\n];');
-  const categories = [...categoriesBlock.matchAll(/\{\s*id: '([^']+)',\s*title: '([^']+)',[\s\S]*?tools: \[([^\]]+)\]\s*\n\s*\}/g)]
+  const categories = [...categoriesBlock.matchAll(/\{\s*id: '([^']+)',\s*title: '([^']+)',(?:\s*rgb: '([^']+)',)?[\s\S]*?tools: \[([^\]]+)\]\s*\n\s*\}/g)]
     .map((match) => ({
       id: match[1],
       title: match[2],
-      toolIds: [...match[3].matchAll(/'([^']+)'/g)].map((toolMatch) => toolMatch[1])
+      rgb: match[3] || '37, 99, 235',
+      toolIds: [...match[4].matchAll(/'([^']+)'/g)].map((toolMatch) => toolMatch[1])
     }));
 
   if (!tools.length || !categories.length) {
