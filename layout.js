@@ -2,6 +2,21 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure document body is styled as flex to push footer to bottom
   document.body.classList.add('flex', 'flex-col', 'min-h-screen');
+
+  // Load the shared motion layer (hover / focus / button polish + upload-zone
+  // feedback). Content pages intentionally get the polish but not scroll
+  // reveals — long articles read better appearing instantly.
+  if (!document.querySelector('link[data-wcf-motion]')) {
+    const motionCss = document.createElement('link');
+    motionCss.rel = 'stylesheet';
+    motionCss.href = '/assets/motion.css?v=20260817-1';
+    motionCss.setAttribute('data-wcf-motion', '');
+    document.head.appendChild(motionCss);
+    const motionJs = document.createElement('script');
+    motionJs.src = '/assets/motion.js?v=20260817-1';
+    motionJs.defer = true;
+    document.body.appendChild(motionJs);
+  }
   
   // Find or wrap the main content
   const main = document.querySelector('main') || document.querySelector('body > :not(header):not(footer)');
