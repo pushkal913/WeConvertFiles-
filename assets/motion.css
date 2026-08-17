@@ -1,0 +1,37 @@
+/* WeConvertFiles motion layer
+   Pure CSS, ~1KB, animates only transform/opacity (compositor-only = no layout cost).
+   Progressive enhancement: reveal elements only start hidden once motion.js has
+   confirmed IntersectionObserver support AND that reduced-motion is not requested,
+   by adding .wcf-anim to <html>. If anything is off, content stays fully visible. */
+
+/* --- Scroll reveal (below-the-fold sections fade + rise into view) --- */
+html.wcf-anim .reveal{
+  opacity:0;
+  transform:translateY(16px);
+  will-change:opacity, transform;
+  transition:opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1);
+}
+html.wcf-anim .reveal.in{opacity:1;transform:none;}
+html.wcf-anim .reveal.d1{transition-delay:.07s;}
+html.wcf-anim .reveal.d2{transition-delay:.14s;}
+
+/* --- Upload zone: a little lift on hover (transform is free) --- */
+#dropZone{transition:border-color .2s ease, background-color .2s ease, box-shadow .2s ease, transform .2s ease;}
+#dropZone:hover{transform:translateY(-2px);}
+#dropZone.wcf-dragover{border-color:#1a73e8;background:#f5f9ff;transform:scale(1.01);box-shadow:0 14px 34px -18px rgba(26,115,232,.55);}
+
+/* --- Universal press micro-interaction on buttons --- */
+button:active:not(:disabled){transform:scale(.97);}
+
+/* --- Clearer keyboard focus (accessibility + polish) --- */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+  outline:2.5px solid #1a73e8;
+  outline-offset:2px;
+  border-radius:8px;
+}
+
+/* --- Respect users who ask for less motion: neutralize everything above --- */
+@media (prefers-reduced-motion: reduce){
+  html.wcf-anim .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
+  #dropZone:hover, #dropZone.wcf-dragover, button:active:not(:disabled){transform:none !important;}
+}
