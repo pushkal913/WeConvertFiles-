@@ -35,3 +35,21 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, input:focus-vis
   html.wcf-anim .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
   #dropZone:hover, #dropZone.wcf-dragover, button:active:not(:disabled){transform:none !important;}
 }
+
+/* --- Extra polish (all compositor-only / zero-layout) --- */
+
+/* Brand-coloured text selection */
+::selection{background:rgba(26,115,232,.92);color:#fff;}
+
+/* Smooth in-page anchor scrolling */
+html{scroll-behavior:smooth;}
+
+/* Guide category accordions: gently reveal contents on open, tint the open header */
+details.wcf-acc[open] > div{animation:wcf-acc-in .24s cubic-bezier(.22,.61,.36,1);}
+details.wcf-acc[open] > summary{color:#1a73e8;}
+@keyframes wcf-acc-in{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  details.wcf-acc[open] > div{animation:none !important;}
+}
