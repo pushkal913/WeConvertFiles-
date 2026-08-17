@@ -19,7 +19,7 @@ function escapeHtml(value) {
 }
 
 const desktopLinkClass = 'rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/60 p-4 text-sm font-semibold text-slate-800 dark:text-slate-200 transition hover:border-[#1a73e8] hover:bg-[#f5f9ff] dark:hover:bg-[#1a73e8]/10';
-const mobileLinkClass = 'flex items-center justify-center text-center p-3 rounded-xl border border-slate-100 dark:border-slate-700/60 bg-slate-50/50 dark:bg-slate-900/40 text-xs font-semibold text-slate-700 dark:text-slate-300 active:bg-slate-100 dark:active:bg-slate-800 transition';
+const mobileLinkClass = 'wcf-guide-link flex items-center justify-center text-center p-3 rounded-xl border border-slate-100 dark:border-slate-700/60 bg-slate-50/50 dark:bg-slate-900/40 text-xs font-semibold text-slate-700 dark:text-slate-300 active:bg-slate-100 dark:active:bg-slate-800 transition';
 
 const orderedTools = categories.flatMap((category) => category.toolIds.map((id) => {
   const tool = toolById.get(id);
