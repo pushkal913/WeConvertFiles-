@@ -4,7 +4,9 @@
   "scripts": {
     "build:css": "tailwindcss -c tailwind.config.js -i ./assets/tailwind.css -o ./assets/styles.css --minify",
     "generate:guides": "node scripts/generate-guide-index.mjs",
-    "generate:tools": "node scripts/generate-guide-index.mjs && node scripts/generate-tool-pages.mjs",
+    "generate:related": "node scripts/generate-related-guides.mjs",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "generate:tools": "node scripts/generate-guide-index.mjs && node scripts/generate-tool-pages.mjs && node scripts/generate-related-guides.mjs && node scripts/generate-sitemap.mjs",
     "validate": "node scripts/validate-guide-index.mjs && node scripts/validate-tool-pages.mjs && node scripts/validate-conversion-pages.mjs && node scripts/validate-canonical-urls.mjs && node scripts/validate-static-css.mjs"
   },
   "devDependencies": {
