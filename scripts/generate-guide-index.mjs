@@ -35,10 +35,10 @@ const renderGroups = (innerGridClass, openFirst) => categories.map((category, in
   }).join('\n');
   const openAttr = openFirst && index === 0 ? ' open' : '';
 
-  return `                <details${openAttr} class="wcf-acc group border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/60 rounded-2xl overflow-hidden">
+  return `                <details${openAttr} data-cat="${index % 6}" class="wcf-acc group border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/60 rounded-2xl overflow-hidden">
                   <summary class="flex items-center justify-between p-4 cursor-pointer select-none font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors list-none [&::-webkit-details-marker]:hidden">
                     <span class="flex items-center gap-2">
-                      <span class="grid h-6 min-w-6 place-items-center rounded-full bg-blue-100 px-1.5 text-xs font-bold text-blue-700 dark:bg-blue-950/60 dark:text-blue-300">${category.toolIds.length}</span>
+                      <span class="wcf-badge grid h-6 min-w-6 place-items-center rounded-full bg-blue-100 px-1.5 text-xs font-bold text-blue-700 dark:bg-blue-950/60 dark:text-blue-300">${category.toolIds.length}</span>
                       ${escapeHtml(category.title)} Guides
                     </span>
                     <svg class="h-4 w-4 text-slate-400 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
@@ -49,13 +49,13 @@ ${links}
                 </details>`;
 }).join('\n');
 
-// Desktop expands each category into more columns; the first category opens by
-// default so the section shows content. Mobile stays fully collapsed (compact).
-const desktopGroups = renderGroups('grid-cols-2 md:grid-cols-3 xl:grid-cols-4', true);
+// Both views use the same collapsed accordions with a 2-column inner link grid.
+// Desktop lays the tabs out two-per-row (2x3); mobile stacks them full width.
+const desktopGroups = renderGroups('grid-cols-2', false);
 const mobileGroups = renderGroups('grid-cols-2', false);
 
 const generatedBlock = `              <!-- GENERATED_GUIDE_GRIDS_START -->
-              <div data-guide-view="desktop" class="mt-5 hidden md:grid gap-3">
+              <div data-guide-view="desktop" class="mt-5 hidden md:grid md:grid-cols-2 gap-3">
 ${desktopGroups}
               </div>
 
