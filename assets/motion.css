@@ -73,6 +73,22 @@ details.wcf-acc[open] > div{animation:wcf-acc-in .24s cubic-bezier(.22,.61,.36,1
    is half-width, ~5-6 when it is open full-width). */
 .wcf-acc > div{grid-template-columns:repeat(auto-fill, minmax(165px, 1fr)) !important;}
 
+/* Guide links inside a category: faint category-coloured border at rest, and a
+   stronger border + tint + gentle lift on hover (uses the tab's own --c). */
+.wcf-acc .wcf-guide-link{
+  border-color:color-mix(in srgb, var(--c) 22%, transparent) !important;
+  transition:border-color .18s ease, background-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.wcf-acc .wcf-guide-link:hover{
+  border-color:var(--c) !important;
+  background:color-mix(in srgb, var(--c) 10%, transparent) !important;
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px -12px color-mix(in srgb, var(--c) 70%, transparent);
+}
+@media (prefers-reduced-motion: reduce){
+  .wcf-acc .wcf-guide-link:hover{transform:none;}
+}
+
 /* Dark mode: lighten the accent so text stays legible on dark grounds */
 @media (prefers-color-scheme: dark){
   .wcf-acc summary .wcf-badge{color:color-mix(in srgb, var(--c) 62%, white) !important; background:color-mix(in srgb, var(--c) 26%, transparent) !important;}
