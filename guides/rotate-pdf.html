@@ -4,22 +4,21 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Rotate PDF Guide - Free Browser Tool</title>
-  <meta name="description" content="Rotate sideways PDF pages clockwise or counter-clockwise." />
+  <title>Rotate PDF Pages 90&deg;, 180&deg; or 270&deg; Without Quality Loss</title>
+  <meta name="description" content="Rotate all or selected PDF pages by 90, 180, or 270 degrees. Learn page-range syntax, cumulative rotation, limitations, and privacy details." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/rotate-pdf.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Rotate PDF Guide - Free Browser Tool" />
-  <meta property="og:description" content="Rotate sideways PDF pages clockwise or counter-clockwise." />
+  <meta property="og:title" content="How to Rotate All or Selected PDF Pages" />
+  <meta property="og:description" content="Fix sideways and upside-down PDF pages with quarter-turn rotation while preserving their normal PDF page content." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/rotate-pdf.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Rotate PDF Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Rotate sideways PDF pages clockwise or counter-clockwise." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="How to Rotate All or Selected PDF Pages" />
+  <meta name="twitter:description" content="Fix sideways and upside-down PDF pages with quarter-turn rotation while preserving their normal PDF page content." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Rotate PDF Guide - Free Browser Tool",
-        "description": "Rotate sideways PDF pages clockwise or counter-clockwise.",
+        "headline": "Rotate PDF Pages: Fix Sideways and Upside-Down Documents",
+        "description": "A practical guide to rotating all or selected PDF pages in 90-degree steps without deliberately rasterizing them.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,124 +46,160 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/rotate-pdf.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/rotate-pdf.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Does rotating files degrade text quality?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. The tool changes the rotation flag metadata in the file instead of rendering to raster images, preserving vector text."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I rotate just a single page instead of the whole file?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, you can enter the specific page index (e.g. page 3) to apply rotation only to that page."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is there a limit on file size?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. Since the operation only updates metadata tags, even massive files process in a fraction of a second."
-            }
-          }
+          { "@type": "Question", "name": "Can I rotate only one page in a PDF?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Enter that page number in the Pages field before applying the rotation." } },
+          { "@type": "Question", "name": "Can I rotate selected pages instead of the whole document?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Enter individual pages such as 2,5,9, a range such as 4-8, or a mixture such as 1,3-5,9." } },
+          { "@type": "Question", "name": "What happens when the Pages field is blank?", "acceptedAnswer": { "@type": "Answer", "text": "Every page in the PDF is selected and receives the chosen rotation." } },
+          { "@type": "Question", "name": "Does rotating a PDF reduce image or text quality?", "acceptedAnswer": { "@type": "Answer", "text": "The implementation changes page rotation through the PDF library and does not intentionally rasterize complete pages. It therefore does not deliberately reduce image resolution or convert ordinary text and vectors into pixels." } },
+          { "@type": "Question", "name": "Can I rotate a PDF by 45 degrees?", "acceptedAnswer": { "@type": "Answer", "text": "No. The tool supports only 90-, 180-, and 270-degree rotations." } },
+          { "@type": "Question", "name": "Does the tool straighten a slightly crooked scan?", "acceptedAnswer": { "@type": "Answer", "text": "No. Straightening a small tilt is deskewing, which requires a different image-processing operation." } },
+          { "@type": "Question", "name": "Is rotation clockwise or counterclockwise?", "acceptedAnswer": { "@type": "Answer", "text": "The displayed 90-, 180-, and 270-degree values are applied clockwise. A 270-degree clockwise turn has the same final orientation as 90 degrees counterclockwise." } },
+          { "@type": "Question", "name": "Does the tool replace my original PDF?", "acceptedAnswer": { "@type": "Answer", "text": "No. It creates a separate file named rotated.pdf." } },
+          { "@type": "Question", "name": "Can I rotate different pages by different angles at once?", "acceptedAnswer": { "@type": "Answer", "text": "One operation uses one angle for its selected pages. Use separate passes for groups that require different angles." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Rotate PDF Pages: Fix Sideways and Upside-Down Documents</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">90&deg;, 180&deg; or 270&deg;</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">A PDF page can contain perfectly readable content while opening in the wrong direction. The <strong class="text-slate-900 dark:text-slate-200">Rotate PDF</strong> tool corrects page orientation in 90-degree steps. Rotate the whole document or select individual pages, then download a separate file named <code>rotated.pdf</code>. The operation changes each selected page's stored rotation instead of deliberately converting the page into a screenshot.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/rotate-pdf">Open Rotate PDF<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Rotate PDF</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Rotate PDF fixes sideways layouts by applying a rotation parameter to selected pages. The engine updates the `/Rotate` tag in the PDF page object metadata, rotating pages by 90, 180, or 270 degrees in-memory, keeping file sizes small.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/rotate-pdf">
-        Open Rotate PDF
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Choose 90, 180, or 270 degrees. Leave the Pages field blank to rotate the whole PDF, or enter pages such as <code>2,4-6</code> to rotate only those pages. The selected angle is added to any rotation already stored on each page.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select the PDF document that contains pages facing the wrong direction.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose Angle</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select your rotation angle (90, 180, or 270 degrees) and specify page ranges if needed.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Rotate & Save</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Rotate PDF to update page tags and download your corrected document.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When rotating PDF pages is useful</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Correct pages from a scanner</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A feeder may save a landscape sheet as portrait, place the reverse side upside down, or apply inconsistent orientation across a batch. Rotate only the affected pages instead of scanning everything again.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Fix mixed portrait and landscape</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A report may contain portrait text pages and a landscape chart. If the chart opens sideways, rotate that page while leaving the surrounding pages unchanged.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Repair PDFs from phone photos</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Mobile capture apps sometimes use image orientation inconsistently. Quarter-turn rotation can correct a page saved on its side or upside down.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Prepare for printing or presenting</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Correctly stored rotation helps compatible PDF viewers and printers display the page in its intended reading direction.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm md:col-span-2"><h3 class="font-bold text-slate-900 dark:text-slate-200">Standardize a combined PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">When several sources have been merged, inspect every join and rotate only the pages that do not match the expected orientation.</p></div>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does rotating files degrade text quality?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. The tool changes the rotation flag metadata in the file instead of rendering to raster images, preserving vector text.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I rotate just a single page instead of the whole file?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, you can enter the specific page index (e.g. page 3) to apply rotation only to that page.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is there a limit on file size?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. Since the operation only updates metadata tags, even massive files process in a fraction of a second.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Rotation options</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Setting</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Effect on an unrotated page</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Typical use</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">90 degrees</td><td class="py-3 pr-4">One quarter-turn clockwise</td><td class="py-3">A page lying on its left side</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">180 degrees</td><td class="py-3 pr-4">One half-turn</td><td class="py-3">An upside-down page</td></tr>
+          <tr><td class="py-3 pr-4">270 degrees</td><td class="py-3 pr-4">Three quarter-turns clockwise</td><td class="py-3">A page lying on its right side</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4"><strong class="text-slate-900 dark:text-slate-200">Rotations are cumulative.</strong> If a page already stores a 90-degree rotation and you apply another 90 degrees, the result is 180 degrees. The tool reads the existing angle, adds the selected value, and wraps the final result within a 360-degree cycle.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Rotate every page or only selected pages</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Rotate the entire PDF:</strong> leave the Pages field empty. The tool treats a blank selection as every page in the document &mdash; useful when a complete scan was created in the wrong orientation.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Rotate one page:</strong> enter a single one-based page number, such as <code>3</code>. Only the third page is changed.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Rotate several individual pages:</strong> separate page numbers with commas, such as <code>2,5,9</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Rotate a continuous range:</strong> use a hyphen, such as <code>4-8</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Combine pages and ranges:</strong> mix them when necessary, such as <code>1,3-5,9</code>.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-3">Use the page numbers shown by a normal PDF viewer. The first page is <code>1</code>, not <code>0</code>.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to rotate PDF pages</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Inspect the PDF.</strong> Open the source and identify every page that faces the wrong direction. Note whether each problem needs a quarter-turn or a half-turn, and process pages that need different angles in separate passes.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Choose the rotation angle.</strong> Select 90, 180, or 270 degrees. The direction is clockwise and the angle is added to each selected page's current stored rotation. Use 90 when the top of the content points left, 270 when it points right, and 180 when the content is upside down.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Select the pages.</strong> Leave the field blank for the whole PDF, or enter individual pages, ranges, or both. Confirm that every entered page exists; a page number beyond the document's page count cannot be rotated.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Generate the rotated copy.</strong> Start the operation and download <code>rotated.pdf</code>. The original file is not overwritten.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Verify the output.</strong> Open the result in the viewer that matters to your workflow and check every selected page, a few unselected pages, portrait and landscape dimensions, printing orientation, crop boundaries, and any links, forms, signatures, bookmarks, or accessibility behavior that is relevant.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How PDF rotation works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A PDF page can store a rotation value that tells a viewer how to display the page. The page's content coordinates do not necessarily need to be redrawn simply to make a quarter-turn. For every selected page, the tool:</p>
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Loads the PDF into browser memory.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Reads the page's current rotation angle.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Adds the chosen 90-, 180-, or 270-degree value.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Uses modulo 360 so a full cycle returns to zero.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Saves the updated document as <code>rotated.pdf</code>.</li>
+        </ol>
+        <p>Because the implementation changes page rotation through the PDF library, it does not intentionally render each page to an image canvas. Selectable text and vector artwork are therefore not deliberately flattened merely to correct orientation.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Rotation does not mean deskewing</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Rotation</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Corrects a page that is exactly sideways or upside down. It works in quarter turns: 90, 180, or 270 degrees.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Deskewing</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Corrects a scanned image that is slightly tilted, perhaps by two or three degrees. It normally analyzes image edges and resamples pixels.</p></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quarter turns only.</strong> The Rotate PDF tool does not provide arbitrary-angle deskewing. A page tilted by a small amount will remain tilted after any quarter-turn rotation.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Does rotating a PDF reduce quality?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>Changing a page's rotation value is not the same as taking a screenshot and placing it into a new PDF. The operation does not intentionally recompress page images, rasterize text, or flatten vector graphics.</p><p>That means visible quality should not be deliberately reduced simply by applying the rotation. However, a PDF can contain unusual page boxes, forms, signatures, links, scripts, or viewer-specific features, so important files should always be checked after saving.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations and important details</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Only quarter-turn angles are supported.</strong> The tool supports 90, 180, and 270 degrees. It cannot rotate by 45 degrees or straighten a page tilted by a few degrees.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Rotation is added to the existing value.</strong> The selected angle is not an absolute "set this page to 90 degrees" command; it is added to the page's current stored rotation.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Different angles require separate passes.</strong> One operation applies one selected angle to every page in its list. Process groups that need different angles separately.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Page boxes can affect appearance.</strong> Unusual media, crop, bleed, trim, and art box combinations can display differently across viewers even when the rotation value is valid.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Existing signatures may be affected.</strong> Saving a modified PDF normally changes the document and can invalidate cryptographic signatures or alter their verification status.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Browser memory remains a practical limit.</strong> Large scanned files may require substantial memory even though the page content is not deliberately rasterized.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Recommended workflow for mixed page orientations</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Suppose a 12-page PDF has pages 1&ndash;3 correct, pages 4&ndash;6 lying on their left side, page 7 upside down, and pages 8&ndash;12 correct. A clear workflow is:</p>
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Rotate pages <code>4-6</code> by 90 degrees.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Open the result and confirm pages 4&ndash;6.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Rotate page <code>7</code> of that result by 180 degrees.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Review all 12 pages.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Keep the original until the corrected file is accepted.</li>
+        </ol>
+        <p>Trying to correct pages that need different angles in one operation would rotate at least one group incorrectly.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">The PDF's contents are processed in browser memory and are not sent to WeConvertFiles for rotation.</strong> Required JavaScript libraries may be downloaded from third-party content-delivery networks when the tool opens, so the workflow should not be described as completely offline.</p><p>If a visitor consents to site analytics, separate usage information such as visits, interactions, device details, or conversion events may be collected. Those analytics do not receive the contents of the PDF.</p><p>For confidential documents, the security of the local device, browser extensions, downloaded copies, backups, and final storage location still matters.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The page rotated in the wrong direction</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The values are clockwise. Start again from the original PDF and use the complementary angle. A 270-degree clockwise rotation is equivalent to a 90-degree counterclockwise turn.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The page rotated too far</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The selected angle is added to the current stored rotation. A page that already has a 90-degree value reaches 180 degrees after another 90-degree operation.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Every page changed</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A blank Pages field selects the entire document. Enter specific page numbers or ranges before starting.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Only one page changed</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Check the page list. Enter a comma-separated list or range when several pages need the same correction.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The page is still slightly tilted</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The page needs deskewing rather than quarter-turn rotation. Use an image-processing or scanning tool that supports arbitrary-angle correction.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The PDF displays differently in another viewer</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Test current versions of more than one PDF viewer. Unusual crop boxes, rotation metadata, forms, or viewer-specific behavior can produce differences.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The tool cannot open the PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The file may be damaged, use unsupported encryption, or exceed available browser memory. Verify that it opens normally and unlock an authorized copy when necessary.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I rotate only one page in a PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Enter that page number in the Pages field before applying the rotation.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I rotate selected pages instead of the whole document?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Enter individual pages such as <code>2,5,9</code>, a range such as <code>4-8</code>, or a mixture such as <code>1,3-5,9</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What happens when the Pages field is blank?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Every page in the PDF is selected and receives the chosen rotation.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does rotating a PDF reduce image or text quality?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The implementation changes page rotation through the PDF library and does not intentionally rasterize complete pages. It therefore does not deliberately reduce image resolution or convert ordinary text and vectors into pixels.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I rotate a PDF by 45 degrees?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The tool supports only 90-, 180-, and 270-degree rotations.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool straighten a slightly crooked scan?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Straightening a small tilt is deskewing, which requires a different image-processing operation.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is rotation clockwise or counterclockwise?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The displayed 90-, 180-, and 270-degree values are applied clockwise. A 270-degree clockwise turn has the same final orientation as 90 degrees counterclockwise.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool replace my original PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It creates a separate file named <code>rotated.pdf</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I rotate different pages by different angles at once?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">One operation uses one angle for its selected pages. Use separate passes for groups that require different angles.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/organize-pdf"><h3 class="font-bold text-[#1a73e8]">Organize PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Put pages in the correct sequence before or after fixing orientation.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/merge-pdf"><h3 class="font-bold text-[#1a73e8]">Merge PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Combine several documents and then correct mixed orientations.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/page-numbers"><h3 class="font-bold text-[#1a73e8]">Page Numbers</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Number pages after order and orientation are finalized.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -174,6 +208,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/split-pdf.html"><h3 class="font-bold text-[#1a73e8]">Split PDF Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Separate every page of a PDF into individual PDF files bundled in a ZIP.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Fix sideways and upside-down pages</h2><p class="mt-3 text-sm leading-6 text-white">Pick a quarter-turn angle, choose all or selected pages, generate <code>rotated.pdf</code>, and verify it in your PDF viewer.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/rotate-pdf">Use Rotate PDF</a></section>
+    </article>
   </main>
 </body>
 </html>
