@@ -32,6 +32,67 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <!-- GUIDE_SCHEMA_START -->
+  <script type="application/ld+json" data-guide-schema>
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "JWT Decoder Guide",
+        "description": "Decode JSON Web Token payloads offline with signature claims analysis.",
+        "image": "https://www.weconvertfiles.com/assets/og-image.png",
+        "datePublished": "2026-07-18",
+        "dateModified": "2026-08-18",
+        "author": {
+          "@type": "Organization",
+          "name": "WeConvertFiles",
+          "url": "https://www.weconvertfiles.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.weconvertfiles.com/assets/favicon.png"
+          }
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "WeConvertFiles",
+          "url": "https://www.weconvertfiles.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.weconvertfiles.com/assets/favicon.png"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.weconvertfiles.com/guides/jwt-decoder.html"
+        },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this tool verify token signatures?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This tool is a client-side decoder that displays header and payload structures. It does not perform cryptographic signature key validations on servers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is it safe to paste developer tokens here?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Hashing and decoding take place entirely inside your local browser memory, ensuring your API secret keys remain confidential."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
