@@ -32,6 +32,75 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
+  <!-- GUIDE_SCHEMA_START -->
+  <script type="application/ld+json" data-guide-schema>
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Code Diff Checker Guide",
+        "description": "Compare two text files or code snippets side-by-side to highlight differences in real-time.",
+        "image": "https://www.weconvertfiles.com/assets/og-image.png",
+        "datePublished": "2026-07-18",
+        "dateModified": "2026-08-18",
+        "author": {
+          "@type": "Organization",
+          "name": "WeConvertFiles",
+          "url": "https://www.weconvertfiles.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.weconvertfiles.com/assets/favicon.png"
+          }
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "WeConvertFiles",
+          "url": "https://www.weconvertfiles.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.weconvertfiles.com/assets/favicon.png"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.weconvertfiles.com/guides/diff-checker.html"
+        },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What algorithm does the diff checker use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It utilizes Google's optimized Diff Match Patch script to perform line-by-line and character-level comparisons, ensuring highly accurate revision tracking."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I compare code snippets as well as plain text?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can paste raw code (HTML, CSS, JavaScript, Python) or plain text, and the diff checker will highlight exact syntax changes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are my comparisons kept confidential?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The diffing algorithm runs in local browser sandbox threads, meaning no code or text lines are uploaded to remote databases."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
