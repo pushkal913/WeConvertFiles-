@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>How to Minify or Beautify Code Online | Guide</title>
-  <meta name="description" content="Learn how to minify or beautify HTML, CSS, and JavaScript 100% locally in your browser, with input/output size and percentage saved shown instantly." />
+  <title>Code Minifier &amp; Beautifier for HTML, CSS and JavaScript</title>
+  <meta name="description" content="Minify or beautify HTML, CSS, and JavaScript in your browser. Compare byte sizes, copy the result, and learn how to test transformed production code." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/code-minifier.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="How to Minify or Beautify Code Online | Guide" />
-  <meta property="og:description" content="Learn how to minify or beautify HTML, CSS, and JavaScript 100% locally in your browser, with input/output size and percentage saved shown instantly." />
+  <meta property="og:title" content="Minify and Beautify HTML, CSS, and JavaScript" />
+  <meta property="og:description" content="Compress code for delivery or reformat it for review with language-aware processing, byte statistics, and downloadable output." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/code-minifier.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="How to Minify or Beautify Code Online | Guide" />
-  <meta name="twitter:description" content="Learn how to minify or beautify HTML, CSS, and JavaScript 100% locally in your browser, with input/output size and percentage saved shown instantly." />
+  <meta name="twitter:title" content="Minify and Beautify HTML, CSS, and JavaScript" />
+  <meta name="twitter:description" content="Compress code for delivery or reformat it for review with language-aware processing, byte statistics, and downloadable output." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,167 +31,188 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-
+  <style>
+    /* Mobile overflow fix: keep the article column within the viewport so wide
+       tables and code blocks scroll inside their own container instead of
+       widening the page, and wrap long inline code tokens. */
+    main { width: 100%; }
+    main :where(p, li, td, th, dd, dt, h1, h2, h3, blockquote) code { overflow-wrap: anywhere; word-break: break-word; }
+    main pre code { overflow-wrap: normal; word-break: normal; white-space: pre; }
+  </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Does this tool execute my HTML, CSS, or JavaScript?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Your code is only parsed as text and rewritten. It is never executed, evaluated, or rendered by the tool."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Are the minifier libraries loaded for every tool visit?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Each parsing engine, such as Terser for JavaScript, is a version-pinned script that only loads the first time you minify or beautify that specific language."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What do the size statistics mean?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "After processing, the tool shows the input size and output size in bytes, plus the percentage change, so you can see exactly how much smaller (or more readable) your code became."
-        }
-      }
-    ]
-  }
-  </script>
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "How to Minify or Beautify Code Online | Guide",
-        "description": "Learn how to minify or beautify HTML, CSS, and JavaScript 100% locally in your browser, with input/output size and percentage saved shown instantly.",
+        "headline": "Code Minifier and Beautifier for HTML, CSS, and JavaScript",
+        "description": "Minify or beautify HTML, CSS, and JavaScript in the browser with language-aware processing, byte-size statistics, copy, and downloadable output.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
-        "datePublished": "2026-07-30",
-        "dateModified": "2026-08-18",
+        "datePublished": "2026-07-18",
+        "dateModified": "2026-08-19",
         "author": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/code-minifier.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/code-minifier.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Does this tool execute my HTML, CSS, or JavaScript?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. Your code is only parsed as text and rewritten. It is never executed, evaluated, or rendered by the tool."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Are the minifier libraries loaded for every tool visit?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. Each parsing engine, such as Terser for JavaScript, is a version-pinned script that only loads the first time you minify or beautify that specific language."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What do the size statistics mean?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "After processing, the tool shows the input size and output size in bytes, plus the percentage change, so you can see exactly how much smaller (or more readable) your code became."
-            }
-          }
+          { "@type": "Question", "name": "Which languages are supported?", "acceptedAnswer": { "@type": "Answer", "text": "The tool supports HTML, CSS, and JavaScript input." } },
+          { "@type": "Question", "name": "Does it execute my JavaScript or render my HTML?", "acceptedAnswer": { "@type": "Answer", "text": "No. It parses and rewrites code as text. It does not execute JavaScript or render the markup." } },
+          { "@type": "Question", "name": "Can it beautify minified code?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Beautify adds two-space formatting, but it cannot restore removed comments, original names, or author structure." } },
+          { "@type": "Question", "name": "Does JavaScript minification rename variables?", "acceptedAnswer": { "@type": "Answer", "text": "Terser's default minification can mangle eligible names and compress expressions. Test output and do not rely on minified local names." } },
+          { "@type": "Question", "name": "Does it minify CSS inside HTML?", "acceptedAnswer": { "@type": "Answer", "text": "The lightweight HTML minifier preserves style and script blocks during whitespace processing; it does not independently run CSSO or Terser on their contents." } },
+          { "@type": "Question", "name": "Does it generate source maps?", "acceptedAnswer": { "@type": "Answer", "text": "No. The output contains processed code only." } },
+          { "@type": "Question", "name": "What do the size numbers mean?", "acceptedAnswer": { "@type": "Answer", "text": "They are the UTF-8 byte sizes of input and output plus the uncompressed percentage change, not gzip or Brotli savings." } },
+          { "@type": "Question", "name": "What filenames are downloaded?", "acceptedAnswer": { "@type": "Answer", "text": "The tool downloads output.html, output.css, or output.js, based on the selected language." } },
+          { "@type": "Question", "name": "Is minification the same as obfuscation?", "acceptedAnswer": { "@type": "Answer", "text": "No. Minification primarily reduces size. It may shorten names, but it does not provide dependable secrecy." } },
+          { "@type": "Question", "name": "Can minified code be deployed without testing?", "acceptedAnswer": { "@type": "Answer", "text": "No automated transformation should bypass project tests and review. Validate behavior in the target environment first." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Code Minifier and Beautifier for HTML, CSS, and JavaScript</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">HTML / CSS / JS</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Source code is written for people, with indentation, descriptive names, comments, and spacing; production assets are delivered to machines, where many of those characters add transfer size without changing behavior. The <strong class="text-slate-900 dark:text-slate-200">Code Minifier &amp; Beautifier</strong> supports HTML, CSS, and JavaScript: choose a language and action, paste code, and process it in the browser. It reports UTF-8 input and output byte sizes, shows the percentage change, lets you copy the result, and downloads <code>output.html</code>, <code>output.css</code>, or <code>output.js</code> according to the selected language.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/code-minifier">Minify or beautify code<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">How to Minify or Beautify Code Online</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Code Minifier & Beautifier compresses or reformats HTML, CSS, and JavaScript directly in your browser. Version-pinned parsing engines, such as Terser for JavaScript, are lazy-loaded only for the language and action you actually use. Minifying strips whitespace, comments, and redundant syntax to shrink file size, while beautifying reformats compressed code with consistent indentation for readability. Input size, output size, and percentage saved are shown after every run, and your code is only parsed and rewritten locally — never executed or uploaded.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/code-minifier">
-        Open Code Minifier & Beautifier
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Select HTML, CSS, or JavaScript; choose <strong>Minify</strong>; paste the source; and run the tool. Review the output and size statistics, then test the transformed code before deploying it. For readable formatting instead, choose <strong>Beautify</strong>, which uses two-space indentation and may increase the byte count. Keep the original source and treat minified files as generated build artifacts.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Paste Your Code</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Paste HTML, CSS, or JavaScript and choose the matching language.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Minify or Beautify</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Pick minify to shrink file size or beautify to reformat compressed code for readability.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Review & Download</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Check the input/output size and percentage saved, then copy or download the result.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What minification and beautification do</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Minification rewrites source code into a smaller representation. Depending on the language and engine, it can remove unnecessary whitespace and comments, shorten or restructure expressions, combine compatible CSS rules, shorten JavaScript variable names, and eliminate redundant JavaScript. Readable JavaScript such as:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>function calculateSubtotal(items) {
+  return items.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+}</code></pre>
+        <p>can become a compact single-line representation similar to:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>function calculateSubtotal(t){return t.reduce((t,c)=>t+c.price*c.quantity,0)}</code></pre>
+        <p>Beautification does the reverse presentation task, adding consistent whitespace and indentation to compressed or poorly formatted code for review, debugging, and understanding third-party snippets. It does not reconstruct original comments, variable names, or author intent &mdash; information removed during minification generally cannot be recovered from the minified file.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does this tool execute my HTML, CSS, or JavaScript?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. Your code is only parsed as text and rewritten. It is never executed, evaluated, or rendered by the tool.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are the minifier libraries loaded for every tool visit?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. Each parsing engine, such as Terser for JavaScript, is a version-pinned script that only loads the first time you minify or beautify that specific language.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What do the size statistics mean?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">After processing, the tool shows the input size and output size in bytes, plus the percentage change, so you can see exactly how much smaller (or more readable) your code became.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to use the Code Minifier &amp; Beautifier</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Choose HTML, CSS, or JavaScript.</strong> The default language is HTML.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Select Minify or Beautify.</strong> The default mode is Minify.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Paste the code</strong> into the input panel.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Run the action</strong> and review the output and byte statistics.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Copy the output</strong> or download the generated <code>output.*</code> file.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6. Compare, lint, build, and test</strong> it in the target project.</li>
+      </ol>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Changing the language determines both the processing engine and the downloaded file extension. Clear removes the input, output, messages, and current statistics.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">JavaScript minification with Terser</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>JavaScript minification uses Terser. Its default process can do more than remove spaces: it can compress expressions and mangle eligible names. That often produces better savings, but it is also why transformed JavaScript needs meaningful tests. The output may shorten local identifiers and rewrite syntax while preserving intended behavior, so do not rely on exact minified variable names. Code that uses string-based name lookup, reflection, direct <code>eval</code>, unusual build-time macros, or undocumented framework conventions can be sensitive to mangling or compression.</p>
+        <p>The tool returns processed code only; <strong class="text-slate-900 dark:text-slate-200">it does not generate a source map.</strong> Without one, production stack traces refer to the minified file's lines and columns, making debugging harder. A pasted fragment also lacks the context of imports, exports, target-browser configuration, TypeScript compilation, JSX transformation, and bundler defines &mdash; this tool processes JavaScript text, it is not a full bundler or transpiler. Compile language extensions before minification and validate the result in the intended runtime.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">CSS minification with CSSO</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>CSS minification uses CSSO, which can remove redundant syntax and optimize compatible structures in addition to deleting whitespace &mdash; for example, it may merge separate margin declarations into a shorter equivalent when it determines that is safe. Because CSS behavior depends on cascade order, specificity, custom properties, and browser support, test key pages and states after minification, including responsive breakpoints, hover and focus states, dark mode, printed output, and right-to-left layouts.</p>
+        <p>The tool does not run PostCSS, resolve imports, rewrite asset URLs, add vendor prefixes, or understand a framework's purge configuration, and it does not compile Sass, Less, or another preprocessor into CSS. Provide compiled CSS as input.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">HTML minification behavior and limitations</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>HTML minification uses a lightweight built-in routine rather than a full HTML compiler. It removes HTML comments, collapses repeated spaces and tabs outside protected blocks, removes whitespace between tags, removes line indentation, and trims the result. Blocks matching <code>pre</code>, <code>textarea</code>, <code>script</code>, and <code>style</code> are protected from the whitespace pass. That design is fast, but HTML whitespace can be meaningful:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>&lt;span&gt;First&lt;/span&gt; &lt;span&gt;Second&lt;/span&gt;</code></pre>
+        <p>Removing the text space between the closing and opening tags can display <code>FirstSecond</code>, so always visually test inline content after HTML minification. The routine also removes HTML comments, which may drop conditional comments, template markers, build directives, or legal notices. Embedded <code>&lt;script&gt;</code> and <code>&lt;style&gt;</code> contents are preserved rather than independently minified &mdash; process those assets separately when needed.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Beautifying HTML, CSS, and JavaScript</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Beautification uses language-specific js-beautify functions with a fixed two-space indentation setting: JavaScript is processed by the JavaScript beautifier, CSS by the CSS beautifier, and HTML by the HTML beautifier with its supporting language modules loaded as needed. For example, this dense CSS:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>.card{display:grid;gap:1rem;padding:1.5rem}.card h2{margin:0;color:#172554}</code></pre>
+        <p>can be reformatted as:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>.card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.card h2 {
+  margin: 0;
+  color: #172554;
+}</code></pre>
+        <p>There are no controls for tabs, brace style, maximum line length, quote preference, or semicolons. Use the result as a readable baseline; if a repository enforces Prettier, ESLint, Stylelint, or another formatter, run the project's configured tooling before committing. Beautification is not syntax repair, and it is not deobfuscation: meaningful names and removed control structure cannot reliably be inferred.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Understanding the size statistics</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>After successful processing, the tool shows input size in bytes, output size in bytes, and the percentage change. The byte values are measured by creating browser <code>Blob</code> objects from the input and output, so they reflect the UTF-8 size of the displayed text, and Unicode characters may require more than one byte. For minification a reduction is shown with a minus sign; beautification usually increases size and can show a plus sign.</p>
+        <p>The percentage is calculated from the uncompressed input and output; it is not a measurement of Brotli or gzip transfer savings. A large raw reduction may become a smaller network improvement after HTTP compression because repeated whitespace already compresses well, so measure the actual built and compressed assets when optimizing production performance.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Minification vs. compression, bundling, and transpilation</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Process</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Main job</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Typical output</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Minification</td><td class="py-3 pr-4">Rewrite source into fewer bytes</td><td class="py-3">Smaller HTML, CSS, or JS text</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Network compression</td><td class="py-3 pr-4">Compress bytes during transfer</td><td class="py-3">Brotli- or gzip-encoded response</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Bundling</td><td class="py-3 pr-4">Combine and resolve modules/assets</td><td class="py-3">One or more application bundles</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Transpilation</td><td class="py-3 pr-4">Convert syntax for another target</td><td class="py-3">Browser-compatible JavaScript or CSS</td></tr>
+          <tr><td class="py-3 pr-4">Tree shaking</td><td class="py-3 pr-4">Remove unused module exports</td><td class="py-3">Smaller JavaScript bundle</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">A strong production pipeline may use several steps. This browser tool minifies or beautifies one pasted source string; it does not bundle modules, resolve dependencies, transpile TypeScript, or configure server compression.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Can minification break code?</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>It can. Mature minifiers aim to preserve semantics, but source code can depend on behavior that transformations expose: JavaScript may rely on function or variable names; HTML may rely on whitespace between inline elements; CSS may rely on ordering or unusual browser behavior; comments may contain licenses, directives, or conditional markup; template syntax may not be valid plain HTML, CSS, or JavaScript; and an incorrect language selection applies the wrong parser.</p>
+        <p>Keep source control and run automated tests. For JavaScript, test initialization, asynchronous flows, error handling, and production-only paths. For CSS and HTML, perform visual regression and accessibility checks at representative viewport sizes. Minifiers often remove comments, and some dependencies require license notices to remain in distributed assets &mdash; preserve required notices through a build-supported mechanism and verify the final artifact, not only the source repository.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common processing errors</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">JavaScript cannot be parsed</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Look for incomplete statements, TypeScript annotations, JSX, or an unmatched quote or bracket. Compile extensions before using the JavaScript minifier.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">CSS output is unexpected</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Confirm the input is compiled CSS rather than Sass or Less. Check custom syntax, malformed declarations, and cascade-sensitive rules.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">HTML text loses spaces</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Whitespace between tags is removed. Add required spacing inside text nodes, or avoid this lightweight HTML minification for whitespace-sensitive markup.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Template directives disappear or move</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Comments and nonstandard template syntax may be treated as removable HTML or invalid language input. Use tooling designed for the template framework.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Beautified output is larger</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">That is expected. Beautification adds whitespace for readability; the statistics display the increase.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A processing library does not load</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The language engines are lazy-loaded from version-pinned third-party CDN scripts. Network filters or script blockers can prevent an engine from loading. Retry in an allowed browser environment.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and code security</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Processing occurs in the browser and the tool does not execute, evaluate, or render the pasted code.</strong> Required parsing libraries are loaded on demand from third-party content delivery infrastructure.</p>
+        <p>Source code can contain credentials, internal endpoints, customer identifiers, proprietary logic, and comments never intended for distribution. Remove secrets before pasting, follow organizational policy, and prefer representative snippets. Minification is not a secret-removal tool: string literals, URLs, API keys, and embedded configuration can remain readable in the output. Never assume minification protects intellectual property &mdash; it creates friction for humans but is reversible enough to inspect and beautify. Use proper access controls and secret management.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which languages are supported?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The tool supports HTML, CSS, and JavaScript input.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it execute my JavaScript or render my HTML?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It parses and rewrites code as text. It does not execute JavaScript or render the markup.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can it beautify minified code?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Beautify adds two-space formatting, but it cannot restore removed comments, original names, or author structure.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does JavaScript minification rename variables?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Terser's default minification can mangle eligible names and compress expressions. Test output and do not rely on minified local names.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it minify CSS inside HTML?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The lightweight HTML minifier preserves <code>style</code> and <code>script</code> blocks during whitespace processing; it does not independently run CSSO or Terser on their contents.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it generate source maps?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The output contains processed code only.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What do the size numbers mean?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">They are the UTF-8 byte sizes of input and output plus the uncompressed percentage change, not gzip or Brotli savings.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What filenames are downloaded?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The tool downloads <code>output.html</code>, <code>output.css</code>, or <code>output.js</code>, based on the selected language.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is minification the same as obfuscation?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Minification primarily reduces size. It may shorten names, but it does not provide dependable secrecy.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can minified code be deployed without testing?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No automated transformation should bypass project tests and review. Validate behavior in the target environment first.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/diff-checker"><h3 class="font-bold text-[#1a73e8]">Diff Checker</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Compare readable source and processed output.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-formatter"><h3 class="font-bold text-[#1a73e8]">JSON Formatter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Format JSON rather than using the code minifier.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/sql-formatter"><h3 class="font-bold text-[#1a73e8]">SQL Formatter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Format database queries with dialect options.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -201,6 +221,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/json-formatter.html"><h3 class="font-bold text-[#1a73e8]">JSON Formatter / Validator Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Format, validate, beautify, and minify raw JSON string data dynamically.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Minify or beautify your code</h2><p class="mt-3 text-sm leading-6 text-white">Pick a language and action, paste HTML, CSS, or JavaScript, and copy or download <code>output.html</code>, <code>output.css</code>, or <code>output.js</code>.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/code-minifier">Use Code Minifier</a></section>
+    </article>
   </main>
 </body>
 </html>
