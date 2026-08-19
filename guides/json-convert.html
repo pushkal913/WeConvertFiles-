@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>JSON to CSV / Excel Converter Guide - WeConvertFiles</title>
-  <meta name="description" content="Convert JSON text or files to Excel spreadsheet or CSV sheets locally and privately." />
+  <title>JSON Converter: Convert JSON to CSV or Excel Online</title>
+  <meta name="description" content="Convert JSON arrays or objects to CSV or Excel in your browser. Learn how fields, nested values, missing keys, numbers, dates, and large IDs affect output." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/json-convert.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="JSON to CSV / Excel Converter Guide - WeConvertFiles" />
-  <meta property="og:description" content="Convert JSON text or files to Excel spreadsheet or CSV sheets locally and privately." />
+  <meta property="og:title" content="Convert JSON to CSV or Excel Online" />
+  <meta property="og:description" content="Turn JSON records into a downloadable CSV file or XLSX workbook with practical guidance for clean, reliable spreadsheet output." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/json-convert.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="JSON to CSV / Excel Converter Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Convert JSON text or files to Excel spreadsheet or CSV sheets locally and privately." />
+  <meta name="twitter:title" content="Convert JSON to CSV or Excel Online" />
+  <meta name="twitter:description" content="Turn JSON records into a downloadable CSV file or XLSX workbook with practical guidance for clean, reliable spreadsheet output." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,134 +31,221 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <style>
+    /* Mobile overflow fix: keep the article column within the viewport so wide
+       tables and code blocks scroll inside their own container instead of
+       widening the page, and wrap long inline code tokens. */
+    main { width: 100%; }
+    main :where(p, li, td, th, dd, dt, h1, h2, h3, blockquote) code { overflow-wrap: anywhere; word-break: break-word; }
+    main pre code { overflow-wrap: normal; word-break: normal; white-space: pre; }
+  </style>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "JSON to CSV / Excel Converter Guide",
-        "description": "Convert JSON text or files to Excel spreadsheet or CSV sheets locally and privately.",
+        "headline": "JSON Converter: Export JSON to CSV or Excel",
+        "description": "Convert a JSON array or object into a downloadable CSV file or XLSX workbook in the browser, with guidance on fields, nesting, types, and large identifiers.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
-        "dateModified": "2026-08-18",
+        "dateModified": "2026-08-19",
         "author": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/json-convert.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/json-convert.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What JSON structure is required for conversion?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The converter expects a JSON array of flat objects (e.g., `[{\"id\": 1, \"name\": \"Alice\"}]`). Nested structures will be flattened with dot notation where possible."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is SheetJS safe for processing database arrays?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, because the SheetJS script runs locally in your browser. No JSON text or data rows are uploaded to the web."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I convert large JSON datasets?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, the local engine handles large JSON payloads of up to 10MB efficiently, delivering formatted CSV/Excel documents in seconds."
-            }
-          }
+          { "@type": "Question", "name": "Can I convert a JSON file to Excel?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Upload one .json file or paste JSON, select Excel, and download converted_data.xlsx with a worksheet named Data." } },
+          { "@type": "Question", "name": "Can I convert JSON to CSV?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Choose CSV output to download converted_data.csv." } },
+          { "@type": "Question", "name": "Does the converter accept a single JSON object?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. A root object is wrapped into a one-item array and exported as one row." } },
+          { "@type": "Question", "name": "Does it flatten nested JSON automatically?", "acceptedAnswer": { "@type": "Answer", "text": "No. Prepare nested objects and arrays as flat fields before conversion when you need predictable columns." } },
+          { "@type": "Question", "name": "What happens when records have different properties?", "acceptedAnswer": { "@type": "Answer", "text": "The worksheet can include columns found across the records, while rows missing a property have an empty cell. Normalize the schema for dependable imports." } },
+          { "@type": "Question", "name": "Are large JSON integers preserved exactly?", "acceptedAnswer": { "@type": "Answer", "text": "Not always. Values beyond JavaScript's safe integer precision can change. Represent exact long IDs as strings." } },
+          { "@type": "Question", "name": "Does JSON conversion preserve dates?", "acceptedAnswer": { "@type": "Answer", "text": "JSON dates are strings. The converter does not apply a date schema, and spreadsheet software may interpret date-like values according to locale." } },
+          { "@type": "Question", "name": "Can it create multiple Excel worksheets?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current conversion creates one worksheet named Data." } },
+          { "@type": "Question", "name": "Is JSON conversion the same as JSON validation?", "acceptedAnswer": { "@type": "Answer", "text": "The input must parse successfully, but conversion does not validate a business schema or data-quality rules." } },
+          { "@type": "Question", "name": "Which input is used if I paste JSON and upload a file?", "acceptedAnswer": { "@type": "Answer", "text": "Non-empty pasted JSON is used first. Clear it to convert the uploaded file instead." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">JSON Converter: Export JSON to CSV or Excel</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">JSON to CSV / XLSX</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">JSON represents objects, arrays, numbers, Boolean values, nulls, and nested structures; spreadsheets organize values into rows and columns. The <strong class="text-slate-900 dark:text-slate-200">JSON Converter</strong> bridges the two by treating object properties as columns and array entries as rows. It accepts pasted JSON text or one uploaded <code>.json</code> file, parses the content in the browser, builds a worksheet named <code>Data</code>, and exports either an Excel workbook (<code>converted_data.xlsx</code>) or a CSV file (<code>converted_data.csv</code>).</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/json-convert">Convert JSON data<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">JSON to CSV / Excel Converter</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">JSON to CSV / Excel Converter converts complex JSON array strings into structured spreadsheet files. It parses raw JSON text using JavaScript engines, flattens nested key-value pairs into tabular columns, and exports them. Using SheetJS and PapaParse libraries client-side, it compiles these tables into standard comma-separated values (.csv) or Microsoft Excel Worksheets (.xlsx). Since the utility executes entirely in browser storage, it is safe to process sensitive API payloads, client records, and databases without server logging.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/json-convert">
-        Open JSON Converter
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Paste valid JSON or upload one JSON file, choose Excel or CSV as the output format, and start the conversion. An array of flat objects produces the most predictable table; a single root object is wrapped as one row. Review nested values, missing fields, dates, and large numbers before using the result in another system.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Load JSON Data</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Paste your raw JSON text array or drop a `.json` file into the upload zone.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select Output</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Pick either Excel (.xlsx) format or comma-separated CSV format for your spreadsheet.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Convert Offline</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert. The SheetJS compilation compiles sheet bytes and triggers download instantly.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What a JSON converter does</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A JSON converter parses JSON and serializes its data into another format. For spreadsheet output, it must translate a flexible hierarchical structure into a rectangular table. Consider this array:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>[
+  { "order_id": "ORD-1001", "customer": "Asha", "total": 79.5, "paid": true },
+  { "order_id": "ORD-1002", "customer": "Daniel", "total": 42, "paid": false }
+]</code></pre>
+        <p>It maps naturally to a table where each object becomes a row, property names become column headings, and property values become cells:</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">order_id</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">customer</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">total</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">paid</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">ORD-1001</td><td class="py-3 pr-4">Asha</td><td class="py-3 pr-4">79.5</td><td class="py-3">true</td></tr>
+          <tr><td class="py-3 pr-4">ORD-1002</td><td class="py-3 pr-4">Daniel</td><td class="py-3 pr-4">42</td><td class="py-3">false</td></tr>
+        </tbody></table></div>
+        <p>This flat shape is the best input for both CSV and Excel exports.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What JSON structure is required for conversion?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The converter expects a JSON array of flat objects (e.g., `[{"id": 1, "name": "Alice"}]`). Nested structures will be flattened with dot notation where possible.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is SheetJS safe for processing database arrays?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, because the SheetJS script runs locally in your browser. No JSON text or data rows are uploaded to the web.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I convert large JSON datasets?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, the local engine handles large JSON payloads of up to 10MB efficiently, delivering formatted CSV/Excel documents in seconds.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">JSON to CSV vs. JSON to Excel</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Choose</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Best for</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Characteristics</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">CSV</td><td class="py-3 pr-4">Imports, scripts, databases, broad compatibility</td><td class="py-3">Plain text, one table, no workbook formatting</td></tr>
+          <tr><td class="py-3 pr-4">Excel</td><td class="py-3 pr-4">Human review, filtering, analysis, sharing</td><td class="py-3"><code>.xlsx</code> workbook, typed cells where supported, one <code>Data</code> sheet</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">CSV is easy to inspect and supported by almost every data tool. Excel is convenient when a person will open, filter, or extend the output in spreadsheet software. Neither output preserves JSON's full hierarchical model without an explicit flattening strategy.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to convert JSON to Excel or CSV</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Open the JSON Converter</strong> and choose the output format &mdash; <em>Excel Spreadsheet (.xlsx)</em> or <em>Comma-separated Values (.csv)</em>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Provide the data.</strong> Paste JSON into the optional text area, or upload one <code>.json</code> file (its contents load into the text area).</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Run the conversion.</strong> The spreadsheet engine loads on demand the first time.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Download</strong> <code>converted_data.xlsx</code> or <code>converted_data.csv</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Verify the output.</strong> Open the <code>Data</code> worksheet (or inspect the CSV in a text editor) and check headers, rows, and important values.</li>
+      </ol>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Excel output is created as a new workbook. JSON does not contain spreadsheet formatting such as column widths, fonts, formulas, colors, filters, charts, or multiple-sheet layouts, so those features are not inferred or restored. The CSV is generated from the same intermediate worksheet, and values that require quoting &mdash; text containing commas or line breaks &mdash; are serialized according to CSV rules.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What JSON structure works best?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Use a top-level array whose entries are flat objects with consistent keys:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>[
+  { "sku": "A-101", "name": "Desk Lamp", "price": 29.99, "stock": 18 },
+  { "sku": "A-102", "name": "Monitor Stand", "price": 54, "stock": 7 }
+]</code></pre>
+        <p>This clearly defines two rows and four columns. The converter also accepts a root object:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>{ "project": "storefront", "environment": "production", "replicas": 3 }</code></pre>
+        <p>The implementation wraps that object in an array and creates a one-row table. A primitive root value such as a string, number, or Boolean is rejected because it does not provide spreadsheet fields.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When objects have different keys</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Real-world records are often inconsistent:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>[
+  { "id": 1, "name": "Ana", "department": "Engineering" },
+  { "id": 2, "name": "Sam", "location": "Pune" }
+]</code></pre>
+        <p>The worksheet library derives columns from the keys it encounters. Rows without a property leave the corresponding cell empty, so the table may contain both <code>department</code> and <code>location</code> columns with blanks where a record does not define them. For dependable imports, normalize records first by giving each one the same keys and using explicit <code>null</code> where a value is absent &mdash; keeping in mind that null and missing values may both appear as blank cells.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Nested JSON needs preparation</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>JSON can nest objects and arrays inside each record:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>[
+  {
+    "id": 101,
+    "customer": { "name": "Mina", "city": "Delhi" },
+    "tags": ["priority", "renewal"]
+  }
+]</code></pre>
+        <p>A two-dimensional sheet has no universal way to represent <code>customer</code> or <code>tags</code>. This converter passes records directly to the worksheet builder; <strong>it does not recursively flatten nested values</strong> into columns such as <code>customer.name</code> and <code>customer.city</code>. Flatten data before conversion when individual nested properties need their own columns:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>[
+  {
+    "id": 101,
+    "customer_name": "Mina",
+    "customer_city": "Delhi",
+    "tags": "priority|renewal"
+  }
+]</code></pre>
+        <p>Choose array handling intentionally: join a short list into one string, create one row per array item, or move child records into a separate table. The correct model depends on how the destination will use the data.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">JSON data types in spreadsheet output</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Strings</strong> usually become text cells. Spreadsheet applications may still auto-interpret numeric-looking or date-like text on CSV import, so postal codes and account identifiers need careful review.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Numbers</strong> are parsed as JavaScript numbers. Very large integers can lose precision because JavaScript uses IEEE-754 double-precision values. If every digit matters, quote the value in the JSON source, for example <code>"transaction_id": "900719925474099312345"</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Boolean values</strong> can be represented as Boolean cells in Excel. CSV stores their textual representation because CSV has no intrinsic Boolean type.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Null and missing values</strong> commonly become blank cells. A blank cannot reliably distinguish "unknown," "not applicable," and "not provided."</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Dates</strong> have no native JSON type. A value such as <code>"2026-08-19T10:30:00Z"</code> is a string; the converter does not apply a date schema, and spreadsheet software may reinterpret it based on locale.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Valid JSON requirements</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The input is parsed with the browser's JSON parser. Valid JSON requires double quotes around property names and string values; commas between members; no trailing comma after the final member; balanced braces and brackets; lowercase <code>true</code>, <code>false</code>, and <code>null</code>; and no JavaScript comments, functions, <code>undefined</code>, <code>NaN</code>, or <code>Infinity</code>. This is not valid JSON:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>[
+  { id: 1, name: 'Ana' },
+]</code></pre>
+        <p>This is valid:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>[
+  { "id": 1, "name": "Ana" }
+]</code></pre>
+        <p>If parsing fails, the converter reports an invalid JSON message from the parser. Use the JSON Formatter to locate structural errors before trying the export again. Note also that JavaScript parsing keeps only the last value when duplicate keys appear in one object, so treat duplicate keys as invalid application data.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">CSV and Excel formula-injection risk</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>Structured data from untrusted users can contain text beginning with <code>=</code>, <code>+</code>, <code>-</code>, or <code>@</code>. Spreadsheet applications may interpret such values as formulas, particularly when opening CSV output, creating a formula-injection risk. The converter does not sanitize records according to your application's schema.</p>
+        <p>Before opening or distributing output from untrusted JSON, identify which columns must be plain text, neutralize formula-like content according to your security policy, inspect links and external references, avoid enabling unexpected external content, and test the file in the spreadsheet software your recipients use. Sanitization should be column-aware: a legitimate negative numeric value is not the same as user-controlled text intended to be displayed literally.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common conversion problems</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The input is valid JavaScript but invalid JSON</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Replace single quotes, unquoted keys, comments, and trailing commas with standard JSON syntax.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The output contains unclear nested values</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Flatten objects and arrays before conversion. The tool does not recursively create dot-notation columns.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Long identifiers have changed</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Encode identifiers as JSON strings before parsing. Once a large integer has lost precision, formatting cannot restore the original digits.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Dates look different in Excel</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Spreadsheet software can interpret date-like text using regional settings. Use ISO 8601 strings, import columns explicitly as text when needed, and check time zones.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Some cells are blank</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The record may omit that key or contain null. Normalize all records against a known schema when blanks need a specific meaning.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Pasted JSON and an uploaded file are both present</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The pasted text takes priority when it is non-empty. Clear the text area if you want the uploaded file to be used.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The conversion library does not load</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Spreadsheet generation relies on a browser-loaded library. Network restrictions or content blockers can prevent it from loading. Retry in an environment that permits the required script.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and browser-based processing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">The JSON is parsed and converted in the browser rather than uploaded to a dedicated conversion API.</strong> Supporting spreadsheet code is loaded from third-party content delivery infrastructure, so the workflow is best described as client-side rather than guaranteed fully offline.</p>
+        <p>JSON exports can contain personal information, API responses, internal identifiers, and business data. Follow your organization's data-handling policy, remove unnecessary secrets, and use representative samples when possible. A client-side converter does not replace access controls, retention rules, or careful handling of the downloaded file.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Best practices for clean output</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; Use a top-level array of flat objects with unique, consistent field names.</li>
+        <li>&bull; Give each record the same expected keys, and flatten nested objects intentionally.</li>
+        <li>&bull; Decide how arrays should map to rows or text.</li>
+        <li>&bull; Store long identifiers as quoted strings, and use ISO 8601 strings for portable timestamps.</li>
+        <li>&bull; Validate formula-like text from untrusted sources.</li>
+        <li>&bull; Compare source and output row counts, then test the result in the destination import workflow.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-3">Conversion changes representation, not data quality. A well-formed spreadsheet can still contain duplicate records, invalid email addresses, missing IDs, or inconsistent currencies.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I convert a JSON file to Excel?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Upload one <code>.json</code> file or paste JSON, select Excel, and download <code>converted_data.xlsx</code> with a worksheet named <code>Data</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I convert JSON to CSV?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Choose CSV output to download <code>converted_data.csv</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the converter accept a single JSON object?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. A root object is wrapped into a one-item array and exported as one row.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it flatten nested JSON automatically?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Prepare nested objects and arrays as flat fields before conversion when you need predictable columns.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What happens when records have different properties?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The worksheet can include columns found across the records, while rows missing a property have an empty cell. Normalize the schema for dependable imports.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Are large JSON integers preserved exactly?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not always. Values beyond JavaScript's safe integer precision can change. Represent exact long IDs as strings.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does JSON conversion preserve dates?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">JSON dates are strings. The converter does not apply a date schema, and spreadsheet software may interpret date-like values according to locale.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can it create multiple Excel worksheets?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current conversion creates one worksheet named <code>Data</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is JSON conversion the same as JSON validation?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The input must parse successfully, but conversion does not validate a business schema or data-quality rules.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which input is used if I paste JSON and upload a file?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Non-empty pasted JSON is used first. Clear it to convert the uploaded file instead.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-formatter"><h3 class="font-bold text-[#1a73e8]">JSON Formatter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Validate and clean source JSON before converting it.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-yaml"><h3 class="font-bold text-[#1a73e8]">JSON to YAML</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert JSON to configuration-oriented YAML output.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/csv-convert"><h3 class="font-bold text-[#1a73e8]">CSV Converter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert a resulting CSV back to JSON or Excel.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -168,6 +254,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/json-yaml.html"><h3 class="font-bold text-[#1a73e8]">JSON to YAML Converter Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert between JSON and YAML with syntax validation and formatted output.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Convert JSON to a spreadsheet</h2><p class="mt-3 text-sm leading-6 text-white">Paste a JSON array of records, choose <code>.xlsx</code> or <code>.csv</code>, and download the generated table.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/json-convert">Use JSON Converter</a></section>
+    </article>
   </main>
 </body>
 </html>
