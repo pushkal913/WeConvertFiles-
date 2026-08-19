@@ -4,22 +4,21 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>CSV to Excel or JSON Guide - Free Browser Tool</title>
-  <meta name="description" content="Convert CSV spreadsheets into Excel or JSON structures." />
+  <title>CSV Converter: Convert CSV to JSON or Excel Online</title>
+  <meta name="description" content="Convert CSV to JSON or Excel in your browser. Learn how headers, quoted fields, blank rows, data types, encoding, and spreadsheet safety affect the result." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/csv-convert.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="CSV to Excel or JSON Guide - Free Browser Tool" />
-  <meta property="og:description" content="Convert CSV spreadsheets into Excel or JSON structures." />
+  <meta property="og:title" content="Convert CSV to JSON or Excel Online" />
+  <meta property="og:description" content="A practical guide to converting CSV files while preserving rows, headers, quoted values, and usable tabular structure." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/csv-convert.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CSV to Excel or JSON Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Convert CSV spreadsheets into Excel or JSON structures." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="Convert CSV to JSON or Excel Online" />
+  <meta name="twitter:description" content="A practical guide to converting CSV files while preserving rows, headers, quoted values, and usable tabular structure." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "CSV to Excel or JSON Guide - Free Browser Tool",
-        "description": "Convert CSV spreadsheets into Excel or JSON structures.",
+        "headline": "CSV Converter: Convert CSV to JSON or Excel",
+        "description": "A practical guide to converting a CSV file into formatted JSON or an Excel workbook in the browser, including headers, quoting, encoding, and data types.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,124 +46,165 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/csv-convert.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/csv-convert.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Does this tool support custom delimiters?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. PapaParse automatically detects standard separators, including commas, tabs, and semicolons."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is my spreadsheet data uploaded to a server?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. The entire parsing and Excel reconstruction is completed client-side inside your browser memory."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can it convert massive CSV datasets?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. The optimized engine processes thousands of data rows in less than a second."
-            }
-          }
+          { "@type": "Question", "name": "Can I convert CSV to JSON for free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Add a CSV file, select JSON, and download the formatted array of row objects. Check the current product interface for any applicable usage limits." } },
+          { "@type": "Question", "name": "Does the first CSV row become JSON keys?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The converter parses the first row as headers and uses those values as object property names." } },
+          { "@type": "Question", "name": "Can I convert CSV directly to XLSX?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Select Excel output to create an .xlsx workbook with one worksheet named Data." } },
+          { "@type": "Question", "name": "Will numbers remain numbers?", "acceptedAnswer": { "@type": "Answer", "text": "Values are not automatically type-inferred during CSV parsing, so numeric-looking content is represented as text initially. This protects values such as IDs with leading zeros. Apply explicit types later when required." } },
+          { "@type": "Question", "name": "Are empty CSV lines included?", "acceptedAnswer": { "@type": "Answer", "text": "Empty lines are skipped. Blank cells within a non-empty record are still meaningful fields." } },
+          { "@type": "Question", "name": "Does conversion preserve Excel formatting or formulas?", "acceptedAnswer": { "@type": "Answer", "text": "No. CSV stores tabular text, not workbook formatting, formulas, charts, macros, or multiple sheets. The generated Excel workbook is newly created from the parsed values." } },
+          { "@type": "Question", "name": "Can a CSV field contain a comma?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. A field containing a comma should be enclosed in quotes. Correct CSV quoting lets the parser distinguish content commas from delimiters." } },
+          { "@type": "Question", "name": "Why are accented characters corrupted?", "acceptedAnswer": { "@type": "Answer", "text": "The source may use a legacy character encoding. Re-export it as UTF-8 CSV and try again." } },
+          { "@type": "Question", "name": "Is CSV conversion the same as validation?", "acceptedAnswer": { "@type": "Answer", "text": "No. Conversion restructures the data. Validation checks whether fields, types, formats, and business rules are correct." } },
+          { "@type": "Question", "name": "Is it safe to open every converted Excel file?", "acceptedAnswer": { "@type": "Answer", "text": "No file from an untrusted source should be assumed safe. Inspect and sanitize formula-like cells and follow your normal spreadsheet security controls." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">CSV Converter: Convert CSV to JSON or Excel</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Browser-based CSV conversion</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">CSV is one of the simplest ways to move tabular data between applications, but "simple" does not always mean predictable &mdash; a comma inside a description, an inconsistent header, a blank row, or an older character encoding can change the result. The WeConvertFiles <strong class="text-slate-900 dark:text-slate-200">CSV Converter</strong> turns one CSV file into either formatted JSON or an Excel workbook. It reads the first row as column headers, converts each remaining row into a record, skips empty lines, and creates a downloadable <code>.json</code> or <code>.xlsx</code> file in your browser.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/csv-convert">Convert a CSV file<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">CSV to Excel or JSON</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">CSV to Excel or JSON parses CSV (comma-separated values) data and exports it to structured JSON arrays or Microsoft Excel (.xlsx) formats. It runs locally using PapaParse and SheetJS libraries, allowing you to manipulate and format spreadsheets instantly.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/csv-convert">
-        Open CSV to Excel or JSON
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Upload a <code>.csv</code> file, choose JSON or Excel as the output, and run the conversion. JSON output is an array of objects whose property names come from the CSV header row. Excel output places the converted table in a worksheet named <code>Data</code>.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select CSV</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Upload your raw CSV spreadsheet file from your local directory.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose Format</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select whether you want to generate a structured JSON array or a Microsoft Excel (.xlsx) file.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Export Sheet</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert to parse and rewrite table rows locally and download the result.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What is a CSV converter?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A CSV converter reads comma-separated tabular data and writes that data in another format. The conversion is structural, not merely a filename change &mdash; the parser must recognize where each row begins and ends, which values belong to which columns, whether commas and line breaks are part of a quoted value, which row supplies the field names, and how blank or malformed rows should be handled. For example, this CSV:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>name,email,city
+Asha,asha@example.com,Mumbai
+Daniel,daniel@example.com,London</code></pre>
+        <p>converts to JSON:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>[
+  { "name": "Asha", "email": "asha@example.com", "city": "Mumbai" },
+  { "name": "Daniel", "email": "daniel@example.com", "city": "London" }
+]</code></pre>
+        <p>When converted to Excel, the same headers and values become cells in a worksheet, making the data easier to sort, filter, review, and share with spreadsheet users.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does this tool support custom delimiters?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. PapaParse automatically detects standard separators, including commas, tabs, and semicolons.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is my spreadsheet data uploaded to a server?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. The entire parsing and Excel reconstruction is completed client-side inside your browser memory.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can it convert massive CSV datasets?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. The optimized engine processes thousands of data rows in less than a second.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">CSV to JSON vs. CSV to Excel</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Choose</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Best for</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Result</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">JSON</td><td class="py-3 pr-4">APIs, JavaScript, databases, automation, application imports</td><td class="py-3">An array of row objects</td></tr>
+          <tr><td class="py-3 pr-4">Excel</td><td class="py-3 pr-4">Analysis, manual review, reporting, filters, business workflows</td><td class="py-3">An <code>.xlsx</code> workbook with a <code>Data</code> sheet</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Choose JSON when another program will consume the records, and Excel when people will inspect or manipulate the table. JSON is usually more convenient for developers; Excel is more familiar to analysts and operations teams.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to convert CSV to JSON</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Add one <code>.csv</code> file, choose JSON as the output, run the conversion, and download the generated <code>.json</code> file. The converter formats the JSON with indentation, so it is readable in a text editor and suitable for code review, and the download uses the source filename with <code>.csv</code> replaced by <code>.json</code>. The first CSV row is treated as the header, each later row becomes an object, and each header becomes a property name:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>sku,title,price,in_stock
+P-100,Desk Lamp,29.99,true
+P-101,Monitor Stand,54.00,false</code></pre>
+        <p>The output is structurally equivalent to:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>[
+  { "sku": "P-100", "title": "Desk Lamp", "price": "29.99", "in_stock": "true" },
+  { "sku": "P-101", "title": "Monitor Stand", "price": "54.00", "in_stock": "false" }
+]</code></pre>
+        <p>Notice that numbers and Boolean-like values remain strings. The converter does not enable automatic type inference &mdash; this is deliberate and predictable, so values such as <code>00123</code>, phone numbers, postal codes, and long identifiers are less likely to be silently changed. If your application requires numbers or Booleans, validate and cast the relevant fields after conversion.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to convert CSV to Excel</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>Add one CSV file, select Excel as the output, run the conversion, and save the generated <code>.xlsx</code> workbook. The converter creates a new workbook containing a worksheet named <code>Data</code>, and the output filename is based on the uploaded CSV filename with an <code>.xlsx</code> extension.</p><p>CSV does not store cell formatting, formulas, multiple worksheets, colors, charts, or column widths. A CSV-to-Excel conversion therefore creates a usable workbook from the data; it cannot restore spreadsheet features that were never present in the CSV.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How headers affect the converted file</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Headers determine the JSON property names and Excel column labels, so a clean header row is important. Prefer concise, unique headers such as <code>order_id,customer_email,order_total,currency</code>, and avoid duplicate, empty, or ambiguous headers such as <code>id,,status,status</code>.</p>
+        <p>Duplicate headers may overwrite or confuse fields when rows are represented as objects, and empty headings can produce unclear keys. Before converting, give every column a unique, stable name; if the data has no header row, add one first, because this converter treats the first row as headers rather than ordinary data. For developer-facing JSON, lowercase <code>snake_case</code> or <code>camelCase</code> names are generally easier to consume; for human-facing Excel files, readable labels may matter more.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Quoted commas, quotes, and multiline values</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A reliable CSV parser does more than split every line at each comma. Valid CSV can contain commas, quotation marks, and even line breaks inside quoted fields:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>name,company,notes
+Mina,"North, West &amp; Co.","Requested a callback
+after 3 PM"</code></pre>
+        <p>The comma in the company name and the line break in the notes belong to their fields. The converter uses a CSV parser that understands quoted fields, and quotes embedded inside a quoted field normally need to be doubled:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>product,description
+Notebook,"The cover says ""Ideas"" in gold."</code></pre>
+        <p>If quotes are unmatched or rows use inconsistent syntax, parsing can fail. Fix the source file instead of manually splitting it, because a visual line in a text editor does not always equal one CSV record.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Empty rows, blank cells, and data types</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Empty rows and blank cells.</strong> Completely empty lines are skipped during parsing. A blank cell within a populated row is different: it still represents a field and is normally retained as an empty value. Do not use a blank cell to mean several different things &mdash; decide whether blank means "unknown," "not applicable," or "not supplied," then normalize it after conversion if your destination requires <code>null</code> or another explicit marker. Rows containing stray delimiters or whitespace may not count as truly empty.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Data types.</strong> No automatic type inference is applied. CSV has no universal type metadata: every field is textual at the file level, so a value like <code>03/04/05</code> could be a date in several formats, a code, or plain text, and <code>00042</code> may be an identifier whose leading zeros are significant. Keeping values as strings avoids destructive guesses; after conversion, use a schema or explicit rules to cast only known fields. Opening the Excel output can introduce a second layer of interpretation, because spreadsheet software may automatically display some text as dates, scientific notation, or numbers &mdash; always spot-check sensitive identifiers and long numeric-looking values.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Delimiters, encoding, and regional CSV differences</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Not every file called "CSV" uses the same dialect &mdash; common variations include semicolon-separated exports, tab-separated content, different quote characters, and regional decimal conventions. The parser can recognize common CSV structures, but this interface does not provide manual delimiter or encoding controls.</p>
+        <p>The browser reads the uploaded file as text, and UTF-8 files are the safest choice. Files saved in older encodings can produce replacement characters or garbled names, especially for accented letters and non-Latin scripts. If text looks wrong, open the source in an editor or spreadsheet that knows its encoding, save or export it as UTF-8 CSV, confirm the delimiter and quote settings, and convert the cleaned file again. A UTF-8 byte-order mark may also appear in some exports; resaving as clean UTF-8 can help if the first header contains unexpected invisible characters.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common reasons a conversion fails</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Unclosed quotation marks</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A quoted value starts but does not close, causing later rows to be interpreted as part of the same field. Correct the quote escaping in the source.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Inconsistent column counts</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Some rows have more or fewer fields than the header. Look for unquoted commas, missing delimiters, or accidental trailing separators.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Duplicate or missing headers</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Object-based output needs dependable field names. Rename headers so each one is non-empty and unique.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The file is not actually CSV</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Renaming an Excel workbook to <code>.csv</code> does not convert it. Export the workbook as CSV first, or use the appropriate spreadsheet converter.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Unsupported text encoding</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Mojibake and replacement symbols usually indicate an encoding mismatch. Re-export the file as UTF-8.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The library did not load</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Conversion relies on browser-loaded parsing libraries. A strict firewall, content blocker, or interrupted connection can prevent those resources from loading. Allow the required scripts or retry in a standard browser session. The tool reports the first parser error it encounters; after fixing it, rerun in case another malformed row appears next.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">CSV security: spreadsheet formula injection</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>Treat CSV data from unknown sources as untrusted. Cells beginning with characters such as <code>=</code>, <code>+</code>, <code>-</code>, or <code>@</code> can be interpreted as formulas by spreadsheet applications in some circumstances &mdash; known as CSV or spreadsheet formula injection. The converter transforms the data; it is not a security sanitizer. Before opening or distributing an Excel export, inspect formula-like values from untrusted sources, validate each column against an expected schema, neutralize values that should be plain text according to your policy, avoid enabling external content, and test the workbook in the spreadsheet software your recipients use.</p>
+        <p>Do not blindly prefix every negative number with an apostrophe. Sanitization should be schema-aware so legitimate numeric data is not corrupted.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and browser-based processing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">The conversion logic runs in your browser rather than requiring the file to be sent to a conversion API.</strong> The page still loads supporting libraries from third-party content-delivery infrastructure, so describe it as browser-based rather than a fully offline workflow.</p><p>For confidential data, follow your organization's policies, use a trusted device and browser session, and remove unnecessary personal information before conversion. Browser-based processing does not replace access control, retention rules, or a review of the downloaded file.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Best practices for dependable results</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; Keep exactly one header row, with unique, non-empty column names.</li>
+        <li>&bull; Export the source as UTF-8.</li>
+        <li>&bull; Quote fields containing commas, quotes, or line breaks correctly.</li>
+        <li>&bull; Check that all rows have the expected number of columns, and compare source and output row counts.</li>
+        <li>&bull; Preserve identifiers as strings, and validate required fields and allowed values.</li>
+        <li>&bull; Review formula-like cells before opening Excel output.</li>
+        <li>&bull; Test a representative sample in the destination application.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-3">Conversion changes representation, not meaning. A technically valid JSON file can still contain invalid email addresses, missing order IDs, or incorrect totals &mdash; data validation remains a separate step.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I convert CSV to JSON for free?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Add a CSV file, select JSON, and download the formatted array of row objects. Check the current product interface for any applicable usage limits.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the first CSV row become JSON keys?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. The converter parses the first row as headers and uses those values as object property names.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I convert CSV directly to XLSX?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Select Excel output to create an <code>.xlsx</code> workbook with one worksheet named <code>Data</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will numbers remain numbers?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Values are not automatically type-inferred during CSV parsing, so numeric-looking content is represented as text initially. This protects values such as IDs with leading zeros. Apply explicit types later when required.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Are empty CSV lines included?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Empty lines are skipped. Blank cells within a non-empty record are still meaningful fields.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does conversion preserve Excel formatting or formulas?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. CSV stores tabular text, not workbook formatting, formulas, charts, macros, or multiple sheets. The generated Excel workbook is newly created from the parsed values.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can a CSV field contain a comma?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. A field containing a comma should be enclosed in quotes. Correct CSV quoting lets the parser distinguish content commas from delimiters.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why are accented characters corrupted?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The source may use a legacy character encoding. Re-export it as UTF-8 CSV and try again.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is CSV conversion the same as validation?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Conversion restructures the data. Validation checks whether fields, types, formats, and business rules are correct.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is it safe to open every converted Excel file?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No file from an untrusted source should be assumed safe. Inspect and sanitize formula-like cells and follow your normal spreadsheet security controls.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-formatter"><h3 class="font-bold text-[#1a73e8]">JSON Formatter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Inspect or validate the converted JSON.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-convert"><h3 class="font-bold text-[#1a73e8]">JSON Convert</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Transform JSON into another supported format.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-yaml"><h3 class="font-bold text-[#1a73e8]">JSON to YAML</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert to YAML when configuration tooling requires it.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -174,6 +213,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/json-yaml.html"><h3 class="font-bold text-[#1a73e8]">JSON to YAML Converter Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert between JSON and YAML with syntax validation and formatted output.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Convert your CSV file</h2><p class="mt-3 text-sm leading-6 text-white">Add one CSV, choose JSON or Excel, and download an array of row objects or an <code>.xlsx</code> workbook with a <code>Data</code> sheet.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/csv-convert">Use CSV Converter</a></section>
+    </article>
   </main>
 </body>
 </html>
