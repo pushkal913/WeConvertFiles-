@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Hash Generator Guide - WeConvertFiles</title>
-  <meta name="description" content="Generate cryptographic hash codes (MD5, SHA-256) locally and securely in your web browser." />
+  <title>Hash Generator: MD5, SHA-1, SHA-256 and SHA-512</title>
+  <meta name="description" content="Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from text in your browser. Learn about checksums, encoding, collisions, passwords, salts, and HMAC." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/hash-generator.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Hash Generator Guide - WeConvertFiles" />
-  <meta property="og:description" content="Generate cryptographic hash codes (MD5, SHA-256) locally and securely in your web browser." />
+  <meta property="og:title" content="Generate MD5 and SHA Hashes from Text" />
+  <meta property="og:description" content="Calculate four common hexadecimal digests locally and learn how to use hashes safely for integrity — not encryption or password storage." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/hash-generator.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hash Generator Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Generate cryptographic hash codes (MD5, SHA-256) locally and securely in your web browser." />
+  <meta name="twitter:title" content="Generate MD5 and SHA Hashes from Text" />
+  <meta name="twitter:description" content="Calculate four common hexadecimal digests locally and learn how to use hashes safely for integrity — not encryption or password storage." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,121 +31,204 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <style>
+    /* Mobile overflow fix: keep the article column within the viewport so wide
+       tables and code blocks scroll inside their own container instead of
+       widening the page, and wrap long inline code tokens. */
+    main { width: 100%; }
+    main :where(p, li, td, th, dd, dt, h1, h2, h3, blockquote) code { overflow-wrap: anywhere; word-break: break-word; }
+    main pre code { overflow-wrap: normal; word-break: normal; white-space: pre; }
+  </style>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Hash Generator Guide",
-        "description": "Generate cryptographic hash codes (MD5, SHA-256) locally and securely in your web browser.",
+        "headline": "Online Hash Generator for MD5, SHA-1, SHA-256, and SHA-512",
+        "description": "Generate MD5, SHA-1, SHA-256, and SHA-512 digests from text in the browser, and understand how to use hashes safely for integrity rather than encryption or password storage.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
-        "dateModified": "2026-08-18",
+        "dateModified": "2026-08-19",
         "author": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/hash-generator.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/hash-generator.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What algorithms are supported?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We support MD5 for integrity checking, and secure SHA-1, SHA-256, and SHA-512 hashing algorithms."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I decrypt the generated hashes?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. Cryptographic hashes are one-way functions designed to be irreversible. They cannot be decrypted back into plain text."
-            }
-          }
+          { "@type": "Question", "name": "Which hash algorithms does the tool support?", "acceptedAnswer": { "@type": "Answer", "text": "It generates MD5, SHA-1, SHA-256, and SHA-512 for entered text." } },
+          { "@type": "Question", "name": "Can a hash be decrypted?", "acceptedAnswer": { "@type": "Answer", "text": "No. Hashing is designed as a one-way transformation, not reversible encryption. Predictable inputs may still be discovered by guessing and comparing digests." } },
+          { "@type": "Question", "name": "Is SHA-256 better than MD5?", "acceptedAnswer": { "@type": "Answer", "text": "For new security-sensitive integrity uses, SHA-256 has much stronger collision resistance. MD5 should be limited to legacy or non-adversarial compatibility cases." } },
+          { "@type": "Question", "name": "Can I hash a file with this tool?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current interface hashes text input, not raw uploaded file bytes. Use a file checksum utility for files." } },
+          { "@type": "Question", "name": "Does the tool add a salt?", "acceptedAnswer": { "@type": "Answer", "text": "No. It computes plain hashes of the entered text." } },
+          { "@type": "Question", "name": "Can I use the output to store passwords?", "acceptedAnswer": { "@type": "Answer", "text": "No. Use a dedicated password-hashing function such as Argon2id, scrypt, bcrypt, or PBKDF2 through a maintained security library." } },
+          { "@type": "Question", "name": "Does it generate HMAC-SHA256?", "acceptedAnswer": { "@type": "Answer", "text": "No. HMAC requires a secret key and a specific keyed construction; plain SHA-256 is not equivalent." } },
+          { "@type": "Question", "name": "Why does adding one space change the hash?", "acceptedAnswer": { "@type": "Answer", "text": "The space changes the input bytes. Hash functions are deliberately sensitive to every input difference." } },
+          { "@type": "Question", "name": "Are hexadecimal hash letters case-sensitive?", "acceptedAnswer": { "@type": "Answer", "text": "The underlying hexadecimal value is normally the same whether letters are displayed in upper- or lowercase. This tool outputs lowercase. Compare according to the surrounding protocol's format rules." } },
+          { "@type": "Question", "name": "Why are the fields empty for empty input?", "acceptedAnswer": { "@type": "Answer", "text": "The current interface clears all result fields when no text is entered rather than showing the standard hashes of an empty byte string." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Online Hash Generator for MD5, SHA-1, SHA-256, and SHA-512</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Live client-side hashing</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">A hash function turns input data into a fixed-length digest: the same exact input always produces the same output, while even a small change normally produces a very different result. The <strong class="text-slate-900 dark:text-slate-200">Hash Generator</strong> calculates MD5, SHA-1, SHA-256, and SHA-512 for text as you type. Each result appears as a lowercase hexadecimal string with its own copy button, computed in the browser through the CryptoJS library. Use it for the right purpose: a plain fast hash is not encryption, does not authenticate a message, and is not a safe way to store passwords.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/hash-generator">Generate text hashes<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Cryptographic Hash Generator</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Hash Generator computes MD5, SHA-1, SHA-256, and SHA-512 cryptographic digests. When you type or paste inputs, the CryptoJS framework evaluates the character byte structures in browser memory and prints the resulting hash strings side-by-side. Hash computation runs locally, so input contents are not sent to WeConvertFiles for processing.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/hash-generator">
-        Open Hash Generator
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Type or paste text into the input field. The tool immediately calculates four digests &mdash; MD5, SHA-1, SHA-256, and SHA-512 &mdash; and you copy the value you need. To reproduce a digest elsewhere, use the same algorithm, character encoding, exact whitespace, capitalization, and line endings. If you are matching an existing checksum, select the algorithm specified by its publisher or protocol.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Provide Payload</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Type or paste raw string parameters inside the main text workspace field.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Hash Computation</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The javascript event loop hashes your inputs dynamically using standard CryptoJS algorithms.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Copy Digests</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Copy next to any computed hash (MD5, SHA-256, etc.) to use it instantly.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What is a cryptographic hash function?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Determinism:</strong> identical input produces an identical digest.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Avalanche behavior:</strong> a small input change substantially changes the output.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Preimage resistance:</strong> finding an input for a chosen digest should be computationally difficult for a secure algorithm.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Second-preimage resistance:</strong> given one input, finding another with the same digest should be difficult.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Collision resistance:</strong> finding any two different inputs with the same digest should be difficult.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">The last properties depend on the algorithm. MD5 and SHA-1 have known collision weaknesses and should not be treated as collision-resistant for security-sensitive uses.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What algorithms are supported?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">We support MD5 for integrity checking, and secure SHA-1, SHA-256, and SHA-512 hashing algorithms.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I decrypt the generated hashes?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. Cryptographic hashes are one-way functions designed to be irreversible. They cannot be decrypted back into plain text.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to use the Hash Generator</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Open the Hash Generator.</strong></li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Type or paste</strong> the exact text to hash.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Review</strong> the MD5, SHA-1, SHA-256, and SHA-512 fields, which update live.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Copy</strong> the digest for the algorithm your workflow requires.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Compare</strong> it character-for-character with the expected value.</li>
+      </ol>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">The current interface hashes text, not uploaded file bytes. It does not offer a salt, secret key, HMAC mode, verification button, uppercase output, or downloadable results. Empty input clears the output fields rather than displaying the well-known digest of an empty string.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Supported hashing algorithms</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Algorithm</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Digest size</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Hex length</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Recommended role</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">MD5</td><td class="py-3 pr-4">128 bits</td><td class="py-3 pr-4">32 characters</td><td class="py-3">Legacy, non-adversarial compatibility checks only</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">SHA-1</td><td class="py-3 pr-4">160 bits</td><td class="py-3 pr-4">40 characters</td><td class="py-3">Legacy compatibility only; avoid for collision security</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">SHA-256</td><td class="py-3 pr-4">256 bits</td><td class="py-3 pr-4">64 characters</td><td class="py-3">Modern general-purpose integrity and fingerprinting</td></tr>
+          <tr><td class="py-3 pr-4">SHA-512</td><td class="py-3 pr-4">512 bits</td><td class="py-3 pr-4">128 characters</td><td class="py-3">Modern integrity where SHA-512 is required</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Digest length alone does not describe every security or performance property. Use the algorithm required by the protocol, and prefer a modern approved option when designing a new system.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When is MD5 or SHA-1 appropriate?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">MD5</strong> produces a compact 128-bit digest and remains common in old checksum files, cache identifiers, and compatibility workflows. However, practical collision attacks exist: an attacker can create different inputs that share an MD5 digest, so MD5 is unsuitable for digital signatures, certificates, adversarial file integrity, or any decision that depends on collision resistance. It can still help when an established non-security protocol requires it, when checking for accidental corruption in a trusted environment, or when a legacy tool publishes only an MD5 checksum.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">SHA-1</strong> produces a 160-bit digest but also has demonstrated collision weaknesses. It should not be selected for new signatures, certificates, or hostile-content integrity checks. Some version-control and legacy systems still expose SHA-1 identifiers. When matching an existing SHA-1 value, confirm whether the system hashes raw content or a larger structured representation &mdash; some tools include metadata, lengths, or object type information before hashing, so hashing only the visible text can produce a different value.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">SHA-256 and SHA-512: the modern defaults</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">SHA-256</strong> is part of the SHA-2 family and produces a 256-bit digest. It is widely used for file checksums, content fingerprints, signed-data systems, and integrity workflows. For ordinary text hashing where no external standard dictates otherwise, SHA-256 is generally the most practical of the four outputs. That does not make a plain SHA-256 digest suitable for every security problem: it cannot prove who created a message because anyone can calculate it.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">SHA-512</strong> is also part of SHA-2 and produces a 512-bit digest whose hexadecimal form is 128 characters long. Use it when a protocol requires SHA-512 or when your system has deliberately standardized on it. SHA-512 is not automatically "twice as secure" as SHA-256 for every application, and its longer output can be unnecessary for basic fingerprints. Algorithm selection should follow the protocol and threat model rather than the visual length of the digest.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why tiny input changes create different hashes</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>These inputs are different byte sequences:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>hello
+Hello
+hello </code></pre>
+        <p>Capitalization and the trailing space matter; adding a newline also changes the digest. Hash functions do not understand that two strings may look semantically equivalent to a person &mdash; they process encoded bytes. Before comparing hashes, confirm leading and trailing whitespace, spaces versus tabs, uppercase versus lowercase, line-ending convention, Unicode normalization, character encoding, and whether a final newline is present. The tool passes text to CryptoJS, which encodes ordinary JavaScript strings as UTF-8; a tool using a different byte encoding will not necessarily produce the same digest.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Hashing Unicode text</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A visible character is not always represented by one unique sequence of code points. An accented character can be written as one precomposed code point or as a base letter followed by a combining mark; the two versions look identical while producing different UTF-8 bytes and different hashes. Emoji can also consist of multiple code points joined into one displayed symbol, and copying text through different applications may normalize or modify it.</p>
+        <p>If cross-system reproducibility matters, define a canonical process: normalize Unicode to a specified form such as NFC, encode text as UTF-8, define newline behavior, decide whether to trim whitespace, and hash the resulting bytes. This tool hashes the entered text as provided; it does not expose a Unicode normalization selector.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Hash vs. encryption vs. encoding</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Operation</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Reversible?</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Main purpose</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Examples</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Hashing</td><td class="py-3 pr-4">Designed to be one-way</td><td class="py-3 pr-4">Fingerprinting and integrity</td><td class="py-3">SHA-256, SHA-512</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Encryption</td><td class="py-3 pr-4">Reversible with a key</td><td class="py-3 pr-4">Confidentiality</td><td class="py-3">AES, authenticated encryption</td></tr>
+          <tr><td class="py-3 pr-4">Encoding</td><td class="py-3 pr-4">Freely reversible</td><td class="py-3 pr-4">Representation and transport</td><td class="py-3">Base64, URL encoding</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">A hash cannot be decrypted because it is not encrypted data. Many inputs map into the same fixed-size output space, so the original content is not stored in the digest. Attackers can still guess inputs and compare their hashes, especially when inputs come from a small or predictable set.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why plain hashes are unsafe for passwords</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>MD5, SHA-1, SHA-256, and SHA-512 are designed to be fast. Speed is useful for file integrity but dangerous for password storage because an attacker can test enormous numbers of guesses. Secure password storage requires a dedicated, configurable password-hashing function such as Argon2id, scrypt, bcrypt, or PBKDF2, selected and configured according to current platform guidance, and each password needs a unique random salt.</p>
+        <p>A salt is a unique random value combined with a password before a password-hashing function runs. It prevents identical passwords from producing identical stored results and makes precomputed lookup attacks less effective. Adding a manually typed salt to a fast SHA-256 input does not turn it into a robust password-storage scheme &mdash; proper password hashing also uses controlled computational cost and, depending on the function, memory hardness. <strong>Do not use this generator to create database password hashes.</strong> It offers only unsalted, single-pass digests for text fingerprints and compatibility checks.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Hash vs. HMAC and signatures</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A plain digest can show that two inputs match, but anyone can generate a new digest after altering the data. An HMAC combines a cryptographic hash with a secret key, allowing parties that share the key to detect unauthorized changes. <strong class="text-slate-900 dark:text-slate-200">This tool does not generate HMAC values.</strong> If a webhook provider asks for <code>HMAC-SHA256</code>, a plain SHA-256 output is not equivalent; follow the provider's exact rules for the secret key, payload bytes, header format, character encoding, and timing-safe comparison.</p>
+        <p>Digital signatures provide another form of authenticity using asymmetric keys. Neither HMAC nor signatures should be substituted with an unkeyed hash.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to verify a checksum</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Identify the exact algorithm.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Obtain the expected digest from a trusted channel.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Reproduce the precise original text bytes.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Generate the corresponding digest.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Compare every hexadecimal character.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Treat any mismatch as a failed check until explained.</li>
+      </ol>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">This page generates text hashes only. For a downloaded application or archive, use a trusted file-hashing tool that reads the raw file bytes &mdash; pasting a filename, file path, Base64 representation, or visible file contents is not the same as hashing the file itself. Remember too that a checksum delivered from the same compromised location as a malicious file may be replaced along with it; authenticated release metadata or digital signatures provide stronger provenance.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common reasons two hashes do not match</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Different algorithms</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">An MD5 value cannot match a SHA-256 value. Digest length is often a clue, but use explicit metadata rather than guessing.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Invisible whitespace</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A trailing space or newline changes the input. Text copied from a terminal or document may include invisible characters.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Different line endings</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Windows often uses carriage return plus line feed, while Unix-like systems commonly use line feed. Textarea handling and copy/paste can normalize them.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Different character encodings</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">UTF-8, UTF-16, and legacy encodings produce different byte sequences for the same visible characters.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Different Unicode normalization</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Visually identical text may contain different code points. Normalize it consistently before hashing when required.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">One tool hashes a file and another hashes displayed text</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">File bytes can contain metadata, byte-order marks, binary data, or newline conventions not represented by pasted text.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The expected value includes a prefix or formatting</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Remove labels such as <code>sha256:</code> only if the protocol defines them as metadata rather than part of the digest. Hexadecimal comparison itself is typically case-insensitive, though surrounding formats may not be.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and client-side hashing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">The input is hashed in the browser rather than submitted to a dedicated hashing endpoint.</strong> The CryptoJS library is loaded on demand from third-party content delivery infrastructure, and computation occurs in page memory.</p>
+        <p>Avoid pasting passwords, private keys, recovery phrases, bearer tokens, or production secrets. Local computation reduces one form of exposure but does not protect against a compromised device, browser extension, clipboard history, screen recording, or analytics and policies outside the hashing function. Use non-sensitive samples whenever possible.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Best practices for reliable hash use</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; Specify the algorithm explicitly, and define the exact bytes and character encoding.</li>
+        <li>&bull; Normalize Unicode and line endings when the protocol requires it; do not trim whitespace unless both sides agree.</li>
+        <li>&bull; Prefer SHA-256 or an approved modern algorithm for new integrity uses, and avoid MD5 and SHA-1 for adversarial collision resistance.</li>
+        <li>&bull; Use HMAC or signatures when authenticity matters, and a dedicated password-hashing function for passwords.</li>
+        <li>&bull; Obtain expected checksums from a trustworthy source, and compare the full digest, not only a short prefix.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which hash algorithms does the tool support?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It generates MD5, SHA-1, SHA-256, and SHA-512 for entered text.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can a hash be decrypted?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Hashing is designed as a one-way transformation, not reversible encryption. Predictable inputs may still be discovered by guessing and comparing digests.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is SHA-256 better than MD5?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">For new security-sensitive integrity uses, SHA-256 has much stronger collision resistance. MD5 should be limited to legacy or non-adversarial compatibility cases.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I hash a file with this tool?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current interface hashes text input, not raw uploaded file bytes. Use a file checksum utility for files.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool add a salt?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It computes plain hashes of the entered text.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I use the output to store passwords?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Use a dedicated password-hashing function such as Argon2id, scrypt, bcrypt, or PBKDF2 through a maintained security library.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it generate HMAC-SHA256?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. HMAC requires a secret key and a specific keyed construction; plain SHA-256 is not equivalent.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why does adding one space change the hash?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The space changes the input bytes. Hash functions are deliberately sensitive to every input difference.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Are hexadecimal hash letters case-sensitive?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The underlying hexadecimal value is normally the same whether letters are displayed in upper- or lowercase. This tool outputs lowercase. Compare according to the surrounding protocol's format rules.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why are the fields empty for empty input?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The current interface clears all result fields when no text is entered rather than showing the standard hashes of an empty byte string.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/diff-checker"><h3 class="font-bold text-[#1a73e8]">Diff Checker</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Locate textual differences before comparing hashes.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/url-base64"><h3 class="font-bold text-[#1a73e8]">Base64 Converter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Use reversible representation when hashing is not what you need.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/password-generator"><h3 class="font-bold text-[#1a73e8]">Password Generator</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Create random secrets, then store passwords with a dedicated library.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -155,6 +237,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/json-formatter.html"><h3 class="font-bold text-[#1a73e8]">JSON Formatter / Validator Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Format, validate, beautify, and minify raw JSON string data dynamically.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Generate a text hash</h2><p class="mt-3 text-sm leading-6 text-white">Enter text to see MD5, SHA-1, SHA-256, and SHA-512 digests update live, then copy the value you need.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/hash-generator">Use Hash Generator</a></section>
+    </article>
   </main>
 </body>
 </html>
