@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>JSON Formatter & Validator Guide - WeConvertFiles</title>
-  <meta name="description" content="Format, beautify, validate, and minify your JSON data locally and securely in your browser." />
+  <title>JSON Formatter and Validator: Beautify or Minify JSON</title>
+  <meta name="description" content="Validate, format, beautify, or minify JSON in your browser. Learn strict JSON syntax, indentation, parser errors, duplicate keys, and number precision." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/json-formatter.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="JSON Formatter & Validator Guide - WeConvertFiles" />
-  <meta property="og:description" content="Format, beautify, validate, and minify your JSON data locally and securely in your browser." />
+  <meta property="og:title" content="Format, Validate, and Minify JSON" />
+  <meta property="og:description" content="Turn compact JSON into readable indented output, validate its syntax, or minify it for storage and transfer." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/json-formatter.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="JSON Formatter & Validator Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Format, beautify, validate, and minify your JSON data locally and securely in your browser." />
+  <meta name="twitter:title" content="Format, Validate, and Minify JSON" />
+  <meta name="twitter:description" content="Turn compact JSON into readable indented output, validate its syntax, or minify it for storage and transfer." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "JSON Formatter & Validator Guide",
-        "description": "Format, beautify, validate, and minify your JSON data locally and securely in your browser.",
+        "headline": "Format, Validate, and Minify JSON",
+        "description": "A practical guide to validating strict JSON syntax and transforming it into readable or compact output with the browser's native parser.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,105 +46,230 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/json-formatter.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/json-formatter.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How does local JSON formatting guarantee safety?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Unlike online services that upload your payload to dynamic servers, WeConvertFiles formats and validates text entirely client-side using JavaScript. No confidential APIs or configs leave your browser."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What happens if validation fails?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The parser catches standard syntax exceptions and prints an error window specifying the character index or syntax error type, allowing you to debug and correct it quickly."
-            }
-          }
+          { "@type": "Question", "name": "What is the difference between formatting and validating JSON?", "acceptedAnswer": { "@type": "Answer", "text": "Validation checks whether the text follows JSON syntax. Formatting parses valid JSON and serializes it with readable indentation. In this tool, successful validation also produces formatted output." } },
+          { "@type": "Question", "name": "Can the tool minify JSON?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It removes unnecessary formatting whitespace by parsing and reserializing without indentation." } },
+          { "@type": "Question", "name": "Does formatting change JSON values?", "acceptedAnswer": { "@type": "Answer", "text": "Whitespace outside strings changes. Parsed values are intended to remain equivalent, but unsafe large numbers can lose precision and duplicate keys can collapse." } },
+          { "@type": "Question", "name": "Does the tool validate JSON Schema?", "acceptedAnswer": { "@type": "Answer", "text": "No. It validates syntax only." } },
+          { "@type": "Question", "name": "Are comments allowed in JSON?", "acceptedAnswer": { "@type": "Answer", "text": "No. Standard JSON does not include line or block comments." } },
+          { "@type": "Question", "name": "Can JSON use single quotes?", "acceptedAnswer": { "@type": "Answer", "text": "No. Property names and string values must use double quotes." } },
+          { "@type": "Question", "name": "Why did a large number change?", "acceptedAnswer": { "@type": "Answer", "text": "The browser parses JSON numbers into JavaScript numbers, which cannot exactly represent every large integer. Use a string representation when the schema permits and exact digits matter." } },
+          { "@type": "Question", "name": "What happens to duplicate keys?", "acceptedAnswer": { "@type": "Answer", "text": "When parsed into a standard JavaScript object, later values normally replace earlier values with the same key." } },
+          { "@type": "Question", "name": "Does the formatter execute my JSON?", "acceptedAnswer": { "@type": "Answer", "text": "No. It uses JSON.parse() rather than eval()." } },
+          { "@type": "Question", "name": "Is the JSON uploaded for formatting?", "acceptedAnswer": { "@type": "Answer", "text": "No. The content is parsed and serialized in browser memory and is not sent to WeConvertFiles for formatting." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Format, Validate, and Minify JSON</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Native JSON Parser</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">JSON is easy for software to exchange and hard for a person to read as one long line. The <strong class="text-slate-900 dark:text-slate-200">JSON Formatter / Validator</strong> parses input with the browser's native <code>JSON.parse()</code>. Valid JSON can be beautified with a chosen indentation or minified without unnecessary whitespace; invalid input produces a parser error and no output. Formatting reveals structure and validation confirms syntax &mdash; but neither proves the data holds correct values or matches an API's schema.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/json-formatter">Open JSON Formatter<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">JSON Formatter & Validator</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">JSON Formatter & Validator parses raw JSON input to identify syntax errors, nesting anomalies, and structural defects. It formats minified strings using customizable indentation spaces (2, 3, or 4 spaces) or minifies raw JSON to reduce byte payload. The entire parsing process executes locally in sandboxed javascript memory, protecting user data from external storage leaks.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/json-formatter">
-        Open JSON Formatter
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Paste strict JSON, choose an indentation for readable output, or select Minify for compact output. The tool parses and reserializes the value, so take special care with unsafe large integers and duplicate object keys.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Input JSON</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Paste your raw JSON text block or string directly inside the input area.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Validate & Format</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select indentation spaces and run validation checks. The engine highlights syntax errors instantly.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Copy / Use</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Copy the clean, beautified, formatted JSON to your clipboard with one click.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What the JSON tool can do</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Validate JSON syntax</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The tool parses the complete input as one JSON value. If parsing succeeds, the syntax is valid according to the browser's JSON implementation.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Format or beautify</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Formatting adds line breaks and indentation so nested objects and arrays are easier to read.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Choose indentation</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Pretty output can use 2, 3, 4, or 8 spaces per nesting level, with 2 spaces as the default.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Minify JSON</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Minification removes formatting whitespace outside string values and produces a compact representation.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm md:col-span-2"><h3 class="font-bold text-slate-900 dark:text-slate-200">Copy transformed output</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Valid formatted or minified text can be copied for use in an editor, request body, configuration file, or debugging workflow.</p></div>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How does local JSON formatting guarantee safety?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Unlike online services that upload your payload to dynamic servers, WeConvertFiles formats and validates text entirely client-side using JavaScript. No confidential APIs or configs leave your browser.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What happens if validation fails?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The parser catches standard syntax exceptions and prints an error window specifying the character index or syntax error type, allowing you to debug and correct it quickly.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What the tool does not do</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; It does not validate against JSON Schema.</li>
+        <li>&bull; It does not verify API-specific business rules.</li>
+        <li>&bull; It does not execute JavaScript or evaluate expressions and functions.</li>
+        <li>&bull; It does not repair every invalid document automatically.</li>
+        <li>&bull; It does not convert YAML, XML, CSV, or JavaScript objects into JSON.</li>
+        <li>&bull; It does not preserve comments, because standard JSON has no comment syntax.</li>
+        <li>&bull; It does not guarantee preservation of unsafe large numeric values.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">JSON values supported by the standard</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Type</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Valid example</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Notes</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Object</td><td class="py-3 pr-4"><code>{"name":"Mina"}</code></td><td class="py-3">Property names must use double quotes</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Array</td><td class="py-3 pr-4"><code>[1,2,3]</code></td><td class="py-3">Values can have different JSON types</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">String</td><td class="py-3 pr-4"><code>"hello"</code></td><td class="py-3">Uses double quotes and valid escape sequences</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Number</td><td class="py-3 pr-4"><code>42.5</code></td><td class="py-3">No NaN, Infinity, or hexadecimal notation</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Boolean</td><td class="py-3 pr-4"><code>true</code></td><td class="py-3">Lowercase true or false</td></tr>
+          <tr><td class="py-3 pr-4">Null</td><td class="py-3 pr-4"><code>null</code></td><td class="py-3">Lowercase null</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Although APIs often use an object or array at the top level, a standalone JSON string, number, boolean, or null value is also valid JSON.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">JSON compared with a JavaScript object literal</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>JSON resembles JavaScript syntax but is more restrictive. This is valid JavaScript but <strong class="text-slate-900 dark:text-slate-200">invalid JSON</strong>:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>{
+  name: 'Mina',
+  active: true,
+  joined: new Date(),
+}</code></pre>
+        <p>The property name is not quoted, the string uses single quotes, <code>new Date()</code> is a JavaScript expression, and the final property has a trailing comma. Valid JSON would be:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>{
+  "name": "Mina",
+  "active": true,
+  "joined": "2026-08-19T00:00:00.000Z"
+}</code></pre>
+        <p>JSON carries data, not executable code or language-specific object instances.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to format JSON</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Paste the complete JSON value.</strong> Copy only the JSON. Remove HTTP headers, log prefixes, Markdown code fences, explanatory text, and terminal prompts surrounding it.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Choose the indentation.</strong> Pick 2, 3, 4, or 8 spaces. Two spaces are a compact style common in web projects; wider settings give stronger visual separation but longer whitespace runs. The choice does not change the represented data.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Select Format or Validate.</strong> The implementation uses the same parsing-and-formatting process for both: successful parsing produces pretty JSON, and failed parsing displays an error.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Review the structure.</strong> Formatting makes it easier to spot incorrect nesting, unexpected arrays or objects, missing fields, values with the wrong apparent type, empty arrays and objects, and deeply nested data.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Copy the output.</strong> Use the transformed JSON in the appropriate destination. Do not paste real credentials, private keys, or production secrets into tickets, chat, examples, or public repositories.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to minify JSON</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Minification still requires parsing, so invalid input cannot be minified. Select Minify, and the tool parses the input and serializes it without indentation. Formatted input:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>{
+  "name": "Mina",
+  "roles": [
+    "editor",
+    "reviewer"
+  ]
+}</code></pre>
+        <p>Minified output:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>{"name":"Mina","roles":["editor","reviewer"]}</code></pre>
+        <p>Minification reduces plain-text size by removing indentation and line breaks. Network compression such as gzip or Brotli already compresses repeated whitespace efficiently, so the transmitted-size benefit may be smaller than the raw character difference suggests. Keep a readable source version for maintenance and generate compact output during a build or delivery step when possible.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the formatter works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Trim leading and trailing whitespace from the input.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Parse the complete string with <code>JSON.parse()</code>.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> For formatted output, call <code>JSON.stringify()</code> with the selected number of spaces (2, 3, 4, or 8).</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> For minified output, call <code>JSON.stringify()</code> without indentation.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Display a success message and transformed output.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> If parsing throws an error, clear the output and show the parser message.</li>
+        </ol>
+        <p>The tool does not use <code>eval()</code> and does not execute pasted JSON as code.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Strict JSON syntax rules</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Property names require double quotes.</strong> <code>{"status":"ready"}</code> is valid; <code>{status:"ready"}</code> is not.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Strings require double quotes.</strong> <code>{"status":"ready"}</code> is valid; <code>{"status":'ready'}</code> is not.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Trailing commas are not allowed.</strong> <code>{"a":1,"b":2,}</code> is invalid.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Comments are not allowed.</strong> Neither line comments nor block comments belong to standard JSON.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Values use lowercase keywords.</strong> Use <code>true</code>, <code>false</code>, and <code>null</code>, not True, False, NULL, undefined, or None.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Numbers follow JSON notation.</strong> JSON does not support NaN, Infinity, 0xFF, numeric separators, or a leading plus sign.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Control characters must be escaped.</strong> Line breaks and tabs inside string values must use escapes such as <code>\n</code> and <code>\t</code>.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common JSON errors</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Unexpected token</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The parser hit a character that cannot appear at the current position. Check for single quotes, comments, unquoted keys, stray letters, or a trailing comma.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Expected property name</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">An object key may be missing double quotes, or a comma may be followed by a closing brace.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Unexpected end of JSON input</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The data may be incomplete or missing a closing quote, bracket, or brace.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Bad escaped character</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A backslash inside a JSON string must introduce a valid escape such as <code>\"</code>, <code>\\</code>, <code>\/</code>, <code>\b</code>, <code>\f</code>, <code>\n</code>, <code>\r</code>, <code>\t</code>, or <code>\u</code> followed by four hexadecimal digits.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Extra content after the JSON value</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The input must contain one complete JSON value. Two objects next to each other, or a log message after the closing brace, is invalid.</p></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400">Parser wording and position details can differ across browsers because the native JavaScript engine produces the error message.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Important issue: large integer precision</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>JavaScript numbers use IEEE 754 double-precision floating point. Integers are exactly represented only through <code>Number.MAX_SAFE_INTEGER</code> (<code>9007199254740991</code>). Larger integer literals can lose precision when <code>JSON.parse()</code> converts them into JavaScript numbers, and reserializing with <code>JSON.stringify()</code> may then output changed digits.</p>
+        <p>Risky JSON: <code>{"accountId":9223372036854775807}</code>. Safer when exact digits are required: <code>{"accountId":"9223372036854775807"}</code>. Quoting an identifier changes its JSON type from number to string, so the producer and consumer must agree on that representation. For financial decimals and arbitrary-precision data, follow the application's schema rather than assuming binary floating point is suitable.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Important issue: duplicate object keys</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>JSON syntax does not give duplicate property names a reliably portable meaning. When <code>{"status":"draft","status":"published"}</code> is parsed into a JavaScript object, the later value normally replaces the earlier one, so formatting or minifying can produce <code>{"status":"published"}</code>.</p>
+        <p>Different tools and languages may reject duplicates, keep the first value, keep the last value, or expose all occurrences. Resolve duplicate keys before relying on the document. This formatter is not a duplicate-key linter, because it parses into a standard JavaScript value before serializing.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Whitespace inside strings is preserved</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Formatting and minification remove or add whitespace between JSON tokens. They do not intentionally remove spaces that belong to a quoted string value. These values are different: <code>{"message":"hello world"}</code> and <code>{"message":"helloworld"}</code>.</p>
+        <p>Minification preserves the space in <code>"hello world"</code> because it is data rather than formatting. Escape sequences may be serialized consistently by the browser, so the textual representation can change while the parsed string value remains equivalent.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Formatting does not validate meaning</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>This JSON is syntactically valid, yet an application may reject it because <code>email</code> should be a string, <code>quantity</code> must be positive, or <code>currency</code> must use an approved code:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>{
+  "email": 42,
+  "quantity": -1000,
+  "currency": "UNKNOWN"
+}</code></pre>
+        <p>Syntax validation answers "can this text be parsed as JSON?" Schema or business validation answers "does this parsed value have the fields, types, formats, ranges, and relationships this application requires?" Use JSON Schema, API documentation, typed validation, or application-specific checks for the second question.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Security and sensitive JSON</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>JSON frequently contains API keys, authentication tokens, session identifiers, passwords, personal information, customer records, private URLs, and internal infrastructure details. Remove or replace sensitive values before using them in examples, issue reports, screenshots, logs, chat, or public code.</p><p>The formatter does not execute JSON, but a valid JSON document can still contain dangerous or sensitive data that becomes harmful when passed into another application. Do not assume that formatting untrusted JSON makes it safe for HTML rendering, database queries, shell commands, template engines, object merging, or authorization logic.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">JSON content is parsed and serialized in browser memory and is not sent to WeConvertFiles for formatting.</strong> The tool uses native browser JSON functions and does not require a remote formatting API.</p><p>If a visitor consents to site analytics, separate usage information such as visits, clicks, device details, or formatting events may be collected. Those analytics do not receive the pasted JSON content.</p><p>The local environment still matters. Browser extensions, malware, clipboard managers, screen recording, shared devices, and copied examples can expose sensitive values independently of the formatter.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Syntax validation only:</strong> no JSON Schema or API-specific validation.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Parsing and reserialization:</strong> unsafe integers and duplicate keys can change.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No comment preservation:</strong> comments are invalid standard JSON.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No automatic repair:</strong> the tool reports errors but does not infer every intended correction.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No streaming mode:</strong> very large documents must fit in browser memory as parsed values and output text.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No conversion:</strong> use a dedicated converter for JSON-to-YAML, CSV, XML, or other formats.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">No source formatting preservation:</strong> original spacing and line-break choices are replaced by the selected output style.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Valid-looking JSON is rejected</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Look for single quotes, unquoted property names, comments, trailing commas, smart quotation marks, control characters, or text surrounding the JSON value.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The error position is hard to find</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Use the browser's reported character position as a starting point. Format a smaller portion or remove sections until the error is isolated.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A large ID changed after formatting</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It exceeded JavaScript's safe integer range. When the schema permits, represent exact identifiers as strings before parsing.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">One duplicate property disappeared</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The later value replaced the earlier one during parsing. Remove duplicate object keys in the source.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Comments disappeared or caused an error</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Standard JSON does not support comments. Store documentation separately or use a format designed to permit comments when the destination supports it.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The output is blank</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The input may be empty or invalid. Review the error message and confirm that the entire pasted text is one JSON value.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Copy does not work</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Browser clipboard permissions may block the action. Select the output manually and copy it.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The browser becomes slow</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Large inputs create the source string, parsed value, and output text in memory. Use a streaming or command-line processor for very large datasets.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What is the difference between formatting and validating JSON?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Validation checks whether the text follows JSON syntax. Formatting parses valid JSON and serializes it with readable indentation. In this tool, successful validation also produces formatted output.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can the tool minify JSON?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. It removes unnecessary formatting whitespace by parsing and reserializing without indentation.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does formatting change JSON values?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Whitespace outside strings changes. Parsed values are intended to remain equivalent, but unsafe large numbers can lose precision and duplicate keys can collapse.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool validate JSON Schema?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It validates syntax only.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Are comments allowed in JSON?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Standard JSON does not include line or block comments.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can JSON use single quotes?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Property names and string values must use double quotes.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why did a large number change?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The browser parses JSON numbers into JavaScript numbers, which cannot exactly represent every large integer. Use a string representation when the schema permits and exact digits matter.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What happens to duplicate keys?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">When parsed into a standard JavaScript object, later values normally replace earlier values with the same key.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the formatter execute my JSON?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It uses <code>JSON.parse()</code> rather than <code>eval()</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is the JSON uploaded for formatting?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The content is parsed and serialized in browser memory and is not sent to WeConvertFiles for formatting.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-yaml"><h3 class="font-bold text-[#1a73e8]">JSON to YAML</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert between JSON and YAML rather than only formatting JSON.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/code-minifier"><h3 class="font-bold text-[#1a73e8]">Code Minifier</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Minify HTML, CSS, or JavaScript rather than structured JSON data.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/diff-checker"><h3 class="font-bold text-[#1a73e8]">Diff Checker</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Compare two formatted JSON versions as text.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -155,6 +278,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/diff-checker.html"><h3 class="font-bold text-[#1a73e8]">Code Diff Checker Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Compare two text or code snippets side-by-side with inline differences highlighted.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Format or validate your JSON</h2><p class="mt-3 text-sm leading-6 text-white">Paste strict JSON, beautify it with your chosen indentation or minify it, and watch for unsafe integers and duplicate keys.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/json-formatter">Use JSON Formatter</a></section>
+    </article>
   </main>
 </body>
 </html>
