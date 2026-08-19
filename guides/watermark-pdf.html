@@ -4,22 +4,21 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Watermark PDF Guide - Free Browser Tool</title>
-  <meta name="description" content="Add text watermarks to your PDF pages." />
+  <title>Add a Text Watermark to PDF Pages Online</title>
+  <meta name="description" content="Add a diagonal text watermark to every PDF page. Choose the text, color, and opacity, then learn about placement, limitations, and privacy." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/watermark-pdf.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Watermark PDF Guide - Free Browser Tool" />
-  <meta property="og:description" content="Add text watermarks to your PDF pages." />
+  <meta property="og:title" content="How to Add a Text Watermark to Every PDF Page" />
+  <meta property="og:description" content="Mark PDF pages as DRAFT, CONFIDENTIAL, COPY, or another status using a customizable text color and opacity." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/watermark-pdf.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Watermark PDF Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Add text watermarks to your PDF pages." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="How to Add a Text Watermark to Every PDF Page" />
+  <meta name="twitter:description" content="Mark PDF pages as DRAFT, CONFIDENTIAL, COPY, or another status using a customizable text color and opacity." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Watermark PDF Guide - Free Browser Tool",
-        "description": "Add text watermarks to your PDF pages.",
+        "headline": "Add a Text Watermark to Every PDF Page",
+        "description": "A practical guide to adding a diagonal text watermark to PDF pages, choosing readable colors and opacity, and understanding what a watermark cannot protect.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,124 +46,189 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/watermark-pdf.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/watermark-pdf.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Can I customize the opacity of the watermark text?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, you can choose transparency levels to ensure the text remains legible beneath the watermark."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is the watermark text editable after downloading?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No, the text is drawn as a flat vector element inside the page stream, making it difficult to remove."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I select a custom font?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The tool uses standard, high-compatibility PDF fonts to guarantee the output displays correctly on all devices."
-            }
-          }
+          { "@type": "Question", "name": "Can I add a text watermark to every PDF page?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The same text, color, and opacity are applied to all pages in the source PDF." } },
+          { "@type": "Question", "name": "Can I watermark only selected pages?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current tool applies the watermark to every page." } },
+          { "@type": "Question", "name": "Can I use an image or logo as the watermark?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current implementation supports a text watermark using Helvetica Bold." } },
+          { "@type": "Question", "name": "Can I change the watermark position?", "acceptedAnswer": { "@type": "Answer", "text": "No. The tool uses a fixed relative position and a -35-degree rotation." } },
+          { "@type": "Question", "name": "What happens if I leave the watermark text empty?", "acceptedAnswer": { "@type": "Answer", "text": "The implementation uses DRAFT as the default text." } },
+          { "@type": "Question", "name": "Does a watermark prevent someone from copying the PDF?", "acceptedAnswer": { "@type": "Answer", "text": "No. It provides a visible notice but does not technically prevent copying, editing, screenshots, or content recreation." } },
+          { "@type": "Question", "name": "Is watermarking the same as encrypting a PDF?", "acceptedAnswer": { "@type": "Answer", "text": "No. Encryption controls whether a recipient can open the document. A watermark is visible after the file has been opened." } },
+          { "@type": "Question", "name": "Does adding a watermark reduce PDF quality?", "acceptedAnswer": { "@type": "Answer", "text": "The operation draws a text overlay onto existing pages and does not intentionally rasterize complete pages. Important documents should still be inspected after saving." } },
+          { "@type": "Question", "name": "Can a watermark invalidate a digital signature?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Adding content changes the PDF and can invalidate or alter the status of an existing cryptographic signature." } },
+          { "@type": "Question", "name": "Does the tool overwrite the original PDF?", "acceptedAnswer": { "@type": "Answer", "text": "No. It creates a separate file named watermarked.pdf." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Add a Text Watermark to Every PDF Page</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Text Overlay</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">A watermark gives readers an immediate visual signal about a document's status. The <strong class="text-slate-900 dark:text-slate-200">Watermark PDF</strong> tool adds the same diagonal text overlay to all pages of a PDF: you choose the wording, color, and opacity, and it creates a separate file named <code>watermarked.pdf</code>. A watermark is useful for communication and deterrence, but it does not encrypt the PDF, prevent editing, establish legal ownership, or create a cryptographic signature.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/watermark-pdf">Open Watermark PDF<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Watermark PDF</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Watermark PDF stamps visible text overlays diagonally across your pages. The script injects custom text content as transparent vector text nodes on top of page content streams locally, making it ideal for marking drafts, copyrights, or confidential tags.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/watermark-pdf">
-        Open Watermark PDF
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Upload one PDF, enter short watermark text, choose its color and opacity, and create the output. The tool places the text diagonally across every page using Helvetica Bold at a size calculated from each page's dimensions.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Upload the PDF document you want to stamp with a watermark.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Enter Text</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Type your custom watermark text (e.g. DRAFT, CONFIDENTIAL) and adjust opacity settings.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Apply & Save</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Watermark PDF to stamp the pages in-memory and download the copy.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common reasons to watermark a PDF</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Mark a document as a draft</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Adding <strong class="text-slate-900 dark:text-slate-200">DRAFT</strong> helps prevent an unfinished proposal, report, or policy from being mistaken for an approved version. The label stays visible when viewed or printed.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Identify confidential material</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Labels such as <strong class="text-slate-900 dark:text-slate-200">CONFIDENTIAL</strong> or <strong class="text-slate-900 dark:text-slate-200">DO NOT DISTRIBUTE</strong> remind recipients how a document should be handled, though the watermark alone does not enforce that policy.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Label samples and proofs</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A visible <strong class="text-slate-900 dark:text-slate-200">SAMPLE</strong>, <strong class="text-slate-900 dark:text-slate-200">PROOF</strong>, or <strong class="text-slate-900 dark:text-slate-200">PREVIEW</strong> watermark distinguishes review copies from final deliverables.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Show workflow status</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Text such as <strong class="text-slate-900 dark:text-slate-200">APPROVED</strong>, <strong class="text-slate-900 dark:text-slate-200">VOID</strong>, or <strong class="text-slate-900 dark:text-slate-200">ARCHIVED</strong> can communicate where a document sits in a business process.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm md:col-span-2"><h3 class="font-bold text-slate-900 dark:text-slate-200">Discourage casual reuse</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A prominent watermark can make unauthorized reuse less convenient, but it is not a technical barrier: someone with suitable PDF-editing software may still be able to alter or remove it.</p></div>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I customize the opacity of the watermark text?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, you can choose transparency levels to ensure the text remains legible beneath the watermark.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is the watermark text editable after downloading?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No, the text is drawn as a flat vector element inside the page stream, making it difficult to remove.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I select a custom font?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The tool uses standard, high-compatibility PDF fonts to guarantee the output displays correctly on all devices.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What you can customize</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Watermark text.</strong> Enter the wording that should appear on every page. Short, recognizable labels work best because the tool uses a fixed diagonal placement &mdash; for example DRAFT, CONFIDENTIAL, INTERNAL USE ONLY, SAMPLE, COPY, VOID, or NOT FOR DISTRIBUTION. If the field is empty, the implementation uses <code>DRAFT</code> as its default value.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Watermark color.</strong> The color picker accepts a custom color and defaults to red. Choose a color that remains visible on the document's dominant background. A medium gray, blue, or muted red often works better than a fully saturated color when the watermark must stay noticeable without overwhelming the page.</p>
+      </section>
+      <section class="mt-4 rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mb-4"><strong class="text-slate-900 dark:text-slate-200">Watermark opacity.</strong> The interface offers three levels:</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Option</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Opacity value</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Best suited to</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Light</td><td class="py-3 pr-4">0.15</td><td class="py-3">Subtle labels over dense text or diagrams</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Medium</td><td class="py-3 pr-4">0.25</td><td class="py-3">General-purpose draft and status watermarks</td></tr>
+          <tr><td class="py-3 pr-4">Strong</td><td class="py-3 pr-4">0.40</td><td class="py-3">Prominent warnings and high-visibility labels</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Opacity controls how much underlying content remains visible through the text. It does not change the watermark's position, angle, or font.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to add a watermark to a PDF</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Review the original PDF.</strong> Inspect a selection of pages &mdash; light and dark backgrounds, portrait and landscape, pages with large photographs, pages with signatures or stamps, and pages with important content near the center &mdash; so you can choose a color and opacity that stay readable throughout.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Enter concise watermark text.</strong> Use wording a reader recognizes quickly. Long sentences may extend beyond the useful page area because the tool does not wrap watermark text. A single word is often enough for status; use the shortest wording that communicates a handling instruction accurately.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Choose a color.</strong> Select a color with enough contrast against most pages, and consider how it looks on screen, in grayscale printing, and over photographs. Do not rely on color alone &mdash; the text itself should state the document status.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Set the opacity.</strong> Start with Medium. Use Light when the overlay interferes with small text or diagrams, and Strong when the label must stay highly visible. A setting that works on a mostly white report may be hard to see on a dark presentation.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Create and download the watermarked PDF.</strong> Start the operation and download <code>watermarked.pdf</code>. The source remains available as a separate file.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6. Check every page type.</strong> Review more than the first page. Confirm the watermark is readable on light and dark content, does not conceal essential text, fits portrait and landscape pages, appears on every page, and stays visible when printed if printing matters. Keep the original until the watermarked copy is accepted.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the text watermark is placed</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The implementation uses a consistent rule for every page:</p>
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> The PDF is loaded into browser memory.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Helvetica Bold is embedded in the document.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> The selected hexadecimal color is converted into PDF red, green, and blue values.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> The font size is calculated as one eighth of the smaller page dimension.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> The text begins at approximately 18% of the page width and 48% of the page height.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> The watermark is rotated by -35 degrees.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">7.</strong> The selected opacity is applied, and the same process runs on every page.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">8.</strong> The result is saved as <code>watermarked.pdf</code>.</li>
+        </ol>
+        <p>Because the overlay is drawn onto the existing PDF pages, the operation does not intentionally turn each complete page into a JPEG or other raster image merely to add the text.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Fixed placement and responsive font sizing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The watermark's font size changes with the page dimensions. Using the smaller dimension helps keep the text proportionate on ordinary portrait and landscape pages. However, the position and angle are fixed relative to the page. The current tool does not provide:</p>
+        <ul class="space-y-2">
+          <li>&bull; Drag-and-drop placement</li>
+          <li>&bull; Horizontal or vertical watermarks</li>
+          <li>&bull; Top, bottom, or corner presets</li>
+          <li>&bull; Tiled watermarks</li>
+          <li>&bull; Different text on different pages</li>
+          <li>&bull; Per-page opacity settings</li>
+          <li>&bull; Custom font selection</li>
+        </ul>
+        <p>For unusual page dimensions or complex layouts, inspect the final result carefully.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Choosing readable watermark text</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Keep the wording short.</strong> Short labels read more easily on a diagonal and are less likely to extend beyond the page. Prefer <strong class="text-slate-900 dark:text-slate-200">CONFIDENTIAL</strong> to a complete sentence unless the longer instruction is essential.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Match the language to the actual status.</strong> Do not label a document <strong class="text-slate-900 dark:text-slate-200">APPROVED</strong> unless it has been approved through the relevant process. Watermarks should reduce ambiguity, not create it.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Avoid unnecessary personal information.</strong> A watermark becomes part of every page, so think carefully before adding email addresses, account numbers, or recipient names.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Consider printing.</strong> Pale colors may disappear on a low-quality printer, while strong colors may turn into a distracting dark gray in monochrome. Print a representative test page when the physical copy matters.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What a PDF watermark does not do</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not encrypt the PDF.</strong> Anyone who can open the watermarked file can still view its contents. Use password protection when access control is required.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not reliably prevent editing or copying.</strong> A PDF editor may change page content, remove overlays, export pages, or recreate the document. A watermark is a visible notice, not digital-rights management.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not create a digital signature.</strong> A typed label such as APPROVED is not proof that a particular person or organization approved the file; cryptographic signatures use certificates and validation data.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not prove ownership by itself.</strong> A watermark can display a claim or brand, but copyright and ownership depend on the underlying facts and applicable law.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not track recipients.</strong> The tool applies identical text to all pages; it does not create unique recipient identifiers, invisible tracking, or download analytics inside the PDF.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Watermarking digitally signed PDFs</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Adding a watermark changes the PDF. If the source contains a cryptographic digital signature, the modification can invalidate that signature or cause a viewer to report that the document changed after signing. A safe workflow:</p>
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Keep the signed original unchanged.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Confirm whether policy allows a marked derivative copy.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Apply the watermark to an authorized copy.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Do not present the watermarked derivative as the untouched signed original.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Check the signature status in the intended viewer.</li>
+        </ol>
+        <p>If signature validity is essential, consult the document owner or the organization responsible for the signing workflow.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Watermark before or after other PDF changes?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Watermarking is usually one of the final visual steps. A recommended order:</p>
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Merge the required source documents.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Remove unwanted pages.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Organize the final page sequence.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Rotate sideways or upside-down pages.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Add page numbers when required.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Apply the watermark.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">7.</strong> Verify the final PDF.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">8.</strong> Add a cryptographic signature through an appropriate signing workflow, when required.</li>
+        </ol>
+        <p>Applying the watermark near the end avoids repeating the operation after pages are added, removed, or rearranged.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">The PDF's contents are processed in browser memory and are not sent to WeConvertFiles for watermarking.</strong> Required JavaScript libraries may be downloaded from third-party content-delivery networks when the tool opens, so the workflow should not be described as completely offline.</p><p>If a visitor consents to site analytics, separate usage information such as visits, clicks, device details, or conversion events may be collected. Those analytics do not receive the contents of the PDF or the watermark wording.</p><p>For confidential files, also consider browser extensions, device security, downloaded copies, backups, shared folders, and how the final file will be distributed.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The watermark is difficult to see</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Increase the opacity or choose a color with stronger contrast. Test pages with different background colors because one setting may not work equally well everywhere.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The watermark covers important content</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Lower the opacity or shorten the text. Position, angle, and font family are fixed in the current implementation.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The watermark extends beyond the page</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Use shorter wording. Very long text and unusually narrow pages may not fit the fixed diagonal layout.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The watermark looks different on landscape pages</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The font size adapts to the smaller page dimension, but placement remains based on fixed proportions. Inspect both orientations before distributing the file.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The watermark does not appear on a page</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Confirm that you are viewing <code>watermarked.pdf</code>, not the original. If a particular page still lacks the overlay, verify that the page loads correctly and try creating the output again.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A digital signature is now reported as invalid</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Watermarking changes the document after it was signed. Return to the original signed file and follow the organization's approved derivative-copy or re-signing process.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The text is present but cannot be edited easily</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The tool creates a finished marked copy, not an editable watermark template. Keep the original and regenerate the output when different wording is needed.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I add a text watermark to every PDF page?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. The same text, color, and opacity are applied to all pages in the source PDF.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I watermark only selected pages?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current tool applies the watermark to every page.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I use an image or logo as the watermark?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current implementation supports a text watermark using Helvetica Bold.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I change the watermark position?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The tool uses a fixed relative position and a -35-degree rotation.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What happens if I leave the watermark text empty?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The implementation uses <code>DRAFT</code> as the default text.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does a watermark prevent someone from copying the PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It provides a visible notice but does not technically prevent copying, editing, screenshots, or content recreation.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is watermarking the same as encrypting a PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Encryption controls whether a recipient can open the document. A watermark is visible after the file has been opened.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does adding a watermark reduce PDF quality?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The operation draws a text overlay onto existing pages and does not intentionally rasterize complete pages. Important documents should still be inspected after saving.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can a watermark invalidate a digital signature?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Adding content changes the PDF and can invalidate or alter the status of an existing cryptographic signature.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool overwrite the original PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It creates a separate file named <code>watermarked.pdf</code>.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/encrypt-pdf"><h3 class="font-bold text-[#1a73e8]">Encrypt PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Add password protection when access control is required.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/organize-pdf"><h3 class="font-bold text-[#1a73e8]">Organize PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Finalize page order before watermarking.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/page-numbers"><h3 class="font-bold text-[#1a73e8]">Page Numbers</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Add continuous numbering before the final watermark.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -174,6 +237,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/split-pdf.html"><h3 class="font-bold text-[#1a73e8]">Split PDF Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Separate every page of a PDF into individual PDF files bundled in a ZIP.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Mark every page in one pass</h2><p class="mt-3 text-sm leading-6 text-white">Enter your label, pick a readable color and opacity, generate <code>watermarked.pdf</code>, and check light, dark, portrait, and landscape pages.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/watermark-pdf">Use Watermark PDF</a></section>
+    </article>
   </main>
 </body>
 </html>
