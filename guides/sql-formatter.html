@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>How to Format SQL Queries Online | Guide</title>
-  <meta name="description" content="Learn how to beautify SQL queries 100% locally for Standard SQL, MySQL, PostgreSQL, and SQL Server, with keyword casing and indentation controls." />
+  <title>SQL Formatter: Beautify SQL Queries Online</title>
+  <meta name="description" content="Format SQL for Standard SQL, MySQL, PostgreSQL, or SQL Server. Control keyword case and indentation, then copy or download readable SQL." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/sql-formatter.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="How to Format SQL Queries Online | Guide" />
-  <meta property="og:description" content="Learn how to beautify SQL queries 100% locally for Standard SQL, MySQL, PostgreSQL, and SQL Server, with keyword casing and indentation controls." />
+  <meta property="og:title" content="Format and Beautify SQL Queries Online" />
+  <meta property="og:description" content="Turn dense SQL into readable, consistently indented queries without connecting to or running them on a database." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/sql-formatter.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="How to Format SQL Queries Online | Guide" />
-  <meta name="twitter:description" content="Learn how to beautify SQL queries 100% locally for Standard SQL, MySQL, PostgreSQL, and SQL Server, with keyword casing and indentation controls." />
+  <meta name="twitter:title" content="Format and Beautify SQL Queries Online" />
+  <meta name="twitter:description" content="Turn dense SQL into readable, consistently indented queries without connecting to or running them on a database." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,167 +31,246 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-
+  <style>
+    /* Mobile overflow fix: keep the article column within the viewport so wide
+       tables and code blocks scroll inside their own container instead of
+       widening the page, and wrap long inline code tokens. */
+    main { width: 100%; }
+    main :where(p, li, td, th, dd, dt, h1, h2, h3, blockquote) code { overflow-wrap: anywhere; word-break: break-word; }
+    main pre code { overflow-wrap: normal; word-break: normal; white-space: pre; }
+  </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Does this tool run or execute my SQL query?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. SQL Formatter only rewrites the text of your query for readability. It never connects to a database, and no query is ever executed."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which SQL dialects are supported?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Standard SQL, MySQL, PostgreSQL, and SQL Server (T-SQL) dialects are supported, each with dialect-specific keyword and syntax handling."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I control keyword casing and indentation?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Use the Keyword Case dropdown to force uppercase, lowercase, or preserve your original casing, and the Indent Size dropdown to control spacing."
-        }
-      }
-    ]
-  }
-  </script>
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "How to Format SQL Queries Online | Guide",
-        "description": "Learn how to beautify SQL queries 100% locally for Standard SQL, MySQL, PostgreSQL, and SQL Server, with keyword casing and indentation controls.",
+        "headline": "SQL Formatter and Query Beautifier",
+        "description": "Beautify pasted SQL for Standard SQL, MySQL, PostgreSQL, and SQL Server without connecting to a database or executing the query.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
-        "datePublished": "2026-07-30",
-        "dateModified": "2026-08-18",
+        "datePublished": "2026-07-18",
+        "dateModified": "2026-08-19",
         "author": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/sql-formatter.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/sql-formatter.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Does this tool run or execute my SQL query?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. SQL Formatter only rewrites the text of your query for readability. It never connects to a database, and no query is ever executed."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Which SQL dialects are supported?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Standard SQL, MySQL, PostgreSQL, and SQL Server (T-SQL) dialects are supported, each with dialect-specific keyword and syntax handling."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I control keyword casing and indentation?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Use the Keyword Case dropdown to force uppercase, lowercase, or preserve your original casing, and the Indent Size dropdown to control spacing."
-            }
-          }
+          { "@type": "Question", "name": "Does the SQL Formatter execute my query?", "acceptedAnswer": { "@type": "Answer", "text": "No. It only rewrites SQL text for readability. It does not connect to a database or run any statement." } },
+          { "@type": "Question", "name": "Which SQL dialects are supported?", "acceptedAnswer": { "@type": "Answer", "text": "The interface offers Standard SQL, MySQL, PostgreSQL, and SQL Server (T-SQL)." } },
+          { "@type": "Question", "name": "Can I convert SQL keywords to uppercase?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Choose uppercase, lowercase, or preserve for recognized SQL keywords. Preserve is the default." } },
+          { "@type": "Question", "name": "Can I choose indentation width?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The tool supports two- and four-space indentation and emits spaces rather than tabs." } },
+          { "@type": "Question", "name": "Does formatting validate SQL syntax?", "acceptedAnswer": { "@type": "Answer", "text": "It can report a formatting error when the engine cannot parse the input, but successful output is not proof that the target database will accept or correctly execute the query." } },
+          { "@type": "Question", "name": "Will formatting optimize a slow query?", "acceptedAnswer": { "@type": "Answer", "text": "No. It does not inspect schemas, indexes, statistics, data volume, or execution plans." } },
+          { "@type": "Question", "name": "Can it format stored procedures?", "acceptedAnswer": { "@type": "Answer", "text": "Some dialect-specific procedural syntax may format, but coverage varies. Select the correct dialect and review complex blocks carefully." } },
+          { "@type": "Question", "name": "What filename does the download use?", "acceptedAnswer": { "@type": "Answer", "text": "The formatted output downloads as formatted-query.sql using UTF-8 text." } },
+          { "@type": "Question", "name": "Is formatted SQL safe to execute?", "acceptedAnswer": { "@type": "Answer", "text": "Formatting does not establish safety. Validate logic, permissions, parameters, scope, and target environment before execution." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">SQL Formatter and Query Beautifier</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Formatting only &mdash; no execution</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">SQL can be valid and still be difficult to read. Long one-line queries hide join conditions, nested expressions, filters, grouping, and ordering. The <strong class="text-slate-900 dark:text-slate-200">SQL Formatter</strong> beautifies pasted SQL for four selectable dialects &mdash; Standard SQL, MySQL, PostgreSQL, and SQL Server (T-SQL). You can preserve keyword case or convert keywords to uppercase or lowercase, choose two- or four-space indentation, copy the result, and download it as <code>formatted-query.sql</code>. It rewrites text only: it never connects to a database, executes a statement, or inspects your schema.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/sql-formatter">Format SQL<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">How to Format SQL Queries Online</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">SQL Formatter beautifies raw SQL queries into clean, readable statements using a dialect-aware formatting engine that loads only when this tool is opened. Choose Standard SQL, MySQL, PostgreSQL, or SQL Server (T-SQL) syntax rules, set keyword casing to uppercase, lowercase, or preserve, and control indentation width. The tool only rewrites the text of your query for readability; it never connects to a database or executes any statement.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/sql-formatter">
-        Open SQL Formatter
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Paste the query, select its SQL dialect, choose a keyword-case rule and indentation width, then select <strong>Format SQL</strong>. Review the output before copying or downloading it. The formatter changes the query's textual layout; it does not connect to a database, execute statements, inspect your schema, or confirm that the query is correct.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Paste Your Query</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Paste a raw SQL query and choose its dialect: Standard SQL, MySQL, PostgreSQL, or SQL Server.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Set Style Rules</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Pick keyword casing and indentation size to match your team's style guide.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Copy or Download</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Copy the formatted SQL to your clipboard or download it as a .sql file.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What does a SQL formatter do?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A SQL formatter tokenizes SQL text and rewrites its presentation according to consistent rules. It can place major clauses such as <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, and <code>ORDER BY</code> on separate lines, indent nested queries and expressions, list selected columns, normalize recognized keyword case, and make joins and Boolean conditions easier to scan.</p>
+        <p>For example, this dense query:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>select c.customer_id,c.name,sum(o.total) as lifetime_value from customers c join orders o on o.customer_id=c.customer_id where o.status='paid' and o.created_at&gt;='2026-01-01' group by c.customer_id,c.name having sum(o.total)&gt;1000 order by lifetime_value desc;</code></pre>
+        <p>can become the following with the <strong>UPPERCASE</strong> keyword-case option:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>SELECT
+  c.customer_id,
+  c.name,
+  SUM(o.total) AS lifetime_value
+FROM
+  customers c
+  JOIN orders o ON o.customer_id = c.customer_id
+WHERE
+  o.status = 'paid'
+  AND o.created_at &gt;= '2026-01-01'
+GROUP BY
+  c.customer_id,
+  c.name
+HAVING
+  SUM(o.total) &gt; 1000
+ORDER BY
+  lifetime_value DESC;</code></pre>
+        <p>The specific line breaks are determined by the formatting engine and the options you select. Formatting aims to improve readability, not to optimize the execution plan.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does this tool run or execute my SQL query?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. SQL Formatter only rewrites the text of your query for readability. It never connects to a database, and no query is ever executed.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Which SQL dialects are supported?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Standard SQL, MySQL, PostgreSQL, and SQL Server (T-SQL) dialects are supported, each with dialect-specific keyword and syntax handling.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I control keyword casing and indentation?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. Use the Keyword Case dropdown to force uppercase, lowercase, or preserve your original casing, and the Indent Size dropdown to control spacing.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to use the SQL Formatter</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Paste raw SQL</strong> into the <em>Raw SQL Input</em> panel.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Choose a dialect:</strong> Standard SQL, MySQL, PostgreSQL, or SQL Server (T-SQL).</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Choose keyword case:</strong> Preserve, UPPERCASE, or lowercase for recognized keywords.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Choose indentation:</strong> two or four spaces.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Click <em>Format SQL</em>.</strong> The formatting engine loads on demand the first time you use it, so the button briefly shows a loading state.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6. Review the formatted result</strong> and compare it with the source.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">7. Copy the output</strong> or download <code>formatted-query.sql</code>.</li>
+      </ol>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">The formatter trims leading and trailing whitespace before processing. If the input is empty, the output stays empty. If the engine cannot process the syntax, the interface reports an error instead of executing anything.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Choose the correct SQL dialect</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Dialect option</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Use it for</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Dialect-specific areas</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Standard SQL</td><td class="py-3 pr-4">Portable or generic SQL</td><td class="py-3">Standard clauses, expressions, joins</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">MySQL</td><td class="py-3 pr-4">MySQL-compatible queries</td><td class="py-3">Backtick identifiers, <code>LIMIT</code>, MySQL functions</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">PostgreSQL</td><td class="py-3 pr-4">PostgreSQL queries</td><td class="py-3">Cast syntax, PostgreSQL operators, <code>RETURNING</code></td></tr>
+          <tr><td class="py-3 pr-4">SQL Server (T-SQL)</td><td class="py-3 pr-4">Microsoft SQL Server</td><td class="py-3">Bracketed identifiers, <code>TOP</code>, T-SQL blocks</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Dialect selection is a formatting hint, not a compatibility test. A statement formatted under PostgreSQL is not thereby proven valid on PostgreSQL, and a generic query may still rely on features unsupported by another database version. Choose the database that will actually execute the query so vendor-specific keywords, quoting, and operators are recognized.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Keyword case: uppercase, lowercase, or preserve?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; <strong class="text-slate-900 dark:text-slate-200">Preserve</strong> keeps the input keyword casing. This is the default, useful when you only want indentation and line breaks.</li>
+        <li>&bull; <strong class="text-slate-900 dark:text-slate-200">UPPERCASE</strong> produces conventions such as <code>SELECT</code>, <code>FROM</code>, and <code>WHERE</code>.</li>
+        <li>&bull; <strong class="text-slate-900 dark:text-slate-200">lowercase</strong> produces <code>select</code>, <code>from</code>, and <code>where</code>.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">These settings apply only to tokens the formatter recognizes as SQL keywords. Identifiers and string values are not keywords: a formatter should not turn <code>'paid'</code> into <code>'PAID'</code> merely because uppercase keywords were selected. Even so, always review output containing unusual quoting, templating, or vendor extensions.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Two spaces vs. four spaces</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Two spaces keep deeply nested queries relatively compact. Four spaces create stronger visual nesting and may be easier to follow in complex subqueries. Neither choice changes SQL semantics. The tool emits spaces, not tab characters, so pick the width that matches your repository or team convention.</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>SELECT
+  product_id,
+  COUNT(*) AS purchase_count
+FROM
+  order_items
+GROUP BY
+  product_id;</code></pre>
+        <p>The indent option controls nesting width; it does not promise column alignment or a particular newline for every expression.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Formatting joins for safer review</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Join-heavy queries benefit greatly from visible structure:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>SELECT
+  o.order_id,
+  c.name,
+  p.reference
+FROM
+  orders o
+  INNER JOIN customers c ON c.customer_id = o.customer_id
+  LEFT JOIN payments p ON p.order_id = o.order_id
+    AND p.status = 'captured'
+WHERE
+  o.status = 'complete';</code></pre>
+        <p>The layout makes it easier to distinguish a join condition from a global filter &mdash; important because moving a condition between <code>ON</code> and <code>WHERE</code> can change outer-join behavior. A formatter can expose placement, but it does not decide whether the placement is logically correct. During review, check that every join has the intended key relationship, aliases point to the expected tables, outer-join filters do not accidentally eliminate unmatched rows, and one-to-many joins do not duplicate aggregates.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Subqueries and common table expressions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Common table expressions can make multi-stage transformations easier to review:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>WITH paid_orders AS (
+  SELECT
+    customer_id,
+    total
+  FROM
+    orders
+  WHERE
+    status = 'paid'
+),
+customer_totals AS (
+  SELECT
+    customer_id,
+    SUM(total) AS total_paid
+  FROM
+    paid_orders
+  GROUP BY
+    customer_id
+)
+SELECT
+  customer_id,
+  total_paid
+FROM
+  customer_totals
+WHERE
+  total_paid &gt;= 1000;</code></pre>
+        <p>Indentation shows where each CTE begins and ends and helps reviewers detect a filter applied at the wrong stage. Formatting does not determine whether a CTE is materialized, inlined, or efficient; those decisions depend on the database and execution plan.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Does formatting change how SQL runs?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Whitespace and keyword case are usually insignificant outside strings, quoted identifiers, comments, and dialect-specific constructs. A good formatter intends to preserve behavior while changing presentation. However, no automated transformation should be treated as infallible: queries can contain procedural blocks, database extensions, template markers, embedded variables, or parser edge cases. Before replacing production SQL, inspect the diff, confirm string and identifier quoting, verify comments and parameter placeholders, run syntax checks with the target database tooling, and test behavior in a safe environment.</p>
+        <p>Formatting is not refactoring. It should not rename aliases, reorder conditions, add indexes, rewrite joins, or change business logic.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Does a SQL formatter validate queries?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Only in a limited sense. The engine may reject syntax it cannot parse or format, which can reveal obvious problems. Successful formatting does not prove that a query is executable. The formatter does not know whether a table or column exists, whether the current user has permission, whether data types are compatible, whether a function exists in the installed database version, whether parameters are supplied correctly, whether constraints will reject a write, or whether the result matches the business requirement.</p>
+        <p>Use the target database's parser, linter, IDE, schema-aware tooling, and tests for validation. For mutation statements, use transactions and non-production data where appropriate.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Formatting is not optimization</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A readable query is easier to optimize, but a formatter does not analyze indexes, statistics, cardinality, partitioning, or execution plans. It cannot tell whether a query performs a full table scan, uses an inefficient join order, or returns excessive data. After formatting a slow query, inspect the database's execution plan, measure with representative data, select only needed columns, review predicates and join keys, check appropriate indexes, and compare changes under realistic workload conditions.</p>
+        <p>Do not infer performance from visual neatness. A beautifully formatted query can still be slow, and a compact query can still have an efficient plan.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Comments, parameters, and template syntax</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>General-purpose formatters usually aim to retain comments, but placement can be sensitive in unusual syntax. Review every comment after formatting, especially optimizer hints and tool directives &mdash; some databases use comment-shaped hints whose exact location has operational meaning. Never place passwords, connection strings, or customer data in comments.</p>
+        <p>Queries may contain placeholders such as <code>?</code>, <code>:customer_id</code>, <code>$1</code>, or <code>@UserId</code>. Select the appropriate dialect and verify that placeholders remain intact in the output. Template systems add constructs that are not SQL at all:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>{% if include_archived %}
+  AND archived_at IS NOT NULL
+{% endif %}</code></pre>
+        <p>The formatter may not understand Jinja, application interpolation, or ORM-generated placeholders. If templating causes an error, format the pure SQL portion, or use a tool designed for that template language. Never replace parameter binding with string concatenation merely to make a query easier to format; parameterization is a critical defense against SQL injection.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common formatting errors</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The wrong dialect is selected</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A generic parser may stumble over vendor-specific casts, operators, quoting, or procedural syntax. Choose the database that will execute the query.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The query is incomplete</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A missing quote, parenthesis, or clause can prevent formatting. Check balanced delimiters and string literals.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A template marker is unsupported</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Non-SQL placeholders can confuse the engine. Isolate the SQL or use tooling designed for the template system.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The formatter engine does not load</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The formatting engine is loaded on demand from a version-pinned third-party CDN. Network restrictions, script blockers, or a strict content policy can prevent it from loading; the tool then shows an error. Retry in an allowed browser environment.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Formatting succeeds but the database rejects the query</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Successful formatting is not semantic validation. Check database errors, schema names, permissions, server version, and parameter values.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Security and privacy</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">The tool formats text in the browser and never connects to a database or executes the statement.</strong> The formatting library is loaded on demand from a version-pinned third-party CDN; the query processing itself happens locally in the page.</p>
+        <p>SQL text can still be sensitive. It may expose schema names, tenant identifiers, business rules, internal hostnames, customer values, or credentials embedded in scripts. Before pasting, replace real customer data with representative samples, remove passwords, API keys, access tokens, and connection strings, follow your organization's source-code and data-handling rules, and clear the editor on shared devices after finishing. Formatting does not neutralize malicious SQL: read <code>UPDATE</code>, <code>DELETE</code>, <code>DROP</code>, permission changes, and dynamic SQL especially carefully.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the SQL Formatter execute my query?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It only rewrites SQL text for readability. It does not connect to a database or run any statement.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which SQL dialects are supported?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The interface offers Standard SQL, MySQL, PostgreSQL, and SQL Server (T-SQL).</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I convert SQL keywords to uppercase?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Choose uppercase, lowercase, or preserve for recognized SQL keywords. Preserve is the default.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I choose indentation width?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. The tool supports two- and four-space indentation and emits spaces rather than tabs.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does formatting validate SQL syntax?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It can report a formatting error when the engine cannot parse the input, but successful output is not proof that the target database will accept or correctly execute the query.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will formatting optimize a slow query?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It does not inspect schemas, indexes, statistics, data volume, or execution plans.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can it format stored procedures?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Some dialect-specific procedural syntax may format, but coverage varies. Select the correct dialect and review complex blocks carefully.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What filename does the download use?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The formatted output downloads as <code>formatted-query.sql</code> using UTF-8 text.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is formatted SQL safe to execute?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Formatting does not establish safety. Validate logic, permissions, parameters, scope, and target environment before execution.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/diff-checker"><h3 class="font-bold text-[#1a73e8]">Diff Checker</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Compare original and formatted SQL before committing it.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/code-minifier"><h3 class="font-bold text-[#1a73e8]">Code Minifier</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Minify or beautify HTML, CSS, or JavaScript rather than SQL.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-formatter"><h3 class="font-bold text-[#1a73e8]">JSON Formatter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Inspect JSON columns, database responses, or query-plan exports.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -201,6 +279,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/json-formatter.html"><h3 class="font-bold text-[#1a73e8]">JSON Formatter / Validator Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Format, validate, beautify, and minify raw JSON string data dynamically.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Beautify your SQL query</h2><p class="mt-3 text-sm leading-6 text-white">Paste a dense query, pick the dialect, keyword case, and indentation, then copy or download <code>formatted-query.sql</code>.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/sql-formatter">Use SQL Formatter</a></section>
+    </article>
   </main>
 </body>
 </html>
