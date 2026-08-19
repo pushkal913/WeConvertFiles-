@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Favicon Generator Guide - WeConvertFiles</title>
-  <meta name="description" content="Convert custom logo graphics into optimized web standard multi-resolution favicons." />
+  <title>Favicon Generator: Create ICO and PNG Website Icons</title>
+  <meta name="description" content="Create favicon.ico, PNG favicons, and an Apple touch icon from a PNG, JPG, or WebP image. Download a ready-to-use ZIP and install each size." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/favicon-generator.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Favicon Generator Guide - WeConvertFiles" />
-  <meta property="og:description" content="Convert custom logo graphics into optimized web standard multi-resolution favicons." />
+  <meta property="og:title" content="Generate a Favicon Package from Your Logo" />
+  <meta property="og:description" content="Turn one image into multi-size PNG icons, favicon.ico, and an Apple touch icon directly in your browser." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/favicon-generator.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Favicon Generator Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Convert custom logo graphics into optimized web standard multi-resolution favicons." />
+  <meta name="twitter:title" content="Generate a Favicon Package from Your Logo" />
+  <meta name="twitter:description" content="Turn one image into multi-size PNG icons, favicon.ico, and an Apple touch icon directly in your browser." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,129 +31,176 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <style>
+    /* Mobile overflow fix: keep the article column within the viewport so wide
+       tables and code blocks scroll inside their own container instead of
+       widening the page, and wrap long inline code tokens. */
+    main { width: 100%; }
+    main :where(p, li, td, th, dd, dt, h1, h2, h3, blockquote) code { overflow-wrap: anywhere; word-break: break-word; }
+    main pre code { overflow-wrap: normal; word-break: normal; white-space: pre; }
+  </style>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Favicon Generator Guide",
-        "description": "Convert custom logo graphics into optimized web standard multi-resolution favicons.",
+        "headline": "Favicon Generator for ICO, PNG, and Apple Touch Icons",
+        "description": "Turn one PNG, JPG, or WebP image into PNG favicons, a multi-size favicon.ico, and an Apple touch icon packaged as a downloadable ZIP, generated in the browser.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
-        "dateModified": "2026-08-18",
+        "dateModified": "2026-08-19",
         "author": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/favicon-generator.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/favicon-generator.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What files are in the download package?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "You get favicon.ico (containing 16x16, 32x32, and 48x48 resolutions), matching high-res PNG icons, and apple-touch-icon.png."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How is the ICO file created offline?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Our client-side script compiles raw PNG pixel blocks into a binary stream, prepends valid ICO file header offsets, and packages them locally."
-            }
-          }
+          { "@type": "Question", "name": "What favicon sizes does the tool generate?", "acceptedAnswer": { "@type": "Answer", "text": "It creates PNG files at 16, 32, 48, and 128 pixels, an ICO containing 16/32/48 pixel images, and a 180 pixel Apple touch icon." } },
+          { "@type": "Question", "name": "Which source formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "One PNG, JPG, or WebP image can be uploaded." } },
+          { "@type": "Question", "name": "Does it preserve a rectangular image's aspect ratio?", "acceptedAnswer": { "@type": "Answer", "text": "No. The source is drawn into square canvases, so prepare a square image to avoid distortion." } },
+          { "@type": "Question", "name": "Does the ZIP include favicon.ico?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. favicon.ico contains 16, 32, and 48 pixel entries." } },
+          { "@type": "Question", "name": "Does it create an Apple touch icon?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The package includes apple-touch-icon.png at 180 × 180 pixels." } },
+          { "@type": "Question", "name": "Does it generate a web app manifest?", "acceptedAnswer": { "@type": "Answer", "text": "No. Create and configure the manifest separately if your site is an installable PWA." } },
+          { "@type": "Question", "name": "Can I use an SVG logo?", "acceptedAnswer": { "@type": "Answer", "text": "SVG is not accepted by this tool. Export a square PNG, JPG, or WebP first." } },
+          { "@type": "Question", "name": "Why is my old favicon still showing?", "acceptedAnswer": { "@type": "Answer", "text": "Browser favicon caching is persistent. Verify deployment, clear site data, test privately, or version the icon URL." } },
+          { "@type": "Question", "name": "Is the ZIP ready to deploy without changes?", "acceptedAnswer": { "@type": "Answer", "text": "The image assets are ready, but you still need to place them at correct URLs and add site markup or framework metadata." } },
+          { "@type": "Question", "name": "What is the download filename?", "acceptedAnswer": { "@type": "Answer", "text": "The package downloads as favicons-package.zip." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Favicon Generator for ICO, PNG, and Apple Touch Icons</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">ICO &amp; PNG package</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">A favicon is the small identifier shown beside a page title in browser tabs, bookmarks, and history &mdash; at 16 or 32 pixels it must stay recognizable under constraints a full-size logo never faces. The <strong class="text-slate-900 dark:text-slate-200">Favicon Generator</strong> accepts one PNG, JPG, or WebP image and creates a downloadable ZIP containing four PNG sizes, a multi-image <code>favicon.ico</code>, and a 180 &times; 180 Apple touch icon. Generation happens in the browser using canvas resizing, and JSZip packages the files as <code>favicons-package.zip</code>.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/favicon-generator">Generate favicon files<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Favicon Generator</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">ICO & PNG Pack</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Favicon Generator converts PNG and JPG logo files into web standard favicons. It resizes input files to 16x16, 32x32, 48x48, and 128x128 pixels, packages them into a multi-res .ico file wrap, and bundles them inside a single download ZIP.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/favicon-generator">
-        Open Favicon Generator
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Upload a square PNG, JPG, or WebP logo, inspect its 16 &times; 16, 32 &times; 32, and 48 &times; 48 previews, then generate the package. Extract the ZIP, place the relevant files in your site's public directory, add the appropriate <code>&lt;link&gt;</code> elements, deploy, and test in multiple browsers and devices. Use a high-resolution square image with a simple centered symbol, strong contrast, and enough padding to remain clear at 16 pixels.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload Square Logo</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select a high-resolution square logo image (PNG, JPG, or WebP format).</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Preview Outputs</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The editor automatically scales and previews your graphic across standard favicon sizes (16px, 32px, 48px).</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Download Package</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert to compile the files. A ZIP file containing favicon.ico, multi-res PNGs, and apple-touch-icon.png downloads.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What files does the generator create?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">File</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Dimensions / content</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Typical use</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>favicon-16x16.png</code></td><td class="py-3 pr-4">16 &times; 16 PNG</td><td class="py-3">Compact browser-tab icon</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>favicon-32x32.png</code></td><td class="py-3 pr-4">32 &times; 32 PNG</td><td class="py-3">Standard high-density tab use</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>favicon-48x48.png</code></td><td class="py-3 pr-4">48 &times; 48 PNG</td><td class="py-3">Larger browser/shortcut contexts</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>favicon-128x128.png</code></td><td class="py-3 pr-4">128 &times; 128 PNG</td><td class="py-3">Larger icon use or project asset</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>favicon.ico</code></td><td class="py-3 pr-4">Embedded 16, 32, and 48 pixel PNG images</td><td class="py-3">Conventional root favicon and discovery</td></tr>
+          <tr><td class="py-3 pr-4"><code>apple-touch-icon.png</code></td><td class="py-3 pr-4">180 &times; 180 PNG</td><td class="py-3">Apple home-screen/bookmark icon</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">All outputs are created from the same source image. The tool does not generate a web app manifest, Android launcher icon set, Safari pinned-tab SVG, Windows tile configuration, or HTML file.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      
-      
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What files are in the download package?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">You get favicon.ico (containing 16x16, 32x32, and 48x48 resolutions), matching high-res PNG icons, and apple-touch-icon.png.</p>
-      </div>
-      
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How is the ICO file created offline?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Our client-side script compiles raw PNG pixel blocks into a binary stream, prepends valid ICO file header offsets, and packages them locally.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to use the Favicon Generator</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Prepare a square logo</strong> in PNG, JPG, or WebP format.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Upload one image</strong> to the tool.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Inspect the previews</strong> at 16, 32, and 48 pixels.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Run the generation action</strong> and download <code>favicons-package.zip</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Extract the archive</strong> and copy the chosen files into your website's public/static directory.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6. Add favicon references</strong> to the document <code>&lt;head&gt;</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">7. Deploy and clear favicon caches</strong> while testing.</li>
+      </ol>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">The preview is valuable because fine lines and small text that look good in a large logo can disappear at browser-tab size.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Recommended HTML favicon markup</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A practical starting point, placed inside <code>&lt;head&gt;</code>, is:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>&lt;link rel="icon" href="/favicon.ico" sizes="any"&gt;
+&lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;
+&lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"&gt;
+&lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;</code></pre>
+        <p>Adjust paths if the files live in a subdirectory or the application uses a base URL. The <code>128x128</code> asset is included in the package but is not referenced by this minimal markup. Some browsers discover <code>/favicon.ico</code> automatically, but explicit markup documents your intention. Do not add a <code>site.webmanifest</code> reference unless you have actually created and deployed that manifest.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why favicon.ico still matters</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Modern browsers support PNG favicons, yet <code>favicon.ico</code> remains a useful compatibility and discovery file because an ICO container can include several image sizes so the browser chooses an appropriate representation. This generator builds an ICO containing the 16, 32, and 48 pixel PNG images; the separate 128 pixel PNG and 180 pixel Apple touch icon are not embedded in that ICO. Modern software generally supports PNG-compressed image data inside ICO containers, but very old clients may have narrower compatibility requirements.</p>
+        <p>Keeping <code>favicon.ico</code> at the site root, such as <code>https://example.com/favicon.ico</code>, is a dependable convention. If your framework fingerprints asset names, consider whether the root file should remain stable while other assets use hashed URLs.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Choosing the best source image</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Favicon quality starts with the source. Use a 1:1 aspect ratio, at least 180 &times; 180 pixels (preferably larger), a simple silhouette, strong contrast in light and dark browser themes, generous transparent or solid padding, and no text unless the character remains legible at 16 pixels. An elaborate horizontal logo is usually a poor favicon &mdash; create a dedicated square brand mark, monogram, or symbol rather than shrinking the entire wordmark.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">A square image is important</strong> because the generator draws the source directly into square canvases at every target size. It does not crop to a square or preserve a non-square aspect ratio, so a rectangular source is stretched and can distort the logo. Crop or pad the image to a square before uploading; if the logo must remain rectangular, place it inside a square canvas with intentional empty space.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">PNG, JPG, or WebP source?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">PNG</strong> is usually the best source because it supports transparency and preserves sharp logo edges without lossy compression. Start with a high-resolution PNG when available.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">JPG</strong> works, but it has no transparency and can introduce compression artifacts around high-contrast edges. Its existing background becomes part of every generated icon.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">WebP</strong> can preserve transparency and detail depending on how it was encoded, and the browser must be able to decode it.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Output files are always PNG and ICO regardless of the uploaded format. The generator does not accept SVG as source input &mdash; if your master logo is SVG, export a square high-resolution PNG first, or rasterize the SVG with controlled padding and background.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Transparency and designing for 16 pixels</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The canvas is not filled with a background before drawing the image, so transparent pixels in a PNG or suitable WebP can remain transparent in the generated PNG files (JPG sources are already opaque). Transparency lets a brand mark float naturally, but test it against both light and dark browser chrome: a dark logo with transparent edges can disappear in dark mode, and a white logo can disappear against light surfaces. A deliberate colored tile or outline often gives more predictable contrast.</p>
+        <p>At 16 pixels every detail competes for a tiny grid, so effective favicon design usually means subtraction: remove taglines and small lettering, thicken important strokes, simplify gradients and shadows, avoid narrow gaps that close after resizing, keep the subject centered, and test at actual size. The generator resamples one master image to every output &mdash; it does not support custom artwork per size, so edit the generated assets or create each size manually if you need optical sizing.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Apple touch icon and PWA icons</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The package includes <code>apple-touch-icon.png</code> at 180 &times; 180 pixels. Reference it with:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>&lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;</code></pre>
+        <p>Keep important artwork away from the extreme edges, because mobile platforms can apply rounded presentation masks. The Apple touch icon is not the same as a complete Progressive Web App icon set: installable PWAs generally need a web app manifest with appropriately sized icons, including platform-recommended larger and possibly maskable assets, which this tool does not generate.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why a new favicon may not appear</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Favicons are aggressively cached, so a browser can keep an old icon after the HTML and image files have changed. Open the icon URL directly to confirm the new file is deployed, verify the response status and content type, check the <code>&lt;link&gt;</code> URL in the rendered page source, hard-refresh or test in a new private window, clear site data or the favicon cache if necessary, and temporarily add a version query such as <code>/favicon.ico?v=2</code>. Versioned URLs help during updates, but keep references consistent across templates and metadata.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common favicon problems</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The logo looks stretched</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The source was not square. Crop or pad it to 1:1 before generating again.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The 16-pixel icon is blurry</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Use a larger, sharper source with simpler shapes. Fine detail cannot survive unlimited downscaling.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The icon disappears in dark mode</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Add a contrasting tile, outline, or alternate mark that remains visible on light and dark backgrounds.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Transparency was lost</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Start with a transparent PNG or WebP. JPG does not support alpha transparency.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The ZIP contains no manifest</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">That is expected. The package includes favicon assets, not a <code>site.webmanifest</code> or full PWA setup.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">An older client rejects the ICO</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The ICO stores PNG-compressed 16, 32, and 48 pixel entries. Extremely old software may require a different encoding from specialized icon tooling.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and browser-based processing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">The uploaded image is decoded and resized in browser memory.</strong> JSZip is loaded from third-party content delivery infrastructure and creates the archive locally; the image is not sent to a dedicated favicon conversion service.</p>
+        <p>Logo files can still contain unreleased branding or confidential campaign material, so follow your organization's handling rules and use a trusted device. Canvas re-encoding typically creates new pixel-based PNGs rather than preserving source EXIF metadata, but metadata removal should not be treated as the purpose or security guarantee of this tool.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What favicon sizes does the tool generate?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It creates PNG files at 16, 32, 48, and 128 pixels, an ICO containing 16/32/48 pixel images, and a 180 pixel Apple touch icon.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which source formats are supported?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">One PNG, JPG, or WebP image can be uploaded.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it preserve a rectangular image's aspect ratio?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The source is drawn into square canvases, so prepare a square image to avoid distortion.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the ZIP include favicon.ico?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. <code>favicon.ico</code> contains 16, 32, and 48 pixel entries.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it create an Apple touch icon?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. The package includes <code>apple-touch-icon.png</code> at 180 &times; 180 pixels.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it generate a web app manifest?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Create and configure the manifest separately if your site is an installable PWA.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I use an SVG logo?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">SVG is not accepted by this tool. Export a square PNG, JPG, or WebP first.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why is my old favicon still showing?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Browser favicon caching is persistent. Verify deployment, clear site data, test privately, or version the icon URL.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is the ZIP ready to deploy without changes?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The image assets are ready, but you still need to place them at correct URLs and add site markup or framework metadata.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What is the download filename?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The package downloads as <code>favicons-package.zip</code>.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-scaler"><h3 class="font-bold text-[#1a73e8]">Image Scaler</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Produce a custom master-image size before generating icons.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/webp-convert"><h3 class="font-bold text-[#1a73e8]">WebP Converter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Move a source between raster formats when needed.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/color-palette"><h3 class="font-bold text-[#1a73e8]">Color Palette Extractor</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Choose a high-contrast brand color for a favicon tile.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -163,6 +209,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/bulk-resize.html"><h3 class="font-bold text-[#1a73e8]">Bulk Image Resizer Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Resize multiple images in bulk by percentage, width, or height and download as a ZIP.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Build your favicon package</h2><p class="mt-3 text-sm leading-6 text-white">Upload a square logo to generate PNG favicons, a multi-size <code>favicon.ico</code>, and an Apple touch icon in one <code>favicons-package.zip</code>.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/favicon-generator">Use Favicon Generator</a></section>
+    </article>
   </main>
 </body>
 </html>
