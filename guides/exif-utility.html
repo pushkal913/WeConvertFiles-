@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>EXIF Viewer & Remover Guide - WeConvertFiles</title>
-  <meta name="description" content="View and strip EXIF camera metadata from JPEG/PNG images offline for complete security." />
+  <title>EXIF Viewer &amp; Remover: Strip Photo Metadata Online</title>
+  <meta name="description" content="View common EXIF fields in a JPEG or PNG and create a clean re-encoded copy in your browser. Learn about GPS privacy, quality, orientation, and verification." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/exif-utility.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="EXIF Viewer & Remover Guide - WeConvertFiles" />
-  <meta property="og:description" content="View and strip EXIF camera metadata from JPEG/PNG images offline for complete security." />
+  <meta property="og:title" content="View and Remove EXIF Metadata from Photos" />
+  <meta property="og:description" content="Inspect camera, date, exposure, GPS, and software fields, then download a browser-re-encoded image without the original metadata blocks." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/exif-utility.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="EXIF Viewer & Remover Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="View and strip EXIF camera metadata from JPEG/PNG images offline for complete security." />
+  <meta name="twitter:title" content="View and Remove EXIF Metadata from Photos" />
+  <meta name="twitter:description" content="Inspect camera, date, exposure, GPS, and software fields, then download a browser-re-encoded image without the original metadata blocks." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,121 +31,150 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <style>
+    /* Mobile overflow fix: keep the article column within the viewport so wide
+       tables and code blocks scroll inside their own container instead of
+       widening the page, and wrap long inline code tokens. */
+    main { width: 100%; }
+    main :where(p, li, td, th, dd, dt, h1, h2, h3, blockquote) code { overflow-wrap: anywhere; word-break: break-word; }
+    main pre code { overflow-wrap: normal; word-break: normal; white-space: pre; }
+  </style>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "EXIF Viewer & Remover Guide",
-        "description": "View and strip EXIF camera metadata from JPEG/PNG images offline for complete security.",
+        "headline": "EXIF Viewer and Metadata Remover for JPEG and PNG",
+        "description": "Inspect a focused set of common EXIF fields in a JPEG or PNG and download a browser-re-encoded copy without the original metadata containers.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
-        "dateModified": "2026-08-18",
+        "dateModified": "2026-08-19",
         "author": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/exif-utility.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/exif-utility.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What metadata gets removed?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "All camera settings, GPS coordinate history, orientation fields, and device details are stripped. Only the visual pixel graphic is saved."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Why is it important for privacy?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "When you share photos online, they can contain coordinates showing where the photo was taken. Stripping EXIF blocks geolocation tracking."
-            }
-          }
+          { "@type": "Question", "name": "Which image formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "The intended interface accepts one JPEG/JPG or PNG image." } },
+          { "@type": "Question", "name": "Which EXIF fields are displayed?", "acceptedAnswer": { "@type": "Answer", "text": "Camera make/model, date, exposure time, aperture, ISO, GPS latitude/longitude, and software are shown when available." } },
+          { "@type": "Question", "name": "Does the viewer show every metadata tag?", "acceptedAnswer": { "@type": "Answer", "text": "No. It displays a focused list of nine fields, not a complete EXIF/XMP/IPTC report." } },
+          { "@type": "Question", "name": "How is metadata removed?", "acceptedAnswer": { "@type": "Answer", "text": "The browser decodes the image, redraws its pixels on a canvas, and exports a new blob without copying the original metadata containers." } },
+          { "@type": "Question", "name": "Does JPEG quality stay identical?", "acceptedAnswer": { "@type": "Answer", "text": "Not necessarily. JPEG is re-encoded using browser defaults, and there is no quality control." } },
+          { "@type": "Question", "name": "Will the image dimensions stay the same?", "acceptedAnswer": { "@type": "Answer", "text": "The canvas uses decoded image width and height, though orientation handling can affect how dimensions are interpreted. Verify the output." } },
+          { "@type": "Question", "name": "Does it remove visible location clues?", "acceptedAnswer": { "@type": "Answer", "text": "No. Metadata removal does not redact signs, faces, landmarks, or other details in the pixels." } },
+          { "@type": "Question", "name": "Can I remove only the GPS fields?", "acceptedAnswer": { "@type": "Answer", "text": "No. The tool creates a new pixel-based copy rather than offering selective tag removal." } },
+          { "@type": "Question", "name": "What is the output filename?", "acceptedAnswer": { "@type": "Answer", "text": "It adds clean- before the original filename." } },
+          { "@type": "Question", "name": "Is a blank metadata table proof the image is clean?", "acceptedAnswer": { "@type": "Answer", "text": "No. Other tags or metadata containers may exist. Verify with another tool for sensitive use." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">EXIF Viewer and Metadata Remover for JPEG and PNG</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Photo privacy tool</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">A camera or editing app may store the device model, capture date, exposure settings, software name, orientation, and GPS coordinates inside a photo's metadata blocks &mdash; helpful for workflows, but able to disclose where, when, and how an image was created. The <strong class="text-slate-900 dark:text-slate-200">EXIF Viewer / Remover</strong> accepts one JPEG or PNG image. It uses EXIF.js to inspect a focused set of common fields, then offers a removal action that decodes the image, draws its pixels onto a new canvas, and downloads a newly encoded copy named with a <code>clean-</code> prefix.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/exif-utility">View and remove EXIF metadata<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">EXIF Viewer & Remover</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">EXIF Viewer / Remover displays camera metadata stored inside JPEG, JPG, and PNG images, such as location coordinate maps, capture device names, and shutter apertures. To remove EXIF, the tool draws the raw visual pixel grid onto a clean canvas buffer and exports the image as a new blob, completely stripping all original metadata headers.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/exif-utility">
-        Open EXIF Remover
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Upload one JPEG or PNG, review any camera or location fields shown in the metadata table, then select <strong>Remove EXIF Metadata</strong>. The tool creates a fresh image from rendered pixels using the source MIME type and downloads it as <code>clean-</code> plus the original filename. Canvas re-encoding can alter compression, color handling, and orientation, so keep the original separately and open the new file in a metadata inspector before sharing sensitive material.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload Image</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Drag or browse your target JPEG, JPG, or PNG photo into the upload dropzone.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Inspect EXIF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Review camera capture settings, coordinates, creation dates, and editing apps in the metadata table.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Strip & Save</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Remove EXIF Metadata to export and download a clean copy of your photo with all headers deleted.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What is EXIF metadata?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>EXIF (Exchangeable Image File Format) information is commonly stored alongside image data by cameras and phones. Depending on the device and application, a photo may contain the camera manufacturer and model, capture date and time, shutter speed and aperture, ISO sensitivity, orientation instructions, focal length and lens details, GPS latitude/longitude/altitude/direction, thumbnails, and editing-software information.</p>
+        <p>Not every image contains EXIF, and not every metadata record is EXIF. Images can also contain XMP, IPTC, ICC color profiles, PNG text chunks, application data, and other containers.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What metadata gets removed?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">All camera settings, GPS coordinate history, orientation fields, and device details are stripped. Only the visual pixel graphic is saved.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Why is it important for privacy?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">When you share photos online, they can contain coordinates showing where the photo was taken. Stripping EXIF blocks geolocation tracking.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Which fields does the viewer display?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mb-4">The interface reads all tags available through EXIF.js but displays only these selected fields when present:</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Display label</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">EXIF key</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">What it may reveal</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Camera Maker</td><td class="py-3 pr-4"><code>Make</code></td><td class="py-3">Device manufacturer</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Camera Model</td><td class="py-3 pr-4"><code>Model</code></td><td class="py-3">Specific camera or phone model</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Date Captured</td><td class="py-3 pr-4"><code>DateTime</code></td><td class="py-3">Stored image date/time text</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Shutter Speed</td><td class="py-3 pr-4"><code>ExposureTime</code></td><td class="py-3">Exposure duration</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">F-Number (Aperture)</td><td class="py-3 pr-4"><code>FNumber</code></td><td class="py-3">Lens aperture setting</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">ISO Rating</td><td class="py-3 pr-4"><code>ISOSpeedRatings</code></td><td class="py-3">Sensor sensitivity setting</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Latitude Coordinates</td><td class="py-3 pr-4"><code>GPSLatitude</code></td><td class="py-3">North/south position</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Longitude Coordinates</td><td class="py-3 pr-4"><code>GPSLongitude</code></td><td class="py-3">East/west position</td></tr>
+          <tr><td class="py-3 pr-4">Editing Software</td><td class="py-3 pr-4"><code>Software</code></td><td class="py-3">Software that wrote or modified the file</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">GPS latitude and longitude are shown in degrees, minutes, and seconds with directional references when the source values follow the expected structure; the tool does not combine them into decimal degrees, display altitude, or open a map. The table is not a complete metadata dump &mdash; a message that no key privacy metadata was identified does not prove that no other EXIF, XMP, IPTC, color-profile, thumbnail, or application metadata exists.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the metadata removal works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The removal process is pixel-based: the browser reads the file as a data URL, an image element decodes it, a canvas is created at the decoded image width and height, the visible image is drawn onto the canvas, and <code>canvas.toBlob()</code> writes a new image using the original MIME type when available. Because the original file containers are not copied into the new blob, the output normally omits EXIF and other source metadata blocks &mdash; this differs from editing individual tags, since the file is decoded and re-encoded from its visible raster.</p>
+        <p>The tool does not selectively keep copyright, creator, color-profile, or orientation tags, and it does not provide a checkbox list of fields to remove. For a source named <code>holiday-photo.jpg</code>, the download is named <code>clean-holiday-photo.jpg</code>: the canvas encodes using the file's MIME type, so JPEG input remains JPEG and PNG remains PNG in normal browser support, and the original extension is retained. There is no output-format selector, quality slider, batch mode, or ZIP download &mdash; only one image is processed at a time.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why GPS metadata is a privacy risk</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>GPS coordinates can reveal a home, school, workplace, hotel, medical facility, or private event location, and repeated images can expose patterns even when one coordinate seems harmless. Before sharing a photo publicly, consider whether the location is sensitive, whether a child or vulnerable person is pictured, whether the capture time reveals absence from home, whether the device model increases fingerprinting risk, and whether the platform will preserve or remove metadata after upload.</p>
+        <p>Some social networks strip metadata, but behavior varies and can change. Remove sensitive information before upload rather than relying on the destination.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Quality, orientation, and color after removal</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Removing EXIF can change image quality. JPEG is lossy, and canvas export re-encodes the pixels using the browser's default JPEG quality because this tool supplies no quality setting, so file size and fine detail may change even at the same dimensions. PNG output uses lossless encoding, but decoded color management or specialized chunks can still differ from the source &mdash; the canvas copy is not a byte-for-byte clone. Compare the clean result at 100% zoom and keep the original if fidelity or archival provenance matters.</p>
+        <p>Some JPEGs store pixels in one orientation and rely on an EXIF Orientation tag to display them upright. Modern browsers often apply that orientation while decoding, and drawing to canvas can bake the displayed orientation into new pixels while discarding the tag; behavior varies, so verify the clean output is upright and has expected dimensions before distributing it. Similarly, an embedded ICC profile may not be preserved, so a color-managed application can display the clean copy differently from the source. For print, product photography, or archival work, use tooling that can preserve or deliberately convert color profiles while removing privacy-sensitive tags.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Removal is not redaction</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Removing metadata does not remove sensitive content visible in the pixels. Street signs, badges, faces, screens, documents, reflections, house numbers, and distinctive landmarks can still disclose information. Cropping does not guarantee metadata removal, and metadata removal does not blur faces. A complete privacy review may include metadata removal, cropping, visual redaction or blurring, checking background and reflections, reviewing the filename, and verifying the final exported file. Do not confuse "clean metadata" with anonymous imagery.</p>
+        <p>Metadata can also be edited or forged easily, so do not use displayed camera or date information as proof of authorship or authenticity. And because metadata viewers and image decoders parse complex formats, keep your browser updated and do not treat the tool as a malware scanner &mdash; a malformed or hostile image can still stress browser memory or target decoder vulnerabilities.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why the viewer may report no EXIF data</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; The camera never stored EXIF, or another app already removed it.</li>
+        <li>&bull; The metadata uses XMP, IPTC, PNG chunks, or unsupported tags.</li>
+        <li>&bull; The file is a screenshot rather than a camera photo.</li>
+        <li>&bull; The metadata is malformed, or the format/tag combination is not handled by EXIF.js.</li>
+        <li>&bull; The file contains tags outside the nine displayed fields.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-3">EXIF is strongly associated with JPEG, where camera metadata is common; PNG historically uses its own chunk system, although modern files may carry EXIF through an <code>eXIf</code> chunk. A blank table for PNG does not guarantee the file contains no metadata chunks &mdash; use a second, independent metadata tool for high-stakes verification.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and browser-based processing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Image inspection and canvas re-encoding happen in the browser.</strong> EXIF.js is loaded from third-party content delivery infrastructure, and the photo is not sent to a dedicated metadata-removal API by this workflow.</p>
+        <p>Client-side processing reduces one exposure path but does not protect against a compromised device, malicious browser extension, screen capture, local downloads, or clipboard history. Handle sensitive photos according to your organization's policy, preserve the original privately, generate the <code>clean-</code> copy, confirm orientation and dimensions, inspect it with an independent metadata tool, review the filename and visible content, and share only the verified clean copy.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which image formats are supported?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The intended interface accepts one JPEG/JPG or PNG image.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which EXIF fields are displayed?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Camera make/model, date, exposure time, aperture, ISO, GPS latitude/longitude, and software are shown when available.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the viewer show every metadata tag?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It displays a focused list of nine fields, not a complete EXIF/XMP/IPTC report.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">How is metadata removed?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The browser decodes the image, redraws its pixels on a canvas, and exports a new blob without copying the original metadata containers.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does JPEG quality stay identical?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not necessarily. JPEG is re-encoded using browser defaults, and there is no quality control.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will the image dimensions stay the same?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The canvas uses decoded image width and height, though orientation handling can affect how dimensions are interpreted. Verify the output.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it remove visible location clues?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Metadata removal does not redact signs, faces, landmarks, or other details in the pixels.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I remove only the GPS fields?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The tool creates a new pixel-based copy rather than offering selective tag removal.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What is the output filename?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It adds <code>clean-</code> before the original filename.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is a blank metadata table proof the image is clean?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Other tags or metadata containers may exist. Verify with another tool for sensitive use.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-cropper"><h3 class="font-bold text-[#1a73e8]">Image Cropper</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Remove sensitive edge content from the pixels.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/color-palette"><h3 class="font-bold text-[#1a73e8]">Image Color Picker</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Inspect exact visible colors after re-encoding.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/webp-convert"><h3 class="font-bold text-[#1a73e8]">WebP Converter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Produce a different output format intentionally.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -155,6 +183,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/bulk-resize.html"><h3 class="font-bold text-[#1a73e8]">Bulk Image Resizer Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Resize multiple images in bulk by percentage, width, or height and download as a ZIP.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Strip photo metadata</h2><p class="mt-3 text-sm leading-6 text-white">Upload a JPEG or PNG, review its EXIF fields, and download a re-encoded <code>clean-</code> copy without the original metadata blocks.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/exif-utility">Use EXIF Viewer / Remover</a></section>
+    </article>
   </main>
 </body>
 </html>
