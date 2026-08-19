@@ -4,22 +4,21 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Image to WebP Converter Guide - WeConvertFiles</title>
-  <meta name="description" content="Convert JPEG, PNG, or WebP images to high-compression WebP format locally in your browser." />
+  <title>Convert JPG and PNG Images to WebP</title>
+  <meta name="description" content="Convert JPG, PNG, or WebP images to WebP in your browser. Choose quality, process batches, and understand transparency, metadata, and compression." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/webp-convert.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Image to WebP Converter Guide - WeConvertFiles" />
-  <meta property="og:description" content="Convert JPEG, PNG, or WebP images to high-compression WebP format locally in your browser." />
+  <meta property="og:title" content="Convert Images to WebP in Your Browser" />
+  <meta property="og:description" content="Turn JPG, PNG, and existing WebP files into WebP images with adjustable quality and batch ZIP downloads." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/webp-convert.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Image to WebP Converter Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Convert JPEG, PNG, or WebP images to high-compression WebP format locally in your browser." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="Convert Images to WebP in Your Browser" />
+  <meta name="twitter:description" content="Turn JPG, PNG, and existing WebP files into WebP images with adjustable quality and batch ZIP downloads." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Image to WebP Converter Guide",
-        "description": "Convert JPEG, PNG, or WebP images to high-compression WebP format locally in your browser.",
+        "headline": "Convert JPG and PNG Images to WebP",
+        "description": "A practical guide to converting JPG, PNG, and existing WebP images into browser-encoded WebP files with adjustable quality.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,124 +46,181 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/webp-convert.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/webp-convert.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Why should I convert images to WebP?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "WebP is a highly optimized next-generation graphic format. It supports both lossy compression and lossless alpha transparency, producing significantly smaller file sizes than JPG or PNG, which boosts website load speeds and SEO rankings."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is the difference between lossy and lossless modes?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Lossless compression preserves every pixel exactly, making it perfect for graphics, logos, and screenshots. Lossy mode discards tiny amounts of visual data to achieve extreme file size reductions, which is ideal for photographic images."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Are my original pictures uploaded to a backend server?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. The entire conversion process occurs within your browser session using native HTML5 API loops. Your images never leave your computer, ensuring complete confidentiality."
-            }
-          }
+          { "@type": "Question", "name": "Which image formats can I convert to WebP?", "acceptedAnswer": { "@type": "Answer", "text": "The current tool accepts JPEG/JPG, PNG, and WebP." } },
+          { "@type": "Question", "name": "Can I convert several images at once?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Multiple results are packaged in converted_webp.zip." } },
+          { "@type": "Question", "name": "Does the converter resize images?", "acceptedAnswer": { "@type": "Answer", "text": "No. Canvas width and height match the decoded source dimensions." } },
+          { "@type": "Question", "name": "What is the default quality?", "acceptedAnswer": { "@type": "Answer", "text": "Lossy conversion defaults to 80%." } },
+          { "@type": "Question", "name": "Is the option labeled Lossless guaranteed to be truly lossless?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current implementation requests canvas WebP quality 1.0 but does not explicitly select or verify a lossless bitstream." } },
+          { "@type": "Question", "name": "Will transparency be preserved?", "acceptedAnswer": { "@type": "Answer", "text": "WebP and canvas support alpha transparency, but important assets should be tested on different backgrounds." } },
+          { "@type": "Question", "name": "Is metadata preserved?", "acceptedAnswer": { "@type": "Answer", "text": "Do not assume so. Canvas conversion focuses on pixels and can remove EXIF, GPS, ICC, XMP, and other metadata." } },
+          { "@type": "Question", "name": "Will animated WebP remain animated?", "acceptedAnswer": { "@type": "Answer", "text": "Animation is not intentionally preserved by the single-canvas workflow." } },
+          { "@type": "Question", "name": "Is WebP always smaller than PNG or JPEG?", "acceptedAnswer": { "@type": "Answer", "text": "No. Compare actual output size and visual quality." } },
+          { "@type": "Question", "name": "Are images uploaded for conversion?", "acceptedAnswer": { "@type": "Answer", "text": "No. Image contents are processed in browser memory and are not sent to WeConvertFiles for conversion." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Convert JPG and PNG Images to WebP</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">WebP Output</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">WebP is an image format designed for efficient delivery on the web, often using fewer bytes than an equivalent older-format image at a visually acceptable quality. The <strong class="text-slate-900 dark:text-slate-200">Image to WebP</strong> tool converts one or more JPG, PNG, or existing WebP files through the browser's canvas encoder &mdash; a single image downloads with a <code>.webp</code> extension, and multiple results are placed in <code>converted_webp.zip</code>. Canvas re-encoding can remove metadata and may not make every image smaller, so compare before replacing originals.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/webp-convert">Open Image to WebP<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Convert Image to WebP</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Image to WebP Converter allows you to convert JPEG and PNG files to modern high-efficiency WebP image files in real-time. The tool loads files into HTML5 Canvas templates and exports them as compressed blobs via native Canvas rendering algorithms. WebP provides superior lossless and lossy compression compared to legacy formats, reducing image sizes by up to 35% while preserving visual clarity. Because all processes run client-side inside your browser memory, your original graphics remain completely private. This tool is ideal for web developers, content creators, and editors optimizing assets for page load speeds.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/webp-convert">
-        Open Image to WebP
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Add JPG, PNG, or WebP images, choose a quality or the highest-quality mode, and convert them. Compare appearance and file size before replacing originals, because canvas re-encoding can remove metadata and may not make every image smaller.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload Images</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose PNG, JPG, or WebP images from your local drive or drag them into the conversion zone.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose Quality</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Adjust the conversion quality slider or toggle Lossless compression to match your file requirements.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Convert & Save</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert to execute. Single files download directly; multiple files compile into a clean ZIP folder.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Supported input and output</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Item</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Current behavior</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Accepted input</td><td class="py-3">JPEG/JPG, PNG, and WebP</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Number of files</td><td class="py-3">One or more</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Output format</td><td class="py-3">WebP</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Dimensions</td><td class="py-3">Same decoded width and height as each source</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Single-file output</td><td class="py-3">Original base filename with <code>.webp</code></td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Multiple-file output</td><td class="py-3"><code>converted_webp.zip</code></td></tr>
+          <tr><td class="py-3 pr-4">Quality</td><td class="py-3">10% to 100% (lossy default 80%)</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">The converter does not resize images. Use the image-scaling or bulk-resize tool when dimensions must change.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Why should I convert images to WebP?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">WebP is a highly optimized next-generation graphic format. It supports both lossy compression and lossless alpha transparency, producing significantly smaller file sizes than JPG or PNG, which boosts website load speeds and SEO rankings.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What is the difference between lossy and lossless modes?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Lossless compression preserves every pixel exactly, making it perfect for graphics, logos, and screenshots. Lossy mode discards tiny amounts of visual data to achieve extreme file size reductions, which is ideal for photographic images.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are my original pictures uploaded to a backend server?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. The entire conversion process occurs within your browser session using native HTML5 API loops. Your images never leave your computer, ensuring complete confidentiality.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When converting to WebP is useful</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Optimize website photographs</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">WebP can reduce transfer size for hero images, articles, product photos, and galleries. Always compare the result at the size where visitors will actually view it.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Convert transparent PNG graphics</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">WebP supports alpha transparency, so logos, interface graphics, and illustrations may become smaller &mdash; though the result depends on image complexity and browser encoding.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Prepare a batch of web assets</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The tool accepts multiple images and packages converted results into one ZIP, useful for a small set of related assets.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Standardize mixed formats</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A project containing JPG, PNG, and WebP sources can be converted into one delivery format while the originals remain available separately.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm md:col-span-2"><h3 class="font-bold text-slate-900 dark:text-slate-200">Re-encode an existing WebP</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">An existing WebP can be decoded and encoded again with a different setting. Re-encoding a lossy source can introduce additional quality loss and is not equivalent to recovering the original image.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to convert an image to WebP</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Keep the original image.</strong> Do not overwrite the only copy. Conversion can remove metadata and alter compressed pixels.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Add one or more supported images.</strong> Choose JPG, PNG, or WebP files. The tool handles them one after another (sequentially) in the current implementation.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Choose a compression setting.</strong> For lossy output, begin around the default 80% and inspect the result. Lower settings request smaller files with more visible artifacts; higher settings prioritize fidelity but may produce larger files. The setting is an encoder-quality hint, not a promise of a particular file size, compression ratio, or objective visual score.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Convert the files.</strong> Each image is decoded, drawn onto a canvas at its original dimensions, and encoded as WebP.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Download the result.</strong> One input produces one <code>.webp</code> download; multiple inputs produce <code>converted_webp.zip</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6. Compare before publishing.</strong> Check dimensions, transparency, colors, gradients, sharp edges, text, and fine texture, and compare file size with the source instead of assuming the WebP is smaller.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Understanding the quality slider</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mb-4">The quality slider ranges from 10 to 100 and defaults to 80. The implementation divides that number by 100 and passes the result to <code>canvas.toBlob()</code> as the WebP quality value.</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Range</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">General expectation</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">What to inspect</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">10&ndash;40</td><td class="py-3 pr-4">Aggressive compression request</td><td class="py-3">Blocking, smearing, ringing, lost texture</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">50&ndash;75</td><td class="py-3 pr-4">Smaller delivery assets</td><td class="py-3">Faces, gradients, text, edge detail</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">80&ndash;90</td><td class="py-3 pr-4">Balanced or high-quality output</td><td class="py-3">File-size benefit compared with source</td></tr>
+          <tr><td class="py-3 pr-4">91&ndash;100</td><td class="py-3 pr-4">Maximum-quality request</td><td class="py-3">Whether the larger output offers a visible benefit</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">These bands are practical starting points, not guarantees. Browser encoders and image content vary.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Important note about the "Lossless" option</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>The interface offers <strong>Lossy (Optimized Size)</strong> and <strong>Lossless (Highest Quality)</strong>. In the current code, the second option passes a quality value of <code>1.0</code> to the browser canvas WebP encoder. The Canvas API quality argument expresses encoder quality for formats that support it; the implementation does not explicitly choose a separate lossless WebP encoding mode or inspect the output bitstream to prove that it is lossless.</p>
+        <p>Treat that option as a <strong>maximum-quality browser encode</strong> rather than guaranteed bit-for-bit pixel preservation. Compare decoded pixels when exact losslessness matters, and keep the original PNG or other source.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How browser canvas conversion works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>For each file, the tool:</p>
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Creates an object URL for the local image.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Loads the decoded image into an HTML <code>Image</code> element.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Creates a canvas matching the image's decoded width and height.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Draws the image onto that canvas.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Calls <code>canvas.toBlob()</code> with MIME type <code>image/webp</code>.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Uses the selected lossy quality, or <code>1.0</code> for the option labeled Lossless.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">7.</strong> Downloads one file or adds multiple files to a JSZip archive.</li>
+        </ol>
+        <p>The loop processes files sequentially, and it does not resize or crop them.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">JPG, PNG, and WebP sources</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">JPG to WebP</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">JPEG is already lossy; converting decodes then recompresses. It can be smaller at similar perceived quality but adds generation loss, removes metadata, and does not restore detail lost to JPEG. Compare edge halos, skin texture, and gradients at 100% zoom.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">PNG to WebP</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">WebP can retain alpha through the canvas path, but test translucent edges and shadows. For screenshots and text, aggressive lossy encoding can blur edges; a high-quality setting may look better but may not be smaller than an optimized PNG.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">WebP to WebP</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Re-encoding decoded pixels can help when requesting a different quality, but lossy-to-lossy conversion accumulates artifacts, discards metadata, may drop animation, and can grow larger. Prefer creating delivery formats from the highest-quality original.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Transparency, metadata, and animation</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Transparency.</strong> Transparent PNG and WebP pixels can remain transparent when the browser encoder supports it. Check soft shadows, antialiased logo edges, semitransparent overlays, and appearance on light and dark backgrounds. The tool offers no background-color control, so add a solid background before conversion if one is required.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Metadata.</strong> Canvas conversion focuses on decoded pixels, so do not assume the output retains EXIF, GPS, IPTC/XMP, copyright, timestamps, embedded thumbnails, orientation tags, ICC color profiles, or animation frames. Removal may help privacy but can also drop authorship, licensing, or color information.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Animation.</strong> The converter draws an image onto a single canvas and creates one output blob; it does not decode and reassemble animation frames. Treat it as a still-image converter and do not use it when animated WebP behavior must be preserved.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Will WebP always be smaller?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>No. File size depends on the source format and existing optimization, image dimensions, detail and noise, transparency, the quality setting, the browser encoder, source metadata, and whether the source was already WebP.</p><p>A tiny optimized PNG icon may be smaller than its WebP conversion, and a noisy photograph may require a lower quality to produce a meaningful reduction. Measure the actual output and judge visual quality at the intended display size.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Browser and server delivery considerations</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; Use the <code>.webp</code> extension and serve the file with <code>Content-Type: image/webp</code>.</li>
+        <li>&bull; Update HTML, CSS, manifests, and preload references.</li>
+        <li>&bull; Confirm caching rules.</li>
+        <li>&bull; Check social, email, CMS, and third-party platform compatibility.</li>
+        <li>&bull; Keep fallbacks if a required consumer does not support WebP.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-3">Modern browsers commonly support WebP, but conversion alone does not update references across a website.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">Image contents are decoded and encoded in browser memory and are not sent to WeConvertFiles for conversion.</strong> JSZip may be downloaded from a third-party CDN when multiple outputs need packaging, so the workflow should not be described as completely offline.</p><p>If a visitor consents to analytics, separate usage information such as visits, clicks, device details, or conversion events may be collected. Those analytics do not receive the image contents.</p><p>The local environment still matters. Browser extensions, malware, shared devices, downloaded files, backups, and cloud-synchronized folders can expose images independently of conversion.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; JPG, PNG, and WebP input only; WebP output only; dimensions remain unchanged.</li>
+        <li>&bull; Browser-dependent canvas encoding.</li>
+        <li>&bull; "Lossless" currently means a <code>1.0</code> quality request, not a verified lossless mode.</li>
+        <li>&bull; Metadata and color profiles are not guaranteed to survive; animation is not intentionally preserved.</li>
+        <li>&bull; Files process sequentially; large images can exceed browser canvas or memory limits.</li>
+        <li>&bull; A smaller file is not guaranteed.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The WebP is larger than the source</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The source may already be optimized, or the selected quality may be too high. Compare lower settings while checking visible quality.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The output looks blurry</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Increase quality and regenerate from the original rather than from a previously compressed derivative.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Transparency looks wrong</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Inspect the output on light and dark backgrounds, and confirm that the source actually contains alpha transparency.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Metadata is missing</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Canvas re-encoding does not preserve file metadata reliably. Keep the original when metadata matters.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">An animated WebP becomes still</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The tool does not implement animation-frame preservation. Use an animation-aware encoder.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Several files produce one ZIP</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">This is expected. Multiple converted images download as <code>converted_webp.zip</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The browser becomes unresponsive</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Large pixel dimensions and multiple files consume memory. Convert fewer or smaller images at a time.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which image formats can I convert to WebP?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The current tool accepts JPEG/JPG, PNG, and WebP.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I convert several images at once?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Multiple results are packaged in <code>converted_webp.zip</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the converter resize images?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Canvas width and height match the decoded source dimensions.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What is the default quality?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Lossy conversion defaults to 80%.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is the option labeled Lossless guaranteed to be truly lossless?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current implementation requests canvas WebP quality <code>1.0</code> but does not explicitly select or verify a lossless bitstream.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will transparency be preserved?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">WebP and canvas support alpha transparency, but important assets should be tested on different backgrounds.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is metadata preserved?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Do not assume so. Canvas conversion focuses on pixels and can remove EXIF, GPS, ICC, XMP, and other metadata.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will animated WebP remain animated?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Animation is not intentionally preserved by the single-canvas workflow.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is WebP always smaller than PNG or JPEG?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Compare actual output size and visual quality.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Are images uploaded for conversion?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Image contents are processed in browser memory and are not sent to WeConvertFiles for conversion.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-scaler"><h3 class="font-bold text-[#1a73e8]">Scale Image</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Enlarge dimensions before creating a delivery format.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/bulk-resize"><h3 class="font-bold text-[#1a73e8]">Bulk Resize</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Resize several images together.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-to-base64"><h3 class="font-bold text-[#1a73e8]">Image to Base64</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Encode an image for inline use rather than changing its format.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -174,6 +229,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/bulk-resize.html"><h3 class="font-bold text-[#1a73e8]">Bulk Image Resizer Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Resize multiple images in bulk by percentage, width, or height and download as a ZIP.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Convert your images to WebP</h2><p class="mt-3 text-sm leading-6 text-white">Add one or more images, pick a quality, generate WebP output, and compare size and appearance against the source before you publish.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/webp-convert">Use Image to WebP</a></section>
+    </article>
   </main>
 </body>
 </html>
