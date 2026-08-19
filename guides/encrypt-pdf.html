@@ -4,22 +4,21 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Protect PDF Guide - Free Browser Tool</title>
-  <meta name="description" content="Lock and encrypt PDF documents with high-security passwords." />
+  <title>Password-Protect a PDF: Encrypt and Lock Your File</title>
+  <meta name="description" content="Add password protection to a PDF in your browser. Learn how encryption and PDF permissions work, how to share passwords safely, and what to test." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/encrypt-pdf.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Protect PDF Guide - Free Browser Tool" />
-  <meta property="og:description" content="Lock and encrypt PDF documents with high-security passwords." />
+  <meta property="og:title" content="How to Password-Protect and Encrypt a PDF" />
+  <meta property="og:description" content="Create a protected PDF, choose a strong password, understand viewer-enforced permissions, and test the result before sharing it." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/encrypt-pdf.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Protect PDF Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Lock and encrypt PDF documents with high-security passwords." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="How to Password-Protect and Encrypt a PDF" />
+  <meta name="twitter:description" content="Create a protected PDF, choose a strong password, understand viewer-enforced permissions, and test the result before sharing it." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Protect PDF Guide - Free Browser Tool",
-        "description": "Lock and encrypt PDF documents with high-security passwords.",
+        "headline": "Password-Protect a PDF Before You Share It",
+        "description": "A practical guide to adding a password to a PDF, understanding encryption and permissions, and distributing the protected file safely.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,124 +46,181 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/encrypt-pdf.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/encrypt-pdf.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What encryption standard is used?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The tool utilizes pdf-lib's built-in encryption algorithm, which complies with standard PDF permissions."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What happens if I forget the password?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We do not save your passwords on any server. If you forget your password, the file cannot be recovered."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can standard PDF readers open the locked file?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Standard PDF readers (like Adobe Acrobat or Chrome) will prompt for the password when opening the file."
-            }
-          }
+          { "@type": "Question", "name": "How do I add a password to a PDF?", "acceptedAnswer": { "@type": "Answer", "text": "Select the PDF, enter a strong unique password, create the protected copy, and download protected.pdf. Reopen the result to confirm that the password prompt works." } },
+          { "@type": "Question", "name": "Does the tool use separate owner and user passwords?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current implementation uses the entered value as both the user password and owner password." } },
+          { "@type": "Question", "name": "Can WeConvertFiles recover a forgotten PDF password?", "acceptedAnswer": { "@type": "Answer", "text": "No. The password is not retained, and the service does not provide password recovery or escrow." } },
+          { "@type": "Question", "name": "Can the protected PDF be printed?", "acceptedAnswer": { "@type": "Answer", "text": "The generated permissions request high-resolution printing. Actual behavior should be tested in the intended PDF reader." } },
+          { "@type": "Question", "name": "Does password protection prevent copying?", "acceptedAnswer": { "@type": "Answer", "text": "The PDF requests that copying be disallowed, but enforcement depends on the PDF software. It cannot prevent screenshots, photographs, retyping, or every form of content extraction." } },
+          { "@type": "Question", "name": "Should I send the password in the same email as the PDF?", "acceptedAnswer": { "@type": "Answer", "text": "For sensitive documents, use a separate trusted channel so one compromised account or message does not expose both the file and its password." } },
+          { "@type": "Question", "name": "Does encrypting the PDF overwrite my original?", "acceptedAnswer": { "@type": "Answer", "text": "No. The tool creates a separate file named protected.pdf." } },
+          { "@type": "Question", "name": "Can I encrypt an already protected PDF?", "acceptedAnswer": { "@type": "Answer", "text": "An encrypted source may fail to load without its current password. Unlock an authorized working copy first when necessary, then apply the new protection." } },
+          { "@type": "Question", "name": "Will encryption preserve an existing digital signature?", "acceptedAnswer": { "@type": "Answer", "text": "Re-saving and encrypting a PDF changes it and may invalidate or alter the status of an existing cryptographic signature." } },
+          { "@type": "Question", "name": "Is a password-protected PDF completely secure?", "acceptedAnswer": { "@type": "Answer", "text": "No single control provides complete security. Protection depends on password strength, software compatibility, device security, recipient behavior, storage, and the sharing method." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Password-Protect a PDF Before You Share It</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Password Protection</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Attachments, statements, and reports can travel far beyond their original folder. The <strong class="text-slate-900 dark:text-slate-200">Encrypt PDF</strong> tool creates a new file named <code>protected.pdf</code> that a compatible reader must unlock with the correct password. It uses your password as both the user and owner password, requests high-resolution printing, and marks copying and modification as disallowed. Password strength, the recipient's device, the transfer channel, and the reader's behavior all still matter.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/encrypt-pdf">Open Encrypt PDF<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Protect PDF</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Protect PDF encrypts your PDF files using advanced standard security controls. By entering a password, the engine locks your document, restricting unauthorized users from viewing, printing, extracting pages, or editing content without authorization.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/encrypt-pdf">
-        Open Protect PDF
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Select one PDF, enter a strong unique password, create <code>protected.pdf</code>, and reopen the download in a current PDF viewer. Send the password through a separate trusted channel and keep an authorized source copy, because WeConvertFiles cannot recover a forgotten password.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Select PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose the PDF file you wish to secure with password encryption.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Enter Password</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Type your secure password and verify it to avoid errors.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Encrypt & Save</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Protect PDF to encrypt the document layout in-memory and download the file.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When password-protecting a PDF is useful</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Sending personal records</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A password adds a barrier when sharing statements, identification, or applications. It does not replace a secure transfer service when policy requires one.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Distributing internal reports</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Protect reports intended for a defined recipient group. Access rules, retention policies, and approved channels should still be followed.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Protecting an exported copy</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A document stored safely inside an application can lose those controls when exported. Encrypting the PDF adds file-level protection to the exported copy.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Reducing accidental access</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">If a file is attached to the wrong message or placed in the wrong folder, a password may prevent someone without the credential from opening it.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm md:col-span-2"><h3 class="font-bold text-slate-900 dark:text-slate-200">Creating a protected archive copy</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">An encrypted PDF may suit an authorized archive when the password is stored separately in a secure credential system.</p></div>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What encryption standard is used?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The tool utilizes pdf-lib's built-in encryption algorithm, which complies with standard PDF permissions.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What happens if I forget the password?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">We do not save your passwords on any server. If you forget your password, the file cannot be recovered.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can standard PDF readers open the locked file?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. Standard PDF readers (like Adobe Acrobat or Chrome) will prompt for the password when opening the file.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What PDF password protection controls</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>PDF security distinguishes between a password required to open the document and permissions that describe what an authorized viewer may allow after opening it.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">User password:</strong> required to open the PDF. Without it, a compatible viewer should refuse access to the document contents.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Owner password:</strong> associated with changing protection settings and permissions. Some workflows use a different owner password so a document opens with one credential while administrative changes require another. The current WeConvertFiles interface uses the <strong class="text-slate-900 dark:text-slate-200">same entered password for both roles</strong> and does not provide separate fields.</p>
+      </section>
+      <section class="mt-4 rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mb-4">The generated PDF requests:</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Action</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Requested setting</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Open the document</td><td class="py-3">Password required</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">High-resolution printing</td><td class="py-3">Allowed</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Copying content</td><td class="py-3">Disallowed</td></tr>
+          <tr><td class="py-3 pr-4">Modifying content</td><td class="py-3">Disallowed</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">PDF permission flags depend on the reader honoring them. They should not be treated as guaranteed digital-rights management.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to password-protect a PDF</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Confirm that encryption is appropriate.</strong> Check organizational requirements before protecting a business, legal, healthcare, financial, or regulated document. Some workflows require an approved secure portal, enterprise rights management, or a particular encryption standard rather than an ad hoc password.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Keep an authorized source copy.</strong> Store the original in an appropriate secure location. Do not make the encrypted file the only copy unless the password and recovery process are reliably managed.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Choose a strong, unique password.</strong> Prefer a long, randomly generated value unique to this document, unrelated to the recipient's name or public information, and stored in a trusted password manager. Avoid short passwords, common phrases, dates, phone numbers, reused passwords, and predictable substitutions such as replacing <code>a</code> with <code>@</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Enter the password carefully.</strong> The interface has no confirmation field, so verify capitalization, symbols, and keyboard layout before creating the file. If you paste a generated password, remember that clipboard history on shared devices may retain secrets.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Create the protected PDF.</strong> Start the operation. The tool loads the source PDF, applies the password and permissions, and prepares <code>protected.pdf</code> as a separate download.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6. Test the result.</strong> Do not assume success because a file downloaded. Open <code>protected.pdf</code> in a current viewer and confirm a password prompt appears, the correct password opens it, an incorrect password is rejected, all pages display, printing behaves as expected, and copying/editing restrictions are reported as expected. Test more than one reader where compatibility matters.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">7. Share the password separately.</strong> Avoid putting the password in the same email or message as the PDF. Use a separate trusted channel appropriate to the sensitivity of the document, such as a phone call or an approved password-sharing service.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the browser encrypts the PDF</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Confirms that a password was entered.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Loads the selected PDF through the browser-compatible PDF library.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Applies the entered value as both <code>userPassword</code> and <code>ownerPassword</code>.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Configures permissions for high-resolution printing while setting modifying and copying to false.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Saves the new PDF and presents it as <code>protected.pdf</code>.</li>
+        </ol>
+        <p>The source PDF is not overwritten. The protected result is a separate document.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to choose a strong PDF password</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Prefer length and randomness.</strong> A randomly generated password resists guessing better than a short human-created word with predictable substitutions. Use the longest value the receiving workflow and PDF readers support comfortably.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Use a unique password.</strong> Do not reuse an account password, email password, device PIN, or a credential from another protected document. Reuse lets one exposed secret compromise several files or systems.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Avoid personal clues.</strong> Names, birthdays, addresses, project titles, invoice numbers, and company names can often be found or guessed.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Store it separately.</strong> Use a password manager or the organization's approved credential system. A password written in the same folder, title, or message as the PDF offers little protection.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Plan for legitimate access.</strong> Decide who stores the credential, how access is audited, and what happens when roles change. WeConvertFiles does not provide password escrow or recovery.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Encryption and permissions are different</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Encryption protects access</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The password unlocks the document in a compatible viewer. Requiring it before opening is stronger than merely asking a reader not to copy.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Permissions request restrictions</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Copying and modification flags tell software which operations to permit after opening. Enforcement can vary across applications.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Neither controls the recipient</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Protection does not remove malware, secure an unmanaged device, prevent screen capture, recall a copy, or enforce deletion after a deadline.</p></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>For high-risk material,</strong> use an approved secure document-sharing platform with identity, access, expiration, revocation, and audit controls. Once a recipient opens a document, information can still be captured through screenshots, photographs, printing, or retyping.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What password protection does not guarantee</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not make a weak password strong.</strong> An attacker can attempt to guess an encrypted PDF's password offline; a short or predictable password undermines otherwise sound encryption.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not guarantee copying restrictions.</strong> The permissions request that copying and modifying be disallowed, but readers differ in how they enforce restrictions.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not hide the existence of the file.</strong> The filename, file size, and the fact that the document is encrypted may still be visible.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not provide password recovery.</strong> The service does not retain the password. If it is lost, the protected file may become inaccessible.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not replace a secure transfer method.</strong> Policy may still require a secure portal, managed storage, access logging, or encrypted communication.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">It does not preserve an existing digital signature.</strong> Re-saving and encrypting a signed PDF changes the document and can invalidate or alter the verification status of a signature.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Compatibility considerations</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>PDF readers vary across browsers, desktop applications, mobile devices, printers, and document-management systems. Before distributing the file widely:</p>
+        <ol class="space-y-3">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Test it in a current desktop PDF reader.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Test the recipient's expected platform when known.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Confirm the password prompt appears.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Verify printing when printing is required.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Check copying and editing restrictions, recognizing that enforcement is reader-dependent.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Retain the original in case the protected file is incompatible with a required system.</li>
+        </ol>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Recommended sharing workflow</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Confirm that email attachment sharing is permitted.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Remove unnecessary personal or confidential information from the PDF.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Create a long, unique password.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Encrypt the PDF and download <code>protected.pdf</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Reopen the file and test it.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Rename it clearly without exposing confidential information in the filename.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">7.</strong> Send the protected PDF through the approved file channel.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">8.</strong> Send the password through a separate trusted channel.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">9.</strong> Confirm receipt with the intended recipient.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">10.</strong> Follow the applicable retention and deletion policy.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">The PDF contents and entered password are processed in browser memory and are not sent to WeConvertFiles for encryption.</strong> Required JavaScript libraries may be downloaded from third-party content-delivery networks when the tool opens, so the workflow should not be described as completely offline.</p><p>If a visitor consents to site analytics, separate information such as visits, clicks, device details, or conversion events may be collected. Those analytics do not receive the PDF contents or the password entered into the tool.</p><p>Browser security still matters. Extensions, malware, clipboard history, screen recording, shared devices, downloads, and cloud-synchronized folders can expose sensitive material independently of the encryption operation.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The protected PDF opens without a password prompt</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Confirm that you opened <code>protected.pdf</code> rather than the original source. Close any already-open copy and test the downloaded result in a current dedicated PDF reader.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The password does not work</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Check capitalization, symbols, spaces, and keyboard layout. If the password was copied, make sure no leading or trailing whitespace was added. Because there is no confirmation field, create a new protected copy from the original when the entered password is uncertain.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The recipient cannot open the document</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Confirm the exact password through a separate channel. Ask which PDF reader and version the recipient uses, and test the same software where possible.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Copying or editing is still available</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Permission enforcement varies among PDF applications. Treat the password as file-access protection and the permission flags as reader-dependent requests, not guaranteed DRM.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Printing is blocked</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The generated permissions request high-resolution printing. If printing is still unavailable, test a current reader and confirm the correct password was used. Viewer behavior and document compatibility can vary.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">An existing signature is invalid</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Encrypting and re-saving the document changed it after signing. Return to the original signed copy and use an approved encryption-and-signing order.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The browser runs out of memory</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Close other memory-heavy tabs and try again. Large image-based PDFs may require more browser memory than smaller text documents.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">How do I add a password to a PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Select the PDF, enter a strong unique password, create the protected copy, and download <code>protected.pdf</code>. Reopen the result to confirm that the password prompt works.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool use separate owner and user passwords?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current implementation uses the entered value as both the user password and owner password.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can WeConvertFiles recover a forgotten PDF password?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The password is not retained, and the service does not provide password recovery or escrow.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can the protected PDF be printed?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The generated permissions request high-resolution printing. Actual behavior should be tested in the intended PDF reader.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does password protection prevent copying?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The PDF requests that copying be disallowed, but enforcement depends on the PDF software. It cannot prevent screenshots, photographs, retyping, or every form of content extraction.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Should I send the password in the same email as the PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">For sensitive documents, use a separate trusted channel so one compromised account or message does not expose both the file and its password.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does encrypting the PDF overwrite my original?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The tool creates a separate file named <code>protected.pdf</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I encrypt an already protected PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">An encrypted source may fail to load without its current password. Unlock an authorized working copy first when necessary, then apply the new protection.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will encryption preserve an existing digital signature?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Re-saving and encrypting a PDF changes it and may invalidate or alter the status of an existing cryptographic signature.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is a password-protected PDF completely secure?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No single control provides complete security. Protection depends on password strength, software compatibility, device security, recipient behavior, storage, and the sharing method.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/password-generator"><h3 class="font-bold text-[#1a73e8]">Password Generator</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Create a long random password or token using Web Crypto.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/decrypt-pdf"><h3 class="font-bold text-[#1a73e8]">Decrypt PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Remove protection from an authorized copy when the current password is known.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/sign-pdf"><h3 class="font-bold text-[#1a73e8]">Sign PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Understand visible signature placement and why it differs from certificate-based signing.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -174,6 +229,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/split-pdf.html"><h3 class="font-bold text-[#1a73e8]">Split PDF Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Separate every page of a PDF into individual PDF files bundled in a ZIP.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Lock your PDF before you send it</h2><p class="mt-3 text-sm leading-6 text-white">Choose a strong unique password, generate <code>protected.pdf</code>, test the prompt in a real viewer, and share the password on a separate channel.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/encrypt-pdf">Use Encrypt PDF</a></section>
+    </article>
   </main>
 </body>
 </html>
