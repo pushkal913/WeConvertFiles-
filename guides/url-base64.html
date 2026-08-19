@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>URL / Base64 Converter Guide - WeConvertFiles</title>
-  <meta name="description" content="Encode and decode URLs, and convert text to Base64 strings client-side inside your browser." />
+  <title>URL &amp; Base64 Converter: Encode or Decode Text Online</title>
+  <meta name="description" content="URL-encode or decode components and convert UTF-8 text to standard Base64 in your browser. Learn about percent encoding, Unicode, padding, and Base64URL." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/url-base64.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="URL / Base64 Converter Guide - WeConvertFiles" />
-  <meta property="og:description" content="Encode and decode URLs, and convert text to Base64 strings client-side inside your browser." />
+  <meta property="og:title" content="Encode and Decode URL Components or Base64 Text" />
+  <meta property="og:description" content="Convert URL components and UTF-8 text with four focused browser-based encoding and decoding modes." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/url-base64.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="URL / Base64 Converter Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Encode and decode URLs, and convert text to Base64 strings client-side inside your browser." />
+  <meta name="twitter:title" content="Encode and Decode URL Components or Base64 Text" />
+  <meta name="twitter:description" content="Convert URL components and UTF-8 text with four focused browser-based encoding and decoding modes." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,134 +31,186 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <style>
+    /* Mobile overflow fix: keep the article column within the viewport so wide
+       tables and code blocks scroll inside their own container instead of
+       widening the page, and wrap long inline code tokens. */
+    main { width: 100%; }
+    main :where(p, li, td, th, dd, dt, h1, h2, h3, blockquote) code { overflow-wrap: anywhere; word-break: break-word; }
+    main pre code { overflow-wrap: normal; word-break: normal; white-space: pre; }
+  </style>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "URL / Base64 Converter Guide",
-        "description": "Encode and decode URLs, and convert text to Base64 strings client-side inside your browser.",
+        "headline": "URL Encoder, Decoder, and Base64 Text Converter",
+        "description": "URL-encode or decode components and convert UTF-8 text to and from standard Base64 in the browser with four focused native modes.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
-        "dateModified": "2026-08-18",
+        "dateModified": "2026-08-19",
         "author": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/url-base64.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/url-base64.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is URL encoding used for?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "URL encoding converts query parameters containing spaces and special characters into safe characters suitable for browser address bars."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How does Base64 conversion work?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Base64 translates raw binary data or text strings into a safe ASCII format, making it easier to transmit data over text-based protocols like email or JSON payloads."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I decode Base64 strings back to plain text?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes! Choose the Base64 Decode option, paste your string, and the decoder will instantly compute the original plain text."
-            }
-          }
+          { "@type": "Question", "name": "Which operations are supported?", "acceptedAnswer": { "@type": "Answer", "text": "URL Encode, URL Decode, Base64 Encode (Text), and Base64 Decode (Text)." } },
+          { "@type": "Question", "name": "Does URL Encode handle an entire URL?", "acceptedAnswer": { "@type": "Answer", "text": "It uses encodeURIComponent, which encodes URL delimiters. Usually you should encode individual values or path segments." } },
+          { "@type": "Question", "name": "Does URL Decode convert plus signs to spaces?", "acceptedAnswer": { "@type": "Answer", "text": "No. decodeURIComponent leaves + unchanged; plus-to-space is part of form/query decoding." } },
+          { "@type": "Question", "name": "Does Base64 mode support Unicode?", "acceptedAnswer": { "@type": "Answer", "text": "It converts normal JavaScript text through UTF-8, so ordinary Unicode text is supported." } },
+          { "@type": "Question", "name": "Can it decode images or files from Base64?", "acceptedAnswer": { "@type": "Answer", "text": "No. This mode expects decoded bytes to be UTF-8 text and has no binary file output." } },
+          { "@type": "Question", "name": "Does it support Base64URL?", "acceptedAnswer": { "@type": "Answer", "text": "No. The output and input use standard Base64 syntax." } },
+          { "@type": "Question", "name": "Is Base64 encrypted?", "acceptedAnswer": { "@type": "Answer", "text": "No. Anyone can reverse it without a key." } },
+          { "@type": "Question", "name": "Why does Base64 end with =?", "acceptedAnswer": { "@type": "Answer", "text": "Padding completes the final four-character group when the byte length is not divisible by three." } },
+          { "@type": "Question", "name": "Can URL encoding prevent XSS or SQL injection?", "acceptedAnswer": { "@type": "Answer", "text": "Not generally. Use the security mechanism appropriate to the destination context." } },
+          { "@type": "Question", "name": "Can I copy the output?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. After converting, use the Copy action. The tool does not download an output file." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">URL Encoder, Decoder, and Base64 Text Converter</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Encode / Decode</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Percent encoding represents special characters in a URL component, while Base64 represents bytes using a restricted ASCII alphabet &mdash; they are often grouped together but solve different problems and are not interchangeable. The <strong class="text-slate-900 dark:text-slate-200">URL / Base64 Converter</strong> provides four operations: URL Encode, URL Decode, Base64 Encode (Text), and Base64 Decode (Text). Paste a string, choose a mode, convert it, and copy the output. All four transformations use native browser functions and process the value as text.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/url-base64">Convert URL or Base64 text<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">URL / Base64 Converter</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">URL / Base64 Converter provides essential utilities for encoding, decoding, and converting data strings. Using native JavaScript functions like encodeURIComponent(), decodeURIComponent(), btoa(), and atob(), it transforms strings to standard URL formats or Base64 code formats without server transmission. URL encoding replaces unsafe ASCII characters with percentage notations, while Base64 translates binary or text streams into ASCII text. This tool is vital for web development, API integrations, and developer debug tasks.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/url-base64">
-        Open URL/Base64 Converter
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Choose <strong>URL Encode</strong> for one query value or path segment containing spaces or special characters; <strong>URL Decode</strong> to turn valid percent escapes such as <code>%20</code> back into characters; <strong>Base64 Encode (Text)</strong> to represent UTF-8 text using standard Base64; and <strong>Base64 Decode (Text)</strong> when standard Base64 is expected to decode into valid UTF-8 text. Base64 is not encryption, and this tool's Base64 mode is not a binary file converter or Base64URL decoder.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Provide Payload</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Paste your raw text, code parameters, or strings into the Input area box.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose Mode</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select either URL Encode, URL Decode, Base64 Encode, or Base64 Decode option.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Execute & Copy</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert. Output is rendered inside the result box. Copy it instantly to your clipboard.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What is URL encoding?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>URL encoding &mdash; often called percent encoding &mdash; represents a byte with a percent sign followed by two hexadecimal digits. A space encoded by this tool becomes <code>%20</code>, while characters outside the unescaped set are represented by their UTF-8 bytes:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>Input:  coffee &amp; tea
+Output: coffee%20%26%20tea</code></pre>
+        <p>The ampersand must be encoded when it is data inside a query value; otherwise it can be interpreted as the separator before another parameter. This tool uses JavaScript's <code>encodeURIComponent()</code>, which is intended for a component, not an entire already-structured URL.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What is URL encoding used for?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">URL encoding converts query parameters containing spaces and special characters into safe characters suitable for browser address bars.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How does Base64 conversion work?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Base64 translates raw binary data or text strings into a safe ASCII format, making it easier to transmit data over text-based protocols like email or JSON payloads.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I decode Base64 strings back to plain text?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes! Choose the Base64 Decode option, paste your string, and the decoder will instantly compute the original plain text.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Encoding a query parameter vs. a whole URL</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Select <strong class="text-slate-900 dark:text-slate-200">URL Encode</strong>, enter only the value that needs encoding, choose <strong class="text-slate-900 dark:text-slate-200">Convert Now</strong>, then place the result into the correct URL structure. A search value such as <code>red shoes &amp; socks</code> becomes <code>red%20shoes%20%26%20socks</code> and can be inserted as a parameter:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>https://example.com/search?q=red%20shoes%20%26%20socks</code></pre>
+        <p><code>encodeURIComponent()</code> also encodes structural delimiters such as <code>:</code>, <code>/</code>, <code>?</code>, <code>=</code>, and <code>&amp;</code>. Encoding the complete URL <code>https://example.com/search?q=blue</code> produces something like:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>https%3A%2F%2Fexample.com%2Fsearch%3Fq%3Dblue</code></pre>
+        <p>That is useful only when the whole URL must become a value inside another context; it is not directly navigable as the same URL. Encode individual dynamic components while preserving the URL's intended structure, and prefer a URL API or framework utility over manually concatenating untrusted strings.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Characters left unescaped</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><code>encodeURIComponent()</code> leaves ASCII letters, digits, and this set unescaped:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>- _ . ! ~ * ' ( )</code></pre>
+        <p>Other characters are converted to percent escapes based on UTF-8. Standards or signing protocols can require stricter canonical encoding than JavaScript's default, so for OAuth signatures, cloud API signing, or another specification, follow its exact normalization rules rather than assuming any general URL encoder is sufficient. Hexadecimal digits in percent escapes may appear uppercase or lowercase and still represent the same byte in ordinary URL processing, although signature systems can require a canonical representation.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">URL decoding and the plus-sign rule</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Select <strong class="text-slate-900 dark:text-slate-200">URL Decode</strong> and paste a percent-encoded component. The decoder uses <code>decodeURIComponent()</code> and expects complete, valid percent-encoded UTF-8 sequences:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>Input:  M%C3%BCnchen%20caf%C3%A9
+Output: M&uuml;nchen caf&eacute;</code></pre>
+        <p>A stray <code>%</code>, an incomplete escape such as <code>%2</code>, or bytes that do not form valid UTF-8 produce an error in the output. Note that HTML form encoding commonly represents spaces as <code>+</code> in <code>application/x-www-form-urlencoded</code> data, but <code>decodeURIComponent()</code> does not apply that rule &mdash; <code>red+shoes</code> decodes to <code>red+shoes</code>. If you are decoding a form query component, convert <code>+</code> to a space according to the form specification first, or use a proper query-string parser; do not blindly replace plus signs when <code>+</code> is legitimate data. Likewise, URL Encode produces <code>%20</code> for a space rather than <code>+</code>.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Avoiding double URL encoding</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Encoding an already-encoded value changes percent signs into <code>%25</code>:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>Original:       red shoes
+Encoded once:   red%20shoes
+Encoded twice:  red%2520shoes</code></pre>
+        <p>One decode of the double-encoded string produces <code>red%20shoes</code>, not <code>red shoes</code>. Double encoding is a common source of broken redirects, failed API signatures, and security-filter inconsistencies. Define which layer owns encoding and encode exactly once for that context.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Encoding and decoding Base64 text</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Base64 converts bytes into characters from an ASCII alphabet &mdash; uppercase and lowercase letters, digits, <code>+</code>, and <code>/</code>, with <code>=</code> used as padding when required &mdash; and it is reversible representation, not secrecy. Select <strong class="text-slate-900 dark:text-slate-200">Base64 Encode (Text)</strong> to represent text; the implementation first converts the JavaScript string to UTF-8 bytes and then calls the browser's Base64 encoder, so ordinary Unicode such as accented characters and emoji work when they form valid strings:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>Input:  Hello
+Output: SGVsbG8=</code></pre>
+        <p>Select <strong class="text-slate-900 dark:text-slate-200">Base64 Decode (Text)</strong> to reverse standard Base64. The browser decodes it into bytes and then interprets those bytes as UTF-8, so if the bytes represent an image, archive, or text in another encoding, UTF-8 conversion can fail or produce incorrect characters &mdash; use a binary/file Base64 tool for non-text data. The output uses standard Base64, including <code>+</code>, <code>/</code>, and any required <code>=</code> padding.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Standard Base64 vs. Base64URL</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Standard Base64</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Base64URL</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Uses <code>+</code></td><td class="py-3">Uses <code>-</code></td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Uses <code>/</code></td><td class="py-3">Uses <code>_</code></td></tr>
+          <tr><td class="py-3 pr-4">Often includes <code>=</code> padding</td><td class="py-3">Padding is often omitted</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Base64URL is a URL-safe variant used by JWTs and web protocols. The tool's Base64 modes use standard Base64: they do not translate the URL-safe alphabet or automatically restore omitted padding. A JWT segment is Base64URL, so use the JWT Decoder or a dedicated Base64URL implementation rather than assuming standard decoding will work.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Base64 is not compression, encryption, or hashing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Base64 normally increases size: every three input bytes become four Base64 characters, plus possible padding &mdash; roughly a 33% increase before surrounding formatting. Repetition can compress well later under gzip or Brotli, but Base64 itself is encoding, not compression. Embedding small resources can reduce network requests in some contexts, yet large Base64 blobs increase document size, memory use, and parsing overhead.</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Operation</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Reversible?</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Requires a key?</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Purpose</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Base64 encoding</td><td class="py-3 pr-4">Yes</td><td class="py-3 pr-4">No</td><td class="py-3">Represent bytes as ASCII text</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">URL encoding</td><td class="py-3 pr-4">Yes</td><td class="py-3 pr-4">No</td><td class="py-3">Represent characters safely in URL components</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Encryption</td><td class="py-3 pr-4">Yes, with the proper key</td><td class="py-3 pr-4">Yes</td><td class="py-3">Protect confidentiality</td></tr>
+          <tr><td class="py-3 pr-4">Hashing</td><td class="py-3 pr-4">Designed as one-way</td><td class="py-3 pr-4">No for plain hashes</td><td class="py-3">Create a fingerprint or integrity value</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Do not place a password, API token, or private key into Base64 and assume it is protected. Base64 strings are recognizable and trivial to decode.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Unicode and malformed-text edge cases</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The Base64 implementation uses a traditional <code>encodeURIComponent</code>/<code>unescape</code> bridge for UTF-8 encoding and the reverse bridge when decoding. It handles normal Unicode text but can throw for malformed JavaScript strings containing an isolated surrogate code unit. A decoded byte stream must also be valid UTF-8: standard Base64 can represent any bytes, but this specific mode only returns text, so if you need robust byte-level conversion, use <code>TextEncoder</code>, <code>TextDecoder</code>, typed arrays, and file APIs in application code.</p>
+        <p>URL decoding also requires valid UTF-8 percent sequences. Legacy sites sometimes percent-encode bytes in a local character set rather than UTF-8, and a modern component decoder may reject or misinterpret them.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common errors and fixes</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200"><code>URI malformed</code></h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The URL input contains an incomplete percent escape, invalid UTF-8 byte sequence, or malformed Unicode string. Correct the source rather than repeatedly decoding.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Base64 input is rejected</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Check the alphabet, padding, accidental spaces, line breaks, and whether the input is actually Base64URL. Do not guess padding for a protocol without reading its specification.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Decoded Base64 shows an error</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The decoded bytes may be binary or may use a text encoding other than UTF-8. Use a binary-aware decoder.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Spaces decode incorrectly</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Form data may use <code>+</code> for space, while this component decoder leaves plus signs unchanged. Use a form/query parser.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A complete URL becomes unusable after encoding</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Encode only its dynamic path or query components, not structural delimiters.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Output contains <code>%25</code></h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The percent sign from an existing escape was encoded again. Investigate double encoding.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Security considerations</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>Encoding does not make unsafe content safe in every context. URL encoding is not an HTML sanitizer, SQL parameterizer, shell escaper, or authorization check &mdash; the correct transformation depends on where data is inserted. Use parameterized queries for SQL, safe DOM/text APIs for HTML output, an allowlist for redirect destinations, and apply canonicalization consistently before security comparisons. Avoid executing decoded content, and do not trust a value merely because it was encoded.</p>
+        <p>Base64 can hide malicious bytes from casual inspection but does not neutralize them. Decode untrusted data only within appropriate size and content limits.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and browser-based processing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">The four operations run through native JavaScript functions in the browser and do not require an encoding API call.</strong> Even so, avoid pasting live credentials or confidential personal data, because clipboard history, browser extensions, screen capture, and a compromised device can expose text regardless of where conversion runs.</p>
+        <p>The tool handles pasted text only. It does not upload files, create downloads, generate data URLs, or convert images despite broader Base64 use cases.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which operations are supported?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">URL Encode, URL Decode, Base64 Encode (Text), and Base64 Decode (Text).</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does URL Encode handle an entire URL?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It uses <code>encodeURIComponent</code>, which encodes URL delimiters. Usually you should encode individual values or path segments.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does URL Decode convert plus signs to spaces?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. <code>decodeURIComponent</code> leaves <code>+</code> unchanged; plus-to-space is part of form/query decoding.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does Base64 mode support Unicode?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It converts normal JavaScript text through UTF-8, so ordinary Unicode text is supported.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can it decode images or files from Base64?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. This mode expects decoded bytes to be UTF-8 text and has no binary file output.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it support Base64URL?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The output and input use standard Base64 syntax.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is Base64 encrypted?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Anyone can reverse it without a key.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why does Base64 end with <code>=</code>?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Padding completes the final four-character group when the byte length is not divisible by three.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can URL encoding prevent XSS or SQL injection?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not generally. Use the security mechanism appropriate to the destination context.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I copy the output?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. After converting, use the Copy action. The tool does not download an output file.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/jwt-decoder"><h3 class="font-bold text-[#1a73e8]">JWT Decoder</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Inspect Base64URL-encoded JWT sections.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-to-base64"><h3 class="font-bold text-[#1a73e8]">Image to Base64</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert an uploaded image into a data URI.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/hash-generator"><h3 class="font-bold text-[#1a73e8]">Hash Generator</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Create one-way fingerprints rather than reversible encoding.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -168,6 +219,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/json-formatter.html"><h3 class="font-bold text-[#1a73e8]">JSON Formatter / Validator Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Format, validate, beautify, and minify raw JSON string data dynamically.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Encode or decode text</h2><p class="mt-3 text-sm leading-6 text-white">Paste a string, choose URL Encode, URL Decode, Base64 Encode, or Base64 Decode, and copy the result.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/url-base64">Use URL / Base64 Converter</a></section>
+    </article>
   </main>
 </body>
 </html>

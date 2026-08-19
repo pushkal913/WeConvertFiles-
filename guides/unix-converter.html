@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Unix Time Converter Guide - WeConvertFiles</title>
-  <meta name="description" content="Convert Epoch timestamps to human-readable datetime formats and vice versa." />
+  <title>Unix Time Converter: Epoch Timestamp to Date</title>
+  <meta name="description" content="Convert Unix timestamps in seconds or milliseconds to GMT and local dates, or turn a local calendar time into epoch seconds and milliseconds." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/unix-converter.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Unix Time Converter Guide - WeConvertFiles" />
-  <meta property="og:description" content="Convert Epoch timestamps to human-readable datetime formats and vice versa." />
+  <meta property="og:title" content="Convert Unix Epoch Time and Calendar Dates" />
+  <meta property="og:description" content="Read epoch timestamps in GMT and local time, see a relative estimate, and convert local date-time input back to seconds or milliseconds." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/unix-converter.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Unix Time Converter Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Convert Epoch timestamps to human-readable datetime formats and vice versa." />
+  <meta name="twitter:title" content="Convert Unix Epoch Time and Calendar Dates" />
+  <meta name="twitter:description" content="Read epoch timestamps in GMT and local time, see a relative estimate, and convert local date-time input back to seconds or milliseconds." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,129 +31,169 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <style>
+    /* Mobile overflow fix: keep the article column within the viewport so wide
+       tables and code blocks scroll inside their own container instead of
+       widening the page, and wrap long inline code tokens. */
+    main { width: 100%; }
+    main :where(p, li, td, th, dd, dt, h1, h2, h3, blockquote) code { overflow-wrap: anywhere; word-break: break-word; }
+    main pre code { overflow-wrap: normal; word-break: normal; white-space: pre; }
+  </style>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Unix Time Converter Guide",
-        "description": "Convert Epoch timestamps to human-readable datetime formats and vice versa.",
+        "headline": "Unix Time Converter for Epoch Seconds and Milliseconds",
+        "description": "Convert Unix timestamps in seconds or milliseconds to GMT and local dates in the browser, turn a local calendar time into epoch values, and read a relative estimate.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
-        "dateModified": "2026-08-18",
+        "dateModified": "2026-08-19",
         "author": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/unix-converter.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/unix-converter.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is Epoch time?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Unix epoch time is the number of seconds (or milliseconds) that have elapsed since January 1, 1970 (UTC), omitting leap seconds."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How do I convert millisecond timestamps?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The tool detects timestamp lengths and auto-resolves whether input integers are in seconds (10 digits) or milliseconds (13 digits)."
-            }
-          }
+          { "@type": "Question", "name": "Does the tool auto-detect seconds and milliseconds?", "acceptedAnswer": { "@type": "Answer", "text": "No. Choose Seconds or Millis explicitly." } },
+          { "@type": "Question", "name": "What does the live clock show?", "acceptedAnswer": { "@type": "Answer", "text": "It displays the browser device's current Unix time in whole seconds and updates once per second." } },
+          { "@type": "Question", "name": "Is Unix time always UTC?", "acceptedAnswer": { "@type": "Answer", "text": "It represents an instant relative to the UTC epoch. Time-zone rules are applied only when displaying that instant as local calendar time." } },
+          { "@type": "Question", "name": "How is calendar input interpreted?", "acceptedAnswer": { "@type": "Answer", "text": "The datetime-local value has no offset and is parsed in the browser's local time zone." } },
+          { "@type": "Question", "name": "Why can the initial calendar value be shifted?", "acceptedAnswer": { "@type": "Answer", "text": "It is populated with UTC clock fields but later interpreted as local clock fields. Select or edit the intended value before use." } },
+          { "@type": "Question", "name": "Does the tool output ISO 8601?", "acceptedAnswer": { "@type": "Answer", "text": "No. It displays a UTC/GMT string and a browser-local string, plus epoch values." } },
+          { "@type": "Question", "name": "Are decimal seconds supported?", "acceptedAnswer": { "@type": "Answer", "text": "The timestamp input is parsed as an integer, so decimals are truncated. Use whole milliseconds for sub-second precision." } },
+          { "@type": "Question", "name": "Does relative time update continuously?", "acceptedAnswer": { "@type": "Answer", "text": "No. It recalculates when the timestamp or unit changes." } },
+          { "@type": "Question", "name": "Can it convert dates before 1970?", "acceptedAnswer": { "@type": "Answer", "text": "Negative timestamps can represent pre-1970 instants when the browser and downstream system support the range." } },
+          { "@type": "Question", "name": "Is the tool affected by Year 2038?", "acceptedAnswer": { "@type": "Answer", "text": "The browser is not limited to signed 32-bit epoch seconds, but downstream systems may still be." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Unix Time Converter for Epoch Seconds and Milliseconds</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Epoch converter</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Unix time represents an instant as an offset from 00:00:00 UTC on 1 January 1970, and the most common mistake is confusing seconds with milliseconds &mdash; the values differ by a factor of 1,000. The <strong class="text-slate-900 dark:text-slate-200">Unix Time Converter</strong> supports both units through an explicit selector. It turns an integer timestamp into a GMT date, browser-local date, and approximate relative time, and in the other direction it reads a <code>datetime-local</code> value and returns epoch seconds and milliseconds. A live clock shows the current epoch in whole seconds.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/unix-converter">Convert Unix time<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Unix Time Converter</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Epoch Converter</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Timestamp / Unix Converter translates raw epoch numbers to human-readable dates and vice versa. It formats Unix times into ISO 8601, UTC, and local timezone formats, with a live countdown display showing current epoch time in seconds.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/unix-converter">
-        Open Unix Converter
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Enter an integer and select <strong>Seconds</strong> or <strong>Millis</strong>. The tool immediately shows its UTC/GMT representation, your browser's local representation, and an approximate "ago" or "in" value. To convert the other way, choose a date and time in the calendar field; it is interpreted in the browser's local time zone and converted to seconds and milliseconds. Ten-digit current-era values are often seconds and 13-digit values are often milliseconds, but this tool does not auto-detect &mdash; select the correct unit explicitly.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Epoch to Date</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Input an epoch number (e.g. 1784370916) in seconds or milliseconds to output GMT and local dates.</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Date to Epoch</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select date, hour, and minute properties from the date-picker calendar to output raw Unix epoch seconds.</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Relative Countdown</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">View human-relative time statements (e.g. "5 days ago", "in 3 minutes") computed in real-time.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What is Unix time?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Unix time counts elapsed seconds from the Unix epoch, <code>1970-01-01 00:00:00 UTC</code>:</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Instant</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Epoch seconds</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Epoch milliseconds</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Unix epoch</td><td class="py-3 pr-4"><code>0</code></td><td class="py-3"><code>0</code></td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">One second after epoch</td><td class="py-3 pr-4"><code>1</code></td><td class="py-3"><code>1000</code></td></tr>
+          <tr><td class="py-3 pr-4">One second before epoch</td><td class="py-3 pr-4"><code>-1</code></td><td class="py-3"><code>-1000</code></td></tr>
+        </tbody></table></div>
+        <p>An epoch timestamp identifies an instant. It does not contain a time-zone name, locale, calendar display format, or daylight-saving abbreviation &mdash; those are applied when software renders the instant.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      
-      
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What is Epoch time?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Unix epoch time is the number of seconds (or milliseconds) that have elapsed since January 1, 1970 (UTC), omitting leap seconds.</p>
-      </div>
-      
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How do I convert millisecond timestamps?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The tool detects timestamp lengths and auto-resolves whether input integers are in seconds (10 digits) or milliseconds (13 digits).</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Converting a timestamp to a date</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Enter the timestamp, select <strong class="text-slate-900 dark:text-slate-200">Seconds</strong> or <strong class="text-slate-900 dark:text-slate-200">Millis</strong>, then read <strong class="text-slate-900 dark:text-slate-200">GMT Date</strong>, compare <strong class="text-slate-900 dark:text-slate-200">Local Date</strong> when local context matters, and treat <strong class="text-slate-900 dark:text-slate-200">Relative Time</strong> as an approximate convenience value. Internally the tool multiplies seconds by 1,000 because JavaScript <code>Date</code> accepts milliseconds; the GMT output uses <code>toUTCString()</code> and the local output uses <code>Date.toString()</code>. For example, epoch <code>0</code> represents the same instant everywhere:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>GMT: Thu, 01 Jan 1970 00:00:00 GMT</code></pre>
+        <p>Choose <strong class="text-slate-900 dark:text-slate-200">Millis</strong> when the value already counts thousandths of a second; the tool passes the integer directly to the date constructor. Using the wrong unit produces a dramatically different result: if <code>1784370916000</code> milliseconds is treated as seconds, multiplying by 1,000 pushes it far outside its intended date and may create an invalid date, while <code>1784370916</code> seconds treated as milliseconds lands only a few weeks after January 1970. Digit length is only a clue &mdash; negative values, historical timestamps, far-future dates, and leading zeros make length heuristics unreliable, so use the source API's schema.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Converting a calendar date to Unix time</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Choose a date and time in <strong class="text-slate-900 dark:text-slate-200">Pick Date &amp; Time</strong>. The browser interprets that wall-clock value in its local time zone, and you read <strong class="text-slate-900 dark:text-slate-200">Epoch (Seconds)</strong> or <strong class="text-slate-900 dark:text-slate-200">Epoch (Milliseconds)</strong>. Epoch milliseconds are the JavaScript time value; epoch seconds are calculated with <code>Math.floor(milliseconds / 1000)</code>, so sub-second precision is not shown in the seconds output.</p>
+        <p>The input control has no time-zone selector or offset. If a specification says "09:00 UTC" but your browser is set to Asia/Kolkata, entering 09:00 means 09:00 Asia/Kolkata &mdash; not UTC. Verify the intended time zone separately.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Important initial calendar-value caveat</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>When the tool opens, its default calendar field is populated from <code>new Date().toISOString().slice(0, 16)</code>. <code>toISOString()</code> contains UTC clock fields, but a <code>datetime-local</code> control has no zone and is later parsed as local time. In a non-UTC browser time zone, the initial visible calendar value can therefore represent a shifted instant when converted &mdash; UTC clock digits can be interpreted as if they were local clock digits.</p>
+        <p>Before relying on calendar-to-epoch output, actively select or edit the intended local date and time. For UTC conversion, calculate the correct local equivalent or use a tool with an explicit UTC/time-zone selector. This caveat affects the initial default, not the underlying definition of Unix time.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">GMT, UTC, and local time</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The UI labels the universal result <strong class="text-slate-900 dark:text-slate-200">GMT Date</strong>. For ordinary software timestamps, GMT and UTC are often used interchangeably as the zero-offset display, although they are not identical concepts in precision timekeeping. The local output depends on the device's time-zone configuration, the historical and current time-zone rules known to the browser, daylight-saving transitions, and locale/runtime date-string formatting.</p>
+        <p>Two users can see different local strings for the same timestamp while the instant remains identical, so use epoch values or an ISO 8601 string with <code>Z</code> or an explicit offset when exchanging instants between systems. Note that this tool does not output ISO 8601 directly &mdash; its universal display is a UTC/GMT date string, not <code>2026-08-20T12:00:00.000Z</code> format.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Seconds vs. milliseconds</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Unit</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Relationship</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Current-era length</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Common systems</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Seconds</td><td class="py-3 pr-4">Whole seconds from epoch</td><td class="py-3 pr-4">Around 10 digits</td><td class="py-3">Unix tools, JWT claims, many APIs</td></tr>
+          <tr><td class="py-3 pr-4">Milliseconds</td><td class="py-3 pr-4">Seconds &times; 1,000</td><td class="py-3 pr-4">Around 13 digits</td><td class="py-3">JavaScript, browser timestamps</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Do not append or remove three zeros without confirming whether sub-second information exists. Converting milliseconds to whole seconds discards the remainder, and the tool's numeric input is parsed as an integer, so any decimal portion is truncated before conversion.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">The live clock and relative time</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The <strong class="text-slate-900 dark:text-slate-200">Current Epoch Clock</strong> updates once per second with <code>Math.floor(Date.now() / 1000)</code>, showing whole seconds according to the device clock. It is useful for quick comparisons but is not a precision time source: device clocks can be wrong or drift, and browser scheduling can be delayed. Use a synchronized server or trusted time service for systems that require authoritative time.</p>
+        <p>The relative result compares the selected timestamp with <code>Date.now()</code> when the conversion runs, rounding into seconds, minutes, hours, or days:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>12 minutes ago
+in 3 days</code></pre>
+        <p>This is an approximation: values are rounded, "day" is treated as 24 hours, calendar month and year differences are not calculated, and the value does not refresh every second automatically. Change the input or unit to recalculate, and use absolute timestamps for auditing, billing, legal deadlines, and scheduling logic.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Time zones, DST, and pre-1970 dates</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Unix timestamps do not change when a user changes time zones; only the displayed local representation changes. That makes epoch values useful for storing instants such as an API request time, account creation, token expiration, or a job execution instant. Not every date/time is best modeled as an instant, though: "Every day at 09:00 Europe/London" is a recurring civil-time rule affected by daylight saving, and storing only one UTC offset does not capture the recurrence &mdash; save the relevant IANA time-zone identifier and scheduling intent.</p>
+        <p>A local wall-clock time can be ambiguous or nonexistent during daylight-saving transitions: when clocks move forward some times never occur, and when they move back the same local time can occur twice. The <code>datetime-local</code> field contains no zone, JavaScript applies browser rules when parsing it, and the UI does not let you choose the earlier or later occurrence. Negative Unix values represent instants before the epoch &mdash; entering <code>-1</code> second produces the instant one second before 1970 UTC &mdash; but historical local-time output should be treated carefully, and downstream systems may reject negative timestamps even when JavaScript accepts them.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Precision, leap seconds, and Year 2038</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>JavaScript numbers cannot represent every integer above <code>Number.MAX_SAFE_INTEGER</code> exactly, so very large millisecond values can lose integer precision before reaching the date constructor, and <code>Date</code> supports only a finite range beyond which values become invalid. The numeric input is processed with <code>parseInt</code>, so decimals are discarded, very large values can lose precision, and invalid or empty input clears the outputs. Validate ranges and types according to the destination system rather than assuming every integer is a supported timestamp.</p>
+        <p>Typical Unix time APIs do not represent leap seconds as a unique <code>23:59:60</code> timestamp; JavaScript <code>Date</code> follows ECMAScript time behavior rather than exposing leap seconds. Separately, the Year 2038 issue affects systems that store epoch seconds in a signed 32-bit integer, which overflows in January 2038. Modern JavaScript numbers are not limited to signed 32-bit seconds, so this converter can represent dates beyond that point &mdash; but the receiving database, embedded device, C library, or legacy API may still have a 32-bit limit. Conversion success does not prove downstream compatibility.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common conversion problems</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The date is near 1970</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A seconds value was probably interpreted as milliseconds. Select Seconds.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The date is invalid or extremely far away</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A millisecond value may have been treated as seconds, or the value exceeds JavaScript Date range.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Calendar conversion is offset by several hours</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The date-time input is interpreted as local time. Also account for the initial UTC-to-local field caveat described above.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Two users see different Local Date values</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Their browsers use different configured time zones. Compare the GMT result or epoch value.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A decimal timestamp loses precision</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Input is parsed as an integer. Use milliseconds for sub-second precision and provide a whole-number millisecond value.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Relative time is stale</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It recalculates on timestamp or unit changes, not continuously. The separate current epoch clock updates every second.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and browser-based processing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">All conversions use the browser's built-in number and date functions.</strong> No date value needs to be submitted to a conversion API. Date inputs can still reveal schedules or operational information if shared through screenshots, clipboard history, or logs, so follow normal privacy practices.</p>
+        <p>Accuracy depends on the device clock and time-zone settings. Client-side processing does not make the device an authoritative clock.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool auto-detect seconds and milliseconds?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Choose Seconds or Millis explicitly.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What does the live clock show?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It displays the browser device's current Unix time in whole seconds and updates once per second.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is Unix time always UTC?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It represents an instant relative to the UTC epoch. Time-zone rules are applied only when displaying that instant as local calendar time.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">How is calendar input interpreted?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The <code>datetime-local</code> value has no offset and is parsed in the browser's local time zone.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why can the initial calendar value be shifted?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It is populated with UTC clock fields but later interpreted as local clock fields. Select or edit the intended value before use.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool output ISO 8601?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It displays a UTC/GMT string and a browser-local string, plus epoch values.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Are decimal seconds supported?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The timestamp input is parsed as an integer, so decimals are truncated. Use whole milliseconds for sub-second precision.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does relative time update continuously?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It recalculates when the timestamp or unit changes.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can it convert dates before 1970?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Negative timestamps can represent pre-1970 instants when the browser and downstream system support the range.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is the tool affected by Year 2038?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The browser is not limited to signed 32-bit epoch seconds, but downstream systems may still be.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/jwt-decoder"><h3 class="font-bold text-[#1a73e8]">JWT Decoder</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Inspect <code>exp</code>, <code>iat</code>, and <code>nbf</code> claims before converting their epoch seconds.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-formatter"><h3 class="font-bold text-[#1a73e8]">JSON Formatter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Find timestamp fields in API payloads.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/uuid-generator"><h3 class="font-bold text-[#1a73e8]">UUID Generator</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Generate identifiers; timestamps and UUIDs solve different problems.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -163,6 +202,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/json-formatter.html"><h3 class="font-bold text-[#1a73e8]">JSON Formatter / Validator Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Format, validate, beautify, and minify raw JSON string data dynamically.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Convert epoch time</h2><p class="mt-3 text-sm leading-6 text-white">Enter a timestamp and pick Seconds or Millis, or choose a calendar date to read epoch seconds and milliseconds.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/unix-converter">Use Unix Time Converter</a></section>
+    </article>
   </main>
 </body>
 </html>
