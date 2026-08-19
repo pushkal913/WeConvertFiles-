@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Image Color Picker & Eyedropper Guide - WeConvertFiles</title>
-  <meta name="description" content="Pick exact pixel color codes from any image or use the native screen eyedropper magnifier offline in your web browser." />
+  <title>Image Color Picker: Get HEX and RGB from Any Pixel</title>
+  <meta name="description" content="Upload a JPG, PNG, or WebP and click a pixel to get its HEX and RGB color. Use the browser screen eyedropper where supported and copy the HEX code." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/color-palette.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Image Color Picker & Eyedropper Guide - WeConvertFiles" />
-  <meta property="og:description" content="Pick exact pixel color codes from any image or use the native screen eyedropper magnifier offline in your web browser." />
+  <meta property="og:title" content="Pick HEX and RGB Colors from an Image" />
+  <meta property="og:description" content="Sample exact decoded image pixels or use a supported browser's screen eyedropper, then copy an uppercase HEX color." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/color-palette.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Image Color Picker & Eyedropper Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Pick exact pixel color codes from any image or use the native screen eyedropper magnifier offline in your web browser." />
+  <meta name="twitter:title" content="Pick HEX and RGB Colors from an Image" />
+  <meta name="twitter:description" content="Sample exact decoded image pixels or use a supported browser's screen eyedropper, then copy an uppercase HEX color." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,134 +31,165 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <style>
+    /* Mobile overflow fix: keep the article column within the viewport so wide
+       tables and code blocks scroll inside their own container instead of
+       widening the page, and wrap long inline code tokens. */
+    main { width: 100%; }
+    main :where(p, li, td, th, dd, dt, h1, h2, h3, blockquote) code { overflow-wrap: anywhere; word-break: break-word; }
+    main pre code { overflow-wrap: normal; word-break: normal; white-space: pre; }
+  </style>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Image Color Picker & Eyedropper Guide",
-        "description": "Pick exact pixel color codes from any image or use the native screen eyedropper magnifier offline in your web browser.",
+        "headline": "Image Color Picker and Screen Eyedropper",
+        "description": "Click a pixel in an uploaded JPG, PNG, or WebP to read its uppercase HEX and RGB color from the browser-decoded raster, and use the native screen eyedropper where supported.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
-        "dateModified": "2026-08-18",
+        "dateModified": "2026-08-19",
         "author": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/color-palette.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/color-palette.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How accurate is the pixel extraction?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "It is 100% pixel-perfect. We read coordinates directly from the image data canvas context, matching your pointer click precisely to the source colors."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Which browsers support the native Eyedropper API?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The native screen-magnifying eyedropper is supported in Chromium-based browsers including Google Chrome, Microsoft Edge, and Opera. On other browsers, you can pick colors directly by clicking the preview graphic."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does the tool store my uploaded images?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. Your images are loaded temporarily in browser memory for canvas pixel scanning and are deleted immediately when you close the session."
-            }
-          }
+          { "@type": "Question", "name": "Which image formats can I use?", "acceptedAnswer": { "@type": "Answer", "text": "The intended interface accepts one JPG/JPEG, PNG, or WebP image." } },
+          { "@type": "Question", "name": "What color formats are shown?", "acceptedAnswer": { "@type": "Answer", "text": "Uppercase six-digit HEX and integer rgb(r, g, b)." } },
+          { "@type": "Question", "name": "Can I copy RGB directly?", "acceptedAnswer": { "@type": "Answer", "text": "The dedicated copy button copies HEX. RGB is displayed and can be selected manually." } },
+          { "@type": "Question", "name": "Does it show transparency?", "acceptedAnswer": { "@type": "Answer", "text": "No. The alpha channel is not included in the displayed value." } },
+          { "@type": "Question", "name": "Can I pick a color outside the uploaded image?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, when the browser supports the native EyeDropper API. Otherwise use the uploaded image picker." } },
+          { "@type": "Question", "name": "Why is the screen eyedropper unavailable?", "acceptedAnswer": { "@type": "Answer", "text": "API support and secure-context requirements vary by browser and platform." } },
+          { "@type": "Question", "name": "Does it automatically extract dominant colors?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current interface picks one exact color at a time and does not show a ranked palette." } },
+          { "@type": "Question", "name": "Does it calculate accessibility contrast?", "acceptedAnswer": { "@type": "Answer", "text": "No. Use a separate contrast checker with chosen foreground and background colors." } },
+          { "@type": "Question", "name": "Is the sampled color from the full-resolution image?", "acceptedAnswer": { "@type": "Answer", "text": "Clicks are mapped from the preview to the canvas drawn at the image's natural dimensions." } },
+          { "@type": "Question", "name": "Can I download a palette?", "acceptedAnswer": { "@type": "Answer", "text": "No. Copy individual HEX values into your own document or design system." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Image Color Picker and Screen Eyedropper</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">HEX / RGB picker</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">A color picker turns a visible pixel into a reusable code for CSS, design software, and brand systems. The <strong class="text-slate-900 dark:text-slate-200">Image Color Picker &amp; Eyedropper</strong> accepts one JPG, PNG, or WebP. It loads the image into a canvas at natural resolution, maps your click from the displayed preview to the original pixel coordinates, and reports uppercase six-digit HEX plus <code>rgb(r, g, b)</code>. If the browser supports the EyeDropper API, a separate action can pick a displayed pixel from anywhere on the screen.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/color-palette">Pick a color from an image<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Image Color Picker & Eyedropper</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Image Color Picker & Eyedropper is an interactive designer utility that extracts precise pixel color codes from uploaded graphics. By leveraging native HTML5 Canvas coordinates, the tool reads RGB and HEX values from the exact pixel you click. For Chrome, Edge, and Opera users, it integrates the native screen EyeDropper API to pick colors from any point on your entire desktop monitor with a magnifying lens. Image processing runs inside your browser, and image contents are not sent to WeConvertFiles for processing.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/color-palette">
-        Open Color Picker
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Upload an image, then click or tap the desired point in the preview. The color card shows a HEX code such as <code>#1A73E8</code> and an RGB value such as <code>rgb(26, 115, 232)</code>. Use <strong>Copy HEX Code</strong> before selecting another pixel. The route is named <code>color-palette</code>, but the active interface is a single-color pixel picker &mdash; it does not automatically extract, rank, or save a multi-color dominant palette.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload Graphic</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Drop a JPEG, PNG, or WebP image layout into the interactive panel.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Click and Pick</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click anywhere directly on the preview image to extract the exact pixel HEX and RGB code.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Screen Eyedropper</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click "Open Eyedropper" to trigger the magnifier and pick colors from anywhere on your monitor screen.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How exact pixel sampling works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Upload one JPG, PNG, or WebP image, wait for the preview to load, then click or tap the pixel you want to sample. The image is displayed at up to 300 pixels high while the canvas retains its natural pixel dimensions, and the click handler scales the preview coordinates to the original raster, so sampling is not limited to the preview's CSS display size. When the image loads, the implementation creates an off-screen canvas using the image's natural width and height and draws the decoded image into it. A click position is converted proportionally:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>sourceX = displayedClickX / displayedWidth &times; naturalWidth
+sourceY = displayedClickY / displayedHeight &times; naturalHeight</code></pre>
+        <p>The coordinates are rounded down to one source pixel, and <code>getImageData()</code> returns its red, green, blue, and alpha channels. The tool displays the RGB channels and computes uppercase HEX. This is more precise than taking the CSS-scaled preview color because interpolation can blend neighboring pixels on screen &mdash; though it still represents the browser-decoded raster, not necessarily untouched raw file channel values before color management.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">How accurate is the pixel extraction?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">It is 100% pixel-perfect. We read coordinates directly from the image data canvas context, matching your pointer click precisely to the source colors.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Which browsers support the native Eyedropper API?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The native screen-magnifying eyedropper is supported in Chromium-based browsers including Google Chrome, Microsoft Edge, and Opera. On other browsers, you can pick colors directly by clicking the preview graphic.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does the tool store my uploaded images?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. Your images are loaded temporarily in browser memory for canvas pixel scanning and are deleted immediately when you close the session.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">HEX and RGB color codes</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A six-digit HEX color uses two hexadecimal digits for each RGB channel in the form <code>#RRGGBB</code>, and RGB expresses red, green, and blue intensity from 0 to 255. Both describe the same opaque sRGB-style triplet in ordinary web usage:</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">HEX</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">RGB</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Description</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>#000000</code></td><td class="py-3 pr-4"><code>rgb(0, 0, 0)</code></td><td class="py-3">Black</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>#FFFFFF</code></td><td class="py-3 pr-4"><code>rgb(255, 255, 255)</code></td><td class="py-3">White</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>#FF0000</code></td><td class="py-3 pr-4"><code>rgb(255, 0, 0)</code></td><td class="py-3">Red</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>#00FF00</code></td><td class="py-3 pr-4"><code>rgb(0, 255, 0)</code></td><td class="py-3">Green</td></tr>
+          <tr><td class="py-3 pr-4"><code>#0000FF</code></td><td class="py-3 pr-4"><code>rgb(0, 0, 255)</code></td><td class="py-3">Blue</td></tr>
+        </tbody></table></div>
+        <p>Hex digits are case-insensitive in CSS; the tool outputs uppercase letters for consistency. It does not output HSL, HSV/HSB, LAB, LCH, CMYK, named colors, or eight-digit HEX alpha values.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Using the screen eyedropper</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>When <code>window.EyeDropper</code> is available, the interface shows <strong class="text-slate-900 dark:text-slate-200">Open Screen Eyedropper</strong>. Selecting it opens the browser's native magnifying picker; choose a pixel visible anywhere on the screen, and the tool converts the returned sRGB HEX value into both HEX and RGB. The browser API generally requires a supporting browser, a secure context such as HTTPS, a direct user action, and interaction with the native picker. If you cancel the picker, no new color is selected, and because support varies, the button is hidden when the API is unavailable.</p>
+        <p>On unsupported or mobile environments, the interface instructs you to tap the uploaded preview instead. There is no active manual <code>&lt;input type="color"&gt;</code> fallback exposed by the current UI.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Image picker vs. screen eyedropper</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Image pixel picker</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Screen eyedropper</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Samples the uploaded raster at natural coordinates</td><td class="py-3">Samples a pixel rendered on the screen</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Works through canvas in ordinary supported browsers</td><td class="py-3">Requires EyeDropper API support</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Useful for original image pixels</td><td class="py-3">Useful for web pages, apps, and any visible screen area</td></tr>
+          <tr><td class="py-3 pr-4">Can differ from scaled visual preview</td><td class="py-3">Captures the final displayed pixel</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Screen colors can include display scaling, browser rendering, overlays, anti-aliasing, opacity, and color-management transformations. The image picker instead reads the browser-decoded source raster drawn on canvas.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Formats, transparency, and edge colors</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The intended inputs are JPEG/JPG for photographs, PNG for graphics and transparency, and WebP for modern web images. Only one image is active at a time; the tool does not accept SVG through its declared interface, process a batch, or download a palette file. Animated formats are outside the intended scope &mdash; the canvas represents the decoded frame available when drawn.</p>
+        <p>Canvas returns an alpha channel, but the interface ignores it and reports only RGB/HEX, so a fully transparent pixel may read as <code>#000000</code> without communicating that it is transparent, and a semi-transparent pixel's stored RGB is not always the color seen when composited over a page background. Edges, text, and curves often use anti-aliasing, so a click one pixel away can produce a different value; JPEG artifacts, gradients, shadows, resizing interpolation, and color profiles have similar effects. Sample several nearby pixels and choose a representative interior point for brand colors.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Color profiles and color management</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Images can embed ICC color profiles or use wide-gamut spaces, and browsers may convert them for display and canvas access according to browser and device rules. The returned RGB value is therefore the canvas/browser interpretation, commonly suitable for sRGB web use, not a full preservation of original color-space metadata.</p>
+        <p>For print production, product color approval, medical imaging, or other color-critical work, use a color-managed application that identifies the source profile and target color space. HEX and RGB alone do not capture CMYK inks, spot colors, viewing conditions, or device calibration.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Building a palette and CSS variables</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Although the route name contains "color-palette," the live interface retains only the currently picked color. Build a small palette manually by sampling a background color and copying its HEX into a document, then sampling primary, accent, and neutral colors, copying each before the next selection. The tool does not automatically identify dominant colors, cluster similar tones, rank frequency, preserve a swatch history, or export CSS variables/JSON. After copying selected values, create role-based design tokens:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>:root {
+  --color-brand: #1A73E8;
+  --color-accent: #F9AB00;
+  --color-surface: #F8FAFC;
+  --color-text: #172554;
+}</code></pre>
+        <p>Name tokens by role rather than appearance &mdash; <code>--color-brand</code> is easier to update than <code>--blue-500</code> when branding changes. Picking a color does not prove that text using it will be readable: contrast depends on both foreground and background, text size and weight, and accessibility criteria, and the current tool does not calculate contrast ratios or WCAG pass/fail results. Compare foreground and background with a separate contrast checker, and never communicate status by color alone.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common problems</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The eyedropper button is missing</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The browser does not expose the EyeDropper API, or the context does not meet its requirements. Upload an image and click the preview instead.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Clicking the image returns a nearby shade</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The area may be anti-aliased, compressed, or part of a gradient. Sample an interior region and compare neighboring pixels.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A transparent area returns black</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Alpha is not displayed. The reported RGB value does not describe transparency.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The screen eyedropper and image picker disagree</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">One samples rendered screen output; the other samples the decoded raster. Scaling, compositing, and color management can create differences.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">I cannot find an extracted palette</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Automatic palette extraction is not exposed in the current active interface. Copy individual picked colors manually.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Copy does not work</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Clipboard access can depend on browser permissions, HTTPS, and user interaction. Select the displayed HEX text manually if necessary.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and browser-based processing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">The uploaded image is decoded and sampled in the browser with canvas.</strong> No dedicated color-analysis API is required, and the screen eyedropper is controlled by the browser and begins only after a user action.</p>
+        <p>Images can contain private faces, documents, screenshots, or locations. Client-side processing reduces one exposure route but does not protect against a compromised device, browser extension, clipboard history, or screen recording. Use representative or redacted assets when appropriate.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which image formats can I use?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The intended interface accepts one JPG/JPEG, PNG, or WebP image.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What color formats are shown?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Uppercase six-digit HEX and integer <code>rgb(r, g, b)</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I copy RGB directly?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The dedicated copy button copies HEX. RGB is displayed and can be selected manually.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it show transparency?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The alpha channel is not included in the displayed value.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I pick a color outside the uploaded image?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes, when the browser supports the native EyeDropper API. Otherwise use the uploaded image picker.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why is the screen eyedropper unavailable?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">API support and secure-context requirements vary by browser and platform.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it automatically extract dominant colors?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current interface picks one exact color at a time and does not show a ranked palette.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does it calculate accessibility contrast?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Use a separate contrast checker with chosen foreground and background colors.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is the sampled color from the full-resolution image?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Clicks are mapped from the preview to the canvas drawn at the image's natural dimensions.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I download a palette?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Copy individual HEX values into your own document or design system.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/favicon-generator"><h3 class="font-bold text-[#1a73e8]">Favicon Generator</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Build browser icons after selecting a high-contrast brand color.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/exif-utility"><h3 class="font-bold text-[#1a73e8]">EXIF Viewer / Remover</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Strip metadata before sharing source photography.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/webp-convert"><h3 class="font-bold text-[#1a73e8]">WebP Converter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Convert an image to another raster format intentionally.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -168,6 +198,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/bulk-resize.html"><h3 class="font-bold text-[#1a73e8]">Bulk Image Resizer Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Resize multiple images in bulk by percentage, width, or height and download as a ZIP.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Pick a color from an image</h2><p class="mt-3 text-sm leading-6 text-white">Upload a JPG, PNG, or WebP and click a pixel to read its uppercase HEX and RGB value, then copy the HEX code.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/color-palette">Use Image Color Picker</a></section>
+    </article>
   </main>
 </body>
 </html>
