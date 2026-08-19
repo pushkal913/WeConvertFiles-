@@ -4,22 +4,21 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Add Page Numbers Guide - Free Browser Tool</title>
-  <meta name="description" content="Add pagination numbers to PDF page footers or headers." />
+  <title>Add Page Numbers to a PDF: 1, 2, 3 or Page X of Y</title>
+  <meta name="description" content="Add centered footer numbers to every PDF page using 1, 2, 3 or Page X of Y. Learn the fixed position, styling, workflow, and limitations." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/page-numbers.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Add Page Numbers Guide - Free Browser Tool" />
-  <meta property="og:description" content="Add pagination numbers to PDF page footers or headers." />
+  <meta property="og:title" content="How to Add Page Numbers to Every PDF Page" />
+  <meta property="og:description" content="Number a finished PDF with simple numbers or Page X of Y labels and learn how to prevent footer overlap." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/page-numbers.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Add Page Numbers Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Add pagination numbers to PDF page footers or headers." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="How to Add Page Numbers to Every PDF Page" />
+  <meta name="twitter:description" content="Number a finished PDF with simple numbers or Page X of Y labels and learn how to prevent footer overlap." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Add Page Numbers Guide - Free Browser Tool",
-        "description": "Add pagination numbers to PDF page footers or headers.",
+        "headline": "Add Page Numbers to a PDF in the Correct Order",
+        "description": "A practical guide to adding centered footer numbers to every page of a PDF using simple numbering or Page X of Y labels.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,124 +46,208 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/page-numbers.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/page-numbers.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Can I change the position of the page numbers?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Page numbers are placed near the bottom center by default to ensure maximum compliance with document layout standards."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does this tool work on locked PDFs?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No, you must unlock password-protected files using our Unlock PDF tool before pagination can be stamped."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Are my paginated documents safe?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, all calculations and file modifications are done inside your browser on-device."
-            }
-          }
+          { "@type": "Question", "name": "Can I add page numbers to every page of a PDF?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The tool numbers every page, beginning with 1." } },
+          { "@type": "Question", "name": "Which page-number styles are available?", "acceptedAnswer": { "@type": "Answer", "text": "Choose simple numbers such as 1, 2, 3, or labels such as Page 1 of 5." } },
+          { "@type": "Question", "name": "Can I skip the cover page?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current tool applies a number to every page." } },
+          { "@type": "Question", "name": "Can numbering start at a value other than 1?", "acceptedAnswer": { "@type": "Answer", "text": "No. A custom starting value or offset is not supported." } },
+          { "@type": "Question", "name": "Where are page numbers placed?", "acceptedAnswer": { "@type": "Answer", "text": "They are centered horizontally and positioned 24 PDF points above the bottom edge." } },
+          { "@type": "Question", "name": "Can I move the number to the top or corner?", "acceptedAnswer": { "@type": "Answer", "text": "No. Placement is fixed at the bottom center." } },
+          { "@type": "Question", "name": "Can I change the font, size, or color?", "acceptedAnswer": { "@type": "Answer", "text": "No. The tool uses Helvetica at 10 points in a fixed dark gray color." } },
+          { "@type": "Question", "name": "Does adding page numbers reduce PDF quality?", "acceptedAnswer": { "@type": "Answer", "text": "The operation adds a text label and does not intentionally rasterize complete pages. Important documents should still be inspected after saving." } },
+          { "@type": "Question", "name": "Will existing digital signatures remain valid?", "acceptedAnswer": { "@type": "Answer", "text": "Adding numbers changes the PDF and can invalidate or alter the status of an existing cryptographic signature." } },
+          { "@type": "Question", "name": "Does the tool overwrite my original PDF?", "acceptedAnswer": { "@type": "Answer", "text": "No. It creates a separate file named page-numbers.pdf." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Add Page Numbers to a PDF in the Correct Order</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Footer Numbering</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Page numbers make long documents easier to navigate, review, print, and discuss. The <strong class="text-slate-900 dark:text-slate-200">Add Page Numbers</strong> tool places a centered footer on every page: choose simple numbers such as <code>1</code>, <code>2</code>, <code>3</code>, or the descriptive <code>Page 1 of 5</code> format. The result downloads separately as <code>page-numbers.pdf</code>, leaving the source unchanged. The style is fixed: Helvetica at 10 points, dark gray, centered, 24 PDF points above the bottom edge, starting at 1.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/page-numbers">Open Add Page Numbers<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Add Page Numbers</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Add Page Numbers inserts professional page counters onto your documents. The parser calculates page coordinates and draws page index labels near the bottom center of each page using local JavaScript vector math, perfect for legal briefs and books.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/page-numbers">
-        Open Add Page Numbers
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Finalize the PDF's page order, choose either simple numbering or Page X of Y, and generate the numbered copy. Check existing footer content, because position, font, size, color, starting number, and page selection are not customizable.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose the PDF file you wish to paginate.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose Style</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select your preferred pagination format, such as simple numbers (1, 2) or total counts (Page 1 of 5).</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Number Pages</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Add Page Numbers to stamp the indexes locally and download the document.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why add page numbers to a PDF?</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Make reviews more precise</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Instead of "the paragraph near the end," a reviewer can identify "page 18." Stable references make feedback easier to understand and resolve.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Keep printed pages in order</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Pages can be separated during printing, scanning, meetings, or distribution. Numbering provides an immediate sequence.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Prepare reports and submissions</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Applications, proposals, exhibits, and administrative packets often benefit from continuous numbering across the final combined document.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Show progress through a document</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The <code>Page X of Y</code> style tells readers both their current location and the total length of the PDF.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm md:col-span-2"><h3 class="font-bold text-slate-900 dark:text-slate-200">Improve meeting and classroom use</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Participants can quickly turn to the same page during a presentation, lesson, workshop, or discussion.</p></div>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I change the position of the page numbers?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Page numbers are placed near the bottom center by default to ensure maximum compliance with document layout standards.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does this tool work on locked PDFs?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No, you must unlock password-protected files using our Unlock PDF tool before pagination can be stamped.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are my paginated documents safe?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, all calculations and file modifications are done inside your browser on-device.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Available numbering styles</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Style</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Example on page 3 of a 12-page PDF</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Best suited to</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Simple</td><td class="py-3 pr-4"><code>3</code></td><td class="py-3">Minimal reports, handouts, and documents where the total is not needed</td></tr>
+          <tr><td class="py-3 pr-4">Page X of Y</td><td class="py-3 pr-4"><code>Page 3 of 12</code></td><td class="py-3">Submissions, review copies, and packets where total length matters</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Both styles begin with page 1 and number every physical page in the loaded PDF. The tool does not currently offer Roman numerals, alphabetic numbering, custom prefixes, section numbering, Bates numbering, or an offset starting value.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Exact page-number appearance</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Font:</strong> Helvetica</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Font size:</strong> 10 PDF points</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Color:</strong> dark gray, approximately RGB 0.25, 0.28, 0.33</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Horizontal position:</strong> centered according to the measured label width</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Vertical position:</strong> 24 PDF points above the bottom edge</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Pages included:</strong> every page</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Starting value:</strong> 1</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Output filename:</strong> <code>page-numbers.pdf</code></li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-3">These settings create a restrained footer suitable for documents with a clear bottom margin. They can overlap content in PDFs whose original design already uses the bottom center of the page.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Do PDF points equal screen pixels?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>No. PDF coordinates use points, traditionally based on 72 points per inch. The tool places the number at a PDF-coordinate value of 24 from the bottom edge &mdash; roughly one third of an inch, although actual physical output can depend on page scaling and printer settings.</p><p>The label is positioned relative to each page's own width, so pages with different widths still receive a horizontally centered number.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Number pages only after the sequence is final</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Page numbering should usually be one of the last structural steps. If pages are moved, inserted, deleted, or duplicated afterward, the visible numbers can stop matching the physical sequence. A recommended order of operations:</p>
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Gather every required source document.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Merge separate PDFs.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Remove unwanted pages.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Organize the final page order.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Rotate sideways or upside-down pages.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Confirm the final page count.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">7.</strong> Add page numbers.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">8.</strong> Apply a final watermark if required.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">9.</strong> Inspect and distribute the finished file.</li>
+        </ol>
+        <p>If the source already contains printed page numbers, decide whether new continuous numbering will clarify the document or create confusion.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to add page numbers to a PDF</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Open and inspect the source.</strong> Confirm all required pages are present and in final order, orientation is correct, no unwanted blank pages remain, the bottom-center area has clear space, and existing footers will not conflict.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Choose the numbering style.</strong> Use <strong class="text-slate-900 dark:text-slate-200">1, 2, 3</strong> for a compact footer, or <strong class="text-slate-900 dark:text-slate-200">Page 1 of 5</strong> when the total count helps readers confirm the document is complete. The chosen style applies consistently to every page.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Generate the numbered PDF.</strong> Start the operation. The tool loads the document, calculates each label, places it on every page, and creates <code>page-numbers.pdf</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Review the download.</strong> Inspect the first and last pages, portrait and landscape pages, pages with existing footers, pages of different sizes, full-bleed or dark backgrounds, and pages likely to be printed. Confirm the visible numbers correspond to the physical page sequence.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Keep the original.</strong> The numbered result is a separate copy. Retain the unnumbered source until the final version is accepted.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the tool places page numbers</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>For every page, the implementation:</p>
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Loads the PDF into browser memory.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Embeds the standard Helvetica font.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Counts the total number of pages.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Creates either the current page number or a <code>Page X of Y</code> label.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Measures that label at a font size of 10.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Subtracts the measured width from the page width and divides by two.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">7.</strong> Draws the text at that horizontal position and at <code>y = 24</code>.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">8.</strong> Uses a fixed dark gray color, then saves the result as <code>page-numbers.pdf</code>.</li>
+        </ol>
+        <p>Measuring each label before positioning it keeps <code>1</code>, <code>10</code>, and <code>Page 10 of 100</code> centered even though their widths differ.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Existing footer content and overlap</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The tool does not detect whether something already occupies the bottom center. Potential conflicts include existing page numbers, confidentiality notices, document titles, revision identifiers, copyright text, website addresses, printer marks, signatures or stamps, and full-page photographs.</p>
+        <p>If overlap occurs, the current interface cannot move the added number to a corner or change its color, size, or vertical margin. Possible alternatives:</p>
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Add blank margin space in a full PDF editor.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Remove or cover an obsolete existing footer before numbering.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Use software that supports custom page-number placement.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Keep the source unnumbered when overlap would make the result unreadable.</li>
+        </ol>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Numbering PDFs with mixed page sizes</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>A PDF can contain A4, Letter, Legal, landscape, and custom-sized pages in one document. The tool centers each number using that page's individual width, so the horizontal position adapts automatically.</p><p>The vertical position remains 24 points from the bottom edge on every page. On a very short page or a page with an unusual crop box, the label may appear too close to content or outside the useful visible area. Always review each distinct page size in the output.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Cover pages, front matter, and custom starting numbers</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Many formal documents use numbering rules such as no visible number on the cover, Roman numerals for front matter, Arabic numbering beginning at the first chapter, a starting number continuing from an earlier volume, or different prefixes for exhibits and appendices.</p>
+        <p>The current tool does not implement those publishing conventions. It begins at 1 and numbers every page using the selected style. If a document needs complex numbering, use desktop publishing software or a full PDF editor that supports page labels, ranges, sections, and offsets.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Visible numbers versus PDF page labels</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Visible page number</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Text is drawn on the page itself. It appears on screen and usually prints with the document. This is what the WeConvertFiles tool adds.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">PDF page label</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Metadata can tell a viewer to display page names such as <code>iii</code>, <code>A-12</code>, or <code>Cover</code> in its navigation without drawing them onto the page. The tool does not create a custom page-label scheme.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Does adding page numbers reduce quality?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>The operation draws a small text label onto existing pages. It does not intentionally render each complete page to a JPEG merely to add the footer, so existing text, images, and vector graphics are not deliberately rasterized.</p><p>However, the PDF is modified and saved as a new document. Complex forms, signatures, scripts, annotations, accessibility structures, or unusual PDF features should still be checked.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Page numbers and digitally signed PDFs</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Adding a page number changes the PDF after it was signed. A reader may report that the cryptographic signature is invalid or that the document has been modified since signing. A recommended approach:</p>
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Finalize pages and numbering before the signing step.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Keep an already signed original unchanged.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Create a numbered derivative only when authorized.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Do not represent the derivative as the untouched signed document.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Re-sign the finalized copy through the approved process when required.</li>
+        </ol>
+        <p>A visible page number does not create or replace a digital signature.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations to understand</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Every page is numbered.</strong> There is no page-range field and no option to skip a cover or blank page.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Numbering always begins at 1.</strong> The interface does not accept a custom starting number.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Placement is fixed.</strong> Numbers appear at the bottom center. Top, left, right, inside, outside, and alternating positions are not available.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Style is fixed.</strong> Font, size, color, and margin cannot be changed.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Only two label formats are available.</strong> Simple numbers or <code>Page X of Y</code>. Roman numerals, prefixes, suffixes, and section labels are not supported.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Existing content is not automatically avoided.</strong> The tool does not inspect the footer area or move labels around existing text and graphics.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">The PDF contents are processed in browser memory and are not sent to WeConvertFiles for numbering.</strong> Required JavaScript libraries may be downloaded from third-party content-delivery networks when the tool opens, so the workflow should not be described as completely offline.</p><p>If a visitor consents to site analytics, separate usage information such as visits, clicks, device details, or conversion events may be collected. Those analytics do not receive the contents of the PDF.</p><p>For sensitive documents, also consider device security, browser extensions, downloaded files, backups, shared folders, and the final distribution method.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The page number overlaps an existing footer</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The current placement is fixed. Use a source with a clear bottom-center margin or a different PDF editor that supports custom positioning.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The cover page should not have a number</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The tool numbers every page. A more advanced editor is required to skip selected pages or begin numbering later.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The numbering should begin at another value</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Custom starting numbers are not supported. The first physical page always receives 1.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Numbers are difficult to see on a dark page</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The text color is fixed dark gray. The current interface cannot add a light background plate or choose white text.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The numbers do not match the table of contents</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Finalize page order before numbering and update the table of contents when necessary. Visible physical page numbers and pre-existing internal labels can differ.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A landscape page looks different</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The label is centered using that page's width and remains 24 points above its bottom edge. Review every distinct orientation and page size.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A digital signature became invalid</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Adding numbers modifies the PDF. Return to the original signed document and use an approved finalize-then-sign workflow.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The browser cannot process the document</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Verify that the source opens normally. Close other memory-heavy tabs and retry. Protected, damaged, very large, or unusually structured PDFs may fail.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I add page numbers to every page of a PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. The tool numbers every page, beginning with 1.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which page-number styles are available?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Choose simple numbers such as <code>1</code>, <code>2</code>, <code>3</code>, or labels such as <code>Page 1 of 5</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I skip the cover page?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current tool applies a number to every page.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can numbering start at a value other than 1?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. A custom starting value or offset is not supported.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Where are page numbers placed?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">They are centered horizontally and positioned 24 PDF points above the bottom edge.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I move the number to the top or corner?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Placement is fixed at the bottom center.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I change the font, size, or color?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The tool uses Helvetica at 10 points in a fixed dark gray color.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does adding page numbers reduce PDF quality?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The operation adds a text label and does not intentionally rasterize complete pages. Important documents should still be inspected after saving.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will existing digital signatures remain valid?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Adding numbers changes the PDF and can invalidate or alter the status of an existing cryptographic signature.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool overwrite my original PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It creates a separate file named <code>page-numbers.pdf</code>.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/organize-pdf"><h3 class="font-bold text-[#1a73e8]">Organize PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Finalize the page sequence before numbering.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/rotate-pdf"><h3 class="font-bold text-[#1a73e8]">Rotate PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Correct page orientation before placing footers.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/watermark-pdf"><h3 class="font-bold text-[#1a73e8]">Watermark PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Add a final status label after numbering.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -174,6 +256,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/split-pdf.html"><h3 class="font-bold text-[#1a73e8]">Split PDF Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Separate every page of a PDF into individual PDF files bundled in a ZIP.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Number your finished PDF</h2><p class="mt-3 text-sm leading-6 text-white">Finalize the page order, pick simple numbers or Page X of Y, generate <code>page-numbers.pdf</code>, and check the footer on every page size.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/page-numbers">Use Add Page Numbers</a></section>
+    </article>
   </main>
 </body>
 </html>

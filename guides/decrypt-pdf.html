@@ -4,22 +4,21 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Unlock PDF Guide - Free Browser Tool</title>
-  <meta name="description" content="Remove password protection and restrictions from PDF files." />
+  <title>Remove a Password from a PDF You Are Authorized to Unlock</title>
+  <meta name="description" content="Remove a known password from an authorized PDF copy. Learn how direct decryption and the rendering fallback affect text, links, forms, quality, and privacy." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/decrypt-pdf.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Unlock PDF Guide - Free Browser Tool" />
-  <meta property="og:description" content="Remove password protection and restrictions from PDF files." />
+  <meta property="og:title" content="How to Remove a Known Password from a PDF" />
+  <meta property="og:description" content="Create an unlocked PDF when you know the current password, and understand when a compatibility fallback may flatten pages into images." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/decrypt-pdf.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Unlock PDF Guide - Free Browser Tool" />
-  <meta name="twitter:description" content="Remove password protection and restrictions from PDF files." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="How to Remove a Known Password from a PDF" />
+  <meta name="twitter:description" content="Create an unlocked PDF when you know the current password, and understand when a compatibility fallback may flatten pages into images." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Unlock PDF Guide - Free Browser Tool",
-        "description": "Remove password protection and restrictions from PDF files.",
+        "headline": "Remove a Known Password from an Authorized PDF Copy",
+        "description": "A practical guide to removing PDF encryption when the current password is known, including direct decryption, image-rendering fallback, verification, and limitations.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,124 +46,192 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/decrypt-pdf.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/decrypt-pdf.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Can I unlock a PDF without knowing the password?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. For security and compliance, you must provide the correct password to unlock the document."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Will this tool remove printing and copying restrictions?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, once unlocked, all permission restrictions regarding printing and copying text are removed."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is my password safe?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, the password is processed in memory on your device and is never transmitted over the network."
-            }
-          }
+          { "@type": "Question", "name": "Can I remove a PDF password if I do not know it?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current password is required. The tool does not crack, guess, recover, or bypass unknown passwords." } },
+          { "@type": "Question", "name": "Can I unlock any password-protected PDF?", "acceptedAnswer": { "@type": "Answer", "text": "Only unlock a document you own or are authorized to modify. A correct password does not automatically grant permission to remove protection or redistribute the contents." } },
+          { "@type": "Question", "name": "Will the unlocked PDF keep searchable text?", "acceptedAnswer": { "@type": "Answer", "text": "It may on the direct-save path. If the rendering fallback is used, each page becomes an image and the text is no longer inherently searchable or selectable." } },
+          { "@type": "Question", "name": "Are links and form fields preserved?", "acceptedAnswer": { "@type": "Answer", "text": "They may survive direct loading and saving, but they are flattened and lost as interactive features in the image-rendering fallback." } },
+          { "@type": "Question", "name": "Does the fallback reduce quality?", "acceptedAnswer": { "@type": "Answer", "text": "It renders pages at 2× scale and uses JPEG quality 0.95, but it still changes vector and text content into raster images. Fine details, zoom behavior, and printing can differ from the source." } },
+          { "@type": "Question", "name": "Does the tool overwrite the protected original?", "acceptedAnswer": { "@type": "Answer", "text": "No. It creates a separate file named unlocked.pdf." } },
+          { "@type": "Question", "name": "Is the password saved by WeConvertFiles?", "acceptedAnswer": { "@type": "Answer", "text": "The password is processed in browser memory and is not sent to WeConvertFiles for decryption." } },
+          { "@type": "Question", "name": "Can an unlocked PDF be protected again?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. After authorized changes, a separate encryption workflow can create a newly protected copy with an appropriate password." } },
+          { "@type": "Question", "name": "Why is the unlocked file larger?", "acceptedAnswer": { "@type": "Answer", "text": "If the fallback was used, full-page JPEG images may require more storage than the source PDF's text, fonts, vectors, and compressed assets." } },
+          { "@type": "Question", "name": "Will a digital signature remain valid?", "acceptedAnswer": { "@type": "Answer", "text": "Do not assume so. Decryption and re-saving modify the document, while the fallback creates a reconstructed PDF. Keep the original signed file for verification." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Remove a Known Password from an Authorized PDF Copy</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Current Password Required</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">If you know the current password and are permitted to remove protection, an unlocked working copy can make legitimate tasks easier. The <strong class="text-slate-900 dark:text-slate-200">Decrypt PDF</strong> tool requires the existing password and creates a separate file named <code>unlocked.pdf</code>. It first tries to open and save the PDF directly; if that fails, it may fall back to rendering every page as a high-resolution JPEG and rebuilding a new PDF &mdash; which preserves the appearance but removes searchable text, links, forms, and other interactive features.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/decrypt-pdf">Open Decrypt PDF<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Unlock PDF</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Unlock PDF removes password security and restrictions from encrypted PDF documents. When you upload a locked file and enter the correct password, the engine decrypts the document stream locally, saving a clean, unrestricted copy.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/decrypt-pdf">
-        Open Unlock PDF
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Select a protected PDF that you are authorized to unlock, enter its current open password, and create <code>unlocked.pdf</code>. Always compare the output with the source, because the fallback path may reconstruct pages from images.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload PDF</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose the password-protected PDF file you wish to unlock.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Enter Password</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Provide the correct current password required to open the document.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Unlock & Save</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Unlock PDF to remove password headers locally and download the decrypted file.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Authorization comes first</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>PDF encryption is an access control chosen by the document owner or publisher. Remove it only when you own the file or have clear permission to create an unlocked copy. Authorization may come from being the document owner, receiving the owner's permission, following an approved organizational process, migrating records under an authorized retention program, or creating a permitted accessibility or compatibility copy.</p>
+        <p>Knowing or obtaining a password does not automatically grant permission to redistribute, modify, publish, or remove protection from a document. Applicable contracts, workplace policies, confidentiality obligations, copyright rules, and local laws still apply. <strong>This tool is not designed to crack or recover unknown passwords.</strong></p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I unlock a PDF without knowing the password?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No. For security and compliance, you must provide the correct password to unlock the document.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Will this tool remove printing and copying restrictions?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, once unlocked, all permission restrictions regarding printing and copying text are removed.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is my password safe?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, the password is processed in memory on your device and is never transmitted over the network.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">When removing a known PDF password is useful</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Create an approved working copy</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A team may need an unlocked copy for a permitted internal process while preserving the encrypted original as the authoritative record.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Improve application compatibility</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Some indexing, archiving, accessibility, printing, or conversion systems cannot process protected PDFs even when an operator knows the password. An unlocked derivative may work with those systems.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Reduce repeated password prompts</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">For a document stored in an appropriately secured environment, an authorized user may remove file-level protection so the password is not entered repeatedly.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Migrate records</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">An organization may need to move documents from a legacy password scheme into managed storage with centralized access controls.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm md:col-span-2"><h3 class="font-bold text-slate-900 dark:text-slate-200">Prepare for another PDF operation</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Merging, organizing, extracting, or rotating pages may require an unencrypted working copy. Remove protection first only when the subsequent modification is permitted.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What you need</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">The protected PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">One PDF that opens with a password. Damaged files, unsupported encryption methods, or unusual structures may still fail even when the password is correct.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">The current password</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Enter the exact password required to open the PDF, including capitalization, spaces, and symbols. The tool cannot derive or recover it.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Enough browser memory</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Direct decryption and especially image rendering can use substantial memory. Large scanned documents and long PDFs are more demanding than small text files.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">A secure destination</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The unlocked result no longer requires the original password. Store and share it according to the sensitivity of its contents.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to remove the password from a PDF</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Confirm ownership or permission.</strong> Verify that the document owner and applicable policy allow an unlocked copy. If the PDF belongs to an employer, client, publisher, or public agency, follow its stated process.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Keep the protected original.</strong> Do not discard or overwrite the encrypted source. It may be required for authenticity, audit, legal, or recovery purposes, and it preserves features a fallback conversion may remove.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Test the password in a normal PDF viewer.</strong> Open the source in a current reader and confirm the password works. This separates password errors from tool or compatibility problems.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Select the PDF and enter the password.</strong> Use the exact credential that opens the document. Check keyboard layout, capitalization, punctuation, and accidental leading or trailing spaces.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Create the unlocked copy.</strong> Start the operation. The tool first attempts direct loading and saving; if that fails, it attempts the page-rendering fallback. The result downloads as <code>unlocked.pdf</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6. Compare the output with the source.</strong> Open the result without a password and check page count and order, orientation, dimensions, text sharpness, text selection and search, hyperlinks, forms and annotations, bookmarks and attachments, accessibility tags, digital-signature status, and file size. Keep the original protected PDF even when the unlocked copy appears correct.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">The two decryption paths</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Method</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">What it does</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Main advantage</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Main trade-off</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Direct load and save</td><td class="py-3 pr-4">Opens the encrypted PDF with the password and saves an unlocked document</td><td class="py-3 pr-4">Can retain normal PDF page structure</td><td class="py-3">Some encryption methods or files may not load successfully</td></tr>
+          <tr><td class="py-3 pr-4">Rendering fallback</td><td class="py-3 pr-4">Renders every page at 2&times; scale, encodes it as JPEG at 0.95 quality, and builds a new PDF</td><td class="py-3 pr-4">Can reproduce visible pages when direct saving fails</td><td class="py-3">Flattens content and removes interactive or semantic features</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">The interface may not prominently announce which internal path produced the download. The most reliable clue is the output itself: if text is no longer selectable or searchable, the rendering fallback was probably used.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Direct decryption and save</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The preferred path:</p>
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Read the source PDF into browser memory.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Load it using the supplied password with encryption checks enabled.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Save the resulting PDF without reapplying password protection.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Download the output as <code>unlocked.pdf</code>.</li>
+        </ol>
+        <p>This path avoids intentionally rebuilding every page as an image, so ordinary selectable text, vector graphics, and page content are more likely to remain in their normal PDF form. However, loading and saving through a different PDF library can still affect signatures, forms, annotations, metadata, embedded files, scripts, bookmarks, or unsupported structures, so verify complex documents.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Image-rendering fallback</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>If direct loading fails, the tool attempts a compatibility path:</p>
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> PDF.js opens the source with the supplied password.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Each page is rendered to a canvas at twice its normal scale.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> The canvas is encoded as JPEG with a quality setting of 0.95.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> A new PDF page is created using the original page's width, height, and orientation.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> The JPEG is placed across that page.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> All reconstructed pages are saved as <code>unlocked.pdf</code>.</li>
+        </ol>
+        <p>This can produce a visually similar copy, but it is not equivalent to removing encryption while leaving every original object untouched.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What the rendering fallback can remove or change</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Selectable and searchable text:</strong> text becomes part of a page image and cannot normally be selected, copied, or searched unless OCR is performed later.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Hyperlinks:</strong> clickable links are flattened into pixels and no longer behave as interactive link annotations.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Form fields:</strong> text boxes, checkboxes, buttons, and calculations become part of the rendered page image.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Accessibility structure:</strong> tags, headings, alternative text, and logical reading order are not preserved in a JPEG page image.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Vector artwork:</strong> lines, diagrams, and fonts become raster content; fine details may look different when zoomed or printed.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Digital signatures:</strong> the fallback creates a different PDF, so existing signatures and their validation data are not preserved as valid signatures.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Attachments and navigation:</strong> embedded files, bookmarks, scripts, layers, and comments are not reproduced merely by rendering each page.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">File size:</strong> the result may be larger or smaller; image-heavy sources behave differently from compact text-and-vector PDFs.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to tell whether the output was flattened</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Open <code>unlocked.pdf</code> and try these checks:</p>
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Select a sentence with the text-selection tool.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Search for a word visible on the page.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Click a visible hyperlink.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Place the cursor inside a form field.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Zoom closely into small text or vector lines.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Inspect the document's bookmarks and attachments.</li>
+        </ol>
+        <p>If the page behaves like one large image, the fallback was likely used.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Decrypting is not password recovery</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Decryption with a known password</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The correct credential is supplied to open the PDF, and an authorized unlocked copy is created. This is the only operation this tool performs.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Password recovery</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A person attempts to discover a forgotten password through guesses, wordlists, prior credentials, or other methods. The tool does not do this.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Password bypass</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A person attempts to avoid or defeat the document's access control without valid authorization. The tool does not do this.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Security after removing the password</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>Store the unlocked file in an approved encrypted device or managed repository.</li>
+        <li>Limit folder and sharing permissions.</li>
+        <li>Avoid placing it in a publicly synchronized location.</li>
+        <li>Remove temporary copies when policy permits.</li>
+        <li>Do not email it without appropriate protection.</li>
+        <li>Consider re-encrypting it with a new password after approved modifications.</li>
+        <li>Keep the original protected file separately.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-3">Removing one security layer should be accompanied by an appropriate replacement control when the contents remain sensitive.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">The PDF contents and entered password are processed in browser memory and are not sent to WeConvertFiles for decryption.</strong> Required JavaScript libraries may be downloaded from third-party content-delivery networks when the tool opens, so the workflow should not be described as completely offline.</p><p>If a visitor consents to site analytics, separate usage information such as visits, clicks, device details, or conversion events may be collected. Those analytics do not receive the PDF contents or the password entered into the tool.</p><p>The local environment still matters. Browser extensions, malware, clipboard history, screen recording, shared devices, downloaded files, and cloud-synchronized folders can expose confidential information independently of the decryption operation.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Incorrect password or failed to decrypt PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Confirm the password in a normal PDF viewer. Check capitalization, symbols, keyboard layout, and accidental spaces. If the password opens the file elsewhere, the PDF may use unsupported encryption or contain a structure the libraries cannot process.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Text is no longer selectable</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The rendering fallback probably created image-based pages. Keep the original and use the unlocked copy only when loss of searchable text is acceptable.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Links and forms do not work</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Interactive features are lost when pages are reconstructed from images. Use a desktop PDF editor or another authorized decryption workflow when those features must remain live.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Small text looks softer</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The fallback renders at 2&times; scale and encodes pages as JPEG at 0.95 quality. Rasterization and JPEG compression can affect fine text and lines.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The output is much larger</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Full-page images can occupy more space than efficiently encoded text and vector content. The effect depends on page count, dimensions, and visual complexity.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Page orientation or size looks wrong</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Compare portrait and landscape pages individually. The fallback attempts to reproduce each original page size and orientation, but unusual page boxes require careful inspection.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A digital signature is missing or invalid</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Creating an unlocked copy changes the document. Use the protected signed original when signature verification matters.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The browser becomes unresponsive</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Rendering every page at 2&times; scale consumes memory. Close other heavy tabs or process a smaller authorized document when possible.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I remove a PDF password if I do not know it?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current password is required. The tool does not crack, guess, recover, or bypass unknown passwords.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I unlock any password-protected PDF?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Only unlock a document you own or are authorized to modify. A correct password does not automatically grant permission to remove protection or redistribute the contents.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will the unlocked PDF keep searchable text?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It may on the direct-save path. If the rendering fallback is used, each page becomes an image and the text is no longer inherently searchable or selectable.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Are links and form fields preserved?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">They may survive direct loading and saving, but they are flattened and lost as interactive features in the image-rendering fallback.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the fallback reduce quality?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It renders pages at 2&times; scale and uses JPEG quality 0.95, but it still changes vector and text content into raster images. Fine details, zoom behavior, and printing can differ from the source.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool overwrite the protected original?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It creates a separate file named <code>unlocked.pdf</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is the password saved by WeConvertFiles?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The password is processed in browser memory and is not sent to WeConvertFiles for decryption.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can an unlocked PDF be protected again?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. After authorized changes, a separate encryption workflow can create a newly protected copy with an appropriate password.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why is the unlocked file larger?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">If the fallback was used, full-page JPEG images may require more storage than the source PDF's text, fonts, vectors, and compressed assets.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Will a digital signature remain valid?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Do not assume so. Decryption and re-saving modify the document, while the fallback creates a reconstructed PDF. Keep the original signed file for verification.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/encrypt-pdf"><h3 class="font-bold text-[#1a73e8]">Encrypt PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Protect an authorized working copy with a new password.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/organize-pdf"><h3 class="font-bold text-[#1a73e8]">Organize PDF</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Reorder pages after creating an approved unlocked copy.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/pdf-to-images"><h3 class="font-bold text-[#1a73e8]">PDF to Images</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Intentionally render PDF pages as image files.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -174,6 +240,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/split-pdf.html"><h3 class="font-bold text-[#1a73e8]">Split PDF Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Separate every page of a PDF into individual PDF files bundled in a ZIP.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Unlock an authorized PDF</h2><p class="mt-3 text-sm leading-6 text-white">Enter the current password, generate <code>unlocked.pdf</code>, and compare it with the source to confirm whether text stayed selectable.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/decrypt-pdf">Use Decrypt PDF</a></section>
+    </article>
   </main>
 </body>
 </html>
