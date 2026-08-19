@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Regex Tester Guide - WeConvertFiles</title>
-  <meta name="description" content="Test JavaScript regular expressions against inputs in real-time with highlights." />
+  <title>JavaScript Regex Tester: Test Patterns and Highlight Matches</title>
+  <meta name="description" content="Test JavaScript regular expressions with g, i, m, and s flags. Highlight matches and learn about escaping, zero-width matches, Unicode, and performance." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/regex-tester.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Regex Tester Guide - WeConvertFiles" />
-  <meta property="og:description" content="Test JavaScript regular expressions against inputs in real-time with highlights." />
+  <meta property="og:title" content="Test JavaScript Regular Expressions in Your Browser" />
+  <meta property="og:description" content="Enter a pattern and sample text, select regex flags, highlight non-overlapping matches, and debug common JavaScript RegExp errors." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/regex-tester.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Regex Tester Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Test JavaScript regular expressions against inputs in real-time with highlights." />
+  <meta name="twitter:title" content="Test JavaScript Regular Expressions in Your Browser" />
+  <meta name="twitter:description" content="Enter a pattern and sample text, select regex flags, highlight non-overlapping matches, and debug common JavaScript RegExp errors." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Regex Tester Guide",
-        "description": "Test JavaScript regular expressions against inputs in real-time with highlights.",
+        "headline": "Test JavaScript Regular Expressions and Highlight Matches",
+        "description": "A practical guide to testing JavaScript regular expressions with global, case-insensitive, multiline, and dotAll flags.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,113 +46,186 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/regex-tester.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/regex-tester.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What RegExp modifiers are supported?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We support standard RegExp flags: global (g), case-insensitive (i), multiline (m), dotAll (s), unicode (u), and sticky (y)."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Are my test scripts secure?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, regex pattern compilations run locally in your tab memory, ensuring no proprietary text or code leaves your computer."
-            }
-          }
+          { "@type": "Question", "name": "Should I include /pattern/g slash delimiters?", "acceptedAnswer": { "@type": "Answer", "text": "No. Enter only the pattern and select g separately." } },
+          { "@type": "Question", "name": "Which regex engine does the tool use?", "acceptedAnswer": { "@type": "Answer", "text": "It uses the JavaScript RegExp engine in the current browser." } },
+          { "@type": "Question", "name": "Which flags are supported?", "acceptedAnswer": { "@type": "Answer", "text": "The interface supports g, i, m, and s." } },
+          { "@type": "Question", "name": "How do I find every match?", "acceptedAnswer": { "@type": "Answer", "text": "Enable the global g flag. Matches are non-overlapping." } },
+          { "@type": "Question", "name": "Can it find overlapping matches?", "acceptedAnswer": { "@type": "Answer", "text": "Not through ordinary global iteration. Some overlapping cases can be expressed with lookahead; others need a different algorithm." } },
+          { "@type": "Question", "name": "What does the multiline flag do?", "acceptedAnswer": { "@type": "Answer", "text": "It changes ^ and $ so they can match boundaries within a multiline string." } },
+          { "@type": "Question", "name": "What does the dotAll flag do?", "acceptedAnswer": { "@type": "Answer", "text": "It allows dot to match line-terminator characters." } },
+          { "@type": "Question", "name": "Can a regex freeze the browser?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Certain patterns can cause excessive backtracking on particular input, and the current tool does not enforce a match timeout." } },
+          { "@type": "Question", "name": "Is a matching email or date guaranteed to be valid?", "acceptedAnswer": { "@type": "Answer", "text": "No. Regex can check textual shape, but real-world validity often requires parsing and domain-specific checks." } },
+          { "@type": "Question", "name": "Is it safe to paste untrusted HTML into the test field?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current preview does not apply a separate sanitization step to all displayed text. Use controlled plain-text samples." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Test JavaScript Regular Expressions and Highlight Matches</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Live Match Preview</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">A regular expression describes a text pattern, and small punctuation changes can completely alter the result. The <strong class="text-slate-900 dark:text-slate-200">Regex Tester</strong> uses the JavaScript <code>RegExp</code> engine built into your browser: enter pattern source without surrounding slash delimiters, choose the <code>g</code>, <code>i</code>, <code>m</code>, and <code>s</code> flags, and provide a test string. Matches are highlighted in the preview, and invalid patterns produce a syntax error. It is great for exploration and debugging, but it does not prove a regex is safe, efficient, portable to another language, or sufficient for security validation.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/regex-tester">Open Regex Tester<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Regex Tester</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">JS RegExp</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Regex Tester is an interactive editor to evaluate regular expressions against sample text inputs in real-time. JavaScript regexp engine compiles input rules, matches strings matching specified flags, and prints matched segments in color highlights.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/regex-tester">
-        Open Regex Tester
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Enter only the pattern &mdash; not <code>/pattern/g</code> &mdash; then choose flags separately. Enable <code>g</code> to find every non-overlapping match. Test both expected matches and near misses, and avoid running untrusted or backtracking-heavy patterns against large input.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Enter Pattern</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Type your regular expression string (e.g. ([A-Z]+) or \d{4}).</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Choose Flags</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select standard RegExp modifiers like global matching (g) or case insensitivity (i).</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Test matches</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Type or paste test strings. Matches will instantly highlight in yellow with statistics.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What this regex tester does</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; Compiles a pattern with JavaScript's <code>new RegExp(pattern, flags)</code> constructor.</li>
+        <li>&bull; Supports the <code>g</code>, <code>i</code>, <code>m</code>, and <code>s</code> flags.</li>
+        <li>&bull; Tests the expression against sample text and highlights matching substrings.</li>
+        <li>&bull; Counts matches and displays syntax errors from the browser's JavaScript engine.</li>
+        <li>&bull; Expands the test and preview areas as content grows, up to the current height limit.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-3">It does not provide replacement templates, capture-group tables, code generation, flavor conversion, or a guarantee that the expression performs safely on arbitrary input.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      
-      
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What RegExp modifiers are supported?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">We support standard RegExp flags: global (g), case-insensitive (i), multiline (m), dotAll (s), unicode (u), and sticky (y).</p>
-      </div>
-      
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Are my test scripts secure?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, regex pattern compilations run locally in your tab memory, ensuring no proprietary text or code leaves your computer.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Enter pattern source without slash delimiters</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>JavaScript source often displays a regex literal like <code>/\b[A-Z][a-z]+\b/g</code>. In the tester, enter only the pattern and enable the <code>g</code> flag separately:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>\b[A-Z][a-z]+\b</code></pre>
+        <p>The opening and closing slashes belong to JavaScript's regex-literal notation. They are not part of the pattern passed to the <code>RegExp</code> constructor, so if you include them the tool looks for literal slash characters around the match.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Supported JavaScript regex flags</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Flag</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Name</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Effect</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>g</code></td><td class="py-3 pr-4">Global</td><td class="py-3">Finds repeated non-overlapping matches instead of stopping after the first</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>i</code></td><td class="py-3 pr-4">Case-insensitive</td><td class="py-3">Ignores ordinary letter case distinctions during matching</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4"><code>m</code></td><td class="py-3 pr-4">Multiline</td><td class="py-3">Changes ^ and $ so they can match line boundaries within the test string</td></tr>
+          <tr><td class="py-3 pr-4"><code>s</code></td><td class="py-3 pr-4">DotAll</td><td class="py-3">Allows . to match line-terminator characters</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">The interface does not currently expose JavaScript's <code>u</code>, <code>v</code>, <code>y</code>, or <code>d</code> flags. Pattern behavior follows the features supported by the current browser.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to test a regular expression</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Define the exact matching goal.</strong> Write down what should match and what must not. "Find dates" is vague; "find ISO-style calendar dates written as YYYY-MM-DD in a log line" is a more useful requirement.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Enter the pattern.</strong> Provide pattern source without slash delimiters, starting with the smallest expression that captures the requirement, for example <code>\b\d{4}-\d{2}-\d{2}\b</code>. This recognizes the shape of a date; it does not prove that <code>2026-99-99</code> is real.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Select only the required flags.</strong> Enable <code>g</code> when every occurrence matters, <code>i</code> only when case should be ignored, and <code>m</code> or <code>s</code> based on specific line-boundary behavior rather than enabling every flag by default.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Add representative test text.</strong> Include expected matches, expected nonmatches, empty input, text at the beginning and end, multiple lines, punctuation next to matches, Unicode characters, very long values, and values that nearly match.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Review the highlighted output.</strong> With <code>g</code>, the tool iterates through every non-overlapping match; without <code>g</code>, it highlights only the first.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6. Test performance and portability.</strong> Before production, test in the actual runtime with realistic maximum input sizes. A browser result does not guarantee identical syntax or performance in Python, .NET, Java, PHP, Go, a database, or a CLI tool.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Core regex building blocks</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">Literal characters:</strong> most characters match themselves; <code>cat</code> matches those three letters.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Character classes:</strong> square brackets match one character from a set, e.g. <code>[A-F0-9]</code> for one uppercase hex character.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Predefined classes:</strong> <code>\d</code> a digit, <code>\w</code> commonly ASCII letters/digits/underscore, <code>\s</code> whitespace; uppercase forms like <code>\D</code> mean the opposite. Do not assume <code>\w</code> covers every writing system.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Quantifiers:</strong> <code>*</code> zero or more, <code>+</code> one or more, <code>?</code> zero or one, <code>{3}</code> exactly three, <code>{2,5}</code> between two and five &mdash; applied to the immediately preceding token or group.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Groups:</strong> parentheses group and capture, e.g. <code>(red|green|blue)</code>; use <code>(?:...)</code> for grouping without capture.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Alternation:</strong> the pipe means "or", e.g. <code>cat|dog</code>.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Anchors:</strong> <code>^</code> start (or line start with <code>m</code>), <code>$</code> end (or line end with <code>m</code>), <code>\b</code> a word boundary.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">Lookaround:</strong> modern engines can support lookahead and lookbehind, but verify browser compatibility and performance before relying on them.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Practical examples</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Goal</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Pattern</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Flags</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Note</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">ISO-style date shapes</td><td class="py-3 pr-4"><code>\b\d{4}-\d{2}-\d{2}\b</code></td><td class="py-3 pr-4"><code>g</code></td><td class="py-3">Formatting only; calendar validation needs extra logic</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Repeated whitespace</td><td class="py-3 pr-4"><code>[ \t]{2,}</code></td><td class="py-3 pr-4"><code>g</code></td><td class="py-3">Two or more spaces or tabs, not line breaks</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Simple hex colors</td><td class="py-3 pr-4"><code>#[0-9A-Fa-f]{6}\b</code></td><td class="py-3 pr-4"><code>g</code></td><td class="py-3">Six-digit only; not 3/4/8-digit variants</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">A complete simple identifier</td><td class="py-3 pr-4"><code>^[A-Za-z_][A-Za-z0-9_]*$</code></td><td class="py-3 pr-4">none</td><td class="py-3">Anchoring both ends checks the full string shape</td></tr>
+          <tr><td class="py-3 pr-4">Lines beginning with ERROR</td><td class="py-3 pr-4"><code>^ERROR\b.*$</code></td><td class="py-3 pr-4"><code>gm</code></td><td class="py-3">The m flag lets ^ and $ apply to each line</td></tr>
+        </tbody></table></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">The global flag and non-overlapping matches</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>With <code>g</code>, the implementation repeatedly calls <code>RegExp.exec()</code> and continues from the end of the previous match, producing non-overlapping matches. For example, searching for <code>aba</code> in <code>ababa</code> finds the first <code>aba</code>; the second possible occurrence begins inside the first match, so ordinary global iteration does not return it.</p><p>Overlapping matches usually require lookahead or a different scanning strategy. Without <code>g</code>, the tool calls the regex once and highlights only the first match.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Zero-width matches</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>Some expressions can match a position without consuming characters &mdash; anchors, boundaries, and certain lookarounds. Repeatedly executing a global zero-width expression could otherwise loop forever because the regex ends where it began. The current implementation detects when the match index equals <code>lastIndex</code> and manually advances the index by one position.</p><p>Zero-width matches may not produce a visible highlighted region because no characters are part of the match. Use focused tests when exploring them.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Multiline and dotAll are different</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Multiline (<code>m</code>)</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Changes the meaning of <code>^</code> and <code>$</code>. It does not make dot match newline characters.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">DotAll (<code>s</code>)</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Allows <code>.</code> to include line terminators. It does not change the meaning of <code>^</code> or <code>$</code>.</p></div>
+      </section>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-3">An expression that should match complete lines may need <code>m</code>; one that should span across line breaks may need <code>s</code>. Some patterns need both, and many need neither.</p>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">JavaScript regex flavor and portability</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>Regular-expression engines share common syntax but are not identical. Differences can include supported flags, lookbehind support, named-capture syntax, Unicode properties, character-class behavior, backreferences, atomic groups, possessive quantifiers, conditional expressions, replacement syntax, and match-timeout support.</p><p>A pattern tested in JavaScript may fail to compile or behave differently in PCRE, Python, Java, .NET, Rust, Go, RE2, PostgreSQL, or another engine. Test the final expression in the actual environment where it will run.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Regex is not enough for every validation task</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; A date-shaped string may describe an impossible date.</li>
+        <li>&bull; An email-shaped string may not identify a working mailbox.</li>
+        <li>&bull; A URL-shaped string may point to an unsafe or nonexistent destination.</li>
+        <li>&bull; A number may fit the pattern but fall outside an allowed range.</li>
+        <li>&bull; A filename may match yet still be unsafe in the target operating system.</li>
+      </ul>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-3">Regex can check textual shape, but it often cannot establish real-world validity by itself. Use a parser, domain-specific validator, allowlist, and application logic when the meaning matters.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Performance and catastrophic backtracking</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>Some backtracking regex engines can take extremely long on carefully chosen input. Nested ambiguous quantifiers are a common warning sign &mdash; a risky pattern shape is <code>^(a+)+$</code>. On a long string of <code>a</code> characters followed by a nonmatching character, the engine may explore many groupings before failing.</p>
+        <p>This can cause a frozen browser tab, high CPU usage, slow server responses, and denial-of-service exposure when patterns or input are untrusted. Reduce ambiguity, avoid unnecessary nested quantifiers, cap input length, and consider a linear-time regex engine for attacker-controlled data. The tester does not provide a timeout or prove that an expression is safe from regular-expression denial of service.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Security warning for untrusted text</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-700 dark:text-slate-300"><p>The current match preview constructs highlighted HTML from the test text and inserts it into the page. It does not apply a separate HTML-escaping or sanitization step to every part of that preview.</p><p><strong>Do not paste untrusted text containing HTML or script-like markup into the tester.</strong> A safe production implementation should treat all test text as text nodes or escape it before constructing preview markup. This limitation is separate from regex compilation: a pattern can be valid while the displayed input still contains unsafe HTML.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">The pattern and test string are processed in browser memory and are not sent to WeConvertFiles for regex matching.</strong> The browser's JavaScript <code>RegExp</code> engine performs compilation and matching.</p><p>If a visitor consents to site analytics, separate usage information such as visits, clicks, device details, or tool interactions may be collected. Those analytics do not receive the pattern or test text entered into the matcher.</p><p>The local environment still matters. Browser extensions, malware, clipboard managers, screen recording, and shared devices can expose text independently of the tester. Avoid using real passwords, tokens, personal data, private logs, or confidential source material as regex examples.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; JavaScript regex flavor only, with only <code>g</code>, <code>i</code>, <code>m</code>, and <code>s</code> flags exposed.</li>
+        <li>&bull; Non-overlapping matching; no replacement mode; no capture-group result table.</li>
+        <li>&bull; No code-snippet generator and no automatic cross-language conversion.</li>
+        <li>&bull; No match timeout or performance guarantee.</li>
+        <li>&bull; No separate sanitization layer for previewed test text.</li>
+        <li>&bull; No proof that a pattern validates real-world meaning.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Invalid regular expression</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Check unclosed parentheses or brackets, misplaced quantifiers, incomplete escapes, unsupported syntax, and features unavailable in the current browser.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Only the first match appears</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Enable the global <code>g</code> flag to search for repeated non-overlapping matches.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The pattern searches for literal slashes</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Remove surrounding <code>/.../</code> delimiters. Enter only pattern source and choose flags separately.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200"><code>^</code> and <code>$</code> do not match every line</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Enable <code>m</code>. Without it, anchors normally apply to the complete test string.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Dot does not cross a line break</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Enable <code>s</code>, or use a character class designed to include line terminators.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">An expected overlapping match is absent</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Standard global iteration advances past the previous match. Use lookahead or another algorithm when overlapping occurrences are required.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The browser becomes slow or unresponsive</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The pattern may cause excessive backtracking. Reduce input size, simplify ambiguous quantifiers, and close the tab if necessary.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Markup in the sample behaves like HTML</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Do not use untrusted HTML-like input in the current preview. The implementation does not separately sanitize every preview fragment.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The pattern works here but fails in another language</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Confirm the target engine's syntax, flags, escaping rules, Unicode behavior, and supported features.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Should I include <code>/pattern/g</code> slash delimiters?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Enter only the pattern and select <code>g</code> separately.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which regex engine does the tool use?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It uses the JavaScript <code>RegExp</code> engine in the current browser.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which flags are supported?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The interface supports <code>g</code>, <code>i</code>, <code>m</code>, and <code>s</code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">How do I find every match?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Enable the global <code>g</code> flag. Matches are non-overlapping.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can it find overlapping matches?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not through ordinary global iteration. Some overlapping cases can be expressed with lookahead; others need a different algorithm.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What does the multiline flag do?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It changes <code>^</code> and <code>$</code> so they can match boundaries within a multiline string.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What does the dotAll flag do?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It allows dot to match line-terminator characters.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can a regex freeze the browser?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. Certain patterns can cause excessive backtracking on particular input, and the current tool does not enforce a match timeout.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is a matching email or date guaranteed to be valid?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Regex can check textual shape, but real-world validity often requires parsing and domain-specific checks.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is it safe to paste untrusted HTML into the test field?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current preview does not apply a separate sanitization step to all displayed text. Use controlled plain-text samples.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/diff-checker"><h3 class="font-bold text-[#1a73e8]">Diff Checker</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Compare two text versions rather than matching a pattern.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-formatter"><h3 class="font-bold text-[#1a73e8]">JSON Formatter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Validate structured JSON syntax with a parser.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/case-converter"><h3 class="font-bold text-[#1a73e8]">Case Converter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Transform text casing without regex replacement.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -163,6 +234,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/json-formatter.html"><h3 class="font-bold text-[#1a73e8]">JSON Formatter / Validator Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Format, validate, beautify, and minify raw JSON string data dynamically.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Test your regular expression</h2><p class="mt-3 text-sm leading-6 text-white">Enter a pattern without slashes, pick the flags you need, and highlight matches against representative plain-text samples.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/regex-tester">Use Regex Tester</a></section>
+    </article>
   </main>
 </body>
 </html>

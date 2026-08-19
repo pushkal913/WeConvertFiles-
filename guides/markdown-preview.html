@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Markdown Live Preview Guide - WeConvertFiles</title>
-  <meta name="description" content="Type Markdown text and view real-time rendered HTML preview side-by-side offline." />
+  <title>Markdown Preview: Write and Render Markdown Live</title>
+  <meta name="description" content="Preview Markdown as rendered HTML while you type. Learn common syntax, renderer differences, raw HTML risks, portability, and publishing checks." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/markdown-preview.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Markdown Live Preview Guide - WeConvertFiles" />
-  <meta property="og:description" content="Type Markdown text and view real-time rendered HTML preview side-by-side offline." />
+  <meta property="og:title" content="Preview Markdown as You Type" />
+  <meta property="og:description" content="Test headings, lists, links, code blocks, tables, and other Markdown syntax in a live browser preview." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/markdown-preview.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Markdown Live Preview Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Type Markdown text and view real-time rendered HTML preview side-by-side offline." />
+  <meta name="twitter:title" content="Preview Markdown as You Type" />
+  <meta name="twitter:description" content="Test headings, lists, links, code blocks, tables, and other Markdown syntax in a live browser preview." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Markdown Live Preview Guide",
-        "description": "Type Markdown text and view real-time rendered HTML preview side-by-side offline.",
+        "headline": "Preview Markdown as Rendered HTML While You Type",
+        "description": "A practical guide to previewing Markdown with the marked browser library, including syntax, renderer differences, HTML safety, and publishing checks.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,118 +46,220 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/markdown-preview.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/markdown-preview.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What markdown features are supported?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "It supports standard Markdown features including headers, bold/italic text, links, lists, blockquotes, inline code, and code fences."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I copy the compiled HTML output?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, you can easily copy the rendered layout from the screen, or inspect it to retrieve raw HTML tags for web deployment."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is marked.js fast enough for real-time compilation?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, marked.js compiles markdown content in milliseconds, allowing the preview pane to update instantly as you type."
-            }
-          }
+          { "@type": "Question", "name": "Which Markdown renderer does the tool use?", "acceptedAnswer": { "@type": "Answer", "text": "It uses the marked JavaScript library loaded in the browser." } },
+          { "@type": "Question", "name": "Is the preview identical to GitHub Markdown?", "acceptedAnswer": { "@type": "Answer", "text": "No. GitHub uses its own flavor, renderer configuration, extensions, and security pipeline." } },
+          { "@type": "Question", "name": "Does the preview update automatically?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It rerenders as the input changes." } },
+          { "@type": "Question", "name": "Can I upload or download a Markdown file?", "acceptedAnswer": { "@type": "Answer", "text": "No. The current tool provides a text editor and live preview only." } },
+          { "@type": "Question", "name": "Are drafts saved?", "acceptedAnswer": { "@type": "Answer", "text": "The tool does not intentionally persist editor content or provide version history." } },
+          { "@type": "Question", "name": "Can Markdown include HTML?", "acceptedAnswer": { "@type": "Answer", "text": "Some renderers, including configurations of marked, can pass through raw HTML. The destination's policy may differ." } },
+          { "@type": "Question", "name": "Is pasted HTML sanitized?", "acceptedAnswer": { "@type": "Answer", "text": "No separate HTML-sanitization step is applied by the current preview. Do not paste untrusted Markdown containing HTML." } },
+          { "@type": "Question", "name": "Why are relative links or images broken?", "acceptedAnswer": { "@type": "Answer", "text": "They are resolved from the preview page rather than the final Markdown file's future location." } },
+          { "@type": "Question", "name": "Does the tool publish my Markdown?", "acceptedAnswer": { "@type": "Answer", "text": "No. It only renders a local preview in the browser." } },
+          { "@type": "Question", "name": "Is Markdown good for SEO?", "acceptedAnswer": { "@type": "Answer", "text": "Markdown can support well-structured content, but SEO depends on the final HTML, metadata, canonical URL, internal links, performance, accessibility, and usefulness." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Preview Markdown as Rendered HTML While You Type</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Live Rendering</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Markdown adds structure to plain text with a small set of readable characters. The <strong class="text-slate-900 dark:text-slate-200">Markdown Preview</strong> tool converts the text you enter into HTML and updates the preview live using the <code>marked</code> JavaScript library. It is useful for drafting README files, documentation, articles, and issue text &mdash; but it does not guarantee that GitHub or another engine will produce exactly the same result. The current implementation inserts the rendered HTML directly and does not add a separate sanitization step, so use content you trust, especially when the Markdown contains raw HTML.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/markdown-preview">Open Markdown Preview<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Markdown Live Preview</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">100% Client-Side</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Markdown Live Preview is a split-screen workspace translating markdown syntax into styled HTML blocks. Using marked.js locally, the processor listens to textarea keystrokes, compiles standard markdown anchors (headers, bolding, lists, code spans), and updates the rendered output pane instantly. The styled preview container includes Tailwind-supported dark and light theme styles. This client-side utility provides instant feedback for bloggers, engineers, and creators writing README files or markdown documents safely.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/markdown-preview">
-        Open Markdown Preview
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Write or paste Markdown and inspect the live output. Use the preview to catch structural mistakes, then verify the final source in the exact platform where it will be published. Do not paste untrusted Markdown containing HTML into the current tool.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Type Markdown</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Write standard Markdown shorthand tags (headers, italics, lists) in the input pane.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Real-Time Compilation</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The marked.js compiler converts markdown markers into HTML tree nodes dynamically.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Review Preview</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">See the rendered, fully-styled HTML blocks inside the split view container instantly.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What the Markdown preview does</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">It does</h3><ul class="mt-2 space-y-1.5 text-sm leading-6 text-slate-600 dark:text-slate-400"><li>&bull; Accepts Markdown text in an editor</li><li>&bull; Calls <code>marked.parse()</code> as the input changes</li><li>&bull; Inserts the returned HTML into a live preview</li><li>&bull; Expands the preview layout when content is present</li><li>&bull; Supports the features of the installed <code>marked</code> version</li></ul></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">It does not</h3><ul class="mt-2 space-y-1.5 text-sm leading-6 text-slate-600 dark:text-slate-400"><li>&bull; Upload, open, or download files</li><li>&bull; Save drafts or version history</li><li>&bull; Guarantee GitHub-identical output</li><li>&bull; Resolve every relative image or link as published</li><li>&bull; Add a separate HTML sanitization layer</li><li>&bull; Provide collaborative editing or comments</li></ul></div>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What markdown features are supported?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">It supports standard Markdown features including headers, bold/italic text, links, lists, blockquotes, inline code, and code fences.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I copy the compiled HTML output?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, you can easily copy the rendered layout from the screen, or inspect it to retrieve raw HTML tags for web deployment.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is marked.js fast enough for real-time compilation?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes, marked.js compiles markdown content in milliseconds, allowing the preview pane to update instantly as you type.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Markdown source and rendered output</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Markdown is the source format:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>## Release notes
+
+The update includes:
+
+- Faster startup
+- Improved search
+- Clearer error messages</code></pre>
+        <p>A renderer turns that source into HTML resembling:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>&lt;h2&gt;Release notes&lt;/h2&gt;
+&lt;p&gt;The update includes:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Faster startup&lt;/li&gt;
+  &lt;li&gt;Improved search&lt;/li&gt;
+  &lt;li&gt;Clearer error messages&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        <p>The exact HTML and visual styling depend on the renderer, its options, and the CSS of the website displaying it.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to preview Markdown</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Identify the destination.</strong> Decide where the Markdown will be used &mdash; GitHub, a documentation generator, a CMS, an issue tracker, a chat app, or another platform. Each can support a different Markdown flavor and security policy.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Write or paste the source.</strong> Use clear structure and representative features such as headings, nested lists, code fences, links, tables, or blockquotes. Avoid placing sensitive tokens, private URLs, credentials, or personal data into examples.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Inspect the live preview.</strong> Check heading hierarchy, paragraph spacing, list nesting, code formatting, link text and destinations, image descriptions, table structure, blockquote boundaries, and escaped punctuation.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Correct the source.</strong> Fix ambiguous nesting, unmatched delimiters, missing blank lines, unclosed code fences, and malformed links.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Verify in the publishing platform.</strong> Paste or commit the final source into the actual destination and preview it again. The destination's renderer and CSS are authoritative for the published result.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common Markdown syntax</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <div>
+          <p><strong class="text-slate-900 dark:text-slate-200">Headings.</strong> Use one to six hash characters followed by a space, in a logical hierarchy &mdash; do not choose a level only for its visual size. Prefer one H1 for the title, H2 for primary sections, and H3 for subsections, avoiding skipped levels.</p>
+          <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white mt-2"><code># Page title
+## Major section
+### Subsection</code></pre>
+        </div>
+        <div>
+          <p><strong class="text-slate-900 dark:text-slate-200">Paragraphs and line breaks.</strong> Separate paragraphs with a blank line. A single source line break may be treated as ordinary whitespace by some renderers, and forced line-break syntax varies, so prefer normal paragraphs unless the destination requires manual breaks.</p>
+        </div>
+        <div>
+          <p><strong class="text-slate-900 dark:text-slate-200">Emphasis.</strong> <code>*Emphasized*</code>, <code>**Strong**</code>, and <code>***Strong emphasis***</code>. Underscores can also work but may interact with words containing underscores, so asterisks are often clearer in technical writing. Use emphasis sparingly.</p>
+        </div>
+        <div>
+          <p><strong class="text-slate-900 dark:text-slate-200">Lists.</strong> Use <code>-</code> for unordered items and <code>1.</code> for ordered items. Indent nested items consistently; the exact spaces required can vary between renderers, so verify complex lists on the destination.</p>
+          <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white mt-2"><code>- PDF tools
+  - Merge
+  - Rotate
+- Text tools
+  - Format JSON
+  - Test regex</code></pre>
+        </div>
+        <div>
+          <p><strong class="text-slate-900 dark:text-slate-200">Links.</strong> Inline <code>[text](url)</code> or reference-style links for long documents. Use descriptive link text, confirm the destination, prefer HTTPS, be cautious with user-supplied URLs, and check relative links from the final document location. "Click here" is less useful than text that describes the destination.</p>
+          <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white mt-2"><code>[Visit WeConvertFiles](https://www.weconvertfiles.com/)
+
+Read the [format guide][guide].
+
+[guide]: https://example.com/guide</code></pre>
+        </div>
+        <div>
+          <p><strong class="text-slate-900 dark:text-slate-200">Images.</strong> <code>![description](url)</code> &mdash; the bracketed text is the alternative text. Write useful alt text when the image conveys information. Relative image paths may fail in the preview because its base URL differs from the future file's location.</p>
+        </div>
+        <div>
+          <p><strong class="text-slate-900 dark:text-slate-200">Inline code and code blocks.</strong> Use single backticks for inline code and triple backticks for blocks. A language identifier can enable syntax highlighting where supported. If the example itself contains triple backticks, wrap it with a longer fence.</p>
+        </div>
+        <div>
+          <p><strong class="text-slate-900 dark:text-slate-200">Blockquotes and horizontal rules.</strong> Start quoted lines with <code>&gt;</code>; use <code>---</code> on its own line, surrounded by blank lines, for a horizontal rule. Use both sparingly &mdash; clear headings usually provide better navigation than rules.</p>
+        </div>
+        <div>
+          <p><strong class="text-slate-900 dark:text-slate-200">Tables and task lists.</strong> Many implementations support pipe tables with optional alignment markers, and some support <code>- [x]</code> task lists. Neither is part of every Markdown baseline, so confirm support on the target flavor.</p>
+          <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white mt-2"><code>| Tool | Output |
+|---|---|
+| JSON Formatter | Formatted JSON |
+| Regex Tester | Highlighted matches |</code></pre>
+        </div>
+        <div>
+          <p><strong class="text-slate-900 dark:text-slate-200">Escaping punctuation.</strong> Use a backslash when punctuation should appear literally instead of starting formatting. Inside code spans and fenced blocks, most Markdown punctuation is already treated as code, so code fences are clearer than repeatedly escaping.</p>
+        </div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Markdown flavors differ</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>"Markdown" refers to a family of related syntaxes rather than one universal renderer &mdash; original Markdown, CommonMark, GitHub Flavored Markdown, documentation-generator extensions, CMS shortcodes, and chat or issue-tracker subsets.</p><p>Differences may affect tables, task lists, automatic URL linking, strikethrough, footnotes, heading identifiers, definition lists, raw HTML, line breaks, syntax highlighting, emoji and mentions, and link sanitization. Treat the target platform's documentation and preview as the final authority.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the live preview works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Listens for changes in the Markdown input.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Trims the input to determine whether content is present.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Passes the source to <code>marked.parse()</code>.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Assigns the returned HTML to the preview container with <code>innerHTML</code>.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Expands the layout from a two-column empty state into a larger preview when text is present.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Adjusts preview height within its current limits (about 420px minimum, capped near 720px).</li>
+        </ol>
+        <p>The <code>marked</code> library may be downloaded from a third-party content-delivery network when the tool opens, so rendering should not be described as completely offline merely because the Markdown content is processed in the browser.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Important security warning: raw HTML</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <p>Markdown can contain raw HTML when the renderer permits it. The current preview inserts the rendered result into the page and does <strong>not</strong> add a separate sanitizer such as DOMPurify. Do not paste untrusted Markdown containing HTML, event-handler attributes, embedded resources, or other active markup into the current tool. Content to treat cautiously includes:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>&lt;img src="..." onerror="..."&gt;
+&lt;iframe src="..."&gt;&lt;/iframe&gt;
+&lt;svg&gt;&lt;!-- active or external content --&gt;&lt;/svg&gt;</code></pre>
+        <p>Encoding these examples in documentation does not make arbitrary pasted HTML safe in the live preview. A production publishing pipeline should define an explicit HTML policy and sanitize untrusted rendered output with a well-maintained sanitizer. Escaping all HTML may be more appropriate when raw HTML is unnecessary.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Previewing is not sanitizing</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>Rendering answers "how does this Markdown become HTML?" Sanitizing answers "which elements, attributes, protocols, and embedded resources are allowed to remain in that HTML?" Those are separate operations.</p><p>A parser can correctly render Markdown and still produce HTML that should not be inserted into a page without sanitization. Do not assume that content is safe because the preview looks normal.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Relative links and images</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The preview page has its own URL, and relative references are resolved from that context, which may differ from the eventual Markdown file. Paths like these may be correct in a repository but broken in the standalone preview:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>[Setup](../docs/setup.md)
+![Logo](./assets/logo.png)</code></pre>
+        <p>Verify relative resources after the file has been placed in its actual directory. Avoid rewriting correct repository-relative paths merely to make the temporary preview load them.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Accessibility and SEO checks</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Accessibility</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">A visual preview does not replace accessibility review. Check one clear title, logical heading order, descriptive link text, useful image alt text, real table headers, lists used as lists, clearly identified code, sufficient contrast in the final theme, and keyboard/screen-reader behavior in the publishing platform.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">SEO</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">When Markdown becomes a page, use a descriptive H1, organize sections under informative H2s, answer the main question early, write descriptive link text, add image alt text, and provide metadata through the publishing system. SEO depends on the final HTML, canonical URL, internal links, performance, structured data, and content quality &mdash; not syntax alone.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">Markdown content is passed to the renderer in browser memory and is not sent to WeConvertFiles for preview generation.</strong> The <code>marked</code> library may be fetched from a third-party CDN when required.</p><p>If a visitor consents to site analytics, separate usage information such as visits, clicks, device details, or tool interactions may be collected. Those analytics do not receive the Markdown source entered into the editor.</p><p>The local environment still matters. Browser extensions, malware, clipboard managers, screen recording, shared devices, and active resources referenced by pasted HTML can expose information independently of the tool. Do not paste secrets, private links, unpublished customer data, or untrusted raw HTML into the preview.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; Output depends on the installed <code>marked</code> version and configuration.</li>
+        <li>&bull; The result may differ from GitHub or another destination.</li>
+        <li>&bull; No separate HTML sanitization step is applied.</li>
+        <li>&bull; No upload, download, autosave, history, or collaboration.</li>
+        <li>&bull; Relative links and images may resolve differently.</li>
+        <li>&bull; Syntax highlighting depends on the available presentation layer.</li>
+        <li>&bull; The preview is not a full accessibility, link, or security audit, and does not publish the document.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A feature looks different on GitHub</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">GitHub uses GitHub Flavored Markdown and its own rendering and sanitization pipeline. Test the source in GitHub before publishing.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A code block consumes the rest of the document</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Close the fence with the same marker and at least the same number of backticks or tildes used to open it.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A nested list is not nested</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Indent child items consistently and add blank lines when required by the destination renderer.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A relative image is broken</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The preview's base URL differs from the final file location. Verify the path after placing the Markdown in its actual repository or site directory.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Raw HTML behaves unexpectedly</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Do not preview untrusted HTML. The current implementation does not add a separate sanitization layer, and different Markdown destinations allow different HTML subsets.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A table is displayed as plain text</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The renderer or destination may not support pipe tables, or the separator row may be malformed. Check the target flavor.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">A heading does not appear in a table of contents</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Automatic heading IDs and table-of-contents generation are platform features, not universal Markdown behavior.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The preview becomes scrollable</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The interface limits preview height for usability. Scrolling does not mean the rendered content is truncated from the source.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which Markdown renderer does the tool use?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It uses the <code>marked</code> JavaScript library loaded in the browser.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is the preview identical to GitHub Markdown?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. GitHub uses its own flavor, renderer configuration, extensions, and security pipeline.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the preview update automatically?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. It rerenders as the input changes.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I upload or download a Markdown file?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. The current tool provides a text editor and live preview only.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Are drafts saved?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The tool does not intentionally persist editor content or provide version history.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can Markdown include HTML?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Some renderers, including configurations of <code>marked</code>, can pass through raw HTML. The destination's policy may differ.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is pasted HTML sanitized?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No separate HTML-sanitization step is applied by the current preview. Do not paste untrusted Markdown containing HTML.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why are relative links or images broken?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">They are resolved from the preview page rather than the final Markdown file's future location.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool publish my Markdown?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It only renders a local preview in the browser.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is Markdown good for SEO?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Markdown can support well-structured content, but SEO depends on the final HTML, metadata, canonical URL, internal links, performance, accessibility, and usefulness.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/diff-checker"><h3 class="font-bold text-[#1a73e8]">Diff Checker</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Compare two Markdown drafts as text.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/word-counter"><h3 class="font-bold text-[#1a73e8]">Word Counter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Measure draft length and reading time.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/regex-tester"><h3 class="font-bold text-[#1a73e8]">Regex Tester</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Test text patterns with controlled plain-text samples.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -168,6 +268,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/json-formatter.html"><h3 class="font-bold text-[#1a73e8]">JSON Formatter / Validator Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Format, validate, beautify, and minify raw JSON string data dynamically.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Preview your Markdown live</h2><p class="mt-3 text-sm leading-6 text-white">Draft your headings, lists, links, and code, watch the live HTML, then confirm the final source in the platform where it will publish.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/markdown-preview">Use Markdown Preview</a></section>
+    </article>
   </main>
 </body>
 </html>
