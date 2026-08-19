@@ -4,20 +4,19 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>JWT Decoder Guide - WeConvertFiles</title>
-  <meta name="description" content="Decode JSON Web Token payloads offline with signature claims analysis." />
+  <title>JWT Decoder: Decode JWT Headers and Payloads Online</title>
+  <meta name="description" content="Decode a JWT header and payload in your browser, inspect claims, and check its exp timestamp. Learn why decoding does not verify a token's signature or trust." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/jwt-decoder.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="JWT Decoder Guide - WeConvertFiles" />
-  <meta property="og:description" content="Decode JSON Web Token payloads offline with signature claims analysis." />
+  <meta property="og:title" content="Decode and Inspect a JSON Web Token" />
+  <meta property="og:description" content="Read JWT header and payload JSON, understand common claims, and avoid confusing token decoding with secure verification." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/jwt-decoder.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="JWT Decoder Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Decode JSON Web Token payloads offline with signature claims analysis." />
+  <meta name="twitter:title" content="Decode and Inspect a JSON Web Token" />
+  <meta name="twitter:description" content="Read JWT header and payload JSON, understand common claims, and avoid confusing token decoding with secure verification." />
   <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
@@ -32,129 +31,216 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <style>
+    /* Mobile overflow fix: keep the article column within the viewport so wide
+       tables and code blocks scroll inside their own container instead of
+       widening the page, and wrap long inline code tokens. */
+    main { width: 100%; }
+    main :where(p, li, td, th, dd, dt, h1, h2, h3, blockquote) code { overflow-wrap: anywhere; word-break: break-word; }
+    main pre code { overflow-wrap: normal; word-break: normal; white-space: pre; }
+  </style>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "JWT Decoder Guide",
-        "description": "Decode JSON Web Token payloads offline with signature claims analysis.",
+        "headline": "JWT Decoder: Inspect Token Headers, Payloads, and Expiration",
+        "description": "Decode the header and payload of a JSON Web Token in the browser, inspect claims, and check the exp timestamp without verifying the signature.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
-        "dateModified": "2026-08-18",
+        "dateModified": "2026-08-19",
         "author": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/jwt-decoder.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/jwt-decoder.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Does this tool verify token signatures?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "This tool is a client-side decoder that displays header and payload structures. It does not perform cryptographic signature key validations on servers."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is it safe to paste developer tokens here?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Hashing and decoding take place entirely inside your local browser memory, ensuring your API secret keys remain confidential."
-            }
-          }
+          { "@type": "Question", "name": "Does decoding a JWT verify its signature?", "acceptedAnswer": { "@type": "Answer", "text": "No. It only reveals the encoded header and payload. Signature verification requires a trusted key and validation policy." } },
+          { "@type": "Question", "name": "Can I decode a JWT without the secret key?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. A normal signed JWT's header and payload are encoded, not encrypted. The key is needed for signature verification, not basic decoding." } },
+          { "@type": "Question", "name": "Does the decoder check whether a token is expired?", "acceptedAnswer": { "@type": "Answer", "text": "It compares a numeric exp claim with the browser's current time and displays the result. It does not verify the signature or other acceptance rules." } },
+          { "@type": "Question", "name": "Does the tool validate iss, aud, or nbf?", "acceptedAnswer": { "@type": "Answer", "text": "No. Those values are displayed in the payload but are not validated by this decoder." } },
+          { "@type": "Question", "name": "Why does my token have five parts?", "acceptedAnswer": { "@type": "Answer", "text": "It may use JWE compact serialization, which represents encrypted content. This tool does not decrypt JWE tokens." } },
+          { "@type": "Question", "name": "Is Base64URL encryption?", "acceptedAnswer": { "@type": "Answer", "text": "No. It is a reversible text encoding. Anyone with the token can generally decode readable sections." } },
+          { "@type": "Question", "name": "Can I edit a JWT payload and use the token?", "acceptedAnswer": { "@type": "Answer", "text": "You can alter and re-encode text, but the original signature will no longer match. A correctly configured server should reject the modified token." } },
+          { "@type": "Question", "name": "What does alg: none mean?", "acceptedAnswer": { "@type": "Answer", "text": "It denotes an unsecured token without a cryptographic signature. Most authentication systems should reject it unless explicitly designed to accept it in a controlled context." } },
+          { "@type": "Question", "name": "Why does an unexpired token still fail?", "acceptedAnswer": { "@type": "Answer", "text": "Expiry is only one rule. The signature, issuer, audience, not-before time, token type, permissions, revocation state, or application policy may fail." } },
+          { "@type": "Question", "name": "Is it safe to share a decoded payload?", "acceptedAnswer": { "@type": "Answer", "text": "Not automatically. Payloads can contain personal data and internal identifiers. Redact sensitive values before sharing." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">JWT Decoder: Inspect Token Headers, Payloads, and Expiration</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Client-side JWT inspection</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">JSON Web Tokens look unreadable, but the header and payload of a typical signed JWT are only Base64URL-encoded JSON. The <strong class="text-slate-900 dark:text-slate-200">JWT Decoder</strong> reads a pasted token as you type, splits it on the dot separators, decodes the first two sections, and displays them as formatted <em>Header (JSON)</em> and <em>Payload (JSON)</em>. If the payload contains a numeric <code>exp</code> claim, it interprets that value as an expiration time. It performs this inspection in the browser with no remote library. It does not validate the signature or prove that any claim is authentic.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/jwt-decoder">Decode a JWT<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">JWT Decoder</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">JSON Web Token</span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">JWT Decoder decodes JSON Web Tokens (JWT) client-side. The decoder splits raw token strings by dot separators, decodes base64url-encoded headers and payload segments, and renders formatted JSON trees with validation checks.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/jwt-decoder">
-        Open JWT Decoder
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Paste a JWT into the decoder. It separates the dot-delimited sections, Base64URL-decodes the first section as the header and the second as the payload, parses both as JSON, and presents them in readable panels. If the payload contains an <code>exp</code> value, it compares that Unix timestamp with the current time on your device. Decoding reveals what a token says; verification determines whether a trusted issuer actually signed it.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Paste Token</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Paste your encoded JWT string (header.payload.signature) into the text region.</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Analyze JSON</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">The utility breaks down and pretty-prints the Header claims and Payload keys separately.</p>
-      </div>
-      
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Check Claims</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">View claim analyses detailing token expiration times and active signature statuses.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">What is a JSON Web Token?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A JWT is a compact representation of claims. A commonly encountered signed JWT has three dot-separated parts:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>header.payload.signature</code></pre>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Segment</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Typical contents</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Displayed here?</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Header</td><td class="py-3 pr-4">Token type, signing algorithm, key identifier</td><td class="py-3">Yes, as formatted JSON</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Payload</td><td class="py-3 pr-4">Subject, issuer, audience, timestamps, application claims</td><td class="py-3">Yes, as formatted JSON</td></tr>
+          <tr><td class="py-3 pr-4">Signature</td><td class="py-3 pr-4">Cryptographic integrity proof</td><td class="py-3">No verification is performed</td></tr>
+        </tbody></table></div>
+        <p>The first two segments are encoded with Base64URL, which uses URL-safe characters. Encoding is not encryption. Anyone who receives an ordinary signed JWT can usually decode its header and payload without knowing a secret or private key.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      
-      
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does this tool verify token signatures?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">This tool is a client-side decoder that displays header and payload structures. It does not perform cryptographic signature key validations on servers.</p>
-      </div>
-      
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Is it safe to paste developer tokens here?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes. Hashing and decoding take place entirely inside your local browser memory, ensuring your API secret keys remain confidential.</p>
-      </div>
-      
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to use the JWT Decoder</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Copy the token</strong> you need to inspect.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Remove an accidental <code>Bearer </code> prefix</strong> if your source included one. The decoder does not strip it for you, and it splits on dots &mdash; so a leading <code>Bearer </code> would break decoding.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Paste the compact token</strong> into the <em>Paste JWT Token</em> field.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Review the <em>Header (JSON)</em> panel.</strong></li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Review the <em>Payload (JSON)</em> panel.</strong></li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6. Check the expiration message</strong> shown below the panels when an <code>exp</code> claim is present.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">7. Verify the token separately</strong> with a trusted JWT library before relying on it.</li>
+      </ol>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">The output updates live from the text input as you type. There is no file upload and nothing is sent to a server. The decoder needs at least a header and payload separated by a dot; if fewer are present it reports <code>Invalid Token format. Must be divided by dots.</code></p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Understanding the JWT header</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>A header often resembles this:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>{
+  "alg": "RS256",
+  "typ": "JWT",
+  "kid": "key-2026-08"
+}</code></pre>
+        <p>Common header parameters include <code>alg</code> (the algorithm the token claims was used, such as <code>RS256</code>, <code>ES256</code>, or <code>HS256</code>), <code>typ</code> (an optional type indicator, commonly <code>JWT</code>), and <code>kid</code> (a key identifier that may help the verifier choose a public key).</p>
+        <p>The header is untrusted until signature verification succeeds. An attacker can construct a token that claims any algorithm or key ID. A secure verifier must enforce an allowlist of expected algorithms and select trusted keys according to policy &mdash; it must not blindly trust the header. If the decoder shows <code>"alg": "none"</code>, that does not make the token legitimate; it indicates an unsecured token that most authentication systems should reject.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Understanding the JWT payload</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>The payload contains claims, which are name-value pairs about the token or subject:</p>
+        <pre class="overflow-x-auto rounded-xl bg-slate-900/60 p-4 text-xs text-white"><code>{
+  "iss": "https://identity.example.com",
+  "sub": "user_4821",
+  "aud": "inventory-api",
+  "iat": 1787068800,
+  "nbf": 1787068800,
+  "exp": 1787072400,
+  "scope": "inventory:read"
+}</code></pre>
+        <p>Registered claims have standardized names such as <code>iss</code>, <code>sub</code>, <code>aud</code>, <code>exp</code>, <code>nbf</code>, <code>iat</code>, and <code>jti</code>. Public claims use collision-resistant names, and private claims are agreed upon by the systems that issue and consume the token. JWT does not dictate a universal authorization model &mdash; one provider might use a space-separated <code>scope</code> string, another an array named <code>roles</code>. Read claims according to the issuer's documented contract.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common JWT claims</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; <strong class="text-slate-900 dark:text-slate-200"><code>iss</code> &mdash; issuer:</strong> the authority that created the token. Verification should compare it with an exact preconfigured value.</li>
+        <li>&bull; <strong class="text-slate-900 dark:text-slate-200"><code>sub</code> &mdash; subject:</strong> the principal the token describes. Do not assume it is an email or globally unique unless the issuer documents that.</li>
+        <li>&bull; <strong class="text-slate-900 dark:text-slate-200"><code>aud</code> &mdash; audience:</strong> the intended recipient. It may be a string or an array. An API should reject a token created for a different audience.</li>
+        <li>&bull; <strong class="text-slate-900 dark:text-slate-200"><code>exp</code> &mdash; expiration time:</strong> normally seconds since the Unix epoch. This tool evaluates it (see below).</li>
+        <li>&bull; <strong class="text-slate-900 dark:text-slate-200"><code>nbf</code> &mdash; not before:</strong> the token should not be accepted earlier than this time. The decoder displays it but does not evaluate it.</li>
+        <li>&bull; <strong class="text-slate-900 dark:text-slate-200"><code>iat</code> &mdash; issued at:</strong> when the token was created. Useful for age limits and diagnostics.</li>
+        <li>&bull; <strong class="text-slate-900 dark:text-slate-200"><code>jti</code> &mdash; JWT ID:</strong> a token identifier that can support replay detection or revocation records.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How expiration checking works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>If a decoded payload contains a numeric <code>exp</code> value, the tool multiplies it by 1,000 to convert epoch seconds to milliseconds, builds a date, and compares that instant with <code>Date.now()</code> in the browser. It then shows whether the token is active or has already expired, rendering the date in your device's local time. When no usable <code>exp</code> value is present, it reports <code>Token parsed successfully (No exp claim found).</code></p>
+        <p>This is useful for a quick diagnosis, but it is not complete validation: the device clock may be wrong; production validators may permit a small clock-skew tolerance; <code>exp</code> may have an invalid type; a token can be unexpired but forged; and <code>nbf</code>, <code>iat</code>, <code>iss</code>, and <code>aud</code> are not checked. A missing <code>exp</code> does not mean the token is permanent &mdash; the issuer may enforce expiry elsewhere.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Decoding vs. verifying a JWT</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Decoding</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Verification</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Converts Base64URL sections into readable data</td><td class="py-3">Cryptographically checks the signature or MAC</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Can be done without a key</td><td class="py-3">Requires a trusted secret or public key</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Shows claimed algorithm, issuer, audience, subject</td><td class="py-3">Enforces allowed algorithm, issuer, audience, time rules</td></tr>
+          <tr><td class="py-3 pr-4">Does not establish trust</td><td class="py-3">Can establish authenticity when implemented correctly</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">A malicious user can edit the payload, encode it again, and produce a token that looks convincing in a decoder. The signature will no longer be valid, but decoding alone cannot expose that fact. Never grant access based only on decoded output.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Signed, encrypted, and opaque tokens</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Not every token is a three-part readable JWT. A signed token commonly uses JWS compact serialization with three sections. An encrypted JWE compact token commonly has five sections, and its protected content cannot be read without decryption material. An opaque access token may be a random-looking reference with no locally decodable JSON.</p>
+        <p>This decoder attempts to parse the first two dot-separated sections as JSON. It is intended for readable JWT headers and payloads, not JWE decryption or opaque-token introspection. A five-part encrypted token will not yield a normal payload here &mdash; its second section is not JSON, so decoding reports a failure.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Base64URL is not ordinary Base64</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p>Base64URL replaces characters that are awkward in URLs: <code>-</code> is used instead of <code>+</code>, <code>_</code> is used instead of <code>/</code>, and trailing <code>=</code> padding is often omitted. The decoder converts the URL-safe alphabet back, restores the required padding, decodes the text with Unicode handling, and parses JSON. A generic Base64 decoder may fail if it does not account for these differences.</p>
+        <p>The decoded bytes must represent valid text that parses as JSON. Corrupted segments, invalid character encoding, or non-JSON data cause the tool to show a decoding error.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Common decoding errors</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200"><code>Invalid Token format. Must be divided by dots.</code></h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The pasted value does not contain at least a header and payload separated by a dot. Check for a truncated copy, whitespace in the middle, or an unrelated opaque token.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200"><code>Failed to decode header.</code></h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The header or payload could not be Base64URL-decoded and parsed as JSON. Verify that the token was copied intact and does not include quotation marks or an HTTP header label.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The token begins with <code>Bearer</code></h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Authorization headers are often written as <code>Authorization: Bearer eyJ...</code>. Paste only the portion after <code>Bearer </code>.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The token appears expired at the wrong time</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Check whether the <code>exp</code> value uses seconds rather than milliseconds and whether the device clock and time zone are correct. JWT NumericDate values use epoch seconds; the UI renders the resulting instant in local time.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The payload is readable but login still fails</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The token may have an invalid signature, wrong audience, wrong issuer, premature <code>nbf</code>, insufficient scope, or a revoked session. Use server logs and the identity provider's verification guidance.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">JWT security mistakes to avoid</h2>
+      <section class="rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
+        <li>&bull; <strong>Accepting a decoded token without verification.</strong> Always verify cryptographic integrity before trusting claims. Decoding is an inspection step only.</li>
+        <li>&bull; <strong>Allowing any algorithm.</strong> Configure the verifier with a narrow allowlist. Do not accept an algorithm solely because the untrusted header names it.</li>
+        <li>&bull; <strong>Confusing an ID token with an access token.</strong> ID tokens describe an authentication event; access tokens authorize API calls. Enforce the expected token type, audience, and issuer.</li>
+        <li>&bull; <strong>Logging complete bearer tokens.</strong> A bearer token grants its holder the owner's access until it expires or is revoked. Redact tokens in logs, screenshots, and tickets.</li>
+        <li>&bull; <strong>Storing secrets in the payload.</strong> A signed JWT is readable. Do not place passwords, private keys, or confidential data in it.</li>
+        <li>&bull; <strong>Ignoring key rotation.</strong> Production verification should handle trusted key rotation and <code>kid</code> selection safely.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy: should I paste a real token?</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">The decoder processes the pasted string in the browser and does not need a JWT parsing library from a remote service.</strong> Even so, bearer tokens are credentials. Prefer expired, revoked, redacted, or locally generated sample tokens for troubleshooting.</p>
+        <p>Avoid placing a live production token in screenshots, shared documents, chat messages, bug reports, or clipboard managers. If a live credential may have been exposed, revoke it or terminate the associated session according to your identity provider's procedure. Clearing a text box does not undo disclosure elsewhere.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">A secure verification checklist</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Parse only the token format you expect.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Restrict permitted signing algorithms.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Obtain verification keys from a trusted configuration or issuer.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Verify the signature before using claims.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Require and validate the exact issuer and intended audience.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Enforce <code>exp</code> and <code>nbf</code> with a deliberate clock-skew policy.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">7.</strong> Validate token type and application-specific claims.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">8.</strong> Apply authorization independently of authentication, and handle key rotation and revocation.</li>
+      </ol>
+      <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">Do not write custom cryptography when a well-maintained JWT implementation is available. Follow the documentation for your framework and identity provider.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does decoding a JWT verify its signature?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It only reveals the encoded header and payload. Signature verification requires a trusted key and validation policy.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I decode a JWT without the secret key?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. A normal signed JWT's header and payload are encoded, not encrypted. The key is needed for signature verification, not basic decoding.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the decoder check whether a token is expired?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It compares a numeric <code>exp</code> claim with the browser's current time and displays the result. It does not verify the signature or other acceptance rules.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does the tool validate <code>iss</code>, <code>aud</code>, or <code>nbf</code>?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Those values are displayed in the payload but are not validated by this decoder.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why does my token have five parts?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It may use JWE compact serialization, which represents encrypted content. This tool does not decrypt JWE tokens.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is Base64URL encryption?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It is a reversible text encoding. Anyone with the token can generally decode readable sections.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can I edit a JWT payload and use the token?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">You can alter and re-encode text, but the original signature will no longer match. A correctly configured server should reject the modified token.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What does <code>alg: none</code> mean?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">It denotes an unsecured token without a cryptographic signature. Most authentication systems should reject it unless explicitly designed to accept it in a controlled context.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why does an unexpired token still fail?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Expiry is only one rule. The signature, issuer, audience, not-before time, token type, permissions, revocation state, or application policy may fail.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is it safe to share a decoded payload?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Not automatically. Payloads can contain personal data and internal identifiers. Redact sensitive values before sharing.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/json-formatter"><h3 class="font-bold text-[#1a73e8]">JSON Formatter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Inspect copied claim objects or API responses.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/unix-converter"><h3 class="font-bold text-[#1a73e8]">Unix Time Converter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Examine <code>exp</code>, <code>iat</code>, and <code>nbf</code> values separately.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/url-base64"><h3 class="font-bold text-[#1a73e8]">Base64 Converter</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Learn how ordinary encoding differs from Base64URL.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -163,6 +249,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/json-formatter.html"><h3 class="font-bold text-[#1a73e8]">JSON Formatter / Validator Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Format, validate, beautify, and minify raw JSON string data dynamically.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Inspect a JSON Web Token</h2><p class="mt-3 text-sm leading-6 text-white">Paste a token to read its header and payload as formatted JSON and check the <code>exp</code> claim &mdash; then verify it properly before trusting it.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/jwt-decoder">Use JWT Decoder</a></section>
+    </article>
   </main>
 </body>
 </html>
