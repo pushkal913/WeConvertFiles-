@@ -4,22 +4,21 @@
   <script id="pagesenseCode" src="/pagesense.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  
-  <title>Photo Upscaler & Image Resolution Enhancer Guide - WeConvertFiles</title>
-  <meta name="description" content="Upscale images by 1.5x, 2x, or 3x locally. Use advanced Lanczos-3 interpolation to enhance photo resolution without uploads." />
+  <title>Scale an Image to 1.5×, 2× or 3×</title>
+  <meta name="description" content="Enlarge JPG, PNG, or WebP images by 1.5×, 2×, or 3× using Lanczos-style, bilinear, or nearest-neighbor scaling in your browser." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.weconvertfiles.com/guides/image-scaler.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="WeConvertFiles" />
-  <meta property="og:title" content="Photo Upscaler & Image Resolution Enhancer Guide - WeConvertFiles" />
-  <meta property="og:description" content="Upscale images by 1.5x, 2x, or 3x locally. Use advanced Lanczos-3 interpolation to enhance photo resolution without uploads." />
+  <meta property="og:title" content="Scale Images with Lanczos, Bilinear, or Nearest Neighbor" />
+  <meta property="og:description" content="Increase image dimensions with mathematical interpolation and choose the right method for photos, graphics, or pixel art." />
   <meta property="og:url" content="https://www.weconvertfiles.com/guides/image-scaler.html" />
   <meta property="og:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Photo Upscaler & Image Resolution Enhancer Guide - WeConvertFiles" />
-  <meta name="twitter:description" content="Upscale images by 1.5x, 2x, or 3x locally. Use advanced Lanczos-3 interpolation to enhance photo resolution without uploads." />
-  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
+  <meta name="twitter:title" content="Scale Images with Lanczos, Bilinear, or Nearest Neighbor" />
+  <meta name="twitter:description" content="Increase image dimensions with mathematical interpolation and choose the right method for photos, graphics, or pixel art." />
+  <meta name="twitter:image" content="https://www.weconvertfiles.com/assets/og-image.png" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -32,15 +31,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5" />
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
-  <!-- GUIDE_SCHEMA_START -->
-  <script type="application/ld+json" data-guide-schema>
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "headline": "Photo Upscaler & Image Resolution Enhancer Guide",
-        "description": "Upscale images by 1.5x, 2x, or 3x locally. Use advanced Lanczos-3 interpolation to enhance photo resolution without uploads.",
+        "headline": "Scale an Image to 1.5×, 2×, or 3×",
+        "description": "A practical guide to enlarging image dimensions with Lanczos-style, bilinear, or nearest-neighbor resampling without claiming AI-generated detail.",
         "image": "https://www.weconvertfiles.com/assets/og-image.png",
         "datePublished": "2026-07-18",
         "dateModified": "2026-08-18",
@@ -48,137 +46,169 @@
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
         "publisher": {
           "@type": "Organization",
           "name": "WeConvertFiles",
           "url": "https://www.weconvertfiles.com/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.weconvertfiles.com/assets/favicon.png"
-          }
+          "logo": { "@type": "ImageObject", "url": "https://www.weconvertfiles.com/assets/favicon.png" }
         },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://www.weconvertfiles.com/guides/image-scaler.html"
-        },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.weconvertfiles.com/guides/image-scaler.html" },
         "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is image resolution upscaling?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Resolution upscaling increases the pixel dimensions and clarity of low-resolution images. Using advanced mathematical interpolation, our photo upscaler calculates missing pixel values in real-time, delivering crisp, high-definition graphics without any quality loss or server uploads."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is the Lanczos-3 resampling algorithm?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Lanczos-3 is a top-tier windowed sinc resampling filter. By assessing a 6x6 pixel grid, it maps smooth vector contours, eliminates scaling artifacts, and preserves clean fine lines, making it the ideal choice for high-fidelity photo upscaling."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I upscale retro pixel art?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes! By choosing the Nearest-Neighbor algorithm, you disable anti-aliasing. This keeps low-resolution pixels perfectly sharp and blocky when scaled to 2x or 3x, preserving the precise retro game design aesthetic."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does this image resolution enhancer support batch upscaling?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "To maintain fast performance and prevent your browser tab from crashing due to high system memory usage, the tool currently processes one high-quality upscaled file at a time."
-            }
-          }
+          { "@type": "Question", "name": "Which formats can I scale?", "acceptedAnswer": { "@type": "Answer", "text": "The tool accepts JPEG/JPG, PNG, and WebP." } },
+          { "@type": "Question", "name": "Which scale factors are available?", "acceptedAnswer": { "@type": "Answer", "text": "Choose 1.5×, 2×, or 3×. The default is 2×." } },
+          { "@type": "Question", "name": "Is this an AI image upscaler?", "acceptedAnswer": { "@type": "Answer", "text": "No. It uses mathematical resampling and does not run a generative model." } },
+          { "@type": "Question", "name": "Does scaling restore missing detail?", "acceptedAnswer": { "@type": "Answer", "text": "No. It estimates new pixels from the existing image and cannot recover information that was never captured." } },
+          { "@type": "Question", "name": "Which method is best for photographs?", "acceptedAnswer": { "@type": "Answer", "text": "Lanczos-style is a useful starting point, while bilinear may look smoother. Compare both on the actual image." } },
+          { "@type": "Question", "name": "Which method is best for pixel art?", "acceptedAnswer": { "@type": "Answer", "text": "Nearest neighbor with an integer factor such as 2× or 3×." } },
+          { "@type": "Question", "name": "Can the output remain transparent?", "acceptedAnswer": { "@type": "Answer", "text": "Choose PNG. JPEG does not support alpha transparency." } },
+          { "@type": "Question", "name": "What JPEG quality is used?", "acceptedAnswer": { "@type": "Answer", "text": "The canvas encoder receives a quality request of 0.95." } },
+          { "@type": "Question", "name": "Why does 3× require so much memory?", "acceptedAnswer": { "@type": "Answer", "text": "Tripling width and height creates nine times as many output pixels." } },
+          { "@type": "Question", "name": "Are images uploaded for scaling?", "acceptedAnswer": { "@type": "Answer", "text": "No. Image contents are processed in browser memory and are not sent to WeConvertFiles for scaling." } }
         ]
       }
     ]
   }
   </script>
-  <!-- GUIDE_SCHEMA_END -->
 </head>
 <body class="bg-[#f8fafd] dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
   <main class="mx-auto max-w-4xl px-4 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/">
-        <svg class="h-4 w-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to Home
-      </a>
-      <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span>
-    </div>
+    <div class="flex items-center justify-between mb-8"><a class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800/80" href="/"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Home</a><span class="text-xs font-semibold text-slate-500 dark:text-slate-400">WeConvertFiles Guide</span></div>
+    <article>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-center gap-3"><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Scale an Image to 1.5×, 2×, or 3×</h1><span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">Mathematical Resampling</span></div>
+        <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Image scaling increases pixel dimensions so an image can fill a larger layout or meet a minimum-size requirement &mdash; but enlarging does not reveal detail the source never captured; an algorithm estimates new pixel values from the existing ones. The <strong class="text-slate-900 dark:text-slate-200">Scale Image</strong> tool accepts one JPG, PNG, or WebP file and enlarges it by 1.5×, 2×, or 3×, using a custom Lanczos-3-style method, browser bilinear smoothing, or nearest neighbor for pixel art, with PNG or high-quality JPEG output. This is mathematical resampling, not generative AI super-resolution.</p>
+        <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/image-scaler">Open Scale Image<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+      </section>
 
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm sm:p-8">
-      <div class="flex items-center gap-3">
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl text-slate-950 dark:text-slate-100">Scale Image (Resolution Enhancer)</h1>
-        <span class="rounded-full bg-blue-50 dark:bg-blue-950/30 px-2.5 py-0.5 text-[10px] font-semibold text-[#1a73e8] dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50">
-          <span class="bg-blue-100 dark:bg-blue-900/30 px-1 py-0.5 rounded font-semibold text-blue-800 dark:text-blue-200">100%</span> Client-Side
-        </span>
-      </div>
-      <p class="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">Scale Image (Resolution Upscaler) is a powerful, offline photo upscaler that enlarges your JPEG, PNG, or WebP images by 1.5x, 2x, or 3x using high-fidelity pixel interpolation. To perform smart image resolution enhancement, the processor applies the Lanczos-3 windowed sinc filter, weighting 36 surrounding pixels to calculate smooth, anti-aliased edges and prevent jagged borders. Since all rendering tasks run locally in browser memory via Client-Side WebAssembly/JavaScript, this image resolution enhancer secures your photos 100% while providing professional, high-definition output.</p>
-      <a class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1a73e8] hover:bg-[#1967d2] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200" href="/image-scaler">
-        Open Scale Image
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
-    </section>
+      <section class="mt-4 rounded-3xl border border-amber-200/50 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 p-6 shadow-sm text-sm leading-6 text-slate-700 dark:text-slate-300"><p><strong>Quick answer.</strong> Choose Lanczos-style scaling for many photographs and detailed graphics, bilinear for a smoother result, or nearest neighbor for deliberately hard pixel edges. Compare at 100% zoom and watch memory use: 2× dimensions create four times as many pixels, while 3× creates nine times as many.</p></section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How It Works</h2>
-    <section class="grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950 text-sm font-bold text-[#1a73e8] dark:text-blue-400">1</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upload Photo</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Select the low-resolution JPEG, PNG, or WebP file you wish to enhance from your device.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950 text-sm font-bold text-indigo-600 dark:text-indigo-400">2</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Configure Algorithm</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Choose your upscaling factor (1.5x, 2x, 3x) and interpolation method (Lanczos-3, Bilinear, or Nearest-Neighbor).</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950 text-sm font-bold text-emerald-600 dark:text-emerald-400">3</span>
-        <h3 class="font-bold text-slate-900 dark:text-slate-200 mt-3">Upscale Resolution</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Click Convert to calculate enhanced pixels locally in browser memory and download the upscaled image.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Supported input and output</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Item</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Current behavior</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Accepted input</td><td class="py-3">JPEG/JPG, PNG, or WebP</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Files per operation</td><td class="py-3">One</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Scale factors</td><td class="py-3">1.5×, 2×, or 3× (default 2×)</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Methods</td><td class="py-3">Lanczos-3-style, bilinear, nearest neighbor</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">Output</td><td class="py-3">PNG or JPEG (JPEG quality request 0.95)</td></tr>
+          <tr><td class="py-3 pr-4">Filename</td><td class="py-3"><code>scaled-1.5x.png</code>, <code>scaled-2x.jpg</code>, and similar</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">The destination dimensions are calculated by multiplying source width and height by the selected factor and rounding to whole pixels.</p>
+      </section>
 
-    <h2 class="text-xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently Asked Questions</h2>
-    <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What is image resolution upscaling?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Resolution upscaling increases the pixel dimensions and clarity of low-resolution images. Using advanced mathematical interpolation, our photo upscaler calculates missing pixel values in real-time, delivering crisp, high-definition graphics without any quality loss or server uploads.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">What is the Lanczos-3 resampling algorithm?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Lanczos-3 is a top-tier windowed sinc resampling filter. By assessing a 6x6 pixel grid, it maps smooth vector contours, eliminates scaling artifacts, and preserves clean fine lines, making it the ideal choice for high-fidelity photo upscaling.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Can I upscale retro pixel art?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Yes! By choosing the Nearest-Neighbor algorithm, you disable anti-aliasing. This keeps low-resolution pixels perfectly sharp and blocky when scaled to 2x or 3x, preserving the precise retro game design aesthetic.</p>
-      </div>
-      <hr class="border-slate-100 dark:border-slate-700/60" />
-      <div>
-        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-200">Does this image resolution enhancer support batch upscaling?</h3>
-        <p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">To maintain fast performance and prevent your browser tab from crashing due to high system memory usage, the tool currently processes one high-quality upscaled file at a time.</p>
-      </div>
-    </section>
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Scaling changes pixel dimensions, not captured detail</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm">
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mb-4">Suppose a source image is 800 × 600 pixels:</p>
+        <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b border-slate-200 dark:border-slate-700"><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Factor</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Output dimensions</th><th class="py-3 pr-4 font-bold text-slate-900 dark:text-slate-200">Total pixels</th><th class="py-3 font-bold text-slate-900 dark:text-slate-200">Increase</th></tr></thead><tbody>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">1.5×</td><td class="py-3 pr-4">1200 × 900</td><td class="py-3 pr-4">1,080,000</td><td class="py-3">2.25×</td></tr>
+          <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-3 pr-4">2×</td><td class="py-3 pr-4">1600 × 1200</td><td class="py-3 pr-4">1,920,000</td><td class="py-3">4×</td></tr>
+          <tr><td class="py-3 pr-4">3×</td><td class="py-3 pr-4">2400 × 1800</td><td class="py-3 pr-4">4,320,000</td><td class="py-3">9×</td></tr>
+        </tbody></table></div>
+        <p class="text-sm leading-6 text-slate-600 dark:text-slate-400 mt-4">New pixels must be estimated. The source does not suddenly contain more optical detail merely because its grid is larger, so scaling cannot reliably turn an out-of-focus thumbnail into a sharp original photograph.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Choose a scaling method</h2>
+      <section class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Lanczos-3-style</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Samples pixels within a three-pixel radius using a Lanczos-style kernel to preserve sharper-looking detail. Good for photos, detailed illustrations, and interface captures. Can produce ringing or halos near strong edges and is slower on large images. This is custom browser code, not identical to every desktop Lanczos-3 implementation.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Bilinear</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Asks the browser canvas to draw the image with smoothing enabled and a high smoothing-quality preference. Good for photos where smoothness matters and soft gradients. Can soften fine detail and blur text and one-pixel lines. Canvas implementations differ between browsers.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Nearest neighbor</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Disables image smoothing and expands source pixels into larger blocks. Good for pixel art, sprites, and retro game graphics. Produces jagged diagonals and blocky photos &mdash; the wrong choice for ordinary photos, the right choice when blockiness is intentional.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How to scale an image</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ol class="space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li><strong class="text-slate-900 dark:text-slate-200">1. Start with the best source.</strong> Use the highest-resolution, least-compressed original available. Scaling a compressed screenshot or social-media download also enlarges its blur, ringing, noise, and block artifacts.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">2. Choose a factor.</strong> Use 1.5× for a moderate increase, 2× for a common integer enlargement, or 3× only when the larger grid is necessary and the device can handle the memory cost. The default is 2×.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">3. Select a resampling method.</strong> Start with Lanczos-style for general imagery, bilinear when smoother output is preferable, or nearest neighbor for pixel art.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">4. Choose PNG or JPEG.</strong> Use PNG for transparency, sharp graphics, screenshots, or repeated editing; use JPEG for opaque photographs when a smaller delivery file matters more.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">5. Generate the scaled image.</strong> The browser creates a canvas at the new dimensions and calculates or draws the output pixels.</li>
+        <li><strong class="text-slate-900 dark:text-slate-200">6. Inspect at 100% zoom.</strong> Look for halos around high-contrast edges, blurred text, jagged lines, enlarged JPEG artifacts, transparency changes, unexpected colors, and excessive file size. Compare all three methods when quality matters.</li>
+      </ol></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">How the scaling implementation works</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <ol class="space-y-2">
+          <li><strong class="text-slate-900 dark:text-slate-200">1.</strong> Loads the local image through an object URL.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">2.</strong> Reads its decoded width and height.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">3.</strong> Multiplies both dimensions by 1.5, 2, or 3 and rounds them.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">4.</strong> Creates a destination canvas with the enlarged dimensions.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">5.</strong> Applies the selected method.</li>
+          <li><strong class="text-slate-900 dark:text-slate-200">6.</strong> Encodes the destination as PNG or JPEG and downloads a filename such as <code>scaled-2x.png</code>.</li>
+        </ol>
+        <p>Nearest neighbor disables canvas image smoothing. Bilinear enables smoothing and requests high smoothing quality. Lanczos-style mode reads source pixels into an array, evaluates nearby samples within a three-pixel radius, writes a new destination pixel array, and yields periodically while processing rows.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Why larger dimensions use much more memory</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>Pixel count grows with area, not with one dimension alone: 1.5× means 2.25× as many output pixels, 2× means 4×, and 3× means 9×.</p><p>An uncompressed RGBA pixel buffer commonly uses four bytes per pixel. A 4000 × 3000 source contains 12 million pixels, or about 48 MB for one basic RGBA buffer before overhead; a 3× output contains 108 million pixels, requiring about 432 MB for one such buffer. Lanczos-style processing may hold the source image, source pixel data, destination data, canvases, and encoded output at the same time, so actual memory use can be much higher. Browser canvas dimension limits also vary, and a valid source may fail when the enlarged destination exceeds the current limit.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Mathematical scaling versus AI upscaling</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">Mathematical resampling</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Estimates new pixels from nearby source pixels; the result is deterministic for the same implementation and settings. It can increase dimensions and smooth or preserve edges, but it cannot truly recover detail absent from the source.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">AI super-resolution</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Uses a trained model to predict plausible details from learned patterns. It may look sharper, but predicted detail can be incorrect. The WeConvertFiles Image Scaler does not run an AI model, so avoid labels like "AI enhancer," "restore detail," or "unblur."</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Choosing PNG or JPEG output</h2>
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">PNG</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Supports alpha transparency, lossless pixel encoding, and suits screenshots, logos, diagrams, and pixel art. It can be large for photographs, and scaling still invents interpolated pixels even though PNG encoding is lossless.</p></div>
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm"><h3 class="font-bold text-slate-900 dark:text-slate-200">JPEG</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Often smaller for opaque photographs and widely supported, but lossy, with no alpha transparency and possible artifacts around text and sharp edges. Quality is requested at 0.95, though output size is not predictable.</p></div>
+      </section>
+      <section class="mt-4 rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm text-sm leading-6 text-slate-600 dark:text-slate-400"><p>The tool does not provide a background-color setting for transparent input. JPEG cannot preserve alpha, so test transparent areas because browser flattening behavior may not match the desired background. PNG output can retain the destination canvas alpha channel, which is the safer choice for logos, icons, and overlays.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Text, screenshots, and pixel art</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <p><strong class="text-slate-900 dark:text-slate-200">Text and screenshots.</strong> Scaling text does not equal rerendering the original font at a larger size. Nearest neighbor keeps hard pixel boundaries but looks blocky; bilinear smooths but can blur letters; Lanczos-style may stay sharp but can add halos. When possible, recreate the screenshot at a higher native display scale or export the original vector/text design again.</p>
+        <p><strong class="text-slate-900 dark:text-slate-200">Pixel art.</strong> Pixel art relies on a deliberate grid, so use nearest-neighbor scaling with integer factors such as 2× or 3×. A 1.5× scale does not map each source pixel to an equal integer-sized block, so some pixels occupy different output widths or heights, creating uneven shapes. Use PNG input and output, and inspect edges at 100% zoom.</p>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Metadata, color profiles, and print</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p>Canvas re-encoding focuses on decoded pixel values. Do not assume the output retains EXIF metadata, GPS coordinates, camera settings, IPTC or XMP fields, ICC color profiles, copyright fields, original timestamps, or embedded thumbnails. This can improve privacy when location metadata is removed, but it can disrupt professional color and asset-management workflows &mdash; keep the source and verify output requirements.</p><p>Increasing pixel dimensions changes the file's pixel grid; it does not create new optical information. Print quality depends on original detail, final physical dimensions, effective pixels per inch, viewing distance, printer and paper, and sharpening. Scaling may satisfy a software minimum or reduce visible pixelation at a layout size, but it cannot guarantee a sharp print from a poor source.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Privacy and data handling</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400"><p><strong class="text-slate-900 dark:text-slate-200">Image contents are decoded, scaled, and encoded in browser memory and are not sent to WeConvertFiles for scaling.</strong> This tool uses browser APIs and local JavaScript processing rather than a remote AI service.</p><p>If a visitor consents to analytics, separate usage information such as visits, clicks, device details, or scaling events may be collected. Those analytics do not receive the image contents.</p><p>Browser extensions, malware, shared devices, downloaded files, backups, and cloud-synchronized folders can still expose images independently of scaling.</p></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Limitations</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm"><ul class="space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        <li>&bull; One image per operation; JPG, PNG, or WebP input only.</li>
+        <li>&bull; Fixed factors of 1.5×, 2×, and 3×; PNG or JPEG output only.</li>
+        <li>&bull; No custom width or height, and no downscaling.</li>
+        <li>&bull; No AI super-resolution, denoising, deblurring, face restoration, or OCR.</li>
+        <li>&bull; Metadata and ICC profile preservation not guaranteed; JPEG cannot preserve transparency.</li>
+        <li>&bull; Large outputs may exceed memory or canvas limits.</li>
+        <li>&bull; Custom Lanczos-style code may differ from other Lanczos implementations.</li>
+      </ul></section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Troubleshooting</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The result is larger but not sharper</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Scaling increases dimensions, not captured detail. Start with a higher-quality source or use a specialized AI workflow when predicted detail is acceptable.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Text looks blurry</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Compare Lanczos-style and nearest neighbor. The best solution may be recreating the text at a larger native resolution.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Edges have halos</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Try bilinear mode. Lanczos-style sharpening behavior can ring around strong contrast transitions.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Pixel art looks soft</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Choose nearest neighbor and use 2× or 3× rather than 1.5×.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Transparency disappears</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Choose PNG. JPEG has no alpha channel.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The browser freezes or runs out of memory</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Use a smaller source or lower factor. A 3× enlargement creates nine times as many output pixels.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">The output file is unexpectedly large</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">PNG photographs and high-resolution outputs can be large. Consider JPEG for opaque photos or use a separate WebP conversion after scaling.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Colors differ from the original</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Canvas re-encoding may not preserve embedded color profiles and metadata. Use a color-managed desktop workflow when profile fidelity is essential.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
+      <section class="rounded-3xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-sm space-y-5">
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which formats can I scale?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The tool accepts JPEG/JPG, PNG, and WebP.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which scale factors are available?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Choose 1.5×, 2×, or 3×. The default is 2×.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Is this an AI image upscaler?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It uses mathematical resampling and does not run a generative model.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Does scaling restore missing detail?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. It estimates new pixels from the existing image and cannot recover information that was never captured.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which method is best for photographs?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Lanczos-style is a useful starting point, while bilinear may look smoother. Compare both on the actual image.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Which method is best for pixel art?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Nearest neighbor with an integer factor such as 2× or 3×.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Can the output remain transparent?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Choose PNG. JPEG does not support alpha transparency.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">What JPEG quality is used?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">The canvas encoder receives a quality request of 0.95.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Why does 3× require so much memory?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Tripling width and height creates nine times as many output pixels.</p></div>
+        <div><h3 class="font-bold text-slate-900 dark:text-slate-200">Are images uploaded for scaling?</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">No. Image contents are processed in browser memory and are not sent to WeConvertFiles for scaling.</p></div>
+      </section>
+
+      <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related tools</h2>
+      <section class="grid gap-4 md:grid-cols-3"><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/webp-convert"><h3 class="font-bold text-[#1a73e8]">Image to WebP</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Create a WebP delivery asset after scaling.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/bulk-resize"><h3 class="font-bold text-[#1a73e8]">Bulk Resize</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Resize several images or target a specific dimension.</p></a><a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition" href="/image-cropper"><h3 class="font-bold text-[#1a73e8]">Image Cropper</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Change composition before increasing dimensions.</p></a></section>
       <!-- RELATED_GUIDES_START -->
       <h2 class="text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-slate-100">Related guides</h2>
       <section class="grid gap-4 md:grid-cols-3">
@@ -187,6 +217,9 @@
         <a class="rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]" href="/guides/bulk-resize.html"><h3 class="font-bold text-[#1a73e8]">Bulk Image Resizer Guide</h3><p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Resize multiple images in bulk by percentage, width, or height and download as a ZIP.</p></a>
       </section>
       <!-- RELATED_GUIDES_END -->
+
+      <section class="mt-10 rounded-3xl bg-[#1a73e8] p-6 text-white shadow-sm sm:p-8"><h2 class="text-2xl font-bold">Enlarge an image the honest way</h2><p class="mt-3 text-sm leading-6 text-white">Pick a factor and a resampling method, generate the larger PNG or JPEG, and compare all three methods at 100% zoom.</p><a class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-blue-50" href="/image-scaler">Use Scale Image</a></section>
+    </article>
   </main>
 </body>
 </html>
