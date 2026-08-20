@@ -54,6 +54,54 @@
     html[data-initial-view="tool"] #workspaceView {
       display: block !important;
     }
+
+    /* Related-tool tabs: subtle emerald glow that interconnects tool pages. */
+    .related-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 9999px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.75rem;
+      line-height: 1;
+      font-weight: 600;
+      color: #047857;
+      background: rgba(16, 185, 129, 0.07);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      box-shadow: 0 1px 8px rgba(16, 185, 129, 0.12);
+      transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+    .related-tab:hover {
+      color: #065f46;
+      background: rgba(16, 185, 129, 0.13);
+      border-color: rgba(16, 185, 129, 0.55);
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.35);
+      transform: translateY(-1px);
+    }
+    .related-tab .related-tab-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 9999px;
+      background: #10b981;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.9);
+      flex: none;
+    }
+    .dark .related-tab {
+      color: #6ee7b7;
+      background: rgba(16, 185, 129, 0.08);
+      border-color: rgba(16, 185, 129, 0.30);
+      box-shadow: 0 1px 10px rgba(16, 185, 129, 0.14);
+    }
+    .dark .related-tab:hover {
+      color: #a7f3d0;
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(16, 185, 129, 0.60);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.45);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .related-tab { transition: none; }
+      .related-tab:hover { transform: none; }
+    }
   </style>
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <link rel="stylesheet" href="/assets/motion.css?v=20260817-3" />
@@ -1083,6 +1131,22 @@
                 </p>
               </div>
             </div>
+
+            <!-- Related tools: subtle emerald tabs that interconnect tool pages -->
+            <nav id="relatedToolsSection" class="rounded-[28px] border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-material" aria-label="Related tools">
+              <div class="flex items-center gap-2">
+                <span class="flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.9)]"></span>
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Explore related tools</h2>
+              </div>
+              <div id="relatedToolsGrid" class="mt-4 flex flex-wrap gap-2.5">
+                  <a class="related-tab" href="/qr-generator"><span class="related-tab-dot"></span>QR Code Generator</a>
+                  <a class="related-tab" href="/word-counter"><span class="related-tab-dot"></span>Word &amp; Character Counter</a>
+                  <a class="related-tab" href="/json-formatter"><span class="related-tab-dot"></span>JSON Formatter / Validator</a>
+                  <a class="related-tab" href="/diff-checker"><span class="related-tab-dot"></span>Code Diff Checker</a>
+                  <a class="related-tab" href="/markdown-preview"><span class="related-tab-dot"></span>Markdown Live Preview</a>
+                  <a class="related-tab" href="/regex-tester"><span class="related-tab-dot"></span>Regex Tester</a>
+                </div>
+            </nav>
 
             <div class="flex min-h-[100px] items-center justify-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-100/70 dark:bg-slate-800/30 p-6 text-center text-sm font-medium text-slate-500 dark:text-slate-400 sm:min-h-[250px]" aria-label="Advertisement">
               Advertisement

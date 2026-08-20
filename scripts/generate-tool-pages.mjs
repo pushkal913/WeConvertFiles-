@@ -28,6 +28,27 @@ if (tools.length !== 47) {
   throw new Error(`Expected 47 tools in app.js, found ${tools.length}.`);
 }
 
+// Parse the category -> tools mapping so related-tool links stay in sync with app.js.
+const categoryBlockStart = appSource.indexOf('const toolCategories = [');
+const categoryBlockEnd = appSource.indexOf('\n];', categoryBlockStart);
+if (categoryBlockStart === -1 || categoryBlockEnd === -1) {
+  throw new Error('Could not locate the toolCategories catalog in app.js.');
+}
+const categoryBlock = appSource.slice(categoryBlockStart, categoryBlockEnd);
+const categoryToolLists = [...categoryBlock.matchAll(/tools:\s*\[([^\]]*)\]/g)]
+  .map((match) => match[1].split(',').map((id) => id.trim().replace(/^'|'$/g, '')).filter(Boolean));
+
+const titleById = new Map(tools.map((tool) => [tool.id, tool.title]));
+const allToolIds = tools.map((tool) => tool.id);
+
+// Same-category siblings first, then top up to six for broad interconnection.
+const getRelatedIds = (toolId) => {
+  const category = categoryToolLists.find((list) => list.includes(toolId)) || [];
+  const siblings = category.filter((id) => id !== toolId);
+  const others = allToolIds.filter((id) => id !== toolId && !siblings.includes(id));
+  return [...siblings, ...others].slice(0, 6);
+};
+
 const escapeHtml = (value) => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -87,6 +108,15 @@ const renderToolPage = (tool) => {
     /<div id="seoHowToContent"([^>]*)><\/div>/,
     `<div id="seoHowToContent"$1><p>${escapeHtml(tool.description)} The supported processing runs locally in your browser.</p></div>`,
     'SEO summary'
+  );
+  const relatedTabs = getRelatedIds(tool.id)
+    .map((id) => `<a class="related-tab" href="/${id}"><span class="related-tab-dot"></span>${escapeHtml(titleById.get(id) || id)}</a>`)
+    .join('\n                  ');
+  html = replaceMeta(
+    html,
+    /<div id="relatedToolsGrid"([^>]*)><\/div>/,
+    `<div id="relatedToolsGrid"$1>\n                  ${relatedTabs}\n                </div>`,
+    'related tools'
   );
   return html;
 };
