@@ -72,19 +72,37 @@
     }
   }
 
-  function showBanner() {
-    if (!document.body || document.getElementById(BANNER_ID)) return;
+  // mode: 'settings' when reopened from the Cookie settings control (a choice
+  // already exists) — adds a close button and shows the current setting.
+  function showBanner(mode) {
+    if (!document.body) return;
+    removeBanner();
+    var isSettings = mode === 'settings';
+    var consent = getConsent();
+    var statusHtml = '';
+    if (isSettings) {
+      var on = consent === 'granted';
+      statusHtml =
+        '<p class="mt-1.5 text-xs font-semibold ' +
+        (on ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400') +
+        '">Analytics is currently ' + (on ? 'ON' : 'OFF') + '. Choose an option below, or close to keep it.</p>';
+    }
+    var closeBtn = isSettings
+      ? '<button type="button" data-consent-close aria-label="Close cookie settings" style="position:absolute;top:0.75rem;right:0.75rem" class="rounded-full p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 transition"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>'
+      : '';
     var wrap = document.createElement('div');
     wrap.id = BANNER_ID;
     wrap.setAttribute('role', 'dialog');
-    wrap.setAttribute('aria-label', 'Cookie and analytics consent');
+    wrap.setAttribute('aria-label', isSettings ? 'Cookie settings' : 'Cookie and analytics consent');
     wrap.className = 'fixed inset-x-0 bottom-0 z-[60] p-3 sm:p-4';
     wrap.innerHTML =
-      '<div class="mx-auto max-w-3xl rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] shadow-2xl p-4 sm:p-5">' +
+      '<div class="relative mx-auto max-w-3xl rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] shadow-2xl p-4 sm:p-5">' +
+        closeBtn +
         '<div class="sm:flex sm:items-center sm:gap-5">' +
-          '<div class="text-sm leading-6 text-slate-600 dark:text-slate-300">' +
-            '<p class="font-semibold text-slate-900 dark:text-slate-100">We value your privacy</p>' +
+          '<div class="text-sm leading-6 text-slate-600 dark:text-slate-300 ' + (isSettings ? 'pr-8 sm:pr-4' : '') + '">' +
+            '<p class="font-semibold text-slate-900 dark:text-slate-100">' + (isSettings ? 'Cookie settings' : 'We value your privacy') + '</p>' +
             '<p class="mt-1">Supported file processing runs in your browser and is not sent to WeConvertFiles for conversion. With your consent, we use Zoho PageSense analytics to understand how the site is used. See our <a href="/privacy" class="font-semibold text-[#1967d2] dark:text-blue-400 hover:underline">Privacy Policy</a>.</p>' +
+            statusHtml +
           '</div>' +
           '<div class="mt-4 sm:mt-0 flex shrink-0 gap-2.5">' +
             '<button type="button" data-consent-choice="denied" class="rounded-full border border-slate-300 dark:border-slate-600 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:focus-visible:ring-slate-500 transition">Decline</button>' +
@@ -95,20 +113,19 @@
     document.body.appendChild(wrap);
 
     wrap.addEventListener('click', function (event) {
+      if (event.target.closest('[data-consent-close]')) { removeBanner(); return; }
       var btn = event.target.closest('[data-consent-choice]');
-      if (!btn) return;
-      choose(btn.getAttribute('data-consent-choice'));
+      if (btn) choose(btn.getAttribute('data-consent-choice'));
     });
 
-    // Move focus to the banner for keyboard and screen-reader users.
-    var accept = wrap.querySelector('[data-consent-choice="granted"]');
-    if (accept) { try { accept.focus({ preventScroll: true }); } catch (e) { accept.focus(); } }
+    // Move focus into the banner for keyboard and screen-reader users.
+    var focusEl = wrap.querySelector(isSettings ? '[data-consent-close]' : '[data-consent-choice="granted"]');
+    if (focusEl) { try { focusEl.focus({ preventScroll: true }); } catch (e) { focusEl.focus(); } }
   }
 
   function openSettings() {
-    // Re-open the banner so the visitor can change or withdraw consent.
-    removeBanner();
-    showBanner();
+    // Re-open the banner in settings mode so the choice can be changed, withdrawn, or closed.
+    showBanner('settings');
     var banner = document.getElementById(BANNER_ID);
     if (banner) banner.scrollIntoView({ block: 'nearest' });
   }
