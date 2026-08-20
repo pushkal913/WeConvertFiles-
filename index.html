@@ -617,7 +617,7 @@
 
     <main class="mx-auto max-w-7xl px-4 pt-5 pb-8 sm:px-6 lg:px-8">
       <section id="dashboardView">
-        <div class="grid gap-6 lg:grid-cols-[1fr_280px]">
+        <div>
           <div>
             <div class="mb-6 rounded-[28px] border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-4 sm:p-8 shadow-material">
               <div class="flex flex-wrap items-center justify-between gap-4 mb-5 pb-4 border-b border-slate-100 dark:border-slate-700/60">
@@ -651,6 +651,11 @@
             </div>
 
             <div id="toolGrid" class="space-y-8"></div>
+
+            <!-- Horizontal advertisement banner -->
+            <div class="my-8 flex min-h-[90px] items-center justify-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-100/70 dark:bg-slate-800/40 px-6 text-center text-sm font-medium text-slate-500 dark:text-slate-400" aria-label="Advertisement">
+              Advertisement
+            </div>
 
             <!-- Popular File Conversions Section -->
             <section class="popular-conversions reveal">
@@ -749,7 +754,7 @@
               <h2 class="text-2xl font-semibold tracking-tight text-slate-950 dark:text-slate-100"><span data-guide-count="47">47</span> Free Client-Side Guides for PDF, Images, Office & Developer Tools</h2>
               <p class="mt-3 max-w-3xl text-sm leading-7 text-slate-600 dark:text-slate-400">Learn how each lightweight client-side module manages, converts, and formats documents, spreadsheets, design assets, and code snippets inside your browser without uploading file contents for conversion.</p>
               <!-- GENERATED_GUIDE_GRIDS_START -->
-              <div data-guide-view="desktop" class="mt-5 hidden md:grid md:grid-cols-2 gap-3">
+              <div data-guide-view="desktop" class="mt-5 hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-3">
                 <details style="--c:rgb(37, 99, 235)" class="wcf-acc group border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/60 rounded-2xl overflow-hidden">
                   <summary class="flex items-center justify-between p-4 cursor-pointer select-none font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors list-none [&::-webkit-details-marker]:hidden">
                     <span class="flex items-center gap-2">
@@ -983,12 +988,6 @@
               <!-- GENERATED_GUIDE_GRIDS_END -->
             </section>
           </div>
-
-          <aside class="min-h-[280px] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-100/70 dark:bg-slate-800/40 p-6 text-center text-sm font-medium text-slate-500 dark:text-slate-400 lg:self-start" aria-label="Advertisement">
-            <div class="flex h-full items-center justify-center rounded-xl border border-dashed border-slate-300 dark:border-slate-700">
-              Advertisement
-            </div>
-          </aside>
         </div>
       </section>
       <section id="workspaceView" class="hidden">

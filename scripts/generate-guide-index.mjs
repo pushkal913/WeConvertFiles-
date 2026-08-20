@@ -50,12 +50,12 @@ ${links}
 }).join('\n');
 
 // Both views use the same collapsed accordions with a 2-column inner link grid.
-// Desktop lays the tabs out two-per-row (2x3); mobile stacks them full width.
+// Desktop lays the tabs out three-per-row (3x2); mobile stacks them full width.
 const desktopGroups = renderGroups('grid-cols-2', false);
 const mobileGroups = renderGroups('grid-cols-2', false);
 
 const generatedBlock = `              <!-- GENERATED_GUIDE_GRIDS_START -->
-              <div data-guide-view="desktop" class="mt-5 hidden md:grid md:grid-cols-2 gap-3">
+              <div data-guide-view="desktop" class="mt-5 hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-3">
 ${desktopGroups}
               </div>
 

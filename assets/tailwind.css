@@ -180,6 +180,24 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
+
+  /* At wide widths, fit all five popular conversions on a single row with tighter pills. */
+  @media (min-width: 1280px) {
+    .popular-conversions-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.625rem;
+    }
+
+    .popular-conversions-grid > a {
+      min-height: 50px;
+      padding: 0.5rem 0.625rem;
+    }
+
+    .popular-conversions-grid > a > div > span {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
 }
 
 @tailwind utilities;
