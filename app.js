@@ -1337,7 +1337,7 @@ function renderDashboard() {
           <span class="tool-category-count">${categoryTools.length} tools</span>
           <span class="tool-category-divider" aria-hidden="true"></span>
         </div>
-        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           ${categoryTools.map(renderToolCard).join('')}
         </div>
       </section>
