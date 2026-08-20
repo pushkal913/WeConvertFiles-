@@ -1562,6 +1562,7 @@ async function openTool(toolId) {
   }
 
   renderToolOptions(tool.id);
+  renderPersistentRelatedTools();
   if (tool.id === 'sign-pdf') {
     ensureSignatureFonts();
     initSignaturePad();
@@ -6695,6 +6696,27 @@ function showResultPanel(blob, fileName) {
     panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
   renderRelatedTools();
+}
+
+// Related tools for the persistent "Explore related tools" section.
+// Same-category siblings first, then top up to six so every tool page
+// interconnects with a healthy set of others.
+function getRelatedTools(toolId) {
+  const category = toolCategories.find((cat) => cat.tools.includes(toolId));
+  const siblings = category ? category.tools.filter((id) => id !== toolId) : [];
+  const others = tools.map((t) => t.id).filter((id) => id !== toolId && !siblings.includes(id));
+  return [...siblings, ...others]
+    .slice(0, 6)
+    .map((id) => tools.find((t) => t.id === id))
+    .filter(Boolean);
+}
+
+function renderPersistentRelatedTools() {
+  const grid = document.getElementById('relatedToolsGrid');
+  if (!grid || !state.currentTool) return;
+  grid.innerHTML = getRelatedTools(state.currentTool.id)
+    .map((t) => `<a class="related-tab" href="/${t.id}"><span class="related-tab-dot"></span>${t.title}</a>`)
+    .join('');
 }
 
 function renderRelatedTools() {

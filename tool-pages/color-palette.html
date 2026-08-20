@@ -54,6 +54,54 @@
     html[data-initial-view="tool"] #workspaceView {
       display: block !important;
     }
+
+    /* Related-tool tabs: subtle emerald glow that interconnects tool pages. */
+    .related-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 9999px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.75rem;
+      line-height: 1;
+      font-weight: 600;
+      color: #047857;
+      background: rgba(16, 185, 129, 0.07);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      box-shadow: 0 1px 8px rgba(16, 185, 129, 0.12);
+      transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+    .related-tab:hover {
+      color: #065f46;
+      background: rgba(16, 185, 129, 0.13);
+      border-color: rgba(16, 185, 129, 0.55);
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.35);
+      transform: translateY(-1px);
+    }
+    .related-tab .related-tab-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 9999px;
+      background: #10b981;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.9);
+      flex: none;
+    }
+    .dark .related-tab {
+      color: #6ee7b7;
+      background: rgba(16, 185, 129, 0.08);
+      border-color: rgba(16, 185, 129, 0.30);
+      box-shadow: 0 1px 10px rgba(16, 185, 129, 0.14);
+    }
+    .dark .related-tab:hover {
+      color: #a7f3d0;
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(16, 185, 129, 0.60);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.45);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .related-tab { transition: none; }
+      .related-tab:hover { transform: none; }
+    }
   </style>
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <link rel="stylesheet" href="/assets/motion.css?v=20260817-3" />
@@ -1059,6 +1107,22 @@
                 Advertisement Space
               </div>
             </div>
+
+            <!-- Related tools: subtle emerald tabs that interconnect tool pages -->
+            <nav id="relatedToolsSection" class="rounded-[28px] border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-material" aria-label="Related tools">
+              <div class="flex items-center gap-2">
+                <span class="flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.9)]"></span>
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Explore related tools</h2>
+              </div>
+              <div id="relatedToolsGrid" class="mt-4 flex flex-wrap gap-2.5">
+                  <a class="related-tab" href="/heic-to-jpg"><span class="related-tab-dot"></span>HEIC to JPG / PNG</a>
+                  <a class="related-tab" href="/image-cropper"><span class="related-tab-dot"></span>Crop Image</a>
+                  <a class="related-tab" href="/bulk-resize"><span class="related-tab-dot"></span>Bulk Image Resizer</a>
+                  <a class="related-tab" href="/image-scaler"><span class="related-tab-dot"></span>Scale Image</a>
+                  <a class="related-tab" href="/webp-convert"><span class="related-tab-dot"></span>Image to WebP</a>
+                  <a class="related-tab" href="/favicon-generator"><span class="related-tab-dot"></span>Favicon Generator</a>
+                </div>
+            </nav>
 
             <!-- Tool notes (placed BELOW the main card, inside Left Column) -->
             <div class="rounded-[28px] border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-material">
