@@ -7255,6 +7255,3 @@ document.addEventListener('click', (event) => {
 }, true);
 document.getElementById('downloadResultBtn')?.addEventListener('click', executeActualDownload);
 document.getElementById('convertAnotherBtn')?.addEventListener('click', resetWorkspaceForNewFile);
-
-  // Reset language to default English
-  localStorage.removeItem('lang');

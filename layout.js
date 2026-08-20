@@ -476,23 +476,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         <!-- Desktop Utilities -->
         <div class="hidden lg:flex items-center gap-3.5 xl:gap-4.5 border-l border-slate-200 dark:border-slate-700/60 pl-4.5 xl:pl-6 shrink-0">
-          <!-- Language Selector Dropdown -->
-          <div class="relative group shrink-0">
-            <button class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-3 py-1 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition" aria-label="Change Language">
-              <svg class="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-              </svg>
-              <span id="currentLangLabel">EN</span>
-              <svg class="h-3 w-3 text-slate-400 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-            </button>
-            <div class="invisible absolute right-0 top-full mt-1.5 z-30 w-32 rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-1 opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100">
-              <button onclick="changeLanguage('en')" class="w-full text-left flex items-center justify-between rounded-xl px-3 py-2 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition">English <span class="text-[10px] text-slate-400">EN</span></button>
-              <button onclick="changeLanguage('es')" class="w-full text-left flex items-center justify-between rounded-xl px-3 py-2 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition">Español <span class="text-[10px] text-slate-400">ES</span></button>
-              <button onclick="changeLanguage('fr')" class="w-full text-left flex items-center justify-between rounded-xl px-3 py-2 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition">Français <span class="text-[10px] text-slate-400">FR</span></button>
-              <button onclick="changeLanguage('de')" class="w-full text-left flex items-center justify-between rounded-xl px-3 py-2 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition">Deutsch <span class="text-[10px] text-slate-400">DE</span></button>
-              <button onclick="changeLanguage('hi')" class="w-full text-left flex items-center justify-between rounded-xl px-3 py-2 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition">हिन्दी <span class="text-[10px] text-slate-400">HI</span></button>
-            </div>
-          </div>
           <button id="headerSearchButton" class="rounded-full p-2 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 border border-blue-200/50 dark:border-blue-800/40 shadow-[0_0_12px_rgba(59,130,246,0.2)] hover:shadow-[0_0_18px_rgba(59,130,246,0.35)] transition-all duration-200 flex items-center justify-center shrink-0" aria-label="Search tools" type="button">
             <svg class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           </button>
@@ -719,7 +702,4 @@ document.addEventListener('DOMContentLoaded', () => {
   if (searchInput) {
     searchInput.addEventListener('input', (e) => renderSearchResults(e.target.value));
   }
-
-  // Reset language to default English
-  localStorage.removeItem('lang');
 });
