@@ -1307,18 +1307,28 @@ const toolColorRgb = {
   teal: '13, 148, 136'
 };
 
+const popularToolIds = new Set(['merge-pdf', 'office-pdf', 'compress-pdf', 'heic-to-jpg', 'json-formatter', 'images-pdf', 'sign-pdf', 'pdf-to-word']);
+
 function renderToolCard(tool) {
   const baseColor = tool.iconColor.replace('text-', '');
   const borderClass = `border-${baseColor}/[0.48] dark:border-${baseColor}/[0.54] hover:border-${baseColor}/90`;
   const colorName = baseColor.split('-')[0];
   const rgbVal = toolColorRgb[colorName] || '59, 130, 246';
+  const popularBadge = popularToolIds.has(tool.id)
+    ? '<span class="ml-1.5 inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-950/40 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-amber-700 dark:text-amber-400 align-middle">Popular</span>'
+    : '';
   return `
-    <button class="group rounded-xl border ${borderClass} bg-white dark:bg-[#1e293b] px-3.5 py-3 text-left transition duration-200 hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(var(--glow-rgb),0.096)] hover:shadow-[0_8px_30px_rgba(var(--glow-rgb),0.30)] flex items-start gap-3" style="--glow-rgb: ${rgbVal};" data-tool-id="${tool.id}">
-      <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl ${tool.iconBg} ${tool.iconColor} shadow-sm">${toolIcon(tool)}</span>
-      <div class="min-w-0 flex-1">
-        <span class="block text-sm font-semibold leading-snug text-slate-950 dark:text-slate-100">${tool.title}</span>
-        <span class="mt-0.5 block text-xs leading-5 text-slate-600 dark:text-slate-400">${tool.description}</span>
-      </div>
+    <button class="group flex flex-col rounded-xl border ${borderClass} bg-white dark:bg-[#1e293b] px-3.5 py-3 text-left transition duration-200 hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(var(--glow-rgb),0.096)] hover:shadow-[0_8px_30px_rgba(var(--glow-rgb),0.30)]" style="--glow-rgb: ${rgbVal};" data-tool-id="${tool.id}">
+      <span class="flex items-start gap-3">
+        <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl ${tool.iconBg} ${tool.iconColor} shadow-sm">${toolIcon(tool)}</span>
+        <span class="min-w-0 flex-1">
+          <span class="block text-sm font-semibold leading-snug text-slate-950 dark:text-slate-100">${tool.title}${popularBadge}</span>
+          <span class="mt-0.5 block text-xs leading-5 text-slate-600 dark:text-slate-400">${tool.description}</span>
+        </span>
+      </span>
+      <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold ${tool.iconColor} opacity-70 group-hover:opacity-100 transition-opacity">Open
+        <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </span>
     </button>
   `;
 }
