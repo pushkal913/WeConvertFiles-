@@ -566,6 +566,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/contact">Contact Us</a>
               <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/privacy">Privacy Policy</a>
               <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/terms">Terms of Service</a>
+              <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/accessibility">Accessibility</a>
             </div>
           </div>
           <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm space-y-2 max-w-xl">

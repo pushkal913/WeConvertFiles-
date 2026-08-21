@@ -47,7 +47,7 @@ for (const url of sitemapUrls) {
   check(!url.endsWith('/index.html'), `sitemap contains an index.html URL: ${url}`);
 }
 
-const informationPages = ['about', 'contact', 'privacy', 'terms'];
+const informationPages = ['about', 'contact', 'privacy', 'terms', 'accessibility'];
 for (const page of informationPages) {
   const html = await readFile(path.join(rootDir, `${page}.html`), 'utf8');
   const canonical = `${siteUrl}/${page}`;
