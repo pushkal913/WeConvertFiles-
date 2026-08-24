@@ -9,15 +9,10 @@ import { guideHrefForTool, guideSlugForTool, parseToolCatalogue } from './guide-
 // repeated homepage accordion. Idempotent via HTML markers.
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const appSource = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
-const { tools, categories } = parseToolCatalogue(appSource);
+const { tools, categories } = parseToolCatalogue();
 
-// Tool descriptions (for the card copy) parsed from the app.js catalogue.
-const toolsBlock = appSource.slice(appSource.indexOf('const tools = ['));
-const descById = new Map();
-for (const m of toolsBlock.matchAll(/\{\s*id: '([^']+)',\s*title: '([^']+)',[\s\S]*?description: '((?:\\'|[^'])*)',/g)) {
-  descById.set(m[1], m[3].replaceAll("\\'", "'"));
-}
+// Tool descriptions (for the card copy) come from the authoritative catalogue.
+const descById = new Map(tools.map((t) => [t.id, t.description]));
 const titleById = new Map(tools.map((t) => [t.id, t.title]));
 const orderedIds = tools.map((t) => t.id);
 

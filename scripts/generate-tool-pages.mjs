@@ -1,42 +1,28 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { tools as catalogueTools, categories as catalogueCategories } from '../data/tools.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = path.join(rootDir, 'tool-pages');
 const siteUrl = 'https://www.weconvertfiles.com';
 const shell = await readFile(path.join(rootDir, 'index.html'), 'utf8');
-const appSource = await readFile(path.join(rootDir, 'app.js'), 'utf8');
-const toolsBlockStart = appSource.indexOf('const tools = [');
-const toolsBlockEnd = appSource.indexOf('\n];', toolsBlockStart);
 
-if (toolsBlockStart === -1 || toolsBlockEnd === -1) {
-  throw new Error('Could not locate the tools catalog in app.js.');
-}
-
-const toolsBlock = appSource.slice(toolsBlockStart, toolsBlockEnd);
-const toolPattern = /\{\s*id: '([^']+)',\s*title: '([^']+)',[\s\S]*?kicker: '([^']+)',\s*badge: '([^']+)',[\s\S]*?description: '((?:\\'|[^'])*)',/g;
-const tools = [...toolsBlock.matchAll(toolPattern)].map((match) => ({
-  id: match[1],
-  title: match[2],
-  kicker: match[3],
-  badge: match[4],
-  description: match[5].replaceAll("\\'", "'")
+// Tool metadata comes from the authoritative catalogue (data/tools.mjs).
+const tools = catalogueTools.map((tool) => ({
+  id: tool.id,
+  title: tool.title,
+  kicker: tool.kicker,
+  badge: tool.badge,
+  description: tool.description
 }));
 
 if (tools.length !== 47) {
-  throw new Error(`Expected 47 tools in app.js, found ${tools.length}.`);
+  throw new Error(`Expected 47 tools in the catalogue, found ${tools.length}.`);
 }
 
-// Parse the category -> tools mapping so related-tool links stay in sync with app.js.
-const categoryBlockStart = appSource.indexOf('const toolCategories = [');
-const categoryBlockEnd = appSource.indexOf('\n];', categoryBlockStart);
-if (categoryBlockStart === -1 || categoryBlockEnd === -1) {
-  throw new Error('Could not locate the toolCategories catalog in app.js.');
-}
-const categoryBlock = appSource.slice(categoryBlockStart, categoryBlockEnd);
-const categoryToolLists = [...categoryBlock.matchAll(/tools:\s*\[([^\]]*)\]/g)]
-  .map((match) => match[1].split(',').map((id) => id.trim().replace(/^'|'$/g, '')).filter(Boolean));
+// Category -> tool-id lists, so related-tool links stay in catalogue order.
+const categoryToolLists = catalogueCategories.map((category) => category.toolIds);
 
 const titleById = new Map(tools.map((tool) => [tool.id, tool.title]));
 const allToolIds = tools.map((tool) => tool.id);

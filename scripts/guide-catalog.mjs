@@ -1,35 +1,32 @@
+import { tools as catalogueTools, categories as catalogueCategories } from '../data/tools.mjs';
+
+// Guide slug overrides: a few tool ids map to a differently-named guide file
+// (the tool route keeps the short id, the guide uses the fuller name). This is a
+// stable transformation rule; the catalogue's `guide` field is derived from it
+// and validate-catalogue.mjs enforces they agree.
 export const GUIDE_SLUG_OVERRIDES = Object.freeze({
   'images-pdf': 'images-to-pdf',
   'pdf-images': 'pdf-to-images',
   'pdf-jpg': 'pdf-to-jpg'
 });
 
-function requiredBlock(source, startText, endText) {
-  const start = source.indexOf(startText);
-  const end = source.indexOf(endText, start);
-  if (start < 0 || end < 0) {
-    throw new Error(`Could not find catalogue block: ${startText}`);
-  }
-  return source.slice(start, end);
-}
-
-export function parseToolCatalogue(appSource) {
-  const toolsBlock = requiredBlock(appSource, 'const tools = [', '\n];');
-  const tools = [...toolsBlock.matchAll(/\{\s*id: '([^']+)',\s*title: '([^']+)',/g)]
-    .map((match) => ({ id: match[1], title: match[2] }));
-
-  const categoriesStart = appSource.indexOf('const toolCategories = [');
-  const categoriesBlock = requiredBlock(appSource.slice(categoriesStart), 'const toolCategories = [', '\n];');
-  const categories = [...categoriesBlock.matchAll(/\{\s*id: '([^']+)',\s*title: '([^']+)',(?:\s*rgb: '([^']+)',)?[\s\S]*?tools: \[([^\]]+)\]\s*\n\s*\}/g)]
-    .map((match) => ({
-      id: match[1],
-      title: match[2],
-      rgb: match[3] || '37, 99, 235',
-      toolIds: [...match[4].matchAll(/'([^']+)'/g)].map((toolMatch) => toolMatch[1])
-    }));
+// Tool identity + category grouping the guide generators need, sourced from the
+// authoritative catalogue (data/tools.mjs) rather than parsed out of app.js.
+export function parseToolCatalogue() {
+  const tools = catalogueTools.map((tool) => ({
+    id: tool.id,
+    title: tool.title,
+    description: tool.description
+  }));
+  const categories = catalogueCategories.map((category) => ({
+    id: category.id,
+    title: category.title,
+    rgb: category.rgb,
+    toolIds: category.toolIds
+  }));
 
   if (!tools.length || !categories.length) {
-    throw new Error('Tool catalogue parsing returned no tools or categories.');
+    throw new Error('Tool catalogue is empty.');
   }
 
   return { tools, categories };

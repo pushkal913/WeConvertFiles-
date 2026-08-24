@@ -4,11 +4,10 @@ import { fileURLToPath } from 'node:url';
 import { guideHrefForTool, guideSlugForTool, parseToolCatalogue } from './guide-catalog.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const appSource = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
 const indexSource = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
 const sitemapSource = fs.readFileSync(path.join(rootDir, 'sitemap.xml'), 'utf8');
 const redirectsSource = fs.readFileSync(path.join(rootDir, '_redirects'), 'utf8');
-const { tools, categories } = parseToolCatalogue(appSource);
+const { tools, categories } = parseToolCatalogue();
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);

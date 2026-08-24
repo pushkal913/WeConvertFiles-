@@ -4,10 +4,9 @@ import { fileURLToPath } from 'node:url';
 import { guideHrefForTool, parseToolCatalogue } from './guide-catalog.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const appSource = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
 const indexPath = path.join(rootDir, 'index.html');
 let indexSource = fs.readFileSync(indexPath, 'utf8');
-const { tools, categories } = parseToolCatalogue(appSource);
+const { tools, categories } = parseToolCatalogue();
 const toolById = new Map(tools.map((tool) => [tool.id, tool]));
 
 function escapeHtml(value) {
