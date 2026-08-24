@@ -1,14 +1,18 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { tools as catalogueTools, categories as catalogueCategories } from '../data/tools.mjs';
+import { tools as catalogueTools, categories as catalogueCategories, assertValidCatalogue } from './catalogue.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = path.join(rootDir, 'tool-pages');
 const siteUrl = 'https://www.weconvertfiles.com';
 const shell = await readFile(path.join(rootDir, 'index.html'), 'utf8');
 
-// Tool metadata comes from the authoritative catalogue (data/tools.mjs).
+// Tool metadata comes from the authoritative catalogue (data/tools.mjs). Fail
+// the build with a clear message if the catalogue is structurally invalid,
+// rather than emitting broken pages.
+assertValidCatalogue();
+
 const tools = catalogueTools.map((tool) => ({
   id: tool.id,
   title: tool.title,
@@ -16,10 +20,6 @@ const tools = catalogueTools.map((tool) => ({
   badge: tool.badge,
   description: tool.description
 }));
-
-if (tools.length !== 47) {
-  throw new Error(`Expected 47 tools in the catalogue, found ${tools.length}.`);
-}
 
 // Category -> tool-id lists, so related-tool links stay in catalogue order.
 const categoryToolLists = catalogueCategories.map((category) => category.toolIds);

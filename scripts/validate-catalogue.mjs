@@ -1,8 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { tools, categories, libraries } from '../data/tools.mjs';
-import { guideSlugForTool } from './guide-catalog.mjs';
+import { tools, categories, libraries, catalogueProblems } from './catalogue.mjs';
 
 // Validates the authoritative tool catalogue (data/tools.mjs):
 //   1. Structural integrity — 47 tools, no duplicate ids, required fields,
@@ -32,47 +31,10 @@ function pickLiteral(src, decl, closeToken) {
 const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
-const REQUIRED_STRING_FIELDS = ['id', 'title', 'description', 'kicker', 'badge', 'category', 'route', 'guide', 'module'];
+// ---- 1. Structural integrity (shared with the generators) -------------------
 
-// ---- 1. Structural integrity -------------------------------------------------
-
+failures.push(...catalogueProblems());
 assert(tools.length === 47, `Expected 47 tools in the catalogue, found ${tools.length}.`);
-
-const ids = tools.map((t) => t.id);
-const duplicateIds = [...new Set(ids.filter((id, i) => ids.indexOf(id) !== i))];
-assert(duplicateIds.length === 0, `Duplicate tool ids in catalogue: ${duplicateIds.join(', ')}`);
-
-const categoryIds = new Set(categories.map((c) => c.id));
-const libraryNames = new Set(Object.keys(libraries));
-
-for (const tool of tools) {
-  const where = `tool "${tool.id || '(no id)'}"`;
-  for (const field of REQUIRED_STRING_FIELDS) {
-    assert(typeof tool[field] === 'string' && tool[field].length > 0, `${where} is missing required field "${field}"`);
-  }
-  assert(tool.icon && typeof tool.icon.bg === 'string' && typeof tool.icon.color === 'string', `${where} is missing icon.bg / icon.color`);
-  assert(tool.route === `/${tool.id}`, `${where} route "${tool.route}" should be "/${tool.id}"`);
-  assert(tool.guide === `/guides/${guideSlugForTool(tool.id)}.html`, `${where} guide "${tool.guide}" does not match its slug rule`);
-  assert(categoryIds.has(tool.category), `${where} references unknown category "${tool.category}"`);
-  assert(Array.isArray(tool.dependencies), `${where} dependencies must be an array`);
-  for (const dep of tool.dependencies || []) {
-    assert(libraryNames.has(dep), `${where} depends on unknown library "${dep}"`);
-  }
-}
-
-// Categories cover exactly the 47 tool ids, once each, and agree with each
-// tool's own `category` field.
-const idsFromCategories = categories.flatMap((c) => c.toolIds);
-const dupCatMembership = [...new Set(idsFromCategories.filter((id, i) => idsFromCategories.indexOf(id) !== i))];
-assert(dupCatMembership.length === 0, `Tool ids listed in more than one category: ${dupCatMembership.join(', ')}`);
-assert(idsFromCategories.length === 47, `Categories list ${idsFromCategories.length} tool ids, expected 47.`);
-for (const category of categories) {
-  for (const id of category.toolIds) {
-    const tool = tools.find((t) => t.id === id);
-    assert(tool, `Category "${category.id}" lists unknown tool "${id}"`);
-    if (tool) assert(tool.category === category.id, `Tool "${id}" has category "${tool.category}" but is listed under "${category.id}"`);
-  }
-}
 
 // ---- 2. No drift vs app.js (runtime config) ---------------------------------
 
@@ -133,6 +95,6 @@ if (failures.length) {
 console.log('Tool catalogue validation passed:');
 console.log(`- ${tools.length} tools, unique ids, all required fields present`);
 console.log(`- ${categories.length} categories cover all 47 tools once; routes and guide URLs derive correctly`);
-console.log(`- every dependency resolves to one of ${libraryNames.size} known libraries`);
+console.log(`- every dependency resolves to one of ${Object.keys(libraries).length} known libraries`);
 console.log('- catalogue matches app.js runtime config (tools, categories, dependencies, libraries) — no drift');
 console.log('- tool ids are in parity with layout.js');
