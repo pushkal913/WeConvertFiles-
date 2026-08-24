@@ -1007,7 +1007,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/password-generator",
     "guide": "/guides/password-generator.html",
-    "module": "app.js",
+    "module": "js/tools/password-generator.js",
     "dependencies": []
   },
   {
@@ -1023,7 +1023,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/case-converter",
     "guide": "/guides/case-converter.html",
-    "module": "app.js",
+    "module": "js/tools/case-converter.js",
     "dependencies": []
   }
 ];

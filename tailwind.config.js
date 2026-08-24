@@ -29,6 +29,7 @@ module.exports = {
   content: [
     './*.html',
     './*.js',
+    './js/**/*.js',
     './convert/*.html',
     './guides/*.html',
     './scripts/*.mjs'

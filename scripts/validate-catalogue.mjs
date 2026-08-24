@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tools, categories, libraries, catalogueProblems } from './catalogue.mjs';
@@ -77,6 +77,21 @@ for (const [name, lib] of Object.entries(libraries)) {
     assert((lib.css || null) === (a.css || null), `Library "${name}" css differs from app.js`);
   }
 }
+
+// Tools split into js/tools/<id>.js: the catalogue `module` field, the module
+// file on disk and app.js's runtime MODULE_TOOLS set must all agree.
+const moduleTools = tools.filter((t) => t.module.startsWith('js/tools/'));
+for (const tool of moduleTools) {
+  assert(tool.module === `js/tools/${tool.id}.js`, `Tool "${tool.id}" module should be js/tools/${tool.id}.js`);
+  assert(existsSync(path.join(rootDir, tool.module)), `Tool "${tool.id}" module file ${tool.module} is missing`);
+}
+const moduleSetMatch = appSource.match(/const MODULE_TOOLS = new Set\(\[([^\]]*)\]\)/);
+const runtimeModuleTools = moduleSetMatch ? [...moduleSetMatch[1].matchAll(/'([^']+)'/g)].map((m) => m[1]) : [];
+const catalogueModuleIds = moduleTools.map((t) => t.id);
+assert(
+  JSON.stringify([...runtimeModuleTools].sort()) === JSON.stringify([...catalogueModuleIds].sort()),
+  `app.js MODULE_TOOLS ${JSON.stringify(runtimeModuleTools)} does not match catalogue module tools ${JSON.stringify(catalogueModuleIds)}`
+);
 
 // ---- 3. Tool-id parity vs layout.js (display values legitimately differ) -----
 
