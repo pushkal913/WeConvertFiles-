@@ -102,6 +102,144 @@
       .related-tab { transition: none; }
       .related-tab:hover { transform: none; }
     }
+
+    /* Homepage redesign refinements: scoped to the preview components. */
+    .homepage-popular-chip {
+      color: #1d4ed8 !important;
+      border-color: #bfdbfe !important;
+      background: linear-gradient(135deg, #eff6ff, #eef2ff) !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+    }
+    .homepage-popular-chip::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      flex: none;
+      margin-right: 0.45rem;
+      border-radius: 9999px;
+      background: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.11);
+    }
+    .homepage-popular-chip:hover {
+      color: #1e40af !important;
+      border-color: #60a5fa !important;
+      background: linear-gradient(135deg, #dbeafe, #e0e7ff) !important;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.16);
+      transform: translateY(-1px);
+    }
+    .dark .homepage-popular-chip {
+      color: #bfdbfe !important;
+      border-color: rgba(96, 165, 250, 0.48) !important;
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.38), rgba(49, 46, 129, 0.34)) !important;
+    }
+    .dark .homepage-popular-chip:hover {
+      color: #eff6ff !important;
+      border-color: #60a5fa !important;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.55), rgba(79, 70, 229, 0.48)) !important;
+    }
+    .homepage-trust-card {
+      min-height: 132px;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .homepage-trust-card:hover { transform: translateY(-3px); }
+    .homepage-trust-card--local {
+      border-color: rgba(16, 185, 129, 0.34) !important;
+      background: linear-gradient(135deg, rgba(209, 250, 229, 0.8), #fff 72%) !important;
+      box-shadow: 0 10px 26px rgba(16, 185, 129, 0.1);
+    }
+    .homepage-trust-card--account {
+      border-color: rgba(59, 130, 246, 0.34) !important;
+      background: linear-gradient(135deg, rgba(219, 234, 254, 0.86), #fff 72%) !important;
+      box-shadow: 0 10px 26px rgba(37, 99, 235, 0.1);
+    }
+    .homepage-trust-card--instant {
+      border-color: rgba(245, 158, 11, 0.36) !important;
+      background: linear-gradient(135deg, rgba(254, 243, 199, 0.9), #fff 72%) !important;
+      box-shadow: 0 10px 26px rgba(245, 158, 11, 0.1);
+    }
+    .homepage-trust-icon {
+      width: 52px !important;
+      height: 52px !important;
+      flex: 0 0 52px;
+      border-radius: 16px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.48), 0 7px 16px rgba(15,23,42,.08);
+    }
+    .homepage-trust-icon svg {
+      width: 26px !important;
+      height: 26px !important;
+    }
+    .dark .homepage-trust-card--local {
+      border-color: rgba(52, 211, 153, 0.35) !important;
+      background: linear-gradient(135deg, rgba(6, 78, 59, 0.48), rgba(30, 41, 59, 0.96) 72%) !important;
+    }
+    .dark .homepage-trust-card--account {
+      border-color: rgba(96, 165, 250, 0.38) !important;
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.43), rgba(30, 41, 59, 0.96) 72%) !important;
+    }
+    .dark .homepage-trust-card--instant {
+      border-color: rgba(251, 191, 36, 0.35) !important;
+      background: linear-gradient(135deg, rgba(120, 53, 15, 0.45), rgba(30, 41, 59, 0.96) 72%) !important;
+    }
+    .homepage-step-card {
+      min-height: 142px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .homepage-step-card:hover { transform: translateY(-3px); }
+    .homepage-step-card--drop {
+      border-color: rgba(96, 165, 250, 0.28) !important;
+      background: linear-gradient(145deg, #eff6ff, #fff 70%) !important;
+    }
+    .homepage-step-card--process {
+      border-color: rgba(52, 211, 153, 0.3) !important;
+      background: linear-gradient(145deg, #ecfdf5, #fff 70%) !important;
+    }
+    .homepage-step-card--download {
+      border-color: rgba(244, 114, 182, 0.3) !important;
+      background: linear-gradient(145deg, #fff1f2, #fff 70%) !important;
+    }
+    .homepage-step-icon {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      border-radius: 14px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), 0 6px 14px rgba(15,23,42,.07);
+    }
+    .homepage-step-icon svg { width: 22px; height: 22px; }
+    .dark .homepage-step-card--drop {
+      border-color: rgba(96, 165, 250, 0.32) !important;
+      background: linear-gradient(145deg, rgba(30, 64, 175, 0.34), rgba(15, 23, 42, 0.7) 72%) !important;
+    }
+    .dark .homepage-step-card--process {
+      border-color: rgba(52, 211, 153, 0.3) !important;
+      background: linear-gradient(145deg, rgba(6, 78, 59, 0.38), rgba(15, 23, 42, 0.7) 72%) !important;
+    }
+    .dark .homepage-step-card--download {
+      border-color: rgba(244, 114, 182, 0.3) !important;
+      background: linear-gradient(145deg, rgba(136, 19, 55, 0.34), rgba(15, 23, 42, 0.7) 72%) !important;
+    }
+    .homepage-final-cta {
+      border-color: rgba(147, 197, 253, 0.62) !important;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(125, 211, 252, 0.32), transparent 30%),
+        radial-gradient(circle at 86% 82%, rgba(167, 139, 250, 0.26), transparent 31%),
+        linear-gradient(135deg, #2563eb 0%, #1d4ed8 54%, #4338ca 100%) !important;
+      box-shadow: 0 18px 44px rgba(37, 99, 235, 0.26);
+    }
+    .homepage-final-cta p { color: #dbeafe !important; }
+    .homepage-final-cta__secondary {
+      border-color: rgba(219, 234, 254, 0.62) !important;
+      color: #eff6ff !important;
+      background: rgba(30, 64, 175, 0.28);
+    }
+    .homepage-final-cta__secondary:hover { background: rgba(255, 255, 255, 0.16) !important; }
+    @media (prefers-reduced-motion: reduce) {
+      .homepage-popular-chip,
+      .homepage-trust-card,
+      .homepage-step-card { transition: none; }
+      .homepage-popular-chip:hover,
+      .homepage-trust-card:hover,
+      .homepage-step-card:hover { transform: none; }
+    }
   </style>
   <link rel="stylesheet" href="/assets/styles.css?v=20260729-4" />
   <link rel="stylesheet" href="/assets/motion.css?v=20260817-3" />
@@ -619,7 +757,7 @@
 
     <main class="mx-auto max-w-7xl px-4 pt-5 pb-8 sm:px-6 lg:px-8">
       <section id="dashboardView">
-        <div class="grid gap-6 lg:grid-cols-[1fr_280px]">
+        <div>
           <div>
             <div class="mb-6 rounded-[28px] border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-4 sm:p-8 shadow-material">
               <div class="flex flex-wrap items-center justify-between gap-4 mb-5 pb-4 border-b border-slate-100 dark:border-slate-700/60">
@@ -633,7 +771,7 @@
                 </button>
               </div>
               <p class="mb-3 inline-flex rounded-full bg-[#e8f0fe] dark:bg-blue-900/30 px-3 py-1 text-sm font-medium text-[#1967d2] dark:text-blue-400"><span class="bg-blue-100 dark:bg-blue-900/30 px-1.5 py-0.5 rounded font-semibold text-[#1967d2] dark:text-blue-400 mr-1.5">Free</span> Privacy-focused — Local File Processing</p>
-              <h1 class="max-w-4xl text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-100 sm:text-5xl">All-in-one web utilities for documents, images, and developers.</h1>
+              <h1 class="max-w-4xl text-4xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-6xl">Convert anything.<br class="hidden sm:block" /> <span class="text-[#1a73e8] dark:text-blue-400">Upload nothing.</span></h1>
               <div class="mt-4 flex flex-wrap gap-2 sm:gap-2.5">
                 <span class="inline-flex items-center rounded-full bg-red-50 dark:bg-red-950/20 px-3 py-1 text-xs font-semibold text-red-700 dark:text-red-400 border border-red-200/50 dark:border-red-900/40">PDF</span>
                 <span class="inline-flex items-center rounded-full bg-blue-50 dark:bg-blue-950/20 px-3 py-1 text-xs font-semibold text-blue-700 dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/40">Word</span>
@@ -649,10 +787,106 @@
                 <span class="inline-flex items-center rounded-full bg-violet-50 dark:bg-violet-950/20 px-3 py-1 text-xs font-semibold text-violet-700 dark:text-violet-400 border border-violet-200/50 dark:border-violet-900/40">MD</span>
                 <span class="inline-flex items-center rounded-full bg-rose-50 dark:bg-rose-950/20 px-3 py-1 text-xs font-semibold text-rose-700 dark:text-rose-400 border border-rose-200/50 dark:border-rose-900/40">Base64</span>
               </div>
-              <p class="mt-4 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-400">Manage PDFs, optimize images, transform Office files, and format code—all powered by <span data-tool-count="47" class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">47 free local tools</span>. Supported file processing happens locally in your browser.</p>
+              <p class="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400"><span data-tool-count="47" class="bg-yellow-100 dark:bg-yellow-900/30 px-1 py-0.5 rounded font-semibold text-yellow-800 dark:text-yellow-200">47 free local tools</span> that run inside your browser. No sign-up, no file uploads, no server round-trips — just a fast, private toolbox.</p>
+              <div class="mt-6">
+                <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Popular right now</p>
+                <div class="mt-2.5 flex flex-wrap gap-2">
+                  <a href="/merge-pdf" class="homepage-popular-chip inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition duration-200">Merge PDF</a>
+                  <a href="/office-pdf" class="homepage-popular-chip inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition duration-200">Word / Excel to PDF</a>
+                  <a href="/compress-pdf" class="homepage-popular-chip inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition duration-200">Compress PDF</a>
+                  <a href="/heic-to-jpg" class="homepage-popular-chip inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition duration-200">HEIC to JPG</a>
+                  <a href="/json-formatter" class="homepage-popular-chip inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition duration-200">JSON Formatter</a>
+                  <a href="/sign-pdf" class="homepage-popular-chip inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs font-semibold transition duration-200">Sign PDF</a>
+                </div>
+              </div>
             </div>
 
+            <!-- Trust cards: 100% local / No sign-up / Instant -->
+            <div class="mb-6 grid gap-4 sm:grid-cols-3">
+              <div class="homepage-trust-card homepage-trust-card--local rounded-2xl border p-5 flex items-start gap-4">
+                <span class="homepage-trust-icon grid place-items-center bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-300">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </span>
+                <div class="min-w-0">
+                  <h3 class="text-base font-bold text-slate-900 dark:text-slate-100">100% local</h3>
+                  <p class="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">Files are processed inside your browser. We don't receive the file contents for conversion.</p>
+                </div>
+              </div>
+              <div class="homepage-trust-card homepage-trust-card--account rounded-2xl border p-5 flex items-start gap-4">
+                <span class="homepage-trust-icon grid place-items-center bg-blue-100 dark:bg-blue-950/50 text-[#1a73e8] dark:text-blue-300">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+                </span>
+                <div class="min-w-0">
+                  <h3 class="text-base font-bold text-slate-900 dark:text-slate-100">No sign-up</h3>
+                  <p class="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">No account, no email, and no payment card. Start using any tool the moment it loads.</p>
+                </div>
+              </div>
+              <div class="homepage-trust-card homepage-trust-card--instant rounded-2xl border p-5 flex items-start gap-4">
+                <span class="homepage-trust-icon grid place-items-center bg-amber-100 dark:bg-amber-950/50 text-amber-600 dark:text-amber-300">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </span>
+                <div class="min-w-0">
+                  <h3 class="text-base font-bold text-slate-900 dark:text-slate-100">Instant</h3>
+                  <p class="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">No queue and no waiting on a server. Processing runs on your device as fast as it can.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- How it works: three steps -->
+            <section class="mb-6 rounded-[28px] border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 sm:p-8 shadow-material">
+              <div class="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <p class="text-[11px] font-bold uppercase tracking-wider text-[#1a73e8] dark:text-blue-400">How it works</p>
+                  <h2 class="mt-1 text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Three steps. Zero surprises.</h2>
+                </div>
+                <a href="/privacy" class="text-sm font-semibold text-[#1967d2] dark:text-blue-400 hover:underline">Read the privacy policy &rarr;</a>
+              </div>
+              <div class="mt-6 grid gap-5 sm:grid-cols-3">
+                <div class="homepage-step-card homepage-step-card--drop relative overflow-hidden rounded-2xl border p-5">
+                  <span class="pointer-events-none absolute -right-1 -top-3 text-6xl font-black leading-none text-blue-200/60 dark:text-blue-500/20 select-none">1</span>
+                  <div class="relative flex items-start gap-3">
+                    <span class="homepage-step-icon grid place-items-center bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-300">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0L7 9m5-5 5 5M5 15v4h14v-4"/></svg>
+                    </span>
+                    <div class="min-w-0">
+                      <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Drop your file</h3>
+                      <p class="mt-1.5 text-xs leading-5 text-slate-600 dark:text-slate-300">Choose a tool and add your file, or paste text. Nothing is sent for conversion.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="homepage-step-card homepage-step-card--process relative overflow-hidden rounded-2xl border p-5">
+                  <span class="pointer-events-none absolute -right-1 -top-3 text-6xl font-black leading-none text-emerald-200/70 dark:text-emerald-500/20 select-none">2</span>
+                  <div class="relative flex items-start gap-3">
+                    <span class="homepage-step-icon grid place-items-center bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-300">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="7" y="7" width="10" height="10" rx="2"/><path stroke-linecap="round" d="M9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3m14-6h3m-3 6h3"/></svg>
+                    </span>
+                    <div class="min-w-0">
+                      <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">We process locally</h3>
+                      <p class="mt-1.5 text-xs leading-5 text-slate-600 dark:text-slate-300">The work runs in your browser using your device's own resources.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="homepage-step-card homepage-step-card--download relative overflow-hidden rounded-2xl border p-5">
+                  <span class="pointer-events-none absolute -right-1 -top-3 text-6xl font-black leading-none text-rose-200/70 dark:text-rose-500/20 select-none">3</span>
+                  <div class="relative flex items-start gap-3">
+                    <span class="homepage-step-icon grid place-items-center bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-300">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0 5-5m-5 5-5-5M5 20h14"/></svg>
+                    </span>
+                    <div class="min-w-0">
+                      <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Download &amp; go</h3>
+                      <p class="mt-1.5 text-xs leading-5 text-slate-600 dark:text-slate-300">Grab the finished result. It stays on your device — we don't keep a copy.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             <div id="toolGrid" class="space-y-8"></div>
+
+            <!-- Horizontal advertisement banner -->
+            <div class="my-8 flex min-h-[90px] items-center justify-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-100/70 dark:bg-slate-800/40 px-6 text-center text-sm font-medium text-slate-500 dark:text-slate-400" aria-label="Advertisement">
+              Advertisement
+            </div>
 
             <!-- Popular File Conversions Section -->
             <section class="popular-conversions reveal">
@@ -751,7 +985,7 @@
               <h2 class="text-2xl font-semibold tracking-tight text-slate-950 dark:text-slate-100"><span data-guide-count="47">47</span> Free Client-Side Guides for PDF, Images, Office & Developer Tools</h2>
               <p class="mt-3 max-w-3xl text-sm leading-7 text-slate-600 dark:text-slate-400">Learn how each lightweight client-side module manages, converts, and formats documents, spreadsheets, design assets, and code snippets inside your browser without uploading file contents for conversion.</p>
               <!-- GENERATED_GUIDE_GRIDS_START -->
-              <div data-guide-view="desktop" class="mt-5 hidden md:grid md:grid-cols-2 gap-3">
+              <div data-guide-view="desktop" class="mt-5 hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-3">
                 <details style="--c:rgb(37, 99, 235)" class="wcf-acc group border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/60 rounded-2xl overflow-hidden">
                   <summary class="flex items-center justify-between p-4 cursor-pointer select-none font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors list-none [&::-webkit-details-marker]:hidden">
                     <span class="flex items-center gap-2">
@@ -984,13 +1218,17 @@
               </div>
               <!-- GENERATED_GUIDE_GRIDS_END -->
             </section>
-          </div>
 
-          <aside class="min-h-[280px] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-100/70 dark:bg-slate-800/40 p-6 text-center text-sm font-medium text-slate-500 dark:text-slate-400 lg:self-start" aria-label="Advertisement">
-            <div class="flex h-full items-center justify-center rounded-xl border border-dashed border-slate-300 dark:border-slate-700">
-              Advertisement
-            </div>
-          </aside>
+            <!-- Closing trust CTA band -->
+            <section class="homepage-final-cta mt-8 overflow-hidden rounded-[28px] border px-6 py-10 sm:px-10 sm:py-12 text-center">
+              <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Zero uploads. Zero accounts. Zero tracking of file contents.</h2>
+              <p class="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-300">Supported tools run with client-side JavaScript and browser APIs. We don't require an account, and file contents are not sent to WeConvertFiles for conversion. See exactly what the site does — and doesn't — collect.</p>
+              <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <a href="/privacy" class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-900 hover:bg-slate-100 transition-colors">Read the policy</a>
+                <a href="/about" class="homepage-final-cta__secondary inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors">How it works</a>
+              </div>
+            </section>
+          </div>
         </div>
       </section>
       <section id="workspaceView" class="hidden">
@@ -1180,6 +1418,7 @@
                 <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/contact">Contact Us</a>
                 <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/privacy">Privacy Policy</a>
                 <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/terms">Terms of Service</a>
+                <a class="hover:text-[#1967d2] hover:dark:text-white transition-colors" href="/accessibility">Accessibility</a>
               </div>
             </div>
 
