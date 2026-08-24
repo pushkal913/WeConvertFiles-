@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T16:32:32.976Z",
+  "generatedAt": "2026-08-24T16:50:55.249Z",
   "env": {
     "playwrightVersion": "1.56.1",
     "cpuThrottleRate": 6,
@@ -19,18 +19,13 @@
       "path": "/",
       "label": "Homepage (static shell — control)",
       "timeline": {
-        "cls": 0.0041,
-        "layoutShifts": [
-          {
-            "value": 0.0041,
-            "startTime": 455
-          }
-        ],
+        "cls": 0,
+        "layoutShifts": [],
         "navTiming": {
-          "firstPaint": 132,
-          "firstContentfulPaint": 248,
-          "domContentLoaded": 897,
-          "loadEvent": 899
+          "firstPaint": 140,
+          "firstContentfulPaint": 472,
+          "domContentLoaded": 854,
+          "loadEvent": 854
         },
         "samples": [
           {
@@ -61,7 +56,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 1049,
+            "actualMs": 1005,
             "rects": {
               "header": {
                 "top": 0,
@@ -201,18 +196,23 @@
       "path": "/guides/bulk-resize.html",
       "label": "Guide: Bulk Resize",
       "timeline": {
-        "cls": 0,
-        "layoutShifts": [],
+        "cls": 0.0041,
+        "layoutShifts": [
+          {
+            "value": 0.0041,
+            "startTime": 323
+          }
+        ],
         "navTiming": {
-          "firstPaint": 112,
-          "firstContentfulPaint": 644,
-          "domContentLoaded": 341,
-          "loadEvent": 633
+          "firstPaint": 84,
+          "firstContentfulPaint": 180,
+          "domContentLoaded": 399,
+          "loadEvent": 531
         },
         "samples": [
           {
             "targetMs": 100,
-            "actualMs": 101,
+            "actualMs": 100,
             "rects": {
               "header": {
                 "top": 0,
@@ -243,7 +243,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 754,
+            "actualMs": 608,
             "rects": {
               "header": {
                 "top": 0,
@@ -274,7 +274,7 @@
           },
           {
             "targetMs": 1500,
-            "actualMs": 1501,
+            "actualMs": 1502,
             "rects": {
               "header": {
                 "top": 0,
@@ -314,18 +314,28 @@
         "failedRequests": []
       },
       "shellInjection": {
-        "headerInjectedAtRuntime": true,
+        "headerInjectedAtRuntime": false,
         "preInjection": {
-          "header": null,
-          "main": {
+          "header": {
             "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
             "left": 192,
             "width": 896,
             "height": 5783
           },
-          "footer": null,
+          "footer": {
+            "top": 5869.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
           "h1": {
-            "top": 143,
+            "top": 229.75,
             "left": 241,
             "width": 798,
             "height": 80
@@ -358,8 +368,10 @@
           }
         },
         "contentShiftPx": {
-          "mainTopShiftPx": 86.75,
-          "h1TopShiftPx": 86.75
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
         },
         "screenshots": {
           "shellBlocked": "screenshots/guide-bulk-resize-shell-blocked.png",
@@ -375,10 +387,10 @@
         "cls": 0,
         "layoutShifts": [],
         "navTiming": {
-          "firstPaint": 108,
-          "firstContentfulPaint": 520,
-          "domContentLoaded": 276,
-          "loadEvent": 528
+          "firstPaint": 484,
+          "firstContentfulPaint": 484,
+          "domContentLoaded": 257,
+          "loadEvent": 483
         },
         "samples": [
           {
@@ -414,7 +426,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 618,
+            "actualMs": 545,
             "rects": {
               "header": {
                 "top": 0,
@@ -546,15 +558,15 @@
         "cls": 0,
         "layoutShifts": [],
         "navTiming": {
-          "firstPaint": 108,
-          "firstContentfulPaint": 508,
-          "domContentLoaded": 263,
-          "loadEvent": 469
+          "firstPaint": 432,
+          "firstContentfulPaint": 432,
+          "domContentLoaded": 208,
+          "loadEvent": 430
         },
         "samples": [
           {
             "targetMs": 100,
-            "actualMs": 102,
+            "actualMs": 100,
             "rects": {
               "header": {
                 "top": 0,
@@ -585,7 +597,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 587,
+            "actualMs": 505,
             "rects": {
               "header": {
                 "top": 0,
@@ -616,7 +628,7 @@
           },
           {
             "targetMs": 1500,
-            "actualMs": 1501,
+            "actualMs": 1500,
             "rects": {
               "header": {
                 "top": 0,
@@ -714,18 +726,18 @@
       "path": "/bulk-resize",
       "label": "Tool page: Bulk Image Resizer",
       "timeline": {
-        "cls": 0.0083,
+        "cls": 0.0011,
         "layoutShifts": [
           {
-            "value": 0.0083,
-            "startTime": 350
+            "value": 0.0011,
+            "startTime": 556
           }
         ],
         "navTiming": {
-          "firstPaint": 132,
-          "firstContentfulPaint": 272,
-          "domContentLoaded": 781,
-          "loadEvent": 781
+          "firstPaint": 120,
+          "firstContentfulPaint": 296,
+          "domContentLoaded": 638,
+          "loadEvent": 639
         },
         "samples": [
           {
@@ -756,7 +768,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 870,
+            "actualMs": 737,
             "rects": {
               "header": {
                 "top": 0,

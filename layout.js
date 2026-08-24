@@ -1,7 +1,16 @@
 // layout.js - Injects shared premium header and footer dynamically for WeConvertFiles subpages
 document.addEventListener('DOMContentLoaded', () => {
+  // Pages whose shell is rendered at build time already ship the header,
+  // footer and overlays in the delivered HTML (marked with data-wcf-shell).
+  // For those we must NOT re-insert the shell — doing so is what caused the
+  // page to jump on load. We only wire up the interactions further down.
+  // Pages without a baked shell (legacy consumers) still get it injected here.
+  const shellAlreadyStatic = !!document.querySelector('header[data-wcf-shell]');
+
   // Ensure document body is styled as flex to push footer to bottom
-  document.body.classList.add('flex', 'flex-col', 'min-h-screen');
+  if (!shellAlreadyStatic) {
+    document.body.classList.add('flex', 'flex-col', 'min-h-screen');
+  }
 
   // Load the shared motion layer (hover / focus / button polish + upload-zone
   // feedback). Content pages intentionally get the polish but not scroll
@@ -18,10 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(motionJs);
   }
   
-  // Find or wrap the main content
-  const main = document.querySelector('main') || document.querySelector('body > :not(header):not(footer)');
-  if (main) {
-    main.classList.add('flex-grow');
+  // Find or wrap the main content (baked shells already carry flex-grow).
+  if (!shellAlreadyStatic) {
+    const main = document.querySelector('main') || document.querySelector('body > :not(header):not(footer)');
+    if (main) {
+      main.classList.add('flex-grow');
+    }
   }
 
   // Define tools dataset for search and mobile menu drawer
@@ -77,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Inject Header (Sitewide, full-width alignment matching main index layout)
   const headerHtml = `
-    <header class="sticky top-0 z-20 border-b border-slate-200/80 dark:border-slate-700/60 bg-white/90 dark:bg-[#0f172a]/95 backdrop-blur">
+    <header data-wcf-shell class="sticky top-0 z-20 border-b border-slate-200/80 dark:border-slate-700/60 bg-white/90 dark:bg-[#0f172a]/95 backdrop-blur">
       <div class="flex items-center justify-between px-6 py-4 sm:px-8 w-full gap-4">
         <div class="flex justify-start shrink-0">
           <a class="flex items-center gap-3 text-left" href="/" aria-label="Open dashboard">
@@ -505,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </header>
   `;
-  document.body.insertAdjacentHTML('afterbegin', headerHtml);
+  if (!shellAlreadyStatic) document.body.insertAdjacentHTML('afterbegin', headerHtml);
 
   // Inject Mobile Menu Drawer Overlay
   const mobileMenuHtml = `
@@ -528,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
   `;
-  document.body.insertAdjacentHTML('beforeend', mobileMenuHtml);
+  if (!shellAlreadyStatic) document.body.insertAdjacentHTML('beforeend', mobileMenuHtml);
 
   // Inject Search Modal Overlay
   const searchModalHtml = `
@@ -544,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
   `;
-  document.body.insertAdjacentHTML('beforeend', searchModalHtml);
+  if (!shellAlreadyStatic) document.body.insertAdjacentHTML('beforeend', searchModalHtml);
 
   // Inject Footer
   const footerHtml = `
@@ -582,7 +593,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </footer>
   `;
-  document.body.insertAdjacentHTML('beforeend', footerHtml);
+  if (!shellAlreadyStatic) document.body.insertAdjacentHTML('beforeend', footerHtml);
 
   // Setup Event Listeners
 
