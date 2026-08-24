@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T18:02:58.166Z",
+  "generatedAt": "2026-08-24T18:49:43.235Z",
   "env": {
     "playwrightVersion": "1.56.1",
     "cpuThrottleRate": 6,
@@ -19,18 +19,13 @@
       "path": "/",
       "label": "Homepage (static shell — control)",
       "timeline": {
-        "cls": 0.0041,
-        "layoutShifts": [
-          {
-            "value": 0.0041,
-            "startTime": 364
-          }
-        ],
+        "cls": 0,
+        "layoutShifts": [],
         "navTiming": {
-          "firstPaint": 144,
-          "firstContentfulPaint": 284,
-          "domContentLoaded": 890,
-          "loadEvent": 891
+          "firstPaint": 116,
+          "firstContentfulPaint": 240,
+          "domContentLoaded": 649,
+          "loadEvent": 650
         },
         "motion": {
           "motionJsLoaded": true,
@@ -39,7 +34,7 @@
         "samples": [
           {
             "targetMs": 100,
-            "actualMs": 101,
+            "actualMs": 102,
             "rects": {
               "header": {
                 "top": 0,
@@ -51,9 +46,14 @@
                 "top": 121.75,
                 "left": 0,
                 "width": 1280,
-                "height": 407
+                "height": 2265
               },
-              "footer": null,
+              "footer": {
+                "top": 2173.75,
+                "left": 32,
+                "width": 1216,
+                "height": 181
+              },
               "h1": {
                 "top": 293.75,
                 "left": 65,
@@ -65,7 +65,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 1082,
+            "actualMs": 782,
             "rects": {
               "header": {
                 "top": 0,
@@ -96,7 +96,7 @@
           },
           {
             "targetMs": 1500,
-            "actualMs": 1500,
+            "actualMs": 1501,
             "rects": {
               "header": {
                 "top": 0,
@@ -129,6 +129,7 @@
         "movementFirstToLast": {
           "headerTopDeltaPx": 0,
           "mainTopDeltaPx": 0,
+          "footerTopDeltaPx": 2391.25,
           "h1TopDeltaPx": 0
         },
         "consoleErrors": [],
@@ -205,18 +206,13 @@
       "path": "/guides/bulk-resize.html",
       "label": "Guide: Bulk Resize",
       "timeline": {
-        "cls": 0.0041,
-        "layoutShifts": [
-          {
-            "value": 0.0041,
-            "startTime": 410
-          }
-        ],
+        "cls": 0,
+        "layoutShifts": [],
         "navTiming": {
-          "firstPaint": 184,
-          "firstContentfulPaint": 184,
-          "domContentLoaded": 343,
-          "loadEvent": 434
+          "firstPaint": 292,
+          "firstContentfulPaint": 292,
+          "domContentLoaded": 325,
+          "loadEvent": 392
         },
         "motion": {
           "motionJsLoaded": false,
@@ -256,7 +252,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 577,
+            "actualMs": 501,
             "rects": {
               "header": {
                 "top": 0,
@@ -287,7 +283,7 @@
           },
           {
             "targetMs": 1500,
-            "actualMs": 1500,
+            "actualMs": 1501,
             "rects": {
               "header": {
                 "top": 0,
@@ -397,18 +393,18 @@
       "path": "/privacy",
       "label": "Legal: Privacy Policy",
       "timeline": {
-        "cls": 0.059,
+        "cls": 0.0068,
         "layoutShifts": [
           {
-            "value": 0.059,
-            "startTime": 346
+            "value": 0.0068,
+            "startTime": 309
           }
         ],
         "navTiming": {
-          "firstPaint": 212,
-          "firstContentfulPaint": 212,
-          "domContentLoaded": 336,
-          "loadEvent": 420
+          "firstPaint": 144,
+          "firstContentfulPaint": 144,
+          "domContentLoaded": 300,
+          "loadEvent": 394
         },
         "motion": {
           "motionJsLoaded": false,
@@ -417,7 +413,7 @@
         "samples": [
           {
             "targetMs": 100,
-            "actualMs": 102,
+            "actualMs": 101,
             "rects": {
               "header": {
                 "top": 0,
@@ -448,7 +444,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 537,
+            "actualMs": 518,
             "rects": {
               "header": {
                 "top": 0,
@@ -593,14 +589,14 @@
         "layoutShifts": [
           {
             "value": 0.0041,
-            "startTime": 287
+            "startTime": 313
           }
         ],
         "navTiming": {
-          "firstPaint": 168,
-          "firstContentfulPaint": 168,
-          "domContentLoaded": 286,
-          "loadEvent": 355
+          "firstPaint": 180,
+          "firstContentfulPaint": 180,
+          "domContentLoaded": 306,
+          "loadEvent": 385
         },
         "motion": {
           "motionJsLoaded": false,
@@ -640,7 +636,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 501,
+            "actualMs": 500,
             "rects": {
               "header": {
                 "top": 0,
@@ -671,7 +667,7 @@
           },
           {
             "targetMs": 1500,
-            "actualMs": 1502,
+            "actualMs": 1501,
             "rects": {
               "header": {
                 "top": 0,
@@ -781,18 +777,18 @@
       "path": "/convert/heic-to-jpg",
       "label": "Convert page: HEIC to JPG",
       "timeline": {
-        "cls": 0.0061,
+        "cls": 0.0041,
         "layoutShifts": [
           {
-            "value": 0.0061,
-            "startTime": 332
+            "value": 0.0041,
+            "startTime": 345
           }
         ],
         "navTiming": {
-          "firstPaint": 184,
-          "firstContentfulPaint": 184,
-          "domContentLoaded": 326,
-          "loadEvent": 415
+          "firstPaint": 180,
+          "firstContentfulPaint": 180,
+          "domContentLoaded": 340,
+          "loadEvent": 427
         },
         "motion": {
           "motionJsLoaded": false,
@@ -832,7 +828,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 515,
+            "actualMs": 516,
             "rects": {
               "header": {
                 "top": 0,
@@ -863,7 +859,7 @@
           },
           {
             "targetMs": 1500,
-            "actualMs": 1502,
+            "actualMs": 1500,
             "rects": {
               "header": {
                 "top": 0,
@@ -973,18 +969,22 @@
       "path": "/bulk-resize",
       "label": "Tool page: Bulk Image Resizer",
       "timeline": {
-        "cls": 0.0369,
+        "cls": 0.041,
         "layoutShifts": [
           {
+            "value": 0.0041,
+            "startTime": 260
+          },
+          {
             "value": 0.0369,
-            "startTime": 464
+            "startTime": 500
           }
         ],
         "navTiming": {
-          "firstPaint": 204,
-          "firstContentfulPaint": 204,
-          "domContentLoaded": 498,
-          "loadEvent": 498
+          "firstPaint": 112,
+          "firstContentfulPaint": 228,
+          "domContentLoaded": 557,
+          "loadEvent": 557
         },
         "motion": {
           "motionJsLoaded": true,
@@ -1005,7 +1005,7 @@
                 "top": 121.75,
                 "left": 0,
                 "width": 1280,
-                "height": 1168.56
+                "height": 52
               },
               "footer": null,
               "h1": {
@@ -1019,7 +1019,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 597,
+            "actualMs": 639,
             "rects": {
               "header": {
                 "top": 0,
