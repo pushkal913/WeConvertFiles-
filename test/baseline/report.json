@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T16:50:55.249Z",
+  "generatedAt": "2026-08-24T17:47:35.717Z",
   "env": {
     "playwrightVersion": "1.56.1",
     "cpuThrottleRate": 6,
@@ -19,44 +19,38 @@
       "path": "/",
       "label": "Homepage (static shell — control)",
       "timeline": {
-        "cls": 0,
-        "layoutShifts": [],
+        "cls": 0.0088,
+        "layoutShifts": [
+          {
+            "value": 0.0047,
+            "startTime": 589
+          },
+          {
+            "value": 0.0041,
+            "startTime": 761
+          }
+        ],
         "navTiming": {
-          "firstPaint": 140,
-          "firstContentfulPaint": 472,
-          "domContentLoaded": 854,
-          "loadEvent": 854
+          "firstPaint": 260,
+          "firstContentfulPaint": 440,
+          "domContentLoaded": 1451,
+          "loadEvent": 1452
         },
         "samples": [
           {
             "targetMs": 100,
-            "actualMs": 100,
+            "actualMs": 109,
             "rects": {
-              "header": {
-                "top": 0,
-                "left": 0,
-                "width": 1280,
-                "height": 86.75
-              },
-              "main": {
-                "top": 121.75,
-                "left": 0,
-                "width": 1280,
-                "height": 1570
-              },
+              "header": null,
+              "main": null,
               "footer": null,
-              "h1": {
-                "top": 293.75,
-                "left": 65,
-                "width": 896,
-                "height": 120
-              }
+              "h1": null
             },
             "screenshot": "screenshots/home-100ms.png"
           },
           {
             "targetMs": 500,
-            "actualMs": 1005,
+            "actualMs": 1778,
             "rects": {
               "header": {
                 "top": 0,
@@ -87,7 +81,7 @@
           },
           {
             "targetMs": 1500,
-            "actualMs": 1501,
+            "actualMs": 1927,
             "rects": {
               "header": {
                 "top": 0,
@@ -117,11 +111,7 @@
             "screenshot": "screenshots/home-1500ms.png"
           }
         ],
-        "movementFirstToLast": {
-          "headerTopDeltaPx": 0,
-          "mainTopDeltaPx": 0,
-          "h1TopDeltaPx": 0
-        },
+        "movementFirstToLast": {},
         "consoleErrors": [],
         "failedRequests": []
       },
@@ -196,23 +186,18 @@
       "path": "/guides/bulk-resize.html",
       "label": "Guide: Bulk Resize",
       "timeline": {
-        "cls": 0.0041,
-        "layoutShifts": [
-          {
-            "value": 0.0041,
-            "startTime": 323
-          }
-        ],
+        "cls": 0,
+        "layoutShifts": [],
         "navTiming": {
-          "firstPaint": 84,
-          "firstContentfulPaint": 180,
-          "domContentLoaded": 399,
-          "loadEvent": 531
+          "firstPaint": 120,
+          "firstContentfulPaint": 220,
+          "domContentLoaded": 393,
+          "loadEvent": 496
         },
         "samples": [
           {
             "targetMs": 100,
-            "actualMs": 100,
+            "actualMs": 101,
             "rects": {
               "header": {
                 "top": 0,
@@ -243,7 +228,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 608,
+            "actualMs": 588,
             "rects": {
               "header": {
                 "top": 0,
@@ -274,7 +259,7 @@
           },
           {
             "targetMs": 1500,
-            "actualMs": 1502,
+            "actualMs": 1501,
             "rects": {
               "header": {
                 "top": 0,
@@ -387,15 +372,15 @@
         "cls": 0,
         "layoutShifts": [],
         "navTiming": {
-          "firstPaint": 484,
-          "firstContentfulPaint": 484,
-          "domContentLoaded": 257,
-          "loadEvent": 483
+          "firstPaint": 188,
+          "firstContentfulPaint": 188,
+          "domContentLoaded": 336,
+          "loadEvent": 439
         },
         "samples": [
           {
             "targetMs": 100,
-            "actualMs": 101,
+            "actualMs": 100,
             "rects": {
               "header": {
                 "top": 0,
@@ -426,7 +411,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 545,
+            "actualMs": 523,
             "rects": {
               "header": {
                 "top": 0,
@@ -497,18 +482,28 @@
         "failedRequests": []
       },
       "shellInjection": {
-        "headerInjectedAtRuntime": true,
+        "headerInjectedAtRuntime": false,
         "preInjection": {
-          "header": null,
-          "main": {
+          "header": {
             "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
             "left": 256,
             "width": 768,
             "height": 5155
           },
-          "footer": null,
+          "footer": {
+            "top": 5241.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
           "h1": {
-            "top": 121,
+            "top": 207.75,
             "left": 305,
             "width": 670,
             "height": 40
@@ -541,8 +536,10 @@
           }
         },
         "contentShiftPx": {
-          "mainTopShiftPx": 86.75,
-          "h1TopShiftPx": 86.75
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
         },
         "screenshots": {
           "shellBlocked": "screenshots/privacy-shell-blocked.png",
@@ -555,18 +552,23 @@
       "path": "/about",
       "label": "About page",
       "timeline": {
-        "cls": 0,
-        "layoutShifts": [],
+        "cls": 0.0022,
+        "layoutShifts": [
+          {
+            "value": 0.0022,
+            "startTime": 344
+          }
+        ],
         "navTiming": {
-          "firstPaint": 432,
-          "firstContentfulPaint": 432,
-          "domContentLoaded": 208,
-          "loadEvent": 430
+          "firstPaint": 180,
+          "firstContentfulPaint": 180,
+          "domContentLoaded": 294,
+          "loadEvent": 400
         },
         "samples": [
           {
             "targetMs": 100,
-            "actualMs": 100,
+            "actualMs": 101,
             "rects": {
               "header": {
                 "top": 0,
@@ -597,7 +599,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 505,
+            "actualMs": 501,
             "rects": {
               "header": {
                 "top": 0,
@@ -628,7 +630,7 @@
           },
           {
             "targetMs": 1500,
-            "actualMs": 1500,
+            "actualMs": 1501,
             "rects": {
               "header": {
                 "top": 0,
@@ -668,18 +670,28 @@
         "failedRequests": []
       },
       "shellInjection": {
-        "headerInjectedAtRuntime": true,
+        "headerInjectedAtRuntime": false,
         "preInjection": {
-          "header": null,
-          "main": {
+          "header": {
             "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
             "left": 256,
             "width": 768,
             "height": 2242
           },
-          "footer": null,
+          "footer": {
+            "top": 2328.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
           "h1": {
-            "top": 121,
+            "top": 207.75,
             "left": 305,
             "width": 670,
             "height": 40
@@ -712,8 +724,10 @@
           }
         },
         "contentShiftPx": {
-          "mainTopShiftPx": 86.75,
-          "h1TopShiftPx": 86.75
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
         },
         "screenshots": {
           "shellBlocked": "screenshots/about-shell-blocked.png",
@@ -722,27 +736,219 @@
       }
     },
     {
-      "slug": "tool-bulk-resize",
-      "path": "/bulk-resize",
-      "label": "Tool page: Bulk Image Resizer",
+      "slug": "convert-heic",
+      "path": "/convert/heic-to-jpg",
+      "label": "Convert page: HEIC to JPG",
       "timeline": {
-        "cls": 0.0011,
+        "cls": 0.0041,
         "layoutShifts": [
           {
-            "value": 0.0011,
-            "startTime": 556
+            "value": 0.0041,
+            "startTime": 312
           }
         ],
         "navTiming": {
-          "firstPaint": 120,
-          "firstContentfulPaint": 296,
-          "domContentLoaded": 638,
-          "loadEvent": 639
+          "firstPaint": 80,
+          "firstContentfulPaint": 168,
+          "domContentLoaded": 306,
+          "loadEvent": 405
         },
         "samples": [
           {
             "targetMs": 100,
-            "actualMs": 101,
+            "actualMs": 100,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 128,
+                "width": 1024,
+                "height": 1882
+              },
+              "footer": {
+                "top": 1968.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 239.75,
+                "left": 193,
+                "width": 894,
+                "height": 48
+              }
+            },
+            "screenshot": "screenshots/convert-heic-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 501,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 128,
+                "width": 1024,
+                "height": 1882
+              },
+              "footer": {
+                "top": 1968.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 239.75,
+                "left": 193,
+                "width": 894,
+                "height": 48
+              }
+            },
+            "screenshot": "screenshots/convert-heic-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1500,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 128,
+                "width": 1024,
+                "height": 1882
+              },
+              "footer": {
+                "top": 1968.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 239.75,
+                "left": 193,
+                "width": 894,
+                "height": 48
+              }
+            },
+            "screenshot": "screenshots/convert-heic-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "footerTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": false,
+        "preInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 128,
+            "width": 1024,
+            "height": 1882
+          },
+          "footer": {
+            "top": 1968.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 239.75,
+            "left": 193,
+            "width": 894,
+            "height": 48
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 128,
+            "width": 1024,
+            "height": 1882
+          },
+          "footer": {
+            "top": 1968.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 239.75,
+            "left": 193,
+            "width": 894,
+            "height": 48
+          }
+        },
+        "contentShiftPx": {
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/convert-heic-shell-blocked.png",
+          "shellSettled": "screenshots/convert-heic-shell-settled.png"
+        }
+      }
+    },
+    {
+      "slug": "tool-bulk-resize",
+      "path": "/bulk-resize",
+      "label": "Tool page: Bulk Image Resizer",
+      "timeline": {
+        "cls": 0.0227,
+        "layoutShifts": [
+          {
+            "value": 0.0041,
+            "startTime": 223
+          },
+          {
+            "value": 0.0186,
+            "startTime": 509
+          }
+        ],
+        "navTiming": {
+          "firstPaint": 188,
+          "firstContentfulPaint": 188,
+          "domContentLoaded": 543,
+          "loadEvent": 543
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 99,
             "rects": {
               "header": {
                 "top": 0,
@@ -754,7 +960,7 @@
                 "top": 121.75,
                 "left": 0,
                 "width": 1280,
-                "height": 52
+                "height": 564
               },
               "footer": null,
               "h1": {
@@ -768,7 +974,7 @@
           },
           {
             "targetMs": 500,
-            "actualMs": 737,
+            "actualMs": 653,
             "rects": {
               "header": {
                 "top": 0,
@@ -780,13 +986,13 @@
                 "top": 121.75,
                 "left": 0,
                 "width": 1280,
-                "height": 2653.06
+                "height": 2685.06
               },
               "footer": {
                 "top": 2473.81,
                 "left": 32,
                 "width": 1216,
-                "height": 269
+                "height": 301
               },
               "h1": {
                 "top": 0,
@@ -811,13 +1017,13 @@
                 "top": 121.75,
                 "left": 0,
                 "width": 1280,
-                "height": 2653.06
+                "height": 2685.06
               },
               "footer": {
                 "top": 2473.81,
                 "left": 32,
                 "width": 1216,
-                "height": 269
+                "height": 301
               },
               "h1": {
                 "top": 0,
@@ -850,13 +1056,13 @@
             "top": 121.75,
             "left": 0,
             "width": 1280,
-            "height": 2653.06
+            "height": 2685.06
           },
           "footer": {
             "top": 2473.81,
             "left": 32,
             "width": 1216,
-            "height": 269
+            "height": 301
           },
           "h1": {
             "top": 0,
@@ -876,13 +1082,13 @@
             "top": 121.75,
             "left": 0,
             "width": 1280,
-            "height": 2653.06
+            "height": 2685.06
           },
           "footer": {
             "top": 2473.81,
             "left": 32,
             "width": 1216,
-            "height": 269
+            "height": 301
           },
           "h1": {
             "top": 0,

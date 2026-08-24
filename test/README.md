@@ -19,9 +19,10 @@ That single command:
    the Netlify hosting contract that affect rendering — it applies the
    `_redirects` rules (200 rewrites, 301/302 redirects, the 404 catch-all) and
    Netlify's pretty-URL fallback (`/about` → `about.html`).
-2. Loads five representative pages in headless Chromium (Playwright):
+2. Loads representative pages in headless Chromium (Playwright):
    `/` (static-shell control), `/guides/bulk-resize.html`, `/privacy`,
-   `/about`, and `/bulk-resize` (a tool page).
+   `/about`, `/convert/heic-to-jpg` (a conversion page), and `/bulk-resize`
+   (a tool page).
 3. Writes results to `test/baseline/`:
    - `REPORT.md` — human-readable summary.
    - `report.json` — full measured data (bounding boxes, layout-shift entries,

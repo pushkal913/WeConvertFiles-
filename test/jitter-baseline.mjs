@@ -52,6 +52,7 @@ const TARGETS = [
   { slug: 'guide-bulk-resize', path: '/guides/bulk-resize.html', label: 'Guide: Bulk Resize' },
   { slug: 'privacy', path: '/privacy', label: 'Legal: Privacy Policy' },
   { slug: 'about', path: '/about', label: 'About page' },
+  { slug: 'convert-heic', path: '/convert/heic-to-jpg', label: 'Convert page: HEIC to JPG' },
   { slug: 'tool-bulk-resize', path: '/bulk-resize', label: 'Tool page: Bulk Image Resizer' }
 ];
 

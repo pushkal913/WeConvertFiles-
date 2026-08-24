@@ -1,33 +1,34 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { HEADER_START, HEADER_END, FOOTER_START, FOOTER_END } from './shell-inject.mjs';
 
-// Guards the Phase 1 guarantee: every guide ships its shared shell in the
-// delivered HTML, so nothing has to be inserted at runtime and the page does
-// not jump on load. Fails loudly if a guide regresses to a runtime-only shell.
+// Guards the Phase 1 guarantee: every page that used to build its shell at
+// runtime now ships that shell in the delivered HTML, so nothing has to be
+// inserted after load and the page does not jump. Covers the guide pages, the
+// legal/info pages and the generated conversion pages. Fails loudly if any of
+// them regresses to a runtime-only shell.
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const guidesDir = path.join(rootDir, 'guides');
 
-const HEADER_START = '<!-- WCF_SHELL_HEADER_START -->';
-const HEADER_END = '<!-- WCF_SHELL_HEADER_END -->';
-const FOOTER_START = '<!-- WCF_SHELL_FOOTER_START -->';
-const FOOTER_END = '<!-- WCF_SHELL_FOOTER_END -->';
+const guideFiles = (await readdir(path.join(rootDir, 'guides')))
+  .filter((f) => f.endsWith('.html'))
+  .map((f) => `guides/${f}`);
+const legalFiles = ['about.html', 'privacy.html', 'terms.html', 'contact.html', 'accessibility.html'];
+const convertFiles = (await readdir(path.join(rootDir, 'convert')))
+  .filter((f) => f.endsWith('.html'))
+  .map((f) => `convert/${f}`);
 
-const files = (await readdir(guidesDir)).filter((f) => f.endsWith('.html')).sort();
+const files = [...guideFiles, ...legalFiles, ...convertFiles].sort();
 const failures = [];
 
-for (const file of files) {
-  const html = await readFile(path.join(guidesDir, file), 'utf8');
-  const rel = `guides/${file}`;
+for (const rel of files) {
+  const html = await readFile(path.join(rootDir, rel), 'utf8');
 
-  // Shell markers present and well-formed.
   for (const marker of [HEADER_START, HEADER_END, FOOTER_START, FOOTER_END]) {
     if (!html.includes(marker)) failures.push(`${rel} is missing ${marker}`);
   }
 
-  // The header carries the data-wcf-shell marker layout.js uses to skip
-  // runtime injection.
   if (!html.includes('<header data-wcf-shell')) {
     failures.push(`${rel} has no static <header data-wcf-shell>`);
   }
@@ -40,8 +41,8 @@ for (const file of files) {
     failures.push(`${rel} shell is out of order (expected header → main → footer)`);
   }
 
-  // A static footer must expose the legal links (pagesense anchors off these,
-  // and they are the site's primary footer navigation).
+  // The static footer exposes the primary legal links (pagesense also anchors
+  // off these).
   for (const href of ['/privacy', '/terms', '/about']) {
     if (!html.includes(`href="${href}"`)) {
       failures.push(`${rel} static footer is missing the ${href} link`);
@@ -61,12 +62,12 @@ for (const file of files) {
 }
 
 if (failures.length) {
-  console.error('Guide shell validation failed:');
+  console.error('Static shell validation failed:');
   for (const f of failures) console.error(`  - ${f}`);
   process.exit(1);
 }
 
-console.log('Guide shell validation passed:');
-console.log(`- ${files.length} guides ship a static header/footer shell (header → main → footer)`);
-console.log('- every guide carries <header data-wcf-shell>, flex body/main layout, and footer legal links');
-console.log('- no guide depends on runtime shell insertion');
+console.log('Static shell validation passed:');
+console.log(`- ${guideFiles.length} guides + ${legalFiles.length} legal/info pages + ${convertFiles.length} conversion pages ship a static header → main → footer shell`);
+console.log('- every page carries <header data-wcf-shell>, flex body/main layout, and footer legal links');
+console.log('- no page depends on runtime shell insertion');
