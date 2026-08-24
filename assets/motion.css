@@ -89,11 +89,12 @@ details.wcf-acc[open] > div{animation:wcf-acc-in .24s cubic-bezier(.22,.61,.36,1
   .wcf-acc .wcf-guide-link:hover{transform:none;}
 }
 
-/* Dark mode: lighten the accent so text stays legible on dark grounds */
-@media (prefers-color-scheme: dark){
-  .wcf-acc summary .wcf-badge{color:color-mix(in srgb, var(--c) 62%, white) !important; background:color-mix(in srgb, var(--c) 26%, transparent) !important;}
-  .wcf-acc[open] > summary{color:color-mix(in srgb, var(--c) 60%, white);}
-}
+/* Dark mode: lighten the accent so text stays legible on dark grounds.
+   Scoped to the site's .dark class (set by the theme toggle / init script)
+   rather than the OS colour-scheme, so the chosen site theme always wins —
+   matching every Tailwind dark: utility. */
+.dark .wcf-acc summary .wcf-badge{color:color-mix(in srgb, var(--c) 62%, white) !important; background:color-mix(in srgb, var(--c) 26%, transparent) !important;}
+.dark .wcf-acc[open] > summary{color:color-mix(in srgb, var(--c) 60%, white);}
 
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}

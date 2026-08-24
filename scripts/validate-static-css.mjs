@@ -85,12 +85,33 @@ for (const glowValue of requiredGlowValues) {
   if (!css.includes(glowValue)) failures.push(`Compiled CSS is missing tool-card glow value ${glowValue}`);
 }
 
+// Theme policy: dark styling must follow the site's .dark class, never the OS
+// via a `@media (prefers-color-scheme)` rule, so the chosen theme always wins.
+// (JS `matchMedia('(prefers-color-scheme…')` for the initial pick is fine — it
+// only seeds the .dark class and is not matched here.)
+const osColorSchemeRule = /@media[^{]*prefers-color-scheme/i;
+const themeScopedFiles = [
+  path.join(rootDir, 'assets', 'motion.css'),
+  path.join(rootDir, '404.html'),
+  ...pageFiles
+];
+let osRuleCount = 0;
+for (const file of themeScopedFiles) {
+  const contents = await readFile(file, 'utf8');
+  if (osColorSchemeRule.test(contents)) {
+    failures.push(`${path.relative(rootDir, file)} uses an @media (prefers-color-scheme) rule; scope dark styling to .dark so the chosen site theme wins over the OS`);
+  } else {
+    osRuleCount += 1;
+  }
+}
+
 if (failures.length) {
   console.error(`Static CSS validation failed:\n- ${failures.join('\n- ')}`);
   process.exit(1);
 }
 
 console.log('Static CSS validation passed.');
+console.log(`- ${themeScopedFiles.length} CSS/HTML files scope dark styling to .dark (no @media prefers-color-scheme)`);
 console.log(`- ${pageFiles.length} styled HTML pages use ${stylesheetUrl}`);
 console.log('- no page or generator uses the Tailwind browser runtime');
 console.log(`- compiled CSS contains ${requiredSelectors.length} critical responsive and dynamic selectors`);
