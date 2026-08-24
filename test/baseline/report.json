@@ -1,0 +1,895 @@
+{
+  "generatedAt": "2026-08-24T16:32:32.976Z",
+  "env": {
+    "playwrightVersion": "1.56.1",
+    "cpuThrottleRate": 6,
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "sampleTimesMs": [
+      100,
+      500,
+      1500
+    ]
+  },
+  "results": [
+    {
+      "slug": "home",
+      "path": "/",
+      "label": "Homepage (static shell — control)",
+      "timeline": {
+        "cls": 0.0041,
+        "layoutShifts": [
+          {
+            "value": 0.0041,
+            "startTime": 455
+          }
+        ],
+        "navTiming": {
+          "firstPaint": 132,
+          "firstContentfulPaint": 248,
+          "domContentLoaded": 897,
+          "loadEvent": 899
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 100,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 1570
+              },
+              "footer": null,
+              "h1": {
+                "top": 293.75,
+                "left": 65,
+                "width": 896,
+                "height": 120
+              }
+            },
+            "screenshot": "screenshots/home-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 1049,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 4776.25
+              },
+              "footer": {
+                "top": 4565,
+                "left": 32,
+                "width": 1216,
+                "height": 301
+              },
+              "h1": {
+                "top": 293.75,
+                "left": 65,
+                "width": 896,
+                "height": 120
+              }
+            },
+            "screenshot": "screenshots/home-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1501,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 4776.25
+              },
+              "footer": {
+                "top": 4565,
+                "left": 32,
+                "width": 1216,
+                "height": 301
+              },
+              "h1": {
+                "top": 293.75,
+                "left": 65,
+                "width": 896,
+                "height": 120
+              }
+            },
+            "screenshot": "screenshots/home-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": false,
+        "preInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 121.75,
+            "left": 0,
+            "width": 1280,
+            "height": 4776.25
+          },
+          "footer": {
+            "top": 4565,
+            "left": 32,
+            "width": 1216,
+            "height": 301
+          },
+          "h1": {
+            "top": 293.75,
+            "left": 65,
+            "width": 896,
+            "height": 120
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 121.75,
+            "left": 0,
+            "width": 1280,
+            "height": 4776.25
+          },
+          "footer": {
+            "top": 4565,
+            "left": 32,
+            "width": 1216,
+            "height": 301
+          },
+          "h1": {
+            "top": 293.75,
+            "left": 65,
+            "width": 896,
+            "height": 120
+          }
+        },
+        "contentShiftPx": {
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/home-shell-blocked.png",
+          "shellSettled": "screenshots/home-shell-settled.png"
+        }
+      }
+    },
+    {
+      "slug": "guide-bulk-resize",
+      "path": "/guides/bulk-resize.html",
+      "label": "Guide: Bulk Resize",
+      "timeline": {
+        "cls": 0,
+        "layoutShifts": [],
+        "navTiming": {
+          "firstPaint": 112,
+          "firstContentfulPaint": 644,
+          "domContentLoaded": 341,
+          "loadEvent": 633
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 101,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 192,
+                "width": 896,
+                "height": 5783
+              },
+              "footer": {
+                "top": 5869.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 229.75,
+                "left": 241,
+                "width": 798,
+                "height": 80
+              }
+            },
+            "screenshot": "screenshots/guide-bulk-resize-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 754,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 192,
+                "width": 896,
+                "height": 5783
+              },
+              "footer": {
+                "top": 5869.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 229.75,
+                "left": 241,
+                "width": 798,
+                "height": 80
+              }
+            },
+            "screenshot": "screenshots/guide-bulk-resize-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1501,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 192,
+                "width": 896,
+                "height": 5783
+              },
+              "footer": {
+                "top": 5869.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 229.75,
+                "left": 241,
+                "width": 798,
+                "height": 80
+              }
+            },
+            "screenshot": "screenshots/guide-bulk-resize-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "footerTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": true,
+        "preInjection": {
+          "header": null,
+          "main": {
+            "top": 0,
+            "left": 192,
+            "width": 896,
+            "height": 5783
+          },
+          "footer": null,
+          "h1": {
+            "top": 143,
+            "left": 241,
+            "width": 798,
+            "height": 80
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 192,
+            "width": 896,
+            "height": 5783
+          },
+          "footer": {
+            "top": 5869.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 229.75,
+            "left": 241,
+            "width": 798,
+            "height": 80
+          }
+        },
+        "contentShiftPx": {
+          "mainTopShiftPx": 86.75,
+          "h1TopShiftPx": 86.75
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/guide-bulk-resize-shell-blocked.png",
+          "shellSettled": "screenshots/guide-bulk-resize-shell-settled.png"
+        }
+      }
+    },
+    {
+      "slug": "privacy",
+      "path": "/privacy",
+      "label": "Legal: Privacy Policy",
+      "timeline": {
+        "cls": 0,
+        "layoutShifts": [],
+        "navTiming": {
+          "firstPaint": 108,
+          "firstContentfulPaint": 520,
+          "domContentLoaded": 276,
+          "loadEvent": 528
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 101,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 5155
+              },
+              "footer": {
+                "top": 5241.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/privacy-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 618,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 5155
+              },
+              "footer": {
+                "top": 5241.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/privacy-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1501,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 5155
+              },
+              "footer": {
+                "top": 5241.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/privacy-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "footerTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": true,
+        "preInjection": {
+          "header": null,
+          "main": {
+            "top": 0,
+            "left": 256,
+            "width": 768,
+            "height": 5155
+          },
+          "footer": null,
+          "h1": {
+            "top": 121,
+            "left": 305,
+            "width": 670,
+            "height": 40
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 256,
+            "width": 768,
+            "height": 5155
+          },
+          "footer": {
+            "top": 5241.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 207.75,
+            "left": 305,
+            "width": 670,
+            "height": 40
+          }
+        },
+        "contentShiftPx": {
+          "mainTopShiftPx": 86.75,
+          "h1TopShiftPx": 86.75
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/privacy-shell-blocked.png",
+          "shellSettled": "screenshots/privacy-shell-settled.png"
+        }
+      }
+    },
+    {
+      "slug": "about",
+      "path": "/about",
+      "label": "About page",
+      "timeline": {
+        "cls": 0,
+        "layoutShifts": [],
+        "navTiming": {
+          "firstPaint": 108,
+          "firstContentfulPaint": 508,
+          "domContentLoaded": 263,
+          "loadEvent": 469
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 102,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 2242
+              },
+              "footer": {
+                "top": 2328.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/about-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 587,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 2242
+              },
+              "footer": {
+                "top": 2328.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/about-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1501,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 2242
+              },
+              "footer": {
+                "top": 2328.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/about-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "footerTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": true,
+        "preInjection": {
+          "header": null,
+          "main": {
+            "top": 0,
+            "left": 256,
+            "width": 768,
+            "height": 2242
+          },
+          "footer": null,
+          "h1": {
+            "top": 121,
+            "left": 305,
+            "width": 670,
+            "height": 40
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 256,
+            "width": 768,
+            "height": 2242
+          },
+          "footer": {
+            "top": 2328.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 207.75,
+            "left": 305,
+            "width": 670,
+            "height": 40
+          }
+        },
+        "contentShiftPx": {
+          "mainTopShiftPx": 86.75,
+          "h1TopShiftPx": 86.75
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/about-shell-blocked.png",
+          "shellSettled": "screenshots/about-shell-settled.png"
+        }
+      }
+    },
+    {
+      "slug": "tool-bulk-resize",
+      "path": "/bulk-resize",
+      "label": "Tool page: Bulk Image Resizer",
+      "timeline": {
+        "cls": 0.0083,
+        "layoutShifts": [
+          {
+            "value": 0.0083,
+            "startTime": 350
+          }
+        ],
+        "navTiming": {
+          "firstPaint": 132,
+          "firstContentfulPaint": 272,
+          "domContentLoaded": 781,
+          "loadEvent": 781
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 101,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 52
+              },
+              "footer": null,
+              "h1": {
+                "top": 0,
+                "left": 0,
+                "width": 0,
+                "height": 0
+              }
+            },
+            "screenshot": "screenshots/tool-bulk-resize-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 870,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 2653.06
+              },
+              "footer": {
+                "top": 2473.81,
+                "left": 32,
+                "width": 1216,
+                "height": 269
+              },
+              "h1": {
+                "top": 0,
+                "left": 0,
+                "width": 0,
+                "height": 0
+              }
+            },
+            "screenshot": "screenshots/tool-bulk-resize-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1501,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 2653.06
+              },
+              "footer": {
+                "top": 2473.81,
+                "left": 32,
+                "width": 1216,
+                "height": 269
+              },
+              "h1": {
+                "top": 0,
+                "left": 0,
+                "width": 0,
+                "height": 0
+              }
+            },
+            "screenshot": "screenshots/tool-bulk-resize-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": false,
+        "preInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 121.75,
+            "left": 0,
+            "width": 1280,
+            "height": 2653.06
+          },
+          "footer": {
+            "top": 2473.81,
+            "left": 32,
+            "width": 1216,
+            "height": 269
+          },
+          "h1": {
+            "top": 0,
+            "left": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 121.75,
+            "left": 0,
+            "width": 1280,
+            "height": 2653.06
+          },
+          "footer": {
+            "top": 2473.81,
+            "left": 32,
+            "width": 1216,
+            "height": 269
+          },
+          "h1": {
+            "top": 0,
+            "left": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        "contentShiftPx": {
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/tool-bulk-resize-shell-blocked.png",
+          "shellSettled": "screenshots/tool-bulk-resize-shell-settled.png"
+        }
+      }
+    }
+  ]
+}

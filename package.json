@@ -8,9 +8,11 @@
     "generate:schema": "node scripts/generate-guide-schema.mjs",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "generate:tools": "node scripts/generate-guide-index.mjs && node scripts/generate-tool-pages.mjs && node scripts/generate-related-guides.mjs && node scripts/generate-guide-schema.mjs && node scripts/generate-sitemap.mjs",
-    "validate": "node scripts/validate-guide-index.mjs && node scripts/validate-tool-pages.mjs && node scripts/validate-conversion-pages.mjs && node scripts/validate-canonical-urls.mjs && node scripts/validate-static-css.mjs"
+    "validate": "node scripts/validate-guide-index.mjs && node scripts/validate-tool-pages.mjs && node scripts/validate-conversion-pages.mjs && node scripts/validate-canonical-urls.mjs && node scripts/validate-static-css.mjs",
+    "baseline:jitter": "node test/jitter-baseline.mjs"
   },
   "devDependencies": {
+    "playwright": "^1.56.1",
     "tailwindcss": "3.4.17"
   }
 }
