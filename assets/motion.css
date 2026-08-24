@@ -41,8 +41,9 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, input:focus-vis
 /* Brand-coloured text selection */
 ::selection{background:rgba(26,115,232,.92);color:#fff;}
 
-/* Smooth in-page anchor scrolling */
-html{scroll-behavior:smooth;}
+/* No global scroll-behavior: normal navigation, history restoration and hash
+   jumps stay instantaneous. The few intentional in-page scrolls request smooth
+   explicitly in JS (and fall back to instant under prefers-reduced-motion). */
 
 /* Guide category accordions: gently reveal contents on open */
 details.wcf-acc[open] > div{animation:wcf-acc-in .24s cubic-bezier(.22,.61,.36,1);}
@@ -97,6 +98,5 @@ details.wcf-acc[open] > div{animation:wcf-acc-in .24s cubic-bezier(.22,.61,.36,1
 .dark .wcf-acc[open] > summary{color:color-mix(in srgb, var(--c) 60%, white);}
 
 @media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto;}
   details.wcf-acc[open] > div{animation:none !important;}
 }

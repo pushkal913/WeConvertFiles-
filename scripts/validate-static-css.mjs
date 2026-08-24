@@ -105,6 +105,18 @@ for (const file of themeScopedFiles) {
   }
 }
 
+// Scroll policy: no global CSS smooth-scroll. Normal navigation, history
+// restoration and hash jumps must stay instantaneous; intentional in-page
+// scrolls request smooth explicitly in JS (and fall back to instant under
+// prefers-reduced-motion). Flag any `scroll-behavior:smooth` in the shared CSS.
+const smoothScrollRule = /scroll-behavior\s*:\s*smooth/i;
+for (const cssFile of ['assets/motion.css', 'assets/styles.css']) {
+  const contents = await readFile(path.join(rootDir, cssFile), 'utf8');
+  if (smoothScrollRule.test(contents)) {
+    failures.push(`${cssFile} sets scroll-behavior:smooth; keep smooth scrolling in JS (reduced-motion aware), not a global CSS rule`);
+  }
+}
+
 if (failures.length) {
   console.error(`Static CSS validation failed:\n- ${failures.join('\n- ')}`);
   process.exit(1);
@@ -112,6 +124,7 @@ if (failures.length) {
 
 console.log('Static CSS validation passed.');
 console.log(`- ${themeScopedFiles.length} CSS/HTML files scope dark styling to .dark (no @media prefers-color-scheme)`);
+console.log('- no global CSS smooth-scroll policy (intentional smooth scrolls live in JS, reduced-motion aware)');
 console.log(`- ${pageFiles.length} styled HTML pages use ${stylesheetUrl}`);
 console.log('- no page or generator uses the Tailwind browser runtime');
 console.log(`- compiled CSS contains ${requiredSelectors.length} critical responsive and dynamic selectors`);

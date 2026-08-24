@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!document.querySelector('link[data-wcf-motion]')) {
     const motionCss = document.createElement('link');
     motionCss.rel = 'stylesheet';
-    motionCss.href = '/assets/motion.css?v=20260824-1';
+    motionCss.href = '/assets/motion.css?v=20260824-2';
     motionCss.setAttribute('data-wcf-motion', '');
     document.head.appendChild(motionCss);
     if (document.querySelector('.reveal, #dropZone')) {
