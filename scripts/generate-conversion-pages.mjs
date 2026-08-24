@@ -1,11 +1,18 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { loadShell } from './shell-inject.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = path.join(rootDir, 'convert');
 const siteUrl = 'https://www.weconvertfiles.com';
 const socialImage = `${siteUrl}/assets/og-image.png`;
+
+// The shared site shell (header/footer/overlays) is emitted directly into each
+// generated page so it ships static in the delivered HTML — layout.js then
+// skips runtime injection (it detects <header data-wcf-shell>) and only wires
+// up the interactions, so conversion pages do not jump on load.
+const shell = loadShell();
 
 const pages = [
   {
@@ -296,8 +303,9 @@ ${jsonLd(page)}
   <link rel="icon" type="image/png" href="/assets/favicon.png?v=5" />
   <link rel="apple-touch-icon" href="/assets/favicon.png?v=5" />
 </head>
-<body class="bg-[#f8fafd] text-slate-900 antialiased transition-colors duration-200 dark:bg-[#0b0f19] dark:text-slate-100">
-  <main class="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6">
+<body class="bg-[#f8fafd] text-slate-900 antialiased transition-colors duration-200 dark:bg-[#0b0f19] dark:text-slate-100 min-h-screen flex flex-col">
+    ${shell.headerBlock}
+  <main class="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 flex-grow">
     <nav class="mb-6 text-sm text-slate-500 dark:text-slate-400" aria-label="Breadcrumb">
       <a class="font-semibold hover:text-[#1a73e8]" href="/">Home</a>
       <span class="mx-2" aria-hidden="true">/</span>
@@ -375,6 +383,7 @@ ${page.related.map(([label, href]) => `          <a class="rounded-full border b
       </section>
     </article>
   </main>
+    ${shell.footerBlock}
 </body>
 </html>
 `;

@@ -6703,7 +6703,8 @@ function showResultPanel(blob, fileName) {
   if (panel && info) {
     info.textContent = `${fileName} (${formatBytes(blob.size)})`;
     panel.classList.remove('hidden');
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    panel.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
   }
   renderRelatedTools();
 }

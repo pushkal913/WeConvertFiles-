@@ -147,17 +147,11 @@
     return true;
   }
 
-  // The homepage/tool pages ship the footer in markup; layout.js injects it
-  // later on the content pages, so watch for it if it is not present yet.
-  function ensureSettingsLink() {
-    if (injectSettingsLink()) return;
-    var observer = new MutationObserver(function () {
-      if (injectSettingsLink()) observer.disconnect();
-    });
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-    // Stop watching after a short window regardless.
-    setTimeout(function () { observer.disconnect(); }, 8000);
-  }
+  // Every page that loads this script now ships its footer (with the legal
+  // links) in the delivered HTML, so the settings control can be attached
+  // directly once the DOM is ready — there is no longer a dynamically injected
+  // footer to wait for, so no document-wide observer is needed. Pages without a
+  // footer (e.g. 404) simply have nowhere to attach the control, which is fine.
 
   // Any element marked data-cookie-settings re-opens the banner.
   document.addEventListener('click', function (event) {
@@ -172,7 +166,7 @@
   if (getConsent() === 'granted') loadAnalytics();
 
   onReady(function () {
-    ensureSettingsLink();
+    injectSettingsLink();
     if (!getConsent()) showBanner();
   });
 })();

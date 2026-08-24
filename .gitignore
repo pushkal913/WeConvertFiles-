@@ -3,3 +3,7 @@ node_modules/
 *.zip
 .DS_Store
 Thumbs.db
+
+# Regenerated baseline screenshots (run `npm run baseline:jitter` to produce).
+# The committed REPORT.md / report.json are the durable, diffable baseline.
+test/baseline/screenshots/

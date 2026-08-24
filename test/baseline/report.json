@@ -1,0 +1,1158 @@
+{
+  "generatedAt": "2026-08-24T18:49:43.235Z",
+  "env": {
+    "playwrightVersion": "1.56.1",
+    "cpuThrottleRate": 6,
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "sampleTimesMs": [
+      100,
+      500,
+      1500
+    ]
+  },
+  "results": [
+    {
+      "slug": "home",
+      "path": "/",
+      "label": "Homepage (static shell — control)",
+      "timeline": {
+        "cls": 0,
+        "layoutShifts": [],
+        "navTiming": {
+          "firstPaint": 116,
+          "firstContentfulPaint": 240,
+          "domContentLoaded": 649,
+          "loadEvent": 650
+        },
+        "motion": {
+          "motionJsLoaded": true,
+          "hasRevealOrDropZone": true
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 102,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 2265
+              },
+              "footer": {
+                "top": 2173.75,
+                "left": 32,
+                "width": 1216,
+                "height": 181
+              },
+              "h1": {
+                "top": 293.75,
+                "left": 65,
+                "width": 896,
+                "height": 120
+              }
+            },
+            "screenshot": "screenshots/home-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 782,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 4776.25
+              },
+              "footer": {
+                "top": 4565,
+                "left": 32,
+                "width": 1216,
+                "height": 301
+              },
+              "h1": {
+                "top": 293.75,
+                "left": 65,
+                "width": 896,
+                "height": 120
+              }
+            },
+            "screenshot": "screenshots/home-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1501,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 4776.25
+              },
+              "footer": {
+                "top": 4565,
+                "left": 32,
+                "width": 1216,
+                "height": 301
+              },
+              "h1": {
+                "top": 293.75,
+                "left": 65,
+                "width": 896,
+                "height": 120
+              }
+            },
+            "screenshot": "screenshots/home-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "footerTopDeltaPx": 2391.25,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": false,
+        "preInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 121.75,
+            "left": 0,
+            "width": 1280,
+            "height": 4776.25
+          },
+          "footer": {
+            "top": 4565,
+            "left": 32,
+            "width": 1216,
+            "height": 301
+          },
+          "h1": {
+            "top": 293.75,
+            "left": 65,
+            "width": 896,
+            "height": 120
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 121.75,
+            "left": 0,
+            "width": 1280,
+            "height": 4776.25
+          },
+          "footer": {
+            "top": 4565,
+            "left": 32,
+            "width": 1216,
+            "height": 301
+          },
+          "h1": {
+            "top": 293.75,
+            "left": 65,
+            "width": 896,
+            "height": 120
+          }
+        },
+        "contentShiftPx": {
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/home-shell-blocked.png",
+          "shellSettled": "screenshots/home-shell-settled.png"
+        }
+      }
+    },
+    {
+      "slug": "guide-bulk-resize",
+      "path": "/guides/bulk-resize.html",
+      "label": "Guide: Bulk Resize",
+      "timeline": {
+        "cls": 0,
+        "layoutShifts": [],
+        "navTiming": {
+          "firstPaint": 292,
+          "firstContentfulPaint": 292,
+          "domContentLoaded": 325,
+          "loadEvent": 392
+        },
+        "motion": {
+          "motionJsLoaded": false,
+          "hasRevealOrDropZone": false
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 100,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 192,
+                "width": 896,
+                "height": 5783
+              },
+              "footer": {
+                "top": 5869.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 229.75,
+                "left": 241,
+                "width": 798,
+                "height": 80
+              }
+            },
+            "screenshot": "screenshots/guide-bulk-resize-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 501,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 192,
+                "width": 896,
+                "height": 5783
+              },
+              "footer": {
+                "top": 5869.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 229.75,
+                "left": 241,
+                "width": 798,
+                "height": 80
+              }
+            },
+            "screenshot": "screenshots/guide-bulk-resize-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1501,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 192,
+                "width": 896,
+                "height": 5783
+              },
+              "footer": {
+                "top": 5869.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 229.75,
+                "left": 241,
+                "width": 798,
+                "height": 80
+              }
+            },
+            "screenshot": "screenshots/guide-bulk-resize-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "footerTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": false,
+        "preInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 192,
+            "width": 896,
+            "height": 5783
+          },
+          "footer": {
+            "top": 5869.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 229.75,
+            "left": 241,
+            "width": 798,
+            "height": 80
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 192,
+            "width": 896,
+            "height": 5783
+          },
+          "footer": {
+            "top": 5869.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 229.75,
+            "left": 241,
+            "width": 798,
+            "height": 80
+          }
+        },
+        "contentShiftPx": {
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/guide-bulk-resize-shell-blocked.png",
+          "shellSettled": "screenshots/guide-bulk-resize-shell-settled.png"
+        }
+      }
+    },
+    {
+      "slug": "privacy",
+      "path": "/privacy",
+      "label": "Legal: Privacy Policy",
+      "timeline": {
+        "cls": 0.0068,
+        "layoutShifts": [
+          {
+            "value": 0.0068,
+            "startTime": 309
+          }
+        ],
+        "navTiming": {
+          "firstPaint": 144,
+          "firstContentfulPaint": 144,
+          "domContentLoaded": 300,
+          "loadEvent": 394
+        },
+        "motion": {
+          "motionJsLoaded": false,
+          "hasRevealOrDropZone": false
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 101,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 5155
+              },
+              "footer": {
+                "top": 5241.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/privacy-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 518,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 5155
+              },
+              "footer": {
+                "top": 5241.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/privacy-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1500,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 5155
+              },
+              "footer": {
+                "top": 5241.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/privacy-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "footerTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": false,
+        "preInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 256,
+            "width": 768,
+            "height": 5155
+          },
+          "footer": {
+            "top": 5241.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 207.75,
+            "left": 305,
+            "width": 670,
+            "height": 40
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 256,
+            "width": 768,
+            "height": 5155
+          },
+          "footer": {
+            "top": 5241.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 207.75,
+            "left": 305,
+            "width": 670,
+            "height": 40
+          }
+        },
+        "contentShiftPx": {
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/privacy-shell-blocked.png",
+          "shellSettled": "screenshots/privacy-shell-settled.png"
+        }
+      }
+    },
+    {
+      "slug": "about",
+      "path": "/about",
+      "label": "About page",
+      "timeline": {
+        "cls": 0.0041,
+        "layoutShifts": [
+          {
+            "value": 0.0041,
+            "startTime": 313
+          }
+        ],
+        "navTiming": {
+          "firstPaint": 180,
+          "firstContentfulPaint": 180,
+          "domContentLoaded": 306,
+          "loadEvent": 385
+        },
+        "motion": {
+          "motionJsLoaded": false,
+          "hasRevealOrDropZone": false
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 100,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 2242
+              },
+              "footer": {
+                "top": 2328.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/about-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 500,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 2242
+              },
+              "footer": {
+                "top": 2328.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/about-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1501,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 256,
+                "width": 768,
+                "height": 2242
+              },
+              "footer": {
+                "top": 2328.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 207.75,
+                "left": 305,
+                "width": 670,
+                "height": 40
+              }
+            },
+            "screenshot": "screenshots/about-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "footerTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": false,
+        "preInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 256,
+            "width": 768,
+            "height": 2242
+          },
+          "footer": {
+            "top": 2328.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 207.75,
+            "left": 305,
+            "width": 670,
+            "height": 40
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 256,
+            "width": 768,
+            "height": 2242
+          },
+          "footer": {
+            "top": 2328.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 207.75,
+            "left": 305,
+            "width": 670,
+            "height": 40
+          }
+        },
+        "contentShiftPx": {
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/about-shell-blocked.png",
+          "shellSettled": "screenshots/about-shell-settled.png"
+        }
+      }
+    },
+    {
+      "slug": "convert-heic",
+      "path": "/convert/heic-to-jpg",
+      "label": "Convert page: HEIC to JPG",
+      "timeline": {
+        "cls": 0.0041,
+        "layoutShifts": [
+          {
+            "value": 0.0041,
+            "startTime": 345
+          }
+        ],
+        "navTiming": {
+          "firstPaint": 180,
+          "firstContentfulPaint": 180,
+          "domContentLoaded": 340,
+          "loadEvent": 427
+        },
+        "motion": {
+          "motionJsLoaded": false,
+          "hasRevealOrDropZone": false
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 100,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 128,
+                "width": 1024,
+                "height": 1882
+              },
+              "footer": {
+                "top": 1968.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 239.75,
+                "left": 193,
+                "width": 894,
+                "height": 48
+              }
+            },
+            "screenshot": "screenshots/convert-heic-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 516,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 128,
+                "width": 1024,
+                "height": 1882
+              },
+              "footer": {
+                "top": 1968.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 239.75,
+                "left": 193,
+                "width": 894,
+                "height": 48
+              }
+            },
+            "screenshot": "screenshots/convert-heic-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1500,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 86.75,
+                "left": 128,
+                "width": 1024,
+                "height": 1882
+              },
+              "footer": {
+                "top": 1968.75,
+                "left": 0,
+                "width": 1280,
+                "height": 301
+              },
+              "h1": {
+                "top": 239.75,
+                "left": 193,
+                "width": 894,
+                "height": 48
+              }
+            },
+            "screenshot": "screenshots/convert-heic-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "footerTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": false,
+        "preInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 128,
+            "width": 1024,
+            "height": 1882
+          },
+          "footer": {
+            "top": 1968.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 239.75,
+            "left": 193,
+            "width": 894,
+            "height": 48
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 86.75,
+            "left": 128,
+            "width": 1024,
+            "height": 1882
+          },
+          "footer": {
+            "top": 1968.75,
+            "left": 0,
+            "width": 1280,
+            "height": 301
+          },
+          "h1": {
+            "top": 239.75,
+            "left": 193,
+            "width": 894,
+            "height": 48
+          }
+        },
+        "contentShiftPx": {
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/convert-heic-shell-blocked.png",
+          "shellSettled": "screenshots/convert-heic-shell-settled.png"
+        }
+      }
+    },
+    {
+      "slug": "tool-bulk-resize",
+      "path": "/bulk-resize",
+      "label": "Tool page: Bulk Image Resizer",
+      "timeline": {
+        "cls": 0.041,
+        "layoutShifts": [
+          {
+            "value": 0.0041,
+            "startTime": 260
+          },
+          {
+            "value": 0.0369,
+            "startTime": 500
+          }
+        ],
+        "navTiming": {
+          "firstPaint": 112,
+          "firstContentfulPaint": 228,
+          "domContentLoaded": 557,
+          "loadEvent": 557
+        },
+        "motion": {
+          "motionJsLoaded": true,
+          "hasRevealOrDropZone": true
+        },
+        "samples": [
+          {
+            "targetMs": 100,
+            "actualMs": 100,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 52
+              },
+              "footer": null,
+              "h1": {
+                "top": 0,
+                "left": 0,
+                "width": 0,
+                "height": 0
+              }
+            },
+            "screenshot": "screenshots/tool-bulk-resize-100ms.png"
+          },
+          {
+            "targetMs": 500,
+            "actualMs": 639,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 2685.06
+              },
+              "footer": {
+                "top": 2473.81,
+                "left": 32,
+                "width": 1216,
+                "height": 301
+              },
+              "h1": {
+                "top": 0,
+                "left": 0,
+                "width": 0,
+                "height": 0
+              }
+            },
+            "screenshot": "screenshots/tool-bulk-resize-500ms.png"
+          },
+          {
+            "targetMs": 1500,
+            "actualMs": 1500,
+            "rects": {
+              "header": {
+                "top": 0,
+                "left": 0,
+                "width": 1280,
+                "height": 86.75
+              },
+              "main": {
+                "top": 121.75,
+                "left": 0,
+                "width": 1280,
+                "height": 2685.06
+              },
+              "footer": {
+                "top": 2473.81,
+                "left": 32,
+                "width": 1216,
+                "height": 301
+              },
+              "h1": {
+                "top": 0,
+                "left": 0,
+                "width": 0,
+                "height": 0
+              }
+            },
+            "screenshot": "screenshots/tool-bulk-resize-1500ms.png"
+          }
+        ],
+        "movementFirstToLast": {
+          "headerTopDeltaPx": 0,
+          "mainTopDeltaPx": 0,
+          "h1TopDeltaPx": 0
+        },
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      "shellInjection": {
+        "headerInjectedAtRuntime": false,
+        "preInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 121.75,
+            "left": 0,
+            "width": 1280,
+            "height": 2685.06
+          },
+          "footer": {
+            "top": 2473.81,
+            "left": 32,
+            "width": 1216,
+            "height": 301
+          },
+          "h1": {
+            "top": 0,
+            "left": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        "postInjection": {
+          "header": {
+            "top": 0,
+            "left": 0,
+            "width": 1280,
+            "height": 86.75
+          },
+          "main": {
+            "top": 121.75,
+            "left": 0,
+            "width": 1280,
+            "height": 2685.06
+          },
+          "footer": {
+            "top": 2473.81,
+            "left": 32,
+            "width": 1216,
+            "height": 301
+          },
+          "h1": {
+            "top": 0,
+            "left": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        "contentShiftPx": {
+          "headerTopShiftPx": 0,
+          "mainTopShiftPx": 0,
+          "footerTopShiftPx": 0,
+          "h1TopShiftPx": 0
+        },
+        "screenshots": {
+          "shellBlocked": "screenshots/tool-bulk-resize-shell-blocked.png",
+          "shellSettled": "screenshots/tool-bulk-resize-shell-settled.png"
+        }
+      }
+    }
+  ]
+}
