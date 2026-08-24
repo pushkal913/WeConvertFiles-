@@ -1,6 +1,6 @@
 # WeConvertFiles — Page Jitter Baseline
 
-Generated: 2026-08-24T17:47:35.717Z
+Generated: 2026-08-24T18:02:58.166Z
 
 Reproduce with a single command:
 
@@ -19,14 +19,14 @@ npm run baseline:jitter
 
 ## Summary
 
-| Page | Runtime header injected? | Content jump (main top) | Observed CLS | Console errors | Failed requests |
-| --- | --- | --- | --- | --- | --- |
-| Homepage (static shell — control) (`/`) | no | 0px | 0.0088 | 0 | 0 |
-| Guide: Bulk Resize (`/guides/bulk-resize.html`) | no | 0px | 0 | 0 | 0 |
-| Legal: Privacy Policy (`/privacy`) | no | 0px | 0 | 0 | 0 |
-| About page (`/about`) | no | 0px | 0.0022 | 0 | 0 |
-| Convert page: HEIC to JPG (`/convert/heic-to-jpg`) | no | 0px | 0.0041 | 0 | 0 |
-| Tool page: Bulk Image Resizer (`/bulk-resize`) | no | 0px | 0.0227 | 0 | 0 |
+| Page | Runtime header injected? | Content jump (main top) | Observed CLS | motion.js loaded | Console errors | Failed requests |
+| --- | --- | --- | --- | --- | --- | --- |
+| Homepage (static shell — control) (`/`) | no | 0px | 0.0041 | yes | 0 | 0 |
+| Guide: Bulk Resize (`/guides/bulk-resize.html`) | no | 0px | 0.0041 | no (unused) | 0 | 0 |
+| Legal: Privacy Policy (`/privacy`) | no | 0px | 0.059 | no (unused) | 0 | 0 |
+| About page (`/about`) | no | 0px | 0.0041 | no (unused) | 0 | 0 |
+| Convert page: HEIC to JPG (`/convert/heic-to-jpg`) | no | 0px | 0.0061 | no (unused) | 0 | 0 |
+| Tool page: Bulk Image Resizer (`/bulk-resize`) | no | 0px | 0.0369 | yes | 0 | 0 |
 
 > "Content jump (main top)" is the downward shift of the `<main>` element between the shell-blocked and settled loads. A positive value means content visibly moves down when the runtime header appears — the jitter.
 
@@ -41,14 +41,14 @@ npm run baseline:jitter
     - footerTopShiftPx: 0
     - h1TopShiftPx: 0
 - Before/after (deterministic) screenshots: `screenshots/home-shell-blocked.png` → `screenshots/home-shell-settled.png`
-- Observed CLS (throttled timeline): 0.0088
-- Layout-shift entries: 0.0047@589ms, 0.0041@761ms
-- Nav timing (throttled): FP=260ms, FCP=440ms, DCL=1451ms, load=1452ms
+- Observed CLS (throttled timeline): 0.0041
+- Layout-shift entries: 0.0041@364ms
+- Nav timing (throttled): FP=144ms, FCP=284ms, DCL=890ms, load=891ms
 - Timeline samples (main top, px):
-    - ~100ms (actual 109ms): main.top=n/a, no header yet → screenshots/home-100ms.png
-    - ~500ms (actual 1778ms): main.top=121.75, header present → screenshots/home-500ms.png
-    - ~1500ms (actual 1927ms): main.top=121.75, header present → screenshots/home-1500ms.png
-- Main top delta first→last sample: n/apx
+    - ~100ms (actual 101ms): main.top=121.75, header present → screenshots/home-100ms.png
+    - ~500ms (actual 1082ms): main.top=121.75, header present → screenshots/home-500ms.png
+    - ~1500ms (actual 1500ms): main.top=121.75, header present → screenshots/home-1500ms.png
+- Main top delta first→last sample: 0px
 
 ### Guide: Bulk Resize — `/guides/bulk-resize.html`
 
@@ -59,12 +59,13 @@ npm run baseline:jitter
     - footerTopShiftPx: 0
     - h1TopShiftPx: 0
 - Before/after (deterministic) screenshots: `screenshots/guide-bulk-resize-shell-blocked.png` → `screenshots/guide-bulk-resize-shell-settled.png`
-- Observed CLS (throttled timeline): 0
-- Nav timing (throttled): FP=120ms, FCP=220ms, DCL=393ms, load=496ms
+- Observed CLS (throttled timeline): 0.0041
+- Layout-shift entries: 0.0041@410ms
+- Nav timing (throttled): FP=184ms, FCP=184ms, DCL=343ms, load=434ms
 - Timeline samples (main top, px):
-    - ~100ms (actual 101ms): main.top=86.75, header present → screenshots/guide-bulk-resize-100ms.png
-    - ~500ms (actual 588ms): main.top=86.75, header present → screenshots/guide-bulk-resize-500ms.png
-    - ~1500ms (actual 1501ms): main.top=86.75, header present → screenshots/guide-bulk-resize-1500ms.png
+    - ~100ms (actual 100ms): main.top=86.75, header present → screenshots/guide-bulk-resize-100ms.png
+    - ~500ms (actual 577ms): main.top=86.75, header present → screenshots/guide-bulk-resize-500ms.png
+    - ~1500ms (actual 1500ms): main.top=86.75, header present → screenshots/guide-bulk-resize-1500ms.png
 - Main top delta first→last sample: 0px
 
 ### Legal: Privacy Policy — `/privacy`
@@ -76,12 +77,13 @@ npm run baseline:jitter
     - footerTopShiftPx: 0
     - h1TopShiftPx: 0
 - Before/after (deterministic) screenshots: `screenshots/privacy-shell-blocked.png` → `screenshots/privacy-shell-settled.png`
-- Observed CLS (throttled timeline): 0
-- Nav timing (throttled): FP=188ms, FCP=188ms, DCL=336ms, load=439ms
+- Observed CLS (throttled timeline): 0.059
+- Layout-shift entries: 0.059@346ms
+- Nav timing (throttled): FP=212ms, FCP=212ms, DCL=336ms, load=420ms
 - Timeline samples (main top, px):
-    - ~100ms (actual 100ms): main.top=86.75, header present → screenshots/privacy-100ms.png
-    - ~500ms (actual 523ms): main.top=86.75, header present → screenshots/privacy-500ms.png
-    - ~1500ms (actual 1501ms): main.top=86.75, header present → screenshots/privacy-1500ms.png
+    - ~100ms (actual 102ms): main.top=86.75, header present → screenshots/privacy-100ms.png
+    - ~500ms (actual 537ms): main.top=86.75, header present → screenshots/privacy-500ms.png
+    - ~1500ms (actual 1500ms): main.top=86.75, header present → screenshots/privacy-1500ms.png
 - Main top delta first→last sample: 0px
 
 ### About page — `/about`
@@ -93,13 +95,13 @@ npm run baseline:jitter
     - footerTopShiftPx: 0
     - h1TopShiftPx: 0
 - Before/after (deterministic) screenshots: `screenshots/about-shell-blocked.png` → `screenshots/about-shell-settled.png`
-- Observed CLS (throttled timeline): 0.0022
-- Layout-shift entries: 0.0022@344ms
-- Nav timing (throttled): FP=180ms, FCP=180ms, DCL=294ms, load=400ms
+- Observed CLS (throttled timeline): 0.0041
+- Layout-shift entries: 0.0041@287ms
+- Nav timing (throttled): FP=168ms, FCP=168ms, DCL=286ms, load=355ms
 - Timeline samples (main top, px):
-    - ~100ms (actual 101ms): main.top=86.75, header present → screenshots/about-100ms.png
+    - ~100ms (actual 100ms): main.top=86.75, header present → screenshots/about-100ms.png
     - ~500ms (actual 501ms): main.top=86.75, header present → screenshots/about-500ms.png
-    - ~1500ms (actual 1501ms): main.top=86.75, header present → screenshots/about-1500ms.png
+    - ~1500ms (actual 1502ms): main.top=86.75, header present → screenshots/about-1500ms.png
 - Main top delta first→last sample: 0px
 
 ### Convert page: HEIC to JPG — `/convert/heic-to-jpg`
@@ -111,13 +113,13 @@ npm run baseline:jitter
     - footerTopShiftPx: 0
     - h1TopShiftPx: 0
 - Before/after (deterministic) screenshots: `screenshots/convert-heic-shell-blocked.png` → `screenshots/convert-heic-shell-settled.png`
-- Observed CLS (throttled timeline): 0.0041
-- Layout-shift entries: 0.0041@312ms
-- Nav timing (throttled): FP=80ms, FCP=168ms, DCL=306ms, load=405ms
+- Observed CLS (throttled timeline): 0.0061
+- Layout-shift entries: 0.0061@332ms
+- Nav timing (throttled): FP=184ms, FCP=184ms, DCL=326ms, load=415ms
 - Timeline samples (main top, px):
     - ~100ms (actual 100ms): main.top=86.75, header present → screenshots/convert-heic-100ms.png
-    - ~500ms (actual 501ms): main.top=86.75, header present → screenshots/convert-heic-500ms.png
-    - ~1500ms (actual 1500ms): main.top=86.75, header present → screenshots/convert-heic-1500ms.png
+    - ~500ms (actual 515ms): main.top=86.75, header present → screenshots/convert-heic-500ms.png
+    - ~1500ms (actual 1502ms): main.top=86.75, header present → screenshots/convert-heic-1500ms.png
 - Main top delta first→last sample: 0px
 
 ### Tool page: Bulk Image Resizer — `/bulk-resize`
@@ -129,13 +131,13 @@ npm run baseline:jitter
     - footerTopShiftPx: 0
     - h1TopShiftPx: 0
 - Before/after (deterministic) screenshots: `screenshots/tool-bulk-resize-shell-blocked.png` → `screenshots/tool-bulk-resize-shell-settled.png`
-- Observed CLS (throttled timeline): 0.0227
-- Layout-shift entries: 0.0041@223ms, 0.0186@509ms
-- Nav timing (throttled): FP=188ms, FCP=188ms, DCL=543ms, load=543ms
+- Observed CLS (throttled timeline): 0.0369
+- Layout-shift entries: 0.0369@464ms
+- Nav timing (throttled): FP=204ms, FCP=204ms, DCL=498ms, load=498ms
 - Timeline samples (main top, px):
-    - ~100ms (actual 99ms): main.top=121.75, header present → screenshots/tool-bulk-resize-100ms.png
-    - ~500ms (actual 653ms): main.top=121.75, header present → screenshots/tool-bulk-resize-500ms.png
-    - ~1500ms (actual 1501ms): main.top=121.75, header present → screenshots/tool-bulk-resize-1500ms.png
+    - ~100ms (actual 100ms): main.top=121.75, header present → screenshots/tool-bulk-resize-100ms.png
+    - ~500ms (actual 597ms): main.top=121.75, header present → screenshots/tool-bulk-resize-500ms.png
+    - ~1500ms (actual 1500ms): main.top=121.75, header present → screenshots/tool-bulk-resize-1500ms.png
 - Main top delta first→last sample: 0px
 
 ## Notes for later phases

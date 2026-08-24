@@ -147,6 +147,14 @@ async function timelinePass(browser, origin, target) {
     };
   });
 
+  // Runtime weight: whether the motion.js scroll/drag runtime ended up loaded.
+  // Content pages (guides, legal, convert) have no .reveal or #dropZone, so they
+  // should not pull it in; pages with an upload zone or reveals still do.
+  const motion = await page.evaluate(() => ({
+    motionJsLoaded: document.querySelectorAll('script[src*="motion.js"]').length > 0,
+    hasRevealOrDropZone: !!document.querySelector('.reveal, #dropZone')
+  }));
+
   // Movement summary: how far <main> and <h1> tops moved between the first
   // and last sample.
   const first = samples[0].rects;
@@ -163,6 +171,7 @@ async function timelinePass(browser, origin, target) {
     cls: Math.round(cls.cls * 10000) / 10000,
     layoutShifts: cls.shifts,
     navTiming,
+    motion,
     samples,
     movementFirstToLast: movement,
     consoleErrors,
@@ -237,13 +246,16 @@ function renderMarkdown(report) {
   lines.push('');
   lines.push('## Summary');
   lines.push('');
-  lines.push('| Page | Runtime header injected? | Content jump (main top) | Observed CLS | Console errors | Failed requests |');
-  lines.push('| --- | --- | --- | --- | --- | --- |');
+  lines.push('| Page | Runtime header injected? | Content jump (main top) | Observed CLS | motion.js loaded | Console errors | Failed requests |');
+  lines.push('| --- | --- | --- | --- | --- | --- | --- |');
   for (const r of report.results) {
     const jump = r.shellInjection.contentShiftPx.mainTopShiftPx;
     const jumpStr = jump === undefined ? 'n/a' : `${jump > 0 ? '+' : ''}${jump}px`;
+    const motion = r.timeline.motion
+      ? (r.timeline.motion.motionJsLoaded ? 'yes' : 'no') + (r.timeline.motion.hasRevealOrDropZone ? '' : ' (unused)')
+      : 'n/a';
     lines.push(
-      `| ${r.label} (\`${r.path}\`) | ${r.shellInjection.headerInjectedAtRuntime ? 'yes' : 'no'} | ${jumpStr} | ${r.timeline.cls} | ${r.timeline.consoleErrors.length} | ${r.timeline.failedRequests.length} |`
+      `| ${r.label} (\`${r.path}\`) | ${r.shellInjection.headerInjectedAtRuntime ? 'yes' : 'no'} | ${jumpStr} | ${r.timeline.cls} | ${motion} | ${r.timeline.consoleErrors.length} | ${r.timeline.failedRequests.length} |`
     );
   }
   lines.push('');

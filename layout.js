@@ -12,19 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('flex', 'flex-col', 'min-h-screen');
   }
 
-  // Load the shared motion layer (hover / focus / button polish + upload-zone
-  // feedback). Content pages intentionally get the polish but not scroll
-  // reveals — long articles read better appearing instantly.
+  // Load the shared motion layer. motion.css gives every page the focus /
+  // button-press / selection / smooth-scroll polish (and the accordion + guide
+  // styles), so it is always added. motion.js only drives scroll reveals and
+  // the upload-zone drag feedback, so it is loaded only when the page actually
+  // has something for it to animate. Content pages like guides have neither a
+  // .reveal nor a #dropZone, so they no longer pay for that unused runtime.
   if (!document.querySelector('link[data-wcf-motion]')) {
     const motionCss = document.createElement('link');
     motionCss.rel = 'stylesheet';
     motionCss.href = '/assets/motion.css?v=20260817-3';
     motionCss.setAttribute('data-wcf-motion', '');
     document.head.appendChild(motionCss);
-    const motionJs = document.createElement('script');
-    motionJs.src = '/assets/motion.js?v=20260817-1';
-    motionJs.defer = true;
-    document.body.appendChild(motionJs);
+    if (document.querySelector('.reveal, #dropZone')) {
+      const motionJs = document.createElement('script');
+      motionJs.src = '/assets/motion.js?v=20260817-1';
+      motionJs.defer = true;
+      document.body.appendChild(motionJs);
+    }
   }
   
   // Find or wrap the main content (baked shells already carry flex-grow).
