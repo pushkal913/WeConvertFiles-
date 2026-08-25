@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { tools, categories, libraries, catalogueProblems } from './catalogue.mjs';
+import { tools, categories, libraries, catalogueProblems, renderRuntimeCatalogue } from './catalogue.mjs';
 
 // Validates the authoritative tool catalogue (data/tools.mjs):
 //   1. Structural integrity — 47 tools, no duplicate ids, required fields,
@@ -40,8 +40,6 @@ assert(tools.length === 47, `Expected 47 tools in the catalogue, found ${tools.l
 
 const appTools = pickLiteral(appSource, 'const tools = ', '\n];');
 const appCategories = pickLiteral(appSource, 'const toolCategories = ', '\n];');
-const appDeps = pickLiteral(appSource, 'const toolLibraryDependencies = ', '\n});');
-const appLibraries = pickLiteral(appSource, 'const converterLibraries = ', '\n});');
 
 const appToolById = new Map(appTools.map((t) => [t.id, t]));
 for (const tool of tools) {
@@ -52,8 +50,6 @@ for (const tool of tools) {
   }
   assert(tool.icon.bg === a.iconBg, `Tool "${tool.id}" icon.bg differs from app.js iconBg`);
   assert(tool.icon.color === a.iconColor, `Tool "${tool.id}" icon.color differs from app.js iconColor`);
-  const appToolDeps = appDeps[tool.id] || [];
-  assert(JSON.stringify(tool.dependencies) === JSON.stringify(appToolDeps), `Tool "${tool.id}" dependencies differ from app.js (${JSON.stringify(tool.dependencies)} vs ${JSON.stringify(appToolDeps)})`);
 }
 for (const a of appTools) {
   assert(tools.find((t) => t.id === a.id), `app.js tool "${a.id}" is missing from the catalogue`);
@@ -69,14 +65,20 @@ for (const category of categories) {
 }
 assert(appCategories.length === categories.length, `app.js has ${appCategories.length} categories, catalogue has ${categories.length}`);
 
-for (const [name, lib] of Object.entries(libraries)) {
-  const a = appLibraries[name];
-  assert(a, `Catalogue library "${name}" is not present in app.js converterLibraries`);
-  if (a) {
-    assert(lib.src === a.src, `Library "${name}" src differs from app.js`);
-    assert((lib.css || null) === (a.css || null), `Library "${name}" css differs from app.js`);
-  }
-}
+// Dependency metadata now lives only in the catalogue and is delivered to the
+// runtime as js/catalogue.js. Check that generated file is in sync, and that
+// app.js keeps a ready-check for exactly the catalogue's libraries.
+const runtimePath = path.join(rootDir, 'js', 'catalogue.js');
+const runtimeOnDisk = existsSync(runtimePath) ? readFileSync(runtimePath, 'utf8') : '';
+assert(runtimeOnDisk === renderRuntimeCatalogue(), 'js/catalogue.js is out of date — run `npm run generate:catalogue-runtime`.');
+
+const readyMatch = appSource.match(/const libraryReadyChecks = \{([\s\S]*?)\n\};/);
+const readyNames = readyMatch ? [...readyMatch[1].matchAll(/^\s{2}([a-z0-9]+):/gm)].map((m) => m[1]) : [];
+const libraryNames = Object.keys(libraries);
+assert(
+  JSON.stringify([...readyNames].sort()) === JSON.stringify([...libraryNames].sort()),
+  `app.js libraryReadyChecks ${JSON.stringify(readyNames)} does not match catalogue libraries ${JSON.stringify(libraryNames)}`
+);
 
 // Tools split into js/tools/<id>.js: the catalogue `module` field, the module
 // file on disk and app.js's runtime MODULE_TOOLS set must all agree.

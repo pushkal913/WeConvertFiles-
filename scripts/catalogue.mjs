@@ -12,6 +12,27 @@ import { guideSlugForTool } from './guide-catalog.mjs';
 
 export { tools, categories, libraries };
 
+// Render the runtime dependency data (js/catalogue.js) from the catalogue: the
+// library CDN sources/css and the per-tool dependency lists, exposed to the
+// classic-script app as window.WCF_CATALOGUE. The library ready-checks are
+// detection code and stay in app.js. Deterministic — generator and validator
+// both use this so the file can't drift from data/tools.mjs.
+export function renderRuntimeCatalogue() {
+  const dependencies = {};
+  for (const tool of tools) {
+    if (Array.isArray(tool.dependencies) && tool.dependencies.length) {
+      dependencies[tool.id] = tool.dependencies;
+    }
+  }
+  const payload = { libraries, dependencies };
+  return `/* GENERATED FILE — do not edit.
+   Source: data/tools.mjs via scripts/generate-catalogue-runtime.mjs
+   (npm run generate:catalogue-runtime). Delivers the tool catalogue's library
+   sources and per-tool dependencies to the runtime app. */
+window.WCF_CATALOGUE = ${JSON.stringify(payload, null, 2)};
+`;
+}
+
 const REQUIRED_STRING_FIELDS = ['id', 'title', 'description', 'kicker', 'badge', 'category', 'route', 'guide', 'module'];
 
 // Returns an array of human-readable problems; empty means the catalogue is valid.

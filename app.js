@@ -4,140 +4,55 @@ let StandardFonts;
 let rgb;
 let degrees;
 
-const converterLibraries = Object.freeze({
-  jspdf: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
-    ready: () => Boolean(window.jspdf && window.jspdf.jsPDF)
-  },
-  pdfjs: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js',
-    ready: () => Boolean(window.pdfjsLib)
-  },
-  pdflib: {
-    src: 'https://cdn.jsdelivr.net/npm/pdf-lib-with-encrypt@1.2.1/dist/pdf-lib.min.js',
-    ready: () => Boolean(window.PDFLib)
-  },
-  papa: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js',
-    ready: () => Boolean(window.Papa)
-  },
-  xlsx: {
-    src: 'https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js',
-    ready: () => Boolean(window.XLSX)
-  },
-  jszip: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
-    ready: () => Boolean(window.JSZip)
-  },
-  mammoth: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js',
-    ready: () => Boolean(window.mammoth)
-  },
-  html2pdf: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js',
-    ready: () => Boolean(window.html2pdf)
-  },
-  docx: {
-    src: 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js',
-    ready: () => Boolean(window.docx && window.docx.Packer)
-  },
-  jspdfautotable: {
-    src: 'https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js',
-    ready: () => Boolean(window.jspdf && window.jspdf.jsPDF && window.jspdf.jsPDF.API && typeof window.jspdf.jsPDF.API.autoTable === 'function')
-  },
-  cryptojs: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js',
-    ready: () => Boolean(window.CryptoJS)
-  },
-  qrious: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js',
-    ready: () => Boolean(window.QRious)
-  },
-  exif: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js',
-    ready: () => Boolean(window.EXIF)
-  },
-  heic2any: {
-    src: 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js',
-    ready: () => Boolean(window.heic2any)
-  },
-  marked: {
-    src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
-    ready: () => Boolean(window.marked)
-  },
-  diff: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js',
-    ready: () => Boolean(window.diff_match_patch)
-  },
-  jsyaml: {
-    src: 'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js',
-    ready: () => Boolean(window.jsyaml)
-  },
-  sqlformatter: {
-    src: 'https://cdn.jsdelivr.net/npm/sql-formatter@15.8.2/dist/sql-formatter.min.js',
-    ready: () => Boolean(window.sqlFormatter)
-  },
-  terser: {
-    src: 'https://cdn.jsdelivr.net/npm/terser@5.49.0/dist/bundle.min.js',
-    ready: () => Boolean(window.Terser)
-  },
-  csso: {
-    src: 'https://cdn.jsdelivr.net/npm/csso@5.0.5/dist/csso.js',
-    ready: () => Boolean(window.csso)
-  },
-  jsbeautifyjs: {
-    src: 'https://cdn.jsdelivr.net/npm/js-beautify@2.0.3/js/lib/beautify.js',
-    ready: () => Boolean(window.js_beautify)
-  },
-  jsbeautifycss: {
-    src: 'https://cdn.jsdelivr.net/npm/js-beautify@2.0.3/js/lib/beautify-css.js',
-    ready: () => Boolean(window.css_beautify)
-  },
-  jsbeautifyhtml: {
-    src: 'https://cdn.jsdelivr.net/npm/js-beautify@2.0.3/js/lib/beautify-html.js',
-    ready: () => Boolean(window.html_beautify)
-  },
-  cropper: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js',
-    css: 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css',
-    ready: () => Boolean(window.Cropper)
-  }
-});
+// Third-party library detection. The CDN sources, versions and per-tool
+// dependency lists live in the tool catalogue (data/tools.mjs) and are
+// delivered at runtime as window.WCF_CATALOGUE by js/catalogue.js, so this file
+// no longer hard-codes that metadata. Only the ready-checks (detection code,
+// which cannot be data) stay here, keyed by library name.
+const libraryReadyChecks = {
+  jspdf: () => Boolean(window.jspdf && window.jspdf.jsPDF),
+  pdfjs: () => Boolean(window.pdfjsLib),
+  pdflib: () => Boolean(window.PDFLib),
+  papa: () => Boolean(window.Papa),
+  xlsx: () => Boolean(window.XLSX),
+  jszip: () => Boolean(window.JSZip),
+  mammoth: () => Boolean(window.mammoth),
+  html2pdf: () => Boolean(window.html2pdf),
+  docx: () => Boolean(window.docx && window.docx.Packer),
+  jspdfautotable: () => Boolean(window.jspdf && window.jspdf.jsPDF && window.jspdf.jsPDF.API && typeof window.jspdf.jsPDF.API.autoTable === 'function'),
+  cryptojs: () => Boolean(window.CryptoJS),
+  qrious: () => Boolean(window.QRious),
+  exif: () => Boolean(window.EXIF),
+  heic2any: () => Boolean(window.heic2any),
+  marked: () => Boolean(window.marked),
+  diff: () => Boolean(window.diff_match_patch),
+  jsyaml: () => Boolean(window.jsyaml),
+  sqlformatter: () => Boolean(window.sqlFormatter),
+  terser: () => Boolean(window.Terser),
+  csso: () => Boolean(window.csso),
+  jsbeautifyjs: () => Boolean(window.js_beautify),
+  jsbeautifycss: () => Boolean(window.css_beautify),
+  jsbeautifyhtml: () => Boolean(window.html_beautify),
+  cropper: () => Boolean(window.Cropper)
+};
 
-const toolLibraryDependencies = Object.freeze({
-  'json-yaml': ['jsyaml'],
-  'sql-formatter': ['sqlformatter'],
-  'pdf-to-word': ['pdfjs'],
-  'office-pdf': ['html2pdf', 'mammoth', 'xlsx'],
-  'merge-pdf': ['pdflib'],
-  'images-pdf': ['jspdf'],
-  'compress-pdf': ['pdfjs', 'jspdf'],
-  'heic-to-jpg': ['heic2any', 'jszip'],
-  'split-pdf': ['pdflib', 'jszip'],
-  'pdf-images': ['pdfjs', 'jszip'],
-  'pdf-jpg': ['pdfjs', 'jszip'],
-  'qr-generator': ['qrious'],
-  'sign-pdf': ['pdflib'],
-  'extract-pages': ['pdflib'],
-  'image-cropper': ['cropper'],
-  'remove-pages': ['pdfjs', 'pdflib'],
-  'bulk-resize': ['jszip'],
-  'excel-to-csv': ['xlsx'],
-  'webp-convert': ['jszip'],
-  'organize-pdf': ['pdfjs', 'pdflib'],
-  'watermark-pdf': ['pdflib'],
-  'page-numbers': ['pdflib'],
-  'rotate-pdf': ['pdfjs', 'pdflib'],
-  'encrypt-pdf': ['pdflib'],
-  'json-convert': ['xlsx'],
-  'csv-convert': ['papa', 'xlsx'],
-  'favicon-generator': ['jszip'],
-  'diff-checker': ['diff'],
-  'markdown-preview': ['marked'],
-  'hash-generator': ['cryptojs'],
-  'exif-utility': ['exif'],
-  'decrypt-pdf': ['pdflib', 'pdfjs', 'jspdf']
-});
+const RUNTIME_CATALOGUE = (typeof window !== 'undefined' && window.WCF_CATALOGUE) || { libraries: {}, dependencies: {} };
+
+// Resolve a library name to { src, css, ready } by combining the catalogue's
+// source metadata with the local ready-check. Returns null for an unknown one.
+function converterLibraryEntry(name) {
+  const meta = RUNTIME_CATALOGUE.libraries[name];
+  const ready = libraryReadyChecks[name];
+  if (!meta || typeof ready !== 'function') return null;
+  return { src: meta.src, css: meta.css, ready };
+}
+
+// The libraries a tool needs, from the catalogue (empty if none).
+function toolDependencies(toolId) {
+  const deps = RUNTIME_CATALOGUE.dependencies[toolId];
+  return Array.isArray(deps) ? deps : [];
+}
+
 
 const interactiveLibraryTools = new Set([
   'qr-generator',
@@ -162,9 +77,9 @@ function syncConverterLibraryGlobals() {
 }
 
 function loadConverterLibrary(name) {
-  const library = converterLibraries[name];
+  const library = converterLibraryEntry(name);
   if (!library) {
-    return Promise.reject(new Error(`Unknown converter library: ${name}`));
+    return Promise.reject(new Error(`The "${name}" library is not registered in the tool catalogue, so it cannot be loaded.`));
   }
   if (library.ready()) {
     syncConverterLibraryGlobals();
@@ -208,7 +123,7 @@ function loadConverterLibrary(name) {
 }
 
 async function ensureToolLibraries(toolId) {
-  const dependencies = toolLibraryDependencies[toolId] || [];
+  const dependencies = toolDependencies(toolId);
   await Promise.all(dependencies.map(loadConverterLibrary));
   syncConverterLibraryGlobals();
 }
@@ -4387,7 +4302,7 @@ async function addFiles(fileListObject) {
   state.files = state.currentTool.multiple ? [...state.files, ...validFiles] : validFiles.slice(0, 1);
   setStatus('');
 
-  const dependencies = toolLibraryDependencies[state.currentTool.id] || [];
+  const dependencies = toolDependencies(state.currentTool.id);
   if (dependencies.length) {
     setStatus('Loading the secure conversion engine...');
     try {
