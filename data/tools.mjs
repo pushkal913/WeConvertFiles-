@@ -783,7 +783,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/diff-checker",
     "guide": "/guides/diff-checker.html",
-    "module": "app.js",
+    "module": "js/tools/diff-checker.js",
     "dependencies": [
       "diff"
     ]
@@ -955,7 +955,7 @@ export const tools = [
     "category": "data-tools",
     "route": "/json-yaml",
     "guide": "/guides/json-yaml.html",
-    "module": "app.js",
+    "module": "js/tools/json-yaml.js",
     "dependencies": [
       "jsyaml"
     ]
@@ -973,7 +973,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/sql-formatter",
     "guide": "/guides/sql-formatter.html",
-    "module": "app.js",
+    "module": "js/tools/sql-formatter.js",
     "dependencies": [
       "sqlformatter"
     ]
@@ -991,7 +991,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/code-minifier",
     "guide": "/guides/code-minifier.html",
-    "module": "app.js",
+    "module": "js/tools/code-minifier.js",
     "dependencies": []
   },
   {
