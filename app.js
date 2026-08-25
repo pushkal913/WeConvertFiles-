@@ -135,7 +135,7 @@ async function ensureToolLibraries(toolId) {
 // WCF.registerTool(id, { render(container, ctx) }). The list below is the
 // runtime mirror of each tool's "module" field in data/tools.mjs.
 const TOOL_MODULE_VERSION = '20260824-1';
-const MODULE_TOOLS = new Set(['password-generator', 'case-converter']);
+const MODULE_TOOLS = new Set(['password-generator', 'case-converter', 'json-formatter', 'uuid-generator', 'unix-converter']);
 const toolModuleRegistry = {};
 const toolModulePromises = new Map();
 window.WCF = window.WCF || {};
@@ -1917,37 +1917,6 @@ function renderToolOptions(toolId) {
         <p class="${helpClass}">Select your DOCX or XLSX file in the upload zone above and click Convert to output a secure client-side PDF.</p>
       </div>
     `,
-    'json-formatter': `
-      <div>
-        <div class="mb-4 flex items-center justify-between">
-          <label class="${labelClass}">Spaces / Tab Size</label>
-          <select id="jsonSpacesSelect" class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition">
-            <option value="2" selected>2 Spaces</option>
-            <option value="3">3 Spaces</option>
-            <option value="4">4 Spaces</option>
-            <option value="8">8 Spaces</option>
-          </select>
-        </div>
-        <div id="jsonGridWrapper" class="grid gap-4 md:grid-cols-2 transition-all duration-300">
-          <div id="jsonInputCol">
-            <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Raw JSON Input</label>
-            <textarea id="jsonFormatterInput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition" placeholder="Paste your raw JSON text here..."></textarea>
-          </div>
-          <div id="jsonOutputCol">
-            <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Formatted Output</label>
-            <textarea id="jsonFormatterOutput" rows="12" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none readonly" readonly placeholder="Formatted output will appear here..."></textarea>
-          </div>
-        </div>
-        <div id="jsonButtonsRow" class="mt-4 flex flex-wrap gap-2.5">
-          <button id="jsonValidateBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-950/60 transition border border-blue-200/50 dark:border-blue-900/50">Validate JSON</button>
-          <button id="jsonFormatBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Format / Beautify</button>
-          <button id="jsonMinifyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Minify JSON</button>
-          <button id="jsonCopyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition ml-auto">Copy Output</button>
-          <button id="jsonClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition">Clear</button>
-        </div>
-        <div id="jsonInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold"></div>
-      </div>
-    `,
     'json-yaml': `
       <div>
         <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -2411,85 +2380,6 @@ function renderToolOptions(toolId) {
         <div id="regexInfoBox" class="mt-3 p-3 rounded-xl text-xs font-bold hidden"></div>
       </div>
     `,
-    'uuid-generator': `
-      <div>
-        <div class="grid gap-4 sm:grid-cols-3 mb-4">
-          <div>
-            <label class="${labelClass}">UUID Version</label>
-            <select id="uuidVersionSelect" class="${inputClass}">
-              <option value="4" selected>Version 4 (Random)</option>
-              <option value="1">Version 1 (Time-based)</option>
-            </select>
-          </div>
-          <div>
-            <label class="${labelClass}">Bulk Quantity</label>
-            <input type="number" id="uuidQuantityInput" class="${inputClass}" min="1" max="500" value="10" />
-          </div>
-          <div>
-            <label class="${labelClass}">Letter Casing</label>
-            <select id="uuidCaseSelect" class="${inputClass}">
-              <option value="lower" selected>Lowercase</option>
-              <option value="upper">Uppercase</option>
-            </select>
-          </div>
-        </div>
-        <div class="mb-4">
-          <label class="${labelClass}">List Separator Format</label>
-          <select id="uuidFormatSelect" class="${inputClass}">
-            <option value="newline" selected>Plain text list (Newlines)</option>
-            <option value="json">JSON Array</option>
-            <option value="csv">CSV (Comma-separated)</option>
-          </select>
-        </div>
-        <div class="relative mt-4">
-          <textarea id="uuidOutputText" rows="6" class="${inputClass} font-mono text-xs readonly" readonly placeholder="UUID outputs will appear here..."></textarea>
-          <div class="mt-4 flex gap-2.5">
-            <button id="uuidGenBtn" type="button" class="px-5 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Generate UUIDs</button>
-            <button id="uuidCopyBtn" type="button" class="px-5 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy Output</button>
-          </div>
-        </div>
-      </div>
-    `,
-    'unix-converter': `
-      <div>
-        <div class="flex items-center justify-between p-4 border border-rose-100 dark:border-rose-950/60 rounded-2xl bg-rose-50/30 dark:bg-rose-950/10 mb-5">
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Current Epoch Clock</h4>
-            <span id="unixLiveClock" class="text-xl font-bold text-rose-600 dark:text-rose-400 font-mono mt-1 block">0</span>
-          </div>
-        </div>
-        <div class="grid gap-5 md:grid-cols-2">
-          <!-- Timestamp to Readable -->
-          <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-900/40">
-            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-3">Epoch to Calendar Date</h4>
-            <label class="text-xs font-semibold text-slate-500">Unix Timestamp</label>
-            <div class="flex gap-2 mt-1">
-              <input type="number" id="unixInputVal" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-1.5 text-xs font-mono" value="1784370916" />
-              <select id="unixInputUnit" class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-2 py-1.5 text-xs">
-                <option value="s" selected>Seconds</option>
-                <option value="ms">Millis</option>
-              </select>
-            </div>
-            <div class="mt-4 space-y-2 text-xs font-mono text-slate-700 dark:text-slate-300">
-              <div><span class="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">GMT Date</span> <span id="unixOutGmt" class="block bg-slate-50 dark:bg-slate-950/40 p-2 rounded-lg border border-slate-100 dark:border-slate-800"></span></div>
-              <div><span class="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Local Date</span> <span id="unixOutLocal" class="block bg-slate-50 dark:bg-slate-950/40 p-2 rounded-lg border border-slate-100 dark:border-slate-800"></span></div>
-              <div><span class="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Relative Time</span> <span id="unixOutRelative" class="block bg-slate-50 dark:bg-slate-950/40 p-2 rounded-lg border border-slate-100 dark:border-slate-800"></span></div>
-            </div>
-          </div>
-
-          <!-- Readable to Timestamp -->
-          <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-900/40">
-            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-3">Calendar Date to Epoch</h4>
-            <label class="text-xs font-semibold text-slate-500">Pick Date & Time</label>
-            <input type="datetime-local" id="dateInputVal" class="${inputClass} mt-1.5 text-xs font-mono" />
-            <div class="mt-4 space-y-2 text-xs font-mono text-slate-700 dark:text-slate-300">
-              <div><span class="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Epoch (Seconds)</span> <span id="dateOutSeconds" class="block bg-slate-50 dark:bg-slate-950/40 p-2 rounded-lg border border-slate-100 dark:border-slate-800"></span></div>
-              <div><span class="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Epoch (Milliseconds)</span> <span id="dateOutMillis" class="block bg-slate-50 dark:bg-slate-950/40 p-2 rounded-lg border border-slate-100 dark:border-slate-800"></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `,
     'jwt-decoder': `
       <div>
         <label class="${labelClass}">Paste JWT Token</label>
@@ -2513,86 +2403,6 @@ function renderToolOptions(toolId) {
   toolOptions.innerHTML = panels[toolId] || '';
   toolOptions.classList.toggle('hidden', !panels[toolId]);
 
-  if (toolId === 'json-formatter') {
-    const input = document.getElementById('jsonFormatterInput');
-    const output = document.getElementById('jsonFormatterOutput');
-    const validateBtn = document.getElementById('jsonValidateBtn');
-    const formatBtn = document.getElementById('jsonFormatBtn');
-    const minifyBtn = document.getElementById('jsonMinifyBtn');
-    const clearBtn = document.getElementById('jsonClearBtn');
-    const copyBtn = document.getElementById('jsonCopyBtn');
-    const info = document.getElementById('jsonInfoBox');
-    const spacesSelect = document.getElementById('jsonSpacesSelect');
-
-    const expandLayout = () => {
-      const wrapper = document.getElementById('jsonGridWrapper');
-      const buttonsRow = document.getElementById('jsonButtonsRow');
-      const outputCol = document.getElementById('jsonOutputCol');
-      if (wrapper && buttonsRow && outputCol) {
-        wrapper.classList.remove('md:grid-cols-2');
-        wrapper.classList.add('grid-cols-1');
-        wrapper.insertBefore(buttonsRow, outputCol);
-      }
-      if (output) {
-        output.style.minHeight = '650px';
-      }
-    };
-
-    const resetLayout = () => {
-      const wrapper = document.getElementById('jsonGridWrapper');
-      const buttonsRow = document.getElementById('jsonButtonsRow');
-      if (wrapper && buttonsRow) {
-        wrapper.parentNode.insertBefore(buttonsRow, wrapper.nextSibling);
-        wrapper.classList.remove('grid-cols-1');
-        wrapper.classList.add('md:grid-cols-2');
-      }
-      if (output) {
-        output.style.minHeight = '';
-        output.style.height = '';
-      }
-    };
-
-    const runFormat = (minify = false) => {
-      const raw = input.value.trim();
-      if (!raw) {
-        output.value = '';
-        info.className = 'hidden';
-        return;
-      }
-      expandLayout();
-      try {
-        const obj = JSON.parse(raw);
-        if (minify) {
-          output.value = JSON.stringify(obj);
-        } else {
-          const spaces = parseInt(spacesSelect.value, 10) || 2;
-          output.value = JSON.stringify(obj, null, spaces);
-        }
-        info.className = 'mt-3 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/50 dark:border-emerald-900/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold';
-        info.textContent = 'Valid JSON! Processed successfully.';
-      } catch (err) {
-        output.value = '';
-        info.className = 'mt-3 p-3 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200/50 dark:border-red-900/40 text-red-800 dark:text-red-300 text-xs font-bold';
-        info.textContent = `Invalid JSON: ${err.message}`;
-      }
-    };
-
-    if (validateBtn) validateBtn.addEventListener('click', () => runFormat(false));
-    if (formatBtn) formatBtn.addEventListener('click', () => runFormat(false));
-    if (minifyBtn) minifyBtn.addEventListener('click', () => runFormat(true));
-    if (clearBtn) clearBtn.addEventListener('click', () => {
-      input.value = '';
-      output.value = '';
-      info.className = 'hidden';
-      resetLayout();
-    });
-    if (copyBtn) copyBtn.addEventListener('click', () => {
-      if (output.value) {
-        navigator.clipboard.writeText(output.value);
-        showNotification('Copied formatted JSON!');
-      }
-    });
-  }
   if (toolId === 'json-yaml') {
     const input = document.getElementById('jyInput');
     const output = document.getElementById('jyOutput');
@@ -3382,132 +3192,6 @@ function renderToolOptions(toolId) {
     document.getElementById('regexFlagM').addEventListener('change', runRegex);
     document.getElementById('regexFlagS').addEventListener('change', runRegex);
     runRegex();
-  }
-  if (toolId === 'uuid-generator') {
-    const out = document.getElementById('uuidOutputText');
-    const genBtn = document.getElementById('uuidGenBtn');
-    const copyBtn = document.getElementById('uuidCopyBtn');
-
-    const generateUUIDs = () => {
-      const qty = Math.max(1, Math.min(500, parseInt(document.getElementById('uuidQuantityInput').value, 10) || 10));
-      const version = document.getElementById('uuidVersionSelect').value;
-      const casing = document.getElementById('uuidCaseSelect').value;
-      const format = document.getElementById('uuidFormatSelect').value;
-
-      const list = [];
-      for (let i = 0; i < qty; i++) {
-        let uuid = '';
-        if (version === '4') {
-          // CSPRNG v4 UUID
-          const arr = new Uint8Array(16);
-          window.crypto.getRandomValues(arr);
-          arr[6] = (arr[6] & 0x0f) | 0x40; // v4
-          arr[8] = (arr[8] & 0x3f) | 0x80; // variant 10
-          const hex = Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('');
-          uuid = `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
-        } else {
-          // Fallback/Timestamp v1 UUID simulation client-side
-          const time = Date.now();
-          const rand = Math.floor(Math.random() * 0x100000000).toString(16).padStart(8, '0');
-          uuid = `${time.toString(16).slice(-8)}-${rand.slice(0,4)}-11e1-ab34-${rand.slice(4)}`;
-        }
-        if (casing === 'upper') uuid = uuid.toUpperCase();
-        list.push(uuid);
-      }
-
-      if (format === 'json') {
-        out.value = JSON.stringify(list, null, 2);
-      } else if (format === 'csv') {
-        out.value = list.join(', ');
-      } else {
-        out.value = list.join('\n');
-      }
-    };
-
-    if (genBtn) genBtn.addEventListener('click', generateUUIDs);
-    if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        if (out.value) {
-          navigator.clipboard.writeText(out.value);
-          showNotification('Copied UUIDs list!');
-        }
-      });
-    }
-    generateUUIDs();
-  }
-  if (toolId === 'unix-converter') {
-    const liveClock = document.getElementById('unixLiveClock');
-    if (liveClock) {
-      if (state.epochClockInterval) clearInterval(state.epochClockInterval);
-      state.epochClockInterval = setInterval(() => {
-        const live = document.getElementById('unixLiveClock');
-        if (live) live.textContent = Math.floor(Date.now() / 1000);
-      }, 1000);
-    }
-
-    // Epoch to Calendar
-    const unixInput = document.getElementById('unixInputVal');
-    const unixUnit = document.getElementById('unixInputUnit');
-    const outGmt = document.getElementById('unixOutGmt');
-    const outLocal = document.getElementById('unixOutLocal');
-    const outRelative = document.getElementById('unixOutRelative');
-
-    const runEpochToCal = () => {
-      let val = parseInt(unixInput.value, 10);
-      if (isNaN(val)) {
-        outGmt.textContent = ''; outLocal.textContent = ''; outRelative.textContent = '';
-        return;
-      }
-      if (unixUnit.value === 's') val = val * 1000;
-      const date = new Date(val);
-      if (isNaN(date.getTime())) {
-        outGmt.textContent = 'Invalid Date'; outLocal.textContent = 'Invalid Date'; outRelative.textContent = '';
-        return;
-      }
-      outGmt.textContent = date.toUTCString();
-      outLocal.textContent = date.toString();
-
-      // Compute Relative
-      const diffMs = val - Date.now();
-      const diffSec = Math.round(diffMs / 1000);
-      const diffMin = Math.round(diffSec / 60);
-      const diffHr = Math.round(diffMin / 60);
-      const diffDay = Math.round(diffHr / 24);
-
-      if (Math.abs(diffSec) < 60) outRelative.textContent = diffSec >= 0 ? `in ${diffSec} seconds` : `${Math.abs(diffSec)} seconds ago`;
-      else if (Math.abs(diffMin) < 60) outRelative.textContent = diffMin >= 0 ? `in ${diffMin} minutes` : `${Math.abs(diffMin)} minutes ago`;
-      else if (Math.abs(diffHr) < 24) outRelative.textContent = diffHr >= 0 ? `in ${diffHr} hours` : `${Math.abs(diffHr)} hours ago`;
-      else outRelative.textContent = diffDay >= 0 ? `in ${diffDay} days` : `${Math.abs(diffDay)} days ago`;
-    };
-
-    if (unixInput) unixInput.addEventListener('input', runEpochToCal);
-    if (unixUnit) unixUnit.addEventListener('change', runEpochToCal);
-
-    // Calendar to Epoch
-    const dateInput = document.getElementById('dateInputVal');
-    const dateSec = document.getElementById('dateOutSeconds');
-    const dateMs = document.getElementById('dateOutMillis');
-
-    const runCalToEpoch = () => {
-      if (!dateInput.value) {
-        dateSec.textContent = ''; dateMs.textContent = '';
-        return;
-      }
-      const time = new Date(dateInput.value).getTime();
-      if (isNaN(time)) {
-        dateSec.textContent = 'Invalid Date'; dateMs.textContent = 'Invalid Date';
-        return;
-      }
-      dateSec.textContent = Math.floor(time / 1000);
-      dateMs.textContent = time;
-    };
-
-    if (dateInput) {
-      dateInput.value = new Date().toISOString().slice(0, 16);
-      dateInput.addEventListener('input', runCalToEpoch);
-      runCalToEpoch();
-    }
-    runEpochToCal();
   }
   if (toolId === 'jwt-decoder') {
     const input = document.getElementById('jwtInputToken');

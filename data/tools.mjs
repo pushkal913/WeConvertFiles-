@@ -733,7 +733,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/json-formatter",
     "guide": "/guides/json-formatter.html",
-    "module": "app.js",
+    "module": "js/tools/json-formatter.js",
     "dependencies": []
   },
   {
@@ -867,7 +867,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/uuid-generator",
     "guide": "/guides/uuid-generator.html",
-    "module": "app.js",
+    "module": "js/tools/uuid-generator.js",
     "dependencies": []
   },
   {
@@ -919,7 +919,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/unix-converter",
     "guide": "/guides/unix-converter.html",
-    "module": "app.js",
+    "module": "js/tools/unix-converter.js",
     "dependencies": []
   },
   {
