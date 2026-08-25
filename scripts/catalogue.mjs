@@ -1,4 +1,4 @@
-import { tools, categories, libraries } from '../data/tools.mjs';
+import { tools, categories, libraries, nav } from '../data/tools.mjs';
 import { guideSlugForTool } from './guide-catalog.mjs';
 
 // Load-and-validate entry point for the authoritative tool catalogue
@@ -10,7 +10,7 @@ import { guideSlugForTool } from './guide-catalog.mjs';
 // cross-check that app.js and layout.js still match the catalogue lives in
 // validate-catalogue.mjs.
 
-export { tools, categories, libraries };
+export { tools, categories, libraries, nav };
 
 // Render the runtime dependency data (js/catalogue.js) from the catalogue: the
 // library CDN sources/css and the per-tool dependency lists, exposed to the

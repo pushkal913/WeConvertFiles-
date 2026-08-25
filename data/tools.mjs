@@ -1027,3 +1027,127 @@ export const tools = [
     "dependencies": []
   }
 ];
+
+export const nav = {
+  // Curated navigation, centralized here so adding a tool to `tools` above (and,
+  // if it belongs in the mobile menu, to a group below) updates the header
+  // search and mobile drawer without editing layout.js.
+  //
+  // Per-tool label overrides for the header search, where the navigation label
+  // is intentionally worded differently from the tool-page title/kicker. Only
+  // title and kicker are shown in navigation.
+  overrides: {
+    "compress-pdf": {
+      "kicker": "Optimize PDF"
+    },
+    "sign-pdf": {
+      "kicker": "Design PDF"
+    },
+    "bulk-resize": {
+      "kicker": "Scale Image"
+    },
+    "word-counter": {
+      "title": "Word Counter & Editor",
+      "kicker": "Text Tools"
+    },
+    "webp-convert": {
+      "kicker": "Optimize Image"
+    },
+    "watermark-pdf": {
+      "kicker": "Design PDF"
+    },
+    "page-numbers": {
+      "kicker": "Design PDF"
+    },
+    "rotate-pdf": {
+      "kicker": "Organize PDF"
+    },
+    "encrypt-pdf": {
+      "kicker": "Security PDF"
+    },
+    "json-convert": {
+      "kicker": "Office Convert"
+    },
+    "csv-convert": {
+      "title": "CSV to JSON / Excel",
+      "kicker": "Office Convert"
+    },
+    "color-palette": {
+      "kicker": "Design Image"
+    },
+    "url-base64": {
+      "title": "URL & Base64 Encoder / Decoder"
+    },
+    "decrypt-pdf": {
+      "kicker": "Security PDF"
+    }
+  },
+  // Mobile menu taxonomy: curated groups in display order. A tool not listed in
+  // any group is intentionally omitted from the mobile drawer.
+  groups: [
+    {
+      "name": "IMAGE TOOLS",
+      "toolIds": [
+        "image-cropper",
+        "favicon-generator",
+        "image-scaler",
+        "pdf-images",
+        "pdf-jpg",
+        "images-pdf",
+        "webp-convert",
+        "bulk-resize",
+        "color-palette",
+        "exif-utility",
+        "heic-to-jpg"
+      ]
+    },
+    {
+      "name": "PDF TOOLS",
+      "toolIds": [
+        "pdf-to-word",
+        "merge-pdf",
+        "split-pdf",
+        "extract-pages",
+        "organize-pdf",
+        "rotate-pdf",
+        "remove-pages",
+        "decrypt-pdf",
+        "encrypt-pdf",
+        "compress-pdf",
+        "watermark-pdf",
+        "page-numbers",
+        "sign-pdf"
+      ]
+    },
+    {
+      "name": "CONVERT & OFFICE",
+      "toolIds": [
+        "excel-to-csv",
+        "csv-convert",
+        "json-convert",
+        "office-pdf",
+        "json-yaml"
+      ]
+    },
+    {
+      "name": "TEXT & DEVELOPERS",
+      "toolIds": [
+        "regex-tester",
+        "uuid-generator",
+        "unix-converter",
+        "jwt-decoder",
+        "word-counter",
+        "diff-checker",
+        "markdown-preview",
+        "url-base64",
+        "json-formatter",
+        "qr-generator",
+        "hash-generator",
+        "sql-formatter",
+        "code-minifier",
+        "password-generator",
+        "case-converter"
+      ]
+    }
+  ]
+};

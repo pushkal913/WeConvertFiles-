@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { tools, categories, libraries, catalogueProblems, renderRuntimeCatalogue } from './catalogue.mjs';
+import { tools, categories, libraries, nav, catalogueProblems, renderRuntimeCatalogue } from './catalogue.mjs';
 
 // Validates the authoritative tool catalogue (data/tools.mjs):
 //   1. Structural integrity — 47 tools, no duplicate ids, required fields,
@@ -101,6 +101,46 @@ const layoutTools = pickLiteral(layoutSource, 'const tools = ', '\n    ];');
 const layoutIds = new Set(layoutTools.map((t) => t.id));
 for (const tool of tools) assert(layoutIds.has(tool.id), `Tool "${tool.id}" is missing from layout.js`);
 for (const id of layoutIds) assert(tools.find((t) => t.id === id), `layout.js tool "${id}" is missing from the catalogue`);
+
+// ---- 4. Navigation is catalogue-driven --------------------------------------
+
+const toolIdSet = new Set(tools.map((t) => t.id));
+for (const id of Object.keys(nav.overrides)) {
+  assert(toolIdSet.has(id), `nav.overrides references unknown tool "${id}"`);
+}
+for (const group of nav.groups) {
+  assert(typeof group.name === 'string' && group.name.length > 0, 'a nav group is missing a name');
+  for (const id of group.toolIds) assert(toolIdSet.has(id), `nav group "${group.name}" references unknown tool "${id}"`);
+}
+// layout.js's search list is generated from the catalogue (markers present and
+// tool ids in catalogue order), and its mobile groups mirror nav.groups.
+assert(
+  layoutSource.includes('WCF_NAV_TOOLS_START') && layoutSource.includes('WCF_NAV_GROUPS_START'),
+  'layout.js navigation is not generated from the catalogue (missing markers) — run `npm run generate:layout-nav`.'
+);
+assert(
+  JSON.stringify(layoutTools.map((t) => t.id)) === JSON.stringify(tools.map((t) => t.id)),
+  'layout.js search tools are out of sync with the catalogue — run `npm run generate:layout-nav`.'
+);
+const layoutGroups = pickLiteral(layoutSource, 'const categories = ', '\n  ];');
+assert(
+  JSON.stringify(layoutGroups.map((g) => ({ name: g.name, ids: g.ids }))) ===
+    JSON.stringify(nav.groups.map((g) => ({ name: g.name, ids: g.toolIds }))),
+  'layout.js mobile groups are out of sync with nav.groups — run `npm run generate:layout-nav`.'
+);
+
+// No stale tool links: every single-segment nav href in the curated header /
+// footer of layout.js and index.html resolves to a catalogue route or a known
+// static page.
+const STATIC_PAGES = new Set(['/about', '/contact', '/privacy', '/terms', '/accessibility']);
+const catalogueRoutes = new Set(tools.map((t) => t.route));
+const indexSource = readFileSync(path.join(rootDir, 'index.html'), 'utf8');
+for (const [file, source] of [['layout.js', layoutSource], ['index.html', indexSource]]) {
+  const hrefs = [...new Set([...source.matchAll(/href="(\/[a-z0-9-]+)"/g)].map((m) => m[1]))];
+  for (const href of hrefs) {
+    assert(catalogueRoutes.has(href) || STATIC_PAGES.has(href), `${file} has a stale nav link "${href}" (not a catalogue route or known page)`);
+  }
+}
 
 // ---- Report -----------------------------------------------------------------
 
