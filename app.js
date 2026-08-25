@@ -4,140 +4,55 @@ let StandardFonts;
 let rgb;
 let degrees;
 
-const converterLibraries = Object.freeze({
-  jspdf: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
-    ready: () => Boolean(window.jspdf && window.jspdf.jsPDF)
-  },
-  pdfjs: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js',
-    ready: () => Boolean(window.pdfjsLib)
-  },
-  pdflib: {
-    src: 'https://cdn.jsdelivr.net/npm/pdf-lib-with-encrypt@1.2.1/dist/pdf-lib.min.js',
-    ready: () => Boolean(window.PDFLib)
-  },
-  papa: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js',
-    ready: () => Boolean(window.Papa)
-  },
-  xlsx: {
-    src: 'https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js',
-    ready: () => Boolean(window.XLSX)
-  },
-  jszip: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
-    ready: () => Boolean(window.JSZip)
-  },
-  mammoth: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js',
-    ready: () => Boolean(window.mammoth)
-  },
-  html2pdf: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js',
-    ready: () => Boolean(window.html2pdf)
-  },
-  docx: {
-    src: 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js',
-    ready: () => Boolean(window.docx && window.docx.Packer)
-  },
-  jspdfautotable: {
-    src: 'https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js',
-    ready: () => Boolean(window.jspdf && window.jspdf.jsPDF && window.jspdf.jsPDF.API && typeof window.jspdf.jsPDF.API.autoTable === 'function')
-  },
-  cryptojs: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js',
-    ready: () => Boolean(window.CryptoJS)
-  },
-  qrious: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js',
-    ready: () => Boolean(window.QRious)
-  },
-  exif: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js',
-    ready: () => Boolean(window.EXIF)
-  },
-  heic2any: {
-    src: 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js',
-    ready: () => Boolean(window.heic2any)
-  },
-  marked: {
-    src: 'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
-    ready: () => Boolean(window.marked)
-  },
-  diff: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js',
-    ready: () => Boolean(window.diff_match_patch)
-  },
-  jsyaml: {
-    src: 'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js',
-    ready: () => Boolean(window.jsyaml)
-  },
-  sqlformatter: {
-    src: 'https://cdn.jsdelivr.net/npm/sql-formatter@15.8.2/dist/sql-formatter.min.js',
-    ready: () => Boolean(window.sqlFormatter)
-  },
-  terser: {
-    src: 'https://cdn.jsdelivr.net/npm/terser@5.49.0/dist/bundle.min.js',
-    ready: () => Boolean(window.Terser)
-  },
-  csso: {
-    src: 'https://cdn.jsdelivr.net/npm/csso@5.0.5/dist/csso.js',
-    ready: () => Boolean(window.csso)
-  },
-  jsbeautifyjs: {
-    src: 'https://cdn.jsdelivr.net/npm/js-beautify@2.0.3/js/lib/beautify.js',
-    ready: () => Boolean(window.js_beautify)
-  },
-  jsbeautifycss: {
-    src: 'https://cdn.jsdelivr.net/npm/js-beautify@2.0.3/js/lib/beautify-css.js',
-    ready: () => Boolean(window.css_beautify)
-  },
-  jsbeautifyhtml: {
-    src: 'https://cdn.jsdelivr.net/npm/js-beautify@2.0.3/js/lib/beautify-html.js',
-    ready: () => Boolean(window.html_beautify)
-  },
-  cropper: {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js',
-    css: 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css',
-    ready: () => Boolean(window.Cropper)
-  }
-});
+// Third-party library detection. The CDN sources, versions and per-tool
+// dependency lists live in the tool catalogue (data/tools.mjs) and are
+// delivered at runtime as window.WCF_CATALOGUE by js/catalogue.js, so this file
+// no longer hard-codes that metadata. Only the ready-checks (detection code,
+// which cannot be data) stay here, keyed by library name.
+const libraryReadyChecks = {
+  jspdf: () => Boolean(window.jspdf && window.jspdf.jsPDF),
+  pdfjs: () => Boolean(window.pdfjsLib),
+  pdflib: () => Boolean(window.PDFLib),
+  papa: () => Boolean(window.Papa),
+  xlsx: () => Boolean(window.XLSX),
+  jszip: () => Boolean(window.JSZip),
+  mammoth: () => Boolean(window.mammoth),
+  html2pdf: () => Boolean(window.html2pdf),
+  docx: () => Boolean(window.docx && window.docx.Packer),
+  jspdfautotable: () => Boolean(window.jspdf && window.jspdf.jsPDF && window.jspdf.jsPDF.API && typeof window.jspdf.jsPDF.API.autoTable === 'function'),
+  cryptojs: () => Boolean(window.CryptoJS),
+  qrious: () => Boolean(window.QRious),
+  exif: () => Boolean(window.EXIF),
+  heic2any: () => Boolean(window.heic2any),
+  marked: () => Boolean(window.marked),
+  diff: () => Boolean(window.diff_match_patch),
+  jsyaml: () => Boolean(window.jsyaml),
+  sqlformatter: () => Boolean(window.sqlFormatter),
+  terser: () => Boolean(window.Terser),
+  csso: () => Boolean(window.csso),
+  jsbeautifyjs: () => Boolean(window.js_beautify),
+  jsbeautifycss: () => Boolean(window.css_beautify),
+  jsbeautifyhtml: () => Boolean(window.html_beautify),
+  cropper: () => Boolean(window.Cropper)
+};
 
-const toolLibraryDependencies = Object.freeze({
-  'json-yaml': ['jsyaml'],
-  'sql-formatter': ['sqlformatter'],
-  'pdf-to-word': ['pdfjs'],
-  'office-pdf': ['html2pdf', 'mammoth', 'xlsx'],
-  'merge-pdf': ['pdflib'],
-  'images-pdf': ['jspdf'],
-  'compress-pdf': ['pdfjs', 'jspdf'],
-  'heic-to-jpg': ['heic2any', 'jszip'],
-  'split-pdf': ['pdflib', 'jszip'],
-  'pdf-images': ['pdfjs', 'jszip'],
-  'pdf-jpg': ['pdfjs', 'jszip'],
-  'qr-generator': ['qrious'],
-  'sign-pdf': ['pdflib'],
-  'extract-pages': ['pdflib'],
-  'image-cropper': ['cropper'],
-  'remove-pages': ['pdfjs', 'pdflib'],
-  'bulk-resize': ['jszip'],
-  'excel-to-csv': ['xlsx'],
-  'webp-convert': ['jszip'],
-  'organize-pdf': ['pdfjs', 'pdflib'],
-  'watermark-pdf': ['pdflib'],
-  'page-numbers': ['pdflib'],
-  'rotate-pdf': ['pdfjs', 'pdflib'],
-  'encrypt-pdf': ['pdflib'],
-  'json-convert': ['xlsx'],
-  'csv-convert': ['papa', 'xlsx'],
-  'favicon-generator': ['jszip'],
-  'diff-checker': ['diff'],
-  'markdown-preview': ['marked'],
-  'hash-generator': ['cryptojs'],
-  'exif-utility': ['exif'],
-  'decrypt-pdf': ['pdflib', 'pdfjs', 'jspdf']
-});
+const RUNTIME_CATALOGUE = (typeof window !== 'undefined' && window.WCF_CATALOGUE) || { libraries: {}, dependencies: {} };
+
+// Resolve a library name to { src, css, ready } by combining the catalogue's
+// source metadata with the local ready-check. Returns null for an unknown one.
+function converterLibraryEntry(name) {
+  const meta = RUNTIME_CATALOGUE.libraries[name];
+  const ready = libraryReadyChecks[name];
+  if (!meta || typeof ready !== 'function') return null;
+  return { src: meta.src, css: meta.css, ready };
+}
+
+// The libraries a tool needs, from the catalogue (empty if none).
+function toolDependencies(toolId) {
+  const deps = RUNTIME_CATALOGUE.dependencies[toolId];
+  return Array.isArray(deps) ? deps : [];
+}
+
 
 const interactiveLibraryTools = new Set([
   'qr-generator',
@@ -162,9 +77,9 @@ function syncConverterLibraryGlobals() {
 }
 
 function loadConverterLibrary(name) {
-  const library = converterLibraries[name];
+  const library = converterLibraryEntry(name);
   if (!library) {
-    return Promise.reject(new Error(`Unknown converter library: ${name}`));
+    return Promise.reject(new Error(`The "${name}" library is not registered in the tool catalogue, so it cannot be loaded.`));
   }
   if (library.ready()) {
     syncConverterLibraryGlobals();
@@ -208,9 +123,40 @@ function loadConverterLibrary(name) {
 }
 
 async function ensureToolLibraries(toolId) {
-  const dependencies = toolLibraryDependencies[toolId] || [];
+  const dependencies = toolDependencies(toolId);
   await Promise.all(dependencies.map(loadConverterLibrary));
   syncConverterLibraryGlobals();
+}
+
+// ---- Tool module runtime (Phase 2 incremental code-splitting) --------------
+// Some tools have moved out of this file into js/tools/<id>.js and load only
+// when their tool is opened, so a visitor to one tool no longer downloads the
+// implementation of unrelated tools. A migrated module calls
+// WCF.registerTool(id, { render(container, ctx) }). The list below is the
+// runtime mirror of each tool's "module" field in data/tools.mjs.
+const TOOL_MODULE_VERSION = '20260824-1';
+const MODULE_TOOLS = new Set(['password-generator', 'case-converter']);
+const toolModuleRegistry = {};
+const toolModulePromises = new Map();
+window.WCF = window.WCF || {};
+window.WCF.registerTool = (id, def) => { toolModuleRegistry[id] = def; };
+function loadToolModule(id) {
+  if (!MODULE_TOOLS.has(id)) return Promise.resolve(null);
+  if (toolModuleRegistry[id]) return Promise.resolve(toolModuleRegistry[id]);
+  if (toolModulePromises.has(id)) return toolModulePromises.get(id);
+  const promise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = `/js/tools/${id}.js?v=${TOOL_MODULE_VERSION}`;
+    script.async = true;
+    script.onload = () => {
+      if (toolModuleRegistry[id]) resolve(toolModuleRegistry[id]);
+      else reject(new Error(`Tool module "${id}" did not register.`));
+    };
+    script.onerror = () => { toolModulePromises.delete(id); reject(new Error(`Could not load tool module "${id}".`)); };
+    document.head.appendChild(script);
+  });
+  toolModulePromises.set(id, promise);
+  return promise;
 }
 
 const toolContentDetails = {
@@ -1571,6 +1517,14 @@ async function openTool(toolId) {
     }
   }
 
+  if (MODULE_TOOLS.has(tool.id)) {
+    try {
+      await loadToolModule(tool.id);
+    } catch (error) {
+      setStatus(error.message || 'Unable to load this tool. Please refresh and try again.', 'error');
+      return;
+    }
+  }
   renderToolOptions(tool.id);
   renderPersistentRelatedTools();
   if (tool.id === 'sign-pdf') {
@@ -1589,6 +1543,14 @@ function renderToolOptions(toolId) {
   const inputClass = 'mt-2 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-sm text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition';
   const labelClass = 'text-sm font-semibold text-slate-800 dark:text-slate-200';
   const helpClass = 'mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400';
+
+  // A migrated tool renders its own options UI from js/tools/<id>.js.
+  const moduleImpl = toolModuleRegistry[toolId];
+  if (moduleImpl) {
+    moduleImpl.render(toolOptions, { classes: { inputClass, labelClass, helpClass } });
+    toolOptions.classList.remove('hidden');
+    return;
+  }
   const panels = {
     'extract-pages': `
       <label class="${labelClass}" for="pageRangeInput">Pages to extract</label>
@@ -2115,104 +2077,6 @@ function renderToolOptions(toolId) {
           </div>
         </div>
         <div id="cmInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold whitespace-pre-wrap"></div>
-      </div>
-    `,
-    'password-generator': `
-      <div>
-        <div class="mb-4 inline-flex flex-wrap rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/40 p-1">
-          <button id="pgModePassword" type="button" class="px-3.5 py-1.5 text-xs font-bold rounded-lg transition">Password</button>
-          <button id="pgModeHex" type="button" class="px-3.5 py-1.5 text-xs font-bold rounded-lg transition">Hex Token</button>
-          <button id="pgModeBase64" type="button" class="px-3.5 py-1.5 text-xs font-bold rounded-lg transition">Base64URL Token</button>
-        </div>
-
-        <div class="grid gap-4 sm:grid-cols-2 mb-4">
-          <div id="pgLengthWrapper">
-            <div class="flex items-center justify-between">
-              <label class="${labelClass}">Length: <span id="pgLengthValue">16</span> characters</label>
-            </div>
-            <input id="pgLengthRange" type="range" min="4" max="128" value="16" class="mt-2.5 w-full accent-[#1a73e8]" />
-          </div>
-          <div id="pgTokenBytesWrapper" class="hidden">
-            <label class="${labelClass}">Token Length</label>
-            <select id="pgTokenBytesSelect" class="${inputClass}">
-              <option value="16">16 bytes (128-bit)</option>
-              <option value="24">24 bytes (192-bit)</option>
-              <option value="32" selected>32 bytes (256-bit)</option>
-              <option value="48">48 bytes (384-bit)</option>
-              <option value="64">64 bytes (512-bit)</option>
-            </select>
-          </div>
-          <div>
-            <label class="${labelClass}">Number of Results</label>
-            <select id="pgCountSelect" class="${inputClass}">
-              <option value="1" selected>1</option>
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="20">20</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="pgCharsetOptions" class="grid gap-2.5 sm:grid-cols-2 mb-4">
-          <label class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300"><input type="checkbox" id="pgUpper" checked class="rounded accent-[#1a73e8]" /> Uppercase (A-Z)</label>
-          <label class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300"><input type="checkbox" id="pgLower" checked class="rounded accent-[#1a73e8]" /> Lowercase (a-z)</label>
-          <label class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300"><input type="checkbox" id="pgNumbers" checked class="rounded accent-[#1a73e8]" /> Numbers (0-9)</label>
-          <label class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300"><input type="checkbox" id="pgSymbols" class="rounded accent-[#1a73e8]" /> Symbols (!@#$...)</label>
-          <label class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 sm:col-span-2"><input type="checkbox" id="pgExcludeAmbiguous" class="rounded accent-[#1a73e8]" /> Exclude ambiguous characters (I, l, 1, O, 0)</label>
-        </div>
-
-        <div class="mb-4 p-3 rounded-xl border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/40 flex items-center justify-between">
-          <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Estimated Entropy</span>
-          <span id="pgEntropyValue" class="text-sm font-bold text-slate-800 dark:text-slate-200">&mdash;</span>
-        </div>
-
-        <div class="flex flex-wrap gap-2.5 mb-4">
-          <button id="pgGenerateBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Generate</button>
-          <button id="pgRegenerateBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Regenerate</button>
-          <button id="pgCopyAllBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy All</button>
-          <button id="pgClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition ml-auto">Clear</button>
-        </div>
-
-        <div id="pgResultsList" class="space-y-2"></div>
-        <div id="pgInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold whitespace-pre-wrap"></div>
-        <p class="mt-3 text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">Generated with your browser's cryptographically secure random number generator (crypto.getRandomValues). Nothing is ever saved, logged, or transmitted.</p>
-      </div>
-    `,
-    'case-converter': `
-      <div>
-        <div class="grid gap-4 md:grid-cols-2 mb-4">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Input Text</label>
-              <span id="ccInputStats" class="text-[10px] font-semibold text-slate-500 dark:text-slate-400">0 words · 0 characters</span>
-            </div>
-            <textarea id="ccInput" rows="11" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none focus:border-[#1a73e8] focus:ring-1 focus:ring-[#1a73e8] transition" placeholder="Type or paste text here..."></textarea>
-          </div>
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Output Text</label>
-              <span id="ccOutputStats" class="text-[10px] font-semibold text-slate-500 dark:text-slate-400">0 words · 0 characters</span>
-            </div>
-            <textarea id="ccOutput" rows="11" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none readonly" readonly placeholder="Converted text will appear here..."></textarea>
-          </div>
-        </div>
-        <label class="${labelClass} block mb-2">Choose a Case Style</label>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
-          <button data-case="upper" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">UPPERCASE</button>
-          <button data-case="lower" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">lowercase</button>
-          <button data-case="title" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Title Case</button>
-          <button data-case="sentence" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Sentence case</button>
-          <button data-case="camel" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">camelCase</button>
-          <button data-case="pascal" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">PascalCase</button>
-          <button data-case="snake" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">snake_case</button>
-          <button data-case="kebab" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">kebab-case</button>
-          <button data-case="constant" type="button" class="cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">CONSTANT_CASE</button>
-        </div>
-        <div class="flex flex-wrap gap-2.5">
-          <button id="ccCopyBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy Output</button>
-          <button id="ccDownloadBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Download .txt</button>
-          <button id="ccClearBtn" type="button" class="px-4 py-2.5 text-xs font-bold rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/20 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/40 dark:border-rose-900/40 transition ml-auto">Clear</button>
-        </div>
       </div>
     `,
     'qr-generator': `
@@ -3061,315 +2925,6 @@ function renderToolOptions(toolId) {
     });
 
     setMode('minify');
-  }
-  if (toolId === 'password-generator') {
-    const modePasswordBtn = document.getElementById('pgModePassword');
-    const modeHexBtn = document.getElementById('pgModeHex');
-    const modeBase64Btn = document.getElementById('pgModeBase64');
-    const lengthWrapper = document.getElementById('pgLengthWrapper');
-    const lengthRange = document.getElementById('pgLengthRange');
-    const lengthValue = document.getElementById('pgLengthValue');
-    const tokenBytesWrapper = document.getElementById('pgTokenBytesWrapper');
-    const tokenBytesSelect = document.getElementById('pgTokenBytesSelect');
-    const countSelect = document.getElementById('pgCountSelect');
-    const charsetOptions = document.getElementById('pgCharsetOptions');
-    const upperCheck = document.getElementById('pgUpper');
-    const lowerCheck = document.getElementById('pgLower');
-    const numbersCheck = document.getElementById('pgNumbers');
-    const symbolsCheck = document.getElementById('pgSymbols');
-    const excludeAmbiguousCheck = document.getElementById('pgExcludeAmbiguous');
-    const entropyValue = document.getElementById('pgEntropyValue');
-    const generateBtn = document.getElementById('pgGenerateBtn');
-    const regenerateBtn = document.getElementById('pgRegenerateBtn');
-    const copyAllBtn = document.getElementById('pgCopyAllBtn');
-    const clearBtn = document.getElementById('pgClearBtn');
-    const resultsList = document.getElementById('pgResultsList');
-    const info = document.getElementById('pgInfoBox');
-
-    const AMBIGUOUS_CHARS = 'Il1O0';
-    const UPPER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const LOWER_CHARS = 'abcdefghijklmnopqrstuvwxyz';
-    const NUMBER_CHARS = '0123456789';
-    const SYMBOL_CHARS = '!@#$%^&*()_+-=[]{}|;:,.<>?';
-
-    const toggleBaseClass = 'px-3.5 py-1.5 text-xs font-bold rounded-lg transition';
-    const toggleActiveClass = 'bg-blue-600 text-white shadow';
-    const toggleInactiveClass = 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800';
-
-    let mode = 'password';
-    let lastResults = [];
-
-    const escapeAttr = (value) => value
-      .replace(/&/g, '&amp;')
-      .replace(/"/g, '&quot;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-
-    const setMode = (m) => {
-      mode = m;
-      modePasswordBtn.className = `${toggleBaseClass} ${mode === 'password' ? toggleActiveClass : toggleInactiveClass}`;
-      modeHexBtn.className = `${toggleBaseClass} ${mode === 'hex' ? toggleActiveClass : toggleInactiveClass}`;
-      modeBase64Btn.className = `${toggleBaseClass} ${mode === 'base64' ? toggleActiveClass : toggleInactiveClass}`;
-      const isPassword = mode === 'password';
-      lengthWrapper.classList.toggle('hidden', !isPassword);
-      charsetOptions.classList.toggle('hidden', !isPassword);
-      tokenBytesWrapper.classList.toggle('hidden', isPassword);
-      updateEntropy();
-    };
-
-    const secureRandomInt = (maxExclusive) => {
-      if (maxExclusive <= 0) return 0;
-      const array = new Uint32Array(1);
-      const limit = Math.floor(0xFFFFFFFF / maxExclusive) * maxExclusive;
-      let x;
-      do {
-        crypto.getRandomValues(array);
-        x = array[0];
-      } while (x >= limit);
-      return x % maxExclusive;
-    };
-
-    const buildCharsetGroups = () => {
-      const groups = [];
-      if (upperCheck.checked) groups.push(UPPER_CHARS);
-      if (lowerCheck.checked) groups.push(LOWER_CHARS);
-      if (numbersCheck.checked) groups.push(NUMBER_CHARS);
-      if (symbolsCheck.checked) groups.push(SYMBOL_CHARS);
-      if (!excludeAmbiguousCheck.checked) return groups;
-      return groups
-        .map((group) => group.split('').filter((ch) => !AMBIGUOUS_CHARS.includes(ch)).join(''))
-        .filter((group) => group.length > 0);
-    };
-
-    const buildCharset = () => buildCharsetGroups().join('');
-
-    const generatePassword = (length, groups) => {
-      const fullCharset = groups.join('');
-      const chars = [];
-      // Guarantee at least one character from each selected class.
-      groups.forEach((group) => {
-        if (chars.length < length) chars.push(group[secureRandomInt(group.length)]);
-      });
-      while (chars.length < length) {
-        chars.push(fullCharset[secureRandomInt(fullCharset.length)]);
-      }
-      // Fisher-Yates shuffle using the same CSPRNG so guaranteed characters aren't predictably placed.
-      for (let i = chars.length - 1; i > 0; i--) {
-        const j = secureRandomInt(i + 1);
-        [chars[i], chars[j]] = [chars[j], chars[i]];
-      }
-      return chars.join('');
-    };
-
-    const generateRandomBytes = (count) => {
-      const bytes = new Uint8Array(count);
-      crypto.getRandomValues(bytes);
-      return bytes;
-    };
-
-    const bytesToHex = (bytes) => Array.from(bytes).map((b) => b.toString(16).padStart(2, '0')).join('');
-
-    const bytesToBase64Url = (bytes) => {
-      let binary = '';
-      bytes.forEach((b) => { binary += String.fromCharCode(b); });
-      return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-    };
-
-    const updateEntropy = () => {
-      let bits = 0;
-      if (mode === 'password') {
-        const charset = buildCharset();
-        const length = parseInt(lengthRange.value, 10) || 0;
-        bits = charset.length > 0 ? length * Math.log2(charset.length) : 0;
-      } else {
-        const tokenBytes = parseInt(tokenBytesSelect.value, 10) || 0;
-        bits = tokenBytes * 8;
-      }
-      entropyValue.textContent = `${Math.round(bits)} bits`;
-    };
-
-    const showError = (message) => {
-      info.className = 'mt-3 p-3 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200/50 dark:border-red-900/40 text-red-800 dark:text-red-300 text-xs font-bold whitespace-pre-wrap';
-      info.textContent = message;
-    };
-    const clearInfo = () => { info.className = 'hidden'; };
-
-    const renderResults = (values) => {
-      resultsList.innerHTML = values.map((value, index) => `
-        <div class="flex items-center gap-2">
-          <input readonly data-index="${index}" class="pg-result-input flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 outline-none" value="${escapeAttr(value)}" />
-          <button type="button" data-index="${index}" class="pg-copy-btn shrink-0 px-3 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy</button>
-        </div>
-      `).join('');
-
-      resultsList.querySelectorAll('.pg-copy-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          navigator.clipboard.writeText(values[Number(btn.dataset.index)]);
-          showNotification('Copied!');
-        });
-      });
-    };
-
-    const runGenerate = () => {
-      const count = parseInt(countSelect.value, 10) || 1;
-      const results = [];
-
-      if (mode === 'password') {
-        const groups = buildCharsetGroups();
-        if (!groups.length) {
-          showError('Select at least one character type (uppercase, lowercase, numbers, or symbols).');
-          resultsList.innerHTML = '';
-          return;
-        }
-        const length = parseInt(lengthRange.value, 10) || 16;
-        for (let i = 0; i < count; i++) {
-          results.push(generatePassword(length, groups));
-        }
-      } else {
-        const tokenBytes = parseInt(tokenBytesSelect.value, 10) || 32;
-        for (let i = 0; i < count; i++) {
-          const bytes = generateRandomBytes(tokenBytes);
-          results.push(mode === 'hex' ? bytesToHex(bytes) : bytesToBase64Url(bytes));
-        }
-      }
-
-      lastResults = results;
-      renderResults(results);
-      clearInfo();
-      updateEntropy();
-    };
-
-    if (modePasswordBtn) modePasswordBtn.addEventListener('click', () => setMode('password'));
-    if (modeHexBtn) modeHexBtn.addEventListener('click', () => setMode('hex'));
-    if (modeBase64Btn) modeBase64Btn.addEventListener('click', () => setMode('base64'));
-
-    if (lengthRange) lengthRange.addEventListener('input', () => {
-      lengthValue.textContent = lengthRange.value;
-      updateEntropy();
-    });
-    [tokenBytesSelect, upperCheck, lowerCheck, numbersCheck, symbolsCheck, excludeAmbiguousCheck].forEach((el) => {
-      if (el) el.addEventListener('change', updateEntropy);
-    });
-
-    if (generateBtn) generateBtn.addEventListener('click', runGenerate);
-    if (regenerateBtn) regenerateBtn.addEventListener('click', runGenerate);
-    if (clearBtn) clearBtn.addEventListener('click', () => {
-      lastResults = [];
-      resultsList.innerHTML = '';
-      clearInfo();
-    });
-    if (copyAllBtn) copyAllBtn.addEventListener('click', () => {
-      if (lastResults.length) {
-        navigator.clipboard.writeText(lastResults.join('\n'));
-        showNotification('Copied all results!');
-      }
-    });
-
-    setMode('password');
-  }
-  if (toolId === 'case-converter') {
-    const input = document.getElementById('ccInput');
-    const output = document.getElementById('ccOutput');
-    const inputStats = document.getElementById('ccInputStats');
-    const outputStats = document.getElementById('ccOutputStats');
-    const copyBtn = document.getElementById('ccCopyBtn');
-    const downloadBtn = document.getElementById('ccDownloadBtn');
-    const clearBtn = document.getElementById('ccClearBtn');
-    const caseButtons = document.querySelectorAll('.cc-case-btn');
-
-    const activeBtnClass = 'cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-blue-600 text-white border border-blue-600 shadow-md transition';
-    const inactiveBtnClass = 'cc-case-btn px-3 py-2.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition';
-
-    const countStats = (text) => {
-      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-      const characters = text.length;
-      return `${words} word${words === 1 ? '' : 's'} · ${characters} character${characters === 1 ? '' : 's'}`;
-    };
-
-    const updateInputStats = () => { inputStats.textContent = countStats(input.value); };
-    const updateOutputStats = () => { outputStats.textContent = countStats(output.value); };
-
-    const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-
-    const splitWords = (str) => str
-      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
-      .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
-      .replace(/[_-]+/g, ' ')
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean);
-
-    const convertLine = (line, m) => {
-      const words = splitWords(line);
-      if (!words.length) return '';
-      if (m === 'camel') return words.map((w, i) => (i === 0 ? w.toLowerCase() : capitalize(w))).join('');
-      if (m === 'pascal') return words.map(capitalize).join('');
-      if (m === 'snake') return words.map((w) => w.toLowerCase()).join('_');
-      if (m === 'kebab') return words.map((w) => w.toLowerCase()).join('-');
-      if (m === 'constant') return words.map((w) => w.toUpperCase()).join('_');
-      return line;
-    };
-
-    const convertText = (text, m) => {
-      if (m === 'upper') return text.toUpperCase();
-      if (m === 'lower') return text.toLowerCase();
-      if (m === 'title') return text.replace(/\S+/g, (word) => capitalize(word));
-      if (m === 'sentence') {
-        return text.toLowerCase().replace(/(^\s*[a-z]|[.!?]\s+[a-z]|\n\s*[a-z])/g, (match) => match.toUpperCase());
-      }
-      if (['camel', 'pascal', 'snake', 'kebab', 'constant'].includes(m)) {
-        return text.split('\n').map((line) => convertLine(line, m)).join('\n');
-      }
-      return text;
-    };
-
-    let activeCase = null;
-
-    caseButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        activeCase = btn.dataset.case;
-        output.value = convertText(input.value, activeCase);
-        updateOutputStats();
-        caseButtons.forEach((b) => { b.className = (b === btn) ? activeBtnClass : inactiveBtnClass; });
-      });
-    });
-
-    if (input) input.addEventListener('input', () => {
-      updateInputStats();
-      if (activeCase) {
-        output.value = convertText(input.value, activeCase);
-        updateOutputStats();
-      }
-    });
-    if (copyBtn) copyBtn.addEventListener('click', () => {
-      if (output.value) {
-        navigator.clipboard.writeText(output.value);
-        showNotification('Copied output!');
-      }
-    });
-    if (downloadBtn) downloadBtn.addEventListener('click', () => {
-      if (!output.value) return;
-      const blob = new Blob([output.value], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'converted-text.txt';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    });
-    if (clearBtn) clearBtn.addEventListener('click', () => {
-      input.value = '';
-      output.value = '';
-      activeCase = null;
-      updateInputStats();
-      updateOutputStats();
-      caseButtons.forEach((b) => { b.className = inactiveBtnClass; });
-    });
-
-    updateInputStats();
-    updateOutputStats();
   }
   if (toolId === 'qr-generator') {
     const textInput = document.getElementById('qrTextInput');
@@ -4747,7 +4302,7 @@ async function addFiles(fileListObject) {
   state.files = state.currentTool.multiple ? [...state.files, ...validFiles] : validFiles.slice(0, 1);
   setStatus('');
 
-  const dependencies = toolLibraryDependencies[state.currentTool.id] || [];
+  const dependencies = toolDependencies(state.currentTool.id);
   if (dependencies.length) {
     setStatus('Loading the secure conversion engine...');
     try {

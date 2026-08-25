@@ -41,55 +41,57 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Define tools dataset for search and mobile menu drawer
+  // WCF_NAV_TOOLS_START — generated from data/tools.mjs (npm run generate:layout-nav); do not edit by hand.
   const tools = [
-      { id: 'pdf-to-word', title: 'PDF to Word / TXT', kicker: 'PDF Tools', badge: 'DOCX or TXT', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
-      { id: 'office-pdf', title: 'Word / Excel to PDF', kicker: 'Office Tools', badge: '100% Local', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' },
-      { id: 'merge-pdf', title: 'Merge PDF', kicker: 'Organize PDF', badge: 'Multiple PDFs', iconBg: 'bg-rose-100', iconColor: 'text-rose-600' },
-      { id: 'images-pdf', title: 'Images to PDF', kicker: 'Convert PDF', badge: 'Convert JPG/PNG', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
-      { id: 'compress-pdf', title: 'Compress PDF', kicker: 'Optimize PDF', badge: 'File shrink', iconBg: 'bg-amber-100', iconColor: 'text-amber-600' },
-      { id: 'heic-to-jpg', title: 'HEIC to JPG / PNG', kicker: 'Image Tools', badge: 'Apple HEIC', iconBg: 'bg-teal-100', iconColor: 'text-teal-600' },
-      { id: 'split-pdf', title: 'Split PDF', kicker: 'Organize PDF', badge: 'ZIP output', iconBg: 'bg-orange-100', iconColor: 'text-orange-600' },
-      { id: 'pdf-images', title: 'PDF to PNG', kicker: 'Convert PDF', badge: 'Extract images', iconBg: 'bg-rose-100', iconColor: 'text-rose-700' },
-      { id: 'pdf-jpg', title: 'PDF to JPG', kicker: 'Convert PDF', badge: 'Extract JPGs', iconBg: 'bg-red-100', iconColor: 'text-red-700' },
-      { id: 'qr-generator', title: 'QR Code Generator', kicker: 'Developer Tools', badge: 'QR Code', iconBg: 'bg-indigo-100', iconColor: 'text-indigo-700' },
-      { id: 'sign-pdf', title: 'Sign PDF', kicker: 'Design PDF', badge: 'Draw/Type', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
-      { id: 'image-cropper', title: 'Crop Image', kicker: 'Image Tools', badge: 'Aspect Crop', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-600' },
-      { id: 'extract-pages', title: 'Extract Pages', kicker: 'Organize PDF', badge: 'Page ranges', iconBg: 'bg-amber-100', iconColor: 'text-amber-700' },
-      { id: 'remove-pages', title: 'Remove Pages', kicker: 'Organize PDF', badge: 'Delete pages', iconBg: 'bg-teal-100', iconColor: 'text-teal-700' },
-      { id: 'bulk-resize', title: 'Bulk Image Resizer', kicker: 'Scale Image', badge: 'ZIP batch', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-600' },
-      { id: 'excel-to-csv', title: 'Excel to CSV / JSON', kicker: 'Document Tools', badge: 'XLSX / XLS', iconBg: 'bg-green-100', iconColor: 'text-green-700' },
-      { id: 'word-counter', title: 'Word Counter & Editor', kicker: 'Text Tools', badge: 'Realtime count', iconBg: 'bg-sky-100', iconColor: 'text-sky-600' },
-      { id: 'image-scaler', title: 'Scale Image', kicker: 'Image Tools', badge: '100% Local', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-700' },
-      { id: 'webp-convert', title: 'Image to WebP', kicker: 'Optimize Image', badge: 'Lossless WebP', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' },
-      { id: 'organize-pdf', title: 'Organize PDF', kicker: 'Organize PDF', badge: 'Reorder pages', iconBg: 'bg-lime-100', iconColor: 'text-lime-700' },
-      { id: 'watermark-pdf', title: 'Watermark PDF', kicker: 'Design PDF', badge: 'Text overlay', iconBg: 'bg-violet-100', iconColor: 'text-violet-700' },
-      { id: 'page-numbers', title: 'Add Page Numbers', kicker: 'Design PDF', badge: 'Footer label', iconBg: 'bg-fuchsia-100', iconColor: 'text-fuchsia-700' },
-      { id: 'rotate-pdf', title: 'Rotate PDF', kicker: 'Organize PDF', badge: 'Any angle', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-700' },
-      { id: 'encrypt-pdf', title: 'Protect PDF', kicker: 'Security PDF', badge: 'Add password', iconBg: 'bg-sky-100', iconColor: 'text-sky-700' },
-      { id: 'json-convert', title: 'JSON to CSV / Excel', kicker: 'Office Convert', badge: 'Local parse', iconBg: 'bg-indigo-100', iconColor: 'text-indigo-600' },
-      { id: 'csv-convert', title: 'CSV to JSON / Excel', kicker: 'Office Convert', badge: 'Local parse', iconBg: 'bg-amber-100', iconColor: 'text-amber-600' },
-      { id: 'json-formatter', title: 'JSON Formatter / Validator', kicker: 'Developer Tools', badge: 'Formatter', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-700' },
-      { id: 'color-palette', title: 'Image Color Picker & Eyedropper', kicker: 'Design Image', badge: 'Hex copy', iconBg: 'bg-pink-100', iconColor: 'text-pink-600' },
-      { id: 'favicon-generator', title: 'Favicon Generator', kicker: 'Image Tools', badge: 'ICO & PNG Pack', iconBg: 'bg-amber-100', iconColor: 'text-amber-600' },
-      { id: 'diff-checker', title: 'Code Diff Checker', kicker: 'Developer Tools', badge: 'Line-by-line', iconBg: 'bg-purple-100', iconColor: 'text-purple-700' },
-      { id: 'url-base64', title: 'URL & Base64 Encoder / Decoder', kicker: 'Developer Tools', badge: '100% Client', iconBg: 'bg-indigo-100', iconColor: 'text-indigo-700' },
-      { id: 'markdown-preview', title: 'Markdown Live Preview', kicker: 'Developer Tools', badge: 'Split screen', iconBg: 'bg-teal-100', iconColor: 'text-teal-600' },
-      { id: 'regex-tester', title: 'Regex Tester', kicker: 'Developer Tools', badge: 'JS RegExp', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-700' },
-      { id: 'jwt-decoder', title: 'JWT Decoder', kicker: 'Developer Tools', badge: 'JSON Web Token', iconBg: 'bg-fuchsia-100', iconColor: 'text-fuchsia-700' },
-      { id: 'uuid-generator', title: 'UUID Generator', kicker: 'Developer Tools', badge: 'v4 / v1 Bulk', iconBg: 'bg-violet-100', iconColor: 'text-violet-700' },
-      { id: 'hash-generator', title: 'Hash Generator', kicker: 'Developer Tools', badge: 'Cryptographic', iconBg: 'bg-rose-100', iconColor: 'text-rose-700' },
-      { id: 'exif-utility', title: 'EXIF Viewer / Remover', kicker: 'Image Tools', badge: 'Privacy Tool', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-700' },
-      { id: 'unix-converter', title: 'Unix Time Converter', kicker: 'Developer Tools', badge: 'Epoch Converter', iconBg: 'bg-rose-100', iconColor: 'text-rose-600' },
-      { id: 'decrypt-pdf', title: 'Unlock PDF', kicker: 'Security PDF', badge: 'Remove pass', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-700' },
-      { id: 'image-to-base64', title: 'Image to Base64', kicker: 'Image Tools', badge: 'Base64 Output', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
-      { id: 'base64-to-image', title: 'Base64 to Image', kicker: 'Image Tools', badge: 'Base64 Decode', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
-      { id: 'svg-to-image', title: 'SVG to PNG / JPG', kicker: 'Image Tools', badge: 'Vector Export', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600' },
-      { id: 'json-yaml', title: 'JSON to YAML Converter', kicker: 'Developer Tools', badge: 'JSON ⇄ YAML', iconBg: 'bg-indigo-100', iconColor: 'text-indigo-700' },
-      { id: 'sql-formatter', title: 'SQL Formatter', kicker: 'Developer Tools', badge: 'Format Only', iconBg: 'bg-cyan-100', iconColor: 'text-cyan-700' },
-      { id: 'code-minifier', title: 'Code Minifier & Beautifier', kicker: 'Developer Tools', badge: 'HTML / CSS / JS', iconBg: 'bg-purple-100', iconColor: 'text-purple-700' },
-      { id: 'password-generator', title: 'Password & Secret Generator', kicker: 'Developer Tools', badge: 'Crypto Secure', iconBg: 'bg-orange-100', iconColor: 'text-orange-600' },
-      { id: 'case-converter', title: 'Case Converter', kicker: 'Developer Tools', badge: 'Text Case', iconBg: 'bg-lime-100', iconColor: 'text-lime-700' }
+      { id: 'image-to-base64', title: "Image to Base64", kicker: "Image Tools" },
+      { id: 'base64-to-image', title: "Base64 to Image", kicker: "Image Tools" },
+      { id: 'svg-to-image', title: "SVG to PNG / JPG", kicker: "Image Tools" },
+      { id: 'pdf-to-word', title: "PDF to Word / TXT", kicker: "PDF Tools" },
+      { id: 'office-pdf', title: "Word / Excel to PDF", kicker: "Office Tools" },
+      { id: 'merge-pdf', title: "Merge PDF", kicker: "Organize PDF" },
+      { id: 'images-pdf', title: "Images to PDF", kicker: "Convert PDF" },
+      { id: 'compress-pdf', title: "Compress PDF", kicker: "Optimize PDF" },
+      { id: 'heic-to-jpg', title: "HEIC to JPG / PNG", kicker: "Image Tools" },
+      { id: 'split-pdf', title: "Split PDF", kicker: "Organize PDF" },
+      { id: 'pdf-images', title: "PDF to PNG", kicker: "Convert PDF" },
+      { id: 'pdf-jpg', title: "PDF to JPG", kicker: "Convert PDF" },
+      { id: 'qr-generator', title: "QR Code Generator", kicker: "Developer Tools" },
+      { id: 'sign-pdf', title: "Sign PDF", kicker: "Design PDF" },
+      { id: 'image-cropper', title: "Crop Image", kicker: "Image Tools" },
+      { id: 'extract-pages', title: "Extract Pages", kicker: "Organize PDF" },
+      { id: 'remove-pages', title: "Remove Pages", kicker: "Organize PDF" },
+      { id: 'bulk-resize', title: "Bulk Image Resizer", kicker: "Scale Image" },
+      { id: 'excel-to-csv', title: "Excel to CSV / JSON", kicker: "Document Tools" },
+      { id: 'word-counter', title: "Word Counter & Editor", kicker: "Text Tools" },
+      { id: 'image-scaler', title: "Scale Image", kicker: "Image Tools" },
+      { id: 'webp-convert', title: "Image to WebP", kicker: "Optimize Image" },
+      { id: 'organize-pdf', title: "Organize PDF", kicker: "Organize PDF" },
+      { id: 'watermark-pdf', title: "Watermark PDF", kicker: "Design PDF" },
+      { id: 'page-numbers', title: "Add Page Numbers", kicker: "Design PDF" },
+      { id: 'rotate-pdf', title: "Rotate PDF", kicker: "Organize PDF" },
+      { id: 'encrypt-pdf', title: "Protect PDF", kicker: "Security PDF" },
+      { id: 'json-convert', title: "JSON to CSV / Excel", kicker: "Office Convert" },
+      { id: 'csv-convert', title: "CSV to JSON / Excel", kicker: "Office Convert" },
+      { id: 'json-formatter', title: "JSON Formatter / Validator", kicker: "Developer Tools" },
+      { id: 'color-palette', title: "Image Color Picker & Eyedropper", kicker: "Design Image" },
+      { id: 'favicon-generator', title: "Favicon Generator", kicker: "Image Tools" },
+      { id: 'diff-checker', title: "Code Diff Checker", kicker: "Developer Tools" },
+      { id: 'url-base64', title: "URL & Base64 Encoder / Decoder", kicker: "Developer Tools" },
+      { id: 'markdown-preview', title: "Markdown Live Preview", kicker: "Developer Tools" },
+      { id: 'regex-tester', title: "Regex Tester", kicker: "Developer Tools" },
+      { id: 'jwt-decoder', title: "JWT Decoder", kicker: "Developer Tools" },
+      { id: 'uuid-generator', title: "UUID Generator", kicker: "Developer Tools" },
+      { id: 'hash-generator', title: "Hash Generator", kicker: "Developer Tools" },
+      { id: 'exif-utility', title: "EXIF Viewer / Remover", kicker: "Image Tools" },
+      { id: 'unix-converter', title: "Unix Time Converter", kicker: "Developer Tools" },
+      { id: 'decrypt-pdf', title: "Unlock PDF", kicker: "Security PDF" },
+      { id: 'json-yaml', title: "JSON to YAML Converter", kicker: "Developer Tools" },
+      { id: 'sql-formatter', title: "SQL Formatter", kicker: "Developer Tools" },
+      { id: 'code-minifier', title: "Code Minifier & Beautifier", kicker: "Developer Tools" },
+      { id: 'password-generator', title: "Password & Secret Generator", kicker: "Developer Tools" },
+      { id: 'case-converter', title: "Case Converter", kicker: "Developer Tools" }
     ];
+  // WCF_NAV_TOOLS_END
 
   // Inject Header (Sitewide, full-width alignment matching main index layout)
   const headerHtml = `
@@ -625,12 +627,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
   const mobileToolsList = document.getElementById('mobileToolsList');
 
+  // WCF_NAV_GROUPS_START — generated from data/tools.mjs (npm run generate:layout-nav); do not edit by hand.
   const categories = [
-    { name: 'IMAGE TOOLS', ids: ['image-cropper', 'favicon-generator', 'image-scaler', 'pdf-images', 'pdf-jpg', 'images-pdf', 'webp-convert', 'bulk-resize', 'color-palette', 'exif-utility', 'heic-to-jpg'] },
-    { name: 'PDF TOOLS', ids: ['pdf-to-word', 'merge-pdf', 'split-pdf', 'extract-pages', 'organize-pdf', 'rotate-pdf', 'remove-pages', 'decrypt-pdf', 'encrypt-pdf', 'compress-pdf', 'watermark-pdf', 'page-numbers', 'sign-pdf'] },
-    { name: 'CONVERT & OFFICE', ids: ['excel-to-csv', 'csv-convert', 'json-convert', 'office-pdf', 'json-yaml'] },
-    { name: 'TEXT & DEVELOPERS', ids: ['regex-tester', 'uuid-generator', 'unix-converter', 'jwt-decoder', 'word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter'] }
+    { name: "IMAGE TOOLS", ids: ['image-cropper', 'favicon-generator', 'image-scaler', 'pdf-images', 'pdf-jpg', 'images-pdf', 'webp-convert', 'bulk-resize', 'color-palette', 'exif-utility', 'heic-to-jpg'] },
+    { name: "PDF TOOLS", ids: ['pdf-to-word', 'merge-pdf', 'split-pdf', 'extract-pages', 'organize-pdf', 'rotate-pdf', 'remove-pages', 'decrypt-pdf', 'encrypt-pdf', 'compress-pdf', 'watermark-pdf', 'page-numbers', 'sign-pdf'] },
+    { name: "CONVERT & OFFICE", ids: ['excel-to-csv', 'csv-convert', 'json-convert', 'office-pdf', 'json-yaml'] },
+    { name: "TEXT & DEVELOPERS", ids: ['regex-tester', 'uuid-generator', 'unix-converter', 'jwt-decoder', 'word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter'] }
   ];
+  // WCF_NAV_GROUPS_END
 
   function renderMobileMenu() {
     if (!mobileToolsList) return;
