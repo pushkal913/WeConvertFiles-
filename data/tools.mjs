@@ -554,7 +554,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/word-counter",
     "guide": "/guides/word-counter.html",
-    "module": "app.js",
+    "module": "js/tools/word-counter.js",
     "dependencies": []
   },
   {
@@ -801,7 +801,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/url-base64",
     "guide": "/guides/url-base64.html",
-    "module": "app.js",
+    "module": "js/tools/url-base64.js",
     "dependencies": []
   },
   {

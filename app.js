@@ -135,7 +135,7 @@ async function ensureToolLibraries(toolId) {
 // WCF.registerTool(id, { render(container, ctx) }). The list below is the
 // runtime mirror of each tool's "module" field in data/tools.mjs.
 const TOOL_MODULE_VERSION = '20260824-1';
-const MODULE_TOOLS = new Set(['password-generator', 'case-converter', 'json-formatter', 'uuid-generator', 'unix-converter']);
+const MODULE_TOOLS = new Set(['password-generator', 'case-converter', 'json-formatter', 'uuid-generator', 'unix-converter', 'word-counter', 'url-base64']);
 const toolModuleRegistry = {};
 const toolModulePromises = new Map();
 window.WCF = window.WCF || {};
@@ -1319,7 +1319,7 @@ async function openTool(toolId) {
   workspaceView.classList.remove('hidden');
 
   // Hide file controls for tools that work entirely with pasted or generated text.
-  const isInteractiveOnly = ['word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'regex-tester', 'jwt-decoder', 'json-yaml', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter'].includes(toolId);
+  const isInteractiveOnly = ['word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'regex-tester', 'jwt-decoder', 'json-yaml', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter', 'uuid-generator', 'unix-converter'].includes(toolId);
   document.getElementById('dropZone').classList.toggle('hidden', isInteractiveOnly);
   document.getElementById('selectedFilesContainer').classList.toggle('hidden', isInteractiveOnly);
   document.getElementById('convertActionRow').classList.toggle('hidden', isInteractiveOnly);
@@ -1816,31 +1816,6 @@ function renderToolOptions(toolId) {
         <p class="${helpClass}">You can also upload a JSON file directly into the workspace above.</p>
       </div>
     `,
-    'word-counter': `
-      <div>
-        <label class="${labelClass}">Enter or Paste Text</label>
-        <textarea id="wordCounterTextArea" rows="8" class="${inputClass} mt-2" placeholder="Start typing here..."></textarea>
-        <div class="mt-5 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="rounded-xl border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/50 p-4 text-center">
-            <span id="charCountLabel" class="block text-2xl font-bold text-slate-800 dark:text-slate-100">0</span>
-            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Characters</span>
-          </div>
-          <div class="rounded-xl border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/50 p-4 text-center">
-            <span id="wordCountLabel" class="block text-2xl font-bold text-slate-800 dark:text-slate-100">0</span>
-            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Words</span>
-          </div>
-          <div class="rounded-xl border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/50 p-4 text-center">
-            <span id="paraCountLabel" class="block text-2xl font-bold text-slate-800 dark:text-slate-100">0</span>
-            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Paragraphs</span>
-          </div>
-          <div class="rounded-xl border border-slate-200 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-900/50 p-4 text-center">
-            <span id="readTimeLabel" class="block text-2xl font-bold text-slate-800 dark:text-slate-100">0m</span>
-            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Reading Time</span>
-          </div>
-        </div>
-        <p class="${helpClass} mt-2">Stats are computed live with local javascript. Perfect for bloggers, authors, and student reports.</p>
-      </div>
-    `,
     'diff-checker': `
       <div>
         <div class="grid gap-4 md:grid-cols-2">
@@ -1875,38 +1850,6 @@ function renderToolOptions(toolId) {
           </div>
         </div>
         <p class="${helpClass} mt-2">Converts standard Markdown formatting to styled HTML preview using marked.js.</p>
-      </div>
-    `,
-    'url-base64': `
-      <div>
-        <div class="grid gap-4 md:grid-cols-2">
-          <div>
-            <label class="${labelClass}">Tool Operation Mode</label>
-            <select id="urlBase64Mode" class="${inputClass}">
-              <option value="url-enc" selected>URL Encode</option>
-              <option value="url-dec">URL Decode</option>
-              <option value="b64-enc">Base64 Encode (Text)</option>
-              <option value="b64-dec">Base64 Decode (Text)</option>
-            </select>
-          </div>
-          <div>
-            <label class="${labelClass}">Actions</label>
-            <div class="mt-2 flex gap-2">
-              <button id="urlBase64RunBtn" type="button" class="flex-1 py-2 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition">Convert Now</button>
-              <button id="urlBase64CopyBtn" type="button" class="px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition">Copy</button>
-            </div>
-          </div>
-        </div>
-        <div class="mt-4 grid gap-4 md:grid-cols-2">
-          <div>
-            <label class="${labelClass}">Input Payload</label>
-            <textarea id="urlBase64Input" rows="5" class="${inputClass} mt-2 font-mono text-xs" placeholder="Paste data to convert..."></textarea>
-          </div>
-          <div>
-            <label class="${labelClass}">Result Output</label>
-            <textarea id="urlBase64Output" rows="5" class="${inputClass} mt-2 font-mono text-xs readonly" readonly placeholder="Result will appear here..."></textarea>
-          </div>
-        </div>
       </div>
     `,
     'office-pdf': `
@@ -2824,26 +2767,6 @@ function renderToolOptions(toolId) {
       });
     }
   }
-  if (toolId === 'word-counter') {
-    const textarea = document.getElementById('wordCounterTextArea');
-    if (textarea) {
-      const updateStats = () => {
-        const text = textarea.value;
-        const charCount = text.length;
-        const words = text.trim().split(/\s+/).filter(w => w.length > 0);
-        const wordCount = words.length;
-        const paragraphs = text.split(/\n+/).filter(p => p.trim().length > 0).length;
-        const readingTime = Math.ceil(wordCount / 200);
-
-        document.getElementById('charCountLabel').textContent = charCount;
-        document.getElementById('wordCountLabel').textContent = wordCount;
-        document.getElementById('paraCountLabel').textContent = paragraphs;
-        document.getElementById('readTimeLabel').textContent = `${readingTime}m`;
-      };
-      textarea.addEventListener('input', updateStats);
-      updateStats();
-    }
-  }
   if (toolId === 'markdown-preview') {
     const input = document.getElementById('markdownInputArea');
     const preview = document.getElementById('markdownPreviewArea');
@@ -3054,42 +2977,6 @@ function renderToolOptions(toolId) {
       orig.addEventListener('input', runDiff);
       mod.addEventListener('input', runDiff);
     }
-  }
-  if (toolId === 'url-base64') {
-    const runBtn = document.getElementById('urlBase64RunBtn');
-    const copyBtn = document.getElementById('urlBase64CopyBtn');
-    const runUrlBase64 = () => {
-      const mode = document.getElementById('urlBase64Mode').value;
-      const input = document.getElementById('urlBase64Input').value;
-      const outputArea = document.getElementById('urlBase64Output');
-      if (!input) {
-        outputArea.value = '';
-        return;
-      }
-      try {
-        let result = '';
-        if (mode === 'url-enc') {
-          result = encodeURIComponent(input);
-        } else if (mode === 'url-dec') {
-          result = decodeURIComponent(input);
-        } else if (mode === 'b64-enc') {
-          result = btoa(unescape(encodeURIComponent(input)));
-        } else if (mode === 'b64-dec') {
-          result = decodeURIComponent(escape(atob(input)));
-        }
-        outputArea.value = result;
-      } catch (err) {
-        outputArea.value = `Error: ${err.message}`;
-      }
-    };
-    if (runBtn) runBtn.addEventListener('click', runUrlBase64);
-    if (copyBtn) copyBtn.addEventListener('click', () => {
-      const out = document.getElementById('urlBase64Output');
-      if (out && out.value) {
-        navigator.clipboard.writeText(out.value);
-        showNotification('Copied output!');
-      }
-    });
   }
   if (toolId === 'webp-convert') {
     const qualitySlider = document.getElementById('webpQualitySlider');
@@ -3969,7 +3856,7 @@ function validateFiles(fileListObject) {
   }
 
   // Group 6: Text / Dev Tools (accept any text or common document files)
-  const textTools = ['word-counter', 'diff-checker', 'url-base64'];
+  const textTools = ['diff-checker'];
   if (textTools.includes(toolId)) {
     return incoming;
   }
@@ -4006,17 +3893,6 @@ async function addFiles(fileListObject) {
     };
     reader.readAsText(validFiles[0]);
   }
-  if (state.currentTool.id === 'word-counter' && validFiles.length) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const area = document.getElementById('wordCounterTextArea');
-      if (area) {
-        area.value = e.target.result;
-        area.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-    };
-    reader.readAsText(validFiles[0]);
-  }
   if (state.currentTool.id === 'diff-checker' && validFiles.length) {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -4025,14 +3901,6 @@ async function addFiles(fileListObject) {
         area.value = e.target.result;
         area.dispatchEvent(new Event('input', { bubbles: true }));
       }
-    };
-    reader.readAsText(validFiles[0]);
-  }
-  if (state.currentTool.id === 'url-base64' && validFiles.length) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const area = document.getElementById('urlBase64Input');
-      if (area) area.value = e.target.result;
     };
     reader.readAsText(validFiles[0]);
   }
