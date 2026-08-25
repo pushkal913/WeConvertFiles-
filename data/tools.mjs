@@ -427,7 +427,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/qr-generator",
     "guide": "/guides/qr-generator.html",
-    "module": "app.js",
+    "module": "js/tools/qr-generator.js",
     "dependencies": [
       "qrious"
     ]
@@ -817,7 +817,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/markdown-preview",
     "guide": "/guides/markdown-preview.html",
-    "module": "app.js",
+    "module": "js/tools/markdown-preview.js",
     "dependencies": [
       "marked"
     ]
@@ -835,7 +835,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/regex-tester",
     "guide": "/guides/regex-tester.html",
-    "module": "app.js",
+    "module": "js/tools/regex-tester.js",
     "dependencies": []
   },
   {
@@ -851,7 +851,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/jwt-decoder",
     "guide": "/guides/jwt-decoder.html",
-    "module": "app.js",
+    "module": "js/tools/jwt-decoder.js",
     "dependencies": []
   },
   {
@@ -883,7 +883,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/hash-generator",
     "guide": "/guides/hash-generator.html",
-    "module": "app.js",
+    "module": "js/tools/hash-generator.js",
     "dependencies": [
       "cryptojs"
     ]

@@ -135,7 +135,7 @@ async function ensureToolLibraries(toolId) {
 // WCF.registerTool(id, { render(container, ctx) }). The list below is the
 // runtime mirror of each tool's "module" field in data/tools.mjs.
 const TOOL_MODULE_VERSION = '20260824-1';
-const MODULE_TOOLS = new Set(['password-generator', 'case-converter', 'json-formatter', 'uuid-generator', 'unix-converter', 'word-counter', 'url-base64']);
+const MODULE_TOOLS = new Set(['password-generator', 'case-converter', 'json-formatter', 'uuid-generator', 'unix-converter', 'word-counter', 'url-base64', 'qr-generator', 'hash-generator', 'markdown-preview', 'regex-tester', 'jwt-decoder']);
 const toolModuleRegistry = {};
 const toolModulePromises = new Map();
 window.WCF = window.WCF || {};
@@ -1836,22 +1836,6 @@ function renderToolOptions(toolId) {
         <p class="${helpClass} mt-2">Highlights added lines in green and deleted lines in red. Runs line-by-line comparison.</p>
       </div>
     `,
-    'markdown-preview': `
-      <div>
-        <div id="markdownGridWrapper" class="grid gap-4 md:grid-cols-2 transition-all duration-300">
-          <div id="markdownInputCol">
-            <label class="${labelClass}">Markdown Input</label>
-            <textarea id="markdownInputArea" rows="10" class="${inputClass} mt-2 font-mono text-xs" placeholder="# Header 1&#10;Write **bold** text or list items:&#10;- Bullet A&#10;- Bullet B"></textarea>
-          </div>
-          <div id="markdownPreviewCol">
-            <label class="${labelClass}">HTML Live Preview</label>
-            <div id="markdownPreviewArea" class="mt-2 w-full h-[215px] overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-950 px-4 py-3 text-sm text-slate-800 dark:text-slate-200 prose prose-slate dark:prose-invert transition-all duration-300" aria-live="polite">
-            </div>
-          </div>
-        </div>
-        <p class="${helpClass} mt-2">Converts standard Markdown formatting to styled HTML preview using marked.js.</p>
-      </div>
-    `,
     'office-pdf': `
       <div>
         <div class="p-4 rounded-xl bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200/50 dark:border-yellow-900/40 text-yellow-800 dark:text-yellow-300 text-xs mb-4">
@@ -1989,66 +1973,6 @@ function renderToolOptions(toolId) {
           </div>
         </div>
         <div id="cmInfoBox" class="hidden mt-3 p-3 rounded-xl text-xs font-bold whitespace-pre-wrap"></div>
-      </div>
-    `,
-    'qr-generator': `
-      <div>
-        <div class="grid gap-4 md:grid-cols-3">
-          <div class="md:col-span-2">
-            <label class="${labelClass}">Text or Link URL</label>
-            <input id="qrTextInput" class="${inputClass}" placeholder="https://www.weconvertfiles.com/" value="https://www.weconvertfiles.com/" />
-          </div>
-          <div>
-            <label class="${labelClass}">QR Code Size</label>
-            <select id="qrSizeSelect" class="${inputClass}">
-              <option value="150">150 x 150 px</option>
-              <option value="200" selected>200 x 200 px</option>
-              <option value="250">250 x 250 px</option>
-              <option value="300">300 x 300 px</option>
-            </select>
-          </div>
-        </div>
-        <div class="mt-6 flex flex-col items-center border border-slate-200 dark:border-slate-700/60 rounded-2xl p-6 bg-slate-50/50 dark:bg-slate-900/30">
-          <canvas id="qrCanvas" class="bg-white p-3 rounded-2xl shadow-sm border border-slate-200/50"></canvas>
-          <button id="qrDownloadBtn" type="button" class="mt-4 px-6 py-2.5 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-md">Download QR Code (PNG)</button>
-        </div>
-      </div>
-    `,
-    'hash-generator': `
-      <div>
-        <label class="${labelClass}">Enter Input Text</label>
-        <textarea id="hashInputText" rows="4" class="${inputClass} font-mono text-xs mt-2" placeholder="Type or paste text to compute cryptographic hashes..."></textarea>
-
-        <div class="mt-5 space-y-3.5">
-          <div class="flex flex-col gap-1.5">
-            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">MD5 Hash</span>
-            <div class="flex gap-2">
-              <input id="hashMd5" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950/40 px-3 py-2 text-xs font-mono text-slate-700 dark:text-slate-300 outline-none readonly" readonly placeholder="MD5 output..." />
-              <button id="copyHashMd5" type="button" class="px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-bold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition">Copy</button>
-            </div>
-          </div>
-          <div class="flex flex-col gap-1.5">
-            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">SHA-1 Hash</span>
-            <div class="flex gap-2">
-              <input id="hashSha1" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950/40 px-3 py-2 text-xs font-mono text-slate-700 dark:text-slate-300 outline-none readonly" readonly placeholder="SHA-1 output..." />
-              <button id="copyHashSha1" type="button" class="px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-bold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition">Copy</button>
-            </div>
-          </div>
-          <div class="flex flex-col gap-1.5">
-            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">SHA-256 Hash</span>
-            <div class="flex gap-2">
-              <input id="hashSha256" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950/40 px-3 py-2 text-xs font-mono text-slate-700 dark:text-slate-300 outline-none readonly" readonly placeholder="SHA-256 output..." />
-              <button id="copyHashSha256" type="button" class="px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-bold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition">Copy</button>
-            </div>
-          </div>
-          <div class="flex flex-col gap-1.5">
-            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">SHA-512 Hash</span>
-            <div class="flex gap-2">
-              <input id="hashSha512" class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950/40 px-3 py-2 text-xs font-mono text-slate-700 dark:text-slate-300 outline-none readonly" readonly placeholder="SHA-512 output..." />
-              <button id="copyHashSha512" type="button" class="px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-bold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition">Copy</button>
-            </div>
-          </div>
-        </div>
       </div>
     `,
     'exif-utility': `
@@ -2285,62 +2209,6 @@ function renderToolOptions(toolId) {
         <p class="${helpClass} mt-2">Generate standard web and Apple touch favicons in a clean ZIP bundle.</p>
       </div>
     `,
-    'regex-tester': `
-      <div>
-        <div class="grid gap-4 md:grid-cols-3 mb-4">
-          <div class="md:col-span-2">
-            <label class="${labelClass}">Regular Expression</label>
-            <input id="regexPatternInput" class="${inputClass}" placeholder="([A-Z][a-z]+)" value="([A-Z][a-z]+)" />
-          </div>
-          <div>
-            <label class="${labelClass}">Flags</label>
-            <div class="mt-2 flex flex-wrap gap-2">
-              <label class="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-300">
-                <input type="checkbox" id="regexFlagG" checked class="rounded border-slate-300 text-[#1a73e8]" /> g
-              </label>
-              <label class="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-300">
-                <input type="checkbox" id="regexFlagI" class="rounded border-slate-300 text-[#1a73e8]" /> i
-              </label>
-              <label class="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-300">
-                <input type="checkbox" id="regexFlagM" class="rounded border-slate-300 text-[#1a73e8]" /> m
-              </label>
-              <label class="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-300">
-                <input type="checkbox" id="regexFlagS" class="rounded border-slate-300 text-[#1a73e8]" /> s
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="grid gap-4 md:grid-cols-2">
-          <div>
-            <label class="${labelClass}">Test String</label>
-            <textarea id="regexTestInput" rows="6" class="${inputClass} mt-2" placeholder="Enter text to match patterns against..."></textarea>
-          </div>
-          <div>
-            <label class="${labelClass}">Matches Highlight Preview</label>
-            <div id="regexHighlightOutput" class="mt-2 w-full h-[130px] overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-950 px-4 py-3 text-sm text-slate-800 dark:text-slate-200 font-mono whitespace-pre-wrap"></div>
-          </div>
-        </div>
-        <div id="regexInfoBox" class="mt-3 p-3 rounded-xl text-xs font-bold hidden"></div>
-      </div>
-    `,
-    'jwt-decoder': `
-      <div>
-        <label class="${labelClass}">Paste JWT Token</label>
-        <textarea id="jwtInputToken" rows="3" class="${inputClass} font-mono text-xs mt-2" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ..."></textarea>
-
-        <div class="grid gap-4 md:grid-cols-2 mt-5">
-          <div>
-            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Header (JSON)</span>
-            <pre id="jwtOutputHeader" class="w-full h-[180px] overflow-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200"></pre>
-          </div>
-          <div>
-            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Payload (JSON)</span>
-            <pre id="jwtOutputPayload" class="w-full h-[180px] overflow-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200"></pre>
-          </div>
-        </div>
-        <div id="jwtInfoBox" class="mt-3 p-3 rounded-xl text-xs font-bold hidden"></div>
-      </div>
-    `
   };
 
   toolOptions.innerHTML = panels[toolId] || '';
@@ -2679,127 +2547,12 @@ function renderToolOptions(toolId) {
 
     setMode('minify');
   }
-  if (toolId === 'qr-generator') {
-    const textInput = document.getElementById('qrTextInput');
-    const canvas = document.getElementById('qrCanvas');
-    const downloadBtn = document.getElementById('qrDownloadBtn');
-    const sizeSelect = document.getElementById('qrSizeSelect');
-
-    const generateQr = () => {
-      const val = textInput.value.trim();
-      if (!val) {
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        downloadBtn.classList.add('hidden');
-        return;
-      }
-      const size = parseInt(sizeSelect.value, 10) || 200;
-      canvas.width = size;
-      canvas.height = size;
-
-      new QRious({
-        element: canvas,
-        value: val,
-        size: size,
-        level: 'H'
-      });
-      downloadBtn.classList.remove('hidden');
-    };
-
-    if (textInput) textInput.addEventListener('input', generateQr);
-    if (sizeSelect) sizeSelect.addEventListener('change', generateQr);
-
-    if (downloadBtn) {
-      downloadBtn.addEventListener('click', () => {
-        const url = canvas.toDataURL('image/png');
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'qrcode.png';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      });
-    }
-    generateQr();
-  }
-  if (toolId === 'hash-generator') {
-    const input = document.getElementById('hashInputText');
-    const md5Out = document.getElementById('hashMd5');
-    const sha1Out = document.getElementById('hashSha1');
-    const sha256Out = document.getElementById('hashSha256');
-    const sha512Out = document.getElementById('hashSha512');
-
-    const computeHashes = () => {
-      const text = input.value;
-      if (!text) {
-        md5Out.value = '';
-        sha1Out.value = '';
-        sha256Out.value = '';
-        sha512Out.value = '';
-        return;
-      }
-      md5Out.value = CryptoJS.MD5(text).toString();
-      sha1Out.value = CryptoJS.SHA1(text).toString();
-      sha256Out.value = CryptoJS.SHA256(text).toString();
-      sha512Out.value = CryptoJS.SHA512(text).toString();
-    };
-
-    if (input) input.addEventListener('input', computeHashes);
-
-    ['Md5', 'Sha1', 'Sha256', 'Sha512'].forEach(algo => {
-      const btn = document.getElementById(`copyHash${algo}`);
-      const field = document.getElementById(`hash${algo}`);
-      if (btn && field) {
-        btn.addEventListener('click', () => {
-          if (field.value) {
-            navigator.clipboard.writeText(field.value);
-            showNotification(`Copied ${algo.toUpperCase()} Hash!`);
-          }
-        });
-      }
-    });
-  }
   if (toolId === 'heic-to-jpg') {
     const qualitySlider = document.getElementById('heicQualitySlider');
     if (qualitySlider) {
       qualitySlider.addEventListener('input', (e) => {
         document.getElementById('heicQualityVal').textContent = `${e.target.value}%`;
       });
-    }
-  }
-  if (toolId === 'markdown-preview') {
-    const input = document.getElementById('markdownInputArea');
-    const preview = document.getElementById('markdownPreviewArea');
-    const wrapper = document.getElementById('markdownGridWrapper');
-    if (input && preview && wrapper) {
-      const resizePreview = (hasContent) => {
-        if (!hasContent) {
-          wrapper.classList.remove('grid-cols-1');
-          wrapper.classList.add('md:grid-cols-2');
-          preview.style.height = '215px';
-          preview.style.minHeight = '215px';
-          return;
-        }
-
-        wrapper.classList.remove('md:grid-cols-2');
-        wrapper.classList.add('grid-cols-1');
-        preview.style.height = 'auto';
-        preview.style.minHeight = '420px';
-
-        requestAnimationFrame(() => {
-          if (!input.value.trim()) return;
-          const previewHeight = Math.min(Math.max(preview.scrollHeight, 420), 720);
-          preview.style.height = `${previewHeight}px`;
-        });
-      };
-
-      const updatePreview = () => {
-        const markdown = input.value.trim();
-        preview.innerHTML = marked.parse(markdown || '<p class="text-slate-400">Markdown preview will show up here...</p>');
-        resizePreview(Boolean(markdown));
-      };
-      input.addEventListener('input', updatePreview);
-      updatePreview();
     }
   }
   if (toolId === 'diff-checker') {
@@ -3001,159 +2754,6 @@ function renderToolOptions(toolId) {
         document.getElementById('dimensionResizeControl').classList.toggle('hidden', isScale);
       });
     }
-  }
-  if (toolId === 'regex-tester') {
-    const pattern = document.getElementById('regexPatternInput');
-    const textInput = document.getElementById('regexTestInput');
-    const output = document.getElementById('regexHighlightOutput');
-    const info = document.getElementById('regexInfoBox');
-
-    const resizeRegexWorkspace = () => {
-      textInput.style.height = 'auto';
-      const nextHeight = Math.min(420, Math.max(130, textInput.scrollHeight));
-      textInput.style.height = `${nextHeight}px`;
-      output.style.height = `${nextHeight}px`;
-    };
-
-    const runRegex = () => {
-      const patVal = pattern.value;
-      const textVal = textInput.value;
-      resizeRegexWorkspace();
-
-      if (!patVal || !textVal) {
-        output.innerHTML = '';
-        info.className = 'hidden';
-        return;
-      }
-
-      const g = document.getElementById('regexFlagG').checked ? 'g' : '';
-      const i = document.getElementById('regexFlagI').checked ? 'i' : '';
-      const m = document.getElementById('regexFlagM').checked ? 'm' : '';
-      const s = document.getElementById('regexFlagS').checked ? 's' : '';
-      const flags = g + i + m + s;
-
-      try {
-        const regex = new RegExp(patVal, flags);
-        let matchesCount = 0;
-        let highlighted = '';
-
-        if (flags.includes('g')) {
-          let match;
-          let lastIndex = 0;
-          while ((match = regex.exec(textVal)) !== null) {
-            if (match.index === regex.lastIndex) {
-              regex.lastIndex++; // Prevent infinite loop for zero-width matches
-            }
-            highlighted += textVal.substring(lastIndex, match.index);
-            highlighted += `<mark class="bg-yellow-200 dark:bg-yellow-800/60 text-slate-900 dark:text-white px-0.5 rounded border border-yellow-300/40">${match[0]}</mark>`;
-            lastIndex = regex.lastIndex;
-            matchesCount++;
-          }
-          highlighted += textVal.substring(lastIndex);
-        } else {
-          const match = regex.exec(textVal);
-          if (match) {
-            highlighted += textVal.substring(0, match.index);
-            highlighted += `<mark class="bg-yellow-200 dark:bg-yellow-800/60 text-slate-900 dark:text-white px-0.5 rounded border border-yellow-300/40">${match[0]}</mark>`;
-            highlighted += textVal.substring(match.index + match[0].length);
-            matchesCount = 1;
-          } else {
-            highlighted = textVal;
-          }
-        }
-
-        output.innerHTML = highlighted;
-        info.className = 'mt-3 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/50 dark:border-emerald-900/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold';
-        info.textContent = `Found ${matchesCount} match(es) successfully!`;
-      } catch (err) {
-        output.innerHTML = textVal;
-        info.className = 'mt-3 p-3 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200/50 dark:border-red-900/40 text-red-800 dark:text-red-300 text-xs font-bold';
-        info.textContent = `Regex error: ${err.message}`;
-      }
-    };
-
-    pattern.addEventListener('input', runRegex);
-    textInput.addEventListener('input', runRegex);
-    document.getElementById('regexFlagG').addEventListener('change', runRegex);
-    document.getElementById('regexFlagI').addEventListener('change', runRegex);
-    document.getElementById('regexFlagM').addEventListener('change', runRegex);
-    document.getElementById('regexFlagS').addEventListener('change', runRegex);
-    runRegex();
-  }
-  if (toolId === 'jwt-decoder') {
-    const input = document.getElementById('jwtInputToken');
-    const outHeader = document.getElementById('jwtOutputHeader');
-    const outPayload = document.getElementById('jwtOutputPayload');
-    const info = document.getElementById('jwtInfoBox');
-
-    const resizeJwtOutputs = (hasToken) => {
-      if (!hasToken) {
-        outHeader.style.height = '180px';
-        outPayload.style.height = '180px';
-        return;
-      }
-      outHeader.style.height = 'auto';
-      outPayload.style.height = 'auto';
-      outHeader.style.height = `${Math.min(420, Math.max(260, outHeader.scrollHeight))}px`;
-      outPayload.style.height = `${Math.min(420, Math.max(260, outPayload.scrollHeight))}px`;
-    };
-
-    const runJwtDecode = () => {
-      const raw = input.value.trim();
-      if (!raw) {
-        outHeader.textContent = ''; outPayload.textContent = ''; info.className = 'hidden';
-        resizeJwtOutputs(false);
-        return;
-      }
-      const parts = raw.split('.');
-      if (parts.length < 2) {
-        outHeader.textContent = 'Invalid Token format. Must be divided by dots.';
-        outPayload.textContent = '';
-        resizeJwtOutputs(true);
-        info.className = 'hidden';
-        return;
-      }
-
-      const base64UrlDecode = (str) => {
-        let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
-        while (base64.length % 4) base64 += '=';
-        return decodeURIComponent(escape(window.atob(base64)));
-      };
-
-      try {
-        const headerObj = JSON.parse(base64UrlDecode(parts[0]));
-        const payloadObj = JSON.parse(base64UrlDecode(parts[1]));
-
-        outHeader.textContent = JSON.stringify(headerObj, null, 2);
-        outPayload.textContent = JSON.stringify(payloadObj, null, 2);
-        resizeJwtOutputs(true);
-
-        // Check Expiry
-        if (payloadObj.exp) {
-          const expMs = payloadObj.exp * 1000;
-          const date = new Date(expMs);
-          const expired = expMs < Date.now();
-          if (expired) {
-            info.className = 'mt-3 p-3 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200/50 dark:border-red-900/40 text-red-800 dark:text-red-300 text-xs font-bold';
-            info.textContent = `Token EXPIRED on ${date.toString()}`;
-          } else {
-            info.className = 'mt-3 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/50 dark:border-emerald-900/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold';
-            info.textContent = `Token active! Expires on ${date.toString()}`;
-          }
-        } else {
-          info.className = 'mt-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 text-xs font-bold';
-          info.textContent = 'Token parsed successfully (No exp claim found).';
-        }
-      } catch (err) {
-        outHeader.textContent = 'Failed to decode header.';
-        outPayload.textContent = `Error: ${err.message}`;
-        resizeJwtOutputs(true);
-        info.className = 'hidden';
-      }
-    };
-
-    input.addEventListener('input', runJwtDecode);
-    runJwtDecode();
   }
   if (toolId === 'image-to-base64') {
     const rawOut = document.getElementById('imgB64RawOutput');
