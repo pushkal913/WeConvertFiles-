@@ -1,4 +1,7 @@
 import { tools, categories, libraries, nav } from '../data/tools.mjs';
+import { buildToolHubMap } from './category-catalog.mjs';
+import { breadcrumbNav } from './breadcrumbs.mjs';
+import { renderFactBlock } from './tool-facts-render.mjs';
 import { guideSlugForTool } from './guide-catalog.mjs';
 
 // Load-and-validate entry point for the authoritative tool catalogue
@@ -24,11 +27,32 @@ export function renderRuntimeCatalogue() {
       dependencies[tool.id] = tool.dependencies;
     }
   }
-  const payload = { libraries, dependencies };
+  // Pre-rendered Home > category hub > tool breadcrumb per tool, from the same
+  // component the static pages use, so the SPA can keep the visible breadcrumb
+  // correct after a client-side tool switch without duplicating the markup.
+  const hubMap = buildToolHubMap();
+  const breadcrumbs = {};
+  for (const tool of tools) {
+    const hub = hubMap.get(tool.id);
+    if (!hub) continue;
+    const trail = [
+      { name: 'Home', href: '/' },
+      { name: hub.h1, href: `/category/${hub.slug}` },
+      { name: tool.title, href: `/${tool.id}` }
+    ];
+    breadcrumbs[tool.id] = breadcrumbNav(trail, { indent: '' }).trim();
+  }
+  // Pre-rendered "Tool facts" block per tool, so the SPA keeps it correct after
+  // a client-side tool switch (same renderer the static pages use).
+  const factBlocks = {};
+  for (const tool of tools) {
+    factBlocks[tool.id] = renderFactBlock(tool.id).trim();
+  }
+  const payload = { libraries, dependencies, breadcrumbs, factBlocks };
   return `/* GENERATED FILE — do not edit.
    Source: data/tools.mjs via scripts/generate-catalogue-runtime.mjs
    (npm run generate:catalogue-runtime). Delivers the tool catalogue's library
-   sources and per-tool dependencies to the runtime app. */
+   sources, per-tool dependencies, breadcrumbs and fact blocks to the runtime app. */
 window.WCF_CATALOGUE = ${JSON.stringify(payload, null, 2)};
 `;
 }
@@ -63,7 +87,7 @@ export function catalogueProblems() {
     if (tool.id && tool.route !== `/${tool.id}`) {
       problems.push(`${where} route "${tool.route}" should be "/${tool.id}"`);
     }
-    if (tool.id && tool.guide !== `/guides/${guideSlugForTool(tool.id)}.html`) {
+    if (tool.id && tool.guide !== `/guides/${guideSlugForTool(tool.id)}`) {
       problems.push(`${where} guide "${tool.guide}" does not match its slug rule`);
     }
     if (!categoryIds.has(tool.category)) {

@@ -58,7 +58,10 @@ async function loadRedirects() {
     if (parts.length < 2) continue;
     const [from, to, statusRaw] = parts;
     const status = parseInt(statusRaw, 10) || 301;
-    rules.push({ from, to, status });
+    // Netlify's force flag (`!`): the rule wins even when a static file exists
+    // at the requested path (e.g. `301!` on /guides/foo.html despite the file).
+    const force = /!\s*$/.test(statusRaw);
+    rules.push({ from, to, status, force });
   }
   return rules;
 }
@@ -97,22 +100,32 @@ export async function startServer({ port = 0 } = {}) {
 
   const server = http.createServer(async (req, res) => {
     const urlPath = (req.url || '/').split('?')[0];
-
-    // 1. Direct file hit (assets, .html requested explicitly, etc).
-    let file = await tryFile(urlPath);
+    const rule = exact.get(urlPath);
+    let file = null;
     let statusCode = 200;
 
-    // 2. Apply an exact `_redirects` rule.
-    if (!file) {
-      const rule = exact.get(urlPath);
-      if (rule) {
-        if (rule.status === 200) {
-          file = await tryFile(rule.to);
-        } else {
-          res.writeHead(rule.status, { Location: rule.to });
-          res.end();
-          return;
-        }
+    // 0. A forced rule (`!`) wins over a static file at the same path.
+    if (rule && rule.force) {
+      if (rule.status === 200) {
+        file = await tryFile(rule.to);
+      } else {
+        res.writeHead(rule.status, { Location: rule.to });
+        res.end();
+        return;
+      }
+    }
+
+    // 1. Direct file hit (assets, .html requested explicitly, etc).
+    if (!file) file = await tryFile(urlPath);
+
+    // 2. Apply a non-forced exact `_redirects` rule (yields to a real file).
+    if (!file && rule && !rule.force) {
+      if (rule.status === 200) {
+        file = await tryFile(rule.to);
+      } else {
+        res.writeHead(rule.status, { Location: rule.to });
+        res.end();
+        return;
       }
     }
 

@@ -27,8 +27,8 @@ for (const tool of tools) {
   check(html.includes(`<meta property="og:url" content="${canonical}" />`), `${tool.id}: OpenGraph URL mismatch`);
   check(html.includes(`<h1 id="workspaceTitle"`), `${tool.id}: missing tool H1`);
   check(!html.includes('<h1 id="workspaceTitle" class="mt-1 text-2xl font-semibold tracking-tight text-slate-950 dark:text-slate-100 sm:text-3xl"></h1>'), `${tool.id}: empty tool H1`);
-  check(html.includes('<script src="/js/catalogue.js?v=20260824-1"></script>'), `${tool.id}: missing runtime catalogue script`);
-  check(html.includes('<script src="/app.js?v=20260824-4"></script>'), `${tool.id}: missing shared app script`);
+  check(html.includes('<script src="/js/catalogue.js?v=20260824-2"></script>'), `${tool.id}: missing runtime catalogue script`);
+  check(html.includes('<script src="/app.js?v=20260824-5"></script>'), `${tool.id}: missing shared app script`);
   check(html.indexOf('/js/catalogue.js') < html.indexOf('/app.js'), `${tool.id}: catalogue.js must load before app.js`);
   check(redirects.includes(`/${tool.id}    /tool-pages/${tool.id}.html    200`), `${tool.id}: route does not use generated page`);
   check(sitemap.includes(`<loc>${canonical}</loc>`), `${tool.id}: canonical missing from sitemap`);
