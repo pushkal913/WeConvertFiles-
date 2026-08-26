@@ -17,6 +17,7 @@ function fileForPath(urlPath) {
   const p = urlPath.replace(/^\//, '');
   if (p === '') return 'index.html';
   if (p.startsWith('convert/')) return `${p}.html`;
+  if (p.startsWith('category/')) return `${p}.html`; // clean loc; file keeps .html
   if (p.startsWith('guides/')) return `${p}.html`; // clean loc; file keeps .html
   const candidates = [`tool-pages/${p}.html`, `${p}.html`, p];
   return candidates.find((c) => fs.existsSync(path.join(rootDir, c))) || null;

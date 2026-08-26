@@ -121,5 +121,10 @@
 /password-generator    /tool-pages/password-generator.html    200
 /case-converter    /tool-pages/case-converter.html    200
 
-# Unknown URLs return a real 404 instead of a homepage soft 404.
+# Category landing pages: force the .html URL to the clean canonical.
+/category/image-tools.html    /category/image-tools    301!
+/category/pdf-tools.html    /category/pdf-tools    301!
+/category/convert-office.html    /category/convert-office    301!
+/category/developer-tools.html    /category/developer-tools    301!
+
 /*    /404.html    404
