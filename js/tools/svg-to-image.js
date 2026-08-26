@@ -6,6 +6,8 @@
 // handleConvert, sanitize helpers) exposed globally by the classic app.js script.
 (function () {
   'use strict';
+  // Set by wire(); invoked when files are added after render (drag-and-drop).
+  let refresh = null;
   function wire() {
     const formatSelect = document.getElementById('svgImgFormatSelect');
     const bgSelect = document.getElementById('svgImgBgSelect');
@@ -97,6 +99,7 @@
       reader.readAsText(file);
     };
 
+    refresh = () => { if (state.files && state.files[0]) handleFileLoad(state.files[0]); };
     if (state.files && state.files[0]) {
       handleFileLoad(state.files[0]);
     }
@@ -299,7 +302,9 @@
     return state.files.length > 0 || !!document.getElementById('svgImgTextInput')?.value?.trim();
   }
 
+  function onFilesChanged() { if (refresh) refresh(); }
+
   (window.WCF && window.WCF.registerTool)
-    ? window.WCF.registerTool('svg-to-image', { render: render, convert: convert, validate: validate })
+    ? window.WCF.registerTool('svg-to-image', { render: render, convert: convert, validate: validate, onFilesChanged: onFilesChanged })
     : console.error('WCF.registerTool unavailable for svg-to-image');
 })();

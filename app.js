@@ -2442,6 +2442,11 @@ async function addFiles(fileListObject) {
     reader.readAsDataURL(validFiles[0]);
   }
 
+  // Migrated tool modules may refresh their own preview/output when files change
+  // (files can be added after the tool renders, e.g. via drag-and-drop).
+  const activeModule = toolModuleRegistry[state.currentTool.id] || null;
+  if (activeModule && typeof activeModule.onFilesChanged === 'function') activeModule.onFilesChanged();
+
   const isVisualTool = ['organize-pdf', 'rotate-pdf', 'remove-pages'].includes(state.currentTool.id);
   if (isVisualTool) {
     await initVisualPages();

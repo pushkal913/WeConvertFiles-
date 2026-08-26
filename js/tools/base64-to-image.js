@@ -6,6 +6,8 @@
 // handleConvert, sanitize helpers) exposed globally by the classic app.js script.
 (function () {
   'use strict';
+  // Set by wire(); invoked when files are added after render (drag-and-drop).
+  let refresh = null;
   function wire() {
     const inputText = document.getElementById('b64ImgInputText');
     const formatSelect = document.getElementById('b64ImgFormatSelect');
@@ -94,7 +96,8 @@
       });
     }
 
-    if (state.files && state.files[0]) {
+    refresh = () => {
+      if (!(state.files && state.files[0])) return;
       const reader = new FileReader();
       reader.onload = (e) => {
         inputText.value = e.target.result;
@@ -102,7 +105,8 @@
         runDecode();
       };
       reader.readAsText(state.files[0]);
-    }
+    };
+    refresh();
 
     if (decodeBtn) decodeBtn.addEventListener('click', handleConvert);
     if (formatSelect) formatSelect.addEventListener('change', () => { if (inputText.value.trim()) runDecode(); });
@@ -218,7 +222,9 @@
     return state.files.length > 0 || !!document.getElementById('b64ImgInputText')?.value?.trim();
   }
 
+  function onFilesChanged() { if (refresh) refresh(); }
+
   (window.WCF && window.WCF.registerTool)
-    ? window.WCF.registerTool('base64-to-image', { render: render, convert: convert, validate: validate })
+    ? window.WCF.registerTool('base64-to-image', { render: render, convert: convert, validate: validate, onFilesChanged: onFilesChanged })
     : console.error('WCF.registerTool unavailable for base64-to-image');
 })();

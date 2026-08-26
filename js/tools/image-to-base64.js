@@ -6,6 +6,8 @@
 // handleConvert, sanitize helpers) exposed globally by the classic app.js script.
 (function () {
   'use strict';
+  // Set by wire(); invoked when files are added after render (drag-and-drop).
+  let refresh = null;
   function wire() {
     const rawOut = document.getElementById('imgB64RawOutput');
     const uriOut = document.getElementById('imgB64UriOutput');
@@ -37,6 +39,7 @@
       reader.readAsDataURL(file);
     };
 
+    refresh = () => { if (state.files && state.files[0]) processFile(state.files[0]); };
     if (state.files && state.files[0]) {
       processFile(state.files[0]);
     }
@@ -123,7 +126,9 @@
   downloadBlob(blob, `${baseName}-base64.txt`);
   }
 
+  function onFilesChanged() { if (refresh) refresh(); }
+
   (window.WCF && window.WCF.registerTool)
-    ? window.WCF.registerTool('image-to-base64', { render: render, convert: convert })
+    ? window.WCF.registerTool('image-to-base64', { render: render, convert: convert, onFilesChanged: onFilesChanged })
     : console.error('WCF.registerTool unavailable for image-to-base64');
 })();
