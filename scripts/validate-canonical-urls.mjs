@@ -63,6 +63,27 @@ for (const page of informationPages) {
   check(!sitemapUrls.includes(`${canonical}.html`), `${page}: redirected .html URL remains in sitemap`);
 }
 
+// Guides publish a clean canonical URL (/guides/<slug>, no .html). Each guide's
+// canonical + og:url must be the clean URL, the clean URL must be in the sitemap,
+// and the .html variant must not appear there.
+const guideFiles = (await readdir(path.join(rootDir, 'guides')))
+  .filter((name) => name.endsWith('.html'));
+for (const file of guideFiles) {
+  const slug = file.replace(/\.html$/, '');
+  const html = await readFile(path.join(rootDir, 'guides', file), 'utf8');
+  const canonical = `${siteUrl}/guides/${slug}`;
+  check(
+    html.includes(`<link rel="canonical" href="${canonical}"`),
+    `guides/${file}: canonical does not match its clean public URL`,
+  );
+  check(
+    html.includes(`<meta property="og:url" content="${canonical}"`),
+    `guides/${file}: og:url does not match its clean public URL`,
+  );
+  check(sitemapUrls.includes(canonical), `guides/${file}: clean canonical URL is missing from sitemap`);
+  check(!sitemapUrls.includes(`${canonical}.html`), `guides/${file}: redirected .html URL remains in sitemap`);
+}
+
 const indexHtml = await readFile(path.join(rootDir, 'index.html'), 'utf8');
 const appSource = await readFile(path.join(rootDir, 'app.js'), 'utf8');
 check(

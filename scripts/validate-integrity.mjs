@@ -92,8 +92,11 @@ for (const tool of tools) {
   if (!sitemap.includes(`<loc>${siteUrl}${route}</loc>`)) {
     fail(`${where}: route ${siteUrl}${route} is missing from sitemap.xml.`);
   }
-  if (!sitemap.includes(`<loc>${siteUrl}/${guideRel}</loc>`)) {
-    fail(`${where}: guide ${siteUrl}/${guideRel} is missing from sitemap.xml.`);
+  // Guides publish a clean canonical URL (no .html); the .html file is served
+  // via a 200 rewrite and the .html URL 301s to the clean one (see _redirects).
+  const guideRoute = `/guides/${guideSlugForTool(tool.id)}`;
+  if (!sitemap.includes(`<loc>${siteUrl}${guideRoute}</loc>`)) {
+    fail(`${where}: guide ${siteUrl}${guideRoute} is missing from sitemap.xml.`);
   }
 }
 

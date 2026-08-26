@@ -63,7 +63,7 @@ export function catalogueProblems() {
     if (tool.id && tool.route !== `/${tool.id}`) {
       problems.push(`${where} route "${tool.route}" should be "/${tool.id}"`);
     }
-    if (tool.id && tool.guide !== `/guides/${guideSlugForTool(tool.id)}.html`) {
+    if (tool.id && tool.guide !== `/guides/${guideSlugForTool(tool.id)}`) {
       problems.push(`${where} guide "${tool.guide}" does not match its slug rule`);
     }
     if (!categoryIds.has(tool.category)) {

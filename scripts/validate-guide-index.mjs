@@ -26,7 +26,7 @@ function guideLinksForView(view) {
   const end = indexSource.indexOf(endMarker, start + startMarker.length);
   assert(start >= 0 && end > start, `Could not find generated ${view} guide grid.`);
   const block = indexSource.slice(start, end);
-  return [...block.matchAll(/href="(\/guides\/[^"]+\.html)"/g)].map((linkMatch) => linkMatch[1]);
+  return [...block.matchAll(/href="(\/guides\/[a-z0-9-]+)"/g)].map((linkMatch) => linkMatch[1]);
 }
 
 const toolIds = tools.map((tool) => tool.id);
@@ -41,7 +41,7 @@ assert(duplicates(expectedGuideHrefs).length === 0, `Multiple tools share a prim
 
 const actualGuideHrefs = fs.readdirSync(path.join(rootDir, 'guides'))
   .filter((file) => file.endsWith('.html'))
-  .map((file) => `/guides/${file}`)
+  .map((file) => `/guides/${file.replace(/\.html$/, '')}`) // clean canonical URL, not the .html file path
   .sort();
 assert(JSON.stringify(actualGuideHrefs) === JSON.stringify(expectedGuideHrefs), `Primary guide files do not match the ${tools.length}-tool catalogue.`);
 
@@ -52,7 +52,7 @@ for (const view of ['desktop', 'mobile']) {
   assert(JSON.stringify(links) === JSON.stringify(expectedGuideHrefs), `${view} guide grid does not match primary guide files.`);
 }
 
-const sitemapGuideHrefs = [...sitemapSource.matchAll(/<loc>https:\/\/www\.weconvertfiles\.com(\/guides\/[^<]+\.html)<\/loc>/g)]
+const sitemapGuideHrefs = [...sitemapSource.matchAll(/<loc>https:\/\/www\.weconvertfiles\.com(\/guides\/[a-z0-9-]+)<\/loc>/g)]
   .map((match) => match[1])
   .sort();
 assert(JSON.stringify(sitemapGuideHrefs) === JSON.stringify(expectedGuideHrefs), 'Sitemap guide URLs do not match primary guide files.');

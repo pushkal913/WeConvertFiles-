@@ -209,7 +209,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/image-to-base64",
-    "guide": "/guides/image-to-base64.html",
+    "guide": "/guides/image-to-base64",
     "module": "js/tools/image-to-base64.js",
     "dependencies": []
   },
@@ -225,7 +225,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/base64-to-image",
-    "guide": "/guides/base64-to-image.html",
+    "guide": "/guides/base64-to-image",
     "module": "js/tools/base64-to-image.js",
     "dependencies": []
   },
@@ -241,7 +241,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/svg-to-image",
-    "guide": "/guides/svg-to-image.html",
+    "guide": "/guides/svg-to-image",
     "module": "js/tools/svg-to-image.js",
     "dependencies": []
   },
@@ -257,7 +257,7 @@ export const tools = [
     },
     "category": "pdf-outputs",
     "route": "/pdf-to-word",
-    "guide": "/guides/pdf-to-word.html",
+    "guide": "/guides/pdf-to-word",
     "module": "app.js",
     "dependencies": [
       "pdfjs"
@@ -275,7 +275,7 @@ export const tools = [
     },
     "category": "create-pdf",
     "route": "/office-pdf",
-    "guide": "/guides/office-pdf.html",
+    "guide": "/guides/office-pdf",
     "module": "app.js",
     "dependencies": [
       "html2pdf",
@@ -295,7 +295,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/merge-pdf",
-    "guide": "/guides/merge-pdf.html",
+    "guide": "/guides/merge-pdf",
     "module": "app.js",
     "dependencies": [
       "pdflib"
@@ -313,7 +313,7 @@ export const tools = [
     },
     "category": "create-pdf",
     "route": "/images-pdf",
-    "guide": "/guides/images-to-pdf.html",
+    "guide": "/guides/images-to-pdf",
     "module": "app.js",
     "dependencies": [
       "jspdf"
@@ -331,7 +331,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/compress-pdf",
-    "guide": "/guides/compress-pdf.html",
+    "guide": "/guides/compress-pdf",
     "module": "app.js",
     "dependencies": [
       "pdfjs",
@@ -350,7 +350,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/heic-to-jpg",
-    "guide": "/guides/heic-to-jpg.html",
+    "guide": "/guides/heic-to-jpg",
     "module": "app.js",
     "dependencies": [
       "heic2any",
@@ -369,7 +369,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/split-pdf",
-    "guide": "/guides/split-pdf.html",
+    "guide": "/guides/split-pdf",
     "module": "app.js",
     "dependencies": [
       "pdflib",
@@ -388,7 +388,7 @@ export const tools = [
     },
     "category": "pdf-outputs",
     "route": "/pdf-images",
-    "guide": "/guides/pdf-to-images.html",
+    "guide": "/guides/pdf-to-images",
     "module": "app.js",
     "dependencies": [
       "pdfjs",
@@ -407,7 +407,7 @@ export const tools = [
     },
     "category": "pdf-outputs",
     "route": "/pdf-jpg",
-    "guide": "/guides/pdf-to-jpg.html",
+    "guide": "/guides/pdf-to-jpg",
     "module": "app.js",
     "dependencies": [
       "pdfjs",
@@ -426,7 +426,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/qr-generator",
-    "guide": "/guides/qr-generator.html",
+    "guide": "/guides/qr-generator",
     "module": "js/tools/qr-generator.js",
     "dependencies": [
       "qrious"
@@ -444,7 +444,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/sign-pdf",
-    "guide": "/guides/sign-pdf.html",
+    "guide": "/guides/sign-pdf",
     "module": "app.js",
     "dependencies": [
       "pdflib"
@@ -462,7 +462,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/image-cropper",
-    "guide": "/guides/image-cropper.html",
+    "guide": "/guides/image-cropper",
     "module": "app.js",
     "dependencies": [
       "cropper"
@@ -480,7 +480,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/extract-pages",
-    "guide": "/guides/extract-pages.html",
+    "guide": "/guides/extract-pages",
     "module": "app.js",
     "dependencies": [
       "pdflib"
@@ -498,7 +498,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/remove-pages",
-    "guide": "/guides/remove-pages.html",
+    "guide": "/guides/remove-pages",
     "module": "app.js",
     "dependencies": [
       "pdfjs",
@@ -517,7 +517,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/bulk-resize",
-    "guide": "/guides/bulk-resize.html",
+    "guide": "/guides/bulk-resize",
     "module": "app.js",
     "dependencies": [
       "jszip"
@@ -535,7 +535,7 @@ export const tools = [
     },
     "category": "data-tools",
     "route": "/excel-to-csv",
-    "guide": "/guides/excel-to-csv.html",
+    "guide": "/guides/excel-to-csv",
     "module": "app.js",
     "dependencies": [
       "xlsx"
@@ -553,7 +553,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/word-counter",
-    "guide": "/guides/word-counter.html",
+    "guide": "/guides/word-counter",
     "module": "js/tools/word-counter.js",
     "dependencies": []
   },
@@ -569,7 +569,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/image-scaler",
-    "guide": "/guides/image-scaler.html",
+    "guide": "/guides/image-scaler",
     "module": "app.js",
     "dependencies": []
   },
@@ -585,7 +585,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/webp-convert",
-    "guide": "/guides/webp-convert.html",
+    "guide": "/guides/webp-convert",
     "module": "app.js",
     "dependencies": [
       "jszip"
@@ -603,7 +603,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/organize-pdf",
-    "guide": "/guides/organize-pdf.html",
+    "guide": "/guides/organize-pdf",
     "module": "app.js",
     "dependencies": [
       "pdfjs",
@@ -622,7 +622,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/watermark-pdf",
-    "guide": "/guides/watermark-pdf.html",
+    "guide": "/guides/watermark-pdf",
     "module": "app.js",
     "dependencies": [
       "pdflib"
@@ -640,7 +640,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/page-numbers",
-    "guide": "/guides/page-numbers.html",
+    "guide": "/guides/page-numbers",
     "module": "app.js",
     "dependencies": [
       "pdflib"
@@ -658,7 +658,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/rotate-pdf",
-    "guide": "/guides/rotate-pdf.html",
+    "guide": "/guides/rotate-pdf",
     "module": "app.js",
     "dependencies": [
       "pdfjs",
@@ -677,7 +677,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/encrypt-pdf",
-    "guide": "/guides/encrypt-pdf.html",
+    "guide": "/guides/encrypt-pdf",
     "module": "app.js",
     "dependencies": [
       "pdflib"
@@ -695,7 +695,7 @@ export const tools = [
     },
     "category": "data-tools",
     "route": "/json-convert",
-    "guide": "/guides/json-convert.html",
+    "guide": "/guides/json-convert",
     "module": "app.js",
     "dependencies": [
       "xlsx"
@@ -713,7 +713,7 @@ export const tools = [
     },
     "category": "data-tools",
     "route": "/csv-convert",
-    "guide": "/guides/csv-convert.html",
+    "guide": "/guides/csv-convert",
     "module": "app.js",
     "dependencies": [
       "papa",
@@ -732,7 +732,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/json-formatter",
-    "guide": "/guides/json-formatter.html",
+    "guide": "/guides/json-formatter",
     "module": "js/tools/json-formatter.js",
     "dependencies": []
   },
@@ -748,7 +748,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/color-palette",
-    "guide": "/guides/color-palette.html",
+    "guide": "/guides/color-palette",
     "module": "app.js",
     "dependencies": []
   },
@@ -764,7 +764,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/favicon-generator",
-    "guide": "/guides/favicon-generator.html",
+    "guide": "/guides/favicon-generator",
     "module": "app.js",
     "dependencies": [
       "jszip"
@@ -782,7 +782,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/diff-checker",
-    "guide": "/guides/diff-checker.html",
+    "guide": "/guides/diff-checker",
     "module": "js/tools/diff-checker.js",
     "dependencies": [
       "diff"
@@ -800,7 +800,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/url-base64",
-    "guide": "/guides/url-base64.html",
+    "guide": "/guides/url-base64",
     "module": "js/tools/url-base64.js",
     "dependencies": []
   },
@@ -816,7 +816,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/markdown-preview",
-    "guide": "/guides/markdown-preview.html",
+    "guide": "/guides/markdown-preview",
     "module": "js/tools/markdown-preview.js",
     "dependencies": [
       "marked"
@@ -834,7 +834,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/regex-tester",
-    "guide": "/guides/regex-tester.html",
+    "guide": "/guides/regex-tester",
     "module": "js/tools/regex-tester.js",
     "dependencies": []
   },
@@ -850,7 +850,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/jwt-decoder",
-    "guide": "/guides/jwt-decoder.html",
+    "guide": "/guides/jwt-decoder",
     "module": "js/tools/jwt-decoder.js",
     "dependencies": []
   },
@@ -866,7 +866,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/uuid-generator",
-    "guide": "/guides/uuid-generator.html",
+    "guide": "/guides/uuid-generator",
     "module": "js/tools/uuid-generator.js",
     "dependencies": []
   },
@@ -882,7 +882,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/hash-generator",
-    "guide": "/guides/hash-generator.html",
+    "guide": "/guides/hash-generator",
     "module": "js/tools/hash-generator.js",
     "dependencies": [
       "cryptojs"
@@ -900,7 +900,7 @@ export const tools = [
     },
     "category": "image-tools",
     "route": "/exif-utility",
-    "guide": "/guides/exif-utility.html",
+    "guide": "/guides/exif-utility",
     "module": "app.js",
     "dependencies": [
       "exif"
@@ -918,7 +918,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/unix-converter",
-    "guide": "/guides/unix-converter.html",
+    "guide": "/guides/unix-converter",
     "module": "js/tools/unix-converter.js",
     "dependencies": []
   },
@@ -934,7 +934,7 @@ export const tools = [
     },
     "category": "manage-pdf",
     "route": "/decrypt-pdf",
-    "guide": "/guides/decrypt-pdf.html",
+    "guide": "/guides/decrypt-pdf",
     "module": "app.js",
     "dependencies": [
       "pdflib",
@@ -954,7 +954,7 @@ export const tools = [
     },
     "category": "data-tools",
     "route": "/json-yaml",
-    "guide": "/guides/json-yaml.html",
+    "guide": "/guides/json-yaml",
     "module": "js/tools/json-yaml.js",
     "dependencies": [
       "jsyaml"
@@ -972,7 +972,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/sql-formatter",
-    "guide": "/guides/sql-formatter.html",
+    "guide": "/guides/sql-formatter",
     "module": "js/tools/sql-formatter.js",
     "dependencies": [
       "sqlformatter"
@@ -990,7 +990,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/code-minifier",
-    "guide": "/guides/code-minifier.html",
+    "guide": "/guides/code-minifier",
     "module": "js/tools/code-minifier.js",
     "dependencies": []
   },
@@ -1006,7 +1006,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/password-generator",
-    "guide": "/guides/password-generator.html",
+    "guide": "/guides/password-generator",
     "module": "js/tools/password-generator.js",
     "dependencies": []
   },
@@ -1022,7 +1022,7 @@ export const tools = [
     },
     "category": "developer-tools",
     "route": "/case-converter",
-    "guide": "/guides/case-converter.html",
+    "guide": "/guides/case-converter",
     "module": "js/tools/case-converter.js",
     "dependencies": []
   }

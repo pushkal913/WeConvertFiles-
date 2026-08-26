@@ -37,5 +37,7 @@ export function guideSlugForTool(toolId) {
 }
 
 export function guideHrefForTool(toolId) {
-  return `/guides/${guideSlugForTool(toolId)}.html`;
+  // Clean canonical guide URL. Netlify serves guides/<slug>.html at this path
+  // via a 200 rewrite; the .html variant 301s here (see _redirects).
+  return `/guides/${guideSlugForTool(toolId)}`;
 }
