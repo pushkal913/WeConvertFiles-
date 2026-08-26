@@ -210,7 +210,7 @@ export const tools = [
     "category": "image-tools",
     "route": "/image-to-base64",
     "guide": "/guides/image-to-base64.html",
-    "module": "app.js",
+    "module": "js/tools/image-to-base64.js",
     "dependencies": []
   },
   {
@@ -226,7 +226,7 @@ export const tools = [
     "category": "image-tools",
     "route": "/base64-to-image",
     "guide": "/guides/base64-to-image.html",
-    "module": "app.js",
+    "module": "js/tools/base64-to-image.js",
     "dependencies": []
   },
   {
@@ -242,7 +242,7 @@ export const tools = [
     "category": "image-tools",
     "route": "/svg-to-image",
     "guide": "/guides/svg-to-image.html",
-    "module": "app.js",
+    "module": "js/tools/svg-to-image.js",
     "dependencies": []
   },
   {
