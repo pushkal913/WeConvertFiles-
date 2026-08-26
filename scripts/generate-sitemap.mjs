@@ -1,52 +1,37 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { contentDates } from '../data/content-dates.mjs';
 
-// Adds a <lastmod> to every <url> in sitemap.xml, derived from the last git
-// commit date of the file that serves that URL. Freshness/priority signal for
-// crawlers. Idempotent: re-running refreshes the dates in place.
+// Sets a <lastmod> on every <url> in sitemap.xml from the centralized content
+// dates (data/content-dates.mjs) rather than git history, so lastmod is stable
+// across builds/clones and changes only when a content date is deliberately
+// bumped. Guides use their own updated date; every other page uses site.updated.
+// Idempotent: re-running refreshes the dates in place.
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sitemapPath = path.join(rootDir, 'sitemap.xml');
-const today = new Date().toISOString().slice(0, 10);
 
-// Map a sitemap path (e.g. "/pdf-to-word", "/guides/x.html", "/convert/x") to
-// the source file that renders it.
-function fileForPath(urlPath) {
+function lastModForUrl(urlPath) {
   const p = urlPath.replace(/^\//, '');
-  if (p === '') return 'index.html';
-  if (p.startsWith('convert/')) return `${p}.html`;
-  if (p.startsWith('category/')) return `${p}.html`; // clean loc; file keeps .html
-  if (p.startsWith('guides/')) return `${p}.html`; // clean loc; file keeps .html
-  const candidates = [`tool-pages/${p}.html`, `${p}.html`, p];
-  return candidates.find((c) => fs.existsSync(path.join(rootDir, c))) || null;
-}
-
-function lastModForFile(file) {
-  if (!file) return today;
-  try {
-    const out = execSync(`git log -1 --format=%cs -- "${file}"`, { cwd: rootDir })
-      .toString().trim();
-    return out || today;
-  } catch {
-    return today;
+  if (p.startsWith('guides/')) {
+    const slug = p.slice('guides/'.length);
+    const entry = contentDates.guides[slug];
+    return entry ? entry.updated : contentDates.site.updated;
   }
+  return contentDates.site.updated;
 }
 
 let sitemap = fs.readFileSync(sitemapPath, 'utf8');
 let updated = 0;
 
-// For each <loc>…</loc> (optionally already followed by a <lastmod>), rewrite so
-// the loc is followed by a fresh <lastmod>.
 sitemap = sitemap.replace(
   /<loc>(https:\/\/www\.weconvertfiles\.com([^<]*))<\/loc>(\s*<lastmod>[^<]*<\/lastmod>)?/g,
   (_match, fullUrl, urlPath) => {
-    const date = lastModForFile(fileForPath(urlPath));
     updated += 1;
-    return `<loc>${fullUrl}</loc>\n    <lastmod>${date}</lastmod>`;
+    return `<loc>${fullUrl}</loc>\n    <lastmod>${lastModForUrl(urlPath)}</lastmod>`;
   }
 );
 
 fs.writeFileSync(sitemapPath, sitemap);
-console.log(`Stamped <lastmod> on ${updated} sitemap URLs.`);
+console.log(`Stamped <lastmod> on ${updated} sitemap URLs from content-dates.`);
