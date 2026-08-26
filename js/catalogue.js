@@ -286,5 +286,515 @@ window.WCF_CATALOGUE = {
     "code-minifier": "<section class=\"rounded-[28px] border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-material\" aria-labelledby=\"toolFactsHeading\">\n  <h2 id=\"toolFactsHeading\" class=\"text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400\">Tool facts</h2>\n  <dl class=\"mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2\">\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Processing</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">In your browser</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Uploads</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">None — nothing is sent to a server</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Account</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Not required</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Input</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">HTML, CSS or JavaScript</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Output</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Minified or beautified code</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Good to know</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Parsed and rewritten only — your code is never executed</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Best for</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Shrinking or tidying code</dd>\n    </div>\n  </dl>\n</section>",
     "password-generator": "<section class=\"rounded-[28px] border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-material\" aria-labelledby=\"toolFactsHeading\">\n  <h2 id=\"toolFactsHeading\" class=\"text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400\">Tool facts</h2>\n  <dl class=\"mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2\">\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Processing</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">In your browser</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Uploads</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">None — nothing is sent to a server</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Account</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Not required</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Input</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Length and character-set options</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Output</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">A password or a hex / Base64URL token</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Good to know</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Uses the Web Crypto secure RNG; nothing is stored, logged or transmitted</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Best for</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Creating strong passwords or tokens</dd>\n    </div>\n  </dl>\n</section>",
     "case-converter": "<section class=\"rounded-[28px] border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-material\" aria-labelledby=\"toolFactsHeading\">\n  <h2 id=\"toolFactsHeading\" class=\"text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400\">Tool facts</h2>\n  <dl class=\"mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2\">\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Processing</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">In your browser</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Uploads</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">None — nothing is sent to a server</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Account</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Not required</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Input</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Text you type or paste</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Output</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">The text in your chosen case style</dd>\n    </div>\n    <div class=\"min-w-0\">\n      <dt class=\"text-xs font-semibold uppercase tracking-wide text-slate-400\">Best for</dt>\n      <dd class=\"mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200\">Reformatting text case</dd>\n    </div>\n  </dl>\n</section>"
+  },
+  "related": {
+    "image-to-base64": {
+      "guide": "/guides/image-to-base64",
+      "tools": [
+        "heic-to-jpg",
+        "image-cropper",
+        "bulk-resize",
+        "image-scaler",
+        "webp-convert",
+        "color-palette"
+      ]
+    },
+    "base64-to-image": {
+      "guide": "/guides/base64-to-image",
+      "tools": [
+        "heic-to-jpg",
+        "image-cropper",
+        "bulk-resize",
+        "image-scaler",
+        "webp-convert",
+        "color-palette"
+      ]
+    },
+    "svg-to-image": {
+      "guide": "/guides/svg-to-image",
+      "tools": [
+        "heic-to-jpg",
+        "image-cropper",
+        "bulk-resize",
+        "image-scaler",
+        "webp-convert",
+        "color-palette"
+      ]
+    },
+    "pdf-to-word": {
+      "guide": "/guides/pdf-to-word",
+      "tools": [
+        "pdf-images",
+        "pdf-jpg",
+        "merge-pdf",
+        "split-pdf",
+        "extract-pages",
+        "organize-pdf"
+      ]
+    },
+    "office-pdf": {
+      "guide": "/guides/office-pdf",
+      "tools": [
+        "images-pdf",
+        "excel-to-csv",
+        "csv-convert",
+        "json-convert",
+        "json-yaml"
+      ]
+    },
+    "merge-pdf": {
+      "guide": "/guides/merge-pdf",
+      "tools": [
+        "compress-pdf",
+        "split-pdf",
+        "sign-pdf",
+        "extract-pages",
+        "remove-pages",
+        "organize-pdf"
+      ]
+    },
+    "images-pdf": {
+      "guide": "/guides/images-to-pdf",
+      "tools": [
+        "office-pdf",
+        "image-cropper",
+        "favicon-generator",
+        "image-scaler",
+        "pdf-images",
+        "pdf-jpg"
+      ]
+    },
+    "compress-pdf": {
+      "guide": "/guides/compress-pdf",
+      "tools": [
+        "merge-pdf",
+        "split-pdf",
+        "sign-pdf",
+        "extract-pages",
+        "remove-pages",
+        "organize-pdf"
+      ]
+    },
+    "heic-to-jpg": {
+      "guide": "/guides/heic-to-jpg",
+      "tools": [
+        "image-cropper",
+        "bulk-resize",
+        "image-scaler",
+        "webp-convert",
+        "color-palette",
+        "favicon-generator"
+      ]
+    },
+    "split-pdf": {
+      "guide": "/guides/split-pdf",
+      "tools": [
+        "merge-pdf",
+        "compress-pdf",
+        "sign-pdf",
+        "extract-pages",
+        "remove-pages",
+        "organize-pdf"
+      ]
+    },
+    "pdf-images": {
+      "guide": "/guides/pdf-to-images",
+      "tools": [
+        "pdf-to-word",
+        "pdf-jpg",
+        "image-cropper",
+        "favicon-generator",
+        "image-scaler",
+        "images-pdf"
+      ]
+    },
+    "pdf-jpg": {
+      "guide": "/guides/pdf-to-jpg",
+      "tools": [
+        "pdf-to-word",
+        "pdf-images",
+        "image-cropper",
+        "favicon-generator",
+        "image-scaler",
+        "images-pdf"
+      ]
+    },
+    "qr-generator": {
+      "guide": "/guides/qr-generator",
+      "tools": [
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview",
+        "regex-tester"
+      ]
+    },
+    "sign-pdf": {
+      "guide": "/guides/sign-pdf",
+      "tools": [
+        "merge-pdf",
+        "compress-pdf",
+        "split-pdf",
+        "extract-pages",
+        "remove-pages",
+        "organize-pdf"
+      ]
+    },
+    "image-cropper": {
+      "guide": "/guides/image-cropper",
+      "tools": [
+        "heic-to-jpg",
+        "bulk-resize",
+        "image-scaler",
+        "webp-convert",
+        "color-palette",
+        "favicon-generator"
+      ]
+    },
+    "extract-pages": {
+      "guide": "/guides/extract-pages",
+      "tools": [
+        "merge-pdf",
+        "compress-pdf",
+        "split-pdf",
+        "sign-pdf",
+        "remove-pages",
+        "organize-pdf"
+      ]
+    },
+    "remove-pages": {
+      "guide": "/guides/remove-pages",
+      "tools": [
+        "merge-pdf",
+        "compress-pdf",
+        "split-pdf",
+        "sign-pdf",
+        "extract-pages",
+        "organize-pdf"
+      ]
+    },
+    "bulk-resize": {
+      "guide": "/guides/bulk-resize",
+      "tools": [
+        "heic-to-jpg",
+        "image-cropper",
+        "image-scaler",
+        "webp-convert",
+        "color-palette",
+        "favicon-generator"
+      ]
+    },
+    "excel-to-csv": {
+      "guide": "/guides/excel-to-csv",
+      "tools": [
+        "json-convert",
+        "csv-convert",
+        "json-yaml",
+        "office-pdf"
+      ]
+    },
+    "word-counter": {
+      "guide": "/guides/word-counter",
+      "tools": [
+        "qr-generator",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview",
+        "regex-tester"
+      ]
+    },
+    "image-scaler": {
+      "guide": "/guides/image-scaler",
+      "tools": [
+        "heic-to-jpg",
+        "image-cropper",
+        "bulk-resize",
+        "webp-convert",
+        "color-palette",
+        "favicon-generator"
+      ]
+    },
+    "webp-convert": {
+      "guide": "/guides/webp-convert",
+      "tools": [
+        "heic-to-jpg",
+        "image-cropper",
+        "bulk-resize",
+        "image-scaler",
+        "color-palette",
+        "favicon-generator"
+      ]
+    },
+    "organize-pdf": {
+      "guide": "/guides/organize-pdf",
+      "tools": [
+        "merge-pdf",
+        "compress-pdf",
+        "split-pdf",
+        "sign-pdf",
+        "extract-pages",
+        "remove-pages"
+      ]
+    },
+    "watermark-pdf": {
+      "guide": "/guides/watermark-pdf",
+      "tools": [
+        "merge-pdf",
+        "compress-pdf",
+        "split-pdf",
+        "sign-pdf",
+        "extract-pages",
+        "remove-pages"
+      ]
+    },
+    "page-numbers": {
+      "guide": "/guides/page-numbers",
+      "tools": [
+        "merge-pdf",
+        "compress-pdf",
+        "split-pdf",
+        "sign-pdf",
+        "extract-pages",
+        "remove-pages"
+      ]
+    },
+    "rotate-pdf": {
+      "guide": "/guides/rotate-pdf",
+      "tools": [
+        "merge-pdf",
+        "compress-pdf",
+        "split-pdf",
+        "sign-pdf",
+        "extract-pages",
+        "remove-pages"
+      ]
+    },
+    "encrypt-pdf": {
+      "guide": "/guides/encrypt-pdf",
+      "tools": [
+        "merge-pdf",
+        "compress-pdf",
+        "split-pdf",
+        "sign-pdf",
+        "extract-pages",
+        "remove-pages"
+      ]
+    },
+    "json-convert": {
+      "guide": "/guides/json-convert",
+      "tools": [
+        "excel-to-csv",
+        "csv-convert",
+        "json-yaml",
+        "office-pdf"
+      ]
+    },
+    "csv-convert": {
+      "guide": "/guides/csv-convert",
+      "tools": [
+        "excel-to-csv",
+        "json-convert",
+        "json-yaml",
+        "office-pdf"
+      ]
+    },
+    "json-formatter": {
+      "guide": "/guides/json-formatter",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview",
+        "regex-tester"
+      ]
+    },
+    "color-palette": {
+      "guide": "/guides/color-palette",
+      "tools": [
+        "heic-to-jpg",
+        "image-cropper",
+        "bulk-resize",
+        "image-scaler",
+        "webp-convert",
+        "favicon-generator"
+      ]
+    },
+    "favicon-generator": {
+      "guide": "/guides/favicon-generator",
+      "tools": [
+        "heic-to-jpg",
+        "image-cropper",
+        "bulk-resize",
+        "image-scaler",
+        "webp-convert",
+        "color-palette"
+      ]
+    },
+    "diff-checker": {
+      "guide": "/guides/diff-checker",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "url-base64",
+        "markdown-preview",
+        "regex-tester"
+      ]
+    },
+    "url-base64": {
+      "guide": "/guides/url-base64",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "markdown-preview",
+        "regex-tester"
+      ]
+    },
+    "markdown-preview": {
+      "guide": "/guides/markdown-preview",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "regex-tester"
+      ]
+    },
+    "regex-tester": {
+      "guide": "/guides/regex-tester",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview"
+      ]
+    },
+    "jwt-decoder": {
+      "guide": "/guides/jwt-decoder",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview"
+      ]
+    },
+    "uuid-generator": {
+      "guide": "/guides/uuid-generator",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview"
+      ]
+    },
+    "hash-generator": {
+      "guide": "/guides/hash-generator",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview"
+      ]
+    },
+    "exif-utility": {
+      "guide": "/guides/exif-utility",
+      "tools": [
+        "heic-to-jpg",
+        "image-cropper",
+        "bulk-resize",
+        "image-scaler",
+        "webp-convert",
+        "color-palette"
+      ]
+    },
+    "unix-converter": {
+      "guide": "/guides/unix-converter",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview"
+      ]
+    },
+    "decrypt-pdf": {
+      "guide": "/guides/decrypt-pdf",
+      "tools": [
+        "merge-pdf",
+        "compress-pdf",
+        "split-pdf",
+        "sign-pdf",
+        "extract-pages",
+        "remove-pages"
+      ]
+    },
+    "json-yaml": {
+      "guide": "/guides/json-yaml",
+      "tools": [
+        "excel-to-csv",
+        "json-convert",
+        "csv-convert",
+        "office-pdf"
+      ]
+    },
+    "sql-formatter": {
+      "guide": "/guides/sql-formatter",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview"
+      ]
+    },
+    "code-minifier": {
+      "guide": "/guides/code-minifier",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview"
+      ]
+    },
+    "password-generator": {
+      "guide": "/guides/password-generator",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview"
+      ]
+    },
+    "case-converter": {
+      "guide": "/guides/case-converter",
+      "tools": [
+        "qr-generator",
+        "word-counter",
+        "json-formatter",
+        "diff-checker",
+        "url-base64",
+        "markdown-preview"
+      ]
+    }
   }
 };

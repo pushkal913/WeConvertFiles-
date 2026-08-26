@@ -2,6 +2,7 @@ import { tools, categories, libraries, nav } from '../data/tools.mjs';
 import { buildToolHubMap } from './category-catalog.mjs';
 import { breadcrumbNav } from './breadcrumbs.mjs';
 import { renderFactBlock } from './tool-facts-render.mjs';
+import { relatedToolIds } from './related.mjs';
 import { guideSlugForTool } from './guide-catalog.mjs';
 
 // Load-and-validate entry point for the authoritative tool catalogue
@@ -48,7 +49,17 @@ export function renderRuntimeCatalogue() {
   for (const tool of tools) {
     factBlocks[tool.id] = renderFactBlock(tool.id).trim();
   }
-  const payload = { libraries, dependencies, breadcrumbs, factBlocks };
+  // Per-tool internal links: genuinely relevant related tools (same category,
+  // then same hub — never unrelated) plus a direct link to the tool's guide.
+  // Baked static pages and the SPA read the same map, so they never diverge.
+  const related = {};
+  for (const tool of tools) {
+    related[tool.id] = {
+      guide: `/guides/${guideSlugForTool(tool.id)}`,
+      tools: relatedToolIds(tool.id)
+    };
+  }
+  const payload = { libraries, dependencies, breadcrumbs, factBlocks, related };
   return `/* GENERATED FILE — do not edit.
    Source: data/tools.mjs via scripts/generate-catalogue-runtime.mjs
    (npm run generate:catalogue-runtime). Delivers the tool catalogue's library

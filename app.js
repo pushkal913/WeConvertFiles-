@@ -4313,21 +4313,35 @@ function showResultPanel(blob, fileName) {
 // Same-category siblings first, then top up to six so every tool page
 // interconnects with a healthy set of others.
 function getRelatedTools(toolId) {
-  const category = toolCategories.find((cat) => cat.tools.includes(toolId));
-  const siblings = category ? category.tools.filter((id) => id !== toolId) : [];
-  const others = tools.map((t) => t.id).filter((id) => id !== toolId && !siblings.includes(id));
-  return [...siblings, ...others]
-    .slice(0, 6)
-    .map((id) => tools.find((t) => t.id === id))
-    .filter(Boolean);
+  // Prefer the build-time related list (genuinely relevant: same category, then
+  // same hub — no unrelated fill), so the SPA matches the static page. Fall back
+  // to same-category siblings only if the runtime catalogue is unavailable.
+  const fromCatalogue = window.WCF_CATALOGUE && window.WCF_CATALOGUE.related && window.WCF_CATALOGUE.related[toolId];
+  let ids;
+  if (fromCatalogue) {
+    ids = fromCatalogue.tools;
+  } else {
+    const category = toolCategories.find((cat) => cat.tools.includes(toolId));
+    ids = category ? category.tools.filter((id) => id !== toolId).slice(0, 6) : [];
+  }
+  return ids.map((id) => tools.find((t) => t.id === id)).filter(Boolean);
 }
 
 function renderPersistentRelatedTools() {
   const grid = document.getElementById('relatedToolsGrid');
   if (!grid || !state.currentTool) return;
-  grid.innerHTML = getRelatedTools(state.currentTool.id)
+  const toolId = state.currentTool.id;
+  grid.innerHTML = getRelatedTools(toolId)
     .map((t) => `<a class="related-tab" href="/${t.id}"><span class="related-tab-dot"></span>${t.title}</a>`)
     .join('');
+  // Contextual link to this tool's own guide, kept correct on client-side switch.
+  const guideLink = document.getElementById('toolGuideLink');
+  if (guideLink) {
+    const rel = window.WCF_CATALOGUE && window.WCF_CATALOGUE.related && window.WCF_CATALOGUE.related[toolId];
+    guideLink.innerHTML = rel && rel.guide
+      ? `<a class="font-semibold text-[#1a73e8] hover:underline" href="${rel.guide}">Read the ${state.currentTool.title} guide <span aria-hidden="true">→</span></a>`
+      : '';
+  }
 }
 
 function renderRelatedTools() {

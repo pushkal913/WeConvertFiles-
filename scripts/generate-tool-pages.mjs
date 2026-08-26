@@ -1,10 +1,12 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { tools as catalogueTools, categories as catalogueCategories, assertValidCatalogue } from './catalogue.mjs';
+import { tools as catalogueTools, assertValidCatalogue } from './catalogue.mjs';
 import { breadcrumbNav, breadcrumbListJsonLd } from './breadcrumbs.mjs';
 import { buildToolHubMap } from './category-catalog.mjs';
 import { renderFactBlock } from './tool-facts-render.mjs';
+import { relatedToolIds } from './related.mjs';
+import { guideSlugForTool } from './guide-catalog.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = path.join(rootDir, 'tool-pages');
@@ -24,11 +26,7 @@ const tools = catalogueTools.map((tool) => ({
   description: tool.description
 }));
 
-// Category -> tool-id lists, so related-tool links stay in catalogue order.
-const categoryToolLists = catalogueCategories.map((category) => category.toolIds);
-
 const titleById = new Map(tools.map((tool) => [tool.id, tool.title]));
-const allToolIds = tools.map((tool) => tool.id);
 const toolHubMap = buildToolHubMap();
 
 // Home > category hub > tool. Every tool belongs to exactly one hub
@@ -42,14 +40,6 @@ const breadcrumbTrail = (tool) => {
     { name: hub.h1, href: `/category/${hub.slug}` },
     { name: tool.title, href: `/${tool.id}` }
   ];
-};
-
-// Same-category siblings first, then top up to six for broad interconnection.
-const getRelatedIds = (toolId) => {
-  const category = categoryToolLists.find((list) => list.includes(toolId)) || [];
-  const siblings = category.filter((id) => id !== toolId);
-  const others = allToolIds.filter((id) => id !== toolId && !siblings.includes(id));
-  return [...siblings, ...others].slice(0, 6);
 };
 
 const escapeHtml = (value) => String(value)
@@ -130,7 +120,7 @@ const renderToolPage = (tool) => {
     `<div id="seoHowToContent"$1><p>${escapeHtml(tool.description)} The supported processing runs locally in your browser.</p></div>`,
     'SEO summary'
   );
-  const relatedTabs = getRelatedIds(tool.id)
+  const relatedTabs = relatedToolIds(tool.id)
     .map((id) => `<a class="related-tab" href="/${id}"><span class="related-tab-dot"></span>${escapeHtml(titleById.get(id) || id)}</a>`)
     .join('\n                  ');
   html = replaceMeta(
@@ -138,6 +128,14 @@ const renderToolPage = (tool) => {
     /<div id="relatedToolsGrid"([^>]*)><\/div>/,
     `<div id="relatedToolsGrid"$1>\n                  ${relatedTabs}\n                </div>`,
     'related tools'
+  );
+  // Contextual link to this tool's own in-depth guide (canonical guide route).
+  const guideHref = `/guides/${guideSlugForTool(tool.id)}`;
+  html = replaceMeta(
+    html,
+    /<p id="toolGuideLink"([^>]*)><\/p>/,
+    `<p id="toolGuideLink"$1><a class="font-semibold text-[#1a73e8] hover:underline" href="${guideHref}">Read the ${escapeHtml(tool.title)} guide <span aria-hidden="true">→</span></a></p>`,
+    'tool guide link'
   );
   return html;
 };
