@@ -6,6 +6,12 @@ import { tools as catalogueTools, assertValidCatalogue } from './catalogue.mjs';
 import { nav } from '../data/tools.mjs';
 import { categoryPages } from '../data/category-pages.mjs';
 import { guideSlugForTool } from './guide-catalog.mjs';
+import { breadcrumbNav, breadcrumbListJsonLd } from './breadcrumbs.mjs';
+
+const breadcrumbTrail = (page) => [
+  { name: 'Home', href: '/' },
+  { name: page.h1, href: `/category/${page.slug}` }
+];
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = path.join(rootDir, 'category');
@@ -56,13 +62,7 @@ const jsonLd = (page, tools) => {
         description: page.description,
         inLanguage: 'en'
       },
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
-          { '@type': 'ListItem', position: 2, name: page.h1, item: url }
-        ]
-      },
+      breadcrumbListJsonLd(breadcrumbTrail(page)),
       {
         '@type': 'ItemList',
         name: page.h1,
@@ -158,11 +158,7 @@ ${jsonLd(page, tools)}
 <body class="bg-[#f8fafd] text-slate-900 antialiased transition-colors duration-200 dark:bg-[#0b0f19] dark:text-slate-100 min-h-screen flex flex-col">
     ${shell.headerBlock}
   <main class="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 flex-grow">
-    <nav class="mb-6 text-sm text-slate-500 dark:text-slate-400" aria-label="Breadcrumb">
-      <a class="font-semibold hover:text-[#1a73e8]" href="/">Home</a>
-      <span class="mx-2" aria-hidden="true">/</span>
-      <span aria-current="page">${escapeHtml(page.h1)}</span>
-    </nav>
+${breadcrumbNav(breadcrumbTrail(page))}
 
     <article>
       <header class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700/60 dark:bg-[#1e293b] sm:p-10">

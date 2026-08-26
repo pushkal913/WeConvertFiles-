@@ -22,18 +22,45 @@
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Image to Base64",
-  "url": "https://www.weconvertfiles.com/image-to-base64",
-  "description": "Convert PNG, JPG, WebP, and GIF images to raw Base64 strings or Data URIs.",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Any",
-  "isAccessibleForFree": true,
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  }
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Image to Base64",
+      "url": "https://www.weconvertfiles.com/image-to-base64",
+      "description": "Convert PNG, JPG, WebP, and GIF images to raw Base64 strings or Data URIs.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.weconvertfiles.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Image Tools",
+          "item": "https://www.weconvertfiles.com/category/image-tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Image to Base64",
+          "item": "https://www.weconvertfiles.com/image-to-base64"
+        }
+      ]
+    }
+  ]
 }
   </script>
   <script>
@@ -1232,6 +1259,17 @@
         </div>
       </section>
       <section id="workspaceView" class="hidden">
+        <div id="toolBreadcrumb">
+          <nav aria-label="Breadcrumb" class="mb-6">
+            <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-500 dark:text-slate-400">
+            <li class="min-w-0 max-w-[60vw] truncate"><a class="rounded hover:text-[#1a73e8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]" href="/">Home</a></li>
+            <li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li>
+            <li class="min-w-0 max-w-[60vw] truncate"><a class="rounded hover:text-[#1a73e8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]" href="/category/image-tools">Image Tools</a></li>
+            <li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li>
+            <li class="min-w-0 max-w-[60vw] truncate"><span aria-current="page" class="font-medium text-slate-700 dark:text-slate-300">Image to Base64</span></li>
+            </ol>
+          </nav>
+        </div>
         <button id="backButton" class="mb-5 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-material transition hover:bg-slate-50 dark:hover:bg-slate-800">
           <span aria-hidden="true">&larr;</span>
           Back to Dashboard
@@ -1466,8 +1504,8 @@
     </div>
   </div>
 
-  <script src="/js/catalogue.js?v=20260824-1"></script>
-  <script src="/app.js?v=20260824-4"></script>
+  <script src="/js/catalogue.js?v=20260824-2"></script>
+  <script src="/app.js?v=20260824-5"></script>
   <script src="/assets/motion.js?v=20260817-1" defer></script>
 </body>
 </html>

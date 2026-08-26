@@ -11,8 +11,8 @@
     "generate:catalogue-runtime": "node scripts/generate-catalogue-runtime.mjs",
     "generate:layout-nav": "node scripts/generate-layout-nav.mjs",
     "generate:categories": "node scripts/generate-category-pages.mjs",
-    "generate:tools": "node scripts/generate-catalogue-runtime.mjs && node scripts/generate-layout-nav.mjs && node scripts/generate-guide-index.mjs && node scripts/generate-tool-pages.mjs && node scripts/generate-related-guides.mjs && node scripts/generate-guide-schema.mjs && node scripts/generate-category-pages.mjs && node scripts/generate-static-shell.mjs && node scripts/generate-sitemap.mjs",
-    "validate": "node scripts/validate-catalogue.mjs && node scripts/validate-integrity.mjs && node scripts/validate-guide-index.mjs && node scripts/validate-tool-pages.mjs && node scripts/validate-conversion-pages.mjs && node scripts/validate-category-pages.mjs && node scripts/validate-canonical-urls.mjs && node scripts/validate-static-shell.mjs && node scripts/validate-static-css.mjs",
+    "generate:tools": "node scripts/generate-catalogue-runtime.mjs && node scripts/generate-layout-nav.mjs && node scripts/generate-guide-index.mjs && node scripts/generate-tool-pages.mjs && node scripts/generate-related-guides.mjs && node scripts/generate-guide-breadcrumbs.mjs && node scripts/generate-guide-schema.mjs && node scripts/generate-category-pages.mjs && node scripts/generate-static-shell.mjs && node scripts/generate-sitemap.mjs",
+    "validate": "node scripts/validate-catalogue.mjs && node scripts/validate-integrity.mjs && node scripts/validate-guide-index.mjs && node scripts/validate-tool-pages.mjs && node scripts/validate-conversion-pages.mjs && node scripts/validate-category-pages.mjs && node scripts/validate-breadcrumbs.mjs && node scripts/validate-canonical-urls.mjs && node scripts/validate-static-shell.mjs && node scripts/validate-static-css.mjs",
     "baseline:jitter": "node test/jitter-baseline.mjs"
   },
   "devDependencies": {

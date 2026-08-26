@@ -618,10 +618,12 @@
     </header>
   <!-- WCF_SHELL_HEADER_END -->
   <main class="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 flex-grow">
-    <nav class="mb-6 text-sm text-slate-500 dark:text-slate-400" aria-label="Breadcrumb">
-      <a class="font-semibold hover:text-[#1a73e8]" href="/">Home</a>
-      <span class="mx-2" aria-hidden="true">/</span>
-      <span aria-current="page">Text &amp; Developer Tools</span>
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-500 dark:text-slate-400">
+      <li class="min-w-0 max-w-[60vw] truncate"><a class="rounded hover:text-[#1a73e8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]" href="/">Home</a></li>
+      <li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li>
+      <li class="min-w-0 max-w-[60vw] truncate"><span aria-current="page" class="font-medium text-slate-700 dark:text-slate-300">Text &amp; Developer Tools</span></li>
+      </ol>
     </nav>
 
     <article>

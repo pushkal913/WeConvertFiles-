@@ -2,6 +2,8 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tools as catalogueTools, categories as catalogueCategories, assertValidCatalogue } from './catalogue.mjs';
+import { breadcrumbNav, breadcrumbListJsonLd } from './breadcrumbs.mjs';
+import { buildToolHubMap } from './category-catalog.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = path.join(rootDir, 'tool-pages');
@@ -26,6 +28,20 @@ const categoryToolLists = catalogueCategories.map((category) => category.toolIds
 
 const titleById = new Map(tools.map((tool) => [tool.id, tool.title]));
 const allToolIds = tools.map((tool) => tool.id);
+const toolHubMap = buildToolHubMap();
+
+// Home > category hub > tool. Every tool belongs to exactly one hub
+// (validate-category-pages enforces coverage), so the middle crumb is always
+// a real category route.
+const breadcrumbTrail = (tool) => {
+  const hub = toolHubMap.get(tool.id);
+  if (!hub) throw new Error(`tool "${tool.id}" has no category hub for its breadcrumb.`);
+  return [
+    { name: 'Home', href: '/' },
+    { name: hub.h1, href: `/category/${hub.slug}` },
+    { name: tool.title, href: `/${tool.id}` }
+  ];
+};
 
 // Same-category siblings first, then top up to six for broad interconnection.
 const getRelatedIds = (toolId) => {
@@ -52,20 +68,26 @@ const renderToolPage = (tool) => {
   const url = `${siteUrl}/${tool.id}`;
   const title = `${tool.title} Online - Private & Free | WeConvertFiles`;
   const description = `${tool.description} Free and private in your browser—file contents are not uploaded for conversion.`;
+  const trail = breadcrumbTrail(tool);
   const structuredData = JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: tool.title,
-    url,
-    description: tool.description,
-    applicationCategory: 'UtilitiesApplication',
-    operatingSystem: 'Any',
-    isAccessibleForFree: true,
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD'
-    }
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        name: tool.title,
+        url,
+        description: tool.description,
+        applicationCategory: 'UtilitiesApplication',
+        operatingSystem: 'Any',
+        isAccessibleForFree: true,
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD'
+        }
+      },
+      breadcrumbListJsonLd(trail)
+    ]
   }, null, 2).replaceAll('<', '\\u003c');
 
   let html = shell;
@@ -83,6 +105,12 @@ const renderToolPage = (tool) => {
     /<script type="application\/ld\+json">[\s\S]*?<\/script>/,
     `<script type="application/ld+json">\n${structuredData}\n  </script>`,
     'structured data'
+  );
+  html = replaceMeta(
+    html,
+    /<div id="toolBreadcrumb"><\/div>/,
+    `<div id="toolBreadcrumb">\n${breadcrumbNav(trail, { indent: '          ' })}\n        </div>`,
+    'tool breadcrumb'
   );
   html = replaceMeta(html, /<p id="workspaceKicker"([^>]*)><\/p>/, `<p id="workspaceKicker"$1>${escapeHtml(tool.kicker)}</p>`, 'workspace kicker');
   html = replaceMeta(html, /<h1 id="workspaceTitle"([^>]*)><\/h1>/, `<h1 id="workspaceTitle"$1>${escapeHtml(tool.title)}</h1>`, 'workspace title');

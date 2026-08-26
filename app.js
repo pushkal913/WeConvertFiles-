@@ -1335,6 +1335,13 @@ async function openTool(toolId) {
   document.getElementById('workspaceDescription').textContent = tool.description;
   document.getElementById('workspaceBadge').textContent = tool.badge;
   document.getElementById('uploadHint').textContent = tool.hint;
+  // Keep the visible breadcrumb correct after a client-side tool switch. The
+  // markup is pre-rendered per tool in the runtime catalogue (same component the
+  // static pages use), so this only swaps it in.
+  const breadcrumbEl = document.getElementById('toolBreadcrumb');
+  if (breadcrumbEl) {
+    breadcrumbEl.innerHTML = (window.WCF_CATALOGUE && window.WCF_CATALOGUE.breadcrumbs && window.WCF_CATALOGUE.breadcrumbs[toolId]) || '';
+  }
   const noteOverrides = {
     'merge-pdf': [
       'Select as many PDF files as you like to merge into a single clean document.',
