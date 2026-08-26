@@ -427,7 +427,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/qr-generator",
     "guide": "/guides/qr-generator.html",
-    "module": "app.js",
+    "module": "js/tools/qr-generator.js",
     "dependencies": [
       "qrious"
     ]
@@ -554,7 +554,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/word-counter",
     "guide": "/guides/word-counter.html",
-    "module": "app.js",
+    "module": "js/tools/word-counter.js",
     "dependencies": []
   },
   {
@@ -733,7 +733,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/json-formatter",
     "guide": "/guides/json-formatter.html",
-    "module": "app.js",
+    "module": "js/tools/json-formatter.js",
     "dependencies": []
   },
   {
@@ -783,7 +783,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/diff-checker",
     "guide": "/guides/diff-checker.html",
-    "module": "app.js",
+    "module": "js/tools/diff-checker.js",
     "dependencies": [
       "diff"
     ]
@@ -801,7 +801,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/url-base64",
     "guide": "/guides/url-base64.html",
-    "module": "app.js",
+    "module": "js/tools/url-base64.js",
     "dependencies": []
   },
   {
@@ -817,7 +817,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/markdown-preview",
     "guide": "/guides/markdown-preview.html",
-    "module": "app.js",
+    "module": "js/tools/markdown-preview.js",
     "dependencies": [
       "marked"
     ]
@@ -835,7 +835,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/regex-tester",
     "guide": "/guides/regex-tester.html",
-    "module": "app.js",
+    "module": "js/tools/regex-tester.js",
     "dependencies": []
   },
   {
@@ -851,7 +851,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/jwt-decoder",
     "guide": "/guides/jwt-decoder.html",
-    "module": "app.js",
+    "module": "js/tools/jwt-decoder.js",
     "dependencies": []
   },
   {
@@ -867,7 +867,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/uuid-generator",
     "guide": "/guides/uuid-generator.html",
-    "module": "app.js",
+    "module": "js/tools/uuid-generator.js",
     "dependencies": []
   },
   {
@@ -883,7 +883,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/hash-generator",
     "guide": "/guides/hash-generator.html",
-    "module": "app.js",
+    "module": "js/tools/hash-generator.js",
     "dependencies": [
       "cryptojs"
     ]
@@ -919,7 +919,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/unix-converter",
     "guide": "/guides/unix-converter.html",
-    "module": "app.js",
+    "module": "js/tools/unix-converter.js",
     "dependencies": []
   },
   {
@@ -955,7 +955,7 @@ export const tools = [
     "category": "data-tools",
     "route": "/json-yaml",
     "guide": "/guides/json-yaml.html",
-    "module": "app.js",
+    "module": "js/tools/json-yaml.js",
     "dependencies": [
       "jsyaml"
     ]
@@ -973,7 +973,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/sql-formatter",
     "guide": "/guides/sql-formatter.html",
-    "module": "app.js",
+    "module": "js/tools/sql-formatter.js",
     "dependencies": [
       "sqlformatter"
     ]
@@ -991,7 +991,7 @@ export const tools = [
     "category": "developer-tools",
     "route": "/code-minifier",
     "guide": "/guides/code-minifier.html",
-    "module": "app.js",
+    "module": "js/tools/code-minifier.js",
     "dependencies": []
   },
   {
