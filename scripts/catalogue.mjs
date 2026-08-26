@@ -1,6 +1,7 @@
 import { tools, categories, libraries, nav } from '../data/tools.mjs';
 import { buildToolHubMap } from './category-catalog.mjs';
 import { breadcrumbNav } from './breadcrumbs.mjs';
+import { renderFactBlock } from './tool-facts-render.mjs';
 import { guideSlugForTool } from './guide-catalog.mjs';
 
 // Load-and-validate entry point for the authoritative tool catalogue
@@ -41,11 +42,17 @@ export function renderRuntimeCatalogue() {
     ];
     breadcrumbs[tool.id] = breadcrumbNav(trail, { indent: '' }).trim();
   }
-  const payload = { libraries, dependencies, breadcrumbs };
+  // Pre-rendered "Tool facts" block per tool, so the SPA keeps it correct after
+  // a client-side tool switch (same renderer the static pages use).
+  const factBlocks = {};
+  for (const tool of tools) {
+    factBlocks[tool.id] = renderFactBlock(tool.id).trim();
+  }
+  const payload = { libraries, dependencies, breadcrumbs, factBlocks };
   return `/* GENERATED FILE — do not edit.
    Source: data/tools.mjs via scripts/generate-catalogue-runtime.mjs
    (npm run generate:catalogue-runtime). Delivers the tool catalogue's library
-   sources, per-tool dependencies and breadcrumbs to the runtime app. */
+   sources, per-tool dependencies, breadcrumbs and fact blocks to the runtime app. */
 window.WCF_CATALOGUE = ${JSON.stringify(payload, null, 2)};
 `;
 }

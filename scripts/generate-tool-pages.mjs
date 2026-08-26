@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { tools as catalogueTools, categories as catalogueCategories, assertValidCatalogue } from './catalogue.mjs';
 import { breadcrumbNav, breadcrumbListJsonLd } from './breadcrumbs.mjs';
 import { buildToolHubMap } from './category-catalog.mjs';
+import { renderFactBlock } from './tool-facts-render.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDir = path.join(rootDir, 'tool-pages');
@@ -111,6 +112,12 @@ const renderToolPage = (tool) => {
     /<div id="toolBreadcrumb"><\/div>/,
     `<div id="toolBreadcrumb">\n${breadcrumbNav(trail, { indent: '          ' })}\n        </div>`,
     'tool breadcrumb'
+  );
+  html = replaceMeta(
+    html,
+    /<div id="toolFactBlock"><\/div>/,
+    `<div id="toolFactBlock">\n${renderFactBlock(tool.id, { indent: '              ' })}\n            </div>`,
+    'tool fact block'
   );
   html = replaceMeta(html, /<p id="workspaceKicker"([^>]*)><\/p>/, `<p id="workspaceKicker"$1>${escapeHtml(tool.kicker)}</p>`, 'workspace kicker');
   html = replaceMeta(html, /<h1 id="workspaceTitle"([^>]*)><\/h1>/, `<h1 id="workspaceTitle"$1>${escapeHtml(tool.title)}</h1>`, 'workspace title');

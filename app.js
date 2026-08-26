@@ -1342,6 +1342,10 @@ async function openTool(toolId) {
   if (breadcrumbEl) {
     breadcrumbEl.innerHTML = (window.WCF_CATALOGUE && window.WCF_CATALOGUE.breadcrumbs && window.WCF_CATALOGUE.breadcrumbs[toolId]) || '';
   }
+  const factBlockEl = document.getElementById('toolFactBlock');
+  if (factBlockEl) {
+    factBlockEl.innerHTML = (window.WCF_CATALOGUE && window.WCF_CATALOGUE.factBlocks && window.WCF_CATALOGUE.factBlocks[toolId]) || '';
+  }
   const noteOverrides = {
     'merge-pdf': [
       'Select as many PDF files as you like to merge into a single clean document.',
