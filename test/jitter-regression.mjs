@@ -107,6 +107,12 @@ async function timelinePass(browser, origin, target) {
   await client.send('Emulation.setCPUThrottlingRate', { rate: CPU_THROTTLE_RATE });
 
   await page.goto(origin + target.path, { waitUntil: 'commit' });
+  // Start geometry samples only after parsing and blocking end-of-body scripts
+  // complete. Sampling from `commit` was timing-dependent under CPU throttle:
+  // the footer could exist before app.js populated the tool grid, producing a
+  // large false movement even though CLS was zero. The buffered observer above
+  // still captures genuine layout shifts from the full navigation lifecycle.
+  await page.waitForLoadState('domcontentloaded');
   const t0 = Date.now();
   const samples = [];
   for (const ms of SAMPLE_TIMES_MS) {
