@@ -4,6 +4,28 @@ Browser-level tooling for the optimisation work. Nothing here changes
 production behaviour — the harness only serves the existing files over a local
 static server and observes them in a real browser.
 
+## Smoke coverage (Phase 4, Task 23)
+
+Headless browser smoke tests for representative pages and the primary
+navigation journeys. Runs against the same local static server, exits non-zero
+on any failure, and needs no network — CI-friendly.
+
+```
+npm test          # alias for the smoke suite
+npm run test:smoke
+```
+
+It loads one page of each important type — homepage, a PDF tool (`/merge-pdf`),
+an image tool (`/image-cropper`), a developer tool (`/json-formatter`), a
+conversion page (`/convert/jpg-to-pdf`), a guide (`/guides/merge-pdf`) and a
+legal page (`/privacy`) — across **desktop and mobile** viewports, and asserts
+each one: responds HTTP ok, has a non-empty `<title>` and a `<main>`, does not
+scroll horizontally on mobile, and produces **no unexpected console/page errors
+or same-origin failed requests** (third-party hosts that CI may block are
+allow-listed). It then walks the primary navigation journeys — homepage → tool,
+tool → category hub, category → tool, guide → tool — to confirm internal routes
+work. Any failure prints the exact page/journey and reason.
+
 ## Jitter baseline (Phase 1, Task 1)
 
 Establishes a reproducible, measured baseline for the page-shell jitter so
