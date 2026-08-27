@@ -73,6 +73,26 @@ needed, add an exact rule/target pair to `KNOWN_EXCEPTIONS` in `test/a11y.mjs`
 and document the selector, rationale, owner, and review condition here. Broad
 rule-level exclusions are not allowed.
 
+## Route and link crawler (Phase 4, Task 27)
+
+Run the crawler and its fixture tests with:
+
+```
+npm run test:links
+```
+
+The Node-only gate reads `sitemap.xml`, every generated HTML file, and
+`_redirects`, then serves the repository with the local Netlify-compatible
+harness. It requires every sitemap canonical to return a direct HTTP 200,
+checks internal link status codes and fragments, verifies 301/302 rules really
+redirect with the declared status and location, rejects redirect chains, and
+fails links that still point to legacy redirect sources. External, `mailto:`,
+`tel:`, `javascript:`, and `data:` links are outside this internal-route check.
+
+Failures are aggregated and name the source file plus the broken route,
+fragment, redirect, or preferred canonical target. CI runs this gate before
+installing Playwright so route regressions fail quickly.
+
 ## Jitter / layout-shift regression test (Phase 4, Task 25)
 
 Turns the Phase 1 jitter measurement into an automatic guard. Runs headlessly,

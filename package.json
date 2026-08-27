@@ -20,7 +20,8 @@
     "baseline:jitter": "node test/jitter-baseline.mjs",
     "test:jitter": "node test/jitter-regression.mjs",
     "measure:vitals": "node test/web-vitals.mjs",
-    "test:a11y": "node test/a11y.mjs"
+    "test:a11y": "node test/a11y.mjs",
+    "test:links": "node --test test/link-crawler.test.mjs && node test/link-crawler.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.11.4",
