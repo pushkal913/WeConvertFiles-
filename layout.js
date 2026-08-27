@@ -494,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         <!-- Desktop Utilities -->
         <div class="hidden lg:flex items-center gap-3.5 xl:gap-4.5 border-l border-slate-200 dark:border-slate-700/60 pl-4.5 xl:pl-6 shrink-0">
-          <button id="headerSearchButton" class="rounded-full p-2 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 border border-blue-200/50 dark:border-blue-800/40 shadow-[0_0_12px_rgba(59,130,246,0.2)] hover:shadow-[0_0_18px_rgba(59,130,246,0.35)] transition-all duration-200 flex items-center justify-center shrink-0" aria-label="Search tools" type="button">
+          <button id="headerSearchButton" class="rounded-full p-2 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 border border-blue-200/50 dark:border-blue-800/40 shadow-[0_0_12px_rgba(59,130,246,0.2)] hover:shadow-[0_0_18px_rgba(59,130,246,0.35)] transition-all duration-200 flex items-center justify-center shrink-0" aria-label="Search tools" aria-controls="searchModal" aria-expanded="false" type="button">
             <svg class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           </button>
           <button id="darkModeToggle" class="rounded-full p-2 text-slate-600 hover:bg-slate-100 hover:text-[#1967d2] transition-all dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-amber-400" aria-label="Toggle dark mode">
@@ -509,14 +509,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         <!-- Mobile Actions -->
         <div class="flex justify-end items-center gap-2 lg:hidden">
-          <button id="mobileSearchButton" class="rounded-full p-2 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 border border-blue-200/50 dark:border-blue-800/40 shadow-[0_0_10px_rgba(59,130,246,0.2)] active:shadow-[0_0_15px_rgba(59,130,246,0.35)] transition-all duration-200 flex items-center justify-center shrink-0" aria-label="Search tools" type="button">
+          <button id="mobileSearchButton" class="rounded-full p-2 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 border border-blue-200/50 dark:border-blue-800/40 shadow-[0_0_10px_rgba(59,130,246,0.2)] active:shadow-[0_0_15px_rgba(59,130,246,0.35)] transition-all duration-200 flex items-center justify-center shrink-0" aria-label="Search tools" aria-controls="searchModal" aria-expanded="false" type="button">
             <svg class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
           </button>
           <button id="mobileDarkModeToggle" class="rounded-full p-2 text-slate-600 hover:bg-slate-100 hover:text-[#1967d2] dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-amber-400" aria-label="Toggle dark mode">
             <svg class="block dark:hidden h-[22px] w-[22px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
             <svg class="hidden dark:block h-[22px] w-[22px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
           </button>
-          <button id="mobileMenuButton" class="rounded-xl p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800" aria-label="Open tools menu">
+          <button id="mobileMenuButton" class="rounded-xl p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800" aria-label="Open tools menu" aria-controls="mobileMenuDrawer" aria-expanded="false" type="button">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
           </button>
         </div>
@@ -529,11 +529,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenuHtml = `
     <div id="mobileMenuDrawer" class="fixed inset-0 z-50 hidden">
       <div id="mobileMenuBackdrop" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
-      <div class="absolute right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-[#0f172a] p-6 shadow-2xl flex flex-col justify-between rounded-l-[32px] border-l border-slate-100 dark:border-slate-700/60">
+      <div role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle" class="absolute right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-[#0f172a] p-6 shadow-2xl flex flex-col justify-between rounded-l-[32px] border-l border-slate-100 dark:border-slate-700/60">
         <div>
           <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700/60 pb-4 mb-6">
-            <span class="text-lg font-bold text-slate-900 dark:text-slate-100">All Tools</span>
-            <button id="closeMobileMenu" class="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            <span id="mobileMenuTitle" class="text-lg font-bold text-slate-900 dark:text-slate-100">All Tools</span>
+            <button id="closeMobileMenu" aria-label="Close tools menu" type="button" class="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </div>
@@ -552,11 +552,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchModalHtml = `
     <div id="searchModal" class="fixed inset-0 z-50 hidden">
       <div id="searchBackdrop" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
-      <div class="absolute inset-x-4 top-[10%] mx-auto max-w-xl rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white/95 dark:bg-[#151f32]/95 backdrop-blur shadow-2xl overflow-hidden flex flex-col max-h-[70vh]">
+      <div role="dialog" aria-modal="true" aria-label="Search tools" class="absolute inset-x-4 top-[10%] mx-auto max-w-xl rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white/95 dark:bg-[#151f32]/95 backdrop-blur shadow-2xl overflow-hidden flex flex-col max-h-[70vh]">
         <div class="relative flex items-center border-b border-slate-200/80 dark:border-slate-700/60 p-4">
           <svg class="h-5 w-5 text-blue-500 mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          <input id="searchInput" type="text" class="w-full bg-transparent text-sm text-slate-950 dark:text-slate-100 outline-none placeholder-slate-400 dark:placeholder-slate-500" placeholder="Search document, image, or developer tools..." />
-          <button id="closeSearchBtn" class="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md">ESC</button>
+          <input id="searchInput" aria-label="Search tools" type="text" class="w-full bg-transparent text-sm text-slate-950 dark:text-slate-100 outline-none placeholder-slate-400 dark:placeholder-slate-500" placeholder="Search document, image, or developer tools..." />
+          <button id="closeSearchBtn" aria-label="Close search" type="button" class="text-xs text-slate-600 hover:text-slate-800 dark:text-slate-300 dark:hover:text-slate-100 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md">ESC</button>
         </div>
         <div id="searchResults" class="overflow-y-auto p-2 space-y-1"></div>
       </div>
@@ -588,13 +588,13 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
           <div class="rounded-2xl border border-slate-200/60 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm space-y-2 max-w-xl">
-            <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">Our Mission & Support</h4>
+            <h2 class="text-xs font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">Our Mission & Support</h2>
             <p class="text-xs leading-5.5 text-slate-600 dark:text-slate-400">
               WeConvertFiles is proudly built by <a href="https://www.techknogeeks.com" target="_blank" rel="noopener" class="font-bold text-[#1a73e8] hover:underline">TechKnoGeeks</a> to provide free, privacy-focused browser-based document tools. Clearly labelled advertising helps fund hosting, maintenance, and continued development without requiring a subscription.
             </p>
           </div>
         </div>
-        <div class="border-t border-slate-200/60 dark:border-slate-700/60 mt-8 pt-6 text-center text-[10px] text-slate-400 dark:text-slate-500">
+        <div class="border-t border-slate-200/60 dark:border-slate-700/60 mt-8 pt-6 text-center text-[10px] text-slate-600 dark:text-slate-400">
           &copy; 2026 WeConvertFiles by TechKnoGeeks. All rights reserved.
         </div>
       </div>
@@ -626,6 +626,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeMobileMenu = document.getElementById('closeMobileMenu');
   const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
   const mobileToolsList = document.getElementById('mobileToolsList');
+  const modalInertElements = new Set();
+  const modalFocusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
+
+  const setModalIsolation = (modalRoot, isolate) => {
+    if (!isolate) {
+      modalInertElements.forEach((element) => { element.inert = false; });
+      modalInertElements.clear();
+      return;
+    }
+
+    setModalIsolation(null, false);
+    let branch = modalRoot;
+    while (branch?.parentElement) {
+      const parent = branch.parentElement;
+      [...parent.children].forEach((sibling) => {
+        if (sibling !== branch && !sibling.inert) {
+          sibling.inert = true;
+          modalInertElements.add(sibling);
+        }
+      });
+      if (parent === document.body) break;
+      branch = parent;
+    }
+  };
+
+  const trapModalFocus = (event, dialog) => {
+    if (event.key !== 'Tab' || !dialog) return;
+    const focusable = [...dialog.querySelectorAll(modalFocusableSelector)].filter((element) => {
+      const style = getComputedStyle(element);
+      const rect = element.getBoundingClientRect();
+      return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+    });
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
 
   // WCF_NAV_GROUPS_START — generated from data/tools.mjs (npm run generate:layout-nav); do not edit by hand.
   const categories = [
@@ -659,10 +702,20 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileMenuButton.addEventListener('click', () => {
       renderMobileMenu();
       mobileMenuDrawer.classList.remove('hidden');
+      setModalIsolation(mobileMenuDrawer, true);
+      mobileMenuButton.setAttribute('aria-expanded', 'true');
+      setTimeout(() => closeMobileMenu?.focus(), 0);
     });
   }
-  if (closeMobileMenu) closeMobileMenu.addEventListener('click', () => mobileMenuDrawer.classList.add('hidden'));
-  if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener('click', () => mobileMenuDrawer.classList.add('hidden'));
+  const hideMobileMenu = ({ restoreFocus = false } = {}) => {
+    if (!mobileMenuDrawer) return;
+    mobileMenuDrawer.classList.add('hidden');
+    setModalIsolation(null, false);
+    mobileMenuButton?.setAttribute('aria-expanded', 'false');
+    if (restoreFocus) mobileMenuButton?.focus();
+  };
+  if (closeMobileMenu) closeMobileMenu.addEventListener('click', () => hideMobileMenu({ restoreFocus: true }));
+  if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener('click', () => hideMobileMenu({ restoreFocus: true }));
 
   // Search Modal
   const headerSearchButton = document.getElementById('headerSearchButton');
@@ -672,11 +725,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeSearchBtn = document.getElementById('closeSearchBtn');
   const searchInput = document.getElementById('searchInput');
   const searchResults = document.getElementById('searchResults');
+  let searchTrigger = null;
 
   const toggleSearchModal = (show) => {
     if (!searchModal) return;
     if (show) {
+      searchTrigger = document.activeElement;
       searchModal.classList.remove('hidden');
+      setModalIsolation(searchModal, true);
+      headerSearchButton?.setAttribute('aria-expanded', 'true');
+      mobileSearchButton?.setAttribute('aria-expanded', 'true');
       if (searchInput) {
         searchInput.value = '';
         setTimeout(() => searchInput.focus(), 50);
@@ -684,6 +742,11 @@ document.addEventListener('DOMContentLoaded', () => {
       renderSearchResults('');
     } else {
       searchModal.classList.add('hidden');
+      setModalIsolation(null, false);
+      headerSearchButton?.setAttribute('aria-expanded', 'false');
+      mobileSearchButton?.setAttribute('aria-expanded', 'false');
+      if (searchTrigger instanceof HTMLElement) searchTrigger.focus();
+      searchTrigger = null;
     }
   };
 
@@ -693,7 +756,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (closeSearchBtn) closeSearchBtn.addEventListener('click', () => toggleSearchModal(false));
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') toggleSearchModal(false);
+    if (e.key === 'Tab' && searchModal && !searchModal.classList.contains('hidden')) {
+      trapModalFocus(e, searchModal.querySelector('[role="dialog"]'));
+    } else if (e.key === 'Tab' && mobileMenuDrawer && !mobileMenuDrawer.classList.contains('hidden')) {
+      trapModalFocus(e, mobileMenuDrawer.querySelector('[role="dialog"]'));
+    } else if (e.key === 'Escape' && searchModal && !searchModal.classList.contains('hidden')) {
+      toggleSearchModal(false);
+    } else if (e.key === 'Escape' && mobileMenuDrawer && !mobileMenuDrawer.classList.contains('hidden')) {
+      hideMobileMenu({ restoreFocus: true });
+    }
   });
 
   function renderSearchResults(query) {

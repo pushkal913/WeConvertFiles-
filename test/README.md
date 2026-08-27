@@ -11,8 +11,8 @@ navigation journeys. Runs against the same local static server, exits non-zero
 on any failure, and needs no network — CI-friendly.
 
 ```
-npm test          # alias for the smoke suite
 npm run test:smoke
+npm test          # smoke + jitter + accessibility regression suites
 ```
 
 It loads one page of each important type — homepage, a PDF tool (`/merge-pdf`),
@@ -26,7 +26,7 @@ allow-listed). It then walks the primary navigation journeys — homepage → to
 tool → category hub, category → tool, guide → tool — to confirm internal routes
 work. Any failure prints the exact page/journey and reason.
 
-## Core Web Vitals baseline (Phase 4, Task 26)
+## Core Web Vitals baseline (Phase 4)
 
 Measures **LCP, CLS and INP** for representative pages, on desktop and mobile,
 for cold (empty-cache) and warm (repeat-visit) loads, using Google's
@@ -47,6 +47,32 @@ Output: `test/baseline/WEB-VITALS.md` (the committed, diffable baseline) and
 measurement tool — it does **not** assert pass/fail targets; project targets
 should be set only after reviewing the baseline (and real field/CrUX data).
 
+## Accessibility regression checks (Phase 4, Task 26)
+
+Run the accessibility suite with:
+
+```
+npm run test:a11y
+```
+
+The suite serves the static site locally, audits the homepage plus representative
+tool, conversion, category, guide, and accessibility-statement pages with `axe-core`, and fails
+on `critical` or `serious` findings (including supported color-contrast rules).
+It also checks visible keyboard focus, Enter/Escape behavior and focus return
+for the mobile menu and search dialog, keyboard accordion activation,
+accessible names, landmarks, and heading order. Because the cookie-settings
+dialog is part of that keyboard path, the suite also confirms that PageSense
+stays blocked after a decline and is requested only after explicit consent.
+
+Scroll-reveal is disabled only inside the audit so below-the-fold content is
+tested in its settled, visible state. Axe checks that need human judgment are
+printed as `manual review` entries in the test output rather than hidden.
+
+There are currently no known axe exceptions. If a deliberate exception is
+needed, add an exact rule/target pair to `KNOWN_EXCEPTIONS` in `test/a11y.mjs`
+and document the selector, rationale, owner, and review condition here. Broad
+rule-level exclusions are not allowed.
+
 ## Jitter / layout-shift regression test (Phase 4, Task 25)
 
 Turns the Phase 1 jitter measurement into an automatic guard. Runs headlessly,
@@ -66,7 +92,8 @@ reuses the Phase 1 methodology:
   injection, the header is absent when blocked and then pushes content down on
   the normal load — a large shift the test rejects.
 - **Timeline pass** — under a fixed CPU throttle, samples the same boxes at
-  ~100/500/1500 ms and records the browser's Cumulative Layout Shift.
+  ~100/500/1500 ms after `DOMContentLoaded` and records the browser's buffered
+  Cumulative Layout Shift across the full navigation lifecycle.
 
 Only movement within the thresholds (header/main/footer ≤ 2px, CLS ≤ 0.05)
 passes; anything larger fails and names the page and element. A compact

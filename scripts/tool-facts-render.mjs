@@ -30,7 +30,7 @@ export function factRowsFor(toolId) {
 
 export function renderFactBlock(toolId, { indent = '' } = {}) {
   const rows = factRowsFor(toolId).map(([label, value]) => `${indent}    <div class="min-w-0">
-${indent}      <dt class="text-xs font-semibold uppercase tracking-wide text-slate-400">${escapeHtml(label)}</dt>
+${indent}      <dt class="text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">${escapeHtml(label)}</dt>
 ${indent}      <dd class="mt-0.5 text-sm leading-6 font-medium text-slate-800 dark:text-slate-200">${escapeHtml(value)}</dd>
 ${indent}    </div>`).join('\n');
   return `${indent}<section class="rounded-[28px] border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-6 shadow-material" aria-labelledby="toolFactsHeading">

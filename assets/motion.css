@@ -24,7 +24,7 @@ html.wcf-anim .reveal.d2{transition-delay:.14s;}
 button:active:not(:disabled){transform:scale(.97);}
 
 /* --- Clearer keyboard focus (accessibility + polish) --- */
-a:focus-visible, button:focus-visible, [tabindex]:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
   outline:2.5px solid #1a73e8;
   outline-offset:2px;
   border-radius:8px;
@@ -96,6 +96,12 @@ details.wcf-acc[open] > div{animation:wcf-acc-in .24s cubic-bezier(.22,.61,.36,1
    matching every Tailwind dark: utility. */
 .dark .wcf-acc summary .wcf-badge{color:color-mix(in srgb, var(--c) 62%, white) !important; background:color-mix(in srgb, var(--c) 26%, transparent) !important;}
 .dark .wcf-acc[open] > summary{color:color-mix(in srgb, var(--c) 60%, white);}
+
+/* Small category counts stay legible against their pale chip background. */
+.tool-category-count,
+.wcf-acc summary .wcf-badge{color:#334155 !important; background:#f1f5f9 !important;}
+.dark .tool-category-count,
+.dark .wcf-acc summary .wcf-badge{color:#cbd5e1 !important; background:rgba(51,65,85,.55) !important;}
 
 @media (prefers-reduced-motion: reduce){
   details.wcf-acc[open] > div{animation:none !important;}

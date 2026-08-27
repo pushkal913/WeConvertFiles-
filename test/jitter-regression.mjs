@@ -82,6 +82,10 @@ async function deterministicPass(browser, origin, target) {
   await p2.waitForLoadState('networkidle').catch(() => {});
   await p2.waitForTimeout(300);
   const settled = await tops(p2);
+  const consentScriptDeferred = await p2.evaluate(() => {
+    const script = document.getElementById('pagesenseCode');
+    return !script || script.defer;
+  });
   await c2.close();
 
   const shift = {};
@@ -89,7 +93,7 @@ async function deterministicPass(browser, origin, target) {
     shift[s] = (blocked[s] != null && settled[s] != null)
       ? Math.round((settled[s] - blocked[s]) * 100) / 100 : null;
   }
-  return { headerPresentBlocked, shift };
+  return { headerPresentBlocked, consentScriptDeferred, shift };
 }
 
 async function timelinePass(browser, origin, target) {
@@ -149,6 +153,9 @@ async function main() {
       if (!det.headerPresentBlocked) {
         fail(`${target.label} (${target.path}): header is NOT present when layout.js is blocked — runtime shell injection reintroduced (the Phase 1 jitter).`);
       }
+      if (!det.consentScriptDeferred) {
+        fail(`${target.label} (${target.path}): consent loader is parser-blocking, which can delay stylesheet discovery and cause a flash of unstyled content.`);
+      }
       for (const el of GUARDED) {
         if (det.shift[el] != null && Math.abs(det.shift[el]) > SHIFT_PX) {
           fail(`${target.label} (${target.path}): <${el}> shifts ${det.shift[el]}px between shell-blocked and settled loads (> ${SHIFT_PX}px).`);
@@ -161,7 +168,7 @@ async function main() {
         fail(`${target.label} (${target.path}): Cumulative Layout Shift ${tl.cls} (> ${CLS_MAX}).`);
       }
 
-      results.push({ ...target, headerPresentBlocked: det.headerPresentBlocked, deterministicShift: det.shift, timelineMove: tl.move, cls: tl.cls });
+      results.push({ ...target, headerPresentBlocked: det.headerPresentBlocked, consentScriptDeferred: det.consentScriptDeferred, deterministicShift: det.shift, timelineMove: tl.move, cls: tl.cls });
       const bad = failures.some((f) => f.includes(target.path));
       console.log(bad ? 'FAIL' : `ok (shift main ${det.shift.main}px, CLS ${tl.cls})`);
     }

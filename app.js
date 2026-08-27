@@ -1272,7 +1272,7 @@ function renderToolCard(tool) {
           <span class="mt-0.5 block text-xs leading-5 text-slate-600 dark:text-slate-400">${tool.description}</span>
         </span>
       </span>
-      <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold ${tool.iconColor} opacity-70 group-hover:opacity-100 transition-opacity">Open
+      <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-slate-700 dark:text-slate-200 group-hover:text-[#1a73e8] dark:group-hover:text-blue-400 transition-colors">Open
         <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
       </span>
     </button>
@@ -4480,6 +4480,49 @@ const mobileMenuButton = document.getElementById('mobileMenuButton');
 const closeMobileMenu = document.getElementById('closeMobileMenu');
 const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
 const mobileToolsList = document.getElementById('mobileToolsList');
+const modalInertElements = new Set();
+const modalFocusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
+
+function setModalIsolation(modalRoot, isolate) {
+  if (!isolate) {
+    modalInertElements.forEach((element) => { element.inert = false; });
+    modalInertElements.clear();
+    return;
+  }
+
+  setModalIsolation(null, false);
+  let branch = modalRoot;
+  while (branch?.parentElement) {
+    const parent = branch.parentElement;
+    [...parent.children].forEach((sibling) => {
+      if (sibling !== branch && !sibling.inert) {
+        sibling.inert = true;
+        modalInertElements.add(sibling);
+      }
+    });
+    if (parent === document.body) break;
+    branch = parent;
+  }
+}
+
+function trapModalFocus(event, dialog) {
+  if (event.key !== 'Tab' || !dialog) return;
+  const focusable = [...dialog.querySelectorAll(modalFocusableSelector)].filter((element) => {
+    const style = getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+    return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+  });
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) {
+    event.preventDefault();
+    first.focus();
+  }
+}
 
 function renderMobileMenu() {
   const categories = [
@@ -4522,20 +4565,30 @@ function renderMobileMenu() {
 mobileMenuButton.addEventListener('click', () => {
   renderMobileMenu();
   mobileMenuDrawer.classList.remove('hidden');
+  setModalIsolation(mobileMenuDrawer, true);
+  mobileMenuButton.setAttribute('aria-expanded', 'true');
+  setTimeout(() => closeMobileMenu.focus(), 0);
 });
 
-closeMobileMenu.addEventListener('click', () => {
+function hideMobileMenu({ restoreFocus = false } = {}) {
   mobileMenuDrawer.classList.add('hidden');
+  setModalIsolation(null, false);
+  mobileMenuButton.setAttribute('aria-expanded', 'false');
+  if (restoreFocus) mobileMenuButton.focus();
+}
+
+closeMobileMenu.addEventListener('click', () => {
+  hideMobileMenu({ restoreFocus: true });
 });
 
 mobileMenuBackdrop.addEventListener('click', () => {
-  mobileMenuDrawer.classList.add('hidden');
+  hideMobileMenu({ restoreFocus: true });
 });
 
 mobileToolsList.addEventListener('click', (e) => {
   const link = e.target.closest('[data-mobile-tool-id]');
   if (link) {
-    mobileMenuDrawer.classList.add('hidden');
+    hideMobileMenu();
     const toolId = link.dataset.mobileToolId;
     history.pushState(null, '', `/${toolId}`);
     handleRoute();
@@ -4669,9 +4722,14 @@ const searchResults = document.getElementById('searchResults');
 const closeSearchModal = document.getElementById('closeSearchModal');
 const headerSearchButton = document.getElementById('headerSearchButton');
 const mobileSearchButton = document.getElementById('mobileSearchButton');
+let searchTrigger = null;
 
-function openSearch() {
+function openSearch(event) {
+  searchTrigger = event?.currentTarget || document.activeElement;
   searchModal.classList.remove('hidden');
+  setModalIsolation(searchModal, true);
+  headerSearchButton?.setAttribute('aria-expanded', 'true');
+  mobileSearchButton?.setAttribute('aria-expanded', 'true');
   searchInput.value = '';
   searchResults.innerHTML = `
     <div class="text-center py-8 text-xs text-slate-400 dark:text-slate-500">
@@ -4681,8 +4739,13 @@ function openSearch() {
   setTimeout(() => searchInput.focus(), 50);
 }
 
-function closeSearch() {
+function closeSearch({ restoreFocus = true } = {}) {
   searchModal.classList.add('hidden');
+  setModalIsolation(null, false);
+  headerSearchButton?.setAttribute('aria-expanded', 'false');
+  mobileSearchButton?.setAttribute('aria-expanded', 'false');
+  if (restoreFocus && searchTrigger instanceof HTMLElement) searchTrigger.focus();
+  searchTrigger = null;
 }
 
 headerSearchButton?.addEventListener('click', openSearch);
@@ -4691,8 +4754,14 @@ closeSearchModal?.addEventListener('click', closeSearch);
 searchBackdrop?.addEventListener('click', closeSearch);
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
+  if (e.key === 'Tab' && !searchModal.classList.contains('hidden')) {
+    trapModalFocus(e, searchModal.querySelector('[role="dialog"]'));
+  } else if (e.key === 'Tab' && !mobileMenuDrawer.classList.contains('hidden')) {
+    trapModalFocus(e, mobileMenuDrawer.querySelector('[role="dialog"]'));
+  } else if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
     closeSearch();
+  } else if (e.key === 'Escape' && !mobileMenuDrawer.classList.contains('hidden')) {
+    hideMobileMenu({ restoreFocus: true });
   }
 });
 
