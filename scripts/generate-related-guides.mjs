@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { guideHrefForTool, guideSlugForTool, parseToolCatalogue } from './guide-catalog.mjs';
+import { relatedToolIds } from './related.mjs';
 
 // Adds a contextual "Related guides" section to every guide, cross-linking the
 // other guides in the same category (filled to three from the wider catalogue).
@@ -9,15 +10,11 @@ import { guideHrefForTool, guideSlugForTool, parseToolCatalogue } from './guide-
 // repeated homepage accordion. Idempotent via HTML markers.
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const { tools, categories } = parseToolCatalogue();
+const { tools } = parseToolCatalogue();
 
 // Tool descriptions (for the card copy) come from the authoritative catalogue.
 const descById = new Map(tools.map((t) => [t.id, t.description]));
 const titleById = new Map(tools.map((t) => [t.id, t.title]));
-const orderedIds = tools.map((t) => t.id);
-
-const categoryOf = new Map();
-for (const c of categories) for (const id of c.toolIds) categoryOf.set(id, c);
 
 const START = '<!-- RELATED_GUIDES_START -->';
 const END = '<!-- RELATED_GUIDES_END -->';
@@ -30,15 +27,10 @@ const shorten = (s, n = 96) => {
   return t.length <= n ? t : `${t.slice(0, n - 1).replace(/\s+\S*$/, '')}…`;
 };
 
+// Genuinely relevant related guides: the shared related-tool ranking (same
+// category, then same hub — never unrelated), capped at three.
 function relatedIdsFor(toolId) {
-  const cat = categoryOf.get(toolId);
-  const sameCat = cat ? cat.toolIds.filter((id) => id !== toolId) : [];
-  const picked = [...sameCat];
-  for (const id of orderedIds) {
-    if (picked.length >= 3) break;
-    if (id !== toolId && !picked.includes(id)) picked.push(id);
-  }
-  return picked.slice(0, 3);
+  return relatedToolIds(toolId, 3);
 }
 
 const cardClass = 'rounded-2xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-[#1e293b] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1a73e8]';

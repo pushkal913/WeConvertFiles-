@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { contentDates } from '../data/content-dates.mjs';
 
 /*
  * Article + FAQPage JSON-LD generator for guide pages.
@@ -69,19 +69,12 @@ function firstMatch(html, regex) {
   return m ? m[1] : null;
 }
 
-function gitDate(file, first) {
-  try {
-    if (first) {
-      const out = execSync(`git log --diff-filter=A --format=%cs -- "${file}"`, { cwd: rootDir })
-        .toString().trim().split('\n').filter(Boolean);
-      return out.length ? out[out.length - 1] : today;
-    }
-    const out = execSync(`git log -1 --format=%cs -- "${file}"`, { cwd: rootDir })
-      .toString().trim();
-    return out || today;
-  } catch {
-    return today;
-  }
+// Content dates come from the single source (data/content-dates.mjs), not git,
+// so they are stable across builds. `relHref` is the guide file name (slug.html).
+function datesFor(relHref) {
+  const slug = relHref.replace(/\.html$/, '');
+  const entry = contentDates.guides[slug];
+  return entry || { published: today, updated: today };
 }
 
 // Pull the Q&A pairs out of the on-page FAQ section. We scope to the markup
@@ -122,8 +115,8 @@ function buildGraph(html, file, relHref) {
     headline,
     description: description ? decodeEntities(description) : headline,
     image: OG_IMAGE,
-    datePublished: gitDate(file, true),
-    dateModified: gitDate(file, false),
+    datePublished: datesFor(relHref).published,
+    dateModified: datesFor(relHref).updated,
     author: ORG,
     publisher: ORG,
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
