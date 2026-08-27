@@ -24,5 +24,5 @@ jobs:
       - name: Validate SEO/GEO output
         run: npm run validate
 
-      - name: Smoke tests
-        run: npm run test:smoke
+      - name: Browser tests (smoke + jitter regression)
+        run: npm test

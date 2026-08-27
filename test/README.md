@@ -26,6 +26,32 @@ allow-listed). It then walks the primary navigation journeys — homepage → to
 tool → category hub, category → tool, guide → tool — to confirm internal routes
 work. Any failure prints the exact page/journey and reason.
 
+## Jitter / layout-shift regression test (Phase 4, Task 25)
+
+Turns the Phase 1 jitter measurement into an automatic guard. Runs headlessly,
+exits non-zero on regression, and is part of `npm test`.
+
+```
+npm run test:jitter
+```
+
+For a page of each shell type (homepage, tool, guide, convert, legal, about) it
+reuses the Phase 1 methodology:
+
+- **Deterministic pass** — loads the page once with `layout.js` blocked and once
+  normally, and compares the top edge of `<header>` / `<main>` / `<footer>`.
+  Because the shell is baked static, the header is already present with
+  `layout.js` blocked and nothing moves. If someone reintroduces runtime shell
+  injection, the header is absent when blocked and then pushes content down on
+  the normal load — a large shift the test rejects.
+- **Timeline pass** — under a fixed CPU throttle, samples the same boxes at
+  ~100/500/1500 ms and records the browser's Cumulative Layout Shift.
+
+Only movement within the thresholds (header/main/footer ≤ 2px, CLS ≤ 0.05)
+passes; anything larger fails and names the page and element. A compact
+diagnostic is written to `test/baseline/jitter-regression.json` (git-ignored,
+regenerated each run).
+
 ## Jitter baseline (Phase 1, Task 1)
 
 Establishes a reproducible, measured baseline for the page-shell jitter so
