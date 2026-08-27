@@ -26,6 +26,27 @@ allow-listed). It then walks the primary navigation journeys — homepage → to
 tool → category hub, category → tool, guide → tool — to confirm internal routes
 work. Any failure prints the exact page/journey and reason.
 
+## Core Web Vitals baseline (Phase 4, Task 26)
+
+Measures **LCP, CLS and INP** for representative pages, on desktop and mobile,
+for cold (empty-cache) and warm (repeat-visit) loads, using Google's
+`web-vitals` library injected into the page.
+
+```
+npm run measure:vitals
+```
+
+Desktop runs at 1280×800 with no CPU throttle; mobile at 390×844 under a 4× CPU
+throttle (~mid-tier phone). INP is exercised with a few non-navigating
+interactions per load, and each configuration is the median of several runs.
+These are **lab** numbers against the local static server — reproducible and
+comparable between commits, **not** field data.
+
+Output: `test/baseline/WEB-VITALS.md` (the committed, diffable baseline) and
+`test/baseline/web-vitals.json` (git-ignored per-run data). This is a
+measurement tool — it does **not** assert pass/fail targets; project targets
+should be set only after reviewing the baseline (and real field/CrUX data).
+
 ## Jitter / layout-shift regression test (Phase 4, Task 25)
 
 Turns the Phase 1 jitter measurement into an automatic guard. Runs headlessly,
