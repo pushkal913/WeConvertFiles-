@@ -2,6 +2,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tools, categories, libraries, nav, catalogueProblems, renderRuntimeCatalogue } from './catalogue.mjs';
+import { buildNavigationCategories } from './category-catalog.mjs';
 
 // Validates the authoritative tool catalogue (data/tools.mjs):
 //   1. Structural integrity — 47 tools, no duplicate ids, required fields,
@@ -115,7 +116,7 @@ for (const group of nav.groups) {
 // layout.js's search list is generated from the catalogue (markers present and
 // tool ids in catalogue order), and its mobile groups mirror nav.groups.
 assert(
-  layoutSource.includes('WCF_NAV_TOOLS_START') && layoutSource.includes('WCF_NAV_GROUPS_START'),
+  layoutSource.includes('WCF_NAV_TOOLS_START') && layoutSource.includes('WCF_NAV_GROUPS_START') && layoutSource.includes('WCF_NAV_DESKTOP_START'),
   'layout.js navigation is not generated from the catalogue (missing markers) — run `npm run generate:layout-nav`.'
 );
 assert(
@@ -124,9 +125,9 @@ assert(
 );
 const layoutGroups = pickLiteral(layoutSource, 'const categories = ', '\n  ];');
 assert(
-  JSON.stringify(layoutGroups.map((g) => ({ name: g.name, ids: g.ids }))) ===
-    JSON.stringify(nav.groups.map((g) => ({ name: g.name, ids: g.toolIds }))),
-  'layout.js mobile groups are out of sync with nav.groups — run `npm run generate:layout-nav`.'
+  JSON.stringify(layoutGroups.map((g) => ({ id: g.id, name: g.name, hubPath: g.hubPath, ids: g.ids }))) ===
+    JSON.stringify(buildNavigationCategories().map((g) => ({ id: g.id, name: g.label, hubPath: g.hubPath, ids: g.toolIds }))),
+  'layout.js mobile groups are out of sync with canonical navigation categories — run `npm run generate:layout-nav`.'
 );
 
 // No stale tool links: every single-segment nav href in the curated header /
