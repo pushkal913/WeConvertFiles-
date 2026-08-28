@@ -796,5 +796,94 @@ window.WCF_CATALOGUE = {
         "markdown-preview"
       ]
     }
-  }
+  },
+  "navigationCategories": [
+    {
+      "id": "pdf",
+      "label": "PDF",
+      "shortLabel": "PDF",
+      "rgb": "249, 115, 22",
+      "icon": "<path d=\"M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8\"/>",
+      "hubPath": "/category/pdf-tools",
+      "toolIds": [
+        "pdf-to-word",
+        "merge-pdf",
+        "split-pdf",
+        "extract-pages",
+        "organize-pdf",
+        "rotate-pdf",
+        "remove-pages",
+        "decrypt-pdf",
+        "encrypt-pdf",
+        "compress-pdf",
+        "watermark-pdf",
+        "page-numbers",
+        "sign-pdf"
+      ]
+    },
+    {
+      "id": "images",
+      "label": "Images",
+      "shortLabel": "Images",
+      "rgb": "16, 185, 129",
+      "icon": "<path d=\"M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z\"/>",
+      "hubPath": "/category/image-tools",
+      "toolIds": [
+        "image-cropper",
+        "favicon-generator",
+        "image-scaler",
+        "pdf-images",
+        "pdf-jpg",
+        "images-pdf",
+        "webp-convert",
+        "bulk-resize",
+        "color-palette",
+        "exif-utility",
+        "heic-to-jpg",
+        "image-to-base64",
+        "base64-to-image",
+        "svg-to-image"
+      ]
+    },
+    {
+      "id": "data-office",
+      "label": "Data & Office",
+      "shortLabel": "Data",
+      "rgb": "99, 102, 241",
+      "icon": "<path d=\"M16.023 9.348h4.992M2.985 19.644v-4.992h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182V4.356\"/>",
+      "hubPath": "/category/convert-office",
+      "toolIds": [
+        "excel-to-csv",
+        "csv-convert",
+        "json-convert",
+        "office-pdf",
+        "json-yaml"
+      ]
+    },
+    {
+      "id": "developer",
+      "label": "Developer",
+      "shortLabel": "Developer",
+      "rgb": "244, 63, 94",
+      "icon": "<path d=\"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4\"/>",
+      "hubPath": "/category/developer-tools",
+      "toolIds": [
+        "regex-tester",
+        "uuid-generator",
+        "unix-converter",
+        "jwt-decoder",
+        "word-counter",
+        "diff-checker",
+        "markdown-preview",
+        "url-base64",
+        "json-formatter",
+        "qr-generator",
+        "hash-generator",
+        "sql-formatter",
+        "code-minifier",
+        "password-generator",
+        "case-converter"
+      ]
+    }
+  ]
 };

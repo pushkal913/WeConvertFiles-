@@ -8,11 +8,31 @@
 // Everything else here is unique, hand-written context so the pages are real
 // topical hubs rather than a repeated tool list.
 
+const navigationMetadata = {
+  'pdf-tools': {
+    id: 'pdf', label: 'PDF', shortLabel: 'PDF', rgb: '249, 115, 22',
+    icon: '<path d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8"/>'
+  },
+  'image-tools': {
+    id: 'images', label: 'Images', shortLabel: 'Images', rgb: '16, 185, 129',
+    icon: '<path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>'
+  },
+  'convert-office': {
+    id: 'data-office', label: 'Data & Office', shortLabel: 'Data', rgb: '99, 102, 241',
+    icon: '<path d="M16.023 9.348h4.992M2.985 19.644v-4.992h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182V4.356"/>'
+  },
+  'developer-tools': {
+    id: 'developer', label: 'Developer', shortLabel: 'Developer', rgb: '244, 63, 94',
+    icon: '<path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>'
+  }
+};
+
 export const categoryPages = [
   {
     slug: 'image-tools',
     navGroup: 'IMAGE TOOLS',
     extraToolIds: ['image-to-base64', 'base64-to-image', 'svg-to-image'],
+    navigation: navigationMetadata['image-tools'],
     eyebrow: 'Image tools',
     h1: 'Image Tools',
     title: 'Image Tools — Resize, Convert & Edit Images in Your Browser | WeConvertFiles',
@@ -37,6 +57,7 @@ export const categoryPages = [
     slug: 'pdf-tools',
     navGroup: 'PDF TOOLS',
     extraToolIds: [],
+    navigation: navigationMetadata['pdf-tools'],
     eyebrow: 'PDF tools',
     h1: 'PDF Tools',
     title: 'PDF Tools — Merge, Split, Compress & Secure PDFs Privately | WeConvertFiles',
@@ -61,6 +82,7 @@ export const categoryPages = [
     slug: 'convert-office',
     navGroup: 'CONVERT & OFFICE',
     extraToolIds: [],
+    navigation: navigationMetadata['convert-office'],
     eyebrow: 'Convert & office',
     h1: 'Convert & Office Tools',
     title: 'Convert & Office Tools — CSV, Excel, JSON, YAML & Word Conversion | WeConvertFiles',
@@ -85,6 +107,7 @@ export const categoryPages = [
     slug: 'developer-tools',
     navGroup: 'TEXT & DEVELOPERS',
     extraToolIds: [],
+    navigation: navigationMetadata['developer-tools'],
     eyebrow: 'Text & developer utilities',
     h1: 'Text & Developer Tools',
     title: 'Developer Tools — JSON, Regex, JWT, Hash, UUID & Text Utilities | WeConvertFiles',

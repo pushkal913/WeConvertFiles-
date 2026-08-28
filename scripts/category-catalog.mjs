@@ -10,6 +10,21 @@ import { guideSlugForTool } from './guide-catalog.mjs';
 
 const navGroupByName = new Map(nav.groups.map((group) => [group.name, group]));
 
+const navigationCategoryOrder = ['pdf-tools', 'image-tools', 'convert-office', 'developer-tools'];
+
+export function buildNavigationCategories() {
+  return navigationCategoryOrder.map((slug) => {
+    const category = categoryPages.find((page) => page.slug === slug);
+    const group = navGroupByName.get(category.navGroup);
+    const toolIds = [...(group?.toolIds || []), ...(category.extraToolIds || [])];
+    return {
+      ...category.navigation,
+      hubPath: `/category/${category.slug}`,
+      toolIds
+    };
+  });
+}
+
 // toolId -> { slug, h1 } of the category hub that owns it.
 export function buildToolHubMap() {
   const map = new Map();

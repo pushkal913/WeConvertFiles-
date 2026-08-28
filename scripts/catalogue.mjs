@@ -1,5 +1,5 @@
 import { tools, categories, libraries, nav } from '../data/tools.mjs';
-import { buildToolHubMap } from './category-catalog.mjs';
+import { buildNavigationCategories, buildToolHubMap } from './category-catalog.mjs';
 import { breadcrumbNav } from './breadcrumbs.mjs';
 import { renderFactBlock } from './tool-facts-render.mjs';
 import { relatedToolIds } from './related.mjs';
@@ -59,7 +59,8 @@ export function renderRuntimeCatalogue() {
       tools: relatedToolIds(tool.id)
     };
   }
-  const payload = { libraries, dependencies, breadcrumbs, factBlocks, related };
+  const navigationCategories = buildNavigationCategories();
+  const payload = { libraries, dependencies, breadcrumbs, factBlocks, related, navigationCategories };
   return `/* GENERATED FILE — do not edit.
    Source: data/tools.mjs via scripts/generate-catalogue-runtime.mjs
    (npm run generate:catalogue-runtime). Delivers the tool catalogue's library
