@@ -38,6 +38,7 @@
 - `test/navigation.mjs`: Playwright behavior coverage for desktop dropdowns, homepage filters, keyboard operation, and mobile overflow.
 - `test/a11y.mjs`: extends shared-shell keyboard/focus assertions to the new controls.
 - `test/README.md`: documents Task 28 coverage and command usage.
+- `DESIGN.md`: mirrors the mature runtime visual system and records the approved four-category navigation tokens; runtime CSS remains canonical.
 - Generated guide, legal, conversion, category, and tool HTML: updated only by existing generators after the shared shell changes.
 
 ---
@@ -328,6 +329,7 @@ git commit -m "Phase 5 (Task 28): simplify shared primary navigation"
 ### Task 3: Add Homepage Filters and Category Card Accents
 
 **Files:**
+- Create: `DESIGN.md`
 - Modify: `index.html`
 - Modify: `app.js`
 - Modify: `assets/tailwind.css`
@@ -364,7 +366,17 @@ Run: `npm run test:navigation`
 
 Expected: FAIL because `[data-tool-filter]` does not exist.
 
-- [ ] **Step 3: Add semantic filter markup**
+- [ ] **Step 3: Record the durable design context**
+
+Create project-root `DESIGN.md` in the Google Labs alpha format. Use runtime-owned values already established in the repository: Inter/system sans, product blue `#1a73e8`, light surface `#ffffff`, dark surface `#0f172a`, PDF orange `#f97316`, Images emerald `#10b981`, Data & Office indigo `#6366f1`, Developer rose `#f43f5e`, standard card/control radii `0.75rem`, and the existing material/lift shadow grammar. State explicitly that this is token-mapping Model B: `assets/tailwind.css` and `tailwind.config.js` remain canonical and `DESIGN.md` mirrors accepted values.
+
+Document the product/tool register, category-color signature, light/dark behavior, focus states, restrained motion, and the rule that color never replaces labels/icons.
+
+Run: `npx -p @google/design.md designmd lint DESIGN.md`
+
+Expected: 0 errors and no empty token maps.
+
+- [ ] **Step 4: Add semantic filter markup**
 
 In `index.html`, add a labelled filter region immediately before `#toolGrid`:
 
@@ -380,7 +392,7 @@ In `index.html`, add a labelled filter region immediately before `#toolGrid`:
 
 Keep the initial All catalogue available; JavaScript enhances the controls.
 
-- [ ] **Step 4: Render canonical sections and filters in `app.js`**
+- [ ] **Step 5: Render canonical sections and filters in `app.js`**
 
 Replace the six local `toolCategories` rendering model with `window.WCF_CATALOGUE.navigationCategories`. Keep a strict fallback that renders all catalogue tools if the generated payload is unavailable.
 
@@ -403,7 +415,7 @@ function applyToolFilter(categoryId, { announce = true } = {}) {
 
 Render all four sections once. Filtering changes `hidden`; it does not destroy links or card state.
 
-- [ ] **Step 5: Replace random card navigation accents**
+- [ ] **Step 6: Replace random card navigation accents**
 
 Change `renderToolCard(tool, category)` so border, glow, icon treatment, and Open action use `--category-rgb`. Preserve each tool's icon SVG, title, description, popular badge, `data-tool-id`, and click behavior.
 
@@ -422,7 +434,7 @@ Use component classes instead of dynamic Tailwind color interpolation:
 </button>
 ```
 
-- [ ] **Step 6: Implement filter/card/dropdown styles**
+- [ ] **Step 7: Implement filter/card/dropdown styles**
 
 In `assets/tailwind.css`, add focused component rules for active/inactive filter states, horizontal narrow-screen containment, category cards, dark mode, focus-visible, and reduced motion. Use RGB custom properties with opaque or sufficiently contrasted text colors; do not lower text opacity. The All filter uses the existing product blue (`#1a73e8`) rather than a category accent.
 
@@ -430,7 +442,7 @@ Remove the obsolete 22-color card-border safelist from `tailwind.config.js` afte
 
 Run: `npm run build:css`
 
-- [ ] **Step 7: Extend accessibility checks**
+- [ ] **Step 8: Extend accessibility checks**
 
 Update `test/a11y.mjs` to verify:
 
@@ -441,7 +453,7 @@ Update `test/a11y.mjs` to verify:
 - desktop dropdown Escape restores focus;
 - no unnamed controls or heading-order regressions are introduced.
 
-- [ ] **Step 8: Run focused UI checks**
+- [ ] **Step 9: Run focused UI checks**
 
 Run:
 
@@ -453,10 +465,10 @@ npm run test:a11y
 
 Expected: all filter/dropdown behavior passes; axe has no critical or serious violations.
 
-- [ ] **Step 9: Commit homepage navigation**
+- [ ] **Step 10: Commit homepage navigation**
 
 ```bash
-git add index.html app.js assets/tailwind.css assets/styles.css tailwind.config.js test/navigation.mjs test/a11y.mjs
+git add DESIGN.md index.html app.js assets/tailwind.css assets/styles.css tailwind.config.js test/navigation.mjs test/a11y.mjs
 git commit -m "Phase 5 (Task 28): add accessible category filters"
 ```
 
