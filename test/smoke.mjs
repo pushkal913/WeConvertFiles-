@@ -152,7 +152,9 @@ async function main() {
 
     await journey(browser, origin, 'guide -> tool', async (page) => {
       await page.goto(origin + '/guides/merge-pdf', { waitUntil: 'networkidle' });
-      await page.locator('nav[aria-label="Breadcrumb"] a[href="/merge-pdf"]').first().click();
+      const toolBreadcrumb = page.locator('nav[aria-label="Breadcrumb"] a[href="/merge-pdf"]').first();
+      await toolBreadcrumb.focus();
+      await page.keyboard.press('Enter');
       await expectPath(page, '/merge-pdf', 'guide -> tool');
     });
   } finally {

@@ -54,6 +54,48 @@ try {
   await page.keyboard.press('ArrowDown');
   assert.equal(await pdfTrigger.getAttribute('aria-expanded'), 'true', 'Arrow Down opens the focused menu');
   assert.equal(await page.evaluate(() => document.activeElement?.id), 'nav-pdf-menu-link-0', 'Arrow Down focuses the first PDF menu link');
+  await page.keyboard.press('Escape');
+
+  await pdfTrigger.evaluate((trigger) => trigger.click());
+  assert.equal(await pdfTrigger.getAttribute('aria-expanded'), 'true', 'click opens a closed menu');
+  await pdfTrigger.evaluate((trigger) => trigger.click());
+  assert.equal(await pdfTrigger.getAttribute('aria-expanded'), 'false', 'a second click closes the open menu');
+
+  await pdfTrigger.focus();
+  await page.keyboard.press('Space');
+  assert.equal(await pdfTrigger.getAttribute('aria-expanded'), 'true', 'Space opens the focused menu');
+  await page.keyboard.press('Escape');
+
+  await pdfTrigger.hover();
+  assert.equal(await pdfTrigger.getAttribute('aria-expanded'), 'true', 'fine-pointer hover opens the menu');
+  await page.mouse.move(10, 880);
+  await page.waitForTimeout(140);
+  assert.equal(await pdfTrigger.getAttribute('aria-expanded'), 'false', 'fine-pointer leave closes after the 120 ms delay');
+
+  await pdfTrigger.hover();
+  await page.mouse.move(10, 880);
+  await page.waitForTimeout(40);
+  await pdfTrigger.hover();
+  await page.waitForTimeout(140);
+  assert.equal(await pdfTrigger.getAttribute('aria-expanded'), 'true', 'pointer re-entry cancels the pending close');
+  await page.keyboard.press('Escape');
+
+  await pdfTrigger.hover();
+  await page.mouse.move(10, 880);
+  await page.waitForTimeout(40);
+  await pdfTrigger.focus();
+  await page.keyboard.press('Space');
+  await page.waitForTimeout(140);
+  assert.equal(await pdfTrigger.getAttribute('aria-expanded'), 'true', 'keyboard opening cancels a pending hover close');
+  await page.keyboard.press('Escape');
+
+  await pdfTrigger.hover();
+  await page.mouse.move(10, 880);
+  await page.waitForTimeout(40);
+  await page.mouse.click(10, 880);
+  await pdfTrigger.evaluate((trigger) => trigger.click());
+  await page.waitForTimeout(140);
+  assert.equal(await pdfTrigger.getAttribute('aria-expanded'), 'true', 'click opening cancels a pending hover close');
 } finally {
   await context.close();
   await browser.close();

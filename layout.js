@@ -330,6 +330,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let pendingNavCloseTimer = null;
 
   function setNavMenuOpen(menu, open, { restoreFocus = false } = {}) {
+    if (open) {
+      clearTimeout(pendingNavCloseTimer);
+      pendingNavCloseTimer = null;
+    }
     const trigger = menu.querySelector('[data-nav-trigger]');
     const panel = menu.querySelector('[data-nav-panel]');
     trigger.setAttribute('aria-expanded', String(open));
@@ -367,7 +371,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     clearTimeout(pendingNavCloseTimer);
     const menu = event.currentTarget.closest('[data-nav-menu]');
-    pendingNavCloseTimer = setTimeout(() => setNavMenuOpen(menu, false), 120);
+    pendingNavCloseTimer = setTimeout(() => {
+      pendingNavCloseTimer = null;
+      setNavMenuOpen(menu, false);
+    }, 120);
   }
 
   function handleOutsideNavPointer(event) {
