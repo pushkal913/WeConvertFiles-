@@ -17,12 +17,15 @@ async function assertSharedPdfMenu(page, origin, path) {
   await dismissConsent(page);
 
   const trigger = page.locator('[data-nav-trigger="pdf"]');
+  assert.equal(await page.locator('[data-nav-panel]:visible').count(), 0, `${path}: all navigation menus start closed`);
   await trigger.focus();
   await page.keyboard.press('Enter');
   assert.equal(await trigger.getAttribute('aria-expanded'), 'true', `${path}: Enter opens the PDF menu`);
   assert.ok(await page.locator('#nav-pdf-menu').isVisible(), `${path}: PDF panel becomes visible`);
+  assert.equal(await page.locator('[data-nav-panel]:visible').count(), 1, `${path}: only one navigation menu is visible`);
   await page.keyboard.press('Escape');
   assert.equal(await trigger.getAttribute('aria-expanded'), 'false', `${path}: Escape closes the PDF menu`);
+  assert.equal(await page.locator('[data-nav-panel]:visible').count(), 0, `${path}: Escape hides every navigation menu`);
   assert.equal(await page.evaluate(() => document.activeElement?.dataset.navTrigger), 'pdf', `${path}: Escape restores trigger focus`);
 }
 
@@ -122,6 +125,7 @@ try {
   assert.ok(await page.locator('button[data-tool-id="office-pdf"]:visible').count(), 'Office/PDF crossover remains in Data & Office');
   await page.locator('[data-tool-filter="all"]').click();
   assert.equal(await page.locator('button[data-tool-id]:visible').count(), 47);
+  assert.equal(await page.locator('[data-tool-category]:visible').count(), 4, 'All restores every tool category');
 
   await page.setViewportSize({ width: 390, height: 844 });
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth <= 4), 'filters do not cause mobile document overflow');

@@ -2,6 +2,10 @@
 @tailwind components;
 
 @layer components {
+  [data-nav-panel][hidden] {
+    display: none;
+  }
+
   .tool-filter {
     margin-bottom: 1.5rem;
   }
