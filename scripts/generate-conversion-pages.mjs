@@ -272,7 +272,7 @@ const renderPage = (page) => {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
-  <script id="pagesenseCode" src="/pagesense.js"></script>
+  <script id="pagesenseCode" src="/pagesense.js" defer></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${escapeHtml(page.title)}</title>
@@ -333,11 +333,11 @@ ${jsonLd(page)}
 
       <section class="mt-8 grid gap-4 sm:grid-cols-2" aria-label="Conversion details">
         <div class="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700/60 dark:bg-[#1e293b]">
-          <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Input</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Input</p>
           <p class="mt-2 font-semibold text-slate-900 dark:text-slate-100">${escapeHtml(page.input)}</p>
         </div>
         <div class="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700/60 dark:bg-[#1e293b]">
-          <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Output</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Output</p>
           <p class="mt-2 font-semibold text-slate-900 dark:text-slate-100">${escapeHtml(page.output)}</p>
         </div>
       </section>

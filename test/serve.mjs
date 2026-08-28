@@ -43,10 +43,10 @@ const MIME = {
 // `from  to  status`. We only need exact-path matches for the baseline URLs,
 // so wildcard rules other than the final catch-all are kept but matched
 // literally (the harness never depends on them).
-async function loadRedirects() {
+async function loadRedirects(root) {
   let raw = '';
   try {
-    raw = await readFile(path.join(ROOT, '_redirects'), 'utf8');
+    raw = await readFile(path.join(root, '_redirects'), 'utf8');
   } catch {
     return [];
   }
@@ -70,11 +70,11 @@ function contentType(filePath) {
   return MIME[path.extname(filePath).toLowerCase()] || 'application/octet-stream';
 }
 
-async function tryFile(relPath) {
-  // Resolve a URL path to an on-disk file inside ROOT, guarding traversal.
+async function tryFile(root, relPath) {
+  // Resolve a URL path to an on-disk file inside the configured root, guarding traversal.
   const clean = decodeURIComponent(relPath.split('?')[0]);
-  const abs = path.resolve(ROOT, '.' + clean);
-  if (!abs.startsWith(ROOT)) return null;
+  const abs = path.resolve(root, '.' + clean);
+  if (abs !== root && !abs.startsWith(root + path.sep)) return null;
   try {
     const s = await stat(abs);
     if (s.isFile()) return abs;
@@ -89,8 +89,9 @@ async function tryFile(relPath) {
   return null;
 }
 
-export async function startServer({ port = 0 } = {}) {
-  const rules = await loadRedirects();
+export async function startServer({ port = 0, root = ROOT } = {}) {
+  const resolvedRoot = path.resolve(root);
+  const rules = await loadRedirects(resolvedRoot);
   const exact = new Map();
   let catchAll = null;
   for (const r of rules) {
@@ -107,7 +108,7 @@ export async function startServer({ port = 0 } = {}) {
     // 0. A forced rule (`!`) wins over a static file at the same path.
     if (rule && rule.force) {
       if (rule.status === 200) {
-        file = await tryFile(rule.to);
+        file = await tryFile(resolvedRoot, rule.to);
       } else {
         res.writeHead(rule.status, { Location: rule.to });
         res.end();
@@ -116,12 +117,12 @@ export async function startServer({ port = 0 } = {}) {
     }
 
     // 1. Direct file hit (assets, .html requested explicitly, etc).
-    if (!file) file = await tryFile(urlPath);
+    if (!file) file = await tryFile(resolvedRoot, urlPath);
 
     // 2. Apply a non-forced exact `_redirects` rule (yields to a real file).
     if (!file && rule && !rule.force) {
       if (rule.status === 200) {
-        file = await tryFile(rule.to);
+        file = await tryFile(resolvedRoot, rule.to);
       } else {
         res.writeHead(rule.status, { Location: rule.to });
         res.end();
@@ -131,13 +132,13 @@ export async function startServer({ port = 0 } = {}) {
 
     // 3. Pretty-URL fallback: /about -> about.html.
     if (!file && !path.extname(urlPath)) {
-      file = await tryFile(urlPath.replace(/\/$/, '') + '.html');
+      file = await tryFile(resolvedRoot, urlPath.replace(/\/$/, '') + '.html');
     }
 
     // 4. Catch-all 404 page.
     if (!file) {
       statusCode = 404;
-      file = await tryFile((catchAll && catchAll.to) || '/404.html');
+      file = await tryFile(resolvedRoot, (catchAll && catchAll.to) || '/404.html');
       if (!file) {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('404 Not Found');

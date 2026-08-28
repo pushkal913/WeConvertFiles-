@@ -7,3 +7,10 @@ Thumbs.db
 # Regenerated baseline screenshots (run `npm run baseline:jitter` to produce).
 # The committed REPORT.md / report.json are the durable, diffable baseline.
 test/baseline/screenshots/
+
+# Regenerated jitter regression diagnostic (run `npm run test:jitter`).
+test/baseline/jitter-regression.json
+
+# Regenerated Core Web Vitals per-run data (run `npm run measure:vitals`).
+# The committed WEB-VITALS.md is the durable, diffable baseline.
+test/baseline/web-vitals.json

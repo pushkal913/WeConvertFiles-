@@ -54,16 +54,21 @@
   // ---- Consent banner -----------------------------------------------------
 
   var BANNER_ID = 'wcf-consent-banner';
+  var settingsTrigger = null;
 
-  function removeBanner() {
+  function removeBanner(restoreFocus) {
     var existing = document.getElementById(BANNER_ID);
     if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+    if (restoreFocus && settingsTrigger && document.documentElement.contains(settingsTrigger)) {
+      try { settingsTrigger.focus({ preventScroll: true }); } catch (e) { settingsTrigger.focus(); }
+    }
+    if (restoreFocus) settingsTrigger = null;
   }
 
   function choose(value) {
     var previous = getConsent();
     setConsent(value);
-    removeBanner();
+    removeBanner(true);
     if (value === 'granted') {
       loadAnalytics();
     } else if (previous === 'granted') {
@@ -76,8 +81,9 @@
   // already exists) — adds a close button and shows the current setting.
   function showBanner(mode) {
     if (!document.body) return;
-    removeBanner();
+    removeBanner(false);
     var isSettings = mode === 'settings';
+    if (!isSettings) settingsTrigger = null;
     var consent = getConsent();
     var statusHtml = '';
     if (isSettings) {
@@ -113,9 +119,15 @@
     document.body.appendChild(wrap);
 
     wrap.addEventListener('click', function (event) {
-      if (event.target.closest('[data-consent-close]')) { removeBanner(); return; }
+      if (event.target.closest('[data-consent-close]')) { removeBanner(true); return; }
       var btn = event.target.closest('[data-consent-choice]');
       if (btn) choose(btn.getAttribute('data-consent-choice'));
+    });
+    wrap.addEventListener('keydown', function (event) {
+      if (isSettings && event.key === 'Escape') {
+        event.preventDefault();
+        removeBanner(true);
+      }
     });
 
     // Move focus into the banner for keyboard and screen-reader users.
@@ -123,8 +135,9 @@
     if (focusEl) { try { focusEl.focus({ preventScroll: true }); } catch (e) { focusEl.focus(); } }
   }
 
-  function openSettings() {
+  function openSettings(trigger) {
     // Re-open the banner in settings mode so the choice can be changed, withdrawn, or closed.
+    settingsTrigger = trigger && typeof trigger.focus === 'function' ? trigger : document.activeElement;
     showBanner('settings');
     var banner = document.getElementById(BANNER_ID);
     if (banner) banner.scrollIntoView({ block: 'nearest' });
@@ -158,7 +171,7 @@
     var trigger = event.target.closest('[data-cookie-settings]');
     if (!trigger) return;
     event.preventDefault();
-    openSettings();
+    openSettings(trigger);
   });
 
   // ---- Start --------------------------------------------------------------

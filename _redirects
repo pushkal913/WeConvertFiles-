@@ -61,11 +61,11 @@
 /png-to-pdf    /images-pdf    301
 
 # Serve the programmatic conversion pages at clean canonical URLs.
-/convert/jpg-to-pdf.html    /convert/jpg-to-pdf    301
-/convert/png-to-pdf.html    /convert/png-to-pdf    301
-/convert/heic-to-jpg.html    /convert/heic-to-jpg    301
-/convert/word-to-pdf.html    /convert/word-to-pdf    301
-/convert/pdf-to-jpg.html    /convert/pdf-to-jpg    301
+/convert/jpg-to-pdf.html    /convert/jpg-to-pdf    301!
+/convert/png-to-pdf.html    /convert/png-to-pdf    301!
+/convert/heic-to-jpg.html    /convert/heic-to-jpg    301!
+/convert/word-to-pdf.html    /convert/word-to-pdf    301!
+/convert/pdf-to-jpg.html    /convert/pdf-to-jpg    301!
 /convert/jpg-to-pdf    /convert/jpg-to-pdf.html    200
 /convert/png-to-pdf    /convert/png-to-pdf.html    200
 /convert/heic-to-jpg    /convert/heic-to-jpg.html    200
