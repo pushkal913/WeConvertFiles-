@@ -61,28 +61,20 @@ for (const selector of requiredSelectors) {
   if (!css.includes(selector)) failures.push(`Compiled CSS is missing ${selector}`);
 }
 
-const cardBorderColors = [...appSource.matchAll(/iconColor:\s*'text-([^']+)'/g)]
-  .map(match => match[1])
-  .filter((color, index, colors) => colors.indexOf(color) === index);
-
-for (const color of cardBorderColors) {
-  const cardSelectors = [
-    `border-${color}\\\/\\[0\\.48\\]`,
-    `dark\\:border-${color}\\\/\\[0\\.54\\]`,
-    `hover\\:border-${color}\\\/90`
-  ];
-  for (const selector of cardSelectors) {
-    if (!css.includes(selector)) failures.push(`Compiled CSS is missing dynamic card selector ${selector}`);
-  }
-}
-
-const requiredGlowValues = [
-  'rgba(var(--glow-rgb),0.096)',
-  'rgba(var(--glow-rgb),0.30)'
+const requiredToolDiscoverySelectors = [
+  '.tool-filter__button',
+  '.tool-card',
+  '.tool-card__icon',
+  '.tool-card__action'
 ];
-for (const glowValue of requiredGlowValues) {
-  if (!appSource.includes(glowValue)) failures.push(`Application script is missing tool-card glow value ${glowValue}`);
-  if (!css.includes(glowValue)) failures.push(`Compiled CSS is missing tool-card glow value ${glowValue}`);
+for (const selector of requiredToolDiscoverySelectors) {
+  if (!css.includes(selector)) failures.push(`Compiled CSS is missing category discovery selector ${selector}`);
+}
+if (!appSource.includes('style="--category-rgb: ${category.rgb};"')) {
+  failures.push('Application tool cards do not receive their canonical category RGB token');
+}
+if (appSource.includes('border-${baseColor}')) {
+  failures.push('Application still builds random per-tool border classes');
 }
 
 // Theme policy: dark styling must follow the site's .dark class, never the OS
@@ -128,5 +120,5 @@ console.log('- no global CSS smooth-scroll policy (intentional smooth scrolls li
 console.log(`- ${pageFiles.length} styled HTML pages use ${stylesheetUrl}`);
 console.log('- no page or generator uses the Tailwind browser runtime');
 console.log(`- compiled CSS contains ${requiredSelectors.length} critical responsive and dynamic selectors`);
-console.log(`- compiled CSS contains dynamic border states for ${cardBorderColors.length} tool-card colors`);
-console.log('- tool-card border and glow intensity is increased by 20% in light and dark modes');
+console.log(`- compiled CSS contains ${requiredToolDiscoverySelectors.length} category filter/card selectors`);
+console.log('- tool-card border, icon, action and glow derive from canonical category color');

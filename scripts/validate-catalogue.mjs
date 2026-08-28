@@ -40,7 +40,6 @@ assert(tools.length === 47, `Expected 47 tools in the catalogue, found ${tools.l
 // ---- 2. No drift vs app.js (runtime config) ---------------------------------
 
 const appTools = pickLiteral(appSource, 'const tools = ', '\n];');
-const appCategories = pickLiteral(appSource, 'const toolCategories = ', '\n];');
 
 const appToolById = new Map(appTools.map((t) => [t.id, t]));
 for (const tool of tools) {
@@ -56,15 +55,11 @@ for (const a of appTools) {
   assert(tools.find((t) => t.id === a.id), `app.js tool "${a.id}" is missing from the catalogue`);
 }
 
-const appCategoryById = new Map(appCategories.map((c) => [c.id, c]));
-for (const category of categories) {
-  const a = appCategoryById.get(category.id);
-  if (!a) { failures.push(`Catalogue category "${category.id}" is not present in app.js`); continue; }
-  assert(category.title === a.title, `Category "${category.id}" title differs from app.js`);
-  assert(category.rgb === a.rgb, `Category "${category.id}" rgb differs from app.js`);
-  assert(JSON.stringify(category.toolIds) === JSON.stringify(a.tools), `Category "${category.id}" tool list differs from app.js`);
-}
-assert(appCategories.length === categories.length, `app.js has ${appCategories.length} categories, catalogue has ${categories.length}`);
+assert(
+  appSource.includes('window.WCF_CATALOGUE?.navigationCategories'),
+  'app.js does not consume canonical navigation categories from the generated runtime catalogue'
+);
+assert(!appSource.includes('const toolCategories = '), 'app.js still duplicates a hand-maintained category list');
 
 // Dependency metadata now lives only in the catalogue and is delivered to the
 // runtime as js/catalogue.js. Check that generated file is in sync, and that
@@ -154,5 +149,5 @@ console.log('Tool catalogue validation passed:');
 console.log(`- ${tools.length} tools, unique ids, all required fields present`);
 console.log(`- ${categories.length} categories cover all 47 tools once; routes and guide URLs derive correctly`);
 console.log(`- every dependency resolves to one of ${Object.keys(libraries).length} known libraries`);
-console.log('- catalogue matches app.js runtime config (tools, categories, dependencies, libraries) — no drift');
+console.log('- catalogue matches app.js runtime config; category discovery consumes the generated canonical model — no drift');
 console.log('- tool ids are in parity with layout.js');

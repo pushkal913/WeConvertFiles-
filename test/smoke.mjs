@@ -112,6 +112,11 @@ async function expectPath(page, expected, name) {
   if (got === expected) pass(); else fail(`journey "${name}": expected path ${expected}, got ${got}`);
 }
 
+async function dismissConsent(page) {
+  const decline = page.locator('[data-consent-choice="denied"]');
+  if (await decline.count() && await decline.isVisible()) await decline.click();
+}
+
 async function main() {
   const { origin, close } = await startServer({ port: 0 });
   const browser = await chromium.launch({ headless: true });
@@ -129,22 +134,31 @@ async function main() {
     // Primary navigation journeys.
     await journey(browser, origin, 'homepage -> tool', async (page) => {
       await page.goto(origin + '/', { waitUntil: 'networkidle' });
+      await dismissConsent(page);
       // Dashboard tool cards are app.js-rendered <button data-tool-id> (the
       // visible entry point; the same-id <a> lives in a collapsed nav menu).
-      await page.locator('button[data-tool-id="merge-pdf"]').first().click();
+      const mergeCard = page.locator('button[data-tool-id="merge-pdf"]').first();
+      await mergeCard.focus();
+      await page.keyboard.press('Enter');
       await expectPath(page, '/merge-pdf', 'homepage -> tool');
       if (await page.locator('#workspaceView').isVisible()) pass(); else fail('journey "homepage -> tool": workspace not visible');
     });
 
     await journey(browser, origin, 'tool -> category hub', async (page) => {
       await page.goto(origin + '/merge-pdf', { waitUntil: 'networkidle' });
-      await page.locator('nav[aria-label="Breadcrumb"] a').nth(1).click();
+      await dismissConsent(page);
+      const categoryBreadcrumb = page.locator('nav[aria-label="Breadcrumb"] a').nth(1);
+      await categoryBreadcrumb.focus();
+      await page.keyboard.press('Enter');
       await expectPath(page, '/category/pdf-tools', 'tool -> category hub');
     });
 
     await journey(browser, origin, 'category -> tool', async (page) => {
       await page.goto(origin + '/category/pdf-tools', { waitUntil: 'networkidle' });
-      await page.locator('main a', { hasText: 'Open tool' }).first().click();
+      await dismissConsent(page);
+      const firstToolLink = page.locator('main a', { hasText: 'Open tool' }).first();
+      await firstToolLink.focus();
+      await page.keyboard.press('Enter');
       await page.waitForTimeout(400);
       const p = new URL(page.url()).pathname;
       if (/^\/[a-z0-9-]+$/.test(p) && p !== '/category') pass(); else fail(`journey "category -> tool": landed on ${p}`);
@@ -152,6 +166,7 @@ async function main() {
 
     await journey(browser, origin, 'guide -> tool', async (page) => {
       await page.goto(origin + '/guides/merge-pdf', { waitUntil: 'networkidle' });
+      await dismissConsent(page);
       const toolBreadcrumb = page.locator('nav[aria-label="Breadcrumb"] a[href="/merge-pdf"]').first();
       await toolBreadcrumb.focus();
       await page.keyboard.press('Enter');

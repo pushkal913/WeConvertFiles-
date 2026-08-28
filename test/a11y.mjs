@@ -148,11 +148,12 @@ async function checkKeyboardAndFocus(page, origin) {
       const hasOutline = style.outlineStyle !== 'none'
         && parseFloat(style.outlineWidth) > 0
         && style.outlineColor !== 'rgba(0, 0, 0, 0)';
+      const hasFocusRing = style.boxShadow !== 'none';
       return {
-        selector: `${element.tagName.toLowerCase()}#${element.id || '(no-id)'}`,
+        selector: `${element.tagName.toLowerCase()}#${element.id || '(no-id)'}${element.getAttribute('href') ? `[href="${element.getAttribute('href')}"]` : ''}`,
         visible: rect.width > 0 && rect.height > 0,
         focusVisible: element.matches(':focus-visible'),
-        hasIndicator: hasOutline
+        hasIndicator: hasOutline || hasFocusRing
       };
     });
     if (state?.visible && (!state.focusVisible || !state.hasIndicator)) focusErrors.push(state.selector);
@@ -294,6 +295,40 @@ async function checkConsentGate(browser, origin) {
   return errors;
 }
 
+async function checkHomepageFilters(page, origin) {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto(origin + '/', { waitUntil: 'networkidle' });
+  await dismissConsent(page);
+  const errors = [];
+
+  const imageFilter = page.locator('[data-tool-filter="images"]');
+  await imageFilter.focus();
+  const focusState = await imageFilter.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      focusVisible: element.matches(':focus-visible'),
+      outline: style.outlineStyle !== 'none' && parseFloat(style.outlineWidth) >= 2
+    };
+  });
+  if (!focusState.focusVisible || !focusState.outline) errors.push('homepage filter lacks a visible focus indicator');
+  await page.keyboard.press('Enter');
+  if (await imageFilter.getAttribute('aria-pressed') !== 'true') errors.push('Enter did not select the Images filter');
+  if (!/14 Image tools shown/.test(await page.locator('#toolFilterStatus').textContent())) errors.push('filter live region did not announce Images results');
+  if (!await imageFilter.evaluate((element) => document.activeElement === element)) errors.push('filter update moved focus');
+
+  const developerFilter = page.locator('[data-tool-filter="developer"]');
+  await developerFilter.focus();
+  await page.keyboard.press('Space');
+  if (await developerFilter.getAttribute('aria-pressed') !== 'true') errors.push('Space did not select the Developer filter');
+
+  const pdfTrigger = page.locator('[data-nav-trigger="pdf"]');
+  await pdfTrigger.focus();
+  await page.keyboard.press('Enter');
+  await page.keyboard.press('Escape');
+  if (!await pdfTrigger.evaluate((element) => document.activeElement === element)) errors.push('desktop dropdown Escape did not restore trigger focus');
+  return errors;
+}
+
 const server = await startServer();
 const browser = await chromium.launch({ headless: true });
 const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
@@ -306,6 +341,7 @@ try {
     failures.push(...(await checkStructure(page, server.origin, target)).map((message) => `${target.name}: ${message}`));
   }
   failures.push(...(await checkKeyboardAndFocus(page, server.origin)).map((message) => `keyboard: ${message}`));
+  failures.push(...(await checkHomepageFilters(page, server.origin)).map((message) => `filters: ${message}`));
   failures.push(...(await checkConsentGate(browser, server.origin)).map((message) => `privacy: ${message}`));
 } finally {
   await context.close();

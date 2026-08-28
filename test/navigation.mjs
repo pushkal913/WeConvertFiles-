@@ -96,6 +96,35 @@ try {
   await pdfTrigger.evaluate((trigger) => trigger.click());
   await page.waitForTimeout(140);
   assert.equal(await pdfTrigger.getAttribute('aria-expanded'), 'true', 'click opening cancels a pending hover close');
+
+  await page.goto(server.origin + '/', { waitUntil: 'networkidle' });
+  await dismissConsent(page);
+  const filters = page.locator('[data-tool-filter]');
+  assert.equal(await filters.count(), 5, 'homepage exposes All plus four category filters');
+  assert.equal(await page.locator('[data-tool-filter="all"]').getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.locator('button[data-tool-id]:visible').count(), 47);
+
+  for (const [id, count, label] of [
+    ['pdf', 13, 'PDF'],
+    ['images', 14, 'Image'],
+    ['data-office', 5, 'Data & Office'],
+    ['developer', 15, 'Developer']
+  ]) {
+    await page.locator(`[data-tool-filter="${id}"]`).click();
+    assert.equal(await page.locator('button[data-tool-id]:visible').count(), count, `${label} filter count`);
+    assert.equal(await page.locator('[data-tool-category]:visible').getAttribute('data-tool-category'), id);
+    assert.match(await page.locator('#toolFilterStatus').textContent(), new RegExp(`${count} ${label} tools? shown`));
+  }
+
+  await page.locator('[data-tool-filter="images"]').click();
+  assert.ok(await page.locator('button[data-tool-id="images-pdf"]:visible').count(), 'image/PDF crossover remains in Images');
+  await page.locator('[data-tool-filter="data-office"]').click();
+  assert.ok(await page.locator('button[data-tool-id="office-pdf"]:visible').count(), 'Office/PDF crossover remains in Data & Office');
+  await page.locator('[data-tool-filter="all"]').click();
+  assert.equal(await page.locator('button[data-tool-id]:visible').count(), 47);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth <= 4), 'filters do not cause mobile document overflow');
 } finally {
   await context.close();
   await browser.close();

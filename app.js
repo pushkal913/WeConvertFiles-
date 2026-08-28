@@ -1125,6 +1125,8 @@ const state = {
 const dashboardView = document.getElementById('dashboardView');
 const workspaceView = document.getElementById('workspaceView');
 const toolGrid = document.getElementById('toolGrid');
+const toolFilters = document.getElementById('toolFilters');
+const toolFilterStatus = document.getElementById('toolFilterStatus');
 const backButton = document.getElementById('backButton');
 const fileInput = document.getElementById('fileInput');
 const dropZone = document.getElementById('dropZone');
@@ -1190,116 +1192,101 @@ function toolIcon(tool) {
   return icons[tool.id] || `<svg class="${iconClass}" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="7" y="5" width="18" height="22" rx="3" fill="currentColor" opacity=".3"/></svg>`;
 }
 
-const toolCategories = [
-  {
-    id: 'create-pdf',
-    title: 'Create & Convert to PDF',
-    rgb: '37, 99, 235',
-    icon: '<path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/>',
-    tools: ['office-pdf', 'images-pdf']
-  },
-  {
-    id: 'manage-pdf',
-    title: 'Edit & Manage PDF',
-    rgb: '249, 115, 22',
-    icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L8 18l-4 1 1-4z"/>',
-    tools: ['merge-pdf', 'compress-pdf', 'split-pdf', 'sign-pdf', 'extract-pages', 'remove-pages', 'organize-pdf', 'watermark-pdf', 'page-numbers', 'rotate-pdf', 'encrypt-pdf', 'decrypt-pdf']
-  },
-  {
-    id: 'pdf-outputs',
-    title: 'Convert PDF to Other Formats',
-    rgb: '244, 63, 94',
-    icon: '<path d="M7 7h10l-3-3m3 3l-3 3"/><path d="M17 17H7l3 3m-3-3l3-3"/>',
-    tools: ['pdf-to-word', 'pdf-images', 'pdf-jpg']
-  },
-  {
-    id: 'image-tools',
-    title: 'Image Conversion & Editing',
-    rgb: '16, 185, 129',
-    icon: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 15l-5-5L5 20"/>',
-    tools: ['heic-to-jpg', 'image-cropper', 'bulk-resize', 'image-scaler', 'webp-convert', 'color-palette', 'favicon-generator', 'exif-utility', 'image-to-base64', 'base64-to-image', 'svg-to-image']
-  },
-  {
-    id: 'data-tools',
-    title: 'Data & Document Conversion',
-    rgb: '99, 102, 241',
-    icon: '<path d="M4 5h16v14H4z"/><path d="M4 10h16M10 5v14"/>',
-    tools: ['excel-to-csv', 'json-convert', 'csv-convert', 'json-yaml']
-  },
-  {
-    id: 'developer-tools',
-    title: 'Text & Developer Utilities',
-    rgb: '139, 92, 246',
-    icon: '<path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/>',
-    tools: ['qr-generator', 'word-counter', 'json-formatter', 'diff-checker', 'url-base64', 'markdown-preview', 'regex-tester', 'jwt-decoder', 'uuid-generator', 'hash-generator', 'unix-converter', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter']
-  }
-];
-
-const toolColorRgb = {
-  red: '239, 68, 68',
-  orange: '249, 115, 22',
-  rose: '244, 63, 94',
-  amber: '245, 158, 11',
-  lime: '132, 204, 22',
-  green: '34, 197, 94',
-  sky: '56, 189, 248',
-  cyan: '6, 182, 212',
-  purple: '168, 85, 247',
-  indigo: '99, 102, 241',
-  blue: '59, 130, 246',
-  fuchsia: '217, 70, 239',
-  emerald: '16, 185, 129',
-  violet: '139, 92, 246',
-  teal: '13, 148, 136'
-};
+const catalogueNavigationCategories = window.WCF_CATALOGUE?.navigationCategories;
+const navigationCategories = Array.isArray(catalogueNavigationCategories) && catalogueNavigationCategories.length
+  ? catalogueNavigationCategories
+  : [{
+      id: 'all-tools',
+      label: 'All tools',
+      shortLabel: 'All',
+      rgb: '26, 115, 232',
+      icon: '<path d="M4 5h16v14H4z"/><path d="M4 10h16M10 5v14"/>',
+      hubPath: '/',
+      toolIds: tools.map((tool) => tool.id)
+    }];
+let activeToolFilter = 'all';
 
 const popularToolIds = new Set(['merge-pdf', 'office-pdf', 'compress-pdf', 'heic-to-jpg', 'json-formatter', 'images-pdf', 'sign-pdf', 'pdf-to-word']);
 
-function renderToolCard(tool) {
-  const baseColor = tool.iconColor.replace('text-', '');
-  const borderClass = `border-${baseColor}/[0.48] dark:border-${baseColor}/[0.54] hover:border-${baseColor}/90`;
-  const colorName = baseColor.split('-')[0];
-  const rgbVal = toolColorRgb[colorName] || '59, 130, 246';
+function renderToolCard(tool, category) {
   const popularBadge = popularToolIds.has(tool.id)
     ? '<span class="ml-1.5 inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-950/40 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-amber-700 dark:text-amber-400 align-middle">Popular</span>'
     : '';
   return `
-    <button class="group flex flex-col rounded-xl border ${borderClass} bg-white dark:bg-[#1e293b] px-3.5 py-3 text-left transition duration-200 hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(var(--glow-rgb),0.096)] hover:shadow-[0_8px_30px_rgba(var(--glow-rgb),0.30)]" style="--glow-rgb: ${rgbVal};" data-tool-id="${tool.id}">
-      <span class="flex items-start gap-3">
-        <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl ${tool.iconBg} ${tool.iconColor} shadow-sm">${toolIcon(tool)}</span>
-        <span class="min-w-0 flex-1">
-          <span class="block text-sm font-semibold leading-snug text-slate-950 dark:text-slate-100">${tool.title}${popularBadge}</span>
-          <span class="mt-0.5 block text-xs leading-5 text-slate-600 dark:text-slate-400">${tool.description}</span>
+    <button class="tool-card group" style="--category-rgb: ${category.rgb};" data-tool-id="${tool.id}">
+      <span class="tool-card__body">
+        <span class="tool-card__icon">${toolIcon(tool)}</span>
+        <span class="tool-card__copy">
+          <span class="tool-card__title">${tool.title}${popularBadge}</span>
+          <span class="tool-card__description">${tool.description}</span>
         </span>
       </span>
-      <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-slate-700 dark:text-slate-200 group-hover:text-[#1a73e8] dark:group-hover:text-blue-400 transition-colors">Open
-        <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      <span class="tool-card__action">Open
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
       </span>
     </button>
   `;
 }
 
+function filterStatusText(categoryId) {
+  if (categoryId === 'all') return `${tools.length} tools shown`;
+  const category = navigationCategories.find(({ id }) => id === categoryId);
+  if (!category) return `${tools.length} tools shown`;
+  const label = category.id === 'images' ? 'Image' : category.label;
+  return `${category.toolIds.length} ${label} tools shown`;
+}
+
+function applyToolFilter(categoryId, { announce = true } = {}) {
+  activeToolFilter = navigationCategories.some(({ id }) => id === categoryId) ? categoryId : 'all';
+  document.querySelectorAll('[data-tool-filter]').forEach((button) => {
+    button.setAttribute('aria-pressed', String(button.dataset.toolFilter === activeToolFilter));
+  });
+  document.querySelectorAll('[data-tool-category]').forEach((section) => {
+    section.hidden = activeToolFilter !== 'all' && section.dataset.toolCategory !== activeToolFilter;
+  });
+  if (announce && toolFilterStatus) toolFilterStatus.textContent = filterStatusText(activeToolFilter);
+}
+
 function renderDashboard() {
   const toolById = new Map(tools.map(tool => [tool.id, tool]));
-  toolGrid.innerHTML = toolCategories.map(category => {
-    const categoryTools = category.tools.map(id => toolById.get(id)).filter(Boolean);
+  if (toolFilters) {
+    const filterOptions = [{ id: 'all', label: 'All', count: tools.length, rgb: '26, 115, 232' }, ...navigationCategories.map((category) => ({
+      id: category.id,
+      label: category.label,
+      count: category.toolIds.length,
+      rgb: category.rgb
+    }))];
+    toolFilters.innerHTML = filterOptions.map((filter) => `
+      <button type="button" class="tool-filter__button" style="--filter-rgb: ${filter.rgb};" data-tool-filter="${filter.id}" aria-pressed="${filter.id === activeToolFilter}">
+        <span>${filter.label}</span><span class="tool-filter__count">${filter.count}</span>
+      </button>
+    `).join('');
+  }
+  toolGrid.innerHTML = navigationCategories.map(category => {
+    const categoryTools = category.toolIds.map(id => toolById.get(id)).filter(Boolean);
     return `
-      <section class="tool-category" aria-labelledby="${category.id}-title" style="--category-rgb: ${category.rgb};">
+      <section class="tool-category" data-tool-category="${category.id}" aria-labelledby="${category.id}-title" style="--category-rgb: ${category.rgb};">
         <div class="tool-category-heading">
           <span class="tool-category-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${category.icon}</svg>
           </span>
-          <h2 id="${category.id}-title">${category.title}</h2>
+          <h2 id="${category.id}-title">${category.label} tools</h2>
           <span class="tool-category-count">${categoryTools.length} tools</span>
           <span class="tool-category-divider" aria-hidden="true"></span>
         </div>
         <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          ${categoryTools.map(renderToolCard).join('')}
+          ${categoryTools.map((tool) => renderToolCard(tool, category)).join('')}
         </div>
       </section>
     `;
   }).join('');
+  applyToolFilter(activeToolFilter, { announce: false });
 }
+
+toolFilters?.addEventListener('click', (event) => {
+  const filter = event.target.closest('[data-tool-filter]');
+  if (filter) applyToolFilter(filter.dataset.toolFilter);
+});
 
 async function openTool(toolId) {
   const tool = tools.find(item => item.id === toolId);
@@ -4321,8 +4308,8 @@ function getRelatedTools(toolId) {
   if (fromCatalogue) {
     ids = fromCatalogue.tools;
   } else {
-    const category = toolCategories.find((cat) => cat.tools.includes(toolId));
-    ids = category ? category.tools.filter((id) => id !== toolId).slice(0, 6) : [];
+    const category = navigationCategories.find((cat) => cat.toolIds.includes(toolId));
+    ids = category ? category.toolIds.filter((id) => id !== toolId).slice(0, 6) : [];
   }
   return ids.map((id) => tools.find((t) => t.id === id)).filter(Boolean);
 }
