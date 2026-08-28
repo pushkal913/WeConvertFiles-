@@ -93,6 +93,27 @@ Failures are aggregated and name the source file plus the broken route,
 fragment, redirect, or preferred canonical target. CI runs this gate before
 installing Playwright so route regressions fail quickly.
 
+## Primary navigation and category filters (Phase 5, Task 28)
+
+Run the source-model and browser checks with:
+
+```
+npm run test:navigation-model
+npm run test:navigation
+```
+
+The model gate proves the canonical PDF, Images, Data & Office, and Developer
+groups contain 13, 14, 5, and 15 tools respectively, cover all 47 catalogue
+tools exactly once, and retain image/PDF and Office/PDF crossover ownership.
+The browser gate checks the shared four-dropdown header on the homepage and a
+generated category page, including click, hover, Enter, Space, Arrow Down,
+Escape/focus restoration, outside close, one-open-menu behavior, delayed hover
+close, and timer cancellation. It also checks the homepage All/PDF/Images/Data
+& Office/Developer filters, exact visible counts, live status, crossover tools,
+and mobile overflow. The accessibility suite additionally verifies filter
+focus visibility, native keyboard activation, `aria-pressed`, stable focus,
+and the polite result announcement.
+
 ## Jitter / layout-shift regression test (Phase 4, Task 25)
 
 Turns the Phase 1 jitter measurement into an automatic guard. Runs headlessly,
