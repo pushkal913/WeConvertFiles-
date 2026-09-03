@@ -3,9 +3,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const stylesheetUrl = '/assets/styles.css?v=20260729-4';
+const stylesheetUrl = '/assets/styles.css?v=20260903-1';
 const pageDirectories = [
   rootDir,
+  path.join(rootDir, 'category'),
   path.join(rootDir, 'convert'),
   path.join(rootDir, 'guides'),
   path.join(rootDir, 'tool-pages')

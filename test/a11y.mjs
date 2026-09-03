@@ -148,11 +148,13 @@ async function checkKeyboardAndFocus(page, origin) {
       const hasOutline = style.outlineStyle !== 'none'
         && parseFloat(style.outlineWidth) > 0
         && style.outlineColor !== 'rgba(0, 0, 0, 0)';
+      const hasFocusRing = style.boxShadow !== 'none'
+        && /0px 0px 0px (?:[1-9]\d*|0\.\d+)px/.test(style.boxShadow);
       return {
         selector: `${element.tagName.toLowerCase()}#${element.id || '(no-id)'}`,
         visible: rect.width > 0 && rect.height > 0,
         focusVisible: element.matches(':focus-visible'),
-        hasIndicator: hasOutline
+        hasIndicator: hasOutline || hasFocusRing
       };
     });
     if (state?.visible && (!state.focusVisible || !state.hasIndicator)) focusErrors.push(state.selector);
