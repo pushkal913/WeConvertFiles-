@@ -127,6 +127,33 @@ async function main() {
     }
 
     // Primary navigation journeys.
+    await journey(browser, origin, 'header category hubs', async (page) => {
+      const destinations = [
+        ['/category/image-tools', 'Image'],
+        ['/category/pdf-tools', 'PDF'],
+        ['/category/convert-office', 'Data & Office'],
+        ['/category/developer-tools', 'Developers']
+      ];
+
+      for (const [path, label] of destinations) {
+        await page.goto(origin + '/', { waitUntil: 'networkidle' });
+        const link = page.locator(`nav[aria-label="Main navigation"] a[href="${path}"]`);
+        if ((await link.innerText()).trim() === label) pass();
+        else fail(`journey "header category hubs": ${path} has the wrong label`);
+
+        const mainTop = await page.locator('main').evaluate((element) => element.getBoundingClientRect().top);
+        await link.hover();
+        if (await link.locator('xpath=..').locator(':scope > div').isVisible()) pass();
+        else fail(`journey "header category hubs": ${label} dropdown did not open on hover`);
+        const hoveredMainTop = await page.locator('main').evaluate((element) => element.getBoundingClientRect().top);
+        if (Math.abs(hoveredMainTop - mainTop) <= 1) pass();
+        else fail(`journey "header category hubs": ${label} dropdown shifted the page by ${hoveredMainTop - mainTop}px`);
+
+        await link.click();
+        await expectPath(page, path, 'header category hubs');
+      }
+    });
+
     await journey(browser, origin, 'homepage -> tool', async (page) => {
       await page.goto(origin + '/', { waitUntil: 'networkidle' });
       // Dashboard tool cards are app.js-rendered <button data-tool-id> (the

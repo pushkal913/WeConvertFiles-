@@ -112,34 +112,17 @@
         
         <!-- Desktop Nav (Centered on desktop, hidden on mobile) -->
         <nav class="hidden lg:flex items-center justify-center gap-3.5 xl:gap-5.5 text-[13.5px] xl:text-[14.5px] font-semibold text-slate-700 dark:text-slate-200 flex-grow min-w-0" aria-label="Main navigation">
-          <!-- Standalone: Unlock PDF -->
-          <a class="group inline-flex items-center gap-1 hover:text-[#1967d2] transition-colors whitespace-nowrap text-slate-700 dark:text-slate-200 hover:dark:text-[#1a73e8]" href="/decrypt-pdf">
-            <svg class="h-[23px] w-[23px] text-emerald-500 transition-colors group-hover:text-[#1967d2]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" opacity=".35"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0 1 9.9-1" />
-            </svg>
-            Unlock PDF
-          </a>
-
-          <!-- Standalone: Sign PDF -->
-          <a class="group inline-flex items-center gap-1 hover:text-[#1967d2] transition-colors whitespace-nowrap text-slate-700 dark:text-slate-200 hover:dark:text-[#1a73e8]" href="/sign-pdf">
-            <svg class="h-[23px] w-[23px] text-purple-500 transition-colors group-hover:text-[#1967d2]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-            </svg>
-            Sign PDF
-          </a>
-
           <!-- Category 1: Image Tools -->
           <div class="group relative py-3">
-            <button class="inline-flex items-center gap-1 hover:text-[#1967d2] transition-colors whitespace-nowrap text-slate-700 dark:text-slate-200 hover:dark:text-[#1a73e8]" type="button">
+            <a class="inline-flex items-center gap-1 hover:text-[#1967d2] transition-colors whitespace-nowrap text-slate-700 dark:text-slate-200 hover:dark:text-[#1a73e8]" href="/category/image-tools">
               <svg class="h-[23px] w-[23px] text-emerald-500 transition-colors group-hover:text-[#1967d2]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              Image Tools
+              Image
               <svg class="h-[15px] w-[15px] text-slate-400 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
-            </button>
+            </a>
             <div class="invisible absolute left-1/2 -translate-x-1/2 top-full z-30 grid w-[480px] grid-cols-2 gap-1 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100 dark:bg-[#1e293b] dark:border-slate-700/60">
               <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/image-cropper">
                 <svg class="h-4 w-4 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -219,15 +202,15 @@
 
           <!-- Category 2: PDF Tools -->
           <div class="group relative py-3">
-            <button class="inline-flex items-center gap-1 hover:text-[#1967d2] transition-colors whitespace-nowrap text-slate-700 dark:text-slate-200 hover:dark:text-[#1a73e8]" type="button">
+            <a class="inline-flex items-center gap-1 hover:text-[#1967d2] transition-colors whitespace-nowrap text-slate-700 dark:text-slate-200 hover:dark:text-[#1a73e8]" href="/category/pdf-tools">
               <svg class="h-[23px] w-[23px] text-orange-500 transition-colors group-hover:text-[#1a73e8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
               </svg>
-              PDF Tools
+              PDF
               <svg class="h-[15px] w-[15px] text-slate-400 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
-            </button>
+            </a>
             <div class="invisible absolute left-1/2 -translate-x-1/2 top-full z-30 grid w-[520px] grid-cols-2 gap-1 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100 dark:bg-[#1e293b] dark:border-slate-700/60">
               <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/pdf-to-word">
                 <svg class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -317,15 +300,15 @@
 
           <!-- Category 3: Convert & Office -->
           <div class="group relative py-3">
-            <button class="inline-flex items-center gap-1 hover:text-[#1967d2] transition-colors whitespace-nowrap text-slate-700 dark:text-slate-200 hover:dark:text-[#1a73e8]" type="button">
+            <a class="inline-flex items-center gap-1 hover:text-[#1967d2] transition-colors whitespace-nowrap text-slate-700 dark:text-slate-200 hover:dark:text-[#1a73e8]" href="/category/convert-office">
               <svg class="h-[23px] w-[23px] text-indigo-500 transition-colors group-hover:text-[#1a73e8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
               </svg>
-              Convert & Office
+              Data & Office
               <svg class="h-[15px] w-[15px] text-slate-400 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
-            </button>
+            </a>
             <div class="invisible absolute left-1/2 -translate-x-1/2 top-full z-30 w-64 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100 dark:bg-[#1e293b] dark:border-slate-700/60">
               <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/excel-to-csv">
                 <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -364,15 +347,15 @@
 
           <!-- Category 4: Text & Developers -->
           <div class="group relative py-3">
-            <button class="inline-flex items-center gap-1 hover:text-[#1967d2] transition-colors whitespace-nowrap text-slate-700 dark:text-slate-200 hover:dark:text-[#1a73e8]" type="button">
+            <a class="inline-flex items-center gap-1 hover:text-[#1967d2] transition-colors whitespace-nowrap text-slate-700 dark:text-slate-200 hover:dark:text-[#1a73e8]" href="/category/developer-tools">
               <svg class="h-[23px] w-[23px] text-rose-500 transition-colors group-hover:text-[#1a73e8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
-              Text & Developers
+              Developers
               <svg class="h-[15px] w-[15px] text-slate-400 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
-            </button>
+            </a>
             <div class="invisible absolute right-0 top-full z-30 grid w-[520px] grid-cols-2 gap-1 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100 dark:bg-[#1e293b] dark:border-slate-700/60">
               <a class="flex items-center gap-2.5 rounded-xl px-3 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-[#1a73e8] dark:hover:text-white transition-colors whitespace-nowrap" href="/regex-tester">
                 <svg class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
