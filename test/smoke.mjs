@@ -89,6 +89,29 @@ async function checkPage(browser, origin, def, vp) {
   if (seen.errors.length === 0) pass(); else fail(`${label}: console error(s) — ${seen.errors.join(' | ')}`);
   if (seen.failedReqs.length === 0) pass(); else fail(`${label}: failed request(s) — ${seen.failedReqs.join(' | ')}`);
 
+  const footerNav = page.locator('footer nav[aria-label="Footer navigation"]');
+  if (await footerNav.count() === 1) pass(); else fail(`${label}: missing labelled footer navigation`);
+  for (const group of ['tools', 'resources', 'company']) {
+    const footerGroup = page.locator(`[data-footer-group="${group}"]`);
+    if (await footerGroup.count() === 1) pass(); else fail(`${label}: missing ${group} footer group`);
+  }
+  if (vp.isMobile && await footerNav.count() === 1) {
+    const [toolsBox, resourcesBox] = await Promise.all([
+      page.locator('[data-footer-group="tools"]').boundingBox(),
+      page.locator('[data-footer-group="resources"]').boundingBox()
+    ]);
+    if (toolsBox && resourcesBox && Math.abs(toolsBox.y - resourcesBox.y) <= 2 && resourcesBox.x > toolsBox.x) pass();
+    else fail(`${label}: mobile Tools and Resources groups are not in a compact two-column row`);
+
+    const companyLinks = page.locator('[data-footer-company-links] > *');
+    const [firstCompanyLink, secondCompanyLink] = await Promise.all([
+      companyLinks.nth(0).boundingBox(),
+      companyLinks.nth(1).boundingBox()
+    ]);
+    if (firstCompanyLink && secondCompanyLink && Math.abs(firstCompanyLink.y - secondCompanyLink.y) <= 2 && secondCompanyLink.x > firstCompanyLink.x) pass();
+    else fail(`${label}: mobile Company links are not arranged in two compact columns`);
+  }
+
   await context.close();
 }
 
