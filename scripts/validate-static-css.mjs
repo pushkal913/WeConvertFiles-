@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const stylesheetUrl = '/assets/styles.css?v=20260903-1';
 const homepageStylesheetUrl = '/assets/styles.css?v=20260904-1';
+const categoryStylesheetUrl = '/assets/styles.css?v=20260904-2';
 const pageDirectories = [
   rootDir,
   path.join(rootDir, 'category'),
@@ -26,7 +27,9 @@ for (const file of pageFiles) {
   const html = await readFile(file, 'utf8');
   const expectedStylesheetUrl = file === path.join(rootDir, 'index.html')
     ? homepageStylesheetUrl
-    : stylesheetUrl;
+    : path.dirname(file) === path.join(rootDir, 'category')
+      ? categoryStylesheetUrl
+      : stylesheetUrl;
   const stylesheetReferences = html.match(/\/assets\/styles\.css\?v=[^"'\s>]+/g) ?? [];
 
   if (stylesheetReferences.length !== 1 || stylesheetReferences[0] !== expectedStylesheetUrl) {
@@ -40,6 +43,11 @@ for (const file of pageFiles) {
 const generator = await readFile(path.join(rootDir, 'scripts', 'generate-conversion-pages.mjs'), 'utf8');
 if (!generator.includes(stylesheetUrl)) {
   failures.push('The conversion-page generator does not include the versioned static stylesheet');
+}
+
+const categoryGenerator = await readFile(path.join(rootDir, 'scripts', 'generate-category-pages.mjs'), 'utf8');
+if (!categoryGenerator.includes(categoryStylesheetUrl)) {
+  failures.push('The category-page generator does not include the current category stylesheet version');
 }
 if (generator.includes('cdn.tailwindcss.com') || generator.includes('tailwind.config')) {
   failures.push('The conversion-page generator still includes the Tailwind browser runtime');
@@ -69,6 +77,11 @@ for (const selector of requiredSelectors) {
 const toolBrowserSelectors = ['.tool-filter-button', '.tool-card-icon', '.tool-card-action'];
 for (const selector of toolBrowserSelectors) {
   if (!css.includes(selector)) failures.push(`Compiled CSS is missing homepage tool-browser selector ${selector}`);
+}
+
+const categoryPageSelectors = ['.category-page-hero', '.category-page-accent', '.category-page-chip', '.category-page-tools'];
+for (const selector of categoryPageSelectors) {
+  if (!css.includes(selector)) failures.push(`Compiled CSS is missing category-page selector ${selector}`);
 }
 
 const requiredGlowValues = [
@@ -122,8 +135,9 @@ if (failures.length) {
 console.log('Static CSS validation passed.');
 console.log(`- ${themeScopedFiles.length} CSS/HTML files scope dark styling to .dark (no @media prefers-color-scheme)`);
 console.log('- no global CSS smooth-scroll policy (intentional smooth scrolls live in JS, reduced-motion aware)');
-console.log(`- homepage uses ${homepageStylesheetUrl}; ${pageFiles.length - 1} other styled HTML pages use ${stylesheetUrl}`);
+console.log(`- homepage uses ${homepageStylesheetUrl}; category hubs use ${categoryStylesheetUrl}; other styled pages use ${stylesheetUrl}`);
 console.log('- no page or generator uses the Tailwind browser runtime');
 console.log(`- compiled CSS contains ${requiredSelectors.length} critical responsive and dynamic selectors`);
 console.log(`- compiled CSS contains the ${toolBrowserSelectors.length} homepage tool-browser component selectors`);
+console.log(`- compiled CSS contains the ${categoryPageSelectors.length} shared category-page tint selectors`);
 console.log('- homepage tool cards use one shared category color for borders, icons, actions and glow');

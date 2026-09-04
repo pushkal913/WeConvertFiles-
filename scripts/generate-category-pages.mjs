@@ -109,7 +109,7 @@ const renderFaqs = (faqs) => faqs.map(([question, answer]) => `
           <details class="group border-b border-slate-100 py-5 last:border-b-0 dark:border-slate-700/60">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-slate-900 dark:text-slate-100">
               ${escapeHtml(question)}
-              <span class="text-[#1a73e8] transition group-open:rotate-45" aria-hidden="true">+</span>
+              <span class="category-page-accent transition group-open:rotate-45" aria-hidden="true">+</span>
             </summary>
             <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">${escapeHtml(answer)}</p>
           </details>`).join('');
@@ -144,7 +144,7 @@ const renderPage = (page, tools) => {
   <script type="application/ld+json">
 ${jsonLd(page, tools)}
   </script>
-  <link rel="stylesheet" href="/assets/styles.css?v=20260903-1" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260904-2" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -160,15 +160,15 @@ ${jsonLd(page, tools)}
   <main class="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 flex-grow">
 ${breadcrumbNav(breadcrumbTrail(page))}
 
-    <article>
-      <header class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700/60 dark:bg-[#1e293b] sm:p-10">
-        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#1a73e8]">${escapeHtml(page.eyebrow)}</p>
+    <article class="category-page" style="--category-rgb: ${page.rgb}; --category-text-rgb: ${page.textRgb}; --category-dark-text-rgb: ${page.darkTextRgb};">
+      <header class="category-page-hero rounded-3xl border p-6 sm:p-10">
+        <p class="category-page-accent text-xs font-bold uppercase tracking-[0.16em]">${escapeHtml(page.eyebrow)}</p>
         <h1 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-100 sm:text-5xl">${escapeHtml(page.h1)}</h1>
         <p class="mt-5 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg">${escapeHtml(page.lead)}</p>
         <div class="mt-6 flex flex-wrap gap-3 text-sm">
           <span class="rounded-full bg-emerald-50 px-3 py-1.5 font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">100% browser-based</span>
           <span class="rounded-full bg-blue-50 px-3 py-1.5 font-semibold text-blue-700 dark:bg-blue-950/40 dark:text-blue-300">No server upload</span>
-          <span class="rounded-full bg-slate-100 px-3 py-1.5 font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-300">${tools.length} free tools</span>
+          <span class="category-page-chip rounded-full px-3 py-1.5 font-semibold">${tools.length} free tools</span>
         </div>
       </header>
 
@@ -183,7 +183,7 @@ ${renderWorkflows(page.workflows)}
         </ul>
       </section>
 
-      <section class="mt-10">
+      <section class="category-page-tools mt-10">
         <h2 class="text-2xl font-bold tracking-tight text-slate-950 dark:text-slate-100">${escapeHtml(page.h1)} in this hub</h2>
         <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">${tools.length} tools — each opens instantly and processes files on your device. Every tool has an in-depth guide.</p>
         <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
