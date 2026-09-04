@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const stylesheetUrl = '/assets/styles.css?v=20260903-1';
+const homepageStylesheetUrl = '/assets/styles.css?v=20260904-1';
 const pageDirectories = [
   rootDir,
   path.join(rootDir, 'category'),
@@ -23,10 +24,13 @@ for (const directory of pageDirectories) {
 const failures = [];
 for (const file of pageFiles) {
   const html = await readFile(file, 'utf8');
-  const stylesheetCount = html.split(stylesheetUrl).length - 1;
+  const expectedStylesheetUrl = file === path.join(rootDir, 'index.html')
+    ? homepageStylesheetUrl
+    : stylesheetUrl;
+  const stylesheetReferences = html.match(/\/assets\/styles\.css\?v=[^"'\s>]+/g) ?? [];
 
-  if (stylesheetCount !== 1) {
-    failures.push(`${path.relative(rootDir, file)} has ${stylesheetCount} versioned stylesheet references`);
+  if (stylesheetReferences.length !== 1 || stylesheetReferences[0] !== expectedStylesheetUrl) {
+    failures.push(`${path.relative(rootDir, file)} must use ${expectedStylesheetUrl}`);
   }
   if (html.includes('cdn.tailwindcss.com') || html.includes('tailwind.config')) {
     failures.push(`${path.relative(rootDir, file)} still includes the Tailwind browser runtime`);
@@ -118,7 +122,7 @@ if (failures.length) {
 console.log('Static CSS validation passed.');
 console.log(`- ${themeScopedFiles.length} CSS/HTML files scope dark styling to .dark (no @media prefers-color-scheme)`);
 console.log('- no global CSS smooth-scroll policy (intentional smooth scrolls live in JS, reduced-motion aware)');
-console.log(`- ${pageFiles.length} styled HTML pages use ${stylesheetUrl}`);
+console.log(`- homepage uses ${homepageStylesheetUrl}; ${pageFiles.length - 1} other styled HTML pages use ${stylesheetUrl}`);
 console.log('- no page or generator uses the Tailwind browser runtime');
 console.log(`- compiled CSS contains ${requiredSelectors.length} critical responsive and dynamic selectors`);
 console.log(`- compiled CSS contains the ${toolBrowserSelectors.length} homepage tool-browser component selectors`);
