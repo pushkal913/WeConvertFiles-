@@ -186,6 +186,38 @@ async function main() {
       if (await page.locator('#workspaceView').isVisible()) pass(); else fail('journey "homepage -> tool": workspace not visible');
     });
 
+    await journey(browser, origin, 'homepage lazy tool starts at top', async (page) => {
+      await page.route('**/js/tools/code-minifier.js*', async (route) => {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        await route.continue();
+      });
+      await page.goto(origin + '/', { waitUntil: 'networkidle' });
+
+      await page.locator('button[data-tool-id="json-formatter"]').first().click();
+      await page.locator('#toolOptions').waitFor({ state: 'visible' });
+      await page.locator('#backButton').click();
+      await expectPath(page, '/', 'homepage lazy tool starts at top');
+
+      const toolCard = page.locator('button[data-tool-id="code-minifier"]').first();
+      await toolCard.scrollIntoViewIfNeeded();
+      const startingScroll = await page.evaluate(() => window.scrollY);
+      if (startingScroll > 0) pass();
+      else fail('journey "homepage lazy tool starts at top": tool card did not require scrolling');
+
+      await toolCard.click();
+      await page.waitForFunction(() => window.location.pathname === '/code-minifier');
+      const loadingScroll = await page.evaluate(() => window.scrollY);
+      if (loadingScroll === 0) pass();
+      else fail(`journey "homepage lazy tool starts at top": viewport remained at ${loadingScroll}px while the tool loaded`);
+
+      const loadingOptions = await page.locator('#toolOptions').evaluate((element) => ({
+        hidden: element.classList.contains('hidden'),
+        text: element.textContent.trim()
+      }));
+      if (!loadingOptions.hidden && loadingOptions.text === 'Loading tool…') pass();
+      else fail('journey "homepage lazy tool starts at top": loading state was not shown while the next tool loaded');
+    });
+
     await journey(browser, origin, 'homepage category filters', async (page) => {
       await page.goto(origin + '/', { waitUntil: 'networkidle' });
 

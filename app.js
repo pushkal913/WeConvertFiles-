@@ -1370,7 +1370,13 @@ async function openTool(toolId) {
   setStatus('');
   document.documentElement.dataset.initialView = 'tool';
   dashboardView.classList.add('hidden');
+  const isLoadingToolModule = MODULE_TOOLS.has(tool.id) && !toolModuleRegistry[tool.id];
+  toolOptions.innerHTML = isLoadingToolModule
+    ? '<p role="status" class="py-5 text-center text-sm font-medium text-slate-500 dark:text-slate-400">Loading tool&hellip;</p>'
+    : '';
+  toolOptions.classList.toggle('hidden', !isLoadingToolModule);
   workspaceView.classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'instant' });
 
   // Hide file controls for tools that work entirely with pasted or generated text.
   const isInteractiveOnly = ['word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'regex-tester', 'jwt-decoder', 'json-yaml', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter', 'uuid-generator', 'unix-converter'].includes(toolId);
@@ -1599,7 +1605,6 @@ async function openTool(toolId) {
   if (tool.id === 'image-scaler') {
     initImageScalerOptions();
   }
-  window.scrollTo({ top: 0, behavior: 'instant' });
   updateFileList();
   setStatus('');
 }
