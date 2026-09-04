@@ -186,6 +186,43 @@ async function main() {
       if (await page.locator('#workspaceView').isVisible()) pass(); else fail('journey "homepage -> tool": workspace not visible');
     });
 
+    await journey(browser, origin, 'homepage category filters', async (page) => {
+      await page.goto(origin + '/', { waitUntil: 'networkidle' });
+
+      const filterNav = page.locator('nav[aria-label="Filter tools by category"]');
+      if (await filterNav.count() === 1) pass(); else fail('journey "homepage category filters": filter navigation is missing');
+
+      const expected = [
+        { id: 'pdf', count: 13, rgb: '249, 115, 22' },
+        { id: 'image', count: 14, rgb: '16, 185, 129' },
+        { id: 'data-office', count: 5, rgb: '99, 102, 241' },
+        { id: 'developers', count: 15, rgb: '244, 63, 94' }
+      ];
+
+      if (await page.locator('[data-tool-filter]').count() === 5) pass();
+      else fail('journey "homepage category filters": expected five filter buttons');
+
+      for (const category of expected) {
+        const button = page.locator(`[data-tool-filter="${category.id}"]`);
+        await button.click();
+
+        if (await button.getAttribute('aria-pressed') === 'true') pass();
+        else fail(`journey "homepage category filters": ${category.id} is not marked active`);
+
+        const visibleCards = page.locator('#toolGrid [data-tool-category]:not([hidden]) button[data-tool-id]');
+        if (await visibleCards.count() === category.count) pass();
+        else fail(`journey "homepage category filters": ${category.id} has the wrong tool count`);
+
+        const cardColors = await visibleCards.evaluateAll((cards) => cards.map((card) => card.style.getPropertyValue('--tool-rgb').trim()));
+        if (cardColors.every((color) => color === category.rgb)) pass();
+        else fail(`journey "homepage category filters": ${category.id} cards do not share the menu color`);
+      }
+
+      await page.locator('[data-tool-filter="all"]').click();
+      if (await page.locator('#toolGrid button[data-tool-id]').count() === 47) pass();
+      else fail('journey "homepage category filters": All does not restore the full catalogue');
+    });
+
     await journey(browser, origin, 'tool -> category hub', async (page) => {
       await page.goto(origin + '/merge-pdf', { waitUntil: 'networkidle' });
       await page.locator('nav[aria-label="Breadcrumb"] a').nth(1).click();

@@ -1235,44 +1235,65 @@ const toolCategories = [
   }
 ];
 
-const toolColorRgb = {
-  red: '239, 68, 68',
-  orange: '249, 115, 22',
-  rose: '244, 63, 94',
-  amber: '245, 158, 11',
-  lime: '132, 204, 22',
-  green: '34, 197, 94',
-  sky: '56, 189, 248',
-  cyan: '6, 182, 212',
-  purple: '168, 85, 247',
-  indigo: '99, 102, 241',
-  blue: '59, 130, 246',
-  fuchsia: '217, 70, 239',
-  emerald: '16, 185, 129',
-  violet: '139, 92, 246',
-  teal: '13, 148, 136'
-};
+const homepageCategories = [
+  {
+    id: 'pdf',
+    title: 'PDF tools',
+    filterLabel: 'PDF',
+    rgb: '249, 115, 22',
+    textRgb: '194, 65, 12',
+    darkTextRgb: '251, 146, 60',
+    icon: '<path d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2"/><path d="M12 3v8m0 0l3-3m-3 3L9 8"/>',
+    tools: ['pdf-to-word', 'merge-pdf', 'split-pdf', 'extract-pages', 'organize-pdf', 'rotate-pdf', 'remove-pages', 'decrypt-pdf', 'encrypt-pdf', 'compress-pdf', 'watermark-pdf', 'page-numbers', 'sign-pdf']
+  },
+  {
+    id: 'image',
+    title: 'Image tools',
+    filterLabel: 'Image',
+    rgb: '16, 185, 129',
+    textRgb: '4, 120, 87',
+    darkTextRgb: '52, 211, 153',
+    icon: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 15l-5-5L5 20"/>',
+    tools: ['image-cropper', 'favicon-generator', 'image-scaler', 'pdf-images', 'pdf-jpg', 'images-pdf', 'webp-convert', 'bulk-resize', 'color-palette', 'exif-utility', 'heic-to-jpg', 'image-to-base64', 'base64-to-image', 'svg-to-image']
+  },
+  {
+    id: 'data-office',
+    title: 'Data & Office tools',
+    filterLabel: 'Data & Office',
+    rgb: '99, 102, 241',
+    textRgb: '67, 56, 202',
+    darkTextRgb: '165, 180, 252',
+    icon: '<path d="M4 5h16v14H4z"/><path d="M4 10h16M10 5v14"/>',
+    tools: ['excel-to-csv', 'csv-convert', 'json-convert', 'office-pdf', 'json-yaml']
+  },
+  {
+    id: 'developers',
+    title: 'Developer tools',
+    filterLabel: 'Developers',
+    rgb: '244, 63, 94',
+    textRgb: '190, 18, 60',
+    darkTextRgb: '251, 113, 133',
+    icon: '<path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/>',
+    tools: ['regex-tester', 'uuid-generator', 'unix-converter', 'jwt-decoder', 'word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter']
+  }
+];
 
 const popularToolIds = new Set(['merge-pdf', 'office-pdf', 'compress-pdf', 'heic-to-jpg', 'json-formatter', 'images-pdf', 'sign-pdf', 'pdf-to-word']);
 
-function renderToolCard(tool) {
-  const baseColor = tool.iconColor.replace('text-', '');
-  const borderClass = `border-${baseColor}/[0.48] dark:border-${baseColor}/[0.54] hover:border-${baseColor}/90`;
-  const colorName = baseColor.split('-')[0];
-  const rgbVal = toolColorRgb[colorName] || '59, 130, 246';
+function renderToolCard(tool, category) {
   const popularBadge = popularToolIds.has(tool.id)
     ? '<span class="ml-1.5 inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-950/40 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-amber-700 dark:text-amber-400 align-middle">Popular</span>'
     : '';
   return `
-    <button class="group flex flex-col rounded-xl border ${borderClass} bg-white dark:bg-[#1e293b] px-3.5 py-3 text-left transition duration-200 hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(var(--glow-rgb),0.096)] hover:shadow-[0_8px_30px_rgba(var(--glow-rgb),0.30)]" style="--glow-rgb: ${rgbVal};" data-tool-id="${tool.id}">
+    <button class="tool-card group flex flex-col rounded-xl border bg-white dark:bg-[#1e293b] px-3.5 py-3 text-left transition duration-200 hover:-translate-y-0.5" style="--tool-rgb: ${category.rgb}; --tool-text-rgb: ${category.textRgb}; --tool-dark-text-rgb: ${category.darkTextRgb};" data-tool-id="${tool.id}">
       <span class="flex items-start gap-3">
-        <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl ${tool.iconBg} ${tool.iconColor} shadow-sm">${toolIcon(tool)}</span>
+        <span class="tool-card-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl shadow-sm">${toolIcon(tool)}</span>
         <span class="min-w-0 flex-1">
           <span class="block text-sm font-semibold leading-snug text-slate-950 dark:text-slate-100">${tool.title}${popularBadge}</span>
           <span class="mt-0.5 block text-xs leading-5 text-slate-600 dark:text-slate-400">${tool.description}</span>
         </span>
       </span>
-      <span class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-slate-700 dark:text-slate-200 group-hover:text-[#1a73e8] dark:group-hover:text-blue-400 transition-colors">Open
+      <span class="tool-card-action mt-3 inline-flex items-center gap-1 text-xs font-bold transition-colors">Open
         <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
       </span>
     </button>
@@ -1281,10 +1302,28 @@ function renderToolCard(tool) {
 
 function renderDashboard() {
   const toolById = new Map(tools.map(tool => [tool.id, tool]));
-  toolGrid.innerHTML = toolCategories.map(category => {
+  const filterButtons = [
+    { id: 'all', title: 'All', rgb: '26, 115, 232', textRgb: '11, 87, 208', darkTextRgb: '96, 165, 250', count: tools.length },
+    ...homepageCategories.map(category => ({ ...category, title: category.filterLabel, count: category.tools.length }))
+  ];
+
+  toolGrid.innerHTML = `
+    <div class="tool-browser-heading">
+      <h2 class="text-lg font-bold tracking-tight text-slate-950 dark:text-slate-100">Browse all tools</h2>
+      <nav class="tool-filter-list" aria-label="Filter tools by category">
+        ${filterButtons.map(filter => `
+          <button type="button" class="tool-filter-button" style="--filter-rgb: ${filter.rgb}; --filter-text-rgb: ${filter.textRgb}; --filter-dark-text-rgb: ${filter.darkTextRgb};" data-tool-filter="${filter.id}" aria-pressed="${filter.id === 'all'}">
+            <span>${filter.title}</span>
+            <span class="tool-filter-count">${filter.count}</span>
+          </button>
+        `).join('')}
+      </nav>
+    </div>
+    <div class="tool-category-list">
+      ${homepageCategories.map(category => {
     const categoryTools = category.tools.map(id => toolById.get(id)).filter(Boolean);
     return `
-      <section class="tool-category" aria-labelledby="${category.id}-title" style="--category-rgb: ${category.rgb};">
+      <section class="tool-category" data-tool-category="${category.id}" aria-labelledby="${category.id}-title" style="--category-rgb: ${category.rgb}; --category-text-rgb: ${category.textRgb}; --category-dark-text-rgb: ${category.darkTextRgb};">
         <div class="tool-category-heading">
           <span class="tool-category-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${category.icon}</svg>
@@ -1294,12 +1333,27 @@ function renderDashboard() {
           <span class="tool-category-divider" aria-hidden="true"></span>
         </div>
         <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          ${categoryTools.map(renderToolCard).join('')}
+          ${categoryTools.map(tool => renderToolCard(tool, category)).join('')}
         </div>
       </section>
     `;
-  }).join('');
+      }).join('')}
+    </div>
+  `;
 }
+
+toolGrid.addEventListener('click', event => {
+  const filterButton = event.target.closest('[data-tool-filter]');
+  if (!filterButton) return;
+
+  const selectedCategory = filterButton.dataset.toolFilter;
+  toolGrid.querySelectorAll('[data-tool-filter]').forEach(button => {
+    button.setAttribute('aria-pressed', String(button === filterButton));
+  });
+  toolGrid.querySelectorAll('[data-tool-category]').forEach(section => {
+    section.hidden = selectedCategory !== 'all' && section.dataset.toolCategory !== selectedCategory;
+  });
+});
 
 async function openTool(toolId) {
   const tool = tools.find(item => item.id === toolId);

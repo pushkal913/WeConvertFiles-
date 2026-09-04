@@ -62,27 +62,19 @@ for (const selector of requiredSelectors) {
   if (!css.includes(selector)) failures.push(`Compiled CSS is missing ${selector}`);
 }
 
-const cardBorderColors = [...appSource.matchAll(/iconColor:\s*'text-([^']+)'/g)]
-  .map(match => match[1])
-  .filter((color, index, colors) => colors.indexOf(color) === index);
-
-for (const color of cardBorderColors) {
-  const cardSelectors = [
-    `border-${color}\\\/\\[0\\.48\\]`,
-    `dark\\:border-${color}\\\/\\[0\\.54\\]`,
-    `hover\\:border-${color}\\\/90`
-  ];
-  for (const selector of cardSelectors) {
-    if (!css.includes(selector)) failures.push(`Compiled CSS is missing dynamic card selector ${selector}`);
-  }
+const toolBrowserSelectors = ['.tool-filter-button', '.tool-card-icon', '.tool-card-action'];
+for (const selector of toolBrowserSelectors) {
+  if (!css.includes(selector)) failures.push(`Compiled CSS is missing homepage tool-browser selector ${selector}`);
 }
 
 const requiredGlowValues = [
-  'rgba(var(--glow-rgb),0.096)',
-  'rgba(var(--glow-rgb),0.30)'
+  'rgba(var(--tool-rgb),.096)',
+  'rgba(var(--tool-rgb),.3)'
 ];
+if (!appSource.includes('--tool-rgb: ${category.rgb}')) {
+  failures.push('Application script does not map homepage tool cards to their category color');
+}
 for (const glowValue of requiredGlowValues) {
-  if (!appSource.includes(glowValue)) failures.push(`Application script is missing tool-card glow value ${glowValue}`);
   if (!css.includes(glowValue)) failures.push(`Compiled CSS is missing tool-card glow value ${glowValue}`);
 }
 
@@ -129,5 +121,5 @@ console.log('- no global CSS smooth-scroll policy (intentional smooth scrolls li
 console.log(`- ${pageFiles.length} styled HTML pages use ${stylesheetUrl}`);
 console.log('- no page or generator uses the Tailwind browser runtime');
 console.log(`- compiled CSS contains ${requiredSelectors.length} critical responsive and dynamic selectors`);
-console.log(`- compiled CSS contains dynamic border states for ${cardBorderColors.length} tool-card colors`);
-console.log('- tool-card border and glow intensity is increased by 20% in light and dark modes');
+console.log(`- compiled CSS contains the ${toolBrowserSelectors.length} homepage tool-browser component selectors`);
+console.log('- homepage tool cards use one shared category color for borders, icons, actions and glow');
