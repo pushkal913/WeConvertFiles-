@@ -193,6 +193,11 @@ async function main() {
       });
       await page.goto(origin + '/', { waitUntil: 'networkidle' });
 
+      await page.locator('button[data-tool-id="json-formatter"]').first().click();
+      await page.locator('#toolOptions').waitFor({ state: 'visible' });
+      await page.locator('#backButton').click();
+      await expectPath(page, '/', 'homepage lazy tool starts at top');
+
       const toolCard = page.locator('button[data-tool-id="code-minifier"]').first();
       await toolCard.scrollIntoViewIfNeeded();
       const startingScroll = await page.evaluate(() => window.scrollY);
@@ -204,6 +209,13 @@ async function main() {
       const loadingScroll = await page.evaluate(() => window.scrollY);
       if (loadingScroll === 0) pass();
       else fail(`journey "homepage lazy tool starts at top": viewport remained at ${loadingScroll}px while the tool loaded`);
+
+      const loadingOptions = await page.locator('#toolOptions').evaluate((element) => ({
+        hidden: element.classList.contains('hidden'),
+        text: element.textContent.trim()
+      }));
+      if (loadingOptions.hidden && loadingOptions.text === '') pass();
+      else fail('journey "homepage lazy tool starts at top": previous tool options remained visible while the next tool loaded');
     });
 
     await journey(browser, origin, 'homepage category filters', async (page) => {

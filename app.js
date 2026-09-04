@@ -1370,6 +1370,8 @@ async function openTool(toolId) {
   setStatus('');
   document.documentElement.dataset.initialView = 'tool';
   dashboardView.classList.add('hidden');
+  toolOptions.innerHTML = '';
+  toolOptions.classList.add('hidden');
   workspaceView.classList.remove('hidden');
   window.scrollTo({ top: 0, behavior: 'instant' });
 
