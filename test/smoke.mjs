@@ -89,6 +89,29 @@ async function checkPage(browser, origin, def, vp) {
   if (seen.errors.length === 0) pass(); else fail(`${label}: console error(s) — ${seen.errors.join(' | ')}`);
   if (seen.failedReqs.length === 0) pass(); else fail(`${label}: failed request(s) — ${seen.failedReqs.join(' | ')}`);
 
+  const footerNav = page.locator('footer nav[aria-label="Footer navigation"]');
+  if (await footerNav.count() === 1) pass(); else fail(`${label}: missing labelled footer navigation`);
+  for (const group of ['tools', 'resources', 'company']) {
+    const footerGroup = page.locator(`[data-footer-group="${group}"]`);
+    if (await footerGroup.count() === 1) pass(); else fail(`${label}: missing ${group} footer group`);
+  }
+  if (vp.isMobile && await footerNav.count() === 1) {
+    const [toolsBox, resourcesBox] = await Promise.all([
+      page.locator('[data-footer-group="tools"]').boundingBox(),
+      page.locator('[data-footer-group="resources"]').boundingBox()
+    ]);
+    if (toolsBox && resourcesBox && Math.abs(toolsBox.y - resourcesBox.y) <= 2 && resourcesBox.x > toolsBox.x) pass();
+    else fail(`${label}: mobile Tools and Resources groups are not in a compact two-column row`);
+
+    const companyLinks = page.locator('[data-footer-company-links] > *');
+    const [firstCompanyLink, secondCompanyLink] = await Promise.all([
+      companyLinks.nth(0).boundingBox(),
+      companyLinks.nth(1).boundingBox()
+    ]);
+    if (firstCompanyLink && secondCompanyLink && Math.abs(firstCompanyLink.y - secondCompanyLink.y) <= 2 && secondCompanyLink.x > firstCompanyLink.x) pass();
+    else fail(`${label}: mobile Company links are not arranged in two compact columns`);
+  }
+
   await context.close();
 }
 
@@ -127,6 +150,33 @@ async function main() {
     }
 
     // Primary navigation journeys.
+    await journey(browser, origin, 'header category hubs', async (page) => {
+      const destinations = [
+        ['/category/image-tools', 'Image'],
+        ['/category/pdf-tools', 'PDF'],
+        ['/category/convert-office', 'Data & Office'],
+        ['/category/developer-tools', 'Developers']
+      ];
+
+      for (const [path, label] of destinations) {
+        await page.goto(origin + '/', { waitUntil: 'networkidle' });
+        const link = page.locator(`nav[aria-label="Main navigation"] a[href="${path}"]`);
+        if ((await link.innerText()).trim() === label) pass();
+        else fail(`journey "header category hubs": ${path} has the wrong label`);
+
+        const mainTop = await page.locator('main').evaluate((element) => element.getBoundingClientRect().top);
+        await link.hover();
+        if (await link.locator('xpath=..').locator(':scope > div').isVisible()) pass();
+        else fail(`journey "header category hubs": ${label} dropdown did not open on hover`);
+        const hoveredMainTop = await page.locator('main').evaluate((element) => element.getBoundingClientRect().top);
+        if (Math.abs(hoveredMainTop - mainTop) <= 1) pass();
+        else fail(`journey "header category hubs": ${label} dropdown shifted the page by ${hoveredMainTop - mainTop}px`);
+
+        await link.click();
+        await expectPath(page, path, 'header category hubs');
+      }
+    });
+
     await journey(browser, origin, 'homepage -> tool', async (page) => {
       await page.goto(origin + '/', { waitUntil: 'networkidle' });
       // Dashboard tool cards are app.js-rendered <button data-tool-id> (the
@@ -134,6 +184,43 @@ async function main() {
       await page.locator('button[data-tool-id="merge-pdf"]').first().click();
       await expectPath(page, '/merge-pdf', 'homepage -> tool');
       if (await page.locator('#workspaceView').isVisible()) pass(); else fail('journey "homepage -> tool": workspace not visible');
+    });
+
+    await journey(browser, origin, 'homepage category filters', async (page) => {
+      await page.goto(origin + '/', { waitUntil: 'networkidle' });
+
+      const filterNav = page.locator('nav[aria-label="Filter tools by category"]');
+      if (await filterNav.count() === 1) pass(); else fail('journey "homepage category filters": filter navigation is missing');
+
+      const expected = [
+        { id: 'pdf', count: 13, rgb: '249, 115, 22' },
+        { id: 'image', count: 14, rgb: '16, 185, 129' },
+        { id: 'data-office', count: 5, rgb: '99, 102, 241' },
+        { id: 'developers', count: 15, rgb: '244, 63, 94' }
+      ];
+
+      if (await page.locator('[data-tool-filter]').count() === 5) pass();
+      else fail('journey "homepage category filters": expected five filter buttons');
+
+      for (const category of expected) {
+        const button = page.locator(`[data-tool-filter="${category.id}"]`);
+        await button.click();
+
+        if (await button.getAttribute('aria-pressed') === 'true') pass();
+        else fail(`journey "homepage category filters": ${category.id} is not marked active`);
+
+        const visibleCards = page.locator('#toolGrid [data-tool-category]:not([hidden]) button[data-tool-id]');
+        if (await visibleCards.count() === category.count) pass();
+        else fail(`journey "homepage category filters": ${category.id} has the wrong tool count`);
+
+        const cardColors = await visibleCards.evaluateAll((cards) => cards.map((card) => card.style.getPropertyValue('--tool-rgb').trim()));
+        if (cardColors.every((color) => color === category.rgb)) pass();
+        else fail(`journey "homepage category filters": ${category.id} cards do not share the menu color`);
+      }
+
+      await page.locator('[data-tool-filter="all"]').click();
+      if (await page.locator('#toolGrid button[data-tool-id]').count() === 47) pass();
+      else fail('journey "homepage category filters": All does not restore the full catalogue');
     });
 
     await journey(browser, origin, 'tool -> category hub', async (page) => {
