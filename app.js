@@ -1371,6 +1371,7 @@ async function openTool(toolId) {
   document.documentElement.dataset.initialView = 'tool';
   dashboardView.classList.add('hidden');
   workspaceView.classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'instant' });
 
   // Hide file controls for tools that work entirely with pasted or generated text.
   const isInteractiveOnly = ['word-counter', 'diff-checker', 'markdown-preview', 'url-base64', 'json-formatter', 'qr-generator', 'hash-generator', 'regex-tester', 'jwt-decoder', 'json-yaml', 'sql-formatter', 'code-minifier', 'password-generator', 'case-converter', 'uuid-generator', 'unix-converter'].includes(toolId);
@@ -1599,7 +1600,6 @@ async function openTool(toolId) {
   if (tool.id === 'image-scaler') {
     initImageScalerOptions();
   }
-  window.scrollTo({ top: 0, behavior: 'instant' });
   updateFileList();
   setStatus('');
 }
