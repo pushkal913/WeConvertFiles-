@@ -164,7 +164,7 @@
   ]
 }
   </script>
-  <link rel="stylesheet" href="/assets/styles.css?v=20260903-1" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260904-3" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -597,15 +597,15 @@
       </ol>
     </nav>
 
-    <article>
-      <header class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700/60 dark:bg-[#1e293b] sm:p-10">
-        <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#1a73e8]">PDF tools</p>
+    <article class="category-page" style="--category-rgb: 249, 115, 22; --category-text-rgb: 194, 65, 12; --category-dark-text-rgb: 251, 146, 60;">
+      <header class="category-page-hero rounded-3xl border p-6 sm:p-10">
+        <p class="category-page-accent text-xs font-bold uppercase tracking-[0.16em]">PDF tools</p>
         <h1 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-100 sm:text-5xl">PDF Tools</h1>
         <p class="mt-5 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg">A complete PDF workbench that runs in the browser, so contracts, statements and scans are edited on your machine instead of a stranger’s server.</p>
         <div class="mt-6 flex flex-wrap gap-3 text-sm">
           <span class="rounded-full bg-emerald-50 px-3 py-1.5 font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">100% browser-based</span>
           <span class="rounded-full bg-blue-50 px-3 py-1.5 font-semibold text-blue-700 dark:bg-blue-950/40 dark:text-blue-300">No server upload</span>
-          <span class="rounded-full bg-slate-100 px-3 py-1.5 font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-300">13 free tools</span>
+          <span class="category-page-chip rounded-full px-3 py-1.5 font-semibold">13 free tools</span>
         </div>
       </header>
 
@@ -633,7 +633,7 @@
         </ul>
       </section>
 
-      <section class="mt-10">
+      <section class="category-page-tools mt-10">
         <h2 class="text-2xl font-bold tracking-tight text-slate-950 dark:text-slate-100">PDF Tools in this hub</h2>
         <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">13 tools — each opens instantly and processes files on your device. Every tool has an in-depth guide.</p>
         <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -752,21 +752,21 @@
           <details class="group border-b border-slate-100 py-5 last:border-b-0 dark:border-slate-700/60">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-slate-900 dark:text-slate-100">
               Is my PDF uploaded to a server?
-              <span class="text-[#1a73e8] transition group-open:rotate-45" aria-hidden="true">+</span>
+              <span class="category-page-accent transition group-open:rotate-45" aria-hidden="true">+</span>
             </summary>
             <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">No. Every PDF tool reads and rewrites the document inside your browser using client-side PDF libraries, so the file is processed on your device and is not uploaded for conversion.</p>
           </details>
           <details class="group border-b border-slate-100 py-5 last:border-b-0 dark:border-slate-700/60">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-slate-900 dark:text-slate-100">
               Are passwords sent anywhere when I encrypt or decrypt a PDF?
-              <span class="text-[#1a73e8] transition group-open:rotate-45" aria-hidden="true">+</span>
+              <span class="category-page-accent transition group-open:rotate-45" aria-hidden="true">+</span>
             </summary>
             <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">No. The encrypt and decrypt tools run entirely in the browser, so the password is used locally to lock or unlock the file and is never transmitted or stored.</p>
           </details>
           <details class="group border-b border-slate-100 py-5 last:border-b-0 dark:border-slate-700/60">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-slate-900 dark:text-slate-100">
               Can I combine several PDFs into one?
-              <span class="text-[#1a73e8] transition group-open:rotate-45" aria-hidden="true">+</span>
+              <span class="category-page-accent transition group-open:rotate-45" aria-hidden="true">+</span>
             </summary>
             <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">Yes. The merge tool joins multiple PDFs in the order you arrange them, and you can then split, reorder or compress the combined file with the other tools in this hub.</p>
           </details>

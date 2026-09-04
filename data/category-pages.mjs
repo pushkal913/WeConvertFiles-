@@ -12,6 +12,9 @@ export const categoryPages = [
   {
     slug: 'image-tools',
     navGroup: 'IMAGE TOOLS',
+    rgb: '16, 185, 129',
+    textRgb: '4, 120, 87',
+    darkTextRgb: '52, 211, 153',
     extraToolIds: ['image-to-base64', 'base64-to-image', 'svg-to-image'],
     eyebrow: 'Image tools',
     h1: 'Image Tools',
@@ -36,6 +39,9 @@ export const categoryPages = [
   {
     slug: 'pdf-tools',
     navGroup: 'PDF TOOLS',
+    rgb: '249, 115, 22',
+    textRgb: '194, 65, 12',
+    darkTextRgb: '251, 146, 60',
     extraToolIds: [],
     eyebrow: 'PDF tools',
     h1: 'PDF Tools',
@@ -60,6 +66,9 @@ export const categoryPages = [
   {
     slug: 'convert-office',
     navGroup: 'CONVERT & OFFICE',
+    rgb: '99, 102, 241',
+    textRgb: '67, 56, 202',
+    darkTextRgb: '165, 180, 252',
     extraToolIds: [],
     eyebrow: 'Convert & office',
     h1: 'Convert & Office Tools',
@@ -84,6 +93,9 @@ export const categoryPages = [
   {
     slug: 'developer-tools',
     navGroup: 'TEXT & DEVELOPERS',
+    rgb: '244, 63, 94',
+    textRgb: '190, 18, 60',
+    darkTextRgb: '251, 113, 133',
     extraToolIds: [],
     eyebrow: 'Text & developer utilities',
     h1: 'Text & Developer Tools',
