@@ -1370,8 +1370,11 @@ async function openTool(toolId) {
   setStatus('');
   document.documentElement.dataset.initialView = 'tool';
   dashboardView.classList.add('hidden');
-  toolOptions.innerHTML = '';
-  toolOptions.classList.add('hidden');
+  const isLoadingToolModule = MODULE_TOOLS.has(tool.id) && !toolModuleRegistry[tool.id];
+  toolOptions.innerHTML = isLoadingToolModule
+    ? '<p role="status" class="py-5 text-center text-sm font-medium text-slate-500 dark:text-slate-400">Loading tool&hellip;</p>'
+    : '';
+  toolOptions.classList.toggle('hidden', !isLoadingToolModule);
   workspaceView.classList.remove('hidden');
   window.scrollTo({ top: 0, behavior: 'instant' });
 

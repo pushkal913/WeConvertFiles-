@@ -214,8 +214,8 @@ async function main() {
         hidden: element.classList.contains('hidden'),
         text: element.textContent.trim()
       }));
-      if (loadingOptions.hidden && loadingOptions.text === '') pass();
-      else fail('journey "homepage lazy tool starts at top": previous tool options remained visible while the next tool loaded');
+      if (!loadingOptions.hidden && loadingOptions.text === 'Loading tool…') pass();
+      else fail('journey "homepage lazy tool starts at top": loading state was not shown while the next tool loaded');
     });
 
     await journey(browser, origin, 'homepage category filters', async (page) => {
