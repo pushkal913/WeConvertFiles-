@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const stylesheetUrl = '/assets/styles.css?v=20260903-1';
 const homepageStylesheetUrl = '/assets/styles.css?v=20260904-1';
-const categoryStylesheetUrl = '/assets/styles.css?v=20260904-2';
+const categoryStylesheetUrl = '/assets/styles.css?v=20260904-3';
 const pageDirectories = [
   rootDir,
   path.join(rootDir, 'category'),
@@ -59,6 +59,7 @@ if (!toolGenerator.includes("const shell = await readFile(path.join(rootDir, 'in
 }
 
 const css = await readFile(path.join(rootDir, 'assets', 'styles.css'), 'utf8');
+const cssSource = await readFile(path.join(rootDir, 'assets', 'tailwind.css'), 'utf8');
 const homepage = await readFile(path.join(rootDir, 'index.html'), 'utf8');
 const appSource = await readFile(path.join(rootDir, 'app.js'), 'utf8');
 const requiredSelectors = [
@@ -93,6 +94,17 @@ if (!appSource.includes('--tool-rgb: ${category.rgb}')) {
 }
 for (const glowValue of requiredGlowValues) {
   if (!css.includes(glowValue)) failures.push(`Compiled CSS is missing tool-card glow value ${glowValue}`);
+}
+
+const categoryCardGlowRules = [
+  'border-color: rgba(var(--category-rgb), 0.30);',
+  'box-shadow: 0 4px 18px rgba(var(--category-rgb), 0.12);',
+  'border-color: rgba(var(--category-rgb), 0.806);',
+  'box-shadow: 0 8px 24px rgba(var(--category-rgb), 0.156);',
+  '.dark .category-page-tools > ul > li:hover'
+];
+for (const rule of categoryCardGlowRules) {
+  if (!cssSource.includes(rule)) failures.push(`Category card glow is missing rule ${rule}`);
 }
 
 // Theme policy: dark styling must follow the site's .dark class, never the OS

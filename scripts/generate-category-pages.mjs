@@ -144,7 +144,7 @@ const renderPage = (page, tools) => {
   <script type="application/ld+json">
 ${jsonLd(page, tools)}
   </script>
-  <link rel="stylesheet" href="/assets/styles.css?v=20260904-2" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260904-3" />
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
