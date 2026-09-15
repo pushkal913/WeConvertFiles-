@@ -226,10 +226,11 @@ async function main() {
       const developerSectionPosition = await page.locator('#developers-title').evaluate((heading) => ({
         scrollY: window.scrollY,
         top: heading.getBoundingClientRect().top,
+        bottom: heading.getBoundingClientRect().bottom,
         viewportHeight: window.innerHeight
       }));
       if (developerSectionPosition.scrollY > 0
-        && developerSectionPosition.top >= 0
+        && developerSectionPosition.bottom > 0
         && developerSectionPosition.top < developerSectionPosition.viewportHeight) pass();
       else fail('journey "homepage category filters": Explore Dev Tools did not scroll to the Developers section');
 
