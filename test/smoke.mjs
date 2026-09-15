@@ -220,6 +220,18 @@ async function main() {
 
     await journey(browser, origin, 'homepage category filters', async (page) => {
       await page.goto(origin + '/', { waitUntil: 'networkidle' });
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+
+      await page.locator('.homepage-explore-dev-tools').click();
+      const developerSectionPosition = await page.locator('#developers-title').evaluate((heading) => ({
+        scrollY: window.scrollY,
+        top: heading.getBoundingClientRect().top,
+        viewportHeight: window.innerHeight
+      }));
+      if (developerSectionPosition.scrollY > 0
+        && developerSectionPosition.top >= 0
+        && developerSectionPosition.top < developerSectionPosition.viewportHeight) pass();
+      else fail('journey "homepage category filters": Explore Dev Tools did not scroll to the Developers section');
 
       const filterNav = page.locator('nav[aria-label="Filter tools by category"]');
       if (await filterNav.count() === 1) pass(); else fail('journey "homepage category filters": filter navigation is missing');
